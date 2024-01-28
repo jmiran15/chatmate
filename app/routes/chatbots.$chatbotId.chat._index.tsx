@@ -1,3 +1,5 @@
+// no chat selected index
+
 export default function ChatIndex() {
   return (
     <div>

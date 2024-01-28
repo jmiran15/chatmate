@@ -1,25 +1,145 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 model User {
-  id    String @id @default(cuid())
-  email String @unique
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  password Password?
+  id        String    @id @default(cuid())
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  password  Password?
+  chatbots  Chatbot[]
+  chats     Chat[] // the user's chats, might not need here, never going to call
 }
 
 model Password {
-  hash String
-
+  hash   String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
+}
+
+model Chatbot {
+  id          String      @id @default(cuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  name        String
+  description String?
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String
+  // chatbots have chats (from outside users)
+  chats       Chat[]
+  // chatbots have components
+  components  Component[]
+}
+
+// regular users will create chats with no user id
+model Chat {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    String?
+  chatbot   Chatbot   @relation(fields: [chatbotId], references: [id])
+  chatbotId String
+  messages  Message[]
+}
+
+model Component {
+  id                 String             @id @default(cuid())
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  name               String
+  chatbotReference   Chatbot            @relation(fields: [chatbotReferenceId], references: [id])
+  chatbotReferenceId String
+  type               Type // change to Enum - i.e. chat, document, etc...
+  chatComponent      ChatComponent?
+  documentComponent  DocumentComponent?
+  messages           Message[]
+}
+
+model ChatComponent {
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  model       Model // change to Enum - i.e. gpt-4, gpt-3.5, gemini pro, llama 2, etc... 
+  temperature Float
+  maxTokens   Int
+  component   Component @relation(fields: [componentId], references: [id])
+  componentId String    @unique
+
+  // dependency graph is made on frontend every time, might be faster to add to db
+  systemPrompt String
+  userPrompt   String
+
+  // might be wrong, can switch to string
+  baseComponent ChatComponent? @relation("history")
+  history       ChatComponent? @relation("history", fields: [historyId], references: [id])
+  historyId     String?        @unique
+}
+
+model DocumentComponent {
+  id                String     @id @default(cuid())
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  numberOfDocuments Int
+  similarity        Float
+  searchQuery       String
+  documents         Document[]
+  component         Component  @relation(fields: [componentId], references: [id])
+  componentId       String     @unique
+}
+
+model Document {
+  id                  String                       @id @default(cuid())
+  createdAt           DateTime                     @default(now())
+  updatedAt           DateTime                     @updatedAt
+  metadata            Json
+  embedding           Unsupported("vector(1536)")?
+  content             String
+  documentComponent   DocumentComponent            @relation(fields: [documentComponentId], references: [id])
+  documentComponentId String
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role // should be Enum, i.e. User or Chatbot
+  content   String
+
+  referenceMessage   Message? @relation("referenceMessage", fields: [referenceMessageId], references: [id])
+  referenceMessageId String?  @unique
+  baseMessage        Message? @relation("referenceMessage")
+
+  componentReference   Component? @relation(fields: [componentReferenceId], references: [id])
+  componentReferenceId String?    @unique
+
+  chat   Chat   @relation(fields: [chatId], references: [id])
+  chatId String
+
+  requestBody String // json of request body for debugging
+}
+
+enum Role {
+  USER
+  ASSISTANT
+}
+
+enum Model {
+  GPT4
+  GPT35
+  GEMINI
+  LLAMA2
+}
+
+enum Type {
+  CHAT
+  DOCUMENT
 }

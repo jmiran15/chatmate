@@ -1,3 +1,7 @@
+// chatbots/id/chat ...
+// this is a layout route
+// it has a sidebar to the right (same type as the one on the left), with a list of chats
+
 import { Outlet } from "@remix-run/react";
 
 export default function Chat() {
