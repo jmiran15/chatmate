@@ -10,7 +10,7 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(cuid())
+  id        String    @id @default(uuid())
   email     String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -26,22 +26,24 @@ model Password {
 }
 
 model Chatbot {
-  id          String      @id @default(cuid())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  name        String
-  description String?
-  user        User        @relation(fields: [userId], references: [id])
-  userId      String
+  id                 String              @id @default(uuid())
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  name               String
+  description        String?
+  user               User                @relation(fields: [userId], references: [id])
+  userId             String
   // chatbots have chats (from outside users)
-  chats       Chat[]
+  chats              Chat[]
   // chatbots have components
-  components  Component[]
+  // components  Component[]
+  chatComponents     ChatComponent[]
+  documentComponents DocumentComponent[]
 }
 
 // regular users will create chats with no user id
 model Chat {
-  id        String    @id @default(cuid())
+  id        String    @id @default(uuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   user      User?     @relation(fields: [userId], references: [id])
@@ -51,28 +53,29 @@ model Chat {
   messages  Message[]
 }
 
-model Component {
-  id                 String             @id @default(cuid())
-  createdAt          DateTime           @default(now())
-  updatedAt          DateTime           @updatedAt
-  name               String
-  chatbotReference   Chatbot            @relation(fields: [chatbotReferenceId], references: [id])
-  chatbotReferenceId String
-  type               Type // change to Enum - i.e. chat, document, etc...
-  chatComponent      ChatComponent?
-  documentComponent  DocumentComponent?
-  messages           Message[]
-}
+// model Component {
+//   id                 String             @id @default(uuid())
+//   createdAt          DateTime           @default(now())
+//   updatedAt          DateTime           @updatedAt
+// name               String
+// chatbotReference   Chatbot            @relation(fields: [chatbotReferenceId], references: [id])
+// chatbotReferenceId String
+//   type               Type // change to Enum - i.e. chat, document, etc...
+//   chatComponent      ChatComponent?
+//   documentComponent  DocumentComponent?
+//   messages           Message[]
+// }
 
 model ChatComponent {
-  id          String    @id @default(cuid())
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  model       Model // change to Enum - i.e. gpt-4, gpt-3.5, gemini pro, llama 2, etc... 
-  temperature Float
-  maxTokens   Int
-  component   Component @relation(fields: [componentId], references: [id])
-  componentId String    @unique
+  id                 String   @id @default(uuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  name               String
+  chatbotReference   Chatbot  @relation(fields: [chatbotReferenceId], references: [id])
+  chatbotReferenceId String
+  model              Model // change to Enum - i.e. gpt-4, gpt-3.5, gemini pro, llama 2, etc... 
+  temperature        Float
+  maxTokens          Int
 
   // dependency graph is made on frontend every time, might be faster to add to db
   systemPrompt String
@@ -85,19 +88,20 @@ model ChatComponent {
 }
 
 model DocumentComponent {
-  id                String     @id @default(cuid())
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
-  numberOfDocuments Int
-  similarity        Float
-  searchQuery       String
-  documents         Document[]
-  component         Component  @relation(fields: [componentId], references: [id])
-  componentId       String     @unique
+  id                 String     @id @default(uuid())
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
+  name               String
+  chatbotReference   Chatbot    @relation(fields: [chatbotReferenceId], references: [id])
+  chatbotReferenceId String
+  numberOfDocuments  Int
+  similarity         Float
+  searchQuery        String
+  documents          Document[]
 }
 
 model Document {
-  id                  String                       @id @default(cuid())
+  id                  String                       @id @default(uuid())
   createdAt           DateTime                     @default(now())
   updatedAt           DateTime                     @updatedAt
   metadata            Json
@@ -108,18 +112,21 @@ model Document {
 }
 
 model Message {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   role      Role // should be Enum, i.e. User or Chatbot
   content   String
 
+  // reference String
+  component String
+
   referenceMessage   Message? @relation("referenceMessage", fields: [referenceMessageId], references: [id])
   referenceMessageId String?  @unique
   baseMessage        Message? @relation("referenceMessage")
 
-  componentReference   Component? @relation(fields: [componentReferenceId], references: [id])
-  componentReferenceId String?    @unique
+  // componentReference   Component? @relation(fields: [componentReferenceId], references: [id])
+  // componentReferenceId String?    @unique
 
   chat   Chat   @relation(fields: [chatId], references: [id])
   chatId String
@@ -139,7 +146,7 @@ enum Model {
   LLAMA2
 }
 
-enum Type {
-  CHAT
-  DOCUMENT
-}
+// enum Type {
+//   CHAT
+//   DOCUMENT
+// }

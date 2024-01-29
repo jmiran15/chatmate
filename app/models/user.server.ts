@@ -1,5 +1,6 @@
 import type { Password, User } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
 
@@ -18,6 +19,7 @@ export async function createUser(email: User["email"], password: string) {
 
   return prisma.user.create({
     data: {
+      id: uuidv4(),
       email,
       password: {
         create: {
