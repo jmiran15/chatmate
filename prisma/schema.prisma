@@ -117,7 +117,7 @@ model Document {
   id         String      @id @default(uuid())
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  metadata   Json
+  name       String
   embeddings Embedding[]
   content    String
   chatbot    Chatbot     @relation(fields: [chatbotId], references: [id])

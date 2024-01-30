@@ -144,7 +144,7 @@ export default function ModelC() {
       <div className="text-right">
         <button
           type="submit"
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 "
+          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         >
           Save
         </button>
