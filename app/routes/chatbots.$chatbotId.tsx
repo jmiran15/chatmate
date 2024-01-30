@@ -27,7 +27,7 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to=""
+              to="model"
             >
               Model
             </NavLink>
@@ -37,7 +37,7 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to=""
+              to="data"
             >
               Data
             </NavLink>
@@ -47,7 +47,7 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to=""
+              to="appearance"
             >
               Appearance
             </NavLink>
@@ -57,7 +57,7 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to=""
+              to="share"
             >
               Share
             </NavLink>
@@ -67,7 +67,7 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to=""
+              to="chats"
             >
               Chats
             </NavLink>
@@ -77,7 +77,7 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to=""
+              to="settings"
             >
               Settings
             </NavLink>
