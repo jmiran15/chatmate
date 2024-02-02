@@ -8,6 +8,12 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const id = params.documentId as string;
   const name = formData.get("name") as string;
   const content = formData.get("content") as string;
+
+  // here we need to update the embeddings of that document
+
+  // reembed the entire document
+  // 1. delete its prev Embedding objects
+  // 2. add new Embedding objects
   return await updateDocumentById({ id, name, content });
 };
 

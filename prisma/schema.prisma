@@ -127,7 +127,6 @@ model Document {
 model Embedding {
   id         String                      @id @default(uuid())
   createdAt  DateTime                    @default(now())
-  updatedAt  DateTime                    @updatedAt
   embedding  Unsupported("vector(1536)")
   document   Document                    @relation(fields: [documentId], references: [id])
   documentId String

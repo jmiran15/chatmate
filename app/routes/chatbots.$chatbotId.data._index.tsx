@@ -9,7 +9,7 @@ import {
 } from "~/models/document.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  // fetch documents from databaase by chatbotid
+  // fetch documents from database by chatbotid
   const chatbotId = params.chatbotId as string;
 
   // if (!chatbotId) {
@@ -27,16 +27,14 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const fileContents = await processFiles({ files });
   const chatbotId = params.chatbotId as string;
 
-  // these are new files that the user tried to add,
-  // lets add them to the databases as documents
-
   const documents: Pick<Document, "name" | "content" | "chatbotId">[] =
     fileContents.map((fileContent) => ({
       ...fileContent,
       chatbotId,
     }));
 
-  await createDocuments({ documents });
+  // this creates the embeddings as well
+  await createDocuments({ documents }); // these are the documents that will be shown in the UI
 
   return json({ fileContents });
 };
