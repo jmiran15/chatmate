@@ -27,16 +27,6 @@ export default function Chatbot() {
               className={({ isActive }) =>
                 `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
               }
-              to="model"
-            >
-              Model
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-              }
               to="data"
             >
               Data
