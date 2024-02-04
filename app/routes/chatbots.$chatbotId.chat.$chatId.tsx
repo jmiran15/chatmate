@@ -5,7 +5,7 @@ import { Role } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { createMessage, getMessagesByChatId } from "~/models/chat.server";
-import { fetchRelevantDocs } from "~/utils/openai";
+import { chat } from "~/utils/openai";
 
 // on click "new chat" -> create empty chat, and naviagete to chat/id/chatId
 
@@ -26,7 +26,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
   const messages = await getMessagesByChatId({ chatId });
 
-  // console.log("messages", messages);
+  console.log("messages", messages);
 
   return json({ messages });
 };
@@ -36,15 +36,44 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const chatbotId = params.chatbotId as string;
   const formData = await request.formData();
   const content = formData.get("message") as string;
+  const msgs = JSON.parse(formData.get("messages") as string) || [];
 
-  // TESTING
-  const relevantDocuments = await fetchRelevantDocs({
+  console.log("these are the messages: ", msgs);
+
+  const messages =
+    msgs.length === 0
+      ? [
+          {
+            role: "user",
+            content,
+          },
+        ]
+      : [
+          ...msgs.map((message) => ({
+            role: message.role === Role.USER ? "user" : "assistant",
+            content: message.content,
+          })),
+          {
+            role: "user",
+            content,
+          },
+        ];
+
+  console.log("messages being sent to openai: ", messages);
+
+  const assistantResponse = await chat({
     chatbotId,
-    input: content,
+    messages,
   });
-  console.log("relevantDocuments", relevantDocuments);
 
-  return await createMessage({ chatId, role: Role.USER, content });
+  console.log("assistant response: ", assistantResponse);
+
+  await createMessage({ chatId, role: Role.USER, content });
+  return await createMessage({
+    chatId,
+    role: Role.ASSISTANT,
+    content: assistantResponse.message.content,
+  });
 };
 
 export default function Chat() {
@@ -77,6 +106,11 @@ export default function Chat() {
       )}
 
       <Form method="post">
+        <input
+          type="hidden"
+          name="messages"
+          value={JSON.stringify(data.messages)}
+        />
         <input
           type="text"
           name="message"

@@ -69,3 +69,29 @@ export function createMessage({
     },
   });
 }
+
+export function getChatsByUserAndChatbotId({
+  userId,
+  chatbotId,
+}: {
+  userId: string;
+  chatbotId: string;
+}) {
+  return prisma.chat.findMany({
+    where: {
+      userId,
+      chatbotId,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+  });
+}
+
+export function deleteChatByChatId({ chatId }: { chatId: Chat["id"] }) {
+  return prisma.chat.delete({
+    where: {
+      id: chatId,
+    },
+  });
+}

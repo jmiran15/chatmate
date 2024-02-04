@@ -2,20 +2,54 @@
 // this is a layout route
 // it has a sidebar to the right (same type as the one on the left), with a list of chats
 
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import { Form, NavLink, Outlet } from "@remix-run/react";
-import { createChatWithUser } from "~/models/chat.server";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
+import { Form, NavLink, Outlet, useLoaderData } from "@remix-run/react";
+import {
+  createChatWithUser,
+  deleteChatByChatId,
+  getChatsByUserAndChatbotId,
+} from "~/models/chat.server";
 import { requireUserId } from "~/session.server";
 
-export const action = async ({ request, params }: ActionFunctionArgs) => {
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const chatbotId = params.chatbotId as string;
   const userId = await requireUserId(request);
 
-  const chat = await createChatWithUser({ chatbotId, userId });
-  return redirect(chat.id);
+  const chats = await getChatsByUserAndChatbotId({ chatbotId, userId });
+
+  return json({ chats });
+};
+
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  // switch action types: create new chat, delete chat, update chat name
+  const formData = await request.formData();
+  const action = formData.get("action") as string;
+  const chatId = formData.get("chatId") as string;
+  const userId = await requireUserId(request);
+  const chatbotId = params.chatbotId as string;
+
+  console.log("action", action);
+
+  switch (action) {
+    case "create": {
+      const chat = await createChatWithUser({ chatbotId, userId });
+      return redirect(chat.id);
+    }
+    case "delete":
+      console.log("deleting chat", chatId);
+      await deleteChatByChatId({ chatId });
+      return redirect(`/chatbots/${chatbotId}/chat`);
+  }
 };
 
 export default function Chat() {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <main className="flex h-full bg-white">
       <div className="flex-1 p-6">
@@ -23,44 +57,40 @@ export default function Chat() {
       </div>
       <div className="h-full w-80 border-r bg-gray-50">
         <Form method="post">
+          <input type="hidden" name="action" value="create" />
           <button className="block p-4 text-xl text-blue-500" type="submit">
             + New Chat
           </button>
         </Form>
 
         <hr />
-        <ol>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-              }
-              to="asd"
-            >
-              this is a chat
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-              }
-              to="xcv"
-            >
-              another chat
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-              }
-              to="e"
-            >
-              2nd
-            </NavLink>
-          </li>
-        </ol>
+
+        {data.chats.length === 0 ? (
+          <p className="p-4">No chats yet</p>
+        ) : (
+          <ol>
+            {data.chats.map((chat) => (
+              <li
+                key={chat.id}
+                className={"flex flex-row justify-between border-b p-4 text-xl"}
+              >
+                <NavLink
+                  className={({ isActive }) =>
+                    ` p-4 text-xl ${isActive ? "bg-white" : ""}`
+                  }
+                  to={chat.id}
+                >
+                  {chat.name}
+                </NavLink>
+                <Form method="post">
+                  <input type="hidden" name="action" value="delete" />
+                  <input type="hidden" name="chatId" value={chat.id} />
+                  <button type="submit">🗑️</button>
+                </Form>
+              </li>
+            ))}
+          </ol>
+        )}
       </div>
     </main>
   );

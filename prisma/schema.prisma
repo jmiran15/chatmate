@@ -57,6 +57,7 @@ model Chat {
   chatbot   Chatbot   @relation(fields: [chatbotId], references: [id])
   chatbotId String
   messages  Message[]
+  name     String? @default("Untitled Chat")
 }
 
 model Document {
@@ -89,7 +90,7 @@ model Message {
   updatedAt DateTime @updatedAt
   role      Role 
   content   String
-  chat   Chat   @relation(fields: [chatId], references: [id])
+  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId String
 }
 
