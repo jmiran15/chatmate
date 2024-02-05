@@ -152,3 +152,7 @@ export default function ModelC() {
     </Form>
   );
 }
+
+export const handle = {
+  breadcrumb: "settings",
+};

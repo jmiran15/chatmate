@@ -83,3 +83,7 @@ export default function Data() {
     </div>
   );
 }
+
+export const handle = {
+  breadcrumb: "data",
+};

@@ -8,7 +8,14 @@
 import { Outlet, useFetcher, useLoaderData } from "@remix-run/react";
 
 import { useState } from "react";
-import { Archive, ArchiveX, File, Inbox, Send, Trash2 } from "lucide-react";
+import {
+  MessageSquareMore,
+  Database,
+  Brush,
+  Share,
+  MessagesSquare,
+  Settings,
+} from "lucide-react";
 
 import { Nav } from "~/components/nav";
 import { cn } from "~/lib/utils";
@@ -196,40 +203,34 @@ export default function ChatbotLayout({
             isCollapsed={isCollapsed}
             links={[
               {
-                title: "Inbox",
-                label: "128",
-                icon: Inbox,
-                variant: "default",
+                title: "Chat",
+                path: "chat",
+                icon: MessageSquareMore,
               },
               {
-                title: "Drafts",
-                label: "9",
-                icon: File,
-                variant: "ghost",
+                title: "Data",
+                path: "data",
+                icon: Database,
               },
               {
-                title: "Sent",
-                label: "",
-                icon: Send,
-                variant: "ghost",
+                title: "Appearance",
+                path: "appearance",
+                icon: Brush,
               },
               {
-                title: "Junk",
-                label: "23",
-                icon: ArchiveX,
-                variant: "ghost",
+                title: "Share",
+                path: "share",
+                icon: Share,
               },
               {
-                title: "Trash",
-                label: "",
-                icon: Trash2,
-                variant: "ghost",
+                title: "Chats",
+                path: "chats",
+                icon: MessagesSquare,
               },
               {
-                title: "Archive",
-                label: "",
-                icon: Archive,
-                variant: "ghost",
+                title: "Settings",
+                path: "settings",
+                icon: Settings,
               },
             ]}
           />

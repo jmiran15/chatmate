@@ -95,3 +95,7 @@ export default function Chat() {
     </main>
   );
 }
+
+export const handle = {
+  breadcrumb: "chat",
+};
