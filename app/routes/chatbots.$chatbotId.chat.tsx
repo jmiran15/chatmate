@@ -1,6 +1,11 @@
 // chatbots/id/chat ...
 // this is a layout route
 // it has a sidebar to the right (same type as the one on the left), with a list of chats
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "~/components/ui/resizable";
 
 import {
   ActionFunctionArgs,
@@ -47,52 +52,73 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
-export default function Chat() {
+export default function Chat({
+  defaultLayout = [1095, 265],
+}: {
+  defaultLayout?: number[] | undefined;
+}) {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <main className="flex h-full bg-white">
-      <div className="flex-1 p-6">
+    <ResizablePanelGroup
+      direction="horizontal"
+      onLayout={(sizes: number[]) => {
+        console.log("set cookies to save");
+      }}
+      className="h-full max-h-[800px] items-stretch"
+    >
+      <ResizablePanel
+        defaultSize={defaultLayout[0]}
+        collapsible={false}
+        // minSize={15}
+        // maxSize={20}
+      >
         <Outlet />
-      </div>
-      <div className="h-full w-80 border-r bg-gray-50">
-        <Form method="post">
-          <input type="hidden" name="action" value="create" />
-          <button className="block p-4 text-xl text-blue-500" type="submit">
-            + New Chat
-          </button>
-        </Form>
+      </ResizablePanel>
 
-        <hr />
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={defaultLayout[1]}>
+        <div className="h-full w-80 border-r bg-gray-50">
+          <Form method="post">
+            <input type="hidden" name="action" value="create" />
+            <button className="block p-4 text-xl text-blue-500" type="submit">
+              + New Chat
+            </button>
+          </Form>
 
-        {data.chats.length === 0 ? (
-          <p className="p-4">No chats yet</p>
-        ) : (
-          <ol>
-            {data.chats.map((chat) => (
-              <li
-                key={chat.id}
-                className={"flex flex-row justify-between border-b p-4 text-xl"}
-              >
-                <NavLink
-                  className={({ isActive }) =>
-                    ` p-4 text-xl ${isActive ? "bg-white" : ""}`
+          <hr />
+
+          {data.chats.length === 0 ? (
+            <p className="p-4">No chats yet</p>
+          ) : (
+            <ol>
+              {data.chats.map((chat) => (
+                <li
+                  key={chat.id}
+                  className={
+                    "flex flex-row justify-between border-b p-4 text-xl"
                   }
-                  to={chat.id}
                 >
-                  {chat.name}
-                </NavLink>
-                <Form method="post">
-                  <input type="hidden" name="action" value="delete" />
-                  <input type="hidden" name="chatId" value={chat.id} />
-                  <button type="submit">🗑️</button>
-                </Form>
-              </li>
-            ))}
-          </ol>
-        )}
-      </div>
-    </main>
+                  <NavLink
+                    className={({ isActive }) =>
+                      ` p-4 text-xl ${isActive ? "bg-white" : ""}`
+                    }
+                    to={chat.id}
+                  >
+                    {chat.name}
+                  </NavLink>
+                  <Form method="post">
+                    <input type="hidden" name="action" value="delete" />
+                    <input type="hidden" name="chatId" value={chat.id} />
+                    <button type="submit">🗑️</button>
+                  </Form>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 }
 

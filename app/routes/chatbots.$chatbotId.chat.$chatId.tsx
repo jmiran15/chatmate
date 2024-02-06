@@ -6,6 +6,10 @@ import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { createMessage, getMessagesByChatId } from "~/models/chat.server";
 import { chat } from "~/utils/openai";
+import { Send } from "lucide-react";
+import { cn } from "~/lib/utils";
+import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
 
 // on click "new chat" -> create empty chat, and naviagete to chat/id/chatId
 
@@ -80,49 +84,45 @@ export default function Chat() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div>
+    <>
       {data.messages.length === 0 ? (
         <p className="p-4">No messages yet</p>
       ) : (
-        <ol className="space-y-4 ">
+        <div className="space-y-4 max-w-[75%]">
           {data.messages.map((message) => (
-            <li key={message.id}>
-              {message.role === Role.USER ? (
-                <div className="flex justify-end">
-                  <div className="bg-blue-100 p-4 rounded-md">
-                    {message.content}
-                  </div>
-                </div>
-              ) : (
-                <div className="flex justify-start">
-                  <div className="bg-gray-100 p-4 rounded-md">
-                    {message.content}
-                  </div>
-                </div>
+            <div
+              key={message.id}
+              className={cn(
+                "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
+                message.role === Role.USER
+                  ? "ml-auto bg-primary text-primary-foreground"
+                  : "bg-muted",
               )}
-            </li>
+            >
+              {message.content}
+            </div>
           ))}
-        </ol>
+        </div>
       )}
 
-      <Form method="post">
+      <Form method="post" className="flex w-full items-center space-x-2">
         <input
           type="hidden"
           name="messages"
           value={JSON.stringify(data.messages)}
         />
-        <input
+        <Input
+          placeholder="Type your message..."
+          className="flex-1"
+          autoComplete="off"
           type="text"
           name="message"
-          className="w-full border-2 border-gray-200 rounded-md p-4"
         />
-        <button
-          type="submit"
-          className="block w-full p-4 text-xl text-blue-500"
-        >
-          Send
-        </button>
+        <Button type="submit" size="icon">
+          <Send className="h-4 w-4" />
+          <span className="sr-only">Send</span>
+        </Button>
       </Form>
-    </div>
+    </>
   );
 }
