@@ -1,21 +1,13 @@
 import PDFParser from "pdf2json";
 
-import { Chatbot, Document, Embedding } from "@prisma/client";
+import { Chatbot, Document } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
 import { embed } from "~/utils/openai";
 export type { Chatbot } from "@prisma/client";
 
-// function to create multiple documents at once:
-
-// also need to create embeddings for those documents and push
-// inside this same function we can do the following
-//  - after we created the documents in db, we get their ids
-//  - then for each document, pass it through splitter, with overlap
-//  - then generate embedding objects for the splits, with the chatbot id, and document id (so that we can delete them later)
-//  - this should be all we need in this function
-
+// takes full, non chuncked documents, inserts the full document as "Document", and also creates Embeddings from it (chunked)
 export async function createDocuments({
   documents,
 }: {
@@ -80,29 +72,6 @@ export async function createDocumentWithEmbeddings({
 
   return documentObject;
 }
-
-// model Embedding {
-//   id         String                      @id @default(uuid())
-//   createdAt  DateTime                    @default(now())
-//   updatedAt  DateTime                    @updatedAt
-//   embedding  Unsupported("vector(1536)")
-//   document   Document                    @relation(fields: [documentId], references: [id])
-//   documentId String
-//   chatbot    Chatbot                     @relation(fields: [chatbotId], references: [id])
-//   chatbotId  String // so that we can find all embeddings for a chatbot easily
-//   content    String
-// }
-
-// model Document {
-//   id         String      @id @default(uuid())
-//   createdAt  DateTime    @default(now())
-//   updatedAt  DateTime    @updatedAt
-//   name       String
-//   embeddings Embedding[]
-//   content    String
-//   chatbot    Chatbot     @relation(fields: [chatbotId], references: [id])
-//   chatbotId  String
-// }
 
 // function to fetch documents by a chatbotid
 export const getDocumentsByChatbotId = async ({

@@ -19,7 +19,7 @@ export default function Customizer() {
   return (
     <ThemeWrapper
       defaultTheme="zinc"
-      className="flex flex-col space-y-4 md:space-y-6 p-6"
+      className="flex flex-col space-y-4 md:space-y-6 p-14"
     >
       <div className="flex items-start pt-4 md:pt-0">
         <div className="space-y-1 pr-2">

@@ -1,4 +1,4 @@
-import { Link, NavLink, useLocation, useMatches } from "@remix-run/react";
+import { Link, useMatches } from "@remix-run/react";
 import { LucideIcon } from "lucide-react";
 
 import { cn } from "~/lib/utils";
@@ -19,13 +19,7 @@ interface NavProps {
 }
 
 export function Nav({ links, isCollapsed }: NavProps) {
-  const { pathname } = useLocation();
   const matches = useMatches();
-
-  console.log(
-    "location",
-    matches.map((match) => match.handle?.breadcrumb),
-  );
 
   function isActive(path: string) {
     return matches.filter((match) =>
@@ -64,11 +58,6 @@ export function Nav({ links, isCollapsed }: NavProps) {
               </TooltipTrigger>
               <TooltipContent side="right" className="flex items-center gap-4">
                 {link.title}
-                {/* {link.label && (
-                  <span className="ml-auto text-muted-foreground">
-                    {link.label}
-                  </span>
-                )} */}
               </TooltipContent>
             </Tooltip>
           ) : (
@@ -87,17 +76,6 @@ export function Nav({ links, isCollapsed }: NavProps) {
             >
               <link.icon className="mr-2 h-4 w-4" />
               {link.title}
-              {/* {link.label && (
-                <span
-                  className={cn(
-                    "ml-auto",
-                    link.variant === "default" &&
-                      "text-background dark:text-white",
-                  )}
-                >
-                  {link.label}
-                </span>
-              )} */}
             </Link>
           ),
         )}

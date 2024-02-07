@@ -3,13 +3,15 @@
 
 import { Role } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
 import { createMessage, getMessagesByChatId } from "~/models/chat.server";
 import { chat } from "~/utils/openai";
 import { Send } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import Messages from "~/components/messages";
 
 // on click "new chat" -> create empty chat, and naviagete to chat/id/chatId
 
@@ -83,46 +85,47 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 export default function Chat() {
   const data = useLoaderData<typeof loader>();
 
-  return (
-    <>
-      {data.messages.length === 0 ? (
-        <p className="p-4">No messages yet</p>
-      ) : (
-        <div className="space-y-4 max-w-[75%]">
-          {data.messages.map((message) => (
-            <div
-              key={message.id}
-              className={cn(
-                "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                message.role === Role.USER
-                  ? "ml-auto bg-primary text-primary-foreground"
-                  : "bg-muted",
-              )}
-            >
-              {message.content}
-            </div>
-          ))}
-        </div>
-      )}
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
 
-      <Form method="post" className="flex w-full items-center space-x-2">
+  console.log("fetcher state", fetcher.state);
+
+  return (
+    <div className="h-full flex flex-col justify-between">
+      <Messages
+        messages={
+          isSubmitting
+            ? [
+                ...data.messages,
+                {
+                  role: Role.USER,
+                  content: "...",
+                  id: "loading-message",
+                },
+              ]
+            : data.messages
+        }
+      />
+      <fetcher.Form method="post">
         <input
           type="hidden"
           name="messages"
           value={JSON.stringify(data.messages)}
         />
-        <Input
-          placeholder="Type your message..."
-          className="flex-1"
-          autoComplete="off"
-          type="text"
-          name="message"
-        />
-        <Button type="submit" size="icon">
-          <Send className="h-4 w-4" />
-          <span className="sr-only">Send</span>
-        </Button>
-      </Form>
-    </>
+        <div className="flex flex-row items-center space-x-2 py-4 px-16">
+          <Input
+            placeholder="Type your message..."
+            className="flex-1"
+            autoComplete="off"
+            type="text"
+            name="message"
+          />
+          <Button type="submit" size="icon">
+            <Send className="h-4 w-4" />
+            <span className="sr-only">Send</span>
+          </Button>
+        </div>
+      </fetcher.Form>
+    </div>
   );
 }

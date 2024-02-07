@@ -1,7 +1,9 @@
 import { Document } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import DocumentCard from "~/components/DocumentCard";
+import DocumentCard from "~/components/document-card";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import {
   createDocuments,
   getDocumentsByChatbotId,
@@ -23,60 +25,84 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const files = formData.getAll("file");
-  const fileContents = await processFiles({ files });
-  const chatbotId = params.chatbotId as string;
+  const action = formData.get("action") as string;
 
-  const documents: Pick<Document, "name" | "content" | "chatbotId">[] =
-    fileContents.map((fileContent) => ({
-      ...fileContent,
-      chatbotId,
-    }));
+  switch (action) {
+    case "scrape": {
+      // scrape and save documents and embeddings
+      return null;
+    }
+    case "upload": {
+      const files = formData.getAll("file");
+      const fileContents = await processFiles({ files });
+      const chatbotId = params.chatbotId as string;
 
-  // this creates the embeddings as well
-  await createDocuments({ documents }); // these are the documents that will be shown in the UI
+      const documents: Pick<Document, "name" | "content" | "chatbotId">[] =
+        fileContents.map((fileContent) => ({
+          ...fileContent,
+          chatbotId,
+        }));
 
-  return json({ fileContents });
+      // this creates the embeddings as well
+      await createDocuments({ documents }); // these are the documents that will be shown in the UI
+
+      return json({ fileContents });
+    }
+    default: {
+      return json({ error: "Invalid action" }, { status: 400 });
+    }
+  }
 };
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col gap-2 w-full px-24 py-12">
-      <h1 className="text-2xl font-bold">Data</h1>
-      <h1 className="font-normal text-gray-700 dark:text-gray-400">
-        This is the data that your chatbot will be able to reference in it's
-        responses
-      </h1>
+    <div className="flex flex-col gap-8 w-full px-24 py-12">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl font-bold">Data</h1>
+        <h1 className="font-normal text-gray-700 dark:text-gray-400">
+          This is the data that your chatbot will be able to reference in it's
+          responses
+        </h1>
 
-      <Form method="post" encType="multipart/form-data">
-        <input
-          type="file"
-          name="file"
-          multiple
-          className="block w-full text-sm text-gray-500
-                               file:mr-4 file:rounded file:border-0
-                               file:bg-blue-50 file:py-2 file:px-4
-                               file:text-sm file:font-semibold
-                               file:text-blue-700 hover:file:bg-blue-100"
-        />
-        <button
-          type="submit"
-          className="mt-2 flex items-center justify-center rounded-md bg-blue-500 px-4 py-3 font-medium text-white hover:bg-blue-600"
+        <Form
+          method="post"
+          encType="multipart/form-data"
+          className="flex flex-row justify-between items-center gap-4"
         >
-          + Upload Document
-        </button>
-      </Form>
+          <input type="hidden" name="action" value="scrape" />
+          <Input
+            type="text"
+            name="url"
+            placeholder="Enter website url"
+            multiple
+            className="flex-1"
+          />
+          <Button type="submit" className="flex-none">
+            Scrape website
+          </Button>
+        </Form>
+
+        <Form
+          method="post"
+          encType="multipart/form-data"
+          className="flex flex-row justify-between items-center gap-4"
+        >
+          <input type="hidden" name="action" value="upload" />
+          <Input type="file" name="file" multiple className="flex-1" />
+          <Button type="submit" className="flex-none">
+            + Upload Document
+          </Button>
+        </Form>
+      </div>
 
       {data.documents.length === 0 ? (
         <p className="p-4">No documents yet</p>
       ) : (
         <ol className="space-y-4 ">
           {data.documents.map((document) => (
-            <li key={document.id}>
-              <DocumentCard document={document} />
-            </li>
+            <DocumentCard key={document.id} document={document} />
           ))}
         </ol>
       )}

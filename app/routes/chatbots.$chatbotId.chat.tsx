@@ -18,8 +18,10 @@ import {
   createChatWithUser,
   deleteChatByChatId,
   getChatsByUserAndChatbotId,
+  updateChatName,
 } from "~/models/chat.server";
 import { requireUserId } from "~/session.server";
+import { ChatsNav } from "~/components/chats-nav";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const chatbotId = params.chatbotId as string;
@@ -45,10 +47,14 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const chat = await createChatWithUser({ chatbotId, userId });
       return redirect(chat.id);
     }
-    case "delete":
-      console.log("deleting chat", chatId);
+    case "delete": {
       await deleteChatByChatId({ chatId });
       return redirect(`/chatbots/${chatbotId}/chat`);
+    }
+    case "update": {
+      const chatName = formData.get("updateName") as string;
+      return await updateChatName({ chatId, chatName });
+    }
   }
 };
 
@@ -67,56 +73,13 @@ export default function Chat({
       }}
       className="h-full max-h-[800px] items-stretch"
     >
-      <ResizablePanel
-        defaultSize={defaultLayout[0]}
-        collapsible={false}
-        // minSize={15}
-        // maxSize={20}
-      >
+      <ResizablePanel defaultSize={defaultLayout[0]} collapsible={false}>
         <Outlet />
       </ResizablePanel>
 
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[1]}>
-        <div className="h-full w-80 border-r bg-gray-50">
-          <Form method="post">
-            <input type="hidden" name="action" value="create" />
-            <button className="block p-4 text-xl text-blue-500" type="submit">
-              + New Chat
-            </button>
-          </Form>
-
-          <hr />
-
-          {data.chats.length === 0 ? (
-            <p className="p-4">No chats yet</p>
-          ) : (
-            <ol>
-              {data.chats.map((chat) => (
-                <li
-                  key={chat.id}
-                  className={
-                    "flex flex-row justify-between border-b p-4 text-xl"
-                  }
-                >
-                  <NavLink
-                    className={({ isActive }) =>
-                      ` p-4 text-xl ${isActive ? "bg-white" : ""}`
-                    }
-                    to={chat.id}
-                  >
-                    {chat.name}
-                  </NavLink>
-                  <Form method="post">
-                    <input type="hidden" name="action" value="delete" />
-                    <input type="hidden" name="chatId" value={chat.id} />
-                    <button type="submit">🗑️</button>
-                  </Form>
-                </li>
-              ))}
-            </ol>
-          )}
-        </div>
+        <ChatsNav chats={data.chats} isCollapsed={false} />
       </ResizablePanel>
     </ResizablePanelGroup>
   );

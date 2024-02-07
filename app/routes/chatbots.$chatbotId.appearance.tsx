@@ -45,20 +45,18 @@ export default function Appearance({
       }}
       className="h-full max-h-[800px] items-stretch"
     >
-      <ResizablePanel
-        defaultSize={defaultLayout[0]}
-        collapsible={false}
-        // minSize={15}
-        // maxSize={20}
-      >
+      <ResizablePanel defaultSize={defaultLayout[0]} collapsible={false}>
         <Customizer />
       </ResizablePanel>
 
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={defaultLayout[1]} className="p-6">
+      <ResizablePanel
+        defaultSize={defaultLayout[1]}
+        className="flex items-center justify-center"
+      >
         <>
           <Card>
-            <CardContent className="flex flex-row items-center">
+            <CardContent className="flex flex-row items-center pt-4">
               <div className="space-y-4">
                 {messages.map((message, index) => (
                   <div

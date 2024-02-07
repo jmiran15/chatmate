@@ -95,3 +95,20 @@ export function deleteChatByChatId({ chatId }: { chatId: Chat["id"] }) {
     },
   });
 }
+
+export function updateChatName({
+  chatId,
+  chatName,
+}: {
+  chatId: Chat["id"];
+  chatName: Chat["name"];
+}) {
+  return prisma.chat.update({
+    where: {
+      id: chatId,
+    },
+    data: {
+      name: chatName,
+    },
+  });
+}
