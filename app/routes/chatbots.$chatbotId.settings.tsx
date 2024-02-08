@@ -3,6 +3,21 @@ import { json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
 import { Chatbot, Model } from "@prisma/client";
+import { Label } from "~/components/ui/label";
+import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
+import { Slider } from "~/components/ui/slider";
+import { Button } from "~/components/ui/button";
+import { ScrollArea } from "~/components/ui/scroll-area";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   // const userId = await requireUserId(request);
@@ -42,114 +57,110 @@ export default function ModelC() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <Form
-      method="post"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        width: "100%",
-        padding: "2rem",
-      }}
-    >
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Name: </span>
-          <input
-            defaultValue={data ? data.chatbot!.name : undefined}
+    <ScrollArea className="h-full w-full">
+      <Form method="post" className="flex flex-col gap-6 p-8">
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="name">Name</Label>
+          <Input
+            type="text"
             name="name"
-            className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
+            id="name"
+            placeholder="Name"
+            defaultValue={data ? data.chatbot!.name : undefined}
           />
-        </label>
-      </div>
+        </div>
 
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Description: </span>
-          <textarea
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="description">Description</Label>
+          <Textarea
+            placeholder="Type your message here."
+            id="description"
+            name="description"
+            rows={8}
             defaultValue={
               data ? (data.chatbot!.description as string) : undefined
             }
-            name="description"
-            rows={8}
-            className="w-full flex-1 rounded-md border-2 border-blue-500 px-3 py-2 text-lg leading-6"
           />
-        </label>
-      </div>
+          <p className="text-sm text-muted-foreground">
+            Describe your chatbot to help you remember what it does.
+          </p>
+        </div>
 
-      <div>
-        <label className="block mb-2 font-medium text-gray-900 dark:text-white">
-          <span>Select a model: </span>
-          <select
-            name="model"
-            defaultValue={data ? (data.chatbot!.model as string) : undefined}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        <Select
+          defaultValue={data ? (data.chatbot!.model as string) : undefined}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a model" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Models</SelectLabel>
+              <SelectItem value={Model.GPT35}>GPT-3.5</SelectItem>
+              <SelectItem value={Model.GPT4}>GPT-4</SelectItem>
+              <SelectItem value={Model.GEMINI}>Gemini</SelectItem>
+              <SelectItem value={Model.LLAMA2}>Llama 2</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <div>
+          <label
+            htmlFor="temp"
+            className="block mb-2 font-medium text-gray-900 dark:text-white"
           >
-            <option value={Model.GPT35}>GPT35</option>
-            <option value={Model.GPT4}>GPT4</option>
-            <option value={Model.GEMINI}>GEMINI</option>
-            <option value={Model.LLAMA2}>LLAMA2</option>
-          </select>
-        </label>
-      </div>
+            <span>Temperature: </span>
 
-      <div>
-        <label className="block mb-2 font-medium text-gray-900 dark:text-white">
-          <span>Temperature: </span>
-          <input
-            defaultValue={
-              data ? (data.chatbot!.temperature as number) : undefined
-            }
-            name="temperature"
-            type="range"
-            min={0}
-            max={2}
-            step={0.1}
-            className="w-full"
-          />
-        </label>
-      </div>
+            <Slider
+              id="temp"
+              defaultValue={data ? [data.chatbot!.temperature as number] : []}
+              name="temperature"
+              min={0}
+              max={2}
+              step={0.1}
+              className="w-full"
+            />
+          </label>
+        </div>
 
-      <div>
-        <label className="block mb-2 font-medium text-gray-900 dark:text-white">
-          <span>Max Tokens: </span>
-          <input
-            name="maxTokens"
-            defaultValue={
-              data ? (data.chatbot!.maxTokens as number) : undefined
-            }
-            type="range"
-            min="0"
-            max="1000"
-            step="1"
-            className="w-full"
-          />
-        </label>
-      </div>
+        <div>
+          <label
+            htmlFor="maxTokens"
+            className="block mb-2 font-medium text-gray-900 dark:text-white"
+          >
+            <span>Max Tokens: </span>
 
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>System Prompt: </span>
-          <textarea
+            <Slider
+              id="maxTokens"
+              defaultValue={data ? [data.chatbot!.maxTokens as number] : []}
+              name="temperature"
+              min={0}
+              max={1000}
+              step={1}
+              className="w-full"
+            />
+          </label>
+        </div>
+
+        <div className="grid w-full gap-1.5">
+          <Label htmlFor="system">System prompt</Label>
+          <Textarea
+            placeholder="Type your message here."
+            id="system"
             name="systemPrompt"
+            rows={8}
             defaultValue={
               data ? (data.chatbot!.systemPrompt as string) : undefined
             }
-            rows={8}
-            className="w-full flex-1 rounded-md border-2 border-blue-500 px-3 py-2 text-lg leading-6"
           />
-        </label>
-      </div>
+          <p className="text-sm text-muted-foreground">
+            The system prompt is the initial message that the chatbot will use
+            to start the conversation.
+          </p>
+        </div>
 
-      <div className="text-right">
-        <button
-          type="submit"
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-        >
-          Save
-        </button>
-      </div>
-    </Form>
+        <Button type="submit">Save</Button>
+      </Form>
+    </ScrollArea>
   );
 }
 
