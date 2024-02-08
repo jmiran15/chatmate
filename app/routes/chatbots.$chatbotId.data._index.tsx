@@ -1,6 +1,6 @@
 import { Document } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import DocumentCard from "~/components/document-card";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -9,6 +9,7 @@ import {
   getDocumentsByChatbotId,
   processFiles,
 } from "~/models/document.server";
+import seed from "~/utils/seed";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   // fetch documents from database by chatbotid
@@ -27,10 +28,22 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const action = formData.get("action") as string;
 
+  console.log({ action });
+
   switch (action) {
     case "scrape": {
       // scrape and save documents and embeddings
-      return null;
+      const url = formData.get("url") as string;
+      return await seed(
+        url,
+        3,
+        {
+          splittingMethod: "markdown",
+          chunkSize: 256,
+          chunkOverlap: 1,
+        },
+        params.chatbotId as string,
+      );
     }
     case "upload": {
       const files = formData.getAll("file");
@@ -56,6 +69,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
+  // const actionData = useActionData<typeof action>();
+
+  // console.log({ actionData });
 
   return (
     <div className="flex flex-col gap-8 w-full px-24 py-12">

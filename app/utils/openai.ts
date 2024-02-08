@@ -1,21 +1,27 @@
 import { Embedding } from "@prisma/client";
 import OpenAI from "openai";
+// import { OpenAIApi, Configuration } from "openai-edge";
 import invariant from "tiny-invariant";
-
 import { prisma } from "~/db.server";
+import { system_prompt } from "./prompts";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function embed({ input }: { input: string }) {
-  const embedding = await openai.embeddings.create({
-    model: "text-embedding-ada-002",
-    input,
-    encoding_format: "float",
-  });
+export async function getEmbeddings({ input }: { input: string }) {
+  try {
+    const embedding = await openai.embeddings.create({
+      model: "text-embedding-ada-002",
+      input: input.replace(/\n/g, " "),
+      encoding_format: "float",
+    });
 
-  return embedding.data[0].embedding;
+    return embedding.data[0].embedding as number[];
+  } catch (e) {
+    console.log("Error calling OpenAI embedding API: ", e);
+    throw new Error(`Error calling OpenAI embedding API: ${e}`);
+  }
 }
 
 // this should take care of all the RAG stuff as well
@@ -43,23 +49,16 @@ export async function chat({
   })) as Embedding[];
 
   const userPromptWithReferences = `
-Create a concise and informative answer (no more than 50 words) for a given question
-based solely on the given documents. You must only use information from the given documents.
-Use an unbiased and journalistic tone. Do not repeat text. Cite the documents using Document[number] notation.
-If multiple documents contain the answer, cite those documents like ‘as stated in Document[number], Document[number], etc.’.
-If the documents do not contain the answer to the question, say that ‘answering is not possible given the available information.’
+  Below are some relevant documents that may help answer your question:
 ${references
   .map((reference) => `Document[${reference.documentId}]: ${reference.content}`)
   .join("\n")}
-Question: ${query}; Answer:`;
+User: ${query}; Chatbot:`;
 
   messages[messages.length - 1].content = userPromptWithReferences;
 
   const completion = await openai.chat.completions.create({
-    messages: [
-      { role: "system", content: "You are a helpful assistant." },
-      ...messages,
-    ],
+    messages: [{ role: "system", content: system_prompt }, ...messages],
     model: "gpt-3.5-turbo",
   });
 
@@ -73,7 +72,7 @@ export async function fetchRelevantDocs({
   chatbotId: string;
   input: string;
 }) {
-  const userEmbedding = await embed({ input });
+  const userEmbedding = await getEmbeddings({ input });
 
   const relevantDocs = await prisma.$queryRaw`
   SELECT id, content, "documentId",
@@ -86,26 +85,3 @@ export async function fetchRelevantDocs({
 
   return relevantDocs;
 }
-
-import { OpenAIApi, Configuration } from "openai-edge";
-
-// const config = new Configuration({
-//   apiKey: process.env.OPENAI_API_KEY
-// })
-// const openai = new OpenAIApi(config)
-
-// export async function getEmbeddings(input: string) {
-//   try {
-//     const response = await openai.createEmbedding({
-//       model: "text-embedding-ada-002",
-//       input: input.replace(/\n/g, ' ')
-//     })
-
-//     const result = await response.json();
-//     return result.data[0].embedding as number[]
-
-//   } catch (e) {
-//     console.log("Error calling OpenAI embedding API: ", e);
-//     throw new Error(`Error calling OpenAI embedding API: ${e}`);
-//   }
-// }

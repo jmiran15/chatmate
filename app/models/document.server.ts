@@ -4,10 +4,11 @@ import { Chatbot, Document } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
-import { embed } from "~/utils/openai";
+import { getEmbeddings } from "~/utils/openai";
 export type { Chatbot } from "@prisma/client";
 
 // takes full, non chuncked documents, inserts the full document as "Document", and also creates Embeddings from it (chunked)
+// this function is WRONG, IT SHOULD HAVE NO SIDE EFFECTS
 export async function createDocuments({
   documents,
 }: {
@@ -46,7 +47,7 @@ export async function createDocumentWithEmbeddings({
 
   const chunksWithEmbeddings = await Promise.all(
     chunks.map(async (chunk) => {
-      const embedding = await embed({ input: chunk });
+      const embedding = await getEmbeddings({ input: chunk });
 
       await prisma.$executeRaw`
       INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
