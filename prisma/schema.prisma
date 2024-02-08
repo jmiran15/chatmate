@@ -94,7 +94,7 @@ model Embedding {
   id         String                      @id @default(uuid())
   createdAt  DateTime                    @default(now())
   embedding  Unsupported("vector(1536)")
-  document   Document                    @relation(fields: [documentId], references: [id])
+  document   Document                    @relation(fields: [documentId], references: [id], onDelete: Cascade)
   documentId String
   chatbot    Chatbot                     @relation(fields: [chatbotId], references: [id])
   chatbotId  String

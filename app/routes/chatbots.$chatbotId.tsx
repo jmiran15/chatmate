@@ -90,8 +90,6 @@ export default function ChatbotLayout({
   // const navCollapsedSize = 4;
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
 
-  console.log("isCollapsed", isCollapsed, defaultCollapsed);
-
   return (
     // <main className="flex h-full bg-white">
     //   <div className="h-full w-80 border-r bg-gray-50">

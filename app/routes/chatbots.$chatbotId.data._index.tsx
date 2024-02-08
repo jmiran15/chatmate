@@ -69,9 +69,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
-  // const actionData = useActionData<typeof action>();
-
-  // console.log({ actionData });
 
   return (
     <div className="flex flex-col gap-8 w-full px-24 py-12">

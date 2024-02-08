@@ -27,8 +27,6 @@ export function Nav({ links, isCollapsed }: NavProps) {
     ).length;
   }
 
-  console.log("isActiontest", isActive("chat"));
-
   return (
     <div
       data-collapsed={isCollapsed}

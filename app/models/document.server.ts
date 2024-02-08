@@ -150,3 +150,8 @@ export async function processFiles({ files }: { files: FormDataEntryValue[] }) {
 
   return fileContents;
 }
+
+// delete a document by id
+export const deleteDocumentById = async ({ id }: { id: Document["id"] }) => {
+  return prisma.document.delete({ where: { id } });
+};
