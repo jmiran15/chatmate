@@ -48,6 +48,15 @@
     --ring: 20.5 90.2% 48.2%;
   }
 }
+.orange-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 165, 0, 0.5) 0%,
+    /* Start with orange */ rgba(255, 165, 0, 0.2) 5%,
+    /* Begin to fade */ rgba(255, 165, 0, 0.1) 10%,
+    /* Continue fading */ rgba(255, 165, 0, 0) 15% /* Fully transparent */
+  );
+}
 
 @layer base {
   * {

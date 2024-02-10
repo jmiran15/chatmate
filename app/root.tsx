@@ -1,23 +1,20 @@
-// should we have the header here? since this is the root layout??? we can get the user in the loader and change header accordingly
-
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  Form,
-  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
+  // useLoaderData,
 } from "@remix-run/react";
 
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
 import { SiteHeader } from "./components/site-header";
+import { Navbar } from "./components/navbar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -29,7 +26,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
+  // const data = useLoaderData<typeof loader>();
 
   return (
     <html lang="en" className="h-full">
@@ -39,9 +36,20 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen h-full flex flex-col bg-slate-300">
-        <SiteHeader />
-        {/* <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
+      <body className="min-h-screen h-full flex flex-col ">
+        {/* <SiteHeader /> */}
+        <Navbar />
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+{
+  /* <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
           <h1 className="text-3xl font-bold">
             <Link to=".">Home</Link>
           </h1>
@@ -78,12 +86,5 @@ export default function App() {
               </Link>
             </div>
           )}
-        </header> */}
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
-  );
+        </header> */
 }

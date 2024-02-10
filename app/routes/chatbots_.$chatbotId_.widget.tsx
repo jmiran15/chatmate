@@ -3,7 +3,6 @@ import { Send, Bot, Minimize, RefreshCw, X } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { useEffect, useState } from "react";
-import { Transition } from "@headlessui/react";
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { cn } from "~/lib/utils";
 
@@ -67,92 +66,87 @@ export default function ChatbotWidget() {
 
   return (
     <div className="fixed bottom-2 right-2 p-4 z-50">
-      <Transition
-        show={isChatVisible}
-        enter="transition ease-out duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition ease-in duration-200"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+      <div
+        className={`chat-interface flex flex-col justify-between absolute h-[90vh] md:h-[80vh] w-[95vw] md:w-[28vw] bg-white rounded-2xl shadow-sm overflow-hidden bottom-full right-4 mb-2
+                  transition ease-in-out duration-300 ${
+                    isChatVisible ? "opacity-100" : "opacity-0 invisible"
+                  }`}
       >
-        <div className="chat-interface flex flex-col justify-between absolute h-[90vh] md:h-[80vh] w-[95vw] md:w-[28vw] bg-white rounded-2xl shadow-sm overflow-hidden bottom-full right-4 mb-2">
-          {/* Chat Header */}
-          <div>
-            <div className="flex items-center justify-between bg-indigo-500 p-5 rounded-t-2xl">
-              <div className="flex items-center">
-                <img
-                  src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png"
-                  alt="Chatmate"
-                  className="h-6 w-6 rounded-full mr-2"
-                />
-                <span className="text-white font-medium">Chatmate</span>
-              </div>
-              <div className="flex items-center">
-                <button
-                  className="text-white hover:text-opacity-80 transition ease-in-out duration-150"
-                  onClick={() => {
-                    /* reset action */
-                  }}
-                >
-                  <RefreshCw className="h-5 w-5" />
-                </button>
-                <button
-                  className="text-white hover:text-opacity-80 transition ease-in-out duration-150 ml-2"
-                  onClick={() => setIsChatVisible(false)}
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+        {/* Chat Header */}
+        <div>
+          <div className="flex items-center justify-between bg-indigo-500 p-5 rounded-t-2xl">
+            <div className="flex items-center">
+              <img
+                src="https://s3-alpha.figma.com/hub/file/1913095808/a7bdc469-cd70-4ea1-bb57-b59204ad8182-cover.png"
+                alt="Chatmate"
+                className="h-6 w-6 rounded-full mr-2"
+              />
+              <span className="text-white font-medium">Chatmate</span>
             </div>
-            <div className="overflow-y-auto mb-3 p-3">
-              <ScrollArea className="flex-1 overflow-y-auto">
-                {messages.length === 0 ? (
-                  <p className="">No messages yet</p>
-                ) : (
-                  <div className="flex flex-col space-y-4">
-                    {messages.map((message, index) => {
-                      console.log("message", message, message.role === "user");
-                      return (
-                        <div
-                          key={index}
-                          className={cn(
-                            "rounded-lg p-3 text-sm",
-                            message.role === "user"
-                              ? "ml-auto bg-primary text-white"
-                              : "bg-gray-200 text-gray-700",
-                          )}
-                        >
-                          {message.content}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </ScrollArea>
+            <div className="flex items-center">
+              <button
+                className="text-white hover:text-opacity-80 transition ease-in-out duration-150"
+                onClick={() => {
+                  /* reset action */
+                }}
+              >
+                <RefreshCw className="h-5 w-5" />
+              </button>
+              <button
+                className="text-white hover:text-opacity-80 transition ease-in-out duration-150 ml-2"
+                onClick={() => setIsChatVisible(false)}
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
           </div>
-          <div className="flex flex-row items-center justify-between gap-2 p-3">
-            <Input
-              placeholder="Type your message..."
-              className="flex-1"
-              autoComplete="off"
-              type="text"
-              name="message"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-            />
-            <Button
-              type="submit"
-              size="icon"
-              className="bg-blue-500 hover:bg-blue-400 active:bg-blue-600"
-              onClick={() => sendMessage(input)}
-            >
-              <Send className="h-4 w-4 text-white" />
-            </Button>
+          <div className="overflow-y-auto mb-3 p-3">
+            <ScrollArea className="flex-1 overflow-y-auto">
+              {messages.length === 0 ? (
+                <p className="">No messages yet</p>
+              ) : (
+                <div className="flex flex-col space-y-4">
+                  {messages.map((message, index) => {
+                    console.log("message", message, message.role === "user");
+                    return (
+                      <div
+                        key={index}
+                        className={cn(
+                          "rounded-lg p-3 text-sm",
+                          message.role === "user"
+                            ? "ml-auto bg-primary text-white"
+                            : "bg-gray-200 text-gray-700",
+                        )}
+                      >
+                        {message.content}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </ScrollArea>
           </div>
         </div>
-      </Transition>
+        <div className="flex flex-row items-center justify-between gap-2 p-3">
+          <Input
+            placeholder="Type your message..."
+            className="flex-1"
+            autoComplete="off"
+            type="text"
+            name="message"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <Button
+            type="submit"
+            size="icon"
+            className="bg-blue-500 hover:bg-blue-400 active:bg-blue-600"
+            onClick={() => sendMessage(input)}
+          >
+            <Send className="h-4 w-4 text-white" />
+          </Button>
+        </div>
+      </div>
       <button
         className="bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-400 transition duration-300 transform hover:scale-110 p-3 rounded-full overflow-hidden border-none cursor-pointer"
         onClick={() => setIsChatVisible(!isChatVisible)}
