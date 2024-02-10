@@ -9,12 +9,14 @@ import {
 } from "~/components/page-header";
 import { buttonVariants } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
+import ChatbotWidget from "./chatbots_.$chatbotId_.widget";
 
 export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
 
 export default function Index() {
   return (
-    <div className="container relative">
+    <div className="container relative ">
+      <ChatbotWidget />
       <PageHeader>
         <PageHeaderHeading>
           10x your landing page conversion with a custom chatbot widget

@@ -39,7 +39,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="min-h-screen h-full flex flex-col">
+      <body className="min-h-screen h-full flex flex-col bg-slate-300">
         <SiteHeader />
         {/* <header className="flex items-center justify-between bg-slate-800 p-4 text-white">
           <h1 className="text-3xl font-bold">

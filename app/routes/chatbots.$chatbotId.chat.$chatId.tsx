@@ -1,31 +1,12 @@
-// chatbots/id/chat/chatId
-// this is a chat, basically the ui for the widgets as well
-
 import { Role } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { createMessage, getMessagesByChatId } from "~/models/chat.server";
 import { chat } from "~/utils/openai";
 import { Send } from "lucide-react";
-import { cn } from "~/lib/utils";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { ScrollArea } from "~/components/ui/scroll-area";
 import Messages from "~/components/messages";
-
-// on click "new chat" -> create empty chat, and naviagete to chat/id/chatId
-
-// in this page
-
-// loader, loads all the messages for a chat
-
-// action, gets called when user submits a message
-// based on action processing data
-// if submitted, add the user message to the chat
-// this stuff will probably revalidate the loader, so will just show up in loader data
-
-// if processing, show loading spiner on the assistant message
-// when finished show the assiatnt message, should also revalidate the loader anyways
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const chatId = params.chatId as string;
