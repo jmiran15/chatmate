@@ -80,7 +80,7 @@ export default function Chat() {
                 ...data.messages,
                 {
                   role: Role.USER,
-                  content: "...",
+                  content: fetcher.formData.get("message") as string,
                   id: "loading-message",
                 },
               ]
