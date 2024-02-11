@@ -1,8 +1,7 @@
-import { Model, type Chatbot, type User } from "@prisma/client";
+import { type Chatbot, type User } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
-export type { Chatbot } from "@prisma/client";
 
 export function getChatbotsByUserId({ userId }: { userId: User["id"] }) {
   return prisma.chatbot.findMany({
@@ -21,11 +20,6 @@ export function createChatbot({
       id: uuidv4(),
       name,
       description,
-      model: Model.GPT35,
-      temperature: 0.7,
-      maxTokens: 100,
-      systemPrompt: "The following is a conversation with an AI assistant.",
-      // stream: false,
       user: {
         connect: {
           id: userId,
@@ -46,29 +40,12 @@ export function updateChatbotById({
   id,
   name,
   description,
-  model,
-  temperature,
-  maxTokens,
-  systemPrompt,
-}: Pick<
-  Chatbot,
-  | "id"
-  | "name"
-  | "description"
-  | "model"
-  | "temperature"
-  | "maxTokens"
-  | "systemPrompt"
->) {
+}: Pick<Chatbot, "id" | "name" | "description">) {
   return prisma.chatbot.update({
     where: { id },
     data: {
       name,
       description,
-      model,
-      temperature,
-      maxTokens,
-      systemPrompt,
     },
   });
 }

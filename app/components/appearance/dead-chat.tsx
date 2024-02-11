@@ -1,7 +1,9 @@
 import { RefreshCw, Send, X } from "lucide-react";
-import Messages from "./messages";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import Messages from "../messages";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+
+// deadchat should a Chat with Header, same thing used inside the Widget component
 
 const messages = [
   {

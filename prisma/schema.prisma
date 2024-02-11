@@ -34,14 +34,10 @@ model Chatbot {
   user             User        @relation(fields: [userId], references: [id])
   userId           String
   chats            Chat[]
-  model            Model?
-  temperature      Float?
-  maxTokens        Int?
-  systemPrompt     String?
   introMessages    String      @default("Hello, how can I help you today?")
   starterQuestions String      @default("What are your features?")
   color            String      @default("#FF5733")
-  radius           Float      @default(1)
+  radius           Float       @default(1)
   documents        Document[]
   embeddings       Embedding[]
 }
@@ -58,7 +54,7 @@ model Chat {
   name      String?   @default("Untitled Chat")
 }
 
-// RENAME THIS TO "Page"
+// Rename this to "Page"
 // interface Page {
 //   url: string;
 //   content: string;
@@ -75,18 +71,18 @@ model Document {
 }
 
 // {
-//       id: hash, // The ID of the vector is the hash of the document content
-//       values: embedding, // The vector values are the OpenAI embeddings
-//       metadata: {
-//         // The metadata includes details about the document
-//         chunk: doc.pageContent, // The chunk of text that the vector represents
-//         text: doc.metadata.text as string, // The text of the document
-//         url: doc.metadata.url as string, // The URL where the document was found
-//         hash: doc.metadata.hash as string, // The hash of the document content
-//       },
+// id: hash, // The ID of the vector is the hash of the document content
+// values: embedding, // The vector values are the OpenAI embeddings
+// metadata: {
+// // The metadata includes details about the document
+// chunk: doc.pageContent, // The chunk of text that the vector represents
+// text: doc.metadata.text as string, // The text of the document
+// url: doc.metadata.url as string, // The URL where the document was found
+// hash: doc.metadata.hash as string, // The hash of the document content
+// },
 // }
 
-// RENAME THIS TO "Vector"
+// Rename this to "Vector"
 model Embedding {
   id         String                      @id @default(uuid())
   createdAt  DateTime                    @default(now())
@@ -104,20 +100,8 @@ model Message {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  role      Role
+  role      String
   content   String
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String
-}
-
-enum Role {
-  USER
-  ASSISTANT
-}
-
-enum Model {
-  GPT4
-  GPT35
-  GEMINI
-  LLAMA2
 }

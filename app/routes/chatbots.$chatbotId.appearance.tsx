@@ -1,11 +1,11 @@
-import Customizer from "~/components/theme-customizer";
+import Customizer from "~/components/appearance/theme-customizer";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "~/components/ui/resizable";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import DeadChat from "~/components/dead-chat";
+import DeadChat from "~/components/appearance/dead-chat";
 import {
   getChatbotById,
   updateChatbotAppearanceById,

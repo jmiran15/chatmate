@@ -1,26 +1,10 @@
-import { CheckIcon, ResetIcon } from "@radix-ui/react-icons";
-import { cn } from "~/lib/utils";
-import { Button } from "./ui/button";
-import { Label } from "./ui/label";
-import { themes } from "~/registry/themes";
-import { Textarea } from "./ui/textarea";
-import { ScrollArea } from "./ui/scroll-area";
+import { ResetIcon } from "@radix-ui/react-icons";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { Textarea } from "../ui/textarea";
+import { ScrollArea } from "../ui/scroll-area";
 import { useFetcher } from "@remix-run/react";
-import { Slider } from "./ui/slider";
-
-// import { useAtom } from "jotai";
-// import { atomWithStorage } from "jotai/utils";
-// import { Theme } from "~/registry/themes";
-
-// interface Config {
-//   theme: Theme["name"];
-//   radius: number;
-// }
-
-// const configAtom = atomWithStorage<Config>("config", {
-//   theme: "zinc",
-//   radius: 0.5,
-// });
+import { Slider } from "../ui/slider";
 
 export default function Customizer({
   introMessages,

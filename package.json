@@ -68,6 +68,7 @@
     "formidable": "^3.5.1",
     "isbot": "^3.7.0",
     "jotai": "^2.6.4",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "lucide-react": "^0.321.0",
     "md5": "^2.3.0",
