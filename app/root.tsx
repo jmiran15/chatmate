@@ -13,7 +13,6 @@ import {
 
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
-import { SiteHeader } from "./components/site-header";
 import { Navbar } from "./components/navbar";
 
 export const links: LinksFunction = () => [
@@ -37,7 +36,6 @@ export default function App() {
         <Links />
       </head>
       <body className="min-h-screen h-full flex flex-col ">
-        {/* <SiteHeader /> */}
         <Navbar />
         <Outlet />
         <ScrollRestoration />

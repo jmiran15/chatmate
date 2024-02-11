@@ -14,7 +14,6 @@ import {
 
 import { Button, buttonVariants } from "./ui/button";
 import { Menu } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
 import { Form, Link, NavLink } from "@remix-run/react";
 import { Icons } from "./icons";
 import { useOptionalUser } from "~/utils";
@@ -60,8 +59,6 @@ export const Navbar = () => {
 
           {/* mobile */}
           <span className="flex md:hidden">
-            <ModeToggle />
-
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger className="px-2">
                 <Menu
@@ -174,8 +171,6 @@ export const Navbar = () => {
                 </Link>
               </>
             )}
-
-            <ModeToggle />
           </div>
         </NavigationMenuList>
       </NavigationMenu>

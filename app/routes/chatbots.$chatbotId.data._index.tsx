@@ -27,9 +27,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const action = formData.get("action") as string;
-
-  console.log({ action });
-
   switch (action) {
     case "scrape": {
       // scrape and save documents and embeddings

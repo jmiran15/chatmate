@@ -43,8 +43,6 @@ export async function createDocumentWithEmbeddings({
 
   const chunks = splitTextIntoChunks(document.content, 2048, 256);
 
-  console.log("chunks: ", chunks);
-
   const chunksWithEmbeddings = await Promise.all(
     chunks.map(async (chunk) => {
       const embedding = await getEmbeddings({ input: chunk });
@@ -62,13 +60,6 @@ export async function createDocumentWithEmbeddings({
         content: chunk,
       };
     }),
-  );
-
-  console.log("embeddings: ", chunksWithEmbeddings);
-
-  console.log(
-    "printing out the created document from inside func: ",
-    documentObject,
   );
 
   return documentObject;

@@ -58,7 +58,6 @@ export default function Chat() {
   const data = useLoaderData<typeof loader>();
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
-  console.log("fetcher state is", fetcher.state);
   const formRef = useRef<HTMLFormElement>();
   const inputRef = useRef<HTMLInputElement>();
 

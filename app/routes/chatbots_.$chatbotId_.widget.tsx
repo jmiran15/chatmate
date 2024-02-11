@@ -3,8 +3,7 @@ import { Send, Bot, Minimize, RefreshCw, X } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { useEffect, useState } from "react";
-import { ScrollArea } from "~/components/ui/scroll-area";
-import { cn } from "~/lib/utils";
+import Messages from "~/components/messages";
 
 export default function ChatbotWidget() {
   const [messages, setMessages] = useState<
@@ -13,23 +12,21 @@ export default function ChatbotWidget() {
   const [input, setInput] = useState<string>("");
   const { chatbotId } = useParams();
   const [isChatVisible, setIsChatVisible] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  // on render, do all regular message stuff with pure state, on destroy, generate random uuid for the user and push the chat to the db
-  useEffect(() => {
-    console.log("mounting chat");
-    return () => {
-      console.log("unmounting chat");
-    };
-  }, []);
-
-  console.log("messages", messages);
+  // useEffect(() => {
+  //   console.log("mounting chat");
+  //   return () => {
+  //     console.log("unmounting chat");
+  //   };
+  // }, []);
 
   async function sendMessage(input: string) {
-    console.log("these are the messages: ", messages);
-
     if (input.trim() === "") {
       return;
     }
+
+    setIsSubmitting(true);
 
     const santizedInput = input.trim();
     const inputMessage = {
@@ -53,13 +50,12 @@ export default function ChatbotWidget() {
     });
 
     const data = await response.json();
-    console.log("response", data);
 
     if (!data) {
       return;
     }
 
-    console.log("message: ", data.response.message);
+    setIsSubmitting(false);
 
     setMessages([...newMessages, data.response.message]);
   }
@@ -100,33 +96,10 @@ export default function ChatbotWidget() {
               </button>
             </div>
           </div>
-          <div className="overflow-y-auto mb-3 p-3">
-            <ScrollArea className="flex-1 overflow-y-auto">
-              {messages.length === 0 ? (
-                <p className="">No messages yet</p>
-              ) : (
-                <div className="flex flex-col space-y-4">
-                  {messages.map((message, index) => {
-                    console.log("message", message, message.role === "user");
-                    return (
-                      <div
-                        key={index}
-                        className={cn(
-                          "rounded-lg p-3 text-sm",
-                          message.role === "user"
-                            ? "ml-auto bg-primary text-white"
-                            : "bg-gray-200 text-gray-700",
-                        )}
-                      >
-                        {message.content}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </ScrollArea>
-          </div>
+          {/* messages */}
+          <Messages messages={messages} loading={isSubmitting} />
         </div>
+        {/* input */}
         <div className="flex flex-row items-center justify-between gap-2 p-3">
           <Input
             placeholder="Type your message..."

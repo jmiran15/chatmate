@@ -26,26 +26,24 @@ model Password {
 }
 
 model Chatbot {
-  id                    String      @id @default(uuid())
-  createdAt             DateTime    @default(now())
-  updatedAt             DateTime    @updatedAt
-  name                  String
-  description           String?
-  user                  User        @relation(fields: [userId], references: [id])
-  userId                String
-  chats                 Chat[]
-  model                 Model?
-  temperature           Float?
-  maxTokens             Int?
-  systemPrompt          String?
-  introMessages         String[]
-  sampleMessages        String[]
-  assistantMessageColor String?
-  userMessageColor      String?
-  backgroundColor       String?
-  inputPlaceholder      String?
-  documents             Document[]
-  embeddings            Embedding[]
+  id               String      @id @default(uuid())
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  name             String
+  description      String?
+  user             User        @relation(fields: [userId], references: [id])
+  userId           String
+  chats            Chat[]
+  model            Model?
+  temperature      Float?
+  maxTokens        Int?
+  systemPrompt     String?
+  introMessages    String      @default("Hello, how can I help you today?")
+  starterQuestions String      @default("What are your features?")
+  color            String      @default("#FF5733")
+  radius           Float      @default(1)
+  documents        Document[]
+  embeddings       Embedding[]
 }
 
 model Chat {
@@ -57,9 +55,8 @@ model Chat {
   chatbot   Chatbot   @relation(fields: [chatbotId], references: [id])
   chatbotId String
   messages  Message[]
-  name     String? @default("Untitled Chat")
+  name      String?   @default("Untitled Chat")
 }
-
 
 // RENAME THIS TO "Page"
 // interface Page {
@@ -107,10 +104,10 @@ model Message {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  role      Role 
+  role      Role
   content   String
-  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId String
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId    String
 }
 
 enum Role {

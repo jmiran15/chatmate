@@ -40,8 +40,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const userId = await requireUserId(request);
   const chatbotId = params.chatbotId as string;
 
-  console.log("action", action);
-
   switch (action) {
     case "create": {
       const chat = await createChatWithUser({ chatbotId, userId });

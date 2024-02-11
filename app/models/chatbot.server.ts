@@ -42,13 +42,6 @@ export function getChatbotById({ id }: { id: Chatbot["id"] }) {
   });
 }
 
-// function to update a chatbot by id given all the following fields:
-// - name - text input
-// - description - text area
-// - model - dropdown
-// - temperature - slider, 0 - 2 floats
-// - maxTokens - slider, 0 - 1000 ints
-// - systemPrompt - text area
 export function updateChatbotById({
   id,
   name,
@@ -77,5 +70,23 @@ export function updateChatbotById({
       maxTokens,
       systemPrompt,
     },
+  });
+}
+
+export function updateChatbotAppearanceById({
+  id,
+  theme,
+}: {
+  id: Chatbot["id"];
+  theme: {
+    introMessages?: string;
+    starterQuestions?: string;
+    color?: string;
+    radius?: number;
+  };
+}) {
+  return prisma.chatbot.update({
+    where: { id },
+    data: theme,
   });
 }

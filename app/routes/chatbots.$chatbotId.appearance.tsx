@@ -1,52 +1,107 @@
-import { Form } from "@remix-run/react";
-import { useState } from "react";
 import Customizer from "~/components/theme-customizer";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardFooter } from "~/components/ui/card";
-import { Send } from "lucide-react";
-
-import { Input } from "~/components/ui/input";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "~/components/ui/resizable";
-import { cn } from "~/lib/utils";
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
+import DeadChat from "~/components/dead-chat";
+import {
+  getChatbotById,
+  updateChatbotAppearanceById,
+} from "~/models/chatbot.server";
+import { useLoaderData } from "@remix-run/react";
+
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const chatbotId = params.chatbotId as string;
+  if (!chatbotId)
+    return json({ message: "No chatbotId provided" }, { status: 400 });
+  const chatbot = await getChatbotById({ id: chatbotId });
+
+  return json(chatbot);
+};
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const field = formData.get("field") as string;
+  const chatbotId = params.chatbotId as string;
+
+  if (!field) return json({ message: "No field provided" }, { status: 400 });
+  if (!chatbotId)
+    return json({ message: "No chatbotId provided" }, { status: 400 });
+
+  switch (field) {
+    case "reset": {
+      return await updateChatbotAppearanceById({
+        id: chatbotId,
+        theme: {
+          introMessages: "Hello, how can I help you today?",
+          starterQuestions: "What are your features?",
+          color: "zinc",
+          radius: "0.5",
+        },
+      });
+    }
+    case "intro": {
+      const introMessages = formData.get("value") as string;
+      return await updateChatbotAppearanceById({
+        id: chatbotId,
+        theme: {
+          introMessages,
+        },
+      });
+    }
+    case "starter": {
+      const starterQuestions = formData.get("value") as string;
+      return await updateChatbotAppearanceById({
+        id: chatbotId,
+        theme: {
+          starterQuestions,
+        },
+      });
+    }
+    case "color": {
+      const color = formData.get("value") as string;
+      return await updateChatbotAppearanceById({
+        id: chatbotId,
+        theme: {
+          color,
+        },
+      });
+    }
+    case "radius": {
+      const radius = parseFloat(formData.get("value") as string);
+      return await updateChatbotAppearanceById({
+        id: chatbotId,
+        theme: {
+          radius,
+        },
+      });
+    }
+    default: {
+      return json({ message: "Invalid field" }, { status: 400 });
+    }
+  }
+};
 
 export default function Appearance({
   defaultLayout = [50, 50],
 }: {
   defaultLayout?: number[] | undefined;
 }) {
-  const [messages, setMessages] = useState([
-    {
-      role: "agent",
-      content: "Hi, how can I help you today?",
-    },
-    {
-      role: "user",
-      content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: "agent",
-      content: "What seems to be the problem?",
-    },
-    {
-      role: "user",
-      content: "I can't log in.",
-    },
-  ]);
+  const data = useLoaderData<typeof loader>();
 
   return (
     <ResizablePanelGroup
       direction="horizontal"
-      onLayout={(sizes: number[]) => {
-        console.log("set cookies to save");
-      }}
       className="h-full max-h-[800px] items-stretch"
     >
       <ResizablePanel defaultSize={defaultLayout[0]} collapsible={false}>
-        <Customizer />
+        <Customizer
+          introMessages={data?.introMessages}
+          starterQuestions={data?.starterQuestions}
+          color={data?.color}
+          radius={data?.radius}
+        />
       </ResizablePanel>
 
       <ResizableHandle withHandle />
@@ -54,46 +109,13 @@ export default function Appearance({
         defaultSize={defaultLayout[1]}
         className="flex items-center justify-center"
       >
-        <>
-          <Card>
-            {/* have actual widget here. not closable */}
-            <CardContent className="flex flex-row items-center pt-4">
-              <div className="space-y-4">
-                {messages.map((message, index) => (
-                  <div
-                    key={index}
-                    className={cn(
-                      "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                      message.role === "user"
-                        ? "ml-auto bg-primary text-primary-foreground"
-                        : "bg-muted",
-                    )}
-                  >
-                    {message.content}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Form
-                method="post"
-                className="flex w-full items-center space-x-2"
-              >
-                <Input
-                  placeholder="Type your message..."
-                  className="flex-1"
-                  autoComplete="off"
-                  type="text"
-                  name="message"
-                />
-                <Button type="submit" size="icon" disabled={true}>
-                  <Send className="h-4 w-4" />
-                  <span className="sr-only">Send</span>
-                </Button>
-              </Form>
-            </CardFooter>
-          </Card>
-        </>
+        <div className="h-full w-full flex items-center justify-center py-24">
+          <DeadChat
+            color={data?.color}
+            radius={data?.radius}
+            name={data?.name}
+          />
+        </div>
       </ResizablePanel>
     </ResizablePanelGroup>
   );
