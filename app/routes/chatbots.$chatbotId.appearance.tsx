@@ -56,6 +56,7 @@ export default function Appearance({
       >
         <>
           <Card>
+            {/* have actual widget here. not closable */}
             <CardContent className="flex flex-row items-center pt-4">
               <div className="space-y-4">
                 {messages.map((message, index) => (
