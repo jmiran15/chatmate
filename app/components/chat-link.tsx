@@ -5,7 +5,7 @@ import { cn } from "~/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { Form, Link } from "react-router-dom";
 import { Trash2, Pencil, Check } from "lucide-react";
-import { Input } from "./ui/input";
+
 export default function ChatLink({ chat }: { chat: Chat }) {
   const [active, setActive] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -13,7 +13,7 @@ export default function ChatLink({ chat }: { chat: Chat }) {
   const navigation = useNavigation();
   const [updateValue, setUpdateValue] = useState(chat.name);
 
-  const isSubmitting = navigation.formData === location.pathname;
+  const isSubmitting = navigation.state === "submitting";
 
   function isActive(id: string) {
     return location.pathname.includes(id);
@@ -24,8 +24,6 @@ export default function ChatLink({ chat }: { chat: Chat }) {
       setEditing(false);
     }
   }, [isSubmitting]);
-
-  console.log("isSubmitting", isSubmitting, editing);
 
   return (
     <div
@@ -60,10 +58,10 @@ export default function ChatLink({ chat }: { chat: Chat }) {
         <div className="flex flex-row gap-2 items-center">
           {editing ? (
             <Form method="post" className="flex-1 items-center">
+              <input type="hidden" name="action" value="update" />
+              <input type="hidden" name="chatId" value={chat.id} />
+              <input type="hidden" name="updateName" value={updateValue} />
               <button type="submit">
-                <input type="hidden" name="action" value="update" />
-                <input type="hidden" name="chatId" value={chat.id} />
-                <input type="hidden" name="updateName" value={updateValue} />
                 <Check className="h-4 w-4" />
               </button>
             </Form>

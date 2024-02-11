@@ -7,14 +7,11 @@ import { Send } from "lucide-react";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import Messages from "~/components/messages";
+import { useEffect, useRef } from "react";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const chatId = params.chatId as string;
-
   const messages = await getMessagesByChatId({ chatId });
-
-  console.log("messages", messages);
-
   return json({ messages });
 };
 
@@ -24,8 +21,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const content = formData.get("message") as string;
   const msgs = JSON.parse(formData.get("messages") as string) || [];
-
-  console.log("these are the messages: ", msgs);
 
   const messages =
     msgs.length === 0
@@ -46,14 +41,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           },
         ];
 
-  console.log("messages being sent to openai: ", messages);
-
   const assistantResponse = await chat({
     chatbotId,
     messages,
   });
-
-  console.log("assistant response: ", assistantResponse);
 
   await createMessage({ chatId, role: Role.USER, content });
   return await createMessage({
@@ -65,11 +56,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Chat() {
   const data = useLoaderData<typeof loader>();
-
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
+  console.log("fetcher state is", fetcher.state);
+  const formRef = useRef<HTMLFormElement>();
+  const inputRef = useRef<HTMLInputElement>();
 
-  console.log("fetcher state", fetcher.state);
+  useEffect(() => {
+    if (isSubmitting) {
+      formRef.current?.reset();
+    } else {
+      inputRef.current?.focus();
+    }
+  }, [isSubmitting]);
 
   return (
     <div className="h-full flex flex-col justify-between">
@@ -86,8 +85,9 @@ export default function Chat() {
               ]
             : data.messages
         }
+        loading={isSubmitting}
       />
-      <fetcher.Form method="post">
+      <fetcher.Form method="post" ref={formRef}>
         <input
           type="hidden"
           name="messages"
@@ -95,13 +95,14 @@ export default function Chat() {
         />
         <div className="flex flex-row items-center space-x-2 py-4 px-16">
           <Input
+            ref={inputRef}
             placeholder="Type your message..."
             className="flex-1"
             autoComplete="off"
             type="text"
             name="message"
           />
-          <Button type="submit" size="icon">
+          <Button type="submit" size="icon" disabled={isSubmitting}>
             <Send className="h-4 w-4" />
             <span className="sr-only">Send</span>
           </Button>

@@ -36,30 +36,3 @@ export function ChatsNav({ chats, isCollapsed }: NavProps) {
     </div>
   );
 }
-
-{
-  /* <div className="h-full w-80 border-r bg-gray-50">
-  {data.chats.length === 0 ? (
-    <p className="p-4">No chats yet</p>
-  ) : (
-    <ol>
-      {data.chats.map((chat) => (
-        <li
-          key={chat.id}
-          className={"flex flex-row justify-between border-b p-4 text-xl"}
-        >
-          <NavLink
-            className={({ isActive }) =>
-              ` p-4 text-xl ${isActive ? "bg-white" : ""}`
-            }
-            to={chat.id}
-          >
-            {chat.name}
-          </NavLink>
-         
-        </li>
-      ))}
-    </ol>
-  )}
-</div>; */
-}
