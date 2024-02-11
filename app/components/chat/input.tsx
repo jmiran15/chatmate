@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Send } from "lucide-react";
+import { CardFooter } from "../ui/card";
 
 export default function ChatInput({
   messages,
@@ -27,9 +28,14 @@ export default function ChatInput({
   }, [isSubmitting]);
 
   return (
-    <fetcher.Form method="post" ref={formRef}>
-      <input type="hidden" name="messages" value={JSON.stringify(messages)} />
-      <div className="flex flex-row items-center space-x-2 py-4 px-16">
+    <CardFooter>
+      <fetcher.Form
+        method="post"
+        ref={formRef}
+        className="flex w-full items-center space-x-2"
+      >
+        {/* this is taking up space even though its hidden, make it not take up space */}
+        <input type="hidden" name="messages" value={JSON.stringify(messages)} />
         <Input
           ref={inputRef}
           placeholder="Type your message..."
@@ -42,7 +48,7 @@ export default function ChatInput({
           <Send className="h-4 w-4" />
           <span className="sr-only">Send</span>
         </Button>
-      </div>
-    </fetcher.Form>
+      </fetcher.Form>
+    </CardFooter>
   );
 }

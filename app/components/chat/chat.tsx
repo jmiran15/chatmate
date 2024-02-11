@@ -25,9 +25,9 @@ export default function Chat({
     : messages;
 
   return (
-    <div className="h-full flex flex-col justify-between">
+    <>
       <Messages messages={optimisticMessages} loading={isSubmitting} />
       <ChatInput messages={messages} fetcher={fetcher} />
-    </div>
+    </>
   );
 }

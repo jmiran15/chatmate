@@ -46,11 +46,13 @@ export default function ChatRoute() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <Chat
-      key="chat"
-      messages={data.messages.map((message) => {
-        return { role: message.role, content: message.content };
-      })}
-    />
+    <div className="flex flex-col justify-between h-full">
+      <Chat
+        key="chat"
+        messages={data.messages.map((message) => {
+          return { role: message.role, content: message.content };
+        })}
+      />
+    </div>
   );
 }

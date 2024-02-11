@@ -6,6 +6,8 @@ import { useState } from "react";
 import WidgetHeader from "./header";
 import Chat from "../chat/chat";
 import ActionButton from "./action-button";
+import { Card, CardContent } from "../ui/card";
+import { cn } from "~/lib/utils";
 
 export default function Widget({
   messages,
@@ -19,23 +21,20 @@ export default function Widget({
 
   return (
     <div className="fixed bottom-2 right-2 p-4 z-50">
-      <div
-        className={`chat-interface flex flex-col justify-between absolute h-[90vh] md:h-[80vh] w-[95vw] md:w-[28vw] bg-white rounded-2xl shadow-sm overflow-hidden bottom-full right-4 mb-2
-                  transition ease-in-out duration-300 ${
-                    visible ? "opacity-100" : "opacity-0 invisible"
-                  }`}
+      <Card
+        className={cn(
+          "absolute h-[90vh] md:h-[80vh] w-[95vw] md:w-[28vw] bottom-full right-4 mb-2 transition ease-in-out duration-300 flex flex-col justify-between",
+          visible ? "opacity-100" : "opacity-0 invisible",
+        )}
       >
-        {/* Chat Header */}
-        <div>
-          <WidgetHeader close={() => setVisible(false)} />
-          <Chat
-            key="widget"
-            messages={messages.map((message) => {
-              return { role: message.role, content: message.content };
-            })}
-          />
-        </div>
-      </div>
+        <WidgetHeader close={() => setVisible(false)} />
+        <Chat
+          key="widget"
+          messages={messages.map((message) => {
+            return { role: message.role, content: message.content };
+          })}
+        />
+      </Card>
 
       <ActionButton
         toggle={() => setVisible((visible) => !visible)}

@@ -15,6 +15,7 @@ import {
   Share,
   MessagesSquare,
   Settings,
+  TestTube,
 } from "lucide-react";
 
 import { Nav } from "~/components/nav";
@@ -91,90 +92,9 @@ export default function ChatbotLayout({
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
 
   return (
-    // <main className="flex h-full bg-white">
-    //   <div className="h-full w-80 border-r bg-gray-50">
-    //     <ol>
-    //       <li>
-    //         <NavLink
-    //           className={({ isActive }) =>
-    //             `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-    //           }
-    //           to="chat"
-    //         >
-    //           Chat
-    //         </NavLink>
-    //       </li>
-    //       <li>
-    //         <NavLink
-    //           className={({ isActive }) =>
-    //             `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-    //           }
-    //           to="data"
-    //         >
-    //           Data
-    //         </NavLink>
-    //       </li>
-    //       <li>
-    //         <NavLink
-    //           className={({ isActive }) =>
-    //             `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-    //           }
-    //           to="appearance"
-    //         >
-    //           Appearance
-    //         </NavLink>
-    //       </li>
-    //       <li>
-    //         <NavLink
-    //           className={({ isActive }) =>
-    //             `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-    //           }
-    //           to="share"
-    //         >
-    //           Share
-    //         </NavLink>
-    //       </li>
-    //       <li>
-    //         <NavLink
-    //           className={({ isActive }) =>
-    //             `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-    //           }
-    //           to="chats"
-    //         >
-    //           Chats
-    //         </NavLink>
-    //       </li>
-    //       <li>
-    //         <NavLink
-    //           className={({ isActive }) =>
-    //             `block border-b p-4 text-xl ${isActive ? "bg-white" : ""}`
-    //           }
-    //           to="settings"
-    //         >
-    //           Settings
-    //         </NavLink>
-    //       </li>
-    //     </ol>
-    //   </div>
-    //   <div className="flex-1">
-    //     <Outlet />
-    //   </div>
-    // </main>
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
         direction="horizontal"
-        onLayout={(sizes: number[]) => {
-          // console.log("called on Layout", sizes);
-          // const formData = new FormData();
-          // formData.append(
-          //   "react-resizable-panels:layout",
-          //   JSON.stringify(sizes),
-          // );
-          // fetcher.submit(formData, { method: "POST" });
-          // document.cookie = `react-resizable-panels:layout=${JSON.stringify(
-          //   sizes,
-          // )}`;
-        }}
         className="h-full max-h-[800px] items-stretch"
       >
         <ResizablePanel
@@ -183,13 +103,6 @@ export default function ChatbotLayout({
           collapsible={true}
           minSize={15}
           maxSize={20}
-          // onCollapse={(collapsed) => {
-          //   console.log("collapsed", collapsed);
-          //   setIsCollapsed(collapsed);
-          //   // document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
-          //   //   collapsed,
-          //   // )}`;
-          // }}
           onCollapse={() => setIsCollapsed(true)}
           onExpand={() => setIsCollapsed(false)}
           className={cn(
@@ -214,6 +127,11 @@ export default function ChatbotLayout({
                 title: "Appearance",
                 path: "appearance",
                 icon: Brush,
+              },
+              {
+                title: "Widget",
+                path: "widget",
+                icon: TestTube,
               },
               {
                 title: "Share",
