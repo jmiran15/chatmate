@@ -18,35 +18,33 @@ export default function Messages({
   radius?: number;
 }) {
   return (
-    <CardContent className="flex-1 overflow-auto">
-      <div className="space-y-4 ">
-        {messages.length === 0 ? (
-          <p className="">No messages yet</p>
-        ) : (
-          <>
-            {messages.map((message, index) => {
-              return (
-                <div
-                  key={index}
-                  className={cn(
-                    "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
-                    message.role === "user"
-                      ? "ml-auto bg-primary text-primary-foreground"
-                      : "bg-muted",
-                  )}
-                  // style={{
-                  //   backgroundColor: message.role === "user" ? color : "#e5e7eb",
-                  //   borderRadius: `${radius}rem`,
-                  // }}
-                >
-                  {message.content}
-                </div>
-              );
-            })}
-            {loading && <LoadingMessage />}
-          </>
-        )}
-      </div>
-    </CardContent>
+    <div className="space-y-4 h-full overflow-y-auto p-6 pt-0">
+      {messages.length === 0 ? (
+        <p className="">No messages yet</p>
+      ) : (
+        <>
+          {messages.map((message, index) => {
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
+                  message.role === "user"
+                    ? "ml-auto bg-primary text-primary-foreground"
+                    : "bg-muted",
+                )}
+                // style={{
+                //   backgroundColor: message.role === "user" ? color : "#e5e7eb",
+                //   borderRadius: `${radius}rem`,
+                // }}
+              >
+                {message.content}
+              </div>
+            );
+          })}
+          {loading && <LoadingMessage />}
+        </>
+      )}
+    </div>
   );
 }

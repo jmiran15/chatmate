@@ -1,10 +1,9 @@
-import { Form, Link, NavLink, useLocation, useMatches } from "@remix-run/react";
+import { Form } from "@remix-run/react";
 
-import { cn } from "~/lib/utils";
-import { buttonVariants } from "./ui/button";
-import { Separator } from "./ui/separator";
+import { Button } from "./ui/button";
 import { Chat } from "@prisma/client";
 import ChatLink from "./chat-link";
+import { Plus } from "lucide-react";
 
 interface NavProps {
   isCollapsed: boolean;
@@ -13,26 +12,21 @@ interface NavProps {
 
 export function ChatsNav({ chats, isCollapsed }: NavProps) {
   return (
-    <div
-      data-collapsed={isCollapsed}
-      className="group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2"
-    >
-      <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
-        <Form method="post">
-          <input type="hidden" name="action" value="create" />
-          <button className="block p-4 text-xl text-blue-500" type="submit">
-            + New Chat
-          </button>
-        </Form>
-        <Separator />
-        {chats.length === 0 ? (
-          <p className="p-4">No chats yet</p>
-        ) : (
-          chats.map(
-            (chat) => !isCollapsed && <ChatLink key={chat.id} chat={chat} />,
-          )
-        )}
-      </nav>
+    <div className="col-span-1 flex flex-col gap-1 p-2 border-l border-gray-200">
+      <Form method="post" className="w-full ">
+        <input type="hidden" name="action" value="create" />
+        <Button type="submit" className="w-full" variant={"outline"}>
+          <Plus className="h-4 w-4" />
+          <span>New Chat</span>
+        </Button>
+      </Form>
+      {chats.length === 0 ? (
+        <p className="p-4">No chats yet</p>
+      ) : (
+        chats.map(
+          (chat) => !isCollapsed && <ChatLink key={chat.id} chat={chat} />,
+        )
+      )}
     </div>
   );
 }

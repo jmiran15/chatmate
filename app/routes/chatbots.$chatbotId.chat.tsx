@@ -56,30 +56,16 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
-export default function Chat({
-  defaultLayout = [1095, 265],
-}: {
-  defaultLayout?: number[] | undefined;
-}) {
+export default function Chat() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      onLayout={(sizes: number[]) => {
-        console.log("set cookies to save");
-      }}
-      className="h-full max-h-[800px] items-stretch"
-    >
-      <ResizablePanel defaultSize={defaultLayout[0]} collapsible={false}>
+    <div className="grid grid-cols-5 h-full">
+      <div className="col-span-4 h-full overflow-hidden">
         <Outlet />
-      </ResizablePanel>
-
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={defaultLayout[1]}>
-        <ChatsNav chats={data.chats} isCollapsed={false} />
-      </ResizablePanel>
-    </ResizablePanelGroup>
+      </div>
+      <ChatsNav chats={data.chats} isCollapsed={false} />
+    </div>
   );
 }
 

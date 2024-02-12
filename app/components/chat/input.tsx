@@ -32,7 +32,7 @@ export default function ChatInput({
       <fetcher.Form
         method="post"
         ref={formRef}
-        className="flex w-full items-center space-x-2"
+        className="flex flex-row w-full items-center space-x-2"
       >
         {/* this is taking up space even though its hidden, make it not take up space */}
         <input type="hidden" name="messages" value={JSON.stringify(messages)} />

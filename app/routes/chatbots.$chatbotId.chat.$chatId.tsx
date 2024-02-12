@@ -46,7 +46,7 @@ export default function ChatRoute() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col justify-between h-full">
+    <div className="h-full flex flex-col justify-between">
       <Chat
         key="chat"
         messages={data.messages.map((message) => {

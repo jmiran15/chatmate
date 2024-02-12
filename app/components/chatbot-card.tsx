@@ -5,7 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 export default function ChatbotCard({ chatbot }: { chatbot: Chatbot }) {
   return (
     <Link
-      to={chatbot.id}
+      to={`${chatbot.id}/chat`}
       className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"
     >
       <div className="flex w-full flex-col gap-1">
