@@ -1,6 +1,5 @@
 // this is the landing page
 import type { MetaFunction } from "@remix-run/node";
-import ChatbotWidget from "./chatbots_.$chatbotId_.widget";
 import { Hero } from "~/components/landing-page/hero";
 import { HowItWorks } from "~/components/landing-page/how-it-works";
 // import { Features } from "~/components/features";
@@ -13,7 +12,6 @@ export default function Index() {
   return (
     <div className="orange-gradient">
       <div className="container relative">
-        <ChatbotWidget />
         <Hero />
         <HowItWorks />
         {/* <Features /> */}

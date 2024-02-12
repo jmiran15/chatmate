@@ -110,11 +110,11 @@ export default function Appearance({
         className="flex items-center justify-center"
       >
         <div className="h-full w-full flex items-center justify-center py-24">
-          <DeadChat
+          {/* <DeadChat
             color={data?.color}
             radius={data?.radius}
             name={data?.name}
-          />
+          /> */}
         </div>
       </ResizablePanel>
     </ResizablePanelGroup>
