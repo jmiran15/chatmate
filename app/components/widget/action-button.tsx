@@ -2,7 +2,6 @@ import { Chatbot } from "@prisma/client";
 import { Bot, Minimize } from "lucide-react";
 import { useState } from "react";
 import tinycolor from "tinycolor2";
-import { cn } from "~/lib/utils";
 
 export default function ActionButton({
   toggle,

@@ -1,21 +1,12 @@
-// chatbots/id/chat ...
-// this is a layout route
-// it has a sidebar to the right (same type as the one on the left), with a list of chats
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "~/components/ui/resizable";
-
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   json,
   redirect,
 } from "@remix-run/node";
-import { Form, NavLink, Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import {
-  createChatWithUser,
+  createChatWithStartersAndUser,
   deleteChatByChatId,
   getChatsByUserAndChatbotId,
   updateChatName,
@@ -42,7 +33,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (action) {
     case "create": {
-      const chat = await createChatWithUser({ chatbotId, userId });
+      const chat = await createChatWithStartersAndUser({ chatbotId, userId });
       return redirect(chat.id);
     }
     case "delete": {

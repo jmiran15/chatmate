@@ -1,21 +1,18 @@
-import { ScrollArea } from "../ui/scroll-area";
 import { cn } from "~/lib/utils";
 import LoadingMessage from "./loading-message";
-import { CardContent } from "../ui/card";
+import { Chatbot } from "@prisma/client";
 
 export default function Messages({
   messages,
   loading,
-  color = "#f97316",
-  radius = 0.5,
+  chatbot,
 }: {
   messages: {
     role: "user" | "assistant";
     content: string;
   }[];
   loading: boolean;
-  color?: string;
-  radius?: number;
+  chatbot: Chatbot;
 }) {
   return (
     <div className="space-y-4 h-full overflow-y-auto p-6 pt-0">
@@ -30,13 +27,15 @@ export default function Messages({
                 className={cn(
                   "flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm",
                   message.role === "user"
-                    ? "ml-auto bg-primary text-primary-foreground"
-                    : "bg-muted",
+                    ? "ml-auto text-primary-foreground"
+                    : "",
                 )}
-                // style={{
-                //   backgroundColor: message.role === "user" ? color : "#e5e7eb",
-                //   borderRadius: `${radius}rem`,
-                // }}
+                style={{
+                  backgroundColor:
+                    message.role === "user"
+                      ? chatbot.color
+                      : "hsl(var(--muted))",
+                }}
               >
                 {message.content}
               </div>

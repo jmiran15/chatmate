@@ -11,27 +11,27 @@ import { cn } from "~/lib/utils";
 
 export default function Widget({
   messages,
-  chatbotId,
+  chatbot,
 }: {
   messages: {
     role: "user" | "assistant";
     content: string;
   }[];
-  chatbotId: string;
+  chatbot: string;
 }) {
   const [visible, setVisible] = useState(false);
-  const [chatbot, setChatbot] = useState({});
+  // const [chatbot, setChatbot] = useState({});
 
-  useEffect(() => {
-    // load the chatbot stuff
-    fetch(`/api/chatbot/${chatbotId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setChatbot(data);
-      });
-  }, [chatbotId]);
+  // useEffect(() => {
+  //   // load the chatbot stuff
+  //   fetch(`/api/chatbot/${chatbotId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setChatbot(data);
+  //     });
+  // }, [chatbotId]);
 
-  console.log(chatbot);
+  // console.log(chatbot);
 
   return (
     <div className="fixed bottom-2 right-2 p-4 z-50">

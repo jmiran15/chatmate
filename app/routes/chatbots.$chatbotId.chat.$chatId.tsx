@@ -3,11 +3,16 @@ import { useLoaderData } from "@remix-run/react";
 import { createMessage, getMessagesByChatId } from "~/models/chat.server";
 import { chat } from "~/utils/openai";
 import Chat from "~/components/chat/chat";
+import { getChatbotById } from "~/models/chatbot.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const chatId = params.chatId as string;
+  const { chatId, chatbotId } = params;
   const messages = await getMessagesByChatId({ chatId });
-  return json({ messages });
+
+  // need to cache this value! maybe in a cookie or something
+  const chatbot = await getChatbotById({ id: chatbotId });
+
+  return json({ messages, chatbot });
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
@@ -52,6 +57,7 @@ export default function ChatRoute() {
         messages={data.messages.map((message) => {
           return { role: message.role, content: message.content };
         })}
+        chatbot={data.chatbot}
       />
     </div>
   );

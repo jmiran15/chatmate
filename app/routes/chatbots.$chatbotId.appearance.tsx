@@ -34,6 +34,8 @@ export default function Appearance() {
   const { chatbotId } = useParams();
   const [refresh, setRefresh] = useState(0);
 
+  console.log("refresh", refresh);
+
   return (
     <div className="grid grid-cols-4 h-full">
       <Customizer
@@ -45,6 +47,7 @@ export default function Appearance() {
         color={data?.color}
       />
 
+      {/* bug with refreshing */}
       <div className="col-span-2">
         <iframe
           key={refresh}

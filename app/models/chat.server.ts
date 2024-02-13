@@ -17,6 +17,63 @@ export function createChat({ chatbotId }: { chatbotId: Chat["chatbotId"] }) {
   });
 }
 
+export async function createChatWithStarterMessages({
+  chatbotId,
+}: {
+  chatbotId: Chat["chatbotId"];
+}) {
+  // fetch the chatbot by its id
+  const chatbot = await prisma.chatbot.findUnique({
+    where: {
+      id: chatbotId,
+    },
+  });
+
+  if (!chatbot) {
+    throw new Error("Chatbot not found");
+  }
+
+  return prisma.chat.create({
+    data: {
+      id: uuidv4(),
+      chatbot: {
+        connect: {
+          id: chatbotId,
+        },
+      },
+      messages: {
+        create: chatbot.introMessages.map((question) => ({
+          role: "assistant",
+          content: question,
+        })),
+      },
+    },
+  });
+}
+
+export async function createChatWithStartersAndUser({
+  chatbotId,
+  userId,
+}: {
+  chatbotId: Chat["chatbotId"];
+  userId: string;
+}) {
+  const chat = await createChatWithStarterMessages({ chatbotId });
+
+  return prisma.chat.update({
+    where: {
+      id: chat.id,
+    },
+    data: {
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+    },
+  });
+}
+
 export function createChatWithUser({
   chatbotId,
   userId,

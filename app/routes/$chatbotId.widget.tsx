@@ -1,7 +1,7 @@
-import { useLoaderData, useParams } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 // import localforage from "localforage";
 import {
-  createChat,
+  createChatWithStarterMessages,
   createMessage,
   getMessagesByChatId,
 } from "~/models/chat.server";
@@ -10,6 +10,7 @@ import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { chat } from "~/utils/openai";
 import { widgetChat } from "~/cookies.server";
 import Widget from "~/components/widget/widget";
+import { getChatbotById } from "~/models/chatbot.server";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { chatbotId } = params;
@@ -20,13 +21,16 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   console.log("cookie", cookieHeader);
 
   if (!cookie.chatId) {
-    const chat = await createChat({ chatbotId });
+    const chat = await createChatWithStarterMessages({ chatbotId });
     cookie.chatId = chat.id;
   }
 
+  // Cache this so we don't need to get it every time loader revalidates
+  const chatbot = await getChatbotById({ id: chatbotId });
+
   const messages = await getMessagesByChatId({ chatId: cookie.chatId });
   return json(
-    { messages },
+    { messages, chatbot },
     {
       headers: {
         "Set-Cookie": await widgetChat.serialize({
@@ -44,7 +48,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const cookie = (await widgetChat.parse(cookieHeader)) || {};
 
   if (!cookie.chatId) {
-    const chat = await createChat({ chatbotId });
+    const chat = await createChatWithStarterMessages({ chatbotId });
     cookie.chatId = chat.id;
   }
 
@@ -84,14 +88,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 export default function ChatWidget() {
   const data = useLoaderData<typeof loader>();
-  const { chatbotId } = useParams();
+  // const { chatbotId } = useParams();
 
   return (
     <Widget
       messages={data.messages.map((message) => {
         return { role: message.role, content: message.content };
       })}
-      chatbotId={chatbotId}
+      chatbot={data.chatbot}
     />
   );
 }

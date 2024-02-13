@@ -29,8 +29,12 @@ export default function Chat({
 
   return (
     <>
-      <Messages messages={optimisticMessages} loading={isSubmitting} />
-      <ChatInput messages={messages} fetcher={fetcher} />
+      <Messages
+        messages={optimisticMessages}
+        loading={isSubmitting}
+        chatbot={chatbot}
+      />
+      <ChatInput messages={messages} fetcher={fetcher} chatbot={chatbot} />
     </>
   );
 }
