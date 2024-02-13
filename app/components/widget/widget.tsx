@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import WidgetHeader from "./header";
 import Chat from "../chat/chat";
 import ActionButton from "./action-button";
-import { Card } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 import { cn } from "~/lib/utils";
+import IntroMessages from "./intro-messages";
 
 export default function Widget({
   messages,
@@ -20,6 +21,8 @@ export default function Widget({
   chatbot: string;
 }) {
   const [visible, setVisible] = useState(false);
+  const [showIntroMessages, setShowIntroMessages] = useState(true);
+
   // const [chatbot, setChatbot] = useState({});
 
   // useEffect(() => {
@@ -35,6 +38,16 @@ export default function Widget({
 
   return (
     <div className="fixed bottom-2 right-2 p-4 z-50">
+      {showIntroMessages ? (
+        <IntroMessages
+          chatbot={chatbot}
+          setVisible={setVisible}
+          setShowIntroMessages={setShowIntroMessages}
+        />
+      ) : (
+        <></>
+      )}
+
       <Card
         className={cn(
           "absolute bottom-full right-4 mb-2 transition ease-in-out duration-300 flex flex-col justify-between",
@@ -43,7 +56,7 @@ export default function Widget({
           visible ? "opacity-100" : "opacity-0 invisible",
         )}
       >
-        <WidgetHeader close={() => setVisible(false)} />
+        <WidgetHeader chatbot={chatbot} />
         <Chat
           key="widget"
           messages={messages.map((message) => {
@@ -55,7 +68,10 @@ export default function Widget({
 
       <ActionButton
         chatbot={chatbot}
-        toggle={() => setVisible((visible) => !visible)}
+        toggle={() => {
+          setVisible(!visible);
+          setShowIntroMessages(false);
+        }}
         visible={visible}
       />
     </div>
