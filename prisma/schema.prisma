@@ -34,10 +34,11 @@ model Chatbot {
   user             User        @relation(fields: [userId], references: [id])
   userId           String
   chats            Chat[]
-  introMessages    String      @default("Hello, how can I help you today?")
-  starterQuestions String      @default("What are your features?")
+  publicName       String      @default("Your Chatbot")
+  bio              String      @default("I'm a chatbot")
+  introMessages    String[]    @default(["Hello, how can I help you today?"])
+  starterQuestions String[]    @default(["What are your features?"])
   color            String      @default("#FF5733")
-  radius           Float       @default(1)
   documents        Document[]
   embeddings       Embedding[]
 }

@@ -1,14 +1,17 @@
 import { useFetcher } from "@remix-run/react";
 import ChatInput from "./input";
 import Messages from "./messages";
+import { Chatbot } from "@prisma/client";
 
 export default function Chat({
   messages,
+  chatbot,
 }: {
   messages: {
     role: "user" | "assistant";
     content: string;
   }[];
+  chatbot: Chatbot;
 }) {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";

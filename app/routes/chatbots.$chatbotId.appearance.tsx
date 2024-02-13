@@ -1,16 +1,8 @@
 import Customizer from "~/components/appearance/theme-customizer";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "~/components/ui/resizable";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import DeadChat from "~/components/appearance/dead-chat";
-import {
-  getChatbotById,
-  updateChatbotAppearanceById,
-} from "~/models/chatbot.server";
-import { useLoaderData } from "@remix-run/react";
+import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
+import { useLoaderData, useNavigation, useParams } from "@remix-run/react";
+import { useState } from "react";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const chatbotId = params.chatbotId as string;
@@ -22,102 +14,48 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const field = formData.get("field") as string;
   const chatbotId = params.chatbotId as string;
 
-  if (!field) return json({ message: "No field provided" }, { status: 400 });
   if (!chatbotId)
     return json({ message: "No chatbotId provided" }, { status: 400 });
 
-  switch (field) {
-    case "reset": {
-      return await updateChatbotAppearanceById({
-        id: chatbotId,
-        theme: {
-          introMessages: "Hello, how can I help you today?",
-          starterQuestions: "What are your features?",
-          color: "zinc",
-          radius: "0.5",
-        },
-      });
-    }
-    case "intro": {
-      const introMessages = formData.get("value") as string;
-      return await updateChatbotAppearanceById({
-        id: chatbotId,
-        theme: {
-          introMessages,
-        },
-      });
-    }
-    case "starter": {
-      const starterQuestions = formData.get("value") as string;
-      return await updateChatbotAppearanceById({
-        id: chatbotId,
-        theme: {
-          starterQuestions,
-        },
-      });
-    }
-    case "color": {
-      const color = formData.get("value") as string;
-      return await updateChatbotAppearanceById({
-        id: chatbotId,
-        theme: {
-          color,
-        },
-      });
-    }
-    case "radius": {
-      const radius = parseFloat(formData.get("value") as string);
-      return await updateChatbotAppearanceById({
-        id: chatbotId,
-        theme: {
-          radius,
-        },
-      });
-    }
-    default: {
-      return json({ message: "Invalid field" }, { status: 400 });
-    }
-  }
+  return await updateChatbotById({
+    id: chatbotId,
+    color: formData.get("color") as string,
+    bio: formData.get("bio") as string,
+    publicName: formData.get("name") as string,
+    starterQuestions: (formData.get("starter") as string).split("\n"),
+    introMessages: (formData.get("intro") as string).split("\n"),
+  });
 };
 
-export default function Appearance({
-  defaultLayout = [50, 50],
-}: {
-  defaultLayout?: number[] | undefined;
-}) {
+export default function Appearance() {
   const data = useLoaderData<typeof loader>();
+  const { chatbotId } = useParams();
+  const [refresh, setRefresh] = useState(0);
 
   return (
-    <ResizablePanelGroup
-      direction="horizontal"
-      className="h-full max-h-[800px] items-stretch"
-    >
-      <ResizablePanel defaultSize={defaultLayout[0]} collapsible={false}>
-        <Customizer
-          introMessages={data?.introMessages}
-          starterQuestions={data?.starterQuestions}
-          color={data?.color}
-          radius={data?.radius}
-        />
-      </ResizablePanel>
+    <div className="grid grid-cols-4 h-full">
+      <Customizer
+        setRefresh={setRefresh}
+        name={data?.publicName}
+        bio={data?.bio}
+        introMessages={data?.introMessages}
+        starterQuestions={data?.starterQuestions}
+        color={data?.color}
+      />
 
-      <ResizableHandle withHandle />
-      <ResizablePanel
-        defaultSize={defaultLayout[1]}
-        className="flex items-center justify-center"
-      >
-        <div className="h-full w-full flex items-center justify-center py-24">
-          {/* <DeadChat
-            color={data?.color}
-            radius={data?.radius}
-            name={data?.name}
-          /> */}
-        </div>
-      </ResizablePanel>
-    </ResizablePanelGroup>
+      <div className="col-span-2">
+        <iframe
+          key={refresh}
+          src={`http://localhost:3000/${chatbotId}/widget`}
+          width="100%"
+          height="100%"
+          allowFullScreen
+          title="chatbot-preview"
+        />
+      </div>
+    </div>
   );
 }
 

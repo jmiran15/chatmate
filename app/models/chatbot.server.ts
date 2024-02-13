@@ -36,34 +36,9 @@ export function getChatbotById({ id }: { id: Chatbot["id"] }) {
   });
 }
 
-export function updateChatbotById({
-  id,
-  name,
-  description,
-}: Pick<Chatbot, "id" | "name" | "description">) {
+export function updateChatbotById(data: Partial<Chatbot>) {
   return prisma.chatbot.update({
-    where: { id },
-    data: {
-      name,
-      description,
-    },
-  });
-}
-
-export function updateChatbotAppearanceById({
-  id,
-  theme,
-}: {
-  id: Chatbot["id"];
-  theme: {
-    introMessages?: string;
-    starterQuestions?: string;
-    color?: string;
-    radius?: number;
-  };
-}) {
-  return prisma.chatbot.update({
-    where: { id },
-    data: theme,
+    where: { id: data.id },
+    data,
   });
 }

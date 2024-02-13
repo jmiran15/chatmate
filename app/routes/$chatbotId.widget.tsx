@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useParams } from "@remix-run/react";
 // import localforage from "localforage";
 import {
   createChat,
@@ -84,12 +84,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 export default function ChatWidget() {
   const data = useLoaderData<typeof loader>();
+  const { chatbotId } = useParams();
 
   return (
     <Widget
       messages={data.messages.map((message) => {
         return { role: message.role, content: message.content };
       })}
+      chatbotId={chatbotId}
     />
   );
 }

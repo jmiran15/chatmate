@@ -5,7 +5,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const chatbotId = formData.get("chatbotId");
 
-  return redirect(`/chatbots/${chatbotId}/widget`, {
+  return redirect(`/${chatbotId}/widget`, {
     headers: {
       "Set-Cookie": await widgetChat.serialize({
         chatId: undefined,
