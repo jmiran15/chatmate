@@ -5,6 +5,10 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { Textarea } from "~/components/ui/textarea";
 
 import { createChatbot } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
@@ -33,8 +37,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function NewChatbot() {
   const actionData = useActionData<typeof action>();
-  const nameRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const nameRef = useRef(null);
+  const descriptionRef = useRef(null);
 
   useEffect(() => {
     if (actionData?.errors?.name) {
@@ -45,28 +49,19 @@ export default function NewChatbot() {
   }, [actionData]);
 
   return (
-    <Form
-      method="post"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        width: "100%",
-      }}
-    >
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Name: </span>
-          <input
-            ref={nameRef}
-            name="name"
-            className="flex-1 rounded-md border-2 border-blue-500 px-3 text-lg leading-loose"
-            aria-invalid={actionData?.errors?.name ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.name ? "title-error" : undefined
-            }
-          />
-        </label>
+    <Form method="post" className="flex flex-col gap-8 w-full py-12 px-96">
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="name">Name: </Label>
+
+        <Input
+          ref={nameRef}
+          id="name"
+          name="name"
+          aria-invalid={actionData?.errors?.name ? true : undefined}
+          aria-errormessage={
+            actionData?.errors?.name ? "title-error" : undefined
+          }
+        />
         {actionData?.errors?.name ? (
           <div className="pt-1 text-red-700" id="title-error">
             {actionData.errors.name}
@@ -74,20 +69,18 @@ export default function NewChatbot() {
         ) : null}
       </div>
 
-      <div>
-        <label className="flex w-full flex-col gap-1">
-          <span>Description: </span>
-          <textarea
-            ref={descriptionRef}
-            name="description"
-            rows={8}
-            className="w-full flex-1 rounded-md border-2 border-blue-500 px-3 py-2 text-lg leading-6"
-            aria-invalid={actionData?.errors?.description ? true : undefined}
-            aria-errormessage={
-              actionData?.errors?.description ? "body-error" : undefined
-            }
-          />
-        </label>
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="desc">Description: </Label>
+        <Textarea
+          id="desc"
+          ref={descriptionRef}
+          name="description"
+          rows={8}
+          aria-invalid={actionData?.errors?.description ? true : undefined}
+          aria-errormessage={
+            actionData?.errors?.description ? "body-error" : undefined
+          }
+        />
         {actionData?.errors?.description ? (
           <div className="pt-1 text-red-700" id="body-error">
             {actionData.errors.description}
@@ -96,12 +89,7 @@ export default function NewChatbot() {
       </div>
 
       <div className="text-right">
-        <button
-          type="submit"
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
-        >
-          Save
-        </button>
+        <Button type="submit">Save</Button>
       </div>
     </Form>
   );

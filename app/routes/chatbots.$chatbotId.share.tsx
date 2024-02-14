@@ -12,11 +12,18 @@ export default function Share() {
       <CodeBlock
         code={`
         <iframe
-        src=http://chatmate.dev/${chatbotId}/widget
-        width="100%"
-        height="100%"
-        allowFullScreen
-        title="chatbot-preview"/>`}
+        id="chatmate-chatbot-widget-iframe"
+        style={{
+          position: "fixed",
+          bottom: "8px",
+          right: "8px",
+          zIndex: 50,
+          height: "80px",
+          width: "80px",
+        }}
+        src="http://localhost:3000/f21aefca-bd96-4f4f-bd92-08ab93f75491/widget"
+        title="chatbot-preview"
+        />`}
         language="html"
       />
     </div>

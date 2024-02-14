@@ -1,27 +1,42 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
-import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
+import { json, redirect } from "@remix-run/node";
+import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import {
+  deleteChatbotById,
+  getChatbotById,
+  updateChatbotById,
+} from "~/models/chatbot.server";
 import { Chatbot } from "@prisma/client";
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 import { ScrollArea } from "~/components/ui/scroll-area";
+import { useRef } from "react";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   // const userId = await requireUserId(request);
   const formData = await request.formData();
+  const action = formData.get("action");
+  const { chatbotId } = params;
 
-  const chatbotId = params.chatbotId as string;
-  const name = formData.get("name") as Chatbot["name"];
-  const description = formData.get("description") as Chatbot["description"];
-
-  return await updateChatbotById({
-    id: chatbotId,
-    name,
-    description,
-  });
+  switch (action) {
+    case "save": {
+      const name = formData.get("name") as Chatbot["name"];
+      const description = formData.get("description") as Chatbot["description"];
+      return await updateChatbotById({
+        id: chatbotId,
+        name,
+        description,
+      });
+    }
+    case "delete": {
+      await deleteChatbotById({ id: chatbotId });
+      return redirect("/chatbots");
+    }
+    default:
+      return json({ message: "Invalid action" }, { status: 400 });
+  }
 };
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -33,10 +48,16 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function ModelC() {
   const data = useLoaderData<typeof loader>();
+  const formRef = useRef<HTMLFormElement>(null);
+  const fetcher = useFetcher();
 
   return (
     <ScrollArea className="h-full w-full">
-      <Form method="post" className="flex flex-col gap-6 p-8">
+      <fetcher.Form
+        ref={formRef}
+        method="post"
+        className="flex flex-col gap-6 p-8"
+      >
         <div className="grid w-full max-w-sm items-center gap-1.5">
           <Label htmlFor="name">Name</Label>
           <Input
@@ -64,18 +85,30 @@ export default function ModelC() {
         </div>
         <div className="flex flex-row justify-between items-center gap-4">
           <Button
-            type="submit"
             name="action"
             value="delete"
             variant="destructive"
+            onClick={() => {
+              fetcher.submit(new FormData(formRef.current!), {
+                method: "POST",
+              });
+            }}
           >
             Delete
           </Button>
-          <Button type="submit" name="action" value="save">
+          <Button
+            name="action"
+            value="save"
+            onClick={() => {
+              fetcher.submit(new FormData(formRef.current!), {
+                method: "POST",
+              });
+            }}
+          >
             Save
           </Button>
         </div>
-      </Form>
+      </fetcher.Form>
     </ScrollArea>
   );
 }

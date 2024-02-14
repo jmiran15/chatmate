@@ -42,3 +42,10 @@ export function updateChatbotById(data: Partial<Chatbot>) {
     data,
   });
 }
+
+// delete a chatbot by its id
+export function deleteChatbotById({ id }: { id: Chatbot["id"] }) {
+  return prisma.chatbot.delete({
+    where: { id },
+  });
+}
