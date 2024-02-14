@@ -21,10 +21,10 @@ export default function Share() {
           height: "80px",
           width: "80px",
         }}
-        src="http://chatmate.dev/${chatbotId}/widget"
+        src="https://chatmate.fly.dev/${chatbotId}/widget"
         title="chatbot-preview"
         />
-        <script src="chatmate.dev/iframeResizer.js"></script>
+        <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
         `}
         language="html"
       />

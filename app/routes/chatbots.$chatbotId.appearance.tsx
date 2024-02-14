@@ -55,7 +55,7 @@ export default function Appearance() {
           width="100%"
           height="100%"
           allowFullScreen
-          title="chatbot-preview"
+          title="chatbot-prev"
         />
       </div>
     </div>

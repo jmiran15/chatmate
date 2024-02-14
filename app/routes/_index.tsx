@@ -13,8 +13,21 @@ export default function Index() {
   return (
     <div className="orange-gradient">
       <Navbar />
-
       <div className="container relative">
+        <iframe
+          id="chatmate-chatbot-widget-iframe"
+          style={{
+            position: "fixed",
+            bottom: "8px",
+            right: "8px",
+            zIndex: 50,
+            height: "80px",
+            width: "80px",
+          }}
+          src="https://chatmate.fly.dev/e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23/widget"
+          title="chatbot-preview"
+        />
+        <script src="http://chatmate.fly.dev/iframeResizer.js"></script>
         <Hero />
         <HowItWorks />
         <Features />
