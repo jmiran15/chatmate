@@ -24,7 +24,7 @@ export default function Index() {
             height: "80px",
             width: "80px",
           }}
-          src="https://chatmate.fly.dev/e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23/widget"
+          src="http://chatmate.fly.dev/e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23/widget"
           title="chatbot-preview"
         />
         <script src="https://chatmate.fly.dev/iframeResizer.js"></script>

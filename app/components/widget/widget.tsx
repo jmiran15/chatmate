@@ -24,6 +24,7 @@ export default function Widget({
   const [showIntroMessages, setShowIntroMessages] = useState(true);
 
   useEffect(() => {
+    console.log("requesting parent viewport height");
     requestParentViewportHeight();
   }, [isChatOpen]);
 
@@ -40,7 +41,7 @@ export default function Widget({
     return () => {
       window.removeEventListener("message", handleViewportHeightMessage);
     };
-  }, []);
+  }, [isChatOpen]);
 
   function requestParentViewportHeight() {
     window.parent.postMessage({ type: "requestViewportHeight" }, "*"); // Replace '*' with the parent domain for security
@@ -52,9 +53,11 @@ export default function Widget({
     }
 
     const size = {
-      width: !isChatOpen ? 420 + 8 : 80,
-      height: !isChatOpen ? parentViewportHeight : 80,
+      width: isChatOpen ? 420 + 8 : 80,
+      height: isChatOpen ? parentViewportHeight : 80,
     };
+
+    console.log("sending size to parent", isChatOpen, size);
 
     window.parent.postMessage(size, "*"); // Use the appropriate domain instead of '*'
   }
