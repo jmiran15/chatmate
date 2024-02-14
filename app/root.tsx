@@ -34,21 +34,23 @@ export default function App() {
         <Meta />
         <Links />
       </head>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-Q7YK60WGKB"
+      ></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-Q7YK60WGKB');
+          `,
+        }}
+      ></script>
+
       <body className="h-full bg-transparent">
-        {/* <iframe
-          id="chatmate-chatbot-widget-iframe"
-          style={{
-            position: "fixed",
-            bottom: "8px",
-            right: "8px",
-            zIndex: 50,
-            height: "80px",
-            width: "80px",
-          }}
-          src="http://localhost:3000/e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23/widget"
-          title="chatbot-preview"
-        />
-        <script src="/iframeResizer.js"></script> */}
         <Outlet />
         <ScrollRestoration />
         <Scripts />
