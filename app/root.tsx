@@ -13,7 +13,6 @@ import {
 
 import { getUser } from "~/session.server";
 import stylesheet from "~/tailwind.css";
-import { Navbar } from "./components/navbar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -35,11 +34,12 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-full">
+      <body className="h-full bg-transparent">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <script src="/iframeResizer.js"></script>
       </body>
     </html>
   );

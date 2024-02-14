@@ -4,14 +4,15 @@ import { useState } from "react";
 import tinycolor from "tinycolor2";
 
 export default function ActionButton({
-  toggle,
-  visible,
+  isOpen,
+  toggleOpen,
   chatbot,
 }: {
-  toggle: () => void;
-  visible: boolean;
+  isOpen: boolean;
+  toggleOpen: () => void;
   chatbot: Chatbot;
 }) {
+  // can move this stuff into a hook
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
@@ -34,14 +35,15 @@ export default function ActionButton({
   return (
     <button
       style={buttonStyle}
-      className="transition duration-300 transform hover:scale-110 p-3 rounded-full overflow-hidden border-none cursor-pointer"
+      aria-label="Toggle Menu"
+      className={`flex items-center justify-center p-4 rounded-full transition duration-300 transform hover:scale-110 cursor-pointer border-none`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseDown={() => setIsActive(true)}
       onMouseUp={() => setIsActive(false)}
-      onClick={toggle}
+      onClick={toggleOpen}
     >
-      {visible ? (
+      {isOpen ? (
         <Minimize className="h-8 w-8 text-white" />
       ) : (
         <Bot className="h-8 w-8 text-white" />

@@ -1,5 +1,5 @@
 import { Chatbot } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "~/lib/utils";
 
 export default function IntroMessages({
@@ -12,19 +12,31 @@ export default function IntroMessages({
   setShowIntroMessages: (showIntroMessages: boolean) => void;
 }) {
   const [introOpacity, setIntroOpacity] = useState("opacity-0");
+  const introRef = useRef(null); // Create a ref for the div
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIntroOpacity("opacity-100");
+
+      console.log("introRef", introRef);
+
+      if (introRef.current) {
+        const { width, height } = introRef.current.getBoundingClientRect();
+        const size = { width: width + 8, height: height + 64 + 32 + 8 }; // 32 = 32rem
+
+        console.log("size", size);
+        window.parent.postMessage(size, "*");
+      }
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [introRef]);
 
   return (
     <div
+      ref={introRef}
       className={cn(
-        "flex flex-col items-end gap-2 absolute bottom-[5rem] right-4 mb-2 cursor-pointer",
+        "flex flex-col items-end gap-2 absolute bottom-[6rem] right-0 cursor-pointer",
       )}
       onClick={() => {
         setVisible(true);

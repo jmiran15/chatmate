@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import WidgetHeader from "./header";
 import Chat from "../chat/chat";
 import ActionButton from "./action-button";
-import { Card, CardContent } from "../ui/card";
+import { Card } from "../ui/card";
 import { cn } from "~/lib/utils";
 import IntroMessages from "./intro-messages";
 
@@ -20,40 +20,64 @@ export default function Widget({
   }[];
   chatbot: string;
 }) {
-  const [visible, setVisible] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const [showIntroMessages, setShowIntroMessages] = useState(true);
 
-  // const [chatbot, setChatbot] = useState({});
+  useEffect(() => {
+    requestParentViewportHeight();
+  }, [isChatOpen]);
 
-  // useEffect(() => {
-  //   // load the chatbot stuff
-  //   fetch(`/api/chatbot/${chatbotId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setChatbot(data);
-  //     });
-  // }, [chatbotId]);
+  useEffect(() => {
+    function handleViewportHeightMessage(event) {
+      if (event.data && event.data.type === "viewportHeight") {
+        const parentViewportHeight = event.data.height;
+        sendSizeToParent(parentViewportHeight);
+      }
+    }
 
-  // console.log(chatbot);
+    window.addEventListener("message", handleViewportHeightMessage);
+
+    return () => {
+      window.removeEventListener("message", handleViewportHeightMessage);
+    };
+  }, []);
+
+  function requestParentViewportHeight() {
+    window.parent.postMessage({ type: "requestViewportHeight" }, "*"); // Replace '*' with the parent domain for security
+  }
+
+  function sendSizeToParent(parentViewportHeight) {
+    if (typeof parentViewportHeight !== "number") {
+      return;
+    }
+
+    const size = {
+      width: !isChatOpen ? 420 + 8 : 80,
+      height: !isChatOpen ? parentViewportHeight : 80,
+    };
+
+    window.parent.postMessage(size, "*"); // Use the appropriate domain instead of '*'
+  }
 
   return (
-    <div className="fixed bottom-2 right-2 p-4 z-50">
+    <div className="fixed bottom-2 right-2 z-50">
       {showIntroMessages ? (
         <IntroMessages
           chatbot={chatbot}
-          setVisible={setVisible}
+          setVisible={setIsChatOpen}
           setShowIntroMessages={setShowIntroMessages}
         />
       ) : (
         <></>
       )}
-
       <Card
+        style={{
+          width: isChatOpen ? 420 : 0,
+          height: isChatOpen ? "80vh" : 0,
+        }}
         className={cn(
-          "absolute bottom-full right-4 mb-2 transition ease-in-out duration-300 flex flex-col justify-between",
-          " h-[80vh]",
-          "w-[420px]",
-          visible ? "opacity-100" : "opacity-0 invisible",
+          "absolute bottom-full right-0 mb-4 transition ease-in-out duration-300 flex flex-col justify-between",
+          isChatOpen ? "opacity-100" : "opacity-0 invisible",
         )}
       >
         <WidgetHeader chatbot={chatbot} />
@@ -67,12 +91,12 @@ export default function Widget({
       </Card>
 
       <ActionButton
+        isOpen={isChatOpen}
         chatbot={chatbot}
-        toggle={() => {
-          setVisible(!visible);
+        toggleOpen={() => {
+          setIsChatOpen((isChatOpen) => !isChatOpen);
           setShowIntroMessages(false);
         }}
-        visible={visible}
       />
     </div>
   );
