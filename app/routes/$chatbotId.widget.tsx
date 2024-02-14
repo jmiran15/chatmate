@@ -18,8 +18,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = (await widgetChat.parse(cookieHeader)) || {};
 
-  console.log("cookie", cookieHeader);
-
   if (!cookie.chatId) {
     const chat = await createChatWithStarterMessages({ chatbotId });
     cookie.chatId = chat.id;

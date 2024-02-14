@@ -24,10 +24,11 @@ export default function Index() {
             height: "80px",
             width: "80px",
           }}
-          src="https://chatmate.fly.dev/e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23/widget"
+          src="http://localhost:3000/4a91ed04-18e3-4f06-ab6c-a03c18f6720e/widget"
           title="chatbot-preview"
         />
-        <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
+        <script src="http://localhost:3000/iframeResizer.js"></script>
+
         <Hero />
         <HowItWorks />
         <Features />

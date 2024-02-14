@@ -49,7 +49,6 @@ export default function App() {
           `,
         }}
       ></script>
-
       <body className="h-full bg-transparent">
         <Outlet />
         <ScrollRestoration />

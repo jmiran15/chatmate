@@ -34,8 +34,6 @@ export default function Appearance() {
   const { chatbotId } = useParams();
   const [refresh, setRefresh] = useState(0);
 
-  console.log("refresh", refresh);
-
   return (
     <div className="grid grid-cols-4 h-full">
       <Customizer
