@@ -6,7 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Copy, CheckCircle } from "lucide-react";
 
-export default function CodeBlock({ code, language }) {
+export default function CodeBlock({
+  code,
+  language,
+}: {
+  code: string;
+  language: string;
+}) {
   const [copied, setCopied] = useState(false);
   const notify = () => {
     toast(<ToastDisplay className="bg-neutral-700 m-2" />);
@@ -30,7 +36,7 @@ export default function CodeBlock({ code, language }) {
   return (
     <div className="relative">
       <button className="absolute top-0 right-0 p-2">
-        <CopyToClipboard text={code} onCopy={(copied) => notify()}>
+        <CopyToClipboard text={code} onCopy={() => notify()}>
           {copied ? (
             <CheckCircle className="h-6 w-6 text-green-300" />
           ) : (

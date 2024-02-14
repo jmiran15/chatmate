@@ -4,23 +4,22 @@
 // 3. calls prepareDocuments which calls the splitter on them and returns them as Document[]
 // 4. embed documents and upsert them
 
-import { Document as DocumentTable } from "@prisma/client";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
-import { prisma } from "~/db.server";
+// import { prisma } from "~/db.server";
 export type { Chatbot } from "@prisma/client";
-import { getEmbeddings } from "./openai";
-import {
-  Document,
-  MarkdownTextSplitter,
-  RecursiveCharacterTextSplitter,
-} from "./splitter";
+// import { getEmbeddings } from "./openai";
+// import {
+//   // Document,
+//   MarkdownTextSplitter,
+//   RecursiveCharacterTextSplitter,
+// } from "./splitter";
 
 // import { Pinecone, PineconeRecord } from "@pinecone-database/pinecone";
 // import { chunkedUpsert } from "../../utils/chunkedUpsert";
-import md5 from "md5"; // this is a hashing function
+// import md5 from "md5"; // this is a hashing function
 import { Crawler, Page } from "./crawler";
-import { truncateStringByBytes } from "./truncateString";
+// import { truncateStringByBytes } from "./truncateString";
 import { createDocuments } from "~/models/document.server";
 
 interface SeedOptions {
@@ -29,7 +28,7 @@ interface SeedOptions {
   chunkOverlap: number;
 }
 
-type DocumentSplitter = RecursiveCharacterTextSplitter | MarkdownTextSplitter;
+// type DocumentSplitter = RecursiveCharacterTextSplitter | MarkdownTextSplitter;
 
 // id will be something derived from the document content SINCE THE EMBEDDING WILL ALSO KNOW THIS
 // async function createDocuments({
@@ -56,22 +55,22 @@ type DocumentSplitter = RecursiveCharacterTextSplitter | MarkdownTextSplitter;
 //   await prisma.$transaction(requests);
 // }
 
-async function createEmbeddings({
-  embedding,
-  documentId,
-  chatbotId,
-  content,
-}: {
-  embedding: number[];
-  documentId: string;
-  chatbotId: string;
-  content: string;
-}) {
-  await prisma.$executeRaw`
-    INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
-    VALUES (${uuidv4()}, ${embedding}::vector, ${documentId}, ${chatbotId}, ${content})
-    `;
-}
+// async function createEmbeddings({
+//   embedding,
+//   documentId,
+//   chatbotId,
+//   content,
+// }: {
+//   embedding: number[];
+//   documentId: string;
+//   chatbotId: string;
+//   content: string;
+// }) {
+//   await prisma.$executeRaw`
+//     INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
+//     VALUES (${uuidv4()}, ${embedding}::vector, ${documentId}, ${chatbotId}, ${content})
+//     `;
+// }
 
 async function seed(
   url: string,
@@ -81,7 +80,7 @@ async function seed(
 ) {
   try {
     // Destructure the options object
-    const { splittingMethod, chunkSize, chunkOverlap } = options;
+    // const { splittingMethod, chunkSize, chunkOverlap } = options;
 
     // Create a new Crawler with depth 1 and maximum pages as limit
     const crawler = new Crawler(1, limit || 100);
@@ -151,7 +150,7 @@ async function seed(
     //   }),
     // );
 
-    await createDocuments({
+    return await createDocuments({
       documents: pages.map((page) => {
         return {
           name: page.url,
@@ -170,62 +169,62 @@ async function seed(
   }
 }
 
-async function embedDocument(doc: Document) {
-  try {
-    // Generate OpenAI embeddings for the document content
-    const embedding = await getEmbeddings({ input: doc.pageContent });
+// async function embedDocument(doc: Document) {
+//   try {
+//     // Generate OpenAI embeddings for the document content
+//     const embedding = await getEmbeddings({ input: doc.pageContent });
 
-    // Create a hash of the document content
-    const hash = md5(doc.pageContent);
+//     // Create a hash of the document content
+//     const hash = md5(doc.pageContent);
 
-    // Return the vector embedding object
-    return {
-      id: hash, // The ID of the vector is the hash of the document content
-      values: embedding, // The vector values are the OpenAI embeddings
-      metadata: {
-        // The metadata includes details about the document
-        chunk: doc.pageContent, // The chunk of text that the vector represents
-        text: doc.metadata.text as string, // The text of the document
-        url: doc.metadata.url as string, // The URL where the document was found
-        hash: doc.metadata.hash as string, // The hash of the document content
-      },
-    };
-  } catch (error) {
-    console.log("Error embedding document: ", error);
-    throw error;
-  }
-}
+//     // Return the vector embedding object
+//     return {
+//       id: hash, // The ID of the vector is the hash of the document content
+//       values: embedding, // The vector values are the OpenAI embeddings
+//       metadata: {
+//         // The metadata includes details about the document
+//         chunk: doc.pageContent, // The chunk of text that the vector represents
+//         text: doc.metadata.text as string, // The text of the document
+//         url: doc.metadata.url as string, // The URL where the document was found
+//         hash: doc.metadata.hash as string, // The hash of the document content
+//       },
+//     };
+//   } catch (error) {
+//     console.log("Error embedding document: ", error);
+//     throw error;
+//   }
+// }
 
-async function prepareDocument(
-  page: Page,
-  splitter: DocumentSplitter,
-): Promise<Document[]> {
-  // Get the content of the page
-  const pageContent = page.content;
+// async function prepareDocument(
+//   page: Page,
+//   splitter: DocumentSplitter,
+// ): Promise<Document[]> {
+//   // Get the content of the page
+//   const pageContent = page.content;
 
-  // Split the documents using the provided splitter
-  const docs = await splitter.splitDocuments([
-    new Document({
-      pageContent,
-      metadata: {
-        url: page.url,
-        // Truncate the text to a maximum byte length
-        text: truncateStringByBytes(pageContent, 36000),
-      },
-    }),
-  ]);
+//   // Split the documents using the provided splitter
+//   const docs = await splitter.splitDocuments([
+//     new Document({
+//       pageContent,
+//       metadata: {
+//         url: page.url,
+//         // Truncate the text to a maximum byte length
+//         text: truncateStringByBytes(pageContent, 36000),
+//       },
+//     }),
+//   ]);
 
-  // Map over the documents and add a hash to their metadata
-  return docs.map((doc: Document) => {
-    return {
-      pageContent: doc.pageContent,
-      metadata: {
-        ...doc.metadata,
-        // Create a hash of the document content
-        hash: md5(doc.pageContent),
-      },
-    };
-  });
-}
+//   // Map over the documents and add a hash to their metadata
+//   return docs.map((doc: Document) => {
+//     return {
+//       pageContent: doc.pageContent,
+//       metadata: {
+//         ...doc.metadata,
+//         // Create a hash of the document content
+//         hash: md5(doc.pageContent),
+//       },
+//     };
+//   });
+// }
 
 export default seed;

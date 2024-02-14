@@ -5,17 +5,14 @@
 // in the loader we should also load the chatbot. This should refresh everytime a change is made to the chatbot (i.e. components)?????
 // maybe not, since chatbots have chats, and dont want to refresh everytime a change to chats
 
-import { Outlet, useFetcher, useLoaderData } from "@remix-run/react";
+import { Outlet } from "@remix-run/react";
 
-import { useState } from "react";
 import {
   MessageSquareMore,
   Database,
   Brush,
   Share,
-  MessagesSquare,
   Settings,
-  TestTube,
 } from "lucide-react";
 
 import { Nav } from "~/components/nav";

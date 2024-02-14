@@ -1,7 +1,7 @@
 import Customizer from "~/components/appearance/theme-customizer";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
-import { useLoaderData, useNavigation, useParams } from "@remix-run/react";
+import { useLoaderData, useParams } from "@remix-run/react";
 import { useState } from "react";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {

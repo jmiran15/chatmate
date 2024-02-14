@@ -41,7 +41,7 @@ export default function Messages({
               </div>
             );
           })}
-          {loading && <LoadingMessage />}
+          {loading ? <LoadingMessage /> : null}
         </>
       )}
     </div>

@@ -43,7 +43,7 @@ export async function createDocumentWithEmbeddings({
 
   const chunks = splitTextIntoChunks(document.content, 2048, 256);
 
-  const chunksWithEmbeddings = await Promise.all(
+  await Promise.all(
     chunks.map(async (chunk) => {
       const embedding = await getEmbeddings({ input: chunk });
 
@@ -123,7 +123,7 @@ export async function processFiles({ files }: { files: FormDataEntryValue[] }) {
 
           fileContent = await new Promise((resolve, reject) => {
             pdfParser.on("pdfParser_dataError", reject);
-            pdfParser.on("pdfParser_dataReady", (pdfData) => {
+            pdfParser.on("pdfParser_dataReady", () => {
               resolve(pdfParser.getRawTextContent());
             });
             pdfParser.parseBuffer(new Buffer(fileBuffer));

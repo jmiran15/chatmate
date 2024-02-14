@@ -50,6 +50,13 @@ module.exports = {
           "warn",
           { validStrategies: ["ternary"] },
         ],
+        "react/prop-types": 0,
+        "react/no-unescaped-entities": 0,
+        "jsx-a11y/heading-has-content": 0,
+        "@typescript-eslint/consistent-type-definitions": 0,
+        "react-hooks/exhaustive-deps": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
       },
     },
 

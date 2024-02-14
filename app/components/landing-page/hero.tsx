@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { Button, buttonVariants } from "../ui/button";
+import { buttonVariants } from "../ui/button";
 import Balance from "react-wrap-balancer";
 import { cn } from "~/lib/utils";
 
