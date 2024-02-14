@@ -51,7 +51,7 @@ export default function Appearance() {
       <div className="col-span-2">
         <iframe
           key={refresh}
-          src={`http://localhost:3000/${chatbotId}/widget`}
+          src={`https://chatmate.fly.dev/${chatbotId}/widget`}
           width="100%"
           height="100%"
           allowFullScreen
