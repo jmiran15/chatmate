@@ -33,9 +33,9 @@ export function Nav({
 
   return (
     // need to make the grid change to 2 col when on mobile
-    <div className="md:col-span-1 bg-green-200">
+    <div className="md:col-span-1 border-b border-gray-200">
       {/* mobile */}
-      <span className="flex md:hidden container h-14 px-4 w-screen flex justify-between">
+      <span className="md:hidden container h-14 px-4 w-screen flex justify-between">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger className="px-2">
             <Menu
@@ -47,11 +47,11 @@ export function Nav({
           </SheetTrigger>
 
           <SheetContent side={"left"}>
-            <SheetHeader>
+            {/* <SheetHeader>
               <SheetTitle className="font-bold text-xl">
                 The tab selected
               </SheetTitle>
-            </SheetHeader>
+            </SheetHeader> */}
             <nav className="flex flex-col justify-center items-start gap-2 mt-4">
               {links.map((link, index) => (
                 <Link
