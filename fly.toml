@@ -1,4 +1,4 @@
-app = "chatmate-f9d4"
+app = "chatmate"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = [ ]
