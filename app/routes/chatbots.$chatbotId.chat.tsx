@@ -4,7 +4,7 @@ import {
   json,
   redirect,
 } from "@remix-run/node";
-import { Outlet, useLoaderData, useParams } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import {
   createChatWithStartersAndUser,
   deleteChatByChatId,

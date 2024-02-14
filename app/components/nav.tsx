@@ -4,14 +4,7 @@ import { LucideIcon, Menu } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { useState } from "react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "./ui/sheet";
-import { NavigationMenu, NavigationMenuList } from "./ui/navigation-menu";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 export function Nav({
   links,

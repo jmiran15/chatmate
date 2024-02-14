@@ -2,7 +2,7 @@
 // this should take messages just like Chat component
 // should be a combo of Chat component and a few other static components for the widget stuff.
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import WidgetHeader from "./header";
 import Chat from "../chat/chat";
 import ActionButton from "./action-button";
