@@ -106,7 +106,7 @@ export const Features = () => {
             <CardFooter>
               <img
                 data-src={image}
-                src={image}
+                src={visibleImages.has(image) ? image : undefined}
                 alt="About feature"
                 className="feature-image w-[200px] lg:w-[300px] mx-auto"
               />
