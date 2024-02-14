@@ -1,4 +1,6 @@
-import { Button } from "../ui/button";
+import { Link } from "@remix-run/react";
+import { Button, buttonVariants } from "../ui/button";
+import { cn } from "~/lib/utils";
 
 export const Cta = () => {
   return (
@@ -6,25 +8,28 @@ export const Cta = () => {
       <div className="container lg:grid lg:grid-cols-2 place-items-center">
         <div className="lg:col-start-1">
           <h2 className="text-3xl md:text-4xl font-bold ">
-            All Your
+            Elevate Your
             <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
               {" "}
-              Ideas & Concepts{" "}
+              Customer Engagement{" "}
             </span>
-            In One Interface
+            with Chatmate
           </h2>
           <p className="text-muted-foreground text-xl mt-4 mb-8 lg:mb-0">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque,
-            beatae. Ipsa tempore ipsum iste quibusdam illum ducimus eos. Quasi,
-            sed!
+            Transform how you interact with your site visitors using Chatmate.
+            Our chatbot, powered by advanced AI like gpt-3.5-turbo, doesn't just
+            answer questions - it proactively engages and converts visitors into
+            customers. Get started for free and see your conversion rates soar!
           </p>
         </div>
 
         <div className="space-y-4 lg:col-start-2">
-          <Button className="w-full md:mr-4 md:w-auto">Request a Demo</Button>
-          <Button variant="outline" className="w-full md:w-auto">
-            View all features
-          </Button>
+          <Link
+            to="/join"
+            className={cn("w-full md:mr-4 md:w-auto", buttonVariants())}
+          >
+            Create Your Chatbot
+          </Link>
         </div>
       </div>
     </section>

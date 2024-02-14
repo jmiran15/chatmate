@@ -39,7 +39,6 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <script src="/iframeResizer.js"></script>
       </body>
     </html>
   );

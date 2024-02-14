@@ -6,8 +6,8 @@ export default function Share() {
   return (
     <div className="flex flex-col h-full w-full p-8 gap-4">
       <p className="text-muted-foreground">
-        To add the chatbot any where on your website, add this iframe to your
-        html code
+        To add the chatbot any where on your website, add this iframe and script
+        tag to your html code
       </p>
       <CodeBlock
         code={`
@@ -21,9 +21,11 @@ export default function Share() {
           height: "80px",
           width: "80px",
         }}
-        src="http://localhost:3000/f21aefca-bd96-4f4f-bd92-08ab93f75491/widget"
+        src="http://chatmate.dev/${chatbotId}/widget"
         title="chatbot-preview"
-        />`}
+        />
+        <script src="chatmate.dev/iframeResizer.js"></script>
+        `}
         language="html"
       />
     </div>

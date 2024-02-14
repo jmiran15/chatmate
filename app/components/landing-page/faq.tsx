@@ -13,34 +13,40 @@ interface FAQProps {
 
 const FAQList: FAQProps[] = [
   {
-    question: "Is this template free?",
-    answer: "Yes. It is a free ChadcnUI template.",
+    question: "What is Chatmate?",
+    answer:
+      "Chatmate is an advanced chatbot creation tool that enables website owners to embed a chatbot powered by large language models, like gpt-3.5-turbo, into their websites. It's designed to not only respond to user inquiries but also proactively engage with visitors, addressing their concerns and guiding them towards becoming customers. This makes Chatmate a powerful tool for increasing website conversion rates.",
     value: "item-1",
   },
   {
-    question: "Lorem ipsum dolor sit amet consectetur adipisicing elit?",
+    question: "How does Chatmate differ from other chatbots?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore quidem quam? Consectetur sapiente iste rerum reiciendis animi nihil nostrum sit quo, modi quod.",
+      "Unlike standard chatbots that mainly answer user queries, Chatmate excels in actively engaging users. It's designed to interact with potential customers, understand their pain points, and persuasively address reasons they might hesitate to use a service. This proactive approach in customer engagement sets Chatmate apart, making it a robust tool for boosting conversion rates on websites.",
     value: "item-2",
   },
   {
-    question:
-      "Lorem ipsum dolor sit amet  Consectetur natus dolores minus quibusdam?",
+    question: "Is Chatmate really free?",
     answer:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore qui nostrum reiciendis veritatis necessitatibus maxime quis ipsa vitae cumque quo?",
+      "Yes, Chatmate is completely free to use. We believe in providing powerful chatbot technology accessible to all website owners, regardless of their budget. This allows even small and medium-sized enterprises to leverage the benefits of advanced chatbot features without any cost.",
     value: "item-3",
   },
   {
-    question: "Lorem ipsum dolor sit amet, consectetur adipisicing elit?",
-    answer: "Lorem ipsum dolor sit amet consectetur, adipisicing elit.",
+    question: "How can I set up Chatmate on my website?",
+    answer:
+      "Setting up Chatmate on your website is straightforward. You simply need to provide the URL of your website or upload documents containing your website's information. After customization, you will receive a code for an iframe, which you can then embed into your website's code. This process is designed to be user-friendly, requiring minimal technical expertise.",
     value: "item-4",
   },
   {
-    question:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur natus?",
+    question: "Can Chatmate be customized to match my website’s style?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint labore quidem quam? Consectetur sapiente iste rerum reiciendis animi nihil nostrum sit quo, modi quod.",
+      "Absolutely! Chatmate offers extensive customization options to ensure the chatbot seamlessly blends with your website's style. You can modify colors, starter messages, example questions, and more, to align the chatbot's appearance and behavior with your brand identity and website aesthetics.",
     value: "item-5",
+  },
+  {
+    question: "What kind of support does Chatmate offer if I encounter issues?",
+    answer:
+      "For any issues or queries, you can reach us at chatmate.dev@gmail.com, and our team will assist you promptly. We are committed to ensuring a smooth experience with Chatmate and are always ready to help with any challenges you may face.",
+    value: "item-6",
   },
 ];
 
@@ -69,7 +75,7 @@ export const FAQ = () => {
       <h3 className="font-medium mt-4">
         Still have questions?{" "}
         <a
-          href="#"
+          href="mailto:chatmate.dev@gmail.com"
           className="text-primary transition-all border-primary hover:border-b-2"
         >
           Contact us

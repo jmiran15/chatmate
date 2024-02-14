@@ -22,21 +22,18 @@ export const Hero = () => {
 
           <p className="text-xl text-muted-foreground md:w-10/12 mx-auto">
             <Balance>
-              Join thousands of startups and enterprises that have transformed
-              their user engagement with Chatmate’s AI-powered chatbot.
-              Experience seamless integration, real-time analytics, and 24/7
-              automated customer service that feels personal and boosts your
-              conversion rates.
+              Join startups and enterprises in transforming their user
+              engagement with Chatmate’s AI-powered chatbot. Experience a
+              seamless integration and boost your conversion rates.
             </Balance>
           </p>
 
           <div className="flex justify-center space-x-4">
             {" "}
-            {/* Flexbox with centering */}
             <Link to="/join" className={cn(buttonVariants())}>
               Get Started
             </Link>
-            <Button variant="outline">Try the demo</Button>
+            {/* <Button variant="outline">Try the demo</Button> */}
           </div>
         </div>
       </Balance>

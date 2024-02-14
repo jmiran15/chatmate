@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "../icons";
+import { Link, Brush, Share } from "lucide-react";
 
 interface FeatureProps {
   icon: JSX.Element;
@@ -15,28 +15,22 @@ interface FeatureProps {
 
 const features: FeatureProps[] = [
   {
-    icon: <MedalIcon />,
-    title: "Accesibility",
+    icon: <Link size={40} color="#f97316" />,
+    title: "Connect",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Connect your website or manually upload files as a data source for your chatbot to learn from.",
   },
   {
-    icon: <MapIcon />,
-    title: "Community",
+    icon: <Brush size={40} color="#f97316" />,
+    title: "Customize",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Test your chatbot and customize your chatbot widget to match your brand and website design.",
   },
   {
-    icon: <PlaneIcon />,
-    title: "Scalability",
+    icon: <Share size={40} color="#f97316" />,
+    title: "Embed",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
-  },
-  {
-    icon: <GiftIcon />,
-    title: "Gamification",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Add the iframe to your website and start engaging with your visitors.",
   },
 ];
 
@@ -51,11 +45,11 @@ export const HowItWorks = () => {
         Step-by-Step Guide
       </h2>
       <p className="md:w-3/4 mx-auto mt-4 mb-8 text-xl text-muted-foreground">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-        dolor pariatur sit!
+        Connect your website, customize your widget UI to your liking, and add
+        it to your website. It's that simple!
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map(({ icon, title, description }: FeatureProps) => (
           <Card key={title} className="bg-muted/50">
             <CardHeader>
