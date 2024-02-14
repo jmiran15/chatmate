@@ -1,10 +1,8 @@
 # base node image
 FROM node:18-bullseye-slim as base
 
-
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
-ENV DATABASE_URL=postgres://postgres:NckghaeNP6t0bSD@chatmate-db.flycast:5432
 
 # Install openssl for Prisma
 RUN apt-get update && apt-get install -y openssl
@@ -37,7 +35,6 @@ ADD prisma .
 RUN npx prisma generate
 
 ADD . .
-RUN npm run setup
 RUN npm run build
 
 # Finally, build the production image with minimal footprint
