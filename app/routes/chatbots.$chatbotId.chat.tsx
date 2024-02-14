@@ -4,7 +4,7 @@ import {
   json,
   redirect,
 } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData, useParams } from "@remix-run/react";
 import {
   createChatWithStartersAndUser,
   deleteChatByChatId,
@@ -51,8 +51,8 @@ export default function Chat() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="grid grid-cols-5 h-full">
-      <div className="col-span-4 h-full overflow-hidden">
+    <div className="flex flex-col-reverse md:grid md:grid-cols-5 h-full">
+      <div className="md:col-span-4 h-full overflow-hidden">
         <Outlet />
       </div>
       <ChatsNav chats={data.chats} isCollapsed={false} />

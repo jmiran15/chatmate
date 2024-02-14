@@ -49,7 +49,7 @@ export const Navbar = () => {
   return (
     <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
       <NavigationMenu className="mx-auto">
-        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
+        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between">
           <NavigationMenuItem className="font-bold flex">
             <NavLink to="/" className="mr-6 flex items-center space-x-2">
               <Icons.logo className="h-6 w-6" />
@@ -75,7 +75,7 @@ export const Navbar = () => {
                     Chatmate
                   </SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col justify-center items-center gap-2 mt-4">
+                <nav className="flex flex-col justify-center items-start gap-2 mt-4">
                   {!user ? (
                     routeList.map(({ href, label }: RouteProps) => (
                       <NavLink

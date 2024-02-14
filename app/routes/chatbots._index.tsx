@@ -18,7 +18,7 @@ export default function MyChatbots() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col gap-8 w-full py-12 px-96">
+    <div className="flex flex-col gap-8 w-full py-12 px-8 md:px-20 xl:px-96">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-2xl font-bold leading-tight tracking-tighter">
           Chatbots

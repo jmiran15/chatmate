@@ -17,8 +17,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const action = formData.get("action") as string;
   const id = params.documentId as string;
 
-  console.log("action", action);
-
   switch (action) {
     case "delete": {
       await deleteDocumentById({ id });

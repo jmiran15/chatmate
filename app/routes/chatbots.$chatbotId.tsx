@@ -19,7 +19,7 @@ import { Nav } from "~/components/nav";
 
 export default function ChatbotLayout() {
   return (
-    <div className="grid grid-cols-6 w-full h-full overflow-hidden">
+    <div className="flex flex-col md:grid md:grid-cols-6 w-full h-full overflow-hidden">
       <Nav
         links={[
           {
@@ -54,7 +54,7 @@ export default function ChatbotLayout() {
           },
         ]}
       />
-      <div className="col-span-5 h-full overflow-hidden">
+      <div className="grow md:col-span-5 h-full overflow-hidden">
         <Outlet />
       </div>
     </div>

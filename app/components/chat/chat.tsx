@@ -15,7 +15,6 @@ export default function Chat({
 }) {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
-  console.log("isSubmitting", isSubmitting);
 
   const optimisticMessages = isSubmitting
     ? [

@@ -68,7 +68,7 @@ export default function Data() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col gap-8 w-full px-24 py-12">
+    <div className="flex flex-col gap-8 w-full p-6 md:px-24 ">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">Data</h1>
         <h1 className="font-normal text-gray-700 dark:text-gray-400">

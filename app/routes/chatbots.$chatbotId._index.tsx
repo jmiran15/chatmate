@@ -5,7 +5,7 @@
 export default function ChatbotIndex() {
   return (
     <div>
-      <h1>Chatbot Index</h1>
+      <h1>Select a tab</h1>
     </div>
   );
 }

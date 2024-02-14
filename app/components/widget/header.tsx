@@ -1,10 +1,16 @@
 import { Form, useParams } from "@remix-run/react";
-import { RefreshCcw } from "lucide-react";
+import { RefreshCcw, X } from "lucide-react";
 import { CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { Chatbot } from "@prisma/client";
 
-export default function WidgetHeader({ chatbot }: { chatbot: Chatbot }) {
+export default function WidgetHeader({
+  chatbot,
+  close,
+}: {
+  chatbot: Chatbot;
+  close: () => void;
+}) {
   const { chatbotId } = useParams();
   return (
     <CardHeader className="flex flex-row items-center">
@@ -17,7 +23,7 @@ export default function WidgetHeader({ chatbot }: { chatbot: Chatbot }) {
         </div>
       </div>
 
-      <Form method="post" action="/clear" className="ml-auto">
+      <Form method="post" action="/clear" className="ml-auto gap-2 flex">
         <input type="hidden" name="chatbotId" value={chatbotId} />
         <Button
           size="icon"
@@ -26,6 +32,14 @@ export default function WidgetHeader({ chatbot }: { chatbot: Chatbot }) {
           type="submit"
         >
           <RefreshCcw className="h-5 w-5" />
+        </Button>
+        <Button
+          size="icon"
+          variant="outline"
+          className="rounded-full"
+          onClick={close}
+        >
+          <X className="h-5 w-5" />
         </Button>
       </Form>
     </CardHeader>

@@ -28,6 +28,7 @@ export default function Index() {
           title="chatbot-preview"
         />
         <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
+
         <Hero />
         <HowItWorks />
         <Features />
