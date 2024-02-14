@@ -33,9 +33,9 @@ COPY --from=deps /myapp/node_modules /myapp/node_modules
 
 ADD prisma .
 RUN npx prisma generate
-RUN npm run setup
 
 ADD . .
+RUN npm run setup
 RUN npm run build
 
 # Finally, build the production image with minimal footprint
