@@ -35,7 +35,7 @@ export default function Appearance() {
   const [refresh, setRefresh] = useState(0);
 
   return (
-    <div className="grid grid-cols-4 h-full">
+    <div className="flex flex-col md:grid md:grid-cols-4 h-full">
       <Customizer
         setRefresh={setRefresh}
         name={data?.publicName}
@@ -49,12 +49,19 @@ export default function Appearance() {
       <div className="col-span-2">
         <iframe
           key={refresh}
+          id="chatmate-chatbot-widget-iframe"
+          style={{
+            position: "fixed",
+            bottom: "8px",
+            right: "8px",
+            zIndex: 50,
+            height: "80px",
+            width: "80px",
+          }}
           src={`https://chatmate.fly.dev/${chatbotId}/widget`}
-          width="100%"
-          height="100%"
-          allowFullScreen
-          title="chatbot-prev"
+          title="chatbot-preview"
         />
+        <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
       </div>
     </div>
   );

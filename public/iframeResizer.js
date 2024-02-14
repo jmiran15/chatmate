@@ -15,10 +15,6 @@ function sendSizeToIframe() {
   }
 }
 
-// Send initial size when window loads
-window.addEventListener("load", sendSizeToIframe);
-
-// Also send size when window resizes
 window.addEventListener("resize", sendSizeToIframe);
 
 window.addEventListener(
@@ -30,7 +26,7 @@ window.addEventListener(
       const viewportWidth = window.innerWidth;
       event.source.postMessage(
         {
-          type: "viewportSize",
+          type: "sizeChange",
           height: viewportHeight,
           width: viewportWidth,
         },

@@ -23,9 +23,10 @@ export default function Widget({
   const [showIntroMessages, setShowIntroMessages] = useState(true);
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
 
-  console.log("viewportSize", viewportSize);
+  useEffect(() => {
+    // request viewport size from parent
+    window.parent.postMessage({ type: "requestViewportSize" }, "*");
 
-  useLayoutEffect(() => {
     function handleViewportResizeMessage(event) {
       if (event.data && event.data.type === "sizeChange") {
         const { width, height } = event.data;
@@ -58,8 +59,6 @@ export default function Widget({
       bottom: isChatOpen ? (isMobile ? 0 : 8) : 8,
       right: isChatOpen ? (isMobile ? 0 : 8) : 8,
     };
-
-    console.log("sending size to parent", size);
 
     window.parent.postMessage(size, "*"); // Use the appropriate domain instead of '*'
   }

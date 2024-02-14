@@ -12,6 +12,12 @@ import { widgetChat } from "~/cookies.server";
 import Widget from "~/components/widget/widget";
 import { getChatbotById } from "~/models/chatbot.server";
 
+import type { HeadersFunction } from "@remix-run/node"; // or cloudflare/deno
+
+export const headers: HeadersFunction = () => ({
+  "Cache-Control": "no-cache, no-store, must-revalidate",
+});
+
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { chatbotId } = params;
 

@@ -22,7 +22,7 @@ export function ChatsNav({ chats, isCollapsed }: NavProps) {
 
       {/* like the nav, have the name of the active chat on left, and button (outline) to open drawer of chats on right */}
       {/* mobile */}
-      <span className="md:hidden container h-14 px-6 w-screen flex justify-between items-center">
+      <span className="md:hidden container h-14 px-6 py-6 w-screen flex justify-between items-center">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <p className="text-xl">
             {params.chatId

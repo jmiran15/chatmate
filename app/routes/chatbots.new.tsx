@@ -32,7 +32,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   }
   const chatbot = await createChatbot({ name, description, userId });
-  return redirect(`/chatbots/${chatbot.id}`);
+  return redirect(`/chatbots/${chatbot.id}/chat`);
 };
 
 export default function NewChatbot() {
@@ -49,7 +49,10 @@ export default function NewChatbot() {
   }, [actionData]);
 
   return (
-    <Form method="post" className="flex flex-col gap-8 w-full py-12 px-96">
+    <Form
+      method="post"
+      className="flex flex-col gap-8 w-full py-12 px-8 md:px-20 xl:px-96"
+    >
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="name">Name: </Label>
 
