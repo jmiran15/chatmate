@@ -5,6 +5,7 @@
 // in the loader we should also load the chatbot. This should refresh everytime a change is made to the chatbot (i.e. components)?????
 // maybe not, since chatbots have chats, and dont want to refresh everytime a change to chats
 
+import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 
 import {
@@ -16,6 +17,18 @@ import {
 } from "lucide-react";
 
 import { Nav } from "~/components/nav";
+import { getChatbotById } from "~/models/chatbot.server";
+import { requireUserId } from "~/session.server";
+
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
+  const { chatbotId } = params;
+  const userId = await requireUserId(request);
+  const chatbot = await getChatbotById({ id: chatbotId });
+  if (chatbot?.userId !== userId) {
+    return redirect("/chatbots");
+  }
+  return { chatbot };
+};
 
 export default function ChatbotLayout() {
   return (
