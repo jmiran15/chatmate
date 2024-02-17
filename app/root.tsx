@@ -8,7 +8,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  // useLoaderData,
 } from "@remix-run/react";
 
 import { getUser } from "~/session.server";
@@ -25,8 +24,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  // const data = useLoaderData<typeof loader>();
-
   return (
     <html lang="en" className="h-full">
       <head>

@@ -70,7 +70,7 @@ export default function ChatInput({
             onMouseLeave={() => setIsHovered(false)}
           >
             <Send className="h-4 w-4" />
-            <span className="sr-only">Send</span>
+            {/* <span className="sr-only">Send</span> */}
           </Button>
         </div>
       </fetcher.Form>
