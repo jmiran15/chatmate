@@ -1,7 +1,13 @@
 import { Document } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import {
+  Form,
+  useLoaderData,
+  useNavigation,
+  useParams,
+} from "@remix-run/react";
 import DocumentCard from "~/components/document-card";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import {
@@ -113,8 +119,38 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
+const SUPPORTED_FILE_TYPES = [
+  "txt",
+  "eml",
+  "msg",
+  "xml",
+  "html",
+  "md",
+  "rst",
+  "json",
+  "rtf",
+  "jpeg",
+  "png",
+  "doc",
+  "docx",
+  "ppt",
+  "pptx",
+  "pdf",
+  "odt",
+  "epub",
+  "csv",
+  "tsv",
+  "xlsx",
+  "gz",
+];
+
 export default function Data() {
   const data = useLoaderData<typeof loader>();
+  const { chatbotId } = useParams();
+  const navigation = useNavigation();
+  const isSubmitting =
+    navigation.formAction === `/chatbots/${chatbotId}/data?index`;
+  console.log("isSubmitting", navigation.formAction);
 
   return (
     <div className="flex flex-col gap-8 w-full px-24 py-12">
@@ -125,34 +161,51 @@ export default function Data() {
           responses
         </h1>
 
-        <Form
-          method="post"
-          encType="multipart/form-data"
-          className="flex flex-row justify-between items-center gap-4"
-        >
-          <input type="hidden" name="action" value="scrape" />
-          <Input
-            type="text"
-            name="url"
-            placeholder="Enter website url"
-            multiple
-            className="flex-1"
-          />
-          <Button type="submit" className="flex-none">
-            Scrape website
-          </Button>
+        <Form method="post" encType="multipart/form-data">
+          <fieldset
+            disabled={isSubmitting}
+            className="flex flex-row justify-between items-center gap-4"
+          >
+            <input type="hidden" name="action" value="scrape" />
+            <Input
+              type="text"
+              name="url"
+              placeholder="Enter website url, e.g. https://example.com"
+              multiple
+              className="flex-1"
+            />
+            <Button type="submit" className="flex-none">
+              Scrape website
+            </Button>
+          </fieldset>
         </Form>
 
         <Form
           method="post"
           encType="multipart/form-data"
-          className="flex flex-row justify-between items-center gap-4"
+          className="flex flex-col gap-4"
         >
-          <input type="hidden" name="action" value="upload" />
-          <Input type="file" name="file" multiple className="flex-1" />
-          <Button type="submit" className="flex-none">
-            + Upload Document
-          </Button>
+          <fieldset
+            disabled={isSubmitting}
+            className="flex flex-row justify-between items-center gap-4"
+          >
+            <input type="hidden" name="action" value="upload" />
+            <Input type="file" name="file" multiple className="flex-1" />
+            <Button type="submit" className="flex-none">
+              + Upload Document
+            </Button>
+          </fieldset>
+
+          <div className="flex flex-row gap-1 flex-wrap">
+            <span className="text-sm font-normal text-gray-700">
+              Supported file types:
+            </span>
+            {SUPPORTED_FILE_TYPES.map((fileType, index) => (
+              <Badge key={index} variant="secondary">
+                {fileType}
+              </Badge>
+            ))}
+          </div>
         </Form>
       </div>
 
