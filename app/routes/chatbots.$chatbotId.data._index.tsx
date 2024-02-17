@@ -13,7 +13,6 @@ import { Input } from "~/components/ui/input";
 import {
   createDocuments,
   getDocumentsByChatbotId,
-  processFiles,
 } from "~/models/document.server";
 import seed from "~/utils/seed";
 
