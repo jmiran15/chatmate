@@ -43,8 +43,58 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       );
     }
     case "upload": {
+      const newFormData = new FormData();
+
+      // Get all file entries from the original formData
       const files = formData.getAll("file");
-      const fileContents = await processFiles({ files });
+
+      // Append each file to the new FormData instance
+      files.forEach((file) => {
+        newFormData.append("files", file);
+      });
+
+      const response = await fetch(
+        "https://api.unstructured.io/general/v0/general",
+        {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
+          },
+          body: newFormData,
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to partition file with error ${
+            response.status
+          } and message ${await response.text()}`,
+        );
+      }
+
+      const elements = await response.json();
+      if (!Array.isArray(elements)) {
+        throw new Error(
+          `Expected partitioning request to return an array, but got ${elements}`,
+        );
+      }
+
+      const fileContents: { name: string; content: string }[] =
+        elements[0].constructor === Array
+          ? elements.map((fileElements) => {
+              return {
+                name: fileElements[0].metadata.filename,
+                content: fileElements.map((element) => element.text).join("\n"),
+              };
+            })
+          : [
+              {
+                name: elements[0].metadata.filename,
+                content: elements.map((element) => element.text).join("\n"),
+              },
+            ];
+
       const chatbotId = params.chatbotId as string;
 
       const documents: Pick<Document, "name" | "content" | "chatbotId">[] =
@@ -53,7 +103,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           chatbotId,
         }));
 
-      // this creates the embeddings as well
       await createDocuments({ documents }); // these are the documents that will be shown in the UI
 
       return json({ fileContents });
