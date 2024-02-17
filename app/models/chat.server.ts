@@ -169,3 +169,11 @@ export function updateChatName({
     },
   });
 }
+
+export function getChatById({ chatId }: { chatId: Chat["id"] }) {
+  return prisma.chat.findUnique({
+    where: {
+      id: chatId,
+    },
+  });
+}

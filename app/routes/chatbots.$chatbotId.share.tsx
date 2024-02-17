@@ -10,8 +10,7 @@ export default function Share() {
         tag to your html code
       </p>
       <CodeBlock
-        code={`
-        <iframe
+        code={`<iframe
         id="chatmate-chatbot-widget-iframe"
         style={{
           position: "fixed",
@@ -22,11 +21,8 @@ export default function Share() {
           width: "80px",
         }}
         src="https://chatmate.fly.dev/${chatbotId}/widget"
-        title="chatbot-preview"
-        />
-        <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
-        `}
-        language="html"
+        title="chatbot-preview"/>
+        <script src="https://chatmate.fly.dev/iframeResizer.js"></script>`}
       />
     </div>
   );

@@ -1,74 +1,40 @@
 import { useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs2015 } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Copy, CheckCircle } from "lucide-react";
+import { Clipboard, ClipboardCheck } from "lucide-react";
+import { Button } from "./ui/button";
+import nl2br from "react-newline-to-break";
+import { useToast } from "./ui/use-toast";
 
-export default function CodeBlock({
-  code,
-  language,
-}: {
-  code: string;
-  language: string;
-}) {
+export default function CodeBlock({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);
-  const notify = () => {
-    toast(<ToastDisplay className="bg-neutral-700 m-2" />);
-    copy();
-  };
+  const { toast } = useToast();
 
-  function ToastDisplay() {
-    return (
-      <div className="m-2">
-        <p className="text-md">Copied to clipboard!</p>
-      </div>
-    );
-  }
   const copy = () => {
     setCopied(true);
+    toast({
+      title: "Success",
+      description: "Code copied to clipboard",
+    });
     setTimeout(() => {
       setCopied(false);
     }, 5000);
   };
 
   return (
-    <div className="relative">
-      <button className="absolute top-0 right-0 p-2">
-        <CopyToClipboard text={code} onCopy={() => notify()}>
+    <div className="flex flex-col items-start gap-2">
+      <div className="bg-gray-800 p-4 rounded-md text-sm text-white">
+        {nl2br(code)}
+      </div>
+      <CopyToClipboard text={code} onCopy={copy}>
+        <Button variant="secondary" className="flex flex-row gap-2">
+          Copy code
           {copied ? (
-            <CheckCircle className="h-6 w-6 text-green-300" />
+            <ClipboardCheck className="h-4 w-4" />
           ) : (
-            <Copy className="h-6 w-6" color="#fff" />
+            <Clipboard className="h-4 w-4" />
           )}
-        </CopyToClipboard>
-      </button>
-      <SyntaxHighlighter
-        className="rounded-md"
-        language={language}
-        style={vs2015}
-        wrapLines={true}
-        wrapLongLines={true}
-        showLineNumbers={false}
-        showInlineLineNumbers={false}
-      >
-        {code}
-      </SyntaxHighlighter>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick={false}
-        closeButton={false}
-        limit={1}
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable={false}
-        pauseOnHover={false}
-        theme="dark"
-      />
+        </Button>
+      </CopyToClipboard>
     </div>
   );
 }

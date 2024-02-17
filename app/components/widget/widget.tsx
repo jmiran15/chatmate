@@ -23,6 +23,8 @@ export default function Widget({
   const [showIntroMessages, setShowIntroMessages] = useState(true);
   const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
 
+  console.log("viewportSize", viewportSize);
+
   useEffect(() => {
     // request viewport size from parent
     window.parent.postMessage({ type: "requestViewportSize" }, "*");
