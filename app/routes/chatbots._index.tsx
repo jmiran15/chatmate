@@ -1,5 +1,5 @@
 // // this page /chatbots shows a list of your chatbots and has a button that takes you to /chatbots/new where you can create a new chatbot
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import ChatbotCard from "~/components/chatbot-card";
 import { buttonVariants } from "~/components/ui/button";
@@ -13,6 +13,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const chatbots = await getChatbotsByUserId({ userId });
   return json({ chatbots });
 };
+
+export const meta: MetaFunction = () => [{ title: "Chatbots" }];
 
 export default function MyChatbots() {
   const data = useLoaderData<typeof loader>();

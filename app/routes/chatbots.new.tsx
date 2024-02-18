@@ -2,13 +2,19 @@
 // maybe we should make a /chatbots layout route
 // main use I can think of now is auth protection
 
-import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  MetaFunction,
+  json,
+  redirect,
+} from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { SyntheticEvent, useEffect, useRef } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
+import * as gtag from "~/utils/gtags.client";
 
 import { createChatbot } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
@@ -35,6 +41,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   return redirect(`/chatbots/${chatbot.id}/chat`);
 };
 
+export const meta: MetaFunction = () => [{ title: "New chatbot" }];
+
 export default function NewChatbot() {
   const actionData = useActionData<typeof action>();
   const nameRef = useRef(null);
@@ -48,8 +56,22 @@ export default function NewChatbot() {
     }
   }, [actionData]);
 
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+    const target = e.target as typeof e.target & {
+      name: { value: string };
+      description: { value: string };
+    };
+
+    gtag.event({
+      action: "new_chatbot",
+      category: "chatbots",
+      label: target.name.value,
+    });
+  };
+
   return (
     <Form
+      onSubmit={handleSubmit}
       method="post"
       className="flex flex-col gap-8 w-full py-12 px-8 md:px-20 xl:px-96"
     >

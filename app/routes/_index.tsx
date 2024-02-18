@@ -7,7 +7,7 @@ import { FAQ } from "~/components/landing-page/faq";
 import { Cta } from "~/components/landing-page/cta";
 import { Navbar } from "~/components/navbar";
 
-export const meta: MetaFunction = () => [{ title: "Chatmate" }];
+export const meta: MetaFunction = () => [{ title: "Landing page" }];
 
 export default function Index() {
   return (

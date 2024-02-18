@@ -6,6 +6,7 @@ import type {
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+import * as gtag from "~/utils/gtags.client";
 
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -79,10 +80,16 @@ export default function LoginPage() {
     }
   }, [actionData]);
 
+  const handleSubmit = () => {
+    gtag.event({
+      action: "login",
+    });
+  };
+
   return (
     <div className="flex h-full flex-col justify-center ">
       <div className="mx-auto w-full max-w-md px-8">
-        <Form method="post" className="space-y-6">
+        <Form onSubmit={handleSubmit} method="post" className="space-y-6">
           <div>
             <label
               htmlFor="email"
