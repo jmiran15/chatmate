@@ -22,7 +22,7 @@ export default function CodeBlock({ code }: { code: string }) {
 
   return (
     <div className="flex flex-col items-start gap-2">
-      <div className="bg-gray-800 p-4 rounded-md text-sm text-white">
+      <div className="bg-slate-800 p-4 rounded-md text-sm text-white">
         {nl2br(code)}
       </div>
       <CopyToClipboard text={code} onCopy={copy}>

@@ -149,7 +149,6 @@ export default function Data() {
   const navigation = useNavigation();
   const isSubmitting =
     navigation.formAction === `/chatbots/${chatbotId}/data?index`;
-  console.log("isSubmitting", navigation.formAction);
 
   return (
     <div className="flex flex-col gap-8 w-full px-24 py-12">

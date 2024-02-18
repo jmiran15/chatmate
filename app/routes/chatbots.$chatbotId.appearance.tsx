@@ -48,19 +48,19 @@ export default function Appearance() {
       {/* bug with refreshing */}
       <div className="col-span-2">
         <iframe
-          key={refresh}
           id="chatmate-chatbot-widget-iframe"
           style={{
             position: "fixed",
             bottom: "8px",
             right: "8px",
-            zIndex: 50,
-            height: "80px",
             width: "80px",
+            height: "80px",
+            border: "none",
+            zIndex: 1000,
           }}
           src={`https://chatmate.fly.dev/${chatbotId}/widget`}
           title="chatbot-preview"
-        />
+        ></iframe>
         <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
       </div>
     </div>

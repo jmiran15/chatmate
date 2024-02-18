@@ -15,6 +15,8 @@ function sendSizeToIframe() {
   }
 }
 
+window.addEventListener("load", sendSizeToIframe);
+
 window.addEventListener("resize", sendSizeToIframe);
 
 window.addEventListener(

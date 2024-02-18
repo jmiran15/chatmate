@@ -11,18 +11,19 @@ export default function Share() {
       </p>
       <CodeBlock
         code={`<iframe
-        id="chatmate-chatbot-widget-iframe"
-        style={{
-          position: "fixed",
-          bottom: "8px",
-          right: "8px",
-          zIndex: 50,
-          height: "80px",
-          width: "80px",
-        }}
-        src="https://chatmate.fly.dev/${chatbotId}/widget"
-        title="chatbot-preview"/>
-        <script src="https://chatmate.fly.dev/iframeResizer.js"></script>`}
+id="chatmate-chatbot-widget-iframe"
+style="
+position: fixed;
+bottom: 8px;
+right: 8px;
+width: 80px;
+height: 80px;
+border: none;
+z-index: 1000;"
+src={https://chatmate.fly.dev/${chatbotId}/widget}
+title="chatbot-preview"
+></iframe>
+<script src="https://chatmate.fly.dev/iframeResizer.js"></script>`}
       />
     </div>
   );

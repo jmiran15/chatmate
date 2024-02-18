@@ -20,15 +20,15 @@ export default function Index() {
             position: "fixed",
             bottom: "8px",
             right: "8px",
-            zIndex: 50,
-            height: "80px",
             width: "80px",
+            height: "80px",
+            border: "none",
+            zIndex: 1000,
           }}
           src="https://chatmate.fly.dev/e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23/widget"
           title="chatbot-preview"
-        />
+        ></iframe>
         <script src="https://chatmate.fly.dev/iframeResizer.js"></script>
-
         <Hero />
         <HowItWorks />
         <Features />
