@@ -48,6 +48,7 @@ export default function Appearance() {
       {/* bug with refreshing */}
       <div className="col-span-2">
         <iframe
+          key={refresh}
           id="chatmate-chatbot-widget-iframe"
           style={{
             position: "fixed",
