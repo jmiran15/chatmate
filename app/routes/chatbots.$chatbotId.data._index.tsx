@@ -59,7 +59,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       });
 
       const response = await fetch(
-        "https://api.unstructured.io/general/v0/general",
+        "https://chatmatedev-0tyi7426.api.unstructuredapp.io/general/v0/general",
         {
           method: "POST",
           headers: {
