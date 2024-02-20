@@ -1,6 +1,5 @@
 import { Embedding } from "@prisma/client";
 import OpenAI from "openai";
-// import { OpenAIApi, Configuration } from "openai-edge";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { system_prompt } from "./prompts";
@@ -23,10 +22,6 @@ export async function getEmbeddings({ input }: { input: string }) {
     throw new Error(`Error calling OpenAI embedding API: ${e}`);
   }
 }
-
-// this should take care of all the RAG stuff as well
-// should just pass in all the model info, and messages, i.e. the chat api request params
-// testing without specific chatbot for now
 
 export async function chat({
   chatbotId,

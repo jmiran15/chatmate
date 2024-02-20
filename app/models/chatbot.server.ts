@@ -49,3 +49,8 @@ export function deleteChatbotById({ id }: { id: Chatbot["id"] }) {
     where: { id },
   });
 }
+
+// get all chatbots
+export function getAllChatbots() {
+  return prisma.chatbot.findMany();
+}

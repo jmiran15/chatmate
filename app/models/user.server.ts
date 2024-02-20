@@ -63,3 +63,8 @@ export async function verifyLogin(
 
   return userWithoutPassword;
 }
+
+// get all users
+export async function getAllUsers() {
+  return prisma.user.findMany();
+}
