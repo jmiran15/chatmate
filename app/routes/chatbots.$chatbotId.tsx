@@ -25,7 +25,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const userId = await requireUserId(request);
   const chatbot = await getChatbotById({ id: chatbotId });
   if (
-    chatbot?.userId !== userId ||
+    chatbot?.userId !== userId &&
     userId !== "47ea213c-227a-42f4-9a91-b1ac4580330f"
   ) {
     return redirect("/chatbots");
