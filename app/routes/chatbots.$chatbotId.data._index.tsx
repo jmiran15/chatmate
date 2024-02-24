@@ -36,7 +36,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "scrape": {
       // scrape and save documents and embeddings
       const url = formData.get("url") as string;
-      return await seed(url, 5, params.chatbotId as string);
+      return await seed(url, 1, params.chatbotId as string);
     }
     case "upload": {
       const newFormData = new FormData();
