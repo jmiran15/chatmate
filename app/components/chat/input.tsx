@@ -5,7 +5,7 @@ import { Send } from "lucide-react";
 import { CardFooter } from "../ui/card";
 import { Chatbot } from "@prisma/client";
 import tinycolor from "tinycolor2";
-import ExampleQueries from "./example-queries";
+// import ExampleQueries from "./example-queries";
 
 export default function ChatInput({
   messages,
@@ -44,12 +44,12 @@ export default function ChatInput({
         className="flex flex-col w-full gap-2"
       >
         <input type="hidden" name="messages" value={JSON.stringify(messages)} />
-        <ExampleQueries
+        {/* <ExampleQueries
           chatbot={chatbot}
           fetcher={fetcher}
           inputRef={inputRef}
           formRef={formRef}
-        />
+        /> */}
         <div className="flex flex-row items-center w-full space-x-2">
           <input
             ref={inputRef}
