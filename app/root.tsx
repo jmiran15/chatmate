@@ -16,6 +16,8 @@ import {
   useLocation,
 } from "@remix-run/react";
 import * as gtag from "~/utils/gtags.client";
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 
 import stylesheet from "~/tailwind.css";
 import { Toaster } from "./components/ui/toaster";
@@ -97,11 +99,13 @@ export default function App() {
             />
           </>
         )}
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-        <Toaster />
+        <Theme>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+          <Toaster />
+        </Theme>
       </body>
     </html>
   );
