@@ -142,7 +142,7 @@ export default function Data() {
     navigation.formAction === `/chatbots/${chatbotId}/data?index`;
 
   return (
-    <div className="flex flex-col gap-8 w-full px-24 py-12 overflow-y-auto h-full">
+    <div className="flex flex-col p-8 gap-8 w-full md:px-24 md:py-12 overflow-y-auto h-full">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold">Data</h1>
         <h1 className="font-normal text-gray-700 dark:text-gray-400">

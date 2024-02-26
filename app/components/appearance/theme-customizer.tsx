@@ -6,34 +6,31 @@ import { Button } from "../ui/button";
 
 export default function Customizer({
   name,
-  bio,
+  // bio,
   introMessages,
-  starterQuestions,
+  // starterQuestions,
   color,
-  setRefresh,
 }: {
   name: string;
-  bio: string;
+  // bio: string;
   introMessages: string[];
-  starterQuestions: string[];
+  // starterQuestions: string[];
   color: string;
-  setRefresh: (value: number) => void;
 }) {
   const intro = introMessages.join("\n");
-  const starter = starterQuestions.join("\n");
+  // const starter = starterQuestions.join("\n");
   const fetcher = useFetcher();
 
   function handleSubmit(event) {
     fetcher.submit(event.currentTarget.form, {
       method: "POST",
     });
-    setRefresh((prev) => prev + 1);
   }
 
   return (
     <fetcher.Form
       method="POST"
-      className="flex flex-col space-y-8 col-span-2 h-full overflow-y-auto border-r border-gray-200 p-8"
+      className="flex flex-col space-y-8 lg:col-span-2 lg:h-full lg:overflow-y-auto lg:border-r border-b border-gray-200 p-8"
     >
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="name">Chatbot name</Label>
@@ -48,7 +45,7 @@ export default function Customizer({
           defaultValue={name}
         />
       </div>
-
+      {/* 
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="bio">Chatbot bio</Label>
         <p className="text-sm text-muted-foreground">
@@ -60,7 +57,7 @@ export default function Customizer({
           placeholder="Enter your chatbot bio"
           defaultValue={bio}
         />
-      </div>
+      </div> */}
 
       <div className="flex flex-col gap-1.5">
         <Label>Theme color</Label>
@@ -85,7 +82,7 @@ export default function Customizer({
         </p>
       </div>
 
-      <div className="flex flex-col gap-1.5">
+      {/* <div className="flex flex-col gap-1.5">
         <Label htmlFor="starter">Starter queries</Label>
         <Textarea
           id="starter"
@@ -97,7 +94,7 @@ export default function Customizer({
         <p className="text-sm text-muted-foreground">
           These questions will be shown when the chatbot is first opened.
         </p>
-      </div>
+      </div> */}
 
       <Button type="submit" className="self-start" onClick={handleSubmit}>
         Update appearance
