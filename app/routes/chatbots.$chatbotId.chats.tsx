@@ -6,7 +6,7 @@ import { requireUserId } from "~/session.server";
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
-  const userId = await requireUserId(request);
+  await requireUserId(request);
 
   if (!chatbotId) {
     throw new Error("chatbotId is required");

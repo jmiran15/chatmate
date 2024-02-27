@@ -1,6 +1,7 @@
 import { Link, useParams } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ChatsCard({ chat }: { chat: any }) {
   const messages = chat.messages;
   const numberOfUserMessages = messages.filter(
