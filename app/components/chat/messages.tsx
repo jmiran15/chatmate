@@ -15,7 +15,7 @@ export default function Messages({
   chatbot: Chatbot;
 }) {
   return (
-    <div className="space-y-4 h-full overflow-y-auto p-6 pt-0">
+    <div className="space-y-4 h-full lg:overflow-y-auto p-6 w-full">
       {messages.length === 0 ? (
         <p className="">No messages yet</p>
       ) : (

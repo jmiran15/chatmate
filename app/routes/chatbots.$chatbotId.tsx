@@ -14,6 +14,7 @@ import {
   Brush,
   Share,
   Settings,
+  MessagesSquare,
 } from "lucide-react";
 
 import { Nav } from "~/components/nav";
@@ -58,11 +59,11 @@ export default function ChatbotLayout() {
             path: "share",
             icon: Share,
           },
-          // {
-          //   title: "Chats",
-          //   path: "chats",
-          //   icon: MessagesSquare,
-          // },
+          {
+            title: "Chats",
+            path: "chats",
+            icon: MessagesSquare,
+          },
           {
             title: "Settings",
             path: "settings",
