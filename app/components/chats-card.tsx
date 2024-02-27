@@ -12,8 +12,6 @@ export default function ChatsCard({ chat }: { chat: any }) {
 
   const selected = chatsId === chat.id;
 
-  console.log("selected", selected);
-
   return (
     <Link
       to={`${chat.id}`}
@@ -33,7 +31,7 @@ export default function ChatsCard({ chat }: { chat: any }) {
         </div>
       </div>
       <div className="text-xs text-muted-foreground">
-        {numberOfUserMessages > 1 ? (
+        {numberOfUserMessages > 1 && chat.aiInsights ? (
           <ol className="list-disc px-3">
             {chat.aiInsights.split("\n").map((insight: string) => (
               <li key={insight}>{insight}</li>
