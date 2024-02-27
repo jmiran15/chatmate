@@ -1,8 +1,6 @@
-import { Document } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
   Form,
-  useActionData,
   useLoaderData,
   useNavigation,
   useParams,
@@ -15,13 +13,9 @@ import DocumentCard from "~/components/document-card";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import {
-  createDocuments,
-  getDocumentsByChatbotId,
-} from "~/models/document.server";
+import { getDocumentsByChatbotId } from "~/models/document.server";
 import { Crawler, Page } from "~/utils/crawler";
 import { getEmbeddings, openai } from "~/utils/openai";
-import seed from "~/utils/seed";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   // fetch documents from database by chatbotid
@@ -343,8 +337,6 @@ export default function Data() {
   const navigation = useNavigation();
   const isSubmitting =
     navigation.formAction === `/chatbots/${chatbotId}/data?index`;
-
-  const actionData = useActionData<typeof action>();
 
   return (
     <div className="flex flex-col p-8 gap-8 w-full md:px-24 md:py-12 overflow-y-auto h-full">
