@@ -4,7 +4,7 @@ import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { system_prompt } from "./prompts";
 
-const openai = new OpenAI({
+export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
