@@ -15,6 +15,8 @@
   const primaryColor = chatbot.color || "#FF5733"; // Default color if not set
   const publicName = chatbot.publicName || "Your Chatbot"; // Default name if not set
 
+  let chatId = null;
+
   document.head.insertAdjacentHTML(
     "beforeend",
     '<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.16/tailwind.min.css" rel="stylesheet">',
@@ -168,6 +170,35 @@
     chatMessages.innerHTML += createLoadingMessage();
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
+    const chatFormData = new FormData();
+    chatFormData.append(
+      "message",
+      JSON.stringify({ role: "user", content: message }),
+    );
+    if (!chatId) {
+      fetch(`/api/createchat/${chatbotId}`, {
+        method: "POST",
+        body: chatFormData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          chatId = data.chatId;
+        })
+        .catch((error) => {
+          console.log(`Error saving chat to the server: ${error}`);
+        });
+    } else {
+      fetch(`/api/updatechat/${chatId}`, {
+        method: "POST",
+        body: chatFormData,
+      })
+        .then((response) => response.json())
+        .then((data) => data)
+        .catch((error) => {
+          console.log(`Error adding new message to chat: ${chatId}: ${error}`);
+        });
+    }
+
     chatInput.value = "";
 
     let formData = new FormData();
@@ -190,6 +221,28 @@
           content: assistantContent,
         });
         reply(assistantContent);
+
+        // save the message to the chat
+        const assistantFormData = new FormData();
+        assistantFormData.append(
+          "message",
+          JSON.stringify({
+            role: "assistant",
+            content: assistantContent,
+          }),
+        );
+
+        fetch(`/api/updatechat/${chatId}`, {
+          method: "POST",
+          body: assistantFormData,
+        })
+          .then((response) => response.json())
+          .then((data) => data)
+          .catch((error) => {
+            console.log(
+              `Error adding new message to chat: ${chatId}: ${error}`,
+            );
+          });
       })
       .catch((error) => {
         const loadingMessage = document.getElementById("loading-assistant");
