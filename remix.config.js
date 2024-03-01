@@ -29,10 +29,5 @@ module.exports = {
     /^trim-lines*/,
     /^web-namespaces*/,
     /^longest-streak*/,
-    /^mermaid*/,
-    /^d3*/,
-    /^internmap*/,
-    /^khroma*/,
-    /^lodash-es*/,
   ],
 };
