@@ -154,7 +154,7 @@ function _MarkDownContent(props: { content: string }) {
 
 export const MarkdownContent = React.memo(_MarkDownContent);
 
-export function Markdown(
+export default function Markdown(
   props: {
     content: string;
     loading?: boolean;
@@ -165,6 +165,7 @@ export function Markdown(
 ) {
   const mdRef = useRef<HTMLDivElement>(null);
 
+  console.log("loading", props.loading);
   return (
     <div
       className="markdown-body"

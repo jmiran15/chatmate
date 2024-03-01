@@ -1,10 +1,10 @@
 import { useFetcher } from "@remix-run/react";
 import ChatInput from "./chat-input";
 import { Chatbot, Message } from "@prisma/client";
-import { Markdown } from "../ui/markdown";
-import { ScrollArea } from "../ui/scroll-area";
-import { useRef } from "react";
 
+import { ScrollArea } from "../ui/scroll-area";
+import { Suspense, lazy, useMemo, useRef, useState } from "react";
+import { ChatAction } from "./chat-action";
 import {
   HoverCard,
   HoverCardContent,
@@ -12,11 +12,17 @@ import {
 } from "~/components/ui/hover-card";
 import { useToast } from "../ui/use-toast";
 import { cn } from "~/lib/utils";
-import { ChatAction } from "./chat-action";
 import { copyToClipboard } from "~/utils/clipboard";
 import { Separator } from "../ui/separator";
 import { Clipboard, Eraser } from "lucide-react";
 import { format } from "date-fns";
+import { useScrollToBottom } from "~/hooks/useScroll";
+import { useMobileScreen } from "~/utils/mobile";
+import { Loading } from "../ui/loading";
+
+const Markdown = lazy(() => import("../ui/markdown"));
+
+export const CHAT_PAGE_SIZE = 15;
 
 export default function Chat({
   messages,
@@ -27,6 +33,8 @@ export default function Chat({
 }) {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
+  const [userInput, setUserInput] = useState("");
+  const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
 
   const optimisticMessages = isSubmitting
     ? [
@@ -38,7 +46,7 @@ export default function Chat({
         },
         {
           role: "assistant",
-          content: "Typing...",
+          content: "Loading...",
           createdAt: new Date().toISOString(),
           last: true, // need to change this to "streaming"
         },
@@ -48,14 +56,65 @@ export default function Chat({
   const { toast } = useToast();
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  const [msgRenderIndex, _setMsgRenderIndex] = useState(
+    Math.max(0, optimisticMessages.length - CHAT_PAGE_SIZE),
+  );
+
+  function setMsgRenderIndex(newIndex: number) {
+    newIndex = Math.min(optimisticMessages.length - CHAT_PAGE_SIZE, newIndex);
+    newIndex = Math.max(0, newIndex);
+    _setMsgRenderIndex(newIndex);
+  }
+
+  const msgs = useMemo(() => {
+    const endRenderIndex = Math.min(
+      msgRenderIndex + 3 * CHAT_PAGE_SIZE,
+      optimisticMessages.length,
+    );
+    return optimisticMessages.slice(msgRenderIndex, endRenderIndex);
+  }, [msgRenderIndex, optimisticMessages]);
+
+  const onChatBodyScroll = (e: HTMLElement) => {
+    const bottomHeight = e.scrollTop + e.clientHeight;
+    const edgeThreshold = e.clientHeight;
+
+    const isTouchTopEdge = e.scrollTop <= edgeThreshold;
+    const isTouchBottomEdge = bottomHeight >= e.scrollHeight - edgeThreshold;
+    const isHitBottom = bottomHeight >= e.scrollHeight - 10;
+
+    const prevPageMsgIndex = msgRenderIndex - CHAT_PAGE_SIZE;
+    const nextPageMsgIndex = msgRenderIndex + CHAT_PAGE_SIZE;
+
+    if (isTouchTopEdge && !isTouchBottomEdge) {
+      setMsgRenderIndex(prevPageMsgIndex);
+    } else if (isTouchBottomEdge) {
+      setMsgRenderIndex(nextPageMsgIndex);
+    }
+
+    setAutoScroll(isHitBottom);
+  };
+
+  const isMobileScreen = useMobileScreen();
+
+  function scrollToBottom() {
+    setMsgRenderIndex(optimisticMessages.length - CHAT_PAGE_SIZE);
+    scrollDomToBottom();
+  }
+
   return (
     <div className="flex flex-col relative h-full">
       <ScrollArea
+        ref={scrollRef}
         className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-5"
         onMouseDown={() => inputRef.current?.blur()}
+        onScroll={(e) => onChatBodyScroll(e.currentTarget)}
+        onTouchStart={() => {
+          inputRef.current?.blur();
+          setAutoScroll(false);
+        }}
       >
         <div className="space-y-5">
-          {optimisticMessages.map((message, i) => {
+          {msgs.map((message, i) => {
             const isUser = message.role === "user";
             const showActions = i > 0 && !(message.content.length === 0);
 
@@ -84,14 +143,18 @@ export default function Chat({
                               : "bg-muted",
                           )}
                         >
-                          <Markdown
-                            content={message.content}
-                            loading={
-                              isSubmitting &&
-                              !isUser &&
-                              message.last !== undefined
-                            }
-                          />
+                          <Suspense fallback={<Loading />}>
+                            <Markdown
+                              content={message.content}
+                              loading={isSubmitting && !isUser && message.last}
+                              onDoubleClickCapture={() => {
+                                if (!isMobileScreen) return;
+                                setUserInput(message.content);
+                              }}
+                              parentRef={scrollRef}
+                              defaultShow={i >= msgs.length - 6}
+                            />
+                          </Suspense>
                         </div>
                         <div className="text-xs text-muted-foreground opacity-80 whitespace-nowrap text-right w-full box-border pointer-events-none z-[1]">
                           {format(
@@ -141,6 +204,8 @@ export default function Chat({
           />
         </div>
         <ChatInput
+          userInput={userInput}
+          setUserInput={setUserInput}
           inputRef={inputRef}
           messages={messages.map((m) => ({
             role: m.role,
@@ -148,7 +213,8 @@ export default function Chat({
           }))}
           fetcher={fetcher}
           chatbot={chatbot}
-          scrollToBottom={() => {}}
+          scrollToBottom={scrollToBottom}
+          setAutoScroll={setAutoScroll}
         />
       </div>
     </div>
