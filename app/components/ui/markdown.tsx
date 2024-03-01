@@ -1,71 +1,73 @@
-import "katex/dist/katex.min.css";
-import React, { RefObject, useRef } from "react";
-import ReactMarkdown from "react-markdown";
-import RehypeHighlight from "rehype-highlight";
-import RehypeKatex from "rehype-katex";
-import RemarkBreaks from "remark-breaks";
-import RemarkGfm from "remark-gfm";
-import RemarkMath from "remark-math";
-import { copyToClipboard } from "~/utils/clipboard";
-import { useToast } from "~/components/ui/use-toast";
-import { Loading } from "~/components/ui/loading";
+// import "katex/dist/katex.min.css";
+// import React, { RefObject, useRef } from "react";
+// import ReactMarkdown from "react-markdown";
+// import RehypeHighlight from "rehype-highlight";
+// import RehypeKatex from "rehype-katex";
+// import RemarkBreaks from "remark-breaks";
+// import RemarkGfm from "remark-gfm";
+// import RemarkMath from "remark-math";
+// import { copyToClipboard } from "~/utils/clipboard";
+// import { useToast } from "~/components/ui/use-toast";
+// import { Loading } from "~/components/ui/loading";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function PreCode(props: { children: any }) {
-  const { toast } = useToast();
-  const ref = useRef<HTMLPreElement>(null);
+import { RefObject, useRef } from "react";
 
-  return (
-    <>
-      {/* eslint-disable-next-line react/jsx-no-leaked-render */}
-      <pre ref={ref} className="group relative">
-        <span
-          className="copy-code-button group-hover:translate-x-0 group-hover:opacity-100 group-hover:pointer-events-auto"
-          onClick={() => {
-            if (ref.current) {
-              const code = ref.current.innerText;
-              copyToClipboard(code, toast);
-            }
-          }}
-        ></span>
-        {props.children}
-      </pre>
-    </>
-  );
-}
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// export function PreCode(props: { children: any }) {
+//   const { toast } = useToast();
+//   const ref = useRef<HTMLPreElement>(null);
 
-function _MarkDownContent(props: { content: string }) {
-  return (
-    <ReactMarkdown
-      remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
-      rehypePlugins={[
-        RehypeKatex,
-        [
-          RehypeHighlight,
-          {
-            detect: false,
-            ignoreMissing: true,
-          },
-        ],
-      ]}
-      components={{
-        pre: PreCode,
-        p: (pProps) => <p {...pProps} dir="auto" />,
-        a: (aProps) => {
-          const href = aProps.href || "";
-          const isInternal = /^\/#/i.test(href);
-          const target = isInternal ? "_self" : aProps.target ?? "_blank";
-          // eslint-disable-next-line jsx-a11y/anchor-has-content
-          return <a {...aProps} target={target} />;
-        },
-      }}
-    >
-      {props.content}
-    </ReactMarkdown>
-  );
-}
+//   return (
+//     <>
+//       {/* eslint-disable-next-line react/jsx-no-leaked-render */}
+//       <pre ref={ref} className="group relative">
+//         <span
+//           className="copy-code-button group-hover:translate-x-0 group-hover:opacity-100 group-hover:pointer-events-auto"
+//           onClick={() => {
+//             if (ref.current) {
+//               const code = ref.current.innerText;
+//               copyToClipboard(code, toast);
+//             }
+//           }}
+//         ></span>
+//         {props.children}
+//       </pre>
+//     </>
+//   );
+// }
 
-export const MarkdownContent = React.memo(_MarkDownContent);
+// function _MarkDownContent(props: { content: string }) {
+//   return (
+//     <ReactMarkdown
+//       remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
+//       rehypePlugins={[
+//         RehypeKatex,
+//         [
+//           RehypeHighlight,
+//           {
+//             detect: false,
+//             ignoreMissing: true,
+//           },
+//         ],
+//       ]}
+//       components={{
+//         pre: PreCode,
+//         p: (pProps) => <p {...pProps} dir="auto" />,
+//         a: (aProps) => {
+//           const href = aProps.href || "";
+//           const isInternal = /^\/#/i.test(href);
+//           const target = isInternal ? "_self" : aProps.target ?? "_blank";
+//           // eslint-disable-next-line jsx-a11y/anchor-has-content
+//           return <a {...aProps} target={target} />;
+//         },
+//       }}
+//     >
+//       {props.content}
+//     </ReactMarkdown>
+//   );
+// }
+
+// export const MarkdownContent = React.memo(_MarkDownContent);
 
 export default function Markdown(
   props: {
@@ -89,11 +91,12 @@ export default function Markdown(
       onContextMenu={props.onContextMenu}
       onDoubleClickCapture={props.onDoubleClickCapture}
     >
-      {props.loading ? (
+      {/* {props.loading ? (
         <Loading />
       ) : (
         <MarkdownContent content={props.content} />
-      )}
+      )} */}
+      {props.content}
     </div>
   );
 }
