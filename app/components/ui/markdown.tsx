@@ -1,6 +1,6 @@
 import "katex/dist/katex.min.css";
 import mermaid from "mermaid";
-import { RefObject, useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import RehypeHighlight from "rehype-highlight";
 import RehypeKatex from "rehype-katex";
@@ -18,7 +18,6 @@ import {
 } from "~/components/ui/dialog";
 import { Separator } from "~/components/ui/separator";
 import { useToast } from "~/components/ui/use-toast";
-import React from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { Loading } from "~/components/ui/loading";
 
@@ -82,6 +81,7 @@ export function Mermaid(props: { code: string }) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function PreCode(props: { children: any }) {
   const { toast } = useToast();
   const ref = useRef<HTMLPreElement>(null);
@@ -103,6 +103,7 @@ export function PreCode(props: { children: any }) {
 
   return (
     <>
+      {/* eslint-disable-next-line react/jsx-no-leaked-render */}
       {mermaidCode.length > 0 && (
         <Mermaid code={mermaidCode} key={mermaidCode} />
       )}
@@ -143,6 +144,7 @@ function _MarkDownContent(props: { content: string }) {
           const href = aProps.href || "";
           const isInternal = /^\/#/i.test(href);
           const target = isInternal ? "_self" : aProps.target ?? "_blank";
+          // eslint-disable-next-line jsx-a11y/anchor-has-content
           return <a {...aProps} target={target} />;
         },
       }}

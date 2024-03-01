@@ -14,7 +14,7 @@ import { useToast } from "../ui/use-toast";
 import { cn } from "~/lib/utils";
 import { copyToClipboard } from "~/utils/clipboard";
 import { Separator } from "../ui/separator";
-import { Clipboard, Eraser } from "lucide-react";
+import { Clipboard } from "lucide-react";
 import { format } from "date-fns";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { useMobileScreen } from "~/utils/mobile";
@@ -146,6 +146,7 @@ export default function Chat({
                           <Suspense fallback={<Loading />}>
                             <Markdown
                               content={message.content}
+                              // eslint-disable-next-line react/jsx-no-leaked-render
                               loading={isSubmitting && !isUser && message.last}
                               onDoubleClickCapture={() => {
                                 if (!isMobileScreen) return;
@@ -195,13 +196,13 @@ export default function Chat({
       <Separator />
       <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">
         <div className="flex justify-between items-center">
-          <ChatAction
+          {/* <ChatAction
             text={"Clear"}
             icon={<Eraser className="w-4 h-4" />}
             onClick={() => {}}
             showTitle
             buttonVariant="outline"
-          />
+          /> */}
         </div>
         <ChatInput
           userInput={userInput}

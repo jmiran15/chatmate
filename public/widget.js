@@ -7,9 +7,12 @@
 
   let chatbotId = scriptTag.getAttribute("data-chatbotid");
 
-  const chatbotResponse = await fetch(`/api/chatbot/${chatbotId}`, {
-    method: "GET",
-  });
+  const chatbotResponse = await fetch(
+    `https://chatmate.fly.dev/api/chatbot/${chatbotId}`,
+    {
+      method: "GET",
+    },
+  );
   const chatbot = await chatbotResponse.json();
 
   const primaryColor = chatbot.color || "#FF5733"; // Default color if not set
@@ -176,7 +179,7 @@
       JSON.stringify({ role: "user", content: message }),
     );
     if (!chatId) {
-      fetch(`/api/createchat/${chatbotId}`, {
+      fetch(`https://chatmate.fly.dev/api/createchat/${chatbotId}`, {
         method: "POST",
         body: chatFormData,
       })
@@ -188,7 +191,7 @@
           console.log(`Error saving chat to the server: ${error}`);
         });
     } else {
-      fetch(`/api/updatechat/${chatId}`, {
+      fetch(`https://chatmate.fly.dev/api/updatechat/${chatId}`, {
         method: "POST",
         body: chatFormData,
       })
@@ -204,7 +207,7 @@
     let formData = new FormData();
     formData.append("messages", JSON.stringify(messages));
 
-    fetch(`/api/chat/${chatbotId}`, {
+    fetch(`https://chatmate.fly.dev/api/chat/${chatbotId}`, {
       method: "POST",
       body: formData,
     })
@@ -232,7 +235,7 @@
           }),
         );
 
-        fetch(`/api/updatechat/${chatId}`, {
+        fetch(`https://chatmate.fly.dev/api/updatechat/${chatId}`, {
           method: "POST",
           body: assistantFormData,
         })

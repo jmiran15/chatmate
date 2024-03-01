@@ -7,17 +7,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useFetcher } from "@remix-run/react";
 import { Chatbot } from "@prisma/client";
-import tinycolor from "tinycolor2";
 import { useMobileScreen } from "~/utils/mobile";
 import { useDebouncedCallback } from "use-debounce";
 import { autoGrowTextArea } from "~/utils/autogrow";
 import { useSubmitHandler } from "~/hooks/useSubmit";
-// import { useDebouncedCallback } from "use-debounce";
-// import { ChatControllerPool } from "../../client/controller";
-// import Locale from "../../locales";
-// import { callSession } from "../../store";
-// import { autoGrowTextArea } from "~/utils/autogrow";
-// import { useMobileScreen } from "~/utils/mobile.client";
 
 export default function ChatInput({
   userInput,
@@ -41,7 +34,6 @@ export default function ChatInput({
   // const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>();
   const isSubmitting = fetcher.state === "submitting";
-  const [isHovered, setIsHovered] = useState(false);
   const { shouldSubmit } = useSubmitHandler();
 
   const isMobileScreen = useMobileScreen();
@@ -72,10 +64,6 @@ export default function ChatInput({
   //     variant: "destructive",
   //   });
   // };
-
-  const hslColor = tinycolor(chatbot.color).toHsl();
-  hslColor.l -= 0.1;
-  const hoverColor = tinycolor(hslColor).toHexString();
 
   useEffect(() => {
     if (isSubmitting) {
@@ -127,33 +115,17 @@ export default function ChatInput({
         onKeyDown={onInputKeyDown}
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={autoFocus}
       />
 
       <div className="my-2 flex items-center gap-2.5 absolute right-[15px]">
         {isMobileScreen ? (
-          <Button
-            type="submit"
-            size="icon"
-            disabled={isSubmitting}
-            style={{
-              backgroundColor: isHovered ? hoverColor : chatbot.color,
-            }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
+          <Button type="submit" size="icon" disabled={isSubmitting}>
             <Send className="h-4 w-4" />
           </Button>
         ) : (
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            style={{
-              backgroundColor: isHovered ? hoverColor : chatbot.color,
-            }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
+          <Button type="submit" disabled={isSubmitting}>
             <Send className="h-4 w-4 mr-2" />
             Send
           </Button>
