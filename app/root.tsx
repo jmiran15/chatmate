@@ -20,12 +20,16 @@ import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
 import stylesheet from "~/tailwind.css";
+import markdownStyle from "./styles/lib/markdown.css";
+import highlightStyle from "./styles/lib/highlight.css";
 import { Toaster } from "./components/ui/toaster";
 import { useEffect } from "react";
 import { getUser } from "./session.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: markdownStyle },
+  { rel: "stylesheet", href: highlightStyle },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 

@@ -4,4 +4,5 @@ module.exports = {
   ignoredRouteFiles: ["**/.*", "**/*.test.{ts,tsx}"],
   serverModuleFormat: "cjs",
   postcss: true,
+  serverDependenciesToBundle: [/.*/], // hacky fix
 };

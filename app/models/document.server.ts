@@ -1,5 +1,3 @@
-import PDFParser from "pdf2json";
-
 import { Chatbot, Document } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
@@ -98,49 +96,49 @@ export const updateDocumentById = async ({
   });
 };
 
-export async function processFiles({ files }: { files: FormDataEntryValue[] }) {
-  const fileContents = await Promise.all(
-    files.map(async (file) => {
-      if (!(file instanceof File)) {
-        throw new Error("Expected file");
-      }
+// export async function processFiles({ files }: { files: FormDataEntryValue[] }) {
+//   const fileContents = await Promise.all(
+//     files.map(async (file) => {
+//       if (!(file instanceof File)) {
+//         throw new Error("Expected file");
+//       }
 
-      const fileExtension = file.name.split(".").pop();
-      let fileContent = "";
+//       const fileExtension = file.name.split(".").pop();
+//       let fileContent = "";
 
-      switch (fileExtension) {
-        case "txt":
-        case "csv":
-        case "html":
-        case "json":
-        case "md":
-        case "mdx":
-          fileContent = await file.text();
-          break;
-        case "pdf": {
-          const fileBuffer = await file.arrayBuffer();
-          const pdfParser = new PDFParser(this, 1);
+//       switch (fileExtension) {
+//         case "txt":
+//         case "csv":
+//         case "html":
+//         case "json":
+//         case "md":
+//         case "mdx":
+//           fileContent = await file.text();
+//           break;
+//         case "pdf": {
+//           const fileBuffer = await file.arrayBuffer();
+//           const pdfParser = new PDFParser(this, 1);
 
-          fileContent = await new Promise((resolve, reject) => {
-            pdfParser.on("pdfParser_dataError", reject);
-            pdfParser.on("pdfParser_dataReady", () => {
-              resolve(pdfParser.getRawTextContent());
-            });
-            pdfParser.parseBuffer(new Buffer(fileBuffer));
-          });
-          break;
-        }
-        default:
-          fileContent = "Unsupported file type";
-          break;
-      }
+//           fileContent = await new Promise((resolve, reject) => {
+//             pdfParser.on("pdfParser_dataError", reject);
+//             pdfParser.on("pdfParser_dataReady", () => {
+//               resolve(pdfParser.getRawTextContent());
+//             });
+//             pdfParser.parseBuffer(new Buffer(fileBuffer));
+//           });
+//           break;
+//         }
+//         default:
+//           fileContent = "Unsupported file type";
+//           break;
+//       }
 
-      return { name: file.name, content: fileContent };
-    }),
-  );
+//       return { name: file.name, content: fileContent };
+//     }),
+//   );
 
-  return fileContents;
-}
+//   return fileContents;
+// }
 
 // delete a document by id
 export const deleteDocumentById = async ({ id }: { id: Document["id"] }) => {
