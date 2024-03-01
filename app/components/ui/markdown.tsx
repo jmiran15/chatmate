@@ -1,11 +1,11 @@
-import "katex/dist/katex.min.css";
+// import "katex/dist/katex.min.css";
 import React, { RefObject, useRef } from "react";
 import ReactMarkdown from "react-markdown";
-import RehypeHighlight from "rehype-highlight";
-import RehypeKatex from "rehype-katex";
-import RemarkBreaks from "remark-breaks";
-import RemarkGfm from "remark-gfm";
-import RemarkMath from "remark-math";
+// import RehypeHighlight from "rehype-highlight";
+// import RehypeKatex from "rehype-katex";
+// import RemarkBreaks from "remark-breaks";
+// import RemarkGfm from "remark-gfm";
+// import RemarkMath from "remark-math";
 import { copyToClipboard } from "~/utils/clipboard";
 import { useToast } from "~/components/ui/use-toast";
 import { Loading } from "~/components/ui/loading";
@@ -37,17 +37,6 @@ export function PreCode(props: { children: any }) {
 function _MarkDownContent(props: { content: string }) {
   return (
     <ReactMarkdown
-      remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
-      rehypePlugins={[
-        RehypeKatex,
-        [
-          RehypeHighlight,
-          {
-            detect: false,
-            ignoreMissing: true,
-          },
-        ],
-      ]}
       components={{
         pre: PreCode,
         p: (pProps) => <p {...pProps} dir="auto" />,
