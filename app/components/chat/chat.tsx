@@ -1,6 +1,6 @@
 import { useFetcher } from "@remix-run/react";
 import ChatInput from "./chat-input";
-import { Chatbot } from "@prisma/client";
+import { Chatbot, Message } from "@prisma/client";
 import { Markdown } from "../ui/markdown";
 import { ScrollArea } from "../ui/scroll-area";
 import { useRef } from "react";
@@ -16,15 +16,13 @@ import { ChatAction } from "./chat-action";
 import { copyToClipboard } from "~/utils/clipboard";
 import { Separator } from "../ui/separator";
 import { Clipboard, Eraser } from "lucide-react";
+import { format } from "date-fns";
 
 export default function Chat({
   messages,
   chatbot,
 }: {
-  messages: {
-    role: "user" | "assistant";
-    content: string;
-  }[];
+  messages: Message[];
   chatbot: Chatbot;
 }) {
   const fetcher = useFetcher();
@@ -36,10 +34,12 @@ export default function Chat({
         {
           role: "user" as "user" | "assistant",
           content: fetcher.formData?.get("message") as string,
+          createdAt: new Date().toISOString(),
         },
         {
           role: "assistant",
           content: "Typing...",
+          createdAt: new Date().toISOString(),
           last: true, // need to change this to "streaming"
         },
       ]
@@ -86,12 +86,18 @@ export default function Chat({
                         >
                           <Markdown
                             content={message.content}
-                            loading={isSubmitting && !isUser && message.last !== undefined}
+                            loading={
+                              isSubmitting &&
+                              !isUser &&
+                              message.last !== undefined
+                            }
                           />
                         </div>
                         <div className="text-xs text-muted-foreground opacity-80 whitespace-nowrap text-right w-full box-border pointer-events-none z-[1]">
-                          {/* {message.date?.toLocaleString()} */}
-                          {new Date().toLocaleString()}
+                          {format(
+                            new Date(message.createdAt),
+                            "M/d/yyyy, h:mm:ss a",
+                          )}
                         </div>
                       </div>
                     </HoverCardTrigger>
@@ -136,7 +142,10 @@ export default function Chat({
         </div>
         <ChatInput
           inputRef={inputRef}
-          messages={messages}
+          messages={messages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          }))}
           fetcher={fetcher}
           chatbot={chatbot}
           scrollToBottom={() => {}}

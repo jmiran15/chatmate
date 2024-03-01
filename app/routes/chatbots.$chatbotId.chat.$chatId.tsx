@@ -52,13 +52,7 @@ export default function ChatRoute() {
 
   return (
     <div className="h-full flex flex-col justify-between">
-      <Chat
-        key="chat"
-        messages={data.messages.map((message) => {
-          return { role: message.role, content: message.content };
-        })}
-        chatbot={data.chatbot}
-      />
+      <Chat key="chat" messages={data.messages} chatbot={data.chatbot} />
     </div>
   );
 }
