@@ -29,5 +29,6 @@ module.exports = {
     /^trim-lines*/,
     /^web-namespaces*/,
     /^longest-streak*/,
+    /^is-plain-obj*/,
   ],
 };
