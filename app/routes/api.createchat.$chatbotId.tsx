@@ -38,5 +38,12 @@ export async function action({ params, request }: ActionFunctionArgs) {
     ...userMessage,
   });
 
-  return json({ chatId: chat.id });
+  // Set CORS headers
+  const headers = {
+    "Access-Control-Allow-Origin": "*", // Allow any domain
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
+  return json({ chatId: chat.id }, { headers });
 }
