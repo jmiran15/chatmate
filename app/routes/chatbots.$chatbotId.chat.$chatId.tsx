@@ -50,15 +50,5 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 export default function ChatRoute() {
   const data = useLoaderData<typeof loader>();
 
-  return (
-    <div className="h-full flex flex-col justify-between">
-      <Chat
-        key="chat"
-        messages={data.messages.map((message) => {
-          return { role: message.role, content: message.content };
-        })}
-        chatbot={data.chatbot}
-      />
-    </div>
-  );
+  return <Chat key="chat" messages={data.messages} chatbot={data.chatbot} />;
 }

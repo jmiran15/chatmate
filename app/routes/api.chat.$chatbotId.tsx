@@ -20,5 +20,12 @@ export async function action({ params, request }: ActionFunctionArgs) {
     messages,
   });
 
-  return json(assistantResponse);
+  // Set CORS headers
+  const headers = {
+    "Access-Control-Allow-Origin": "*", // Allow any domain
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
+  return json(assistantResponse, { headers });
 }

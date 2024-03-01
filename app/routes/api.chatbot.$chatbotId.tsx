@@ -6,5 +6,12 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const chatbot = await getChatbotById({ id: chatbotId });
 
-  return json(chatbot);
+  // Set CORS headers
+  const headers = {
+    "Access-Control-Allow-Origin": "*", // Allow any domain
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
+  return json(chatbot, { headers });
 }
