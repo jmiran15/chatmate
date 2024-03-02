@@ -34,6 +34,7 @@
       bottom: 20px;
       right: 20px;
       flex-direction: column;
+      z-index: 9999;
     }
     #chat-popup {
       height: 70vh;
