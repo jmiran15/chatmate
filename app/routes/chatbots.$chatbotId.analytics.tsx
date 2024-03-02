@@ -3,13 +3,7 @@ import { useLoaderData } from "@remix-run/react";
 import { LineChart, Card } from "@tremor/react";
 import { cn } from "~/lib/utils";
 import { getChatsByChatbotId } from "~/models/chat.server";
-import {
-  format,
-  parseISO,
-  startOfWeek,
-  endOfWeek,
-  differenceInCalendarWeeks,
-} from "date-fns";
+import { format, parseISO, startOfWeek, endOfWeek } from "date-fns";
 import { useMemo } from "react";
 
 // Types for the data
@@ -56,9 +50,7 @@ const getAverageMessagesPerChat = (data: ChatData): number => {
 };
 
 // Function to get chats per day
-const getChatsPerDay = (
-  data: ChatData,
-): Array<{ date: string; chats: number }> => {
+const getChatsPerDay = (data: ChatData): { date: string; chats: number }[] => {
   const chatsByDay: Record<string, number> = {};
   data.forEach((chat) => {
     const date = format(parseISO(chat.createdAt), "yyyy-MM-dd");
@@ -68,7 +60,7 @@ const getChatsPerDay = (
   return Object.entries(chatsByDay).map(([date, chats]) => ({ date, chats }));
 };
 
-export const loader = async ({ params, request }) => {
+export const loader = async ({ params }) => {
   // get all messages for the chatbotId
 
   const { chatbotId } = params;
