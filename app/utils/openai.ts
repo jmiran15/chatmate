@@ -1,11 +1,17 @@
-import { Embedding } from "@prisma/client";
+import { Chatbot, Embedding } from "@prisma/client";
 import OpenAI from "openai";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
-import { system_prompt } from "./prompts";
+import { system_prompt, user_prompt } from "./prompts";
+import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings";
 
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+});
+
+export const anyscaleClient = new OpenAI({
+  baseURL: process.env.ANYSCALE_BASE_URL,
+  apiKey: process.env.ANYSCALE_API_KEY,
 });
 
 export async function getEmbeddings({ input }: { input: string }) {
@@ -24,10 +30,10 @@ export async function getEmbeddings({ input }: { input: string }) {
 }
 
 export async function chat({
-  chatbotId,
+  chatbot,
   messages,
 }: {
-  chatbotId: string;
+  chatbot: Chatbot;
   messages: { role: "user" | "assistant"; content: string }[];
 }) {
   invariant(messages.length > 0, "Messages must not be empty");
@@ -39,27 +45,57 @@ export async function chat({
   const query = messages[messages.length - 1].content;
 
   const references = (await fetchRelevantDocs({
-    chatbotId,
+    chatbotId: chatbot.id,
     input: query,
   })) as Embedding[];
 
-  const userPromptWithReferences = `
-  Below are some relevant documents that may help answer your question:
-${references
-  .map((reference) => `Document[${reference.documentId}]: ${reference.content}`)
-  .join("\n")}
-User: ${query}; Chatbot:`;
+  const SP = system_prompt({
+    chatbotName: chatbot.name,
+    systemPrompt: chatbot.systemPrompt
+      ? chatbot.systemPrompt
+      : "Your are a friendly chatbot here to help you with any questions you have.",
+    responseLength: chatbot.responseLength ? chatbot.responseLength : "short",
+    startWords:
+      chatbot.responseLength === "short"
+        ? "25"
+        : chatbot.responseLength === "medium"
+        ? "50"
+        : "100",
+    endWords:
+      chatbot.responseLength === "short"
+        ? "50"
+        : chatbot.responseLength === "medium"
+        ? "100"
+        : "100+",
+  });
 
-  messages[messages.length - 1].content = userPromptWithReferences;
+  const UP = user_prompt({
+    retrievedData: references
+      .map(
+        (reference) =>
+          `VERIFIED_SOURCE_[${reference.documentId}]: ${reference.content}`,
+      )
+      .join("\n"),
+    question: query,
+  });
 
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: system_prompt }, ...messages],
-    model: "gpt-3.5-turbo",
+  messages[messages.length - 1].content = UP;
+
+  const client = ANYSCALE_MODELS.includes(chatbot.model)
+    ? anyscaleClient
+    : openai;
+
+  console.log("chatbot.model: ", { model: chatbot.model, client });
+
+  const completion = await client.chat.completions.create({
+    messages: [{ role: "system", content: SP }, ...messages],
+    model: chatbot.model,
   });
 
   return completion.choices[0];
 }
 
+// WE NEED TO BE SUMMARIZING THE PREV CHAT AS WELL AND USING THAT TO GET EMBEDDINGS
 export async function fetchRelevantDocs({
   chatbotId,
   input,

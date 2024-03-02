@@ -97,6 +97,7 @@ export default function ChatInput({
       ref={formRef}
       className="flex flex-1 items-end relative"
     >
+      <input type="hidden" name="chatbot" value={JSON.stringify(chatbot)} />
       <input type="hidden" name="messages" value={JSON.stringify(messages)} />
       <Textarea
         className={cn(

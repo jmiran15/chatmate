@@ -16,16 +16,24 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
-  const { chatId, chatbotId } = params;
+  const { chatId } = params;
   const formData = await request.formData();
 
-  // throw error if chatId not found or chatbotId not found
-
-  const userMessage = formData.get("message");
-
-  // throw some error if empty string, or maybe just return if its an empty string or not a string
-
+  const userMessage = formData.get("message") as string;
   const messages = JSON.parse(formData.get("messages") as string) || []; // should do some error checking
+  const chatbot = JSON.parse(formData.get("chatbot") as string);
+
+  if (!chatbot) {
+    return json({ error: "Chatbot not found" }, { status: 404 });
+  }
+
+  if (!chatId) {
+    return json({ error: "Chat not found" }, { status: 404 });
+  }
+
+  if (!userMessage) {
+    return json({ error: "Message not found" }, { status: 400 });
+  }
 
   messages.push({
     role: "user",
@@ -34,7 +42,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   // this should intuitivly be defered, only problem is that they messages have no ordering, so we need the user promise to be fulfilled before the others.
   const assistantResponse = await chat({
-    chatbotId,
+    chatbot,
     messages,
   });
 

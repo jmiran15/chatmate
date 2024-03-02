@@ -29,8 +29,6 @@ model Chatbot {
   id               String      @id @default(uuid())
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
-  name             String
-  description      String?
   user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId           String
   chats            Chat[]
@@ -39,6 +37,10 @@ model Chatbot {
   introMessages    String[]    @default(["Hello, how can I help you today?"])
   starterQuestions String[]    @default(["What are your features?"])
   color            String      @default("#FF5733")
+  name             String
+  systemPrompt     String?
+  model            String?     @default("gpt-3.5-turbo-0125")
+  responseLength   String?     @default("short")
   documents        Document[]
   embeddings       Embedding[]
 }

@@ -7,12 +7,9 @@
 
   let chatbotId = scriptTag.getAttribute("data-chatbotid");
 
-  const chatbotResponse = await fetch(
-    `https://chatmate.fly.dev/api/chatbot/${chatbotId}`,
-    {
-      method: "GET",
-    },
-  );
+  const chatbotResponse = await fetch(`/api/chatbot/${chatbotId}`, {
+    method: "GET",
+  });
   const chatbot = await chatbotResponse.json();
 
   const primaryColor = chatbot.color || "#FF5733"; // Default color if not set
@@ -28,42 +25,42 @@
   // Inject the CSS
   const style = document.createElement("style");
   style.innerHTML = `
-
-    #chat-widget-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      flex-direction: column;
-      z-index: 9999;
-    }
-    #chat-popup {
-      height: 70vh;
-      max-height: 70vh;
-      transition: all 0.3s;
-      overflow: hidden;
-    }
-    @media (max-width: 768px) {
-      #chat-popup {
+  
+      #chat-widget-container {
         position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        max-height: 100%;
-        border-radius: 0;
+        bottom: 20px;
+        right: 20px;
+        flex-direction: column;
+        z-index: 9999;
       }
-    }
-
-    /* Setting primary color */
-    #chat-bubble, #chat-submit {
-      background-color: ${primaryColor};
-    }
-    #chat-header {
-      background-color: ${primaryColor};
-    }
-    `;
+      #chat-popup {
+        height: 70vh;
+        max-height: 70vh;
+        transition: all 0.3s;
+        overflow: hidden;
+      }
+      @media (max-width: 768px) {
+        #chat-popup {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          max-height: 100%;
+          border-radius: 0;
+        }
+      }
+  
+      /* Setting primary color */
+      #chat-bubble, #chat-submit {
+        background-color: ${primaryColor};
+      }
+      #chat-header {
+        background-color: ${primaryColor};
+      }
+      `;
 
   document.head.appendChild(style);
 
@@ -74,32 +71,32 @@
 
   // Inject the HTML
   chatWidgetContainer.innerHTML = `
-      <div id="chat-bubble" class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center cursor-pointer text-3xl">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-        </svg>
-      </div>
-      <div id="chat-popup" class="hidden absolute bottom-20 right-0 w-96 bg-white rounded-md shadow-md flex flex-col transition-all text-sm">
-        <div id="chat-header" class="flex justify-between items-center p-4 bg-gray-800 text-white rounded-t-md">
-          <h3 class="m-0 text-lg">${publicName}</h3>
-          <button id="close-popup" class="bg-transparent border-none text-white cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+        <div id="chat-bubble" class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center cursor-pointer text-3xl">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+          </svg>
         </div>
-        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto"></div>
-        <div id="chat-input-container" class="p-4 border-t border-gray-200">
-          <div class="flex space-x-4 items-center">
-            <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-md px-4 py-2 outline-none w-3/4" placeholder="Type your message...">
-            <button id="chat-submit" class="bg-gray-800 text-white rounded-md px-4 py-2 cursor-pointer">Send</button>
+        <div id="chat-popup" class="hidden absolute bottom-20 right-0 w-96 bg-white rounded-md shadow-md flex flex-col transition-all text-sm">
+          <div id="chat-header" class="flex justify-between items-center p-4 bg-gray-800 text-white rounded-t-md">
+            <h3 class="m-0 text-lg">${publicName}</h3>
+            <button id="close-popup" class="bg-transparent border-none text-white cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-          <div class="flex text-center text-xs pt-4">
-            <span class="flex-1">Powered by <a href="https://chatmate.fly.dev/" target="_blank" class="text-indigo-600">Chatmate</a></span>
+          <div id="chat-messages" class="flex-1 p-4 overflow-y-auto"></div>
+          <div id="chat-input-container" class="p-4 border-t border-gray-200">
+            <div class="flex space-x-4 items-center">
+              <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-md px-4 py-2 outline-none w-3/4" placeholder="Type your message...">
+              <button id="chat-submit" class="bg-gray-800 text-white rounded-md px-4 py-2 cursor-pointer">Send</button>
+            </div>
+            <div class="flex text-center text-xs pt-4">
+              <span class="flex-1">Powered by <a href="/" target="_blank" class="text-indigo-600">Chatmate</a></span>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
 
   // Add event listeners
   const chatInput = document.getElementById("chat-input");
@@ -150,12 +147,12 @@
 
   function createLoadingMessage() {
     return `
-      <div id="loading-assistant" class="flex space-x-2 justify-center items-center bg-gray-200 w-min rounded-lg pb-2 pt-3 px-4 text-sm">
-        <div class="h-2 w-2 bg-gray-700 rounded-full animate-bounce" style="animation-delay: -0.3s;"></div>
-        <div class="h-2 w-2 bg-gray-700 rounded-full animate-bounce" style="animation-delay: -0.15s;"></div>
-        <div class="h-2 w-2 bg-gray-700 rounded-full animate-bounce"></div>
-      </div>
-    `;
+        <div id="loading-assistant" class="flex space-x-2 justify-center items-center bg-gray-200 w-min rounded-lg pb-2 pt-3 px-4 text-sm">
+          <div class="h-2 w-2 bg-gray-700 rounded-full animate-bounce" style="animation-delay: -0.3s;"></div>
+          <div class="h-2 w-2 bg-gray-700 rounded-full animate-bounce" style="animation-delay: -0.15s;"></div>
+          <div class="h-2 w-2 bg-gray-700 rounded-full animate-bounce"></div>
+        </div>
+      `;
   }
 
   function onUserRequest(message) {
@@ -165,10 +162,10 @@
     const messageElement = document.createElement("div");
     messageElement.className = "flex justify-end mb-3";
     messageElement.innerHTML = `
-        <div class="bg-gray-800 text-white rounded-lg py-2 px-4 max-w-[70%]">
-          ${message}
-        </div>
-      `;
+          <div class="bg-gray-800 text-white rounded-lg py-2 px-4 max-w-[70%]">
+            ${message}
+          </div>
+        `;
     chatMessages.appendChild(messageElement);
 
     chatMessages.innerHTML += createLoadingMessage();
@@ -180,7 +177,7 @@
       JSON.stringify({ role: "user", content: message }),
     );
     if (!chatId) {
-      fetch(`https://chatmate.fly.dev/api/createchat/${chatbotId}`, {
+      fetch(`/api/createchat/${chatbotId}`, {
         method: "POST",
         body: chatFormData,
       })
@@ -192,7 +189,7 @@
           console.log(`Error saving chat to the server: ${error}`);
         });
     } else {
-      fetch(`https://chatmate.fly.dev/api/updatechat/${chatId}`, {
+      fetch(`/api/updatechat/${chatId}`, {
         method: "POST",
         body: chatFormData,
       })
@@ -209,7 +206,7 @@
     formData.append("messages", JSON.stringify(messages));
     formData.append("chatbot", JSON.stringify(chatbot));
 
-    fetch(`https://chatmate.fly.dev/api/chat/${chatbotId}`, {
+    fetch(`/api/chat/${chatbotId}`, {
       method: "POST",
       body: formData,
     })
@@ -237,7 +234,7 @@
           }),
         );
 
-        fetch(`https://chatmate.fly.dev/api/updatechat/${chatId}`, {
+        fetch(`/api/updatechat/${chatId}`, {
           method: "POST",
           body: assistantFormData,
         })
@@ -268,10 +265,10 @@
     const replyElement = document.createElement("div");
     replyElement.className = "flex mb-3";
     replyElement.innerHTML = `
-        <div class="bg-gray-200 text-black rounded-lg py-2 px-4 max-w-[70%]">
-          ${message}
-        </div>
-      `;
+          <div class="bg-gray-200 text-black rounded-lg py-2 px-4 max-w-[70%]">
+            ${message}
+          </div>
+        `;
     chatMessages.appendChild(replyElement);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }

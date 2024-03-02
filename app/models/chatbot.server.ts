@@ -12,14 +12,12 @@ export function getChatbotsByUserId({ userId }: { userId: User["id"] }) {
 
 export function createChatbot({
   name,
-  description,
   userId,
-}: Pick<Chatbot, "name" | "description"> & { userId: User["id"] }) {
+}: Pick<Chatbot, "name"> & { userId: User["id"] }) {
   return prisma.chatbot.create({
     data: {
       id: uuidv4(),
       name,
-      description,
       user: {
         connect: {
           id: userId,

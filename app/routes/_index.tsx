@@ -16,8 +16,9 @@ export default function Index() {
       <div className="container relative">
         <script
           async
-          src="widget.js"
+          src="dev-widget.js"
           data-chatbotid="e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23"
+          // data-chatbotid="69ea8261-bdfe-4d3d-b6a4-29f2d728b59e"
         ></script>
         <Hero />
         <HowItWorks />
