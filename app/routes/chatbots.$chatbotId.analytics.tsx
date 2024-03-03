@@ -156,19 +156,19 @@ export default function Analytics() {
     {
       name: "Total chats",
       stat: totalChats,
-      change: `${percentChangeTotalChats}%`,
+      change: `${parseFloat(percentChangeTotalChats.toFixed(1))}%`,
       changeType: percentChangeTotalChats > 0 ? "positive" : "negative",
     },
     {
       name: "Weekly chats",
       stat: weeklyChats,
-      change: `${percentChangeWeeklyChats}%`,
+      change: `${parseFloat(percentChangeWeeklyChats.toFixed(1))}%`,
       changeType: percentChangeWeeklyChats > 0 ? "positive" : "negative",
     },
     {
       name: "Average messages per chat",
       stat: averageMessagesPerChat,
-      change: `${percentChangeAverageMessagesPerChat}%`,
+      change: `${parseFloat(percentChangeAverageMessagesPerChat.toFixed(1))}%`,
       changeType:
         percentChangeAverageMessagesPerChat > 0 ? "positive" : "negative",
     },
