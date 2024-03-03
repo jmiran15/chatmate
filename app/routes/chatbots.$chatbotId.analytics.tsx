@@ -57,7 +57,9 @@ const getChatsPerDay = (data: ChatData): { date: string; chats: number }[] => {
     chatsByDay[date] = (chatsByDay[date] || 0) + 1;
   });
 
-  return Object.entries(chatsByDay).map(([date, chats]) => ({ date, chats }));
+  return Object.entries(chatsByDay)
+    .map(([date, chats]) => ({ date, chats }))
+    .sort((a, b) => new Date(a.date) - new Date(b.date));
 };
 
 export const loader = async ({ params }) => {
@@ -154,19 +156,19 @@ export default function Analytics() {
     {
       name: "Total chats",
       stat: totalChats,
-      change: percentChangeTotalChats,
+      change: `${percentChangeTotalChats}%`,
       changeType: percentChangeTotalChats > 0 ? "positive" : "negative",
     },
     {
       name: "Weekly chats",
       stat: weeklyChats,
-      change: percentChangeWeeklyChats,
+      change: `${percentChangeWeeklyChats}%`,
       changeType: percentChangeWeeklyChats > 0 ? "positive" : "negative",
     },
     {
       name: "Average messages per chat",
       stat: averageMessagesPerChat,
-      change: percentChangeAverageMessagesPerChat,
+      change: `${percentChangeAverageMessagesPerChat}%`,
       changeType:
         percentChangeAverageMessagesPerChat > 0 ? "positive" : "negative",
     },
