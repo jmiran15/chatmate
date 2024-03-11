@@ -69,9 +69,11 @@ export function Nav({
           </SheetContent>
         </Sheet>
       </span>
+
       <div className="hidden md:flex flex-col gap-1 p-2 border-r border-gray-200 md:h-full">
         {links.map((link, index) => (
           <Link
+            id={link.path}
             key={index}
             to={link.path}
             className={cn(

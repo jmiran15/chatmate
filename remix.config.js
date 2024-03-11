@@ -7,6 +7,7 @@ module.exports = {
   assetsBuildDirectory: "public/build",
   publicPath: "/build/",
   serverBuildPath: "build/index.js",
+  browserNodeBuiltinsPolyfill: { modules: { punycode: true } },
   serverDependenciesToBundle: [
     /^rehype.*/,
     /^remark.*/,

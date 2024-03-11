@@ -1,9 +1,10 @@
-import { useFetcher } from "@remix-run/react";
+import { fetchEventSource } from "@microsoft/fetch-event-source";
+import { useFetcher, useParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
 import { Chatbot, Message } from "@prisma/client";
 
 import { ScrollArea } from "../ui/scroll-area";
-import { Suspense, lazy, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { ChatAction } from "./chat-action";
 import {
   HoverCard,
@@ -19,49 +20,134 @@ import { format } from "date-fns";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { useMobileScreen } from "~/utils/mobile";
 import { Loading } from "../ui/loading";
+import { v4 } from "uuid";
 
 const Markdown = lazy(() => import("../ui/markdown"));
 
 export const CHAT_PAGE_SIZE = 15;
 
-export default function Chat({
-  messages,
-  chatbot,
-}: {
-  messages: Message[];
-  chatbot: Chatbot;
-}) {
-  const fetcher = useFetcher();
-  const isSubmitting = fetcher.state === "submitting";
+export default function Chat() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [userInput, setUserInput] = useState("");
   const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
+  const { chatId, chatbotId } = useParams();
+  const [chatbot, setChatbot] = useState<Chatbot>();
 
-  const optimisticMessages = isSubmitting
-    ? [
-        ...messages,
-        {
-          role: "user" as "user" | "assistant",
-          content: fetcher.formData?.get("message") as string,
-          createdAt: new Date().toISOString(),
-        },
-        {
-          role: "assistant",
-          content: "Loading...",
-          createdAt: new Date().toISOString(),
-          last: true, // need to change this to "streaming"
-        },
-      ]
-    : messages;
+  const [messages, setMessages] = useState<
+    { role: "user" | "assistant"; content: string }[]
+  >([]);
+
+  console.log("messages", messages);
+
+  useEffect(() => {
+    // fetch at /api/messages/${chatId}
+    fetch(`/api/messages/${chatId}`)
+      .then((res) => res.json())
+      .then(({ messages }) => {
+        setMessages(messages);
+      });
+
+    // get the chatbot by id /api/chatbot/${chatbotId}
+    fetch(`/api/chatbot/${chatbotId}`)
+      .then((res) => res.json())
+      .then((chatbot) => {
+        setChatbot(chatbot);
+      });
+  }, [chatId, chatbotId]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!userInput || userInput === "") return false;
+
+    const prevChatHistory = [
+      ...messages,
+      { createdAt: new Date().toISOString(), content: userInput, role: "user" },
+      {
+        createdAt: new Date().toISOString(),
+        content: "",
+        role: "assistant",
+        pending: true,
+        userMessage: userInput,
+        animate: true,
+      },
+    ];
+
+    setMessages(prevChatHistory);
+    setUserInput("");
+    setIsSubmitting(true);
+  };
+
+  useEffect(() => {
+    // this is where we call our api for a chat response
+    async function fetchReply() {
+      const promptMessage =
+        messages.length > 0 ? messages[messages.length - 1] : null;
+      const remHistory = messages.length > 0 ? messages.slice(0, -1) : [];
+      let _chatHistory = [...remHistory];
+
+      if (!promptMessage || !promptMessage?.userMessage) {
+        setIsSubmitting(false);
+        return false;
+      }
+
+      console.log("fetchReply", promptMessage);
+
+      await streamChat(chatbot, remHistory, chatbotId, chatId, (chatResult) =>
+        handleChat(
+          chatResult,
+          setIsSubmitting,
+          setMessages,
+          remHistory,
+          _chatHistory,
+        ),
+      );
+      return;
+    }
+    isSubmitting === true && fetchReply();
+  }, [isSubmitting, messages]);
+
+  // function handleSendMessage(message: string) {
+  //   //add user message to state
+  //   setMessages((prevMessages) => [
+  //     ...prevMessages,
+  //     { role: "user", content: message },
+  //   ]);
+
+  //   // get assistant response /api/chat/${chatbotId}
+  //   fetch(`/api/chat/${chatbotId}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       messages: [
+  //         ...messages.map((message) => {
+  //           return { role: message.role, content: message.content };
+  //         }),
+  //         { role: "user", content: message },
+  //       ],
+  //       chatbot: chatbot,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((assistantResponse) => {
+  //       // add assistant response to state
+  //       setMessages((prevMessages) => [
+  //         ...prevMessages,
+  //         { role: "assistant", content: assistantResponse.message.content },
+  //       ]);
+  //     });
+  // }
 
   const { toast } = useToast();
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const [msgRenderIndex, _setMsgRenderIndex] = useState(
-    Math.max(0, optimisticMessages.length - CHAT_PAGE_SIZE),
+    Math.max(0, messages.length - CHAT_PAGE_SIZE),
   );
 
   function setMsgRenderIndex(newIndex: number) {
-    newIndex = Math.min(optimisticMessages.length - CHAT_PAGE_SIZE, newIndex);
+    newIndex = Math.min(messages.length - CHAT_PAGE_SIZE, newIndex);
     newIndex = Math.max(0, newIndex);
     _setMsgRenderIndex(newIndex);
   }
@@ -69,10 +155,10 @@ export default function Chat({
   const msgs = useMemo(() => {
     const endRenderIndex = Math.min(
       msgRenderIndex + 3 * CHAT_PAGE_SIZE,
-      optimisticMessages.length,
+      messages.length,
     );
-    return optimisticMessages.slice(msgRenderIndex, endRenderIndex);
-  }, [msgRenderIndex, optimisticMessages]);
+    return messages.slice(msgRenderIndex, endRenderIndex);
+  }, [msgRenderIndex, messages]);
 
   const onChatBodyScroll = (e: HTMLElement) => {
     const bottomHeight = e.scrollTop + e.clientHeight;
@@ -97,9 +183,11 @@ export default function Chat({
   const isMobileScreen = useMobileScreen();
 
   function scrollToBottom() {
-    setMsgRenderIndex(optimisticMessages.length - CHAT_PAGE_SIZE);
+    setMsgRenderIndex(messages.length - CHAT_PAGE_SIZE);
     scrollDomToBottom();
   }
+
+  console.log("msgs", msgs);
 
   return (
     <div className="flex flex-col relative h-full">
@@ -147,7 +235,9 @@ export default function Chat({
                             <Markdown
                               content={message.content}
                               // eslint-disable-next-line react/jsx-no-leaked-render
-                              loading={isSubmitting && !isUser && message.last}
+                              loading={
+                                isSubmitting && !isUser && message.pending
+                              }
                               onDoubleClickCapture={() => {
                                 if (!isMobileScreen) return;
                                 setUserInput(message.content);
@@ -195,29 +285,199 @@ export default function Chat({
       </ScrollArea>
       <Separator />
       <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">
-        <div className="flex justify-between items-center">
-          {/* <ChatAction
-            text={"Clear"}
-            icon={<Eraser className="w-4 h-4" />}
-            onClick={() => {}}
-            showTitle
-            buttonVariant="outline"
-          /> */}
-        </div>
         <ChatInput
           userInput={userInput}
           setUserInput={setUserInput}
           inputRef={inputRef}
-          messages={messages.map((m) => ({
-            role: m.role,
-            content: m.content,
-          }))}
-          fetcher={fetcher}
-          chatbot={chatbot}
+          handleSendMessage={handleSubmit}
           scrollToBottom={scrollToBottom}
           setAutoScroll={setAutoScroll}
         />
       </div>
     </div>
   );
+}
+
+async function streamChat(
+  chatbot,
+  remHistory,
+  chatbotId,
+  sessionId,
+  handleChat,
+) {
+  const ctrl = new AbortController();
+
+  // CHANGE THIS URL TO BE THE URL OF MY API
+
+  console.log("remHistory", remHistory);
+
+  const URL_TEST = `https://chatmate.fly.dev/api/chat/${chatbotId}/${sessionId}`;
+  await fetchEventSource(URL_TEST, {
+    method: "POST",
+    body: JSON.stringify({
+      chatbot,
+      messages: remHistory.map((msg) => {
+        return {
+          role: msg.role === "user" ? "user" : "assistant",
+          content: msg.content,
+        };
+      }),
+    }),
+    signal: ctrl.signal,
+    openWhenHidden: true,
+    async onopen(response) {
+      if (response.ok) {
+        console.log("response", response);
+        return; // everything's good
+      } else if (response.status >= 400) {
+        await response
+          .json()
+          .then((serverResponse) => {
+            handleChat(serverResponse);
+          })
+          .catch(() => {
+            handleChat({
+              createdAt: new Date().toISOString(),
+              id: v4(),
+              type: "abort",
+              textResponse: null,
+              sources: [],
+              close: true,
+              error: `An error occurred while streaming response. Code ${response.status}`,
+            });
+          });
+        ctrl.abort();
+        throw new Error();
+      } else {
+        handleChat({
+          createdAt: new Date().toISOString(),
+          id: v4(),
+          type: "abort",
+          textResponse: null,
+          sources: [],
+          close: true,
+          error: `An error occurred while streaming response. Unknown Error.`,
+        });
+        ctrl.abort();
+        throw new Error("Unknown Error");
+      }
+    },
+    async onmessage(msg) {
+      try {
+        const chatResult = JSON.parse(msg.data);
+        console.log("chatResult", chatResult);
+        handleChat(chatResult);
+      } catch {}
+    },
+    onerror(err) {
+      handleChat({
+        createdAt: new Date().toISOString(),
+        id: v4(),
+        type: "abort",
+        textResponse: null,
+        sources: [],
+        close: true,
+        error: `An error occurred while streaming response. ${err.message}`,
+      });
+      ctrl.abort();
+      throw new Error();
+    },
+  });
+}
+
+// For handling of synchronous chats that are not utilizing streaming or chat requests.
+function handleChat(
+  chatResult,
+  setLoadingResponse,
+  setChatHistory,
+  remHistory,
+  _chatHistory,
+) {
+  const { uuid, textResponse, type, sources = [], error, close } = chatResult;
+
+  if (type === "abort") {
+    setLoadingResponse(false);
+    setChatHistory([
+      ...remHistory,
+      {
+        createdAt: new Date().toISOString(),
+        uuid,
+        content: textResponse,
+        role: "assistant",
+        sources,
+        closed: true,
+        error,
+        animate: false,
+        pending: false,
+      },
+    ]);
+    _chatHistory.push({
+      createdAt: new Date().toISOString(),
+      uuid,
+      content: textResponse,
+      role: "assistant",
+      sources,
+      closed: true,
+      error,
+      animate: false,
+      pending: false,
+    });
+  } else if (type === "textResponse") {
+    setLoadingResponse(false);
+    setChatHistory([
+      ...remHistory,
+      {
+        createdAt: new Date().toISOString(),
+
+        uuid,
+        content: textResponse,
+        role: "assistant",
+        sources,
+        closed: close,
+        error,
+        animate: !close,
+        pending: false,
+      },
+    ]);
+    _chatHistory.push({
+      createdAt: new Date().toISOString(),
+
+      uuid,
+      content: textResponse,
+      role: "assistant",
+      sources,
+      closed: close,
+      error,
+      animate: !close,
+      pending: false,
+    });
+  } else if (type === "textResponseChunk") {
+    const chatIdx = _chatHistory.findIndex((chat) => chat.uuid === uuid);
+    if (chatIdx !== -1) {
+      const existingHistory = { ..._chatHistory[chatIdx] };
+      const updatedHistory = {
+        ...existingHistory,
+        content: existingHistory.content + textResponse,
+        sources,
+        error,
+        closed: close,
+        animate: !close,
+        pending: false,
+      };
+      _chatHistory[chatIdx] = updatedHistory;
+    } else {
+      _chatHistory.push({
+        createdAt: new Date().toISOString(),
+        uuid,
+        sources,
+        error,
+        content: textResponse,
+        role: "assistant",
+        closed: close,
+        animate: !close,
+        pending: false,
+      });
+    }
+    setChatHistory([..._chatHistory]);
+  }
 }

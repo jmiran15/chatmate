@@ -18,9 +18,30 @@ export function createChat({ chatbotId }: { chatbotId: Chat["chatbotId"] }) {
   });
 }
 
-export async function createChatWithStarterMessages({
+export function createChatWithId({
+  chatId,
   chatbotId,
 }: {
+  chatId: Chat["id"];
+  chatbotId: Chat["chatbotId"];
+}) {
+  return prisma.chat.create({
+    data: {
+      id: chatId,
+      chatbot: {
+        connect: {
+          id: chatbotId,
+        },
+      },
+    },
+  });
+}
+
+export async function createChatWithStarterMessages({
+  sessionId,
+  chatbotId,
+}: {
+  sessionId: Chat["id"];
   chatbotId: Chat["chatbotId"];
 }) {
   // fetch the chatbot by its id
@@ -36,7 +57,7 @@ export async function createChatWithStarterMessages({
 
   return prisma.chat.create({
     data: {
-      id: uuidv4(),
+      id: sessionId,
       chatbot: {
         connect: {
           id: chatbotId,
@@ -249,6 +270,128 @@ export async function updateChatAIInsights({ chatId }: { chatId: Chat["id"] }) {
     },
     data: {
       aiInsights: insights.chatSummary,
+    },
+  });
+}
+
+export function clearChatMessages({ chatId }: { chatId: Chat["id"] }) {
+  return prisma.message.deleteMany({
+    where: {
+      chatId,
+    },
+  });
+}
+
+export function getPublicChatsCount({
+  chatbotId,
+}: {
+  chatbotId: Chat["chatbotId"];
+}) {
+  return prisma.chat.count({
+    where: {
+      chatbotId,
+      userId: null,
+    },
+  });
+}
+
+// pagination
+export async function getChatsPagination({
+  chatbotId,
+  cursorId,
+  take,
+  starred,
+  sort,
+}: {
+  chatbotId: Chat["chatbotId"];
+  cursorId: Chat["id"] | null;
+  take: number;
+  starred?: boolean;
+  sort: "dateNewToOld" | "dateOldToNew";
+}) {
+  const where = starred
+    ? {
+        chatbotId,
+        userId: null,
+        starred: true,
+      }
+    : {
+        chatbotId,
+        userId: null,
+      };
+
+  const include = {
+    _count: {
+      select: { messages: true },
+    },
+  };
+
+  const orderBy =
+    sort === "dateNewToOld"
+      ? {
+          createdAt: "desc",
+        }
+      : {
+          createdAt: "asc",
+        };
+
+  let queryResults = [];
+
+  if (!cursorId) {
+    // first take
+    queryResults = await prisma.chat.findMany({
+      take,
+      where,
+      orderBy,
+      include,
+    });
+  } else {
+    queryResults = await prisma.chat.findMany({
+      take,
+      skip: 1, // Skip the cursor
+      cursor: {
+        id: cursorId,
+      },
+      where,
+      orderBy,
+      include,
+    });
+  }
+
+  console.log("request and response ", {
+    cursorId,
+    starred,
+    queryResults,
+  });
+
+  if (queryResults.length === 0) {
+    return {
+      chats: [],
+      cursorId,
+    };
+  }
+
+  const lastChatInResults = queryResults[queryResults.length - 1];
+  const cursor = lastChatInResults.id;
+  return {
+    chats: queryResults,
+    cursorId: cursor,
+  };
+}
+
+export function updateChatStarredStatus({
+  chatId,
+  starred,
+}: {
+  chatId: Chat["id"];
+  starred: boolean;
+}) {
+  return prisma.chat.update({
+    where: {
+      id: chatId,
+    },
+    data: {
+      starred,
     },
   });
 }

@@ -10,7 +10,10 @@ export default function Share() {
         tag to your html code
       </p>
       <CodeBlock
-        code={`<script async src="https://chatmate.fly.dev/widget.js" data-chatbotid="${chatbotId}"></script>`}
+        code={`<script
+          data-embed-id="${chatbotId}"
+          src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
+        ></script>`}
       />
     </div>
   );

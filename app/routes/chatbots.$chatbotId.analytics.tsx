@@ -260,5 +260,5 @@ export function LineChartHero({
 }
 
 export const handle = {
-  breadcrumb: "appearance",
+  breadcrumb: "analytics",
 };

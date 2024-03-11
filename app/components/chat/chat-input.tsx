@@ -5,8 +5,6 @@ import { cn } from "~/lib/utils";
 import { Send } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 
-import { useFetcher } from "@remix-run/react";
-import { Chatbot } from "@prisma/client";
 import { useMobileScreen } from "~/utils/mobile";
 import { useDebouncedCallback } from "use-debounce";
 import { autoGrowTextArea } from "~/utils/autogrow";
@@ -17,23 +15,20 @@ export default function ChatInput({
   setUserInput,
   inputRef,
   scrollToBottom,
-  chatbot,
-  messages,
-  fetcher,
+  handleSendMessage,
   setAutoScroll,
 }: {
   userInput: string;
   setUserInput: (value: string) => void;
   inputRef: React.RefObject<HTMLTextAreaElement>;
   scrollToBottom: () => void;
-  chatbot: Chatbot;
-  messages: { role: "user" | "assistant"; content: string }[];
-  fetcher: ReturnType<typeof useFetcher>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleSendMessage: any;
   setAutoScroll: (autoScroll: boolean) => void;
 }) {
   // const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>();
-  const isSubmitting = fetcher.state === "submitting";
+  const isSubmitting = false;
   const { shouldSubmit } = useSubmitHandler();
 
   const isMobileScreen = useMobileScreen();
@@ -73,7 +68,7 @@ export default function ChatInput({
     } else {
       inputRef.current?.focus();
     }
-  }, [isSubmitting, chatbot.color]);
+  }, [isSubmitting]);
 
   const autoFocus = !isMobileScreen; // wont auto focus on mobile screen
 
@@ -81,24 +76,21 @@ export default function ChatInput({
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (shouldSubmit(e)) {
       if (!isSubmitting) {
-        const formData = new FormData(formRef.current);
-
-        fetcher.submit(formData, {
-          method: "post",
-        });
+        handleSendMessage(e);
       }
       e.preventDefault();
     }
   };
 
   return (
-    <fetcher.Form
-      method="post"
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSendMessage(e);
+      }}
       ref={formRef}
       className="flex flex-1 items-end relative"
     >
-      <input type="hidden" name="chatbot" value={JSON.stringify(chatbot)} />
-      <input type="hidden" name="messages" value={JSON.stringify(messages)} />
       <Textarea
         className={cn(
           "ring-inset focus-visible:ring-offset-0 pr-28 md:pr-40 min-h-[56px]",
@@ -112,7 +104,6 @@ export default function ChatInput({
         onFocus={scrollToBottom}
         onClick={scrollToBottom}
         rows={inputRows}
-        name="message"
         onKeyDown={onInputKeyDown}
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
@@ -132,6 +123,6 @@ export default function ChatInput({
           </Button>
         )}
       </div>
-    </fetcher.Form>
+    </form>
   );
 }

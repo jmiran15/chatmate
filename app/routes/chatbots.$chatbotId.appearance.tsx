@@ -3,6 +3,7 @@ import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
 import { useLoaderData } from "@remix-run/react";
 import Preview from "~/components/widget/preview";
+import { useMobileScreen } from "~/utils/mobile";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const chatbotId = params.chatbotId as string;
@@ -19,13 +20,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   if (!chatbotId)
     return json({ message: "No chatbotId provided" }, { status: 400 });
 
+  const themeColor = formData.get("color") as string;
+  const publicName = formData.get("name") as string;
+  const introMessages = (formData.get("intro") as string).split("\n");
+  const openIcon = formData.get("icon") as string;
+  const logoUrl = formData.get("url") as string;
+
   return await updateChatbotById({
     id: chatbotId,
-    color: formData.get("color") as string,
-    // bio: formData.get("bio") as string,
-    publicName: formData.get("name") as string,
-    // starterQuestions: (formData.get("starter") as string).split("\n"),
-    introMessages: (formData.get("intro") as string).split("\n"),
+    themeColor,
+    publicName,
+    introMessages,
+    openIcon,
+    logoUrl,
   });
 };
 
@@ -33,22 +40,17 @@ export default function Appearance() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-4 h-full overflow-y-auto">
+    <div className="flex flex-col lg:grid lg:grid-cols-4 overflow-y-auto h-full">
       <Customizer
         name={data?.publicName}
-        // bio={data?.bio}
+        url={data?.logoUrl}
+        color={data?.themeColor}
+        icon={data?.openIcon}
         introMessages={data?.introMessages}
-        // starterQuestions={data?.starterQuestions}
-        color={data?.color}
       />
 
-      {/* bug with refreshing */}
-      <div className="md:col-span-2 flex flex-col items-center justify-center p-8">
-        <Preview
-          primaryColor={data?.color}
-          publicName={data?.publicName}
-          starterMessages={data?.introMessages}
-        />
+      <div className="lg:col-span-2 flex flex-col items-end justify-end p-[20px] h-full bg-slate-100">
+        <Preview chatbot={data} />
       </div>
     </div>
   );

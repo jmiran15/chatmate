@@ -3,22 +3,54 @@ import { Textarea } from "../ui/textarea";
 import { useFetcher } from "@remix-run/react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+
+const THEME_COLORS = [
+  "zinc",
+  "white",
+  "red",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+  "pink",
+  "rose",
+];
+
+const OPEN_ICONS = ["plus", "chevron", "chat"];
 
 export default function Customizer({
   name,
-  // bio,
-  introMessages,
-  // starterQuestions,
+  url,
   color,
+  icon,
+  introMessages,
 }: {
   name: string;
-  // bio: string;
-  introMessages: string[];
-  // starterQuestions: string[];
+  url: string;
   color: string;
+  icon: string;
+  introMessages: string[];
 }) {
   const intro = introMessages.join("\n");
-  // const starter = starterQuestions.join("\n");
   const fetcher = useFetcher();
 
   function handleSubmit(event) {
@@ -33,11 +65,7 @@ export default function Customizer({
       className="flex flex-col space-y-8 lg:col-span-2 lg:h-full lg:overflow-y-auto lg:border-r border-b border-gray-200 p-8"
     >
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="name">Chatbot name</Label>
-        <p className="text-sm text-muted-foreground">
-          This is the name of your chatbot that will be displayed on the widget
-          header.
-        </p>
+        <Label htmlFor="name">Name</Label>
         <Input
           id="name"
           name="name"
@@ -45,27 +73,52 @@ export default function Customizer({
           defaultValue={name}
         />
       </div>
-      {/* 
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="bio">Chatbot bio</Label>
-        <p className="text-sm text-muted-foreground">
-          The bio will be displayed below the chatbot name.
-        </p>
+        <Label htmlFor="url">Logo url</Label>
         <Input
-          id="bio"
-          name="bio"
-          placeholder="Enter your chatbot bio"
-          defaultValue={bio}
+          id="url"
+          name="url"
+          placeholder="Enter your logo url"
+          defaultValue={url}
         />
-      </div> */}
+      </div>
 
       <div className="flex flex-col gap-1.5">
         <Label>Theme color</Label>
-        <p className="text-sm text-muted-foreground">
-          The theme color will be applied to the user messages, send button, and
-          widget button.
-        </p>
-        <Input type="color" name="color" defaultValue={color} />
+        <Select name="color" defaultValue={color}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a theme color" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Theme color</SelectLabel>
+              {THEME_COLORS.map((color) => (
+                <SelectItem key={color} value={color}>
+                  {color}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label>Open button icon</Label>
+        <Select name="icon" defaultValue={icon}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select an icon" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Icon</SelectLabel>
+              {OPEN_ICONS.map((icon) => (
+                <SelectItem key={icon} value={icon}>
+                  {icon}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -81,21 +134,6 @@ export default function Customizer({
           These messages will be shown when the chatbot is first opened.
         </p>
       </div>
-
-      {/* <div className="flex flex-col gap-1.5">
-        <Label htmlFor="starter">Starter queries</Label>
-        <Textarea
-          id="starter"
-          name="starter"
-          placeholder={`Enter your starter queries\nOne per line\nLike this`}
-          rows={5}
-          defaultValue={starter}
-        />
-        <p className="text-sm text-muted-foreground">
-          These questions will be shown when the chatbot is first opened.
-        </p>
-      </div> */}
-
       <Button type="submit" className="self-start" onClick={handleSubmit}>
         Update appearance
       </Button>

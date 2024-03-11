@@ -36,6 +36,7 @@ export async function chat({
   chatbot: Chatbot;
   messages: { role: "user" | "assistant"; content: string }[];
 }) {
+  console.log("messages", messages);
   invariant(messages.length > 0, "Messages must not be empty");
   invariant(
     messages[messages.length - 1].role === "user",
@@ -87,12 +88,15 @@ export async function chat({
 
   console.log("chatbot.model: ", { model: chatbot.model, client });
 
-  const completion = await client.chat.completions.create({
+  const stream = await client.chat.completions.create({
     messages: [{ role: "system", content: SP }, ...messages],
     model: chatbot.model,
+    stream: true,
   });
 
-  return completion.choices[0];
+  // return completion.choices[0];
+
+  return stream;
 }
 
 // WE NEED TO BE SUMMARIZING THE PREV CHAT AS WELL AND USING THAT TO GET EMBEDDINGS

@@ -2,14 +2,17 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import { chat } from "~/utils/openai";
 
 export async function action({ request }: ActionFunctionArgs) {
-  const formData = await request.formData();
+  // data is coming in as json not formdata
 
-  const messages = JSON.parse(formData.get("messages") as string) || [];
-  const chatbot = JSON.parse(formData.get("chatbot") as string);
+  const body = JSON.parse(await request.text());
+  const { chatbot, messages } = body;
 
   if (!chatbot) {
     return json({ error: "Chatbot not found" }, { status: 404 });
   }
+
+  console.log("chatbot", chatbot);
+  console.log("messages", messages);
 
   const assistantResponse = await chat({
     chatbot,
