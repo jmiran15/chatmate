@@ -55,6 +55,7 @@ function OptionsMenu() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ContactSupport({ email = null }) {
   if (!email) return null;
 

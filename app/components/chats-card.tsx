@@ -1,5 +1,5 @@
-import { Form, Link, useFetcher, useParams } from "@remix-run/react";
-import { formatDistanceToNow, set } from "date-fns";
+import { Form, Link, useParams } from "@remix-run/react";
+import { formatDistanceToNow } from "date-fns";
 import { Button } from "./ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";

@@ -3,7 +3,6 @@ import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
 import { useLoaderData } from "@remix-run/react";
 import Preview from "~/components/widget/preview";
-import { useMobileScreen } from "~/utils/mobile";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const chatbotId = params.chatbotId as string;

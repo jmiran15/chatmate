@@ -1,7 +1,7 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { useFetcher, useParams } from "@remix-run/react";
+import { useParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
-import { Chatbot, Message } from "@prisma/client";
+import { Chatbot } from "@prisma/client";
 
 import { ScrollArea } from "../ui/scroll-area";
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
@@ -83,7 +83,7 @@ export default function Chat() {
       const promptMessage =
         messages.length > 0 ? messages[messages.length - 1] : null;
       const remHistory = messages.length > 0 ? messages.slice(0, -1) : [];
-      let _chatHistory = [...remHistory];
+      const _chatHistory = [...remHistory];
 
       if (!promptMessage || !promptMessage?.userMessage) {
         setIsSubmitting(false);
@@ -367,6 +367,8 @@ async function streamChat(
         const chatResult = JSON.parse(msg.data);
         console.log("chatResult", chatResult);
         handleChat(chatResult);
+
+        // eslint-disable-next-line no-empty
       } catch {}
     },
     onerror(err) {

@@ -23,6 +23,7 @@ const markdown = markdownIt({
           hljs.highlight(code, { language: lang, ignoreIllegals: true }).value +
           "</pre></div>"
         );
+        // eslint-disable-next-line no-empty
       } catch (__) {}
     }
 

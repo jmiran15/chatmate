@@ -1,7 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
   clearChatMessages,
-  createChatWithId,
   createChatWithStarterMessages,
   createMessage,
   getChatById,
