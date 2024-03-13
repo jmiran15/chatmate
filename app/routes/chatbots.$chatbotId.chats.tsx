@@ -192,7 +192,6 @@ export default function Chats() {
     setShouldFetch(false);
   }, [clientHeight, scrollPosition]);
 
-  console.log(clientHeight, scrollPosition, height);
   // Merge chats, increment cursor, and allow fetching again
   useEffect(() => {
     // Discontinue API calls if the last page has been reached
