@@ -1,7 +1,6 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { useLoaderData, useParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
-import { Chatbot } from "@prisma/client";
 
 import { ScrollArea } from "../ui/scroll-area";
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";

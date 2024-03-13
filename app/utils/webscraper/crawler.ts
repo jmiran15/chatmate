@@ -161,10 +161,10 @@ export class WebCrawler {
     return urlObj.hostname === domainWithoutProtocol;
   }
 
-  private matchesPattern(link: string): boolean {
-    // TODO: implement pattern matching following the glob syntax
-    return true;
-  }
+  // private matchesPattern(link: string): boolean {
+  //   // TODO: implement pattern matching following the glob syntax
+  //   return true;
+  // }
 
   // function to check if the url is a file
   private isFile(url: string): boolean {

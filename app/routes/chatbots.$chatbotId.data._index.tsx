@@ -1,5 +1,4 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
@@ -23,7 +22,6 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { getDocumentsByChatbotId } from "~/models/document.server";
-import { Crawler, Page } from "~/utils/crawler";
 import { getEmbeddings, openai } from "~/utils/openai";
 import { getDocuments } from "~/utils/webscraper/scrape";
 import { Document } from "~/utils/types";
@@ -343,19 +341,19 @@ async function convertUploadedFilesToDocuments(
   }
 }
 
-async function convertWebsiteToDocuments(url: string): Promise<FullDocument[]> {
-  const crawler = new Crawler(1, 1);
+// async function convertWebsiteToDocuments(url: string): Promise<FullDocument[]> {
+//   const crawler = new Crawler(1, 1);
 
-  const pages = (await crawler.crawl(url)) as Page[];
-  return pages.map((page) => {
-    const id = uuidv4();
-    return {
-      name: page.url,
-      content: page.content,
-      id,
-    };
-  });
-}
+//   const pages = (await crawler.crawl(url)) as Page[];
+//   return pages.map((page) => {
+//     const id = uuidv4();
+//     return {
+//       name: page.url,
+//       content: page.content,
+//       id,
+//     };
+//   });
+// }
 
 const SUPPORTED_FILE_TYPES = [
   "txt",
@@ -387,6 +385,7 @@ export default function Data() {
   const { chatbotId } = useParams();
   const navigation = useNavigation();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [links, setLinks] = useState<any[]>([]);
   const [isScrapingWebsiteModalOpen, setIsScrapingWebsiteModalOpen] =
     useState(false);
@@ -552,6 +551,7 @@ function ScrapeWebsiteModal({
   open: boolean;
   setOpen: (value: boolean) => void;
   fetcher: ReturnType<typeof useFetcher>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   links: any[];
   loading: boolean;
 }) {
