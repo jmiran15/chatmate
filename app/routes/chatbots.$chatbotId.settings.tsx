@@ -72,13 +72,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         "response-length",
       ) as Chatbot["responseLength"];
 
-      console.log("Saving chatbot info", {
-        name,
-        systemPrompt,
-        model,
-        responseLength,
-      });
-
       const updatedChatbot = await updateChatbotById({
         id: chatbotId,
         name,

@@ -79,8 +79,6 @@ export const loader = async ({ params }) => {
 export default function Analytics() {
   const { chats: data } = useLoaderData<typeof loader>();
 
-  console.log(data);
-
   const {
     totalChats,
     percentChangeTotalChats,
@@ -142,15 +140,15 @@ export default function Analytics() {
     };
   }, [data]);
 
-  console.log(
-    totalChats,
-    percentChangeTotalChats,
-    weeklyChats,
-    percentChangeWeeklyChats,
-    averageMessagesPerChat,
-    percentChangeAverageMessagesPerChat,
-    chats,
-  );
+  // console.log(
+  //   totalChats,
+  //   percentChangeTotalChats,
+  //   weeklyChats,
+  //   percentChangeWeeklyChats,
+  //   averageMessagesPerChat,
+  //   percentChangeAverageMessagesPerChat,
+  //   chats,
+  // );
 
   const kpiData = [
     {

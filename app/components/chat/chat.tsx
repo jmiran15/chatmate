@@ -1,5 +1,5 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { useParams } from "@remix-run/react";
+import { useLoaderData, useParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
 import { Chatbot } from "@prisma/client";
 
@@ -27,33 +27,22 @@ const Markdown = lazy(() => import("../ui/markdown"));
 export const CHAT_PAGE_SIZE = 15;
 
 export default function Chat() {
+  const data = useLoaderData();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [userInput, setUserInput] = useState("");
   const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
   const { chatId, chatbotId } = useParams();
-  const [chatbot, setChatbot] = useState<Chatbot>();
+
+  const chatbot = data?.chatbot;
+  const BASE_URL = data?.BASE_URL;
 
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string }[]
-  >([]);
-
-  console.log("messages", messages);
+  >(data.messages);
 
   useEffect(() => {
-    // fetch at /api/messages/${chatId}
-    fetch(`/api/messages/${chatId}`)
-      .then((res) => res.json())
-      .then(({ messages }) => {
-        setMessages(messages);
-      });
-
-    // get the chatbot by id /api/chatbot/${chatbotId}
-    fetch(`/api/chatbot/${chatbotId}`)
-      .then((res) => res.json())
-      .then((chatbot) => {
-        setChatbot(chatbot);
-      });
-  }, [chatId, chatbotId]);
+    setMessages(data.messages);
+  }, [chatId]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -90,16 +79,20 @@ export default function Chat() {
         return false;
       }
 
-      console.log("fetchReply", promptMessage);
-
-      await streamChat(chatbot, remHistory, chatbotId, chatId, (chatResult) =>
-        handleChat(
-          chatResult,
-          setIsSubmitting,
-          setMessages,
-          remHistory,
-          _chatHistory,
-        ),
+      await streamChat(
+        BASE_URL,
+        chatbot,
+        remHistory,
+        chatbotId,
+        chatId,
+        (chatResult) =>
+          handleChat(
+            chatResult,
+            setIsSubmitting,
+            setMessages,
+            remHistory,
+            _chatHistory,
+          ),
       );
       return;
     }
@@ -187,8 +180,6 @@ export default function Chat() {
     scrollDomToBottom();
   }
 
-  console.log("msgs", msgs);
-
   return (
     <div className="flex flex-col relative h-full">
       <ScrollArea
@@ -205,7 +196,6 @@ export default function Chat() {
           {msgs.map((message, i) => {
             const isUser = message.role === "user";
 
-            console.log("MESSAGE", message);
             const showActions = i > 0 && !(message.content.length === 0);
 
             return (
@@ -301,6 +291,7 @@ export default function Chat() {
 }
 
 async function streamChat(
+  BASE_URL,
   chatbot,
   remHistory,
   chatbotId,
@@ -309,11 +300,21 @@ async function streamChat(
 ) {
   const ctrl = new AbortController();
 
-  // CHANGE THIS URL TO BE THE URL OF MY API
+  if (!BASE_URL) {
+    handleChat({
+      createdAt: new Date().toISOString(),
+      id: v4(),
+      type: "abort",
+      textResponse: null,
+      sources: [],
+      close: true,
+      error: `An error occurred while streaming response. No messages to send. BASE_URL not found.`,
+    });
+    ctrl.abort();
+    throw new Error();
+  }
 
-  console.log("remHistory", remHistory);
-
-  const URL_TEST = `http://localhost:3000/api/chat/${chatbotId}/${sessionId}`;
+  const URL_TEST = `${BASE_URL}/api/chat/${chatbotId}/${sessionId}`;
   await fetchEventSource(URL_TEST, {
     method: "POST",
     body: JSON.stringify({
@@ -329,7 +330,6 @@ async function streamChat(
     openWhenHidden: true,
     async onopen(response) {
       if (response.ok) {
-        console.log("response", response);
         return; // everything's good
       } else if (response.status >= 400) {
         await response
@@ -367,7 +367,6 @@ async function streamChat(
     async onmessage(msg) {
       try {
         const chatResult = JSON.parse(msg.data);
-        console.log("chatResult", chatResult);
         handleChat(chatResult);
 
         // eslint-disable-next-line no-empty

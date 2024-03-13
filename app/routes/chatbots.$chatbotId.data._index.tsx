@@ -409,7 +409,7 @@ export default function Data() {
         }
       } else if (action === "scrapeLinks") {
         if (fetcher.data) {
-          console.log("fetcher data documents", fetcher.data);
+          // console.log("fetcher data documents", fetcher.data);
           setIsScrapingWebsiteModalOpen(false);
           setLinks([]);
         }
@@ -424,8 +424,6 @@ export default function Data() {
       // done
     }
   }, [fetcher.state]);
-
-  console.log("loading", isSubmitting);
 
   return (
     <>

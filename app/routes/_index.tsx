@@ -14,13 +14,13 @@ export default function Index() {
     <div className="orange-gradient">
       <Navbar />
       <div className="container relative">
+        {/* old widget */}
         {/* <script
           async
           src="dev-widget.js"
           data-chatbotid="e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23"
           // data-chatbotid="69ea8261-bdfe-4d3d-b6a4-29f2d728b59e"
         ></script> */}
-
         <script
           data-embed-id="e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23"
           src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"

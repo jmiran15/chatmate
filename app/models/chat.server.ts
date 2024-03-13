@@ -358,12 +358,6 @@ export async function getChatsPagination({
     });
   }
 
-  console.log("request and response ", {
-    cursorId,
-    starred,
-    queryResults,
-  });
-
   if (queryResults.length === 0) {
     return {
       chats: [],

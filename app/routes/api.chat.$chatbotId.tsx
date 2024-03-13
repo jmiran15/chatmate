@@ -11,9 +11,6 @@ export async function action({ request }: ActionFunctionArgs) {
     return json({ error: "Chatbot not found" }, { status: 404 });
   }
 
-  console.log("chatbot", chatbot);
-  console.log("messages", messages);
-
   const assistantResponse = await chat({
     chatbot,
     messages,
