@@ -62,6 +62,7 @@
     "@tremor/react": "^3.14.1",
     "ag-grid-community": "^31.1.1",
     "ag-grid-react": "^31.1.1",
+    "async": "^3.2.5",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.12",

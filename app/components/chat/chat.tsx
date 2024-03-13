@@ -204,6 +204,8 @@ export default function Chat() {
         <div className="space-y-5">
           {msgs.map((message, i) => {
             const isUser = message.role === "user";
+
+            console.log("MESSAGE", message);
             const showActions = i > 0 && !(message.content.length === 0);
 
             return (
@@ -311,7 +313,7 @@ async function streamChat(
 
   console.log("remHistory", remHistory);
 
-  const URL_TEST = `https://chatmate.fly.dev/api/chat/${chatbotId}/${sessionId}`;
+  const URL_TEST = `http://localhost:3000/api/chat/${chatbotId}/${sessionId}`;
   await fetchEventSource(URL_TEST, {
     method: "POST",
     body: JSON.stringify({

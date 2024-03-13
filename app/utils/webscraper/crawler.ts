@@ -59,6 +59,8 @@ export class WebCrawler {
     inProgress?: (progress: Progress) => void,
   ): Promise<string[]> {
     const queue = async.queue(async (task: string, callback) => {
+      console.log("type of callback", typeof callback);
+
       if (this.crawledUrls.size >= this.maxCrawledLinks) {
         callback();
         return;
@@ -84,12 +86,17 @@ export class WebCrawler {
       callback();
     }, concurrencyLimit);
 
+    // queue.error(function (err, task) {
+    //   console.error(err, task);
+    // });
+
     queue.push(
       urls.filter((url) => !this.visited.has(url)),
       (err) => {
         if (err) console.error(err);
       },
     );
+
     await queue.drain();
     return Array.from(this.crawledUrls);
   }

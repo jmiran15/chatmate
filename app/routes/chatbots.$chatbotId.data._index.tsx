@@ -4,7 +4,6 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
   Form,
-  useActionData,
   useFetcher,
   useLoaderData,
   useNavigation,
@@ -12,7 +11,7 @@ import {
 } from "@remix-run/react";
 import { prisma } from "~/db.server";
 
-import { useCallback, useEffect, useState, useRef, Fragment } from "react";
+import { useEffect, useState, useRef, Fragment } from "react";
 import { AgGridReact } from "ag-grid-react";
 import AgGridStyles from "ag-grid-community/styles/ag-grid.css";
 import AgThemeAlpineStyles from "ag-grid-community/styles/ag-theme-alpine.css";
@@ -27,6 +26,7 @@ import { getDocumentsByChatbotId } from "~/models/document.server";
 import { Crawler, Page } from "~/utils/crawler";
 import { getEmbeddings, openai } from "~/utils/openai";
 import { getDocuments } from "~/utils/webscraper/scrape";
+import { Document } from "~/utils/types";
 
 const columnDefs = [
   { field: "metadata.sourceURL", checkboxSelection: true, flex: 1 },
@@ -50,8 +50,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (action) {
     case "getLinks": {
-      console.log("getLinks action");
-
       const url = formData.get("url") as string;
 
       const links = await getDocuments(
@@ -64,44 +62,70 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       );
 
-      console.log("links", links);
-
       return json({ links });
     }
     case "scrapeLinks": {
-      // links/urls to be scraped are passed in as formData
+      let links = JSON.parse(formData.get("links") as string);
+      links = links.map((link) => link.metadata.sourceURL);
+
+      const scrapedDocuments = await getDocuments(
+        links,
+        "single_urls",
+        1000,
+        false,
+        (progress) => {
+          console.log("scraping: ", progress);
+        },
+      );
+
       // const documents: FullDocument[] = await convertWebsiteToDocuments(url);
-      // const baseChunks: Chunk[] = documents.flatMap((document) =>
-      //   splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP),
-      // );
-      // baseChunks.forEach(async (chunk) => {
-      //   const summary = await generateSummaryForChunk(chunk);
-      //   const questions = await generatePossibleQuestionsForChunk(chunk);
-      //   await [chunk, summary, ...questions].map(async (node) => {
-      //     const embedding = await getEmbeddings({ input: node.content });
-      //     await prisma.$executeRaw`
-      //     INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
-      //     VALUES (${uuidv4()}, ${embedding}::vector, ${
-      //       node.documentId
-      //     }, ${chatbotId}, ${chunk.content})
-      //     `;
-      //     return {
-      //       chunk: chunk.content,
-      //       embedding: embedding,
-      //       documentId: chunk.documentId,
-      //       chatbotId,
-      //     };
-      //   });
-      // });
-      // // insert the document
-      // return await prisma.document.createMany({
-      //   data: documents.map((document) => ({
-      //     name: document.name,
-      //     content: document.content,
-      //     chatbotId: chatbotId as string,
-      //     id: document.id,
-      //   })),
-      // });
+      const documents: FullDocument[] = scrapedDocuments.map(
+        (document: Document) => {
+          const id = uuidv4();
+          return {
+            name: document.metadata.sourceURL
+              ? document.metadata.sourceURL
+              : "Untitled document",
+            content: document.content,
+            id,
+          };
+        },
+      );
+
+      const baseChunks: Chunk[] = documents.flatMap((document) =>
+        splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP),
+      );
+
+      baseChunks.forEach(async (chunk) => {
+        const summary = await generateSummaryForChunk(chunk);
+        const questions = await generatePossibleQuestionsForChunk(chunk);
+        await [chunk, summary, ...questions].map(async (node) => {
+          const embedding = await getEmbeddings({ input: node.content });
+          await prisma.$executeRaw`
+          INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
+          VALUES (${uuidv4()}, ${embedding}::vector, ${
+            node.documentId
+          }, ${chatbotId}, ${chunk.content})
+          `;
+          return {
+            chunk: chunk.content,
+            embedding: embedding,
+            documentId: chunk.documentId,
+            chatbotId,
+          };
+        });
+      });
+      // insert the document
+      const documents_ = await prisma.document.createMany({
+        data: documents.map((document) => ({
+          name: document.name,
+          content: document.content,
+          chatbotId: chatbotId as string,
+          id: document.id,
+        })),
+      });
+
+      return json({ documents: documents_ });
     }
     case "upload": {
       // Get all file entries from the original formData
@@ -362,48 +386,46 @@ export default function Data() {
   const data = useLoaderData<typeof loader>();
   const { chatbotId } = useParams();
   const navigation = useNavigation();
-  const isSubmitting =
-    navigation.formAction === `/chatbots/${chatbotId}/data?index`;
-  const actionData = useActionData<typeof action>();
+
   const [links, setLinks] = useState<any[]>([]);
   const [isScrapingWebsiteModalOpen, setIsScrapingWebsiteModalOpen] =
     useState(false);
 
   const fetcher = useFetcher();
 
-  // get the submission info from the fetcher
-
-  // when submitted from the getLinks form, we should wait for the status and then set the isScrapingWebsiteModalOpen to open
-  // and set the Links to the fetcher.data
-
-  // when the modal fetcher is submitted
+  const isSubmitting =
+    navigation.formAction === `/chatbots/${chatbotId}/data?index` ||
+    fetcher.state === "submitting" ||
+    fetcher.state === "loading";
 
   useEffect(() => {
     if (fetcher.formData) {
       const action = fetcher.formData.get("action");
 
-      console.log("action", action, fetcher.state);
       if (action === "getLinks") {
         if (fetcher.data) {
-          console.log("fetcher data links", fetcher.data.links);
           setLinks(fetcher.data.links);
           setIsScrapingWebsiteModalOpen(true);
         }
+      } else if (action === "scrapeLinks") {
+        if (fetcher.data) {
+          console.log("fetcher data documents", fetcher.data);
+          setIsScrapingWebsiteModalOpen(false);
+          setLinks([]);
+        }
       }
+    }
+
+    if (fetcher.state === "submitting" || fetcher.state === "loading") {
+      // loading
+    }
+
+    if (fetcher.state === "idle") {
+      // done
     }
   }, [fetcher.state]);
 
-  console.log("status: ", links, isScrapingWebsiteModalOpen);
-
-  // useEffect(() => {
-  //   if (actionData?.links) {
-  //     setLinks(
-  //       actionData.links.map((document) => ({
-  //         url: document.metadata.sourceURL,
-  //       })),
-  //     );
-  //   }
-  // }, [actionData?.links]);
+  console.log("loading", isSubmitting);
 
   return (
     <>
@@ -505,6 +527,7 @@ export default function Data() {
         setOpen={setIsScrapingWebsiteModalOpen}
         fetcher={fetcher}
         links={links}
+        loading={isSubmitting}
       />
     </>
   );
@@ -526,11 +549,13 @@ function ScrapeWebsiteModal({
   setOpen,
   fetcher,
   links,
+  loading,
 }: {
   open: boolean;
   setOpen: (value: boolean) => void;
   fetcher: ReturnType<typeof useFetcher>;
   links: any[];
+  loading: boolean;
 }) {
   const cancelButtonRef = useRef(null);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -541,8 +566,6 @@ function ScrapeWebsiteModal({
     const selectedData = selectedNodes.map((node) => node.data);
     setSelectedRows(selectedData);
   };
-
-  console.log("selectedRows", selectedRows);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -575,7 +598,7 @@ function ScrapeWebsiteModal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 w-full">
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                     <Dialog.Title
@@ -601,22 +624,33 @@ function ScrapeWebsiteModal({
                     </div>
                   </div>
                 </div>
-                <fetcher.Form className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
-                    type="submit"
-                    className="inline-flex w-full justify-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                <fetcher.Form method="POST">
+                  <fieldset
+                    disabled={loading}
+                    className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse"
                   >
-                    Scrape
-                  </button>
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                    ref={cancelButtonRef}
-                  >
-                    Cancel
-                  </button>
+                    <input type="hidden" name="action" value="scrapeLinks" />
+                    <input
+                      type="hidden"
+                      name="links"
+                      value={JSON.stringify(selectedRows)}
+                    />
+                    <button
+                      type="submit"
+                      className="inline-flex w-full justify-center rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                      // onClick={() => setOpen(false)}
+                    >
+                      Scrape
+                    </button>
+                    <button
+                      type="button"
+                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                      onClick={() => setOpen(false)}
+                      ref={cancelButtonRef}
+                    >
+                      Cancel
+                    </button>
+                  </fieldset>
                 </fetcher.Form>
               </Dialog.Panel>
             </Transition.Child>
