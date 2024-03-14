@@ -49,7 +49,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   switch (action) {
     case "getLinks": {
       const url = formData.get("url") as string;
-
       const links = await getDocuments(
         [url],
         "crawl",
@@ -596,9 +595,9 @@ function ScrapeWebsiteModal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6 w-full">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-3/5 sm:p-6 w-full">
                 <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                  <div className="m-3 text-center sm:text-left w-full">
                     <Dialog.Title
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"

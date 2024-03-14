@@ -123,7 +123,10 @@ export class WebCrawler {
 
     // Perform the crawl
     try {
+      console.log("crawling url to get links", url);
       const response = await axios.get(url);
+      // console.log("response", response);
+
       const $ = cheerio.load(response.data);
       const links: string[] = [];
 
@@ -161,10 +164,11 @@ export class WebCrawler {
     return urlObj.hostname === domainWithoutProtocol;
   }
 
-  // private matchesPattern(link: string): boolean {
-  //   // TODO: implement pattern matching following the glob syntax
-  //   return true;
-  // }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private matchesPattern(link: string): boolean {
+    // TODO: implement pattern matching following the glob syntax
+    return true;
+  }
 
   // function to check if the url is a file
   private isFile(url: string): boolean {
