@@ -34,10 +34,8 @@ export default function ChatLink({ chat }: { chat: Chat }) {
           variant: isActive(chat.id) ? "default" : "ghost",
           size: "sm",
         }),
-        isActive(chat.id) &&
-          "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
-        "justify-start",
-        "flex flex-row justify-between items-center",
+        isActive(chat.id) && "justify-start",
+        "flex flex-row justify-between items-center w-full",
       )}
     >
       {editing ? (
@@ -50,7 +48,7 @@ export default function ChatLink({ chat }: { chat: Chat }) {
           onChange={(e) => setUpdateValue(e.target.value)}
         />
       ) : (
-        <Link to={chat.id} className="flex-1">
+        <Link to={chat.id} className="flex-1 truncate">
           {chat.name}
         </Link>
       )}
