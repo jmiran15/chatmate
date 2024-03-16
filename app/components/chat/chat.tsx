@@ -15,7 +15,7 @@ import { cn } from "~/lib/utils";
 import { copyToClipboard } from "~/utils/clipboard";
 import { Separator } from "../ui/separator";
 import { Clipboard } from "lucide-react";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { useMobileScreen } from "~/utils/mobile";
 import { Loading } from "../ui/loading";
@@ -112,11 +112,6 @@ export default function Chat() {
             _chatHistory,
           ),
       );
-      // console.log("done: ", _chatHistory[_chatHistory.length - 1]);
-
-      // here we have the assiant response
-      // call api/followup to get follow up questions
-      // set the follow up questions state
 
       const followUpRes = await fetch(`/api/generatefollowups`, {
         method: "POST",
@@ -129,8 +124,6 @@ export default function Chat() {
       const { followUps } = await followUpRes.json();
 
       setFollowUps(followUps);
-
-      console.log("followUps: ", followUps);
 
       return;
     }
