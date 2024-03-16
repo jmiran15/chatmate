@@ -22,6 +22,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const themeColor = formData.get("color") as string;
   const publicName = formData.get("name") as string;
   const introMessages = (formData.get("intro") as string).split("\n");
+  const starterQuestions = (formData.get("starter") as string).split("\n");
   const openIcon = formData.get("icon") as string;
   const logoUrl = formData.get("url") as string;
 
@@ -30,6 +31,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     themeColor,
     publicName,
     introMessages,
+    starterQuestions,
     openIcon,
     logoUrl,
   });
@@ -46,6 +48,7 @@ export default function Appearance() {
         color={data?.themeColor}
         icon={data?.openIcon}
         introMessages={data?.introMessages}
+        starterQuestions={data?.starterQuestions}
       />
 
       <div className="lg:col-span-2 flex flex-col items-end justify-end p-[20px] h-full bg-slate-100">

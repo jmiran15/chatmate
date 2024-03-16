@@ -56,7 +56,7 @@ export function ChatsNav({ chats, isCollapsed }: NavProps) {
       </span>
 
       {/* desktop */}
-      <div className="hidden md:flex col-span-1 flex-col gap-1 p-2 border-l border-gray-200">
+      <div className="hidden md:flex col-span-1 shrink-0 flex-col gap-1 p-2 border-l border-gray-200 overflow-x-hidden overflow-y-auto">
         <Form method="post" className="w-full ">
           <input type="hidden" name="action" value="create" />
           <Button type="submit" className="w-full" variant={"outline"}>
