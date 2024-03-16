@@ -113,7 +113,7 @@ export default function Chat() {
           ),
       );
 
-      const followUpRes = await fetch(`/api/generatefollowups`, {
+      const followUpRes = await fetch(`${BASE_URL}/api/generatefollowups`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
