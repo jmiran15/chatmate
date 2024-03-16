@@ -34,13 +34,13 @@ model Chatbot {
   chats     Chat[]
 
   // style
-  publicName    String   @default("Your Chatbot")
-  logoUrl       String?
-  themeColor    String   @default("zinc")
-  introMessages String[] @default(["Hello, how can I help you today?"])
-  openIcon      String   @default("plus") // plus, chevron, chat
+  publicName       String   @default("Your Chatbot")
+  logoUrl          String?
+  themeColor       String   @default("zinc")
+  introMessages    String[] @default(["Hello, how can I help you today?"])
+  openIcon         String   @default("plus") // plus, chevron, chat
   // bio              String      @default("I'm a chatbot")
-  // starterQuestions String[]    @default(["What are your features?"])
+  starterQuestions String[] @default(["What are your features?"])
 
   name           String
   systemPrompt   String?
