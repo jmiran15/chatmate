@@ -340,20 +340,6 @@ async function convertUploadedFilesToDocuments(
   }
 }
 
-// async function convertWebsiteToDocuments(url: string): Promise<FullDocument[]> {
-//   const crawler = new Crawler(1, 1);
-
-//   const pages = (await crawler.crawl(url)) as Page[];
-//   return pages.map((page) => {
-//     const id = uuidv4();
-//     return {
-//       name: page.url,
-//       content: page.content,
-//       id,
-//     };
-//   });
-// }
-
 const SUPPORTED_FILE_TYPES = [
   "txt",
   "eml",

@@ -12,8 +12,6 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     throw new Error("Chatbot ID is required");
   }
 
-  // fetch at /api/messages/${chatId}
-
   const isDev = process.env.NODE_ENV === "development";
 
   const BASE_URL = isDev ? process.env.DEV_BASE : process.env.PROD_BASE;
