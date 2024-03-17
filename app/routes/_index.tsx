@@ -22,7 +22,7 @@ export default function Index() {
           // data-chatbotid="69ea8261-bdfe-4d3d-b6a4-29f2d728b59e"
         ></script> */}
         <script
-          data-embed-id="e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23"
+          data-embed-id="45fa2e63-fd62-422f-ae83-383022baedc6"
           src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
         ></script>
         <Hero />
