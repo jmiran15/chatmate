@@ -2,7 +2,7 @@
 
 export default function ChatIndex() {
   return (
-    <div className="flex flex-col p-6">
+    <div className="flex flex-col p-4">
       <h1>Create a new chat, or select one from the list</h1>
     </div>
   );

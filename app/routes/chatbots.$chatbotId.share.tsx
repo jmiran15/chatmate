@@ -4,7 +4,7 @@ import CodeBlock from "~/components/code-block";
 export default function Share() {
   const { chatbotId } = useParams();
   return (
-    <div className="flex flex-col h-full w-full p-8 gap-4">
+    <div className="flex flex-col h-full w-full p-4 gap-4">
       <p className="text-muted-foreground">
         To add the chatbot any where on your website, add this iframe and script
         tag to your html code

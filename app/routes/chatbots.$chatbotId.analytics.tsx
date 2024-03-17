@@ -173,7 +173,7 @@ export default function Analytics() {
   ];
 
   return (
-    <div className="h-full w-full p-10 flex flex-col gap-6 overflow-y-auto">
+    <div className="h-full w-full p-4 flex flex-col gap-6 overflow-y-auto">
       <KPICards data={kpiData} />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <LineChartHero data={chats} />

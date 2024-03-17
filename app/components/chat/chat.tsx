@@ -183,7 +183,7 @@ export default function Chat() {
     <div className="flex flex-col relative h-full">
       <ScrollArea
         ref={scrollRef}
-        className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-5"
+        className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-4"
         onMouseDown={() => inputRef.current?.blur()}
         onScroll={(e) => onChatBodyScroll(e.currentTarget)}
         onTouchStart={() => {

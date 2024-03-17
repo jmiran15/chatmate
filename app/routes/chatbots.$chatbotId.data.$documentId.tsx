@@ -82,7 +82,7 @@ export default function ModelC() {
   return (
     <ScrollArea className="h-full w-full">
       <Form method="post">
-        <fieldset disabled={isSubmitting} className="flex flex-col gap-6 p-8">
+        <fieldset disabled={isSubmitting} className="flex flex-col gap-6 p-4">
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="name">Name</Label>
             <Input
