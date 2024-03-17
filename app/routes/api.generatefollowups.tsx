@@ -1,4 +1,4 @@
-import { groq, openai } from "~/utils/openai";
+import { openai } from "~/utils/openai";
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { follow_up_system_prompt } from "~/utils/prompts";
 
