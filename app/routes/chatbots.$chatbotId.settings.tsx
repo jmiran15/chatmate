@@ -229,7 +229,7 @@ export default function ModelC() {
         <fetcher.Form
           ref={formRef}
           method="post"
-          className="flex flex-col gap-6 p-8"
+          className="flex flex-col gap-6 p-4"
         >
           <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900">
