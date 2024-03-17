@@ -11,6 +11,7 @@ import * as gtag from "~/utils/gtags.client";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
+import { Button } from "~/components/ui/button";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -87,7 +88,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-full flex-col justify-center ">
+    <div className="flex h-screen w-screen flex-col justify-center items-center">
       <div className="mx-auto w-full max-w-md px-8">
         <Form onSubmit={handleSubmit} method="post" className="space-y-6">
           <div>
@@ -146,12 +147,7 @@ export default function LoginPage() {
           </div>
 
           <input type="hidden" name="redirectTo" value={redirectTo} />
-          <button
-            type="submit"
-            className="w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-400"
-          >
-            Log in
-          </button>
+          <Button type="submit">Log in</Button>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
