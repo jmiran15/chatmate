@@ -194,7 +194,7 @@ export default function Chat() {
         <div className="space-y-5">
           {msgs.map((message, i) => {
             const isUser = message.role === "user";
-            const showActions = i > 0 && !(message.content.length === 0);
+            const showActions = i > 0;
 
             return (
               <div className="space-y-5" key={i}>
@@ -224,8 +224,8 @@ export default function Chat() {
                           <Suspense fallback={<Loading />}>
                             <Markdown
                               content={message.content}
-                              // eslint-disable-next-line react/jsx-no-leaked-render
                               loading={
+                                // eslint-disable-next-line react/jsx-no-leaked-render
                                 isSubmitting && !isUser && message.pending
                               }
                               onDoubleClickCapture={() => {
