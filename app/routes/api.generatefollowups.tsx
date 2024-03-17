@@ -1,4 +1,4 @@
-import { groq } from "~/utils/openai";
+import { groq, openai } from "~/utils/openai";
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { follow_up_system_prompt } from "~/utils/prompts";
 
@@ -72,7 +72,20 @@ async function generateFollowUps(
     history +
     "POSSIBLE FOLLOW UP QUESTIONS (separated by new line, min 0, max 3)";
 
-  const completion = await groq.chat.completions.create({
+  // const completion = await groq.chat.completions.create({
+  //   messages: [
+  //     {
+  //       role: "system",
+  //       content: follow_up_system_prompt,
+  //     },
+  //     {
+  //       role: "user",
+  //       content: user_prompt,
+  //     },
+  //   ],
+  //   model: "mixtral-8x7b-32768",
+  // });
+  const completion = await openai.chat.completions.create({
     messages: [
       {
         role: "system",
@@ -83,7 +96,7 @@ async function generateFollowUps(
         content: user_prompt,
       },
     ],
-    model: "mixtral-8x7b-32768",
+    model: "gpt-4-0125-preview",
   });
 
   return completion.choices[0].message.content as string;
