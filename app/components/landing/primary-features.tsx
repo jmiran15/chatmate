@@ -3,35 +3,36 @@ import { Tab } from "@headlessui/react";
 import clsx from "clsx";
 
 import { Container } from "./container";
-import screenshotExpenses from "../../images/screenshots/expenses.png";
-import screenshotPayroll from "../../images/screenshots/payroll.png";
-import screenshotReporting from "../../images/screenshots/reporting.png";
-import screenshotVatReturns from "../../images/screenshots/vat-returns.png";
+
+import screenshotDocuments from "../../images/screenshots/data.png";
+import screenshotAppearance from "../../images/screenshots/appearance.png";
+import screenshotChats from "../../images/screenshots/chats.png";
+import screenshotAnalytics from "../../images/screenshots/analytics.png";
 
 const features = [
   {
     title: "Ground your AI agent",
     description:
       "Imbue your agent with your company’s identity, policies, processes, and knowledge – ensuring your agent represents the best of your business.",
-    image: screenshotPayroll,
+    image: screenshotDocuments,
   },
   {
     title: "Customize",
     description:
       "Customize your chatbot widget to match your brand and website design. Add starter messages, follow-up questions, and more.",
-    image: screenshotExpenses,
+    image: screenshotAppearance,
   },
   {
     title: "Gather AI insights",
     description:
       "Chatmate automatically generates key insights for each conversation, making it easy to track success and see what your customers are interested in most.",
-    image: screenshotVatReturns,
+    image: screenshotChats,
   },
   {
     title: "Analytics",
     description:
       "From conversation trends to resolution rates, gain a comprehensive view of your AI chatbot’s effectiveness in enhancing customer experience.",
-    image: screenshotReporting,
+    image: screenshotAnalytics,
   },
 ];
 

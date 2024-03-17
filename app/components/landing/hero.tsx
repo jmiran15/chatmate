@@ -1,6 +1,6 @@
 import { Button } from "./button";
 import { Container } from "./container";
-import screenshotPayroll from "../../images/screenshots/payroll.png";
+import screenshotChats from "../../images/screenshots/chats.png";
 
 export function Hero() {
   return (
@@ -42,7 +42,7 @@ export function Hero() {
       </div>
       <img
         className="w-full mt-12"
-        src={screenshotPayroll}
+        src={screenshotChats}
         alt=""
         sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
       />
