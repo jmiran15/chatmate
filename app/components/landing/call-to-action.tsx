@@ -17,7 +17,7 @@ export function CallToAction() {
             conversational experience, while dramatically improving business
             outcomes.
           </p>
-          <Button to="/register" color="white" className="mt-10">
+          <Button to="/join" color="white" className="mt-10">
             Get started for free
           </Button>
         </div>

@@ -26,7 +26,7 @@ export function Hero() {
         volume
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
-        <Button to="/register">Get started for free</Button>
+        <Button to="/join">Get started for free</Button>
         {/* <Button
           to="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
           variant="outline"
