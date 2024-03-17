@@ -10,27 +10,27 @@ import screenshotVatReturns from "../../images/screenshots/vat-returns.png";
 
 const features = [
   {
-    title: "Payroll",
+    title: "Ground your AI agent",
     description:
-      "Keep track of everyone's salaries and whether or not they've been paid. Direct deposit not supported.",
+      "Imbue your agent with your company’s identity, policies, processes, and knowledge – ensuring your agent represents the best of your business.",
     image: screenshotPayroll,
   },
   {
-    title: "Claim expenses",
+    title: "Customize",
     description:
-      "All of your receipts organized into one place, as long as you don't mind typing in the data by hand.",
+      "Customize your chatbot widget to match your brand and website design. Add starter messages, follow-up questions, and more.",
     image: screenshotExpenses,
   },
   {
-    title: "VAT handling",
+    title: "Gather AI insights",
     description:
-      "We only sell our software to companies who don't deal with VAT at all, so technically we do all the VAT stuff they need.",
+      "Chatmate automatically generates key insights for each conversation, making it easy to track success and see what your customers are interested in most.",
     image: screenshotVatReturns,
   },
   {
-    title: "Reporting",
+    title: "Analytics",
     description:
-      "Easily export your data into an Excel spreadsheet where you can do whatever the hell you want with it.",
+      "From conversation trends to resolution rates, gain a comprehensive view of your AI chatbot’s effectiveness in enhancing customer experience.",
     image: screenshotReporting,
   },
 ];
@@ -59,23 +59,16 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Features for running your books"
-      className="relative overflow-hidden bg-orange-600 pb-28 pt-20 sm:py-32"
+      className="relative overflow-hidden bg-orange-300 pb-28 pt-20 sm:py-32"
     >
-      {/* <img
-        className="absolute left-1/2 top-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-        src={backgroundImage}
-        alt=""
-        width={2245}
-        height={1636}
-      /> */}
       <Container className="relative">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-            Everything you need to run your books.
+            Make AI your own.
           </h2>
           <p className="mt-6 text-lg tracking-tight text-orange-100">
-            Well everything you need if you aren’t that picky about minor
-            details like tax compliance.
+            Chatmate’s AI platform enables your company to build an AI agent
+            that is personalized to your business and customers.
           </p>
         </div>
         <Tab.Group
@@ -102,7 +95,7 @@ export function PrimaryFeatures() {
                           className={clsx(
                             "font-display text-lg ui-not-focus-visible:outline-none",
                             selectedIndex === featureIndex
-                              ? "text-orange-600 lg:text-white"
+                              ? "text-orange-500 lg:text-white"
                               : "text-orange-100 hover:text-white lg:text-white",
                           )}
                         >

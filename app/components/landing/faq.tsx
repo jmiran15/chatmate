@@ -1,56 +1,52 @@
 import { Container } from "./container";
-import backgroundImage from "../../images/background-faqs.jpg";
 
 const faqs = [
   [
     {
-      question: "Does TaxPal handle VAT?",
+      question: "What is Chatmate?",
       answer:
-        "Well no, but if you move your company offshore you can probably ignore it.",
+        "Chatmate is an advanced chatbot creation tool that enables website owners to embed a chatbot powered by large language models, like gpt-4, into their websites. It's designed to respond to user inquiries, proactively engage, and address their concerns. This makes Chatmate a powerful tool for your customer support.",
     },
     {
-      question: "Can I pay for my subscription via purchase order?",
-      answer: "Absolutely, we are happy to take your money in all forms.",
+      question: "Is Chatmate free?",
+      answer:
+        "Yes, Chatmate is completely free to use. We believe in providing powerful chatbot technology accessible to all website owners, regardless of their budget. This allows even small and medium-sized enterprises to leverage the benefits of advanced chatbot features without cost.",
     },
     {
-      question: "How do I apply for a job at TaxPal?",
+      question: "How can I set up Chatmate on my website?",
       answer:
-        "We only hire our customers, so subscribe for a minimum of 6 months and then let’s talk.",
+        "Setting up Chatmate on your website is straightforward. You simply need to provide the URL of your website or upload documents containing your website's information. After customization, you will receive code that you can embed into your website. This process is designed to be user-friendly, requiring minimal technical expertise.",
     },
   ],
   [
     {
-      question: "What was that testimonial about tax fraud all about?",
+      question: "Do I need to know how to code?",
       answer:
-        "TaxPal is just a software application, ultimately your books are your responsibility.",
+        "No, Chatmate is a completely no-code customer support chatbot tool. You can create and modify your chatbot entirely through our user-friendly UI. Once you are finished you can simply embed a few lines of code into your existing website.",
     },
     {
       question:
-        "TaxPal sounds horrible but why do I still feel compelled to purchase?",
+        "Can I use Chatmate if my website is on Webflow, Wix, Framer, Wordpress, Shopify, etc…?",
       answer:
-        "This is the power of excellent visual design. You just can’t resist it, no matter how poorly it actually functions.",
+        "Yes, you can embed Chatmate on any platform that allows you to add custom code to your website. If you face any troubles while embedding, or have questions, feel free to contact us at chatmate.dev@gmail.com",
     },
     {
-      question:
-        "I found other companies called TaxPal, are you sure you can use this name?",
+      question: "Can Chatmate be customized to match my website’s style?",
       answer:
-        "Honestly not sure at all. We haven’t actually incorporated or anything, we just thought it sounded cool and made this website.",
+        "Absolutely! Chatmate offers extensive customization options to ensure the chatbot seamlessly blends with your website's style. You can modify colors, starter messages, follow-up questions, and more, to align the chatbot's appearance and behavior with your brand identity and website aesthetics.",
     },
   ],
   [
     {
-      question: "How do you generate reports?",
+      question:
+        "What kind of support does Chatmate offer if I encounter issues?",
       answer:
-        "You just tell us what data you need a report for, and we get our kids to create beautiful charts for you using only the finest crayons.",
+        "For any issues or queries, you can reach us at chatmate.dev@gmail.com, and our team will assist you promptly. We are committed to ensuring a smooth experience with Chatmate and are always ready to help with any challenges you may face.",
     },
     {
-      question: "Can we expect more inventory features?",
-      answer: "In life it’s really better to never expect anything at all.",
-    },
-    {
-      question: "I lost my password, how do I get into my account?",
+      question: "What kind of data can I connect my chatbot to?",
       answer:
-        "Send us an email and we will send you a copy of our latest password spreadsheet so you can find your information.",
+        "Chatmate allows you to connect your chatbot to your website directly or upload files. We support txt, eml, msg, xml, html, md, rst, json, rtf, jpeg, png, doc, docx, ppt, pptx, pdf, odt, epub, csv, tsv, xlsx, and gz files. There is no limit on data uploads.",
     },
   ],
 ];
@@ -78,8 +74,8 @@ export function Faqs() {
             Frequently asked questions
           </h2>
           <p className="mt-4 text-lg tracking-tight text-slate-700">
-            If you can’t find what you’re looking for, email our support team
-            and if you’re lucky someone will get back to you.
+            If you can’t find what you’re looking for, email our support team at
+            chatmate.dev@gmail.com
           </p>
         </div>
         <ul className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3">
