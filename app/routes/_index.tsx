@@ -15,7 +15,7 @@ export default function Index() {
       <Navbar />
       {/* widget */}
       <script
-        data-embed-id="e95f87ab-d525-4a8e-b9ca-4fe17e5c3d23"
+        data-embed-id="45fa2e63-fd62-422f-ae83-383022baedc6"
         src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
       ></script>
       <main>
