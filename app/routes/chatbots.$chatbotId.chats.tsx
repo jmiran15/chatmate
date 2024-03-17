@@ -45,7 +45,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const paginatedChats = await getChatsPagination({
     chatbotId,
     cursorId: cursor,
-    take: 3,
+    take: 25,
     starred: starred === "true",
     sort,
   });
