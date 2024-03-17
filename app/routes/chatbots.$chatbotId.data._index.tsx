@@ -340,20 +340,6 @@ async function convertUploadedFilesToDocuments(
   }
 }
 
-// async function convertWebsiteToDocuments(url: string): Promise<FullDocument[]> {
-//   const crawler = new Crawler(1, 1);
-
-//   const pages = (await crawler.crawl(url)) as Page[];
-//   return pages.map((page) => {
-//     const id = uuidv4();
-//     return {
-//       name: page.url,
-//       content: page.content,
-//       id,
-//     };
-//   });
-// }
-
 const SUPPORTED_FILE_TYPES = [
   "txt",
   "eml",
@@ -425,7 +411,7 @@ export default function Data() {
 
   return (
     <>
-      <div className="flex flex-col p-8 gap-8 w-full md:px-24 md:py-12 overflow-y-auto h-full">
+      <div className="flex flex-col p-4 gap-8 w-full overflow-y-auto h-full">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold">Data</h1>
           <h1 className="font-normal text-gray-700 dark:text-gray-400">

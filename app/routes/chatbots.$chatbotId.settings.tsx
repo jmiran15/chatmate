@@ -32,17 +32,21 @@ import { useToast } from "~/components/ui/use-toast";
 export const OPENAI_MODELS = ["gpt-4-0125-preview", "gpt-3.5-turbo-0125"];
 
 export const ANYSCALE_MODELS = [
-  "google/gemma-7b-it",
-  "meta-llama/Llama-2-7b-chat-hf",
-  "meta-llama/Llama-2-13b-chat-hf",
-  "meta-llama/Llama-2-70b-chat-hf",
   "codellama/CodeLlama-70b-Instruct-hf",
-  "mistralai/Mistral-7B-Instruct-v0.1",
-  "mistralai/Mixtral-8x7B-Instruct-v0.1",
   "mlabonne/NeuralHermes-2.5-Mistral-7B",
 ];
 
-export const SUPPORTED_MODELS = [...OPENAI_MODELS, ...ANYSCALE_MODELS];
+export const GROQ_MODELS = [
+  "llama2-70b-4096",
+  "mixtral-8x7b-32768",
+  "gemma-7b-it",
+];
+
+export const SUPPORTED_MODELS = [
+  ...OPENAI_MODELS,
+  ...GROQ_MODELS,
+  ...ANYSCALE_MODELS,
+];
 
 export const PROMPT_TEMPLATES = [
   {
@@ -225,7 +229,7 @@ export default function ModelC() {
         <fetcher.Form
           ref={formRef}
           method="post"
-          className="flex flex-col gap-6 p-8"
+          className="flex flex-col gap-6 p-4"
         >
           <div>
             <h2 className="text-base font-semibold leading-7 text-gray-900">

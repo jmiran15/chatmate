@@ -97,6 +97,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 messages,
               });
 
+              console.log("chatStream", chatStream);
+
               for await (const chunk of chatStream) {
                 for (const choice of chunk.choices) {
                   console.log("choice", choice);
@@ -140,6 +142,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
               console.log("assistantResponse", assistantResponse);
             } catch (error) {
+              console.log("error", error);
+
               controller.enqueue(
                 `data: ${JSON.stringify({
                   uuid,

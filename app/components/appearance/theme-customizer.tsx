@@ -43,14 +43,17 @@ export default function Customizer({
   color,
   icon,
   introMessages,
+  starterQuestions,
 }: {
   name: string;
   url: string;
   color: string;
   icon: string;
   introMessages: string[];
+  starterQuestions: string[];
 }) {
   const intro = introMessages.join("\n");
+  const starter = starterQuestions.join("\n");
   const fetcher = useFetcher();
 
   function handleSubmit(event) {
@@ -62,7 +65,7 @@ export default function Customizer({
   return (
     <fetcher.Form
       method="POST"
-      className="flex flex-col space-y-8 lg:col-span-2 lg:h-full lg:overflow-y-auto lg:border-r border-b border-gray-200 p-8"
+      className="flex flex-col space-y-8 lg:col-span-2 lg:h-full lg:overflow-y-auto lg:border-r border-b border-gray-200 p-4"
     >
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="name">Name</Label>
@@ -132,6 +135,20 @@ export default function Customizer({
         />
         <p className="text-sm text-muted-foreground">
           These messages will be shown when the chatbot is first opened.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="starter">Starter questions</Label>
+        <Textarea
+          id="starter"
+          name="starter"
+          placeholder={`Enter your starter questions\nOne per line\nLike this`}
+          rows={5}
+          defaultValue={starter}
+        />
+        <p className="text-sm text-muted-foreground">
+          These questions will be shown when the chatbot is first opened.
         </p>
       </div>
       <Button type="submit" className="self-start" onClick={handleSubmit}>

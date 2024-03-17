@@ -3,15 +3,23 @@ import OpenAI from "openai";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { system_prompt, user_prompt } from "./prompts";
-import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings";
+import Groq from "groq-sdk";
+import {
+  ANYSCALE_MODELS,
+  GROQ_MODELS,
+} from "~/routes/chatbots.$chatbotId.settings";
 
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export const anyscaleClient = new OpenAI({
+export const anyscale = new OpenAI({
   baseURL: process.env.ANYSCALE_BASE_URL,
   apiKey: process.env.ANYSCALE_API_KEY,
+});
+
+export const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function getEmbeddings({ input }: { input: string }) {
@@ -83,18 +91,21 @@ export async function chat({
   messages[messages.length - 1].content = UP;
 
   const client = ANYSCALE_MODELS.includes(chatbot.model)
-    ? anyscaleClient
+    ? anyscale
+    : GROQ_MODELS.includes(chatbot.model)
+    ? groq
     : openai;
 
-  console.log("chatbot.model: ", { model: chatbot.model, client });
+  console.log("messages going to openai: ", [
+    { role: "system", content: SP },
+    ...messages,
+  ]);
 
   const stream = await client.chat.completions.create({
     messages: [{ role: "system", content: SP }, ...messages],
     model: chatbot.model,
     stream: true,
   });
-
-  // return completion.choices[0];
 
   return stream;
 }

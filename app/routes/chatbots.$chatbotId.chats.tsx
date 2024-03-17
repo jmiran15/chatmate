@@ -45,7 +45,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const paginatedChats = await getChatsPagination({
     chatbotId,
     cursorId: cursor,
-    take: 3,
+    take: 25,
     starred: starred === "true",
     sort,
   });
@@ -213,14 +213,14 @@ export default function Chats() {
   }, [fetcher.data]);
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-10 h-full overflow-none">
+    <div className="flex flex-col lg:grid lg:grid-cols-10 h-full overflow-none ">
       <div
         ref={divRef}
-        className="lg:col-span-4 overflow-y-auto flex flex-col items-center justify-start gap-4 lg:border-r border-b border-gray-200 p-8"
+        className="lg:col-span-4 overflow-y-auto flex flex-col items-center justify-start gap-4 lg:border-r border-b border-gray-200 p-4"
       >
         <Tabs
           value={tab}
-          className="w-[400px]"
+          className="w-full"
           onValueChange={(value: "all" | "starred") => {
             setTab(value);
           }}
@@ -248,7 +248,7 @@ export default function Chats() {
           </div>
           <TabsContent value="all">
             {chatsState.length === 0 ? (
-              <p className="p-4 self-start">No chats</p>
+              <p className="self-start">No chats</p>
             ) : (
               <ol className="w-full space-y-4">
                 {chatsState.map((chat) => (
@@ -261,7 +261,7 @@ export default function Chats() {
           </TabsContent>
           <TabsContent value="starred">
             {chatsState.length === 0 ? (
-              <p className="p-4 self-start">No chats</p>
+              <p className="self-start">No chats</p>
             ) : (
               <ol className="w-full space-y-4">
                 {chatsState.map((chat) => (

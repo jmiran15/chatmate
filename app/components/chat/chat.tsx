@@ -20,6 +20,7 @@ import { useScrollToBottom } from "~/hooks/useScroll";
 import { useMobileScreen } from "~/utils/mobile";
 import { Loading } from "../ui/loading";
 import { v4 } from "uuid";
+import { Button } from "../ui/button";
 
 const Markdown = lazy(() => import("../ui/markdown"));
 
@@ -31,16 +32,32 @@ export default function Chat() {
   const [userInput, setUserInput] = useState("");
   const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
   const { chatId, chatbotId } = useParams();
-
-  const chatbot = data?.chatbot;
-  const BASE_URL = data?.BASE_URL;
-
+  const [chatbot, setChatbot] = useState(data?.chatbot);
+  const [BASE_URL, setBASE_URL] = useState(data?.BASE_URL);
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string }[]
   >(data.messages);
 
+  const showInitalStarterQuestions =
+    messages.length <= chatbot.introMessages.length;
+
+  const [followUps, setFollowUps] = useState<string[]>(
+    showInitalStarterQuestions ? chatbot?.starterQuestions : [],
+  );
+
   useEffect(() => {
     setMessages(data.messages);
+    setChatbot(data.chatbot);
+    setBASE_URL(data.BASE_URL);
+    console.log(
+      "show: ",
+      data.messages.length <= data.chatbot.introMessages.length,
+    );
+    setFollowUps(
+      data.messages.length <= data.chatbot.introMessages.length
+        ? data.chatbot?.starterQuestions
+        : [],
+    );
   }, [chatId]);
 
   const handleSubmit = async (event) => {
@@ -78,6 +95,8 @@ export default function Chat() {
         return false;
       }
 
+      if (isSubmitting) setFollowUps([]);
+
       await streamChat(
         BASE_URL,
         chatbot,
@@ -93,43 +112,24 @@ export default function Chat() {
             _chatHistory,
           ),
       );
+
+      const followUpRes = await fetch(`${BASE_URL}/api/generatefollowups`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ history: _chatHistory }),
+      });
+
+      const { followUps } = await followUpRes.json();
+
+      setFollowUps(followUps);
+
       return;
     }
+
     isSubmitting === true && fetchReply();
   }, [isSubmitting, messages]);
-
-  // function handleSendMessage(message: string) {
-  //   //add user message to state
-  //   setMessages((prevMessages) => [
-  //     ...prevMessages,
-  //     { role: "user", content: message },
-  //   ]);
-
-  //   // get assistant response /api/chat/${chatbotId}
-  //   fetch(`/api/chat/${chatbotId}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       messages: [
-  //         ...messages.map((message) => {
-  //           return { role: message.role, content: message.content };
-  //         }),
-  //         { role: "user", content: message },
-  //       ],
-  //       chatbot: chatbot,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((assistantResponse) => {
-  //       // add assistant response to state
-  //       setMessages((prevMessages) => [
-  //         ...prevMessages,
-  //         { role: "assistant", content: assistantResponse.message.content },
-  //       ]);
-  //     });
-  // }
 
   const { toast } = useToast();
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -183,7 +183,7 @@ export default function Chat() {
     <div className="flex flex-col relative h-full">
       <ScrollArea
         ref={scrollRef}
-        className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-5"
+        className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-4"
         onMouseDown={() => inputRef.current?.blur()}
         onScroll={(e) => onChatBodyScroll(e.currentTarget)}
         onTouchStart={() => {
@@ -194,8 +194,7 @@ export default function Chat() {
         <div className="space-y-5">
           {msgs.map((message, i) => {
             const isUser = message.role === "user";
-
-            const showActions = i > 0 && !(message.content.length === 0);
+            const showActions = i > 0;
 
             return (
               <div className="space-y-5" key={i}>
@@ -225,8 +224,8 @@ export default function Chat() {
                           <Suspense fallback={<Loading />}>
                             <Markdown
                               content={message.content}
-                              // eslint-disable-next-line react/jsx-no-leaked-render
                               loading={
+                                // eslint-disable-next-line react/jsx-no-leaked-render
                                 isSubmitting && !isUser && message.pending
                               }
                               onDoubleClickCapture={() => {
@@ -272,6 +271,27 @@ export default function Chat() {
               </div>
             );
           })}
+
+          <div className="space-y-2">
+            {followUps.length > 0 ? (
+              followUps.map((followUp, i) => (
+                <form key={i} onSubmit={handleSubmit}>
+                  <Button
+                    variant={"outline"}
+                    type="submit"
+                    className="max-w-[80%] flex items-end text-sm select-text relative break-words rounded-lg px-3 py-2 ml-auto"
+                    onClick={() => {
+                      setUserInput(followUp);
+                    }}
+                  >
+                    {followUp}
+                  </Button>
+                </form>
+              ))
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </ScrollArea>
       <Separator />
@@ -425,6 +445,7 @@ function handleChat(
       pending: false,
     });
   } else if (type === "textResponse") {
+    console.log("got last part? ", textResponse);
     setLoadingResponse(false);
     setChatHistory([
       ...remHistory,
