@@ -11,6 +11,7 @@ export default function Share() {
       </p>
       <CodeBlock
         code={`<script
+          data-chatmate-widget-script="true"
           data-embed-id="${chatbotId}"
           src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
         ></script>`}
