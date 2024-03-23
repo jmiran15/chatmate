@@ -6,7 +6,7 @@ import { WebCrawler } from "./crawler";
 
 // defaults
 const CONCURRENT_REQUESTS = 20;
-const MAX_CRAWLED_LINKS = 1000;
+const MAX_CRAWLED_LINKS = 100;
 const RETURN_ONLY_URLS = false;
 
 export async function convertUrlsToDocuments(
@@ -54,6 +54,8 @@ export async function getDocuments(
       maxCrawledLinks,
     });
     const links = await crawler.start(inProgress);
+
+    console.log(`Found \n\n${links}\n\n urls in crawl`);
     if (returnOnlyUrls) {
       return links.map((url) => ({
         content: "",

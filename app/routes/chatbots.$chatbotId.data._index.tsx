@@ -52,7 +52,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const links = await getDocuments(
         [url],
         "crawl",
-        1000,
+        100,
         true,
         (progress) => {
           console.log(progress);
@@ -68,7 +68,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const scrapedDocuments = await getDocuments(
         links,
         "single_urls",
-        1000,
+        100,
         false,
         (progress) => {
           console.log("scraping: ", progress);
@@ -238,7 +238,7 @@ async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
         content: `Chunk: ${chunk.content}\n Summary:`,
       },
     ],
-    model: "gpt-4-0125-preview",
+    model: "gpt-3.5-turbo-0125",
   });
 
   const chunkId = uuidv4();
@@ -266,7 +266,7 @@ async function generatePossibleQuestionsForChunk(
         content: `Chunk: ${chunk.content}\n10 questions separated by a new line:`,
       },
     ],
-    model: "gpt-4-0125-preview",
+    model: "gpt-3.5-turbo-0125",
   });
 
   const questionsContent = (
@@ -542,6 +542,18 @@ function ScrapeWebsiteModal({
 }) {
   const cancelButtonRef = useRef(null);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredDocuments, setFilteredDocuments] = useState(links);
+
+  useEffect(() => {
+    setFilteredDocuments(
+      links.filter((link) =>
+        link.metadata.sourceURL
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()),
+      ),
+    );
+  }, [searchTerm, links]);
 
   // Handler for row selection
   const onSelectionChanged = (params) => {
@@ -549,6 +561,8 @@ function ScrapeWebsiteModal({
     const selectedData = selectedNodes.map((node) => node.data);
     setSelectedRows(selectedData);
   };
+
+  console.log("filteredDocuments", filteredDocuments);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -596,9 +610,19 @@ function ScrapeWebsiteModal({
                         chatbot
                       </p>
                     </div>
+                    <Input
+                      type="text"
+                      className="mt-2"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      placeholder="Search by Source URL"
+                    />
+                    <p className="mt-2 text-sm text-gray-500">
+                      Currently showing {filteredDocuments.length} links
+                    </p>
                     <div className="ag-theme-alpine w-full h-96 mt-2">
                       <AgGridReact
-                        rowData={links}
+                        rowData={filteredDocuments}
                         columnDefs={columnDefs}
                         rowSelection="multiple"
                         onSelectionChanged={onSelectionChanged}

@@ -150,7 +150,7 @@ export async function generateChatName(
           .join("\n")}\nChat name:`,
       },
     ],
-    model: "gpt-4-0125-preview",
+    model: "gpt-3.5-turbo-0125",
   });
 
   return {
@@ -175,7 +175,7 @@ export async function generateChatSummary(
           .join("\n")}\nChat list with max of 5 key insights:`,
       },
     ],
-    model: "gpt-4-0125-preview",
+    model: "gpt-3.5-turbo-0125",
   });
 
   return {

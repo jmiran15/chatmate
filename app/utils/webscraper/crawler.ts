@@ -21,7 +21,7 @@ export class WebCrawler {
     initialUrl,
     // includes,
     // excludes,
-    maxCrawledLinks = 1000,
+    maxCrawledLinks = 100,
   }: {
     initialUrl: string;
     includes?: string[];
@@ -46,6 +46,8 @@ export class WebCrawler {
       return sitemapLinks;
     }
     // Proceed with crawling if no sitemap links found
+
+    console.log("starting crawling with initial url", this.initialUrl);
     return await this.crawlUrls(
       [this.initialUrl],
       concurrencyLimit,
@@ -123,31 +125,40 @@ export class WebCrawler {
 
     // Perform the crawl
     try {
-      console.log("crawling url to get links", url);
       const response = await axios.get(url);
       // console.log("response", response);
 
       const $ = cheerio.load(response.data);
       const links: string[] = [];
+      const baseUrl = this.initialUrl.split("/").slice(0, 3).join("/");
+      console.log("baseUrl", baseUrl);
 
       $("a").each((_, element) => {
         const href = $(element).attr("href");
+        // console.log("href", href);
         if (href) {
           let fullUrl = href;
           if (!href.startsWith("http")) {
             fullUrl = new URL(href, this.baseUrl).toString(); // Use base URL for relative links
+            console.log("fulllink does not start with http", fullUrl);
           }
+
           if (
-            fullUrl.startsWith(this.initialUrl) && // Ensure it starts with the initial URL
+            fullUrl.startsWith(baseUrl) && // Ensure it starts with the initial URL
             this.isInternalLink(fullUrl) &&
             this.matchesPattern(fullUrl) &&
             this.noSections(fullUrl)
           ) {
+            console.log("adding link", fullUrl);
             links.push(fullUrl);
           }
         }
       });
 
+      console.log(
+        "returning links",
+        links.filter((link) => !this.visited.has(link)),
+      );
       return links.filter((link) => !this.visited.has(link));
     } catch (error) {
       return [];
