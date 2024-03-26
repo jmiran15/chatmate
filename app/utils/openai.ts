@@ -4,10 +4,12 @@ import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { system_prompt, user_prompt } from "./prompts";
 import Groq from "groq-sdk";
+import { v4 as uuidv4 } from "uuid";
 import {
   ANYSCALE_MODELS,
   GROQ_MODELS,
 } from "~/routes/chatbots.$chatbotId.settings";
+import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
 
 export const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -132,7 +134,6 @@ export async function fetchRelevantDocs({
   return relevantDocs;
 }
 
-// function to generate a name for the chat
 export async function generateChatName(
   chat: { role: "user" | "assistant"; content: string }[],
 ) {
@@ -181,4 +182,152 @@ export async function generateChatSummary(
   return {
     chatSummary: completion.choices[0].message.content as string,
   };
+}
+
+export function splitStringIntoChunks(
+  document: FullDocument,
+  chunkSize: number,
+  overlap: number,
+): Chunk[] {
+  if (chunkSize <= 0) {
+    throw new Error("Chunk size must be greater than 0.");
+  }
+
+  if (overlap >= chunkSize) {
+    throw new Error("Overlap must be smaller than the chunk size.");
+  }
+
+  const chunks: Chunk[] = [];
+  let startIndex = 0;
+
+  while (startIndex < document.content.length) {
+    const endIndex = Math.min(startIndex + chunkSize, document.content.length);
+    const chunk = document.content.substring(startIndex, endIndex);
+    const chunkId = uuidv4();
+    chunks.push({
+      content: chunk,
+      id: chunkId,
+      documentId: document.id,
+    });
+    startIndex += chunkSize - overlap;
+
+    // If the overlap is greater than the remaining characters, break to avoid an empty chunk
+    if (startIndex + overlap >= document.content.length) {
+      break;
+    }
+  }
+
+  return chunks;
+}
+
+export async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content:
+          "Generate a short 2 sentence summary that describes the semantics of the chunk.",
+      },
+      {
+        role: "user",
+        content: `Chunk: ${chunk.content}\n Summary:`,
+      },
+    ],
+    model: "gpt-3.5-turbo-0125",
+  });
+
+  const chunkId = uuidv4();
+  return {
+    content: completion.choices[0].message.content as string,
+    id: chunkId,
+    documentId: chunk.documentId,
+  };
+}
+
+export async function generatePossibleQuestionsForChunk(
+  chunk: Chunk,
+): Promise<Chunk[]> {
+  // fetch call to openai with prompt to generate 10 possible questions that a user could ask about this chunk
+  // return the new questions as chunks
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content:
+          "Generate 10 possible questions that a user could ask about this chunk. Your questions should be seperated by a new line.",
+      },
+      {
+        role: "user",
+        content: `Chunk: ${chunk.content}\n10 questions separated by a new line:`,
+      },
+    ],
+    model: "gpt-3.5-turbo-0125",
+  });
+
+  const questionsContent = (
+    completion.choices[0].message.content as string
+  ).split("\n") as string[];
+
+  return questionsContent.map((question) => {
+    const id = uuidv4();
+
+    return {
+      content: question,
+      id,
+      documentId: chunk.documentId,
+    };
+  });
+}
+
+export async function convertUploadedFilesToDocuments(
+  files: FormDataEntryValue[],
+): Promise<FullDocument[]> {
+  const newFormData = new FormData();
+
+  // Append each file to the new FormData instance
+  files.forEach((file) => {
+    newFormData.append("files", file);
+  });
+
+  const response = await fetch(UNSTRUCTURED_URL, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
+    },
+    body: newFormData,
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to partition file with error ${
+        response.status
+      } and message ${await response.text()}`,
+    );
+  }
+
+  const elements = await response.json();
+  if (!Array.isArray(elements)) {
+    throw new Error(
+      `Expected partitioning request to return an array, but got ${elements}`,
+    );
+  }
+
+  if (elements[0].constructor !== Array) {
+    return [
+      {
+        name: elements[0].metadata.filename,
+        content: elements.map((element) => element.text).join("\n"),
+        id: uuidv4(),
+      },
+    ];
+  } else {
+    return elements.map((fileElements) => {
+      return {
+        name: fileElements[0].metadata.filename,
+        content: fileElements.map((element) => element.text).join("\n"),
+        id: uuidv4(),
+      };
+    });
+  }
 }

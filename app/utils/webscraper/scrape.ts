@@ -5,7 +5,7 @@ import { getLinksFromSitemap } from "./sitemap";
 import { WebCrawler } from "./crawler";
 
 // defaults
-const CONCURRENT_REQUESTS = 20;
+export const CONCURRENT_REQUESTS = 5;
 const MAX_CRAWLED_LINKS = 100;
 const RETURN_ONLY_URLS = false;
 
