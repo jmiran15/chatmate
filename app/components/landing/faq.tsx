@@ -8,22 +8,17 @@ const faqs = [
         "Chatmate is an advanced chatbot creation tool that enables website owners to embed a chatbot powered by large language models, like gpt-4, into their websites. It's designed to respond to user inquiries, proactively engage, and address their concerns. This makes Chatmate a powerful tool for your customer support.",
     },
     {
-      question: "Is Chatmate free?",
-      answer:
-        "Yes, Chatmate is completely free to use. We believe in providing powerful chatbot technology accessible to all website owners, regardless of their budget. This allows even small and medium-sized enterprises to leverage the benefits of advanced chatbot features without cost.",
-    },
-    {
       question: "How can I set up Chatmate on my website?",
       answer:
         "Setting up Chatmate on your website is straightforward. You simply need to provide the URL of your website or upload documents containing your website's information. After customization, you will receive code that you can embed into your website. This process is designed to be user-friendly, requiring minimal technical expertise.",
     },
-  ],
-  [
     {
       question: "Do I need to know how to code?",
       answer:
         "No, Chatmate is a completely no-code customer support chatbot tool. You can create and modify your chatbot entirely through our user-friendly UI. Once you are finished you can simply embed a few lines of code into your existing website.",
     },
+  ],
+  [
     {
       question:
         "Can I use Chatmate if my website is on Webflow, Wix, Framer, Wordpress, Shopify, etc…?",
@@ -35,14 +30,14 @@ const faqs = [
       answer:
         "Absolutely! Chatmate offers extensive customization options to ensure the chatbot seamlessly blends with your website's style. You can modify colors, starter messages, follow-up questions, and more, to align the chatbot's appearance and behavior with your brand identity and website aesthetics.",
     },
-  ],
-  [
     {
       question:
         "What kind of support does Chatmate offer if I encounter issues?",
       answer:
         "For any issues or queries, you can reach us at chatmate.dev@gmail.com, and our team will assist you promptly. We are committed to ensuring a smooth experience with Chatmate and are always ready to help with any challenges you may face.",
     },
+  ],
+  [
     {
       question: "What kind of data can I connect my chatbot to?",
       answer:
