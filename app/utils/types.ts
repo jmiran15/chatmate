@@ -32,3 +32,21 @@ export interface Progress {
   metadata?: any;
   currentDocumentUrl?: string;
 }
+
+export const CHUNK_SIZE = 1024;
+export const OVERLAP = 20;
+
+export interface FullDocument {
+  name: string;
+  content: string;
+  id: string;
+}
+
+export interface Chunk {
+  content: string;
+  id: string;
+  documentId: string;
+}
+
+export const UNSTRUCTURED_URL =
+  "https://chatmatedev-0tyi7426.api.unstructuredapp.io/general/v0/general";

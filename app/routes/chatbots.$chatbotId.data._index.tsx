@@ -22,9 +22,21 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { getDocumentsByChatbotId } from "~/models/document.server";
-import { getEmbeddings, openai } from "~/utils/openai";
-import { getDocuments } from "~/utils/webscraper/scrape";
-import { Document } from "~/utils/types";
+import {
+  convertUploadedFilesToDocuments,
+  generatePossibleQuestionsForChunk,
+  generateSummaryForChunk,
+  getEmbeddings,
+  splitStringIntoChunks,
+} from "~/utils/openai";
+import { CONCURRENT_REQUESTS, getDocuments } from "~/utils/webscraper/scrape";
+import {
+  CHUNK_SIZE,
+  Chunk,
+  Document,
+  FullDocument,
+  OVERLAP,
+} from "~/utils/types";
 
 const columnDefs = [
   { field: "metadata.sourceURL", checkboxSelection: true, flex: 1 },
@@ -49,18 +61,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   switch (action) {
     case "getLinks": {
       const url = formData.get("url") as string;
-      const links = await getDocuments(
-        [url],
-        "crawl",
-        100,
-        true,
-        (progress) => {
-          console.log(progress);
-        },
-      );
+      const links = await getDocuments([url], "crawl", 100, true);
 
       return json({ links });
     }
+
     case "scrapeLinks": {
       let links = JSON.parse(formData.get("links") as string);
       links = links.map((link) => link.metadata.sourceURL);
@@ -70,12 +75,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         "single_urls",
         100,
         false,
-        (progress) => {
-          console.log("scraping: ", progress);
-        },
       );
 
-      // const documents: FullDocument[] = await convertWebsiteToDocuments(url);
       const documents: FullDocument[] = scrapedDocuments.map(
         (document: Document) => {
           const id = uuidv4();
@@ -89,31 +90,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       );
 
-      const baseChunks: Chunk[] = documents.flatMap((document) =>
-        splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP),
-      );
-
-      baseChunks.forEach(async (chunk) => {
-        const summary = await generateSummaryForChunk(chunk);
-        const questions = await generatePossibleQuestionsForChunk(chunk);
-        await [chunk, summary, ...questions].map(async (node) => {
-          const embedding = await getEmbeddings({ input: node.content });
-          await prisma.$executeRaw`
-          INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
-          VALUES (${uuidv4()}, ${embedding}::vector, ${
-            node.documentId
-          }, ${chatbotId}, ${chunk.content})
-          `;
-          return {
-            chunk: chunk.content,
-            embedding: embedding,
-            documentId: chunk.documentId,
-            chatbotId,
-          };
-        });
-      });
-      // insert the document
-      const documents_ = await prisma.document.createMany({
+      // Create the documents in the database first
+      const createdDocuments = await prisma.document.createMany({
         data: documents.map((document) => ({
           name: document.name,
           content: document.content,
@@ -122,9 +100,59 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
-      return json({ documents: documents_ });
+      const baseChunks: Chunk[] = documents.flatMap((document) =>
+        splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP),
+      );
+
+      console.log("starting");
+      const BATCH_SIZE = 10;
+      const chunkedBaseChunks = [];
+      for (let i = 0; i < baseChunks.length; i += BATCH_SIZE) {
+        chunkedBaseChunks.push(baseChunks.slice(i, i + BATCH_SIZE));
+      }
+
+      for (const batchChunks of chunkedBaseChunks) {
+        console.log("Processing batch of chunks");
+        await Promise.all(
+          batchChunks.map(async (chunk, index) => {
+            const [summary, questions] = await Promise.all([
+              generateSummaryForChunk(chunk),
+              generatePossibleQuestionsForChunk(chunk),
+            ]);
+
+            await Promise.all(
+              [chunk, summary, ...questions].map(async (node) => {
+                const embedding = await getEmbeddings({ input: node.content });
+                await prisma.$executeRaw`
+                  INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
+                  VALUES (${uuidv4()}, ${embedding}::vector, ${
+                    node.documentId
+                  }, ${chatbotId}, ${chunk.content})
+                `;
+
+                console.log(
+                  `Inserted embedding for chunk ${index} out of ${baseChunks.length}`,
+                );
+                return {
+                  chunk: chunk.content,
+                  embedding: embedding,
+                  documentId: chunk.documentId,
+                  chatbotId,
+                };
+              }),
+            );
+          }),
+        );
+      }
+
+      console.log("Inserted all embeddings");
+
+      return json({ documents: createdDocuments });
     }
+
     case "upload": {
+      // do same parallel stuff that we do in the scrapeLinks action
+
       // Get all file entries from the original formData
       const files = formData.getAll("file");
 
@@ -173,172 +201,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
   }
 };
-
-const CHUNK_SIZE = 1024;
-const OVERLAP = 20;
-
-interface FullDocument {
-  name: string;
-  content: string;
-  id: string;
-}
-
-interface Chunk {
-  content: string;
-  id: string;
-  documentId: string;
-}
-
-function splitStringIntoChunks(
-  document: FullDocument,
-  chunkSize: number,
-  overlap: number,
-): Chunk[] {
-  if (chunkSize <= 0) {
-    throw new Error("Chunk size must be greater than 0.");
-  }
-
-  if (overlap >= chunkSize) {
-    throw new Error("Overlap must be smaller than the chunk size.");
-  }
-
-  const chunks: Chunk[] = [];
-  let startIndex = 0;
-
-  while (startIndex < document.content.length) {
-    const endIndex = Math.min(startIndex + chunkSize, document.content.length);
-    const chunk = document.content.substring(startIndex, endIndex);
-    const chunkId = uuidv4();
-    chunks.push({
-      content: chunk,
-      id: chunkId,
-      documentId: document.id,
-    });
-    startIndex += chunkSize - overlap;
-
-    // If the overlap is greater than the remaining characters, break to avoid an empty chunk
-    if (startIndex + overlap >= document.content.length) {
-      break;
-    }
-  }
-
-  return chunks;
-}
-
-async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Generate a short 2 sentence summary that describes the semantics of the chunk.",
-      },
-      {
-        role: "user",
-        content: `Chunk: ${chunk.content}\n Summary:`,
-      },
-    ],
-    model: "gpt-3.5-turbo-0125",
-  });
-
-  const chunkId = uuidv4();
-  return {
-    content: completion.choices[0].message.content as string,
-    id: chunkId,
-    documentId: chunk.documentId,
-  };
-}
-
-async function generatePossibleQuestionsForChunk(
-  chunk: Chunk,
-): Promise<Chunk[]> {
-  // fetch call to openai with prompt to generate 10 possible questions that a user could ask about this chunk
-  // return the new questions as chunks
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Generate 10 possible questions that a user could ask about this chunk. Your questions should be seperated by a new line.",
-      },
-      {
-        role: "user",
-        content: `Chunk: ${chunk.content}\n10 questions separated by a new line:`,
-      },
-    ],
-    model: "gpt-3.5-turbo-0125",
-  });
-
-  const questionsContent = (
-    completion.choices[0].message.content as string
-  ).split("\n") as string[];
-
-  return questionsContent.map((question) => {
-    const id = uuidv4();
-
-    return {
-      content: question,
-      id,
-      documentId: chunk.documentId,
-    };
-  });
-}
-
-const UNSTRUCTURED_URL =
-  "https://chatmatedev-0tyi7426.api.unstructuredapp.io/general/v0/general";
-
-async function convertUploadedFilesToDocuments(
-  files: FormDataEntryValue[],
-): Promise<FullDocument[]> {
-  const newFormData = new FormData();
-
-  // Append each file to the new FormData instance
-  files.forEach((file) => {
-    newFormData.append("files", file);
-  });
-
-  const response = await fetch(UNSTRUCTURED_URL, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
-    },
-    body: newFormData,
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to partition file with error ${
-        response.status
-      } and message ${await response.text()}`,
-    );
-  }
-
-  const elements = await response.json();
-  if (!Array.isArray(elements)) {
-    throw new Error(
-      `Expected partitioning request to return an array, but got ${elements}`,
-    );
-  }
-
-  if (elements[0].constructor !== Array) {
-    return [
-      {
-        name: elements[0].metadata.filename,
-        content: elements.map((element) => element.text).join("\n"),
-        id: uuidv4(),
-      },
-    ];
-  } else {
-    return elements.map((fileElements) => {
-      return {
-        name: fileElements[0].metadata.filename,
-        content: fileElements.map((element) => element.text).join("\n"),
-        id: uuidv4(),
-      };
-    });
-  }
-}
 
 const SUPPORTED_FILE_TYPES = [
   "txt",
@@ -561,8 +423,6 @@ function ScrapeWebsiteModal({
     const selectedData = selectedNodes.map((node) => node.data);
     setSelectedRows(selectedData);
   };
-
-  console.log("filteredDocuments", filteredDocuments);
 
   return (
     <Transition.Root show={open} as={Fragment}>
