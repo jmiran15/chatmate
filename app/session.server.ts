@@ -3,6 +3,7 @@ import invariant from "tiny-invariant";
 
 import type { User } from "~/models/user.server";
 import { getUserById } from "~/models/user.server";
+import { activeSubscription } from "~/models/subscription.server";
 
 invariant(process.env.SESSION_SECRET, "SESSION_SECRET must be set");
 
@@ -61,6 +62,18 @@ export async function requireUser(request: Request) {
   if (user) return user;
 
   throw await logout(request);
+}
+
+export async function requirePaidUserId(
+  request: Request,
+  // redirectTo: string = new URL(request.url).pathname,
+): Promise<string> {
+  const user = await requireUser(request);
+  if (!(await activeSubscription(user))) {
+    // const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
+    throw redirect(`/#pricing`);
+  }
+  return user.id;
 }
 
 export async function createUserSession({

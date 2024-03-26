@@ -1,7 +1,9 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
+  Chat,
   createChatWithStarterMessages,
   createMessage,
+  getChatById,
   getChatBySessionId,
   getMessagesByChatId,
   updateChatAIInsights,
@@ -70,7 +72,14 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       const { chatbot, messages } = body;
 
       // try to find the sessionId in the chats
-      let _chat = await getChatBySessionId({ sessionId });
+      let _chat: Chat | null = null;
+      if (body.chatId) {
+        _chat = await getChatById({ chatId: sessionId });
+      } else {
+        _chat = await getChatBySessionId({ sessionId });
+      }
+
+      console.log("_chat", _chat);
 
       // if no chat, create one with the given sessionId
       if (!_chat) {

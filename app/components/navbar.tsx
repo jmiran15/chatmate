@@ -32,10 +32,10 @@ const routeList: RouteProps[] = [
   //   href: "#testimonials",
   //   label: "Testimonials",
   // },
-  // {
-  //   href: "#pricing",
-  //   label: "Pricing",
-  // },
+  {
+    href: "#pricing",
+    label: "Pricing",
+  },
   // {
   //   href: "#demo",
   //   label: "Demo",
@@ -48,10 +48,10 @@ const routeList: RouteProps[] = [
     href: "#faq",
     label: "FAQ",
   },
-  {
-    href: "#",
-    label: "Blog",
-  },
+  // {
+  //   href: "#",
+  //   label: "Blog",
+  // },
 ];
 
 export const Navbar = () => {
@@ -110,6 +110,11 @@ export const Navbar = () => {
                       >
                         View your chatbots
                       </Link>
+                      <Form action="/billing" method="post">
+                        <Button type="submit" variant="outline">
+                          Billing
+                        </Button>
+                      </Form>
                       <Form action="/logout" method="post">
                         <Button type="submit" variant="destructive">
                           Logout
@@ -163,6 +168,11 @@ export const Navbar = () => {
                 >
                   View your chatbots
                 </Link>
+                <Form action="/billing" method="post">
+                  <Button type="submit" variant="outline">
+                    Billing
+                  </Button>
+                </Form>
                 <Form action="/logout" method="post">
                   <Button type="submit" variant="destructive">
                     Logout

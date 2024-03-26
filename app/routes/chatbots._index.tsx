@@ -6,10 +6,10 @@ import { buttonVariants } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
 
 import { getChatbotsByUserId } from "~/models/chatbot.server";
-import { requireUserId } from "~/session.server";
+import { requirePaidUserId } from "~/session.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const userId = await requireUserId(request);
+  const userId = await requirePaidUserId(request);
   const chatbots = await getChatbotsByUserId({ userId });
   return json({ chatbots });
 };

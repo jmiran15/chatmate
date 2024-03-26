@@ -344,6 +344,7 @@ async function streamChat(
           content: msg.content,
         };
       }),
+      chatId: true,
     }),
     signal: ctrl.signal,
     openWhenHidden: true,

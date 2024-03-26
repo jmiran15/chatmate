@@ -77,6 +77,7 @@ export default function App() {
       })(window, document, "clarity", "script", "l2cwgd2upk");`,
           }}
         ></script>
+        <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
       </head>
 
       <body className="h-full bg-transparent">

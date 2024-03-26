@@ -10,13 +10,16 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  email     String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  password  Password?
-  chatbots  Chatbot[]
-  chats     Chat[] // the user's chats, might not need here, never going to call
+  id                       String    @id @default(uuid())
+  email                    String    @unique
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+  password                 Password?
+  chatbots                 Chatbot[]
+  chats                    Chat[]
+  stripeCustomerId         String?
+  stripeSubscriptionId     String?
+  stripeSubscriptionStatus String?
 }
 
 model Password {
@@ -26,28 +29,24 @@ model Password {
 }
 
 model Chatbot {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  chats     Chat[]
-
-  // style
-  publicName       String   @default("Your Chatbot")
+  id               String      @id @default(uuid())
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
+  chats            Chat[]
+  publicName       String      @default("Your Chatbot")
   logoUrl          String?
-  themeColor       String   @default("zinc")
-  introMessages    String[] @default(["Hello, how can I help you today?"])
-  openIcon         String   @default("plus") // plus, chevron, chat
-  // bio              String      @default("I'm a chatbot")
-  starterQuestions String[] @default(["What are your features?"])
-
-  name           String
-  systemPrompt   String?
-  model          String?     @default("gpt-3.5-turbo-0125")
-  responseLength String?     @default("short")
-  documents      Document[]
-  embeddings     Embedding[]
+  themeColor       String      @default("zinc")
+  introMessages    String[]    @default(["Hello, how can I help you today?"])
+  openIcon         String      @default("plus") // plus, chevron, chat
+  starterQuestions String[]    @default(["What are your features?"])
+  name             String
+  systemPrompt     String?
+  model            String?     @default("gpt-3.5-turbo-0125")
+  responseLength   String?     @default("short")
+  documents        Document[]
+  embeddings       Embedding[]
 }
 
 model Chat {
@@ -65,11 +64,6 @@ model Chat {
   sessionId  String?
 }
 
-// Rename this to "Page"
-// interface Page {
-//   url: string;
-//   content: string;
-// }
 model Document {
   id         String      @id @default(uuid())
   createdAt  DateTime    @default(now())
@@ -81,19 +75,6 @@ model Document {
   chatbotId  String
 }
 
-// {
-// id: hash, // The ID of the vector is the hash of the document content
-// values: embedding, // The vector values are the OpenAI embeddings
-// metadata: {
-// // The metadata includes details about the document
-// chunk: doc.pageContent, // The chunk of text that the vector represents
-// text: doc.metadata.text as string, // The text of the document
-// url: doc.metadata.url as string, // The URL where the document was found
-// hash: doc.metadata.hash as string, // The hash of the document content
-// },
-// }
-
-// Rename this to "Vector"
 model Embedding {
   id         String                      @id @default(uuid())
   createdAt  DateTime                    @default(now())
