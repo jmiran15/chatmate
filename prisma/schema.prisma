@@ -62,6 +62,7 @@ model Chat {
   name       String?   @default("Untitled Chat")
   aiInsights String?
   starred    Boolean?  @default(false)
+  sessionId  String?
 }
 
 // Rename this to "Page"

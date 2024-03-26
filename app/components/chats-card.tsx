@@ -34,6 +34,9 @@ export default function ChatsCard({ chat }: { chat: any }) {
             })}
           </div>
         </div>
+        <div className="ml-auto text-xs text-muted-foreground">
+          Session id: {chat.sessionId}
+        </div>
       </div>
       <div className="text-xs text-muted-foreground">
         {chat.aiInsights ? (

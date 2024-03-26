@@ -1,9 +1,8 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
-  clearChatMessages,
   createChatWithStarterMessages,
   createMessage,
-  getChatById,
+  getChatBySessionId,
   getMessagesByChatId,
   updateChatAIInsights,
   updateChatNameWithAI,
@@ -23,13 +22,25 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
 
   // first try to find the chat with that session ID, if it exists, get the messages and return, otherwise, create the chat with that id and return the messages in that chat
-  const _chat = await getChatById({ chatId: sessionId });
+  let _chat = await getChatBySessionId({ sessionId });
+
+  console.log("_chat", _chat);
 
   if (!_chat) {
-    await createChatWithStarterMessages({ sessionId, chatbotId });
+    // CREATE NEW ID
+    const id = uuidv4();
+    _chat = await createChatWithStarterMessages({
+      sessionId: id,
+      chatbotId,
+      sId: sessionId,
+    });
   }
 
-  const messages = await getMessagesByChatId({ chatId: sessionId });
+  if (!_chat) {
+    return json({ error: "Failed to create chat" }, { status: 500 });
+  }
+
+  const messages = await getMessagesByChatId({ chatId: _chat.id });
 
   const headers = {
     "Access-Control-Allow-Origin": "*", // Allow any domain
@@ -59,14 +70,21 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       const { chatbot, messages } = body;
 
       // try to find the sessionId in the chats
-      const _chat = await getChatById({ chatId: sessionId });
+      let _chat = await getChatBySessionId({ sessionId });
 
       // if no chat, create one with the given sessionId
       if (!_chat) {
-        await createChatWithStarterMessages({
-          sessionId,
+        // CREATE NEW ID
+        const id = uuidv4();
+        _chat = await createChatWithStarterMessages({
+          sessionId: id,
           chatbotId,
+          sId: sessionId,
         });
+      }
+
+      if (!_chat) {
+        return json({ error: "Failed to create chat" }, { status: 500 });
       }
 
       const userMessage =
@@ -79,7 +97,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       console.log("userMessage", userMessage);
       // add the user message to the chat
       const createdMessage = await createMessage({
-        chatId: sessionId,
+        chatId: _chat.id,
         ...userMessage,
       });
 
@@ -135,7 +153,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
               // push the final text as a new messsgae in the chat
               const assistantResponse = await createMessage({
-                chatId: sessionId,
+                chatId: _chat.id,
                 role: "assistant",
                 content: fullText,
               });
@@ -163,8 +181,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
       // update name and key insights
       await Promise.all([
-        updateChatNameWithAI({ chatId: sessionId }),
-        updateChatAIInsights({ chatId: sessionId }),
+        updateChatNameWithAI({ chatId: _chat.id }),
+        updateChatAIInsights({ chatId: _chat.id }),
       ]);
 
       const headers = {
@@ -181,7 +199,14 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       });
     }
     case "DELETE": {
-      return await clearChatMessages({ chatId: sessionId });
+      // create a new chat with the given sessionId
+      const id = uuidv4();
+      return await createChatWithStarterMessages({
+        sessionId: id,
+        chatbotId,
+        sId: sessionId,
+      });
+      // return await clearChatMessages({ chatId: sessionId });
     }
     default: {
       return json({ error: "Invalid method" }, { status: 405 });

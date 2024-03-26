@@ -40,9 +40,11 @@ export function createChatWithId({
 export async function createChatWithStarterMessages({
   sessionId,
   chatbotId,
+  sId,
 }: {
   sessionId: Chat["id"];
   chatbotId: Chat["chatbotId"];
+  sId?: Chat["sessionId"];
 }) {
   // fetch the chatbot by its id
   const chatbot = await prisma.chatbot.findUnique({
@@ -69,6 +71,7 @@ export async function createChatWithStarterMessages({
           content: question,
         })),
       },
+      sessionId: sId,
     },
   });
 }
@@ -196,6 +199,22 @@ export function getChatById({ chatId }: { chatId: Chat["id"] }) {
   return prisma.chat.findUnique({
     where: {
       id: chatId,
+    },
+  });
+}
+
+// get chat by sessionId, return the latest one
+export function getChatBySessionId({
+  sessionId,
+}: {
+  sessionId: Chat["sessionId"];
+}) {
+  return prisma.chat.findFirst({
+    where: {
+      sessionId: sessionId,
+    },
+    orderBy: {
+      updatedAt: "desc",
     },
   });
 }
