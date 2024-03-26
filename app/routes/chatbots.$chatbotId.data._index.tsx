@@ -29,7 +29,7 @@ import {
   getEmbeddings,
   splitStringIntoChunks,
 } from "~/utils/openai";
-import { CONCURRENT_REQUESTS, getDocuments } from "~/utils/webscraper/scrape";
+import { getDocuments } from "~/utils/webscraper/scrape";
 import {
   CHUNK_SIZE,
   Chunk,
