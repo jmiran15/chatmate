@@ -4,7 +4,7 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { Link, useActionData, Form, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import * as gtag from "~/utils/gtags.client";
 
@@ -12,6 +12,16 @@ import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 import { Button } from "~/components/ui/button";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -24,7 +34,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const email = formData.get("email");
   const password = formData.get("password");
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
-  const remember = formData.get("remember");
 
   if (!validateEmail(email)) {
     return json(
@@ -58,7 +67,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   return createUserSession({
     redirectTo,
-    remember: remember === "on" ? true : false,
+    remember: true,
     request,
     userId: user.id,
   });
@@ -88,96 +97,76 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col justify-center items-center">
-      <div className="mx-auto w-full max-w-md px-8">
-        <Form onSubmit={handleSubmit} method="post" className="space-y-6">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email address
-            </label>
-            <div className="mt-1">
-              <input
+    <div className="flex justify-center items-center h-screen p-4">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your email below to login to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form onSubmit={handleSubmit} method="post" className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
                 ref={emailRef}
-                id="email"
-                required
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus={true}
                 name="email"
-                type="email"
                 autoComplete="email"
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-describedby="email-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                required
               />
+
               {actionData?.errors?.email ? (
-                <div className="pt-1 text-red-700" id="email-error">
+                <p
+                  className="pt-1 text-red-700 text-sm font-medium leading-none"
+                  id="email-error"
+                >
                   {actionData.errors.email}
-                </div>
+                </p>
               ) : null}
             </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <div className="mt-1">
-              <input
-                id="password"
+            <div className="grid gap-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
                 ref={passwordRef}
                 name="password"
-                type="password"
                 autoComplete="current-password"
                 aria-invalid={actionData?.errors?.password ? true : undefined}
                 aria-describedby="password-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                id="password"
+                type="password"
+                required
               />
               {actionData?.errors?.password ? (
-                <div className="pt-1 text-red-700" id="password-error">
+                <p
+                  className="pt-1 text-red-700 text-sm font-medium leading-none"
+                  id="password-error"
+                >
                   {actionData.errors.password}
-                </div>
+                </p>
               ) : null}
             </div>
-          </div>
+            <input type="hidden" name="redirectTo" value={redirectTo} />
 
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <Button type="submit">Log in</Button>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember"
-                name="remember"
-                type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <label
-                htmlFor="remember"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-            <div className="text-center text-sm text-gray-500">
+            <Button type="submit" className="w-full">
+              Login
+            </Button>
+            <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link
-                className="text-blue-500 underline"
-                to={{
-                  pathname: "/join",
-                  search: searchParams.toString(),
-                }}
-              >
+              <Link to="/join" className="underline">
                 Sign up
               </Link>
             </div>
-          </div>
-        </Form>
-      </div>
+          </Form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

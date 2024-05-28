@@ -12,6 +12,15 @@ import { createUser, getUserByEmail } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 import { Button } from "~/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { Label } from "~/components/ui/label";
+import { Input } from "~/components/ui/input";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -93,82 +102,76 @@ export default function Join() {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col justify-center items-center">
-      <div className="mx-auto w-full max-w-md px-8">
-        <Form onSubmit={handleSubmit} method="post" className="space-y-6">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email address
-            </label>
-            <div className="mt-1">
-              <input
+    <div className="flex justify-center items-center h-screen p-4">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl">Sign Up</CardTitle>
+          <CardDescription>
+            Enter your information to create an account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form onSubmit={handleSubmit} method="post" className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
                 ref={emailRef}
-                id="email"
-                required
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus={true}
                 name="email"
-                type="email"
                 autoComplete="email"
                 aria-invalid={actionData?.errors?.email ? true : undefined}
                 aria-describedby="email-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                required
               />
+
               {actionData?.errors?.email ? (
-                <div className="pt-1 text-red-700" id="email-error">
+                <p
+                  className="pt-1 text-red-700 text-sm font-medium leading-none"
+                  id="email-error"
+                >
                   {actionData.errors.email}
-                </div>
+                </p>
               ) : null}
             </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <div className="mt-1">
-              <input
-                id="password"
+            <div className="grid gap-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
                 ref={passwordRef}
                 name="password"
-                type="password"
-                autoComplete="new-password"
+                autoComplete="current-password"
                 aria-invalid={actionData?.errors?.password ? true : undefined}
                 aria-describedby="password-error"
-                className="w-full rounded border border-gray-500 px-2 py-1 text-lg"
+                id="password"
+                type="password"
+                required
               />
               {actionData?.errors?.password ? (
-                <div className="pt-1 text-red-700" id="password-error">
+                <p
+                  className="pt-1 text-red-700 text-sm font-medium leading-none"
+                  id="password-error"
+                >
                   {actionData.errors.password}
-                </div>
+                </p>
               ) : null}
             </div>
-          </div>
+            <input type="hidden" name="redirectTo" value={redirectTo} />
 
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <Button type="submit">Create Account</Button>
-          <div className="flex items-center justify-center">
-            <div className="text-center text-sm text-gray-500">
+            <Button type="submit" className="w-full">
+              Create an account
+            </Button>
+            <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
-              <Link
-                className="text-blue-500 underline"
-                to={{
-                  pathname: "/login",
-                  search: searchParams.toString(),
-                }}
-              >
-                Log in
+              <Link to="/login" className="underline">
+                Sign in
               </Link>
             </div>
-          </div>
-        </Form>
-      </div>
+          </Form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
