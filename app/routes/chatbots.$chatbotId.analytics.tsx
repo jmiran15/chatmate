@@ -1,10 +1,13 @@
-import { json } from "@remix-run/node";
+import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { LineChart, Card } from "@tremor/react";
 import { cn } from "~/lib/utils";
 import { getChatsByChatbotId } from "~/models/chat.server";
 import { format, parseISO, startOfWeek, endOfWeek } from "date-fns";
 import { useMemo } from "react";
+import Blur from "~/components/analytics/blur";
+import { requireUserId } from "~/session.server";
+import { isProUser } from "~/models/user.server";
 
 // Types for the data
 interface ChatMessage {
@@ -62,22 +65,23 @@ const getChatsPerDay = (data: ChatData): { date: string; chats: number }[] => {
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 };
 
-export const loader = async ({ params }) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   // get all messages for the chatbotId
 
+  const userId = await requireUserId(request);
   const { chatbotId } = params;
 
   if (!chatbotId) {
     throw new Error("chatbotId is required");
   }
-
   const chats = await getChatsByChatbotId({ chatbotId });
+  const isPro = await isProUser(userId);
 
-  return json({ chats });
+  return json({ chats, isPro });
 };
 
 export default function Analytics() {
-  const { chats: data } = useLoaderData<typeof loader>();
+  const { chats: data, isPro } = useLoaderData<typeof loader>();
 
   const {
     totalChats,
@@ -140,16 +144,6 @@ export default function Analytics() {
     };
   }, [data]);
 
-  // console.log(
-  //   totalChats,
-  //   percentChangeTotalChats,
-  //   weeklyChats,
-  //   percentChangeWeeklyChats,
-  //   averageMessagesPerChat,
-  //   percentChangeAverageMessagesPerChat,
-  //   chats,
-  // );
-
   const kpiData = [
     {
       name: "Total chats",
@@ -173,17 +167,17 @@ export default function Analytics() {
   ];
 
   return (
-    <div className="h-full w-full p-4 flex flex-col gap-6 overflow-y-auto">
-      <KPICards data={kpiData} />
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <LineChartHero data={chats} />
-        {/* <Card className="col-span-1">
-          <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-            AI generated insights
-          </h3>
-          <p>ai generated insights list</p>
-        </Card> */}
-      </div>
+    <div className="h-full w-full flex flex-col gap-4 p-4 overflow-y-auto lg:gap-6 lg:p-6">
+      {isPro ? (
+        <>
+          <KPICards data={kpiData} />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <LineChartHero data={chats} />
+          </div>
+        </>
+      ) : (
+        <Blur />
+      )}
     </div>
   );
 }

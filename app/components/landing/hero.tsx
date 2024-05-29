@@ -2,14 +2,20 @@ import screenshotChats from "../../images/screenshots/chats.png";
 import { Link } from "@remix-run/react";
 import { buttonVariants } from "../ui/button";
 import { useOptionalUser } from "~/utils";
+import H3 from "./h3";
+import { Container } from "./container";
 
 export function Hero() {
   const user = useOptionalUser();
 
   return (
-    <div className="flex flex-col gap-6 md:gap-8 mx-auto max-w-7xl px-4 py-20 md:py-32 text-center items-center">
+    <Container>
       <H1 />
-      <Lead />
+      <H3 className="text-muted-foreground text-center">
+        Create custom AI chatbots that provide fast and accurate responses,
+        resolving customer inquiries and instantly reducing your team’s ticket
+        volume
+      </H3>
 
       <div className="flex flex-col gap-1 items-center">
         <Link
@@ -30,13 +36,13 @@ export function Hero() {
         src={screenshotChats}
         alt=""
       />
-    </div>
+    </Container>
   );
 }
 
 function H1() {
   return (
-    <h1 className="mx-auto max-w-4xl font-display text-4xl font-medium tracking-tight text-slate-900 md:text-7xl text-balance">
+    <h1 className="mx-auto max-w-4xl font-display text-4xl font-medium tracking-tight text-slate-900 md:text-7xl text-balance text-center">
       AI Chatbot to{" "}
       <span className="relative whitespace-nowrap text-orange-500">
         <svg
@@ -51,15 +57,5 @@ function H1() {
       </span>{" "}
       80% of your support queries.
     </h1>
-  );
-}
-
-function Lead() {
-  return (
-    <p className="mx-auto text-xl text-muted-foreground max-w-2xl text-balance">
-      Create custom AI chatbots that provide fast and accurate responses,
-      resolving customer inquiries and instantly reducing your team’s ticket
-      volume
-    </p>
   );
 }

@@ -226,24 +226,18 @@ function FeaturesDesktop() {
 
 export function SecondaryFeatures() {
   return (
-    <section
-      id="secondary-features"
-      aria-label="Features for simplifying everyday business tasks"
-      className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
-    >
-      <Container>
-        <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-            Engaging and authentic conversations.
-          </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Delight your customers with organic customer service interactions
-            while improving customer satisfaction.
-          </p>
-        </div>
-        <FeaturesMobile />
-        <FeaturesDesktop />
-      </Container>
-    </section>
+    <Container>
+      <div className="mx-auto max-w-2xl md:text-center">
+        <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
+          Engaging and authentic conversations.
+        </h2>
+        <p className="mt-4 text-lg tracking-tight text-slate-700">
+          Delight your customers with organic customer service interactions
+          while improving customer satisfaction.
+        </p>
+      </div>
+      <FeaturesMobile />
+      <FeaturesDesktop />
+    </Container>
   );
 }

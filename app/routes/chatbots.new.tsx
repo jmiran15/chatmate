@@ -1,5 +1,6 @@
 import {
   ActionFunctionArgs,
+  LoaderFunctionArgs,
   MetaFunction,
   json,
   redirect,
@@ -11,8 +12,22 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import * as gtag from "~/utils/gtags.client";
 
-import { createChatbot } from "~/models/chatbot.server";
+import { createChatbot, getChatbotsByUserId } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
+import { isProUser } from "~/models/user.server";
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  // check if user can create a new chatbot, if not, redirect them back to chatbots page
+  const userId = await requireUserId(request);
+  const chatbots = await getChatbotsByUserId({ userId });
+  const isPro = await isProUser(userId);
+
+  if (chatbots.length >= 1 && !isPro) {
+    return redirect("/chatbots");
+  }
+
+  return json({ chatbots, isPro });
+};
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const userId = await requireUserId(request);

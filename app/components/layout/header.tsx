@@ -86,7 +86,7 @@ export const Header = () => {
       <div
         className={cn(
           "flex items-center justify-between mx-auto gap-4 h-full px-4",
-          chatbotId ? "w-full" : "max-w-7xl",
+          chatbotId ? "w-full" : "max-w-6xl",
         )}
       >
         {sheet ? <SidebarSheet routes={routes} /> : null}

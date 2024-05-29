@@ -119,3 +119,18 @@ export async function getAllUsers() {
 //     },
 //   });
 // };
+
+export async function isProUser(userId: User["id"]) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    include: {
+      subscription: true,
+    },
+  });
+
+  if (user?.subscription?.planId === "pro") {
+    return true;
+  }
+
+  return false;
+}

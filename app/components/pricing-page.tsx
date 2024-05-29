@@ -2,7 +2,7 @@ import { Button, buttonVariants } from "./ui/button";
 import { Container } from "~/components/landing/container";
 import { cn } from "~/lib/utils";
 import { Form, Link } from "@remix-run/react";
-import { Price } from "@prisma/client";
+import { Price, User } from "@prisma/client";
 import {
   Card,
   CardContent,
@@ -10,6 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import H2 from "./landing/h2";
+import H3 from "./landing/h3";
+import { useOptionalUser } from "~/utils";
 
 export const PLANS = {
   FREE: "free",
@@ -128,18 +131,22 @@ function Plan({
   price,
   price_id,
   features,
-  featured = false,
+  canCheckout,
+  button,
+  to,
 }: {
   name: string;
   price: string;
   price_id: string;
   features: string[];
-  featured?: boolean;
+  canCheckout: boolean;
+  button: string;
+  to: (user: User | null) => string;
 }) {
+  const user = useOptionalUser();
+
   return (
-    <Card
-      className={cn(featured ? "order-first lg:order-none rounded-xl" : "")}
-    >
+    <Card>
       <CardHeader>
         <CardTitle>{name}</CardTitle>
         <CardTitle className="text-4xl">{price}</CardTitle>
@@ -155,15 +162,31 @@ function Plan({
         </ul>
       </CardContent>
       <CardFooter>
-        <Form method="POST">
-          <input type="hidden" name="price" value={price_id} />
-          <Button
-            type="submit"
-            aria-label={`Get started with the ${name} plan for ${price}`}
+        {user && canCheckout ? (
+          <Form
+            method="post"
+            action="/chatbots/settings/billing"
+            className="w-full"
           >
-            Start trial
-          </Button>
-        </Form>
+            <input type="hidden" name="planId" value={price_id} />
+            <input type="hidden" name="planInterval" value={INTERVALS.MONTH} />
+            <Button
+              type="submit"
+              name="intent"
+              value="createCheckout"
+              className="w-full"
+            >
+              {button}
+            </Button>
+          </Form>
+        ) : (
+          <Link
+            to={to(user)}
+            className={cn(buttonVariants({ variant: "default" }), "w-full")}
+          >
+            {button}
+          </Link>
+        )}
       </CardFooter>
     </Card>
   );
@@ -171,14 +194,20 @@ function Plan({
 
 export default function Pricing() {
   return (
-    <section
-      id="pricing"
-      aria-label="Pricing"
-      className="bg-primary py-20 sm:py-32"
-    >
-      <div className="flex flex-col mx-auto max-w-7xl px-6">
-        <MainText />
-        <div className="mt-16 grid max-w-7xl w-full grid-cols-1 gap-y-10 gap-x-10 mx-auto lg:grid-cols-3 items-start">
+    <section id="pricing" aria-label="Pricing" className="bg-primary">
+      <Container>
+        <H2 className="text-white">
+          <span className="relative whitespace-nowrap">
+            <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
+            <span className="relative">Simple pricing,</span>
+          </span>{" "}
+          for everyone.
+        </H2>
+        <H3 className="text-white">
+          It doesn’t matter what size your business is, our plans are designed
+          to fit all your needs.
+        </H3>
+        <div className="grid max-w-7xl w-full grid-cols-1 gap-x-10 gap-y-10 mx-auto lg:grid-cols-3 items-start">
           {plans.map((plan) => (
             <Plan
               key={plan.name}
@@ -186,37 +215,22 @@ export default function Pricing() {
               price={plan.price}
               price_id={plan.price_id}
               features={plan.features}
+              canCheckout={plan.canCheckout}
+              button={plan.button}
+              to={plan.to}
             />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
-  );
-}
-
-function MainText() {
-  return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 className="font-display tracking-tight text-white sm:text-4xl md:text-5xl">
-        <span className="relative whitespace-nowrap">
-          <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
-          <span className="relative">Simple pricing,</span>
-        </span>{" "}
-        for everyone.
-      </h2>
-      <p className="mt-6 text-lg tracking-tight text-white">
-        It doesn’t matter what size your business is, our plans are designed to
-        fit all your needs.
-      </p>
-    </div>
   );
 }
 
 const plans = [
   {
-    name: "Free",
-    price: "$0",
-    price_id: "",
+    name: "Everyone starts",
+    price: "Free",
+    price_id: "free",
     features: [
       "1 chatbot",
       "Unlimited chats",
@@ -226,11 +240,14 @@ const plans = [
       "AI chat insights",
       "AI follow ups",
     ],
+    canCheckout: false,
+    button: "Start for free",
+    to: (user: User | null) => (user ? "/chatbots" : "/join"),
   },
   {
     name: "Pro",
-    price: "$19.90",
-    price_id: "",
+    price: "$5/mo",
+    price_id: "pro",
     features: [
       "Unlimited chatbots",
       "Unlimited chats",
@@ -242,15 +259,21 @@ const plans = [
       "24/7 customer support",
       "Analytics",
     ],
+    button: "Start",
+    canCheckout: true,
+    to: (user: User | null) => "/join",
   },
   {
     name: "Enterprise",
     price: "Contact us",
-    price_id: "",
+    price_id: "enterprise",
     features: [
       "Everything in the pro plan",
       "Custom integrations",
       "Custom features",
     ],
+    canCheckout: false,
+    button: "Contact us",
+    to: (user: User | null) => "mailto:info@chatmate.so",
   },
 ];

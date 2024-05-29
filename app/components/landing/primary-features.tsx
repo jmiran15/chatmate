@@ -8,30 +8,32 @@ import screenshotDocuments from "../../images/screenshots/data.png";
 import screenshotAppearance from "../../images/screenshots/appearance.png";
 import screenshotChats from "../../images/screenshots/chats.png";
 import screenshotAnalytics from "../../images/screenshots/analytics.png";
+import H3 from "./h3";
+import H2 from "./h2";
 
 const features = [
   {
     title: "Ground your AI agent",
     description:
-      "Imbue your agent with your company’s identity, policies, processes, and knowledge – ensuring your agent represents the best of your business.",
+      "Imbue your agent with your company’s identity, policies, processes, and knowledge.",
     image: screenshotDocuments,
   },
   {
     title: "Customize",
     description:
-      "Customize your chatbot widget to match your brand and website design. Add starter messages, follow-up questions, and more.",
+      "Customize your chatbot widget to match your brand and website design.",
     image: screenshotAppearance,
   },
   {
     title: "Gather AI insights",
     description:
-      "Chatmate automatically generates key insights for each conversation, making it easy to track success and see what your customers are interested in most.",
+      "Track success and see what your customers are interested in most.",
     image: screenshotChats,
   },
   {
     title: "Analytics",
     description:
-      "From conversation trends to resolution rates, gain a comprehensive view of your AI chatbot’s effectiveness in enhancing customer experience.",
+      "Comprehensive view of your AI chatbot’s effectiveness in enhancing customer experience.",
     image: screenshotAnalytics,
   },
 ];
@@ -60,21 +62,17 @@ export function PrimaryFeatures() {
     <section
       id="features"
       aria-label="Chatmate features"
-      className="relative overflow-hidden bg-primary px-4 py-20 md:py-32"
+      className="overflow-hidden bg-primary"
     >
-      <div className="mx-auto max-w-7xl">
-        <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-            Make AI your own.
-          </h2>
-          <p className="mt-6 text-lg tracking-tight text-white">
-            Chatmate’s AI platform enables your company to build an AI agent
-            that is personalized to your business and customers.
-          </p>
-        </div>
+      <Container>
+        <H2 className="text-white text-center">Make AI your own.</H2>
+        <H3 className="text-white text-center">
+          Chatmate’s AI platform enables your company to build an AI agent that
+          is personalized to your business and customers.
+        </H3>
         <Tab.Group
           as="div"
-          className="mt-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0"
+          className="grid grid-cols-1 items-center gap-y-2 sm:gap-y-6 lg:grid-cols-12"
           vertical={tabOrientation === "vertical"}
         >
           {({ selectedIndex }) => (
@@ -85,7 +83,7 @@ export function PrimaryFeatures() {
                     <div
                       key={feature.title}
                       className={clsx(
-                        "group relative rounded-full px-4 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6",
+                        "group relative rounded-full px-4 py-1 lg:rounded-l-xl lg:rounded-r-none lg:p-6 text-start",
                         selectedIndex === featureIndex
                           ? "bg-white lg:bg-white/10 lg:ring-1 lg:ring-inset lg:ring-white/10"
                           : "hover:bg-white/10 lg:hover:bg-white/5",
@@ -94,7 +92,7 @@ export function PrimaryFeatures() {
                       <h3>
                         <Tab
                           className={clsx(
-                            "font-display text-lg ui-not-focus-visible:outline-none",
+                            "font-display text-xl ui-not-focus-visible:outline-none",
                             selectedIndex === featureIndex
                               ? "text-primary lg:text-white"
                               : "text-white hover:text-white lg:text-white",
@@ -106,7 +104,7 @@ export function PrimaryFeatures() {
                       </h3>
                       <p
                         className={clsx(
-                          "mt-2 hidden text-sm lg:block",
+                          "mt-2 hidden lg:block",
                           selectedIndex === featureIndex
                             ? "text-white"
                             : "text-white group-hover:text-white",
@@ -141,7 +139,7 @@ export function PrimaryFeatures() {
             </>
           )}
         </Tab.Group>
-      </div>
+      </Container>
     </section>
   );
 }

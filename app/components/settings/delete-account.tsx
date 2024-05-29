@@ -23,7 +23,7 @@ export default function DeleteAccount() {
   const submit = useSubmit();
 
   return (
-    <Card className="border-destructive">
+    <Card>
       <CardHeader>
         <CardTitle>Delete Account</CardTitle>
         <CardDescription>
@@ -31,7 +31,7 @@ export default function DeleteAccount() {
           their respective data.
         </CardDescription>
       </CardHeader>
-      <CardFooter className="rounded-b-md border-t px-6 py-4 bg-destructive/10">
+      <CardFooter className="border-t px-6 py-4">
         {/* alert dialog to confirm */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
