@@ -18,7 +18,7 @@ export function Hero() {
       </div>
 
       <img
-        className="w-full mt-12 hidden md:block"
+        className="w-full mt-12 hidden md:block rounded-xl border"
         src={screenshotChats}
         alt=""
       />

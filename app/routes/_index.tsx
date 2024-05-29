@@ -1,8 +1,4 @@
-import {
-  redirect,
-  type ActionFunctionArgs,
-  type MetaFunction,
-} from "@remix-run/node";
+import { type ActionFunctionArgs, type MetaFunction } from "@remix-run/node";
 import { Header } from "~/components/layout/header";
 import { Hero } from "~/components/landing/hero";
 import { PrimaryFeatures } from "~/components/landing/primary-features";
@@ -11,7 +7,7 @@ import { Faqs } from "~/components/landing/faq";
 import { Footer } from "~/components/landing/footer";
 import PricingPage from "~/components/pricing-page";
 import { requireUser } from "~/session.server";
-import { createCheckoutSession } from "~/models/subscription.server";
+// import { createCheckoutSession } from "~/models/subscription.server";
 
 export const meta: MetaFunction = () => [{ title: "Chatmate" }];
 
@@ -21,9 +17,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const price = String(formData.get("price"));
 
   // create a checkout session and redirect
-  const url = await createCheckoutSession(user, price);
+  // const url = await createCheckoutSession(user, price);
 
-  return redirect(url);
+  // return redirect(url);
+  return 0;
 };
 
 export default function Index() {

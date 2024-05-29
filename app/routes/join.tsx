@@ -21,6 +21,11 @@ import {
 } from "~/components/ui/card";
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
+import {
+  createCustomer,
+  createFreeSubscription,
+} from "~/models/subscription.server";
+import { prisma } from "~/db.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -32,7 +37,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/chatbots");
 
   if (!validateEmail(email)) {
     return json(
@@ -69,6 +74,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const user = await createUser(email, password);
+  await createCustomer({ userId: user.id });
+  const subscription = await prisma.subscription.findUnique({
+    where: { userId: user.id },
+  });
+  if (!subscription) await createFreeSubscription({ userId: user.id });
 
   return createUserSession({
     redirectTo,

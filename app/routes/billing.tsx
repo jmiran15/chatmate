@@ -1,13 +1,13 @@
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
-import { requireUser } from "~/session.server";
-import { createBillingSession } from "~/models/subscription.server";
+// import { ActionFunctionArgs, redirect } from "@remix-run/node";
+// import { requireUser } from "~/session.server";
+// import { createBillingSession } from "~/models/subscription.server";
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  const user = await requireUser(request);
+// export const action = async ({ request }: ActionFunctionArgs) => {
+//   const user = await requireUser(request);
 
-  // create a customer portal session
-  const url = await createBillingSession(user);
+//   // create a customer portal session
+//   const url = await createBillingSession(user);
 
-  // redirect to the customer portal
-  return redirect(url);
-};
+//   // redirect to the customer portal
+//   return redirect(url);
+// };

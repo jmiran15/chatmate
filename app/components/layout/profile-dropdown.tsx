@@ -1,4 +1,4 @@
-import { Bot, CircleUser, CreditCard, LogOut } from "lucide-react";
+import { Bot, CircleUser, LogOut, Settings } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -25,9 +25,11 @@ export default function ProfileDropdown() {
           <Bot className="mr-2 h-4 w-4" />
           <span>View your chatbots</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => navigate("/billing")}>
-          <CreditCard className="mr-2 h-4 w-4" />
-          <span>Billing</span>
+        <DropdownMenuItem
+          onClick={() => navigate("/chatbots/settings/general")}
+        >
+          <Settings className="mr-2 h-4 w-4" />
+          <span>Settings</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

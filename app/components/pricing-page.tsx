@@ -1,7 +1,76 @@
-import { Button } from "~/components/landing/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Container } from "~/components/landing/container";
 import { cn } from "~/lib/utils";
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
+import { Price } from "@prisma/client";
+
+export const PLANS = {
+  FREE: "free",
+  PRO: "pro",
+} as const;
+
+export type Plan = (typeof PLANS)[keyof typeof PLANS];
+
+export const INTERVALS = {
+  MONTH: "month",
+  YEAR: "year",
+} as const;
+
+export type Interval = (typeof INTERVALS)[keyof typeof INTERVALS];
+
+type PricingPlan<T extends Plan = Plan> = {
+  [key in T]: {
+    id: string;
+    name: string;
+    description: string;
+    prices: PriceInterval;
+  };
+};
+
+export const CURRENCIES = {
+  DEFAULT: "usd",
+  USD: "usd",
+} as const;
+
+export type Currency = (typeof CURRENCIES)[keyof typeof CURRENCIES];
+
+export const PRICING_PLANS = {
+  [PLANS.FREE]: {
+    id: PLANS.FREE,
+    name: "Free",
+    description: "Start with the basics, upgrade anytime.",
+    prices: {
+      [INTERVALS.MONTH]: {
+        [CURRENCIES.USD]: 0,
+      },
+      [INTERVALS.YEAR]: {
+        [CURRENCIES.USD]: 0,
+      },
+    },
+  },
+  [PLANS.PRO]: {
+    id: PLANS.PRO,
+    name: "Pro",
+    description: "Access to all features and unlimited projects.",
+    prices: {
+      [INTERVALS.MONTH]: {
+        [CURRENCIES.USD]: 1990,
+      },
+      [INTERVALS.YEAR]: {
+        [CURRENCIES.USD]: 19990,
+      },
+    },
+  },
+} satisfies PricingPlan;
+
+type PriceInterval<
+  I extends Interval = Interval,
+  C extends Currency = Currency,
+> = {
+  [interval in I]: {
+    [currency in C]: Price["amount"];
+  };
+};
 
 function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -97,21 +166,25 @@ function Plan({
         ))}
       </ul>
       {enterprise ? (
-        <Button
+        <Link
           to="mailto:chatmate.dev@gmail.com"
-          variant={featured ? "solid" : "outline"}
           color="white"
-          className="mt-8"
+          className={cn(
+            "mt-8",
+            featured
+              ? buttonVariants({ variant: "default" })
+              : buttonVariants({ variant: "outline" }),
+          )}
           aria-label={`Get started with the ${name} plan for ${price}`}
         >
           Contact us
-        </Button>
+        </Link>
       ) : (
         <Form method="POST">
           <input type="hidden" name="price" value={price_id} />
           <Button
             type="submit"
-            variant={featured ? "solid" : "outline"}
+            variant={featured ? "default" : "outline"}
             color="white"
             className="mt-8"
             aria-label={`Get started with the ${name} plan for ${price}`}

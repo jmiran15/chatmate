@@ -59,15 +59,15 @@ export function PrimaryFeatures() {
   return (
     <section
       id="features"
-      aria-label="Features for running your books"
-      className="relative overflow-hidden bg-orange-300 pb-28 pt-20 sm:py-32"
+      aria-label="Chatmate features"
+      className="relative overflow-hidden bg-primary px-4 py-20 md:py-32"
     >
-      <Container className="relative">
+      <div className="mx-auto max-w-7xl">
         <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
             Make AI your own.
           </h2>
-          <p className="mt-6 text-lg tracking-tight text-orange-100">
+          <p className="mt-6 text-lg tracking-tight text-white">
             Chatmate’s AI platform enables your company to build an AI agent
             that is personalized to your business and customers.
           </p>
@@ -96,8 +96,8 @@ export function PrimaryFeatures() {
                           className={clsx(
                             "font-display text-lg ui-not-focus-visible:outline-none",
                             selectedIndex === featureIndex
-                              ? "text-orange-500 lg:text-white"
-                              : "text-orange-100 hover:text-white lg:text-white",
+                              ? "text-primary lg:text-white"
+                              : "text-white hover:text-white lg:text-white",
                           )}
                         >
                           <span className="absolute inset-0 rounded-full lg:rounded-l-xl lg:rounded-r-none" />
@@ -109,7 +109,7 @@ export function PrimaryFeatures() {
                           "mt-2 hidden text-sm lg:block",
                           selectedIndex === featureIndex
                             ? "text-white"
-                            : "text-orange-100 group-hover:text-white",
+                            : "text-white group-hover:text-white",
                         )}
                       >
                         {feature.description}
@@ -127,7 +127,7 @@ export function PrimaryFeatures() {
                         {feature.description}
                       </p>
                     </div>
-                    <div className="mt-10 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-orange-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
+                    <div className="mt-10 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
                       <img
                         className="w-full"
                         src={feature.image}
@@ -141,7 +141,7 @@ export function PrimaryFeatures() {
             </>
           )}
         </Tab.Group>
-      </Container>
+      </div>
     </section>
   );
 }
