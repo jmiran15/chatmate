@@ -16,6 +16,7 @@ import SidebarSheet from "./sidebar-sheet";
 import ProfileDropdown from "./profile-dropdown";
 import { useMobileScreen } from "~/utils/mobile";
 import MarketingLinks from "./marketing-links";
+import { cn } from "~/lib/utils";
 
 export const Header = () => {
   const user = useOptionalUser();
@@ -81,31 +82,41 @@ export const Header = () => {
   const routes = user && chatbotId ? chatbotSidebarLinks : unauthenticatedLinks;
 
   return (
-    <header className="sticky flex h-14 items-center justify-between gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-      {sheet ? <SidebarSheet routes={routes} /> : null}
-      <div className="flex items-center gap-8">
-        {!isMobile || user ? (
-          <Link to="/" className="flex items-center gap-2 font-semibold">
-            <Icons.logo className="h-6 w-6" />
-            <span>Chatmate</span>
-          </Link>
-        ) : null}
-        {!user || !chatbotId ? <MarketingLinks routes={routes} /> : null}
-      </div>
-
-      {user ? (
-        <ProfileDropdown />
-      ) : (
-        <div className="flex items-center gap-2">
-          <Link to="/login" className={buttonVariants({ variant: "outline" })}>
-            Log In
-          </Link>
-
-          <Link to="/join" className={buttonVariants()}>
-            Get Started
-          </Link>
+    <header className="sticky h-14 border-b bg-muted/40">
+      <div
+        className={cn(
+          "flex items-center justify-between mx-auto gap-4 h-full px-4",
+          chatbotId ? "w-full" : "max-w-7xl",
+        )}
+      >
+        {sheet ? <SidebarSheet routes={routes} /> : null}
+        <div className="flex items-center gap-8">
+          {!isMobile || user ? (
+            <Link to="/" className="flex items-center gap-2 font-semibold">
+              <Icons.logo className="h-6 w-6" />
+              <span>Chatmate</span>
+            </Link>
+          ) : null}
+          {!user || !chatbotId ? <MarketingLinks routes={routes} /> : null}
         </div>
-      )}
+
+        {user ? (
+          <ProfileDropdown />
+        ) : (
+          <div className="flex items-center gap-2">
+            <Link
+              to="/login"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              Log In
+            </Link>
+
+            <Link to="/join" className={buttonVariants()}>
+              Get Started
+            </Link>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
