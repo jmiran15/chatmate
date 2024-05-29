@@ -15,6 +15,7 @@ import {
 import SidebarSheet from "./sidebar-sheet";
 import ProfileDropdown from "./profile-dropdown";
 import { useMobileScreen } from "~/utils/mobile";
+import MarketingLinks from "./marketing-links";
 
 export const Header = () => {
   const user = useOptionalUser();
@@ -89,21 +90,7 @@ export const Header = () => {
             <span>Chatmate</span>
           </Link>
         ) : null}
-        {!user || !chatbotId ? (
-          <nav className="hidden lg:flex items-center justify-center">
-            {routes.map((route, i) => (
-              <NavLink
-                to={route.path}
-                key={i}
-                className={`text-sm ${buttonVariants({
-                  variant: "ghost",
-                })}`}
-              >
-                {route.title}
-              </NavLink>
-            ))}
-          </nav>
-        ) : null}
+        {!user || !chatbotId ? <MarketingLinks routes={routes} /> : null}
       </div>
 
       {user ? (
