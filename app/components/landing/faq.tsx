@@ -56,28 +56,33 @@ export function Faqs() {
   return (
     <section id="faq" aria-labelledby="faq-title" className="overflow-hidden">
       <Container className="relative">
-        <H2 className="text-center">Frequently asked questions</H2>
-        <H3 className="text-center text-slate-700">
-          Have a question? We have answers. If you can’t find what you’re
-          looking for, email our support team at{" "}
-          <Link
-            to="mailto:info@chatmate.so"
-            className={cn(
-              buttonVariants({ variant: "link" }),
-              "inline-block text-xl p-0",
-            )}
-          >
-            info@chatmate.so
-          </Link>
-        </H3>
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, faqIndex) => (
-            <AccordionItem key={faqIndex} value={faqIndex.toString()}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div className="flex flex-col gap-16 items-center">
+          <div className="flex flex-col gap-8 items-center">
+            <H2 className="text-primary">Frequently asked questions</H2>
+            <H3 className="text-primary">
+              Have a question? We have answers. If you can’t find what you’re
+              looking for, email our support team at{" "}
+              <Link
+                to="mailto:info@chatmate.so"
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "inline-block text-xl p-0",
+                )}
+              >
+                info@chatmate.so
+              </Link>
+            </H3>
+          </div>
+
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, faqIndex) => (
+              <AccordionItem key={faqIndex} value={faqIndex.toString()}>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </Container>
     </section>
   );

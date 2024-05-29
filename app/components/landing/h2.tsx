@@ -10,7 +10,7 @@ export default function H2({
   return (
     <p
       className={cn(
-        "mx-auto text-5xl max-w-2xl text-balance tracking-tight font-display",
+        "mx-auto text-5xl max-w-2xl text-balance tracking-tight font-display text-center",
         className,
       )}
     >

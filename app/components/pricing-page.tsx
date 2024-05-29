@@ -146,7 +146,7 @@ function Plan({
   const user = useOptionalUser();
 
   return (
-    <Card>
+    <Card className="rounded-xl">
       <CardHeader>
         <CardTitle>{name}</CardTitle>
         <CardTitle className="text-4xl">{price}</CardTitle>
@@ -196,30 +196,34 @@ export default function Pricing() {
   return (
     <section id="pricing" aria-label="Pricing" className="bg-primary">
       <Container>
-        <H2 className="text-white">
-          <span className="relative whitespace-nowrap">
-            <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
-            <span className="relative">Simple pricing,</span>
-          </span>{" "}
-          for everyone.
-        </H2>
-        <H3 className="text-white">
-          It doesn’t matter what size your business is, our plans are designed
-          to fit all your needs.
-        </H3>
-        <div className="grid max-w-7xl w-full grid-cols-1 gap-x-10 gap-y-10 mx-auto lg:grid-cols-3 items-start">
-          {plans.map((plan) => (
-            <Plan
-              key={plan.name}
-              name={plan.name}
-              price={plan.price}
-              price_id={plan.price_id}
-              features={plan.features}
-              canCheckout={plan.canCheckout}
-              button={plan.button}
-              to={plan.to}
-            />
-          ))}
+        <div className="flex flex-col gap-16 items-center">
+          <div className="flex flex-col gap-8 items-center">
+            <H2 className="text-white">
+              <span className="relative whitespace-nowrap">
+                <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
+                <span className="relative">Simple pricing,</span>
+              </span>{" "}
+              for everyone.
+            </H2>
+            <H3 className="text-white">
+              It doesn’t matter what size your business is, our plans are
+              designed to fit all your needs.
+            </H3>
+          </div>
+          <div className="grid max-w-7xl w-full grid-cols-1 gap-x-10 gap-y-10 mx-auto lg:grid-cols-3 items-start">
+            {plans.map((plan) => (
+              <Plan
+                key={plan.name}
+                name={plan.name}
+                price={plan.price}
+                price_id={plan.price_id}
+                features={plan.features}
+                canCheckout={plan.canCheckout}
+                button={plan.button}
+                to={plan.to}
+              />
+            ))}
+          </div>
         </div>
       </Container>
     </section>

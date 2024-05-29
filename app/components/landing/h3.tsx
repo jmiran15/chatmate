@@ -8,7 +8,12 @@ export default function H3({
   className?: string;
 }) {
   return (
-    <p className={cn("mx-auto text-xl max-w-2xl text-balance", className)}>
+    <p
+      className={cn(
+        "mx-auto text-xl max-w-2xl text-balance text-center",
+        className,
+      )}
+    >
       {children}
     </p>
   );

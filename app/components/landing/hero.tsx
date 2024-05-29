@@ -4,38 +4,50 @@ import { buttonVariants } from "../ui/button";
 import { useOptionalUser } from "~/utils";
 import H3 from "./h3";
 import { Container } from "./container";
+import { cn } from "~/lib/utils";
 
 export function Hero() {
   const user = useOptionalUser();
 
   return (
     <Container>
-      <H1 />
-      <H3 className="text-muted-foreground text-center">
-        Create custom AI chatbots that provide fast and accurate responses,
-        resolving customer inquiries and instantly reducing your team’s ticket
-        volume
-      </H3>
+      <div className="flex flex-col gap-16 items-center">
+        <div className="flex flex-col gap-8 items-center">
+          <H1 />
+          <H3 className="text-muted-foreground">
+            Create custom AI chatbots that provide fast and accurate responses,
+            resolving customer inquiries and instantly reducing your team’s
+            ticket volume
+          </H3>
 
-      <div className="flex flex-col gap-1 items-center">
-        <Link
-          className={buttonVariants({ variant: "default" })}
-          to={user ? "/chatbots" : "/join"}
-        >
-          {user ? "Go to my chatbots" : "Start for free"}
-        </Link>
-        {!user ? (
-          <p className="text-sm text-muted-foreground">
-            No credit card required.
-          </p>
-        ) : null}
+          <div className="flex flex-col gap-1 items-center">
+            <Link
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "relative text-white p-7 text-xl font-semibold shadow-lg",
+                "transition duration-300 ease-in-out",
+                "hover:scale-105 hover:shadow-inner hover:shadow-white/30",
+                "focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50",
+              )}
+              to={user ? "/chatbots" : "/join"}
+            >
+              <span className="relative z-10">
+                {user ? "My chatbots" : "Start for free"}
+              </span>
+            </Link>
+            {!user ? (
+              <p className="text-sm text-muted-foreground">
+                No credit card required.
+              </p>
+            ) : null}
+          </div>
+        </div>
+        <img
+          className="w-full hidden md:block rounded-xl border"
+          src={screenshotChats}
+          alt=""
+        />
       </div>
-
-      <img
-        className="w-full mt-12 hidden md:block rounded-xl border"
-        src={screenshotChats}
-        alt=""
-      />
     </Container>
   );
 }
