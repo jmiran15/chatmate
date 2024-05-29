@@ -3,7 +3,7 @@ import {
   type ActionFunctionArgs,
   type MetaFunction,
 } from "@remix-run/node";
-import { Navbar } from "~/components/navbar";
+import { Header } from "~/components/layout/header";
 import { Hero } from "~/components/landing/hero";
 import { PrimaryFeatures } from "~/components/landing/primary-features";
 import { SecondaryFeatures } from "~/components/landing/secondary-features";
@@ -29,7 +29,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function Index() {
   return (
     <>
-      <Navbar />
+      <Header />
       {/* widget */}
       <script
         data-chatmate-widget-script="true"

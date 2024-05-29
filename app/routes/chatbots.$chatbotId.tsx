@@ -10,7 +10,7 @@ import {
   AreaChart,
 } from "lucide-react";
 
-import { Nav } from "~/components/nav";
+import Sidebar from "~/components/layout/sidebar";
 import { getChatbotById } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
 
@@ -30,46 +30,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 export default function ChatbotLayout() {
   return (
     <div className="flex flex-col md:grid md:grid-cols-6 w-full h-full overflow-hidden">
-      <Nav
-        links={[
-          {
-            title: "Chat",
-            path: "chat",
-            icon: MessageSquareMore,
-          },
-          {
-            title: "Data",
-            path: "data",
-            icon: Database,
-          },
-          {
-            title: "Appearance",
-            path: "appearance",
-            icon: Brush,
-          },
-          {
-            title: "Share",
-            path: "share",
-            icon: Share,
-          },
-          {
-            title: "Chats",
-            path: "chats",
-            icon: MessagesSquare,
-          },
-          {
-            title: "Analytics",
-            path: "analytics",
-            icon: AreaChart,
-          },
-          {
-            title: "Settings",
-            path: "settings",
-            icon: Settings,
-          },
-        ]}
-      />
-
+      <Sidebar />
       <div className="grow md:col-span-5 h-full overflow-hidden">
         <Outlet />
       </div>
