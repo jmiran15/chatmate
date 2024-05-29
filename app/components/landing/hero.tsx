@@ -1,20 +1,28 @@
 import screenshotChats from "../../images/screenshots/chats.png";
 import { Link } from "@remix-run/react";
 import { buttonVariants } from "../ui/button";
+import { useOptionalUser } from "~/utils";
 
 export function Hero() {
+  const user = useOptionalUser();
+
   return (
     <div className="flex flex-col gap-6 md:gap-8 mx-auto max-w-7xl px-4 py-20 md:py-32 text-center items-center">
       <H1 />
       <Lead />
 
       <div className="flex flex-col gap-1 items-center">
-        <Link className={buttonVariants({ variant: "default" })} to="/join">
-          Start for free
+        <Link
+          className={buttonVariants({ variant: "default" })}
+          to={user ? "/chatbots" : "/join"}
+        >
+          {user ? "Go to my chatbots" : "Start for free"}
         </Link>
-        <p className="text-sm text-muted-foreground">
-          No credit card required.
-        </p>
+        {!user ? (
+          <p className="text-sm text-muted-foreground">
+            No credit card required.
+          </p>
+        ) : null}
       </div>
 
       <img
