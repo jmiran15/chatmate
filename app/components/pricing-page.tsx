@@ -3,6 +3,13 @@ import { Container } from "~/components/landing/container";
 import { cn } from "~/lib/utils";
 import { Form, Link } from "@remix-run/react";
 import { Price } from "@prisma/client";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
 
 export const PLANS = {
   FREE: "free",
@@ -120,80 +127,45 @@ function Plan({
   name,
   price,
   price_id,
-  description,
   features,
   featured = false,
-  enterprise = false,
 }: {
   name: string;
   price: string;
   price_id: string;
-  description: string;
   features: string[];
   featured?: boolean;
-  enterprise?: boolean;
 }) {
   return (
-    <section
-      className={cn(
-        "flex flex-col rounded-3xl px-6 sm:px-8",
-        featured ? "order-first bg-orange-400 py-8 lg:order-none" : "lg:py-8",
-      )}
+    <Card
+      className={cn(featured ? "order-first lg:order-none rounded-xl" : "")}
     >
-      <h3 className="mt-5 font-display text-lg text-white">{name}</h3>
-      <p
-        className={cn(
-          "mt-2 text-base",
-          featured ? "text-white" : "text-slate-400",
-        )}
-      >
-        {description}
-      </p>
-      <p className="order-first font-display text-5xl font-light tracking-tight text-white">
-        {enterprise ? "♾️" : price}
-      </p>
-      <ul
-        className={cn(
-          "order-last mt-10 flex flex-col gap-y-3 text-sm",
-          featured ? "text-white" : "text-slate-200",
-        )}
-      >
-        {features.map((feature) => (
-          <li key={feature} className="flex">
-            <CheckIcon className={featured ? "text-white" : "text-slate-400"} />
-            <span className="ml-4">{feature}</span>
-          </li>
-        ))}
-      </ul>
-      {enterprise ? (
-        <Link
-          to="mailto:chatmate.dev@gmail.com"
-          color="white"
-          className={cn(
-            "mt-8",
-            featured
-              ? buttonVariants({ variant: "default" })
-              : buttonVariants({ variant: "outline" }),
-          )}
-          aria-label={`Get started with the ${name} plan for ${price}`}
-        >
-          Contact us
-        </Link>
-      ) : (
+      <CardHeader>
+        <CardTitle>{name}</CardTitle>
+        <CardTitle className="text-4xl">{price}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className={cn("order-last flex flex-col gap-y-3 text-primary")}>
+          {features.map((feature) => (
+            <li key={feature} className="flex">
+              <CheckIcon className="text-primary" />
+              <span className="ml-4">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+      <CardFooter>
         <Form method="POST">
           <input type="hidden" name="price" value={price_id} />
           <Button
             type="submit"
-            variant={featured ? "default" : "outline"}
-            color="white"
-            className="mt-8"
             aria-label={`Get started with the ${name} plan for ${price}`}
           >
             Start trial
           </Button>
         </Form>
-      )}
-    </section>
+      </CardFooter>
+    </Card>
   );
 }
 
@@ -202,55 +174,83 @@ export default function Pricing() {
     <section
       id="pricing"
       aria-label="Pricing"
-      className="bg-slate-900 py-20 sm:py-32"
+      className="bg-primary py-20 sm:py-32"
     >
-      <Container>
-        <div className="md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
-            <span className="relative whitespace-nowrap">
-              <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
-              <span className="relative">Simple pricing,</span>
-            </span>{" "}
-            for everyone.
-          </h2>
-          <p className="mt-4 text-lg text-slate-400">
-            It doesn’t matter what size your business is, our plans are designed
-            to fit all your needs.
-          </p>
+      <div className="flex flex-col mx-auto max-w-7xl px-6">
+        <MainText />
+        <div className="mt-16 grid max-w-7xl w-full grid-cols-1 gap-y-10 gap-x-10 mx-auto lg:grid-cols-3 items-start">
+          {plans.map((plan) => (
+            <Plan
+              key={plan.name}
+              name={plan.name}
+              price={plan.price}
+              price_id={plan.price_id}
+              features={plan.features}
+            />
+          ))}
         </div>
-        <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-2 xl:mx-0 xl:gap-x-8">
-          <Plan
-            featured
-            name="Small business"
-            price="$20"
-            price_id="price_1OyctNFSz9CUblnBMBJkmSuB"
-            description="Perfect for small / medium sized businesses."
-            features={[
-              "Unlimited chats",
-              "Unlimited chatbots",
-              "Unlimited document uploads",
-              "Analytics",
-              "AI chat insights",
-              "AI follow ups",
-              "Model customization",
-              "Widget customization",
-              "24/7 customer support",
-            ]}
-          />
-          <Plan
-            name="Enterprise"
-            price="$39"
-            price_id=""
-            description="Dedicated support and infrastructure for your company."
-            features={[
-              "Everything in the scale plan",
-              "Custom integrations",
-              "Custom features",
-            ]}
-            enterprise
-          />
-        </div>
-      </Container>
+      </div>
     </section>
   );
 }
+
+function MainText() {
+  return (
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 className="font-display tracking-tight text-white sm:text-4xl md:text-5xl">
+        <span className="relative whitespace-nowrap">
+          <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
+          <span className="relative">Simple pricing,</span>
+        </span>{" "}
+        for everyone.
+      </h2>
+      <p className="mt-6 text-lg tracking-tight text-white">
+        It doesn’t matter what size your business is, our plans are designed to
+        fit all your needs.
+      </p>
+    </div>
+  );
+}
+
+const plans = [
+  {
+    name: "Free",
+    price: "$0",
+    price_id: "",
+    features: [
+      "1 chatbot",
+      "Unlimited chats",
+      "Unlimited document uploads",
+      "Widget customization",
+      "Model customization",
+      "AI chat insights",
+      "AI follow ups",
+    ],
+  },
+  {
+    name: "Pro",
+    price: "$19.90",
+    price_id: "",
+    features: [
+      "Unlimited chatbots",
+      "Unlimited chats",
+      "Unlimited document uploads",
+      "Widget customization",
+      "Model customization",
+      "AI chat insights",
+      "AI follow ups",
+      "24/7 customer support",
+      "Analytics",
+    ],
+  },
+  {
+    name: "Enterprise",
+    price: "Contact us",
+    price_id: "",
+    features: [
+      "Everything in the pro plan",
+      "Custom integrations",
+      "Custom features",
+    ],
+  },
+];
