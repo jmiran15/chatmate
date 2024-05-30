@@ -37,8 +37,13 @@ RUN npx prisma generate
 ADD . .
 RUN npm run build
 
+# Remove development dependencies
+RUN npm prune --omit=dev
+
 # Finally, build the production image with minimal footprint
 FROM base
+
+
 
 WORKDIR /myapp
 
@@ -48,5 +53,8 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
 ADD . .
+
+# Entrypoint prepares the database.
+ENTRYPOINT [ "/myapp/docker-entrypoint.js" ]
 
 CMD ["npm", "start"]
