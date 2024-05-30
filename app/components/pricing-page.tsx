@@ -146,7 +146,7 @@ function Plan({
   to: (user: User | null) => string;
 }) {
   const user = useOptionalUser();
-  const isPending = useIsPending();
+  const isPending = useIsPending({ intent: "createCheckout" });
 
   return (
     <Card className="rounded-xl">
@@ -178,6 +178,7 @@ function Plan({
               name="intent"
               value="createCheckout"
               className="w-full"
+              disabled={isPending}
             >
               {isPending ? <Loader2 className="animate-spin" /> : button}
             </Button>

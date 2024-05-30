@@ -8,8 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { useIsPending } from "~/hooks/use-is-pending";
+import { Loader2 } from "lucide-react";
 
 export default function ManageSubscription() {
+  const isPending = useIsPending({
+    intent: "createCustomerPortal",
+  });
   return (
     <Card>
       <CardHeader>
@@ -30,8 +35,9 @@ export default function ManageSubscription() {
             size="sm"
             name="intent"
             value="createCustomerPortal"
+            disabled={isPending}
           >
-            Manage
+            {isPending ? <Loader2 className="animate-spin" /> : "Manage"}
           </Button>
         </Form>
       </CardFooter>

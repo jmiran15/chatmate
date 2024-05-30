@@ -32,7 +32,9 @@ export default function ChangePlan() {
   const [selectedPlanInterval, setSelectedPlanInterval] = useState<Interval>(
     INTERVALS.MONTH,
   );
-  const isPending = useIsPending();
+  const isPending = useIsPending({
+    intent: "createCheckout",
+  });
 
   return (
     <Card>
@@ -168,7 +170,7 @@ export default function ChangePlan() {
               size="sm"
               name="intent"
               value="createCheckout"
-              disabled={selectedPlanId === PLANS.FREE}
+              disabled={selectedPlanId === PLANS.FREE || isPending}
             >
               {isPending ? (
                 <Loader2 className="animate-spin" />

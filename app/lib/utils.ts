@@ -6,12 +6,22 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-interface Handle {
-  breadcrumb?: string;
-}
+export function isActive({
+  matches,
+  path,
+  chatbotId,
+}: {
+  matches: ReturnType<typeof useMatches>;
+  path: string;
+  chatbotId: string | undefined;
+}) {
+  if (!chatbotId) {
+    return false;
+  }
 
-export function isActive(matches: ReturnType<typeof useMatches>, path: string) {
-  return matches.filter((match) =>
-    match.handle ? (match.handle as Handle).breadcrumb === path : false,
-  ).length;
+  return (
+    matches
+      .filter((match) => match.handle && match.handle.PATH)
+      .filter((match) => match.handle.PATH(chatbotId) === path).length > 0
+  );
 }

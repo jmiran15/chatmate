@@ -281,5 +281,6 @@ export default function Chats() {
   );
 }
 export const handle = {
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/chats`,
   breadcrumb: "chats",
 };

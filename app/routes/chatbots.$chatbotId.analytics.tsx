@@ -252,5 +252,6 @@ export function LineChartHero({
 }
 
 export const handle = {
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/analytics`,
   breadcrumb: "analytics",
 };

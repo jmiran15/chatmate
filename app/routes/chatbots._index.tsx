@@ -22,7 +22,9 @@ export const meta: MetaFunction = () => [{ title: "Chatbots" }];
 
 export default function MyChatbots() {
   const data = useLoaderData<typeof loader>();
-  const isPending = useIsPending();
+  const isPending = useIsPending({
+    intent: "createCheckout",
+  });
 
   return (
     <div className="flex flex-col gap-8 w-full py-12 px-8 md:px-20 xl:px-96">
@@ -32,9 +34,6 @@ export default function MyChatbots() {
         </h1>
 
         <div className="flex flex-row gap-2 items-center">
-          {/* <Link to="new" className={cn(buttonVariants(), "self-end")}>
-            + New Chatbot
-          </Link> */}
           <Form method="get" action="/chatbots/new" navigate>
             <Button
               type="submit"
@@ -51,7 +50,12 @@ export default function MyChatbots() {
                 name="planInterval"
                 value={INTERVALS.MONTH}
               />
-              <Button type="submit" name="intent" value="createCheckout">
+              <Button
+                type="submit"
+                name="intent"
+                value="createCheckout"
+                disabled={isPending}
+              >
                 {isPending ? (
                   <Loader2 className="animate-spin" />
                 ) : (

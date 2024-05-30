@@ -1,5 +1,5 @@
 import { buttonVariants } from "../ui/button";
-import { Link, NavLink, useMatches, useParams } from "@remix-run/react";
+import { Link, useLocation, useMatches, useParams } from "@remix-run/react";
 import { Icons } from "../icons";
 import { useOptionalUser } from "~/utils";
 
@@ -17,48 +17,57 @@ import ProfileDropdown from "./profile-dropdown";
 import { useMobileScreen } from "~/utils/mobile";
 import MarketingLinks from "./marketing-links";
 import { cn } from "~/lib/utils";
+import { useEffect } from "react";
 
 export const Header = () => {
   const user = useOptionalUser();
   const { chatbotId } = useParams();
   const sheet = (user && chatbotId) || !user;
   const isMobile = useMobileScreen();
+  const location = useLocation();
 
   const chatbotSidebarLinks = [
     {
-      title: "Chat",
-      path: `/chatbots/${chatbotId}/chat`,
-      icon: MessageSquareMore,
+      title: "Chats",
+      path: `/chatbots/${chatbotId}/chats`,
+      icon: MessagesSquare,
+      navigate: true,
     },
     {
       title: "Data",
       path: `/chatbots/${chatbotId}/data`,
       icon: Database,
+      navigate: true,
     },
     {
       title: "Appearance",
       path: `/chatbots/${chatbotId}/appearance`,
       icon: Brush,
+      navigate: true,
     },
     {
       title: "Share",
       path: `/chatbots/${chatbotId}/share`,
       icon: Share,
-    },
-    {
-      title: "Chats",
-      path: `/chatbots/${chatbotId}/chats`,
-      icon: MessagesSquare,
+      navigate: true,
     },
     {
       title: "Analytics",
       path: `/chatbots/${chatbotId}/analytics`,
       icon: AreaChart,
+      navigate: true,
+    },
+    {
+      title: "Chat",
+      path: `/chatbots/${chatbotId}/chat`,
+      icon: MessageSquareMore,
+      navigate: true,
     },
     {
       title: "Settings",
       path: `/chatbots/${chatbotId}/settings`,
       icon: Settings,
+      navigate: true,
     },
   ];
 
@@ -66,20 +75,38 @@ export const Header = () => {
     {
       path: "/#features",
       title: "Features",
+      navigate: false,
     },
 
     {
       path: "/#pricing",
       title: "Pricing",
+      navigate: false,
     },
 
     {
       path: "/#faq",
       title: "FAQ",
+      navigate: false,
     },
   ];
 
   const routes = user && chatbotId ? chatbotSidebarLinks : unauthenticatedLinks;
+  const matches = useMatches();
+
+  useEffect(() => {
+    console.log("sidebar-sheet.tsx: location.hash", location.hash);
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      console.log("sidebar-sheet.tsx: element", element);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location.hash]);
+
+  console.log("Header.tsx: matches", matches);
+  console.log("Header.tsx: sheet bool", sheet);
 
   return (
     <header className="sticky h-14 border-b bg-muted/40">
@@ -89,8 +116,8 @@ export const Header = () => {
           chatbotId ? "w-full" : "max-w-6xl",
         )}
       >
-        {sheet ? <SidebarSheet routes={routes} /> : null}
         <div className="flex items-center gap-8">
+          {sheet ? <SidebarSheet routes={routes} matches={matches} /> : null}
           {!isMobile || user ? (
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Icons.logo className="h-6 w-6" />
