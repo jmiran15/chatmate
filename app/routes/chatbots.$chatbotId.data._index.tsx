@@ -377,10 +377,6 @@ export default function Data() {
   );
 }
 
-export const handle = {
-  breadcrumb: "data",
-};
-
 export function links() {
   return [
     { rel: "stylesheet", href: AgGridStyles },
@@ -527,3 +523,8 @@ function ScrapeWebsiteModal({
     </Transition.Root>
   );
 }
+
+export const handle = {
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/data`,
+  breadcrumb: "data",
+};

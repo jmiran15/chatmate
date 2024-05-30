@@ -9,6 +9,8 @@ import { Container } from "./container";
 import screenshotFollowup from "../../images/screenshots/ai-followups.png";
 import screenshotModel from "../../images/screenshots/customize.png";
 import screenshotSafe from "../../images/screenshots/safe.png";
+import H2 from "./h2";
+import H3 from "./h3";
 
 interface Feature {
   name: React.ReactNode;
@@ -55,7 +57,7 @@ const features: Feature[] = [
     },
   },
   {
-    name: "Model",
+    name: "Model customization",
     summary: "Align your AI chatbot to your brand tone and voice.",
     description:
       "Tailor your model to your brand’s voice, with options to modify system prompts, response lengths, and choose from top AI models like GPT-4, LLaMA 70B, and Mixtral.",
@@ -83,10 +85,9 @@ const features: Feature[] = [
   },
   {
     name: "Trustworthy",
-    summary:
-      "With built-in safeguards, Chatmate strictly uses your support content to answer questions, eliminating off-topic conversations and misleading responses.",
+    summary: "Built-in safeguards to eliminate misleading responses.",
     description:
-      "Chatmate is designed with the highest commitment to trust, security, and compliance. Your AI agent won't pretend to be something it's not, and it will be honest about its limitations.",
+      "Your AI agent won't pretend to be something it's not, and it will be honest about its limitations.",
     image: screenshotSafe,
     icon: function ContactsIcon() {
       return (
@@ -138,10 +139,12 @@ function Feature({
       >
         {feature.name}
       </h3>
-      <p className="mt-2 font-display text-xl text-slate-900">
+      <p className="mt-2 font-display text-xl text-primary">
         {feature.summary}
       </p>
-      <p className="mt-4 text-sm text-slate-600">{feature.description}</p>
+      <p className="mt-4 text-sm text-muted-foreground">
+        {feature.description}
+      </p>
     </div>
   );
 }
@@ -192,7 +195,7 @@ function FeaturesDesktop() {
               />
             ))}
           </Tab.List>
-          <Tab.Panels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
+          <Tab.Panels className="relative mt-20 overflow-hidden rounded-4xl bg-muted px-14 py-16 xl:px-16 rounded-xl">
             <div className="-mx-5 flex">
               {features.map((feature, featureIndex) => (
                 <Tab.Panel
@@ -216,7 +219,7 @@ function FeaturesDesktop() {
                 </Tab.Panel>
               ))}
             </div>
-            <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-slate-900/10" />
+            <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-slate-900/10" />
           </Tab.Panels>
         </>
       )}
@@ -226,24 +229,16 @@ function FeaturesDesktop() {
 
 export function SecondaryFeatures() {
   return (
-    <section
-      id="secondary-features"
-      aria-label="Features for simplifying everyday business tasks"
-      className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
-    >
-      <Container>
-        <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-            Engaging and authentic conversations.
-          </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
-            Delight your customers with organic customer service interactions
-            while improving customer satisfaction.
-          </p>
-        </div>
-        <FeaturesMobile />
-        <FeaturesDesktop />
-      </Container>
-    </section>
+    <Container>
+      <div className="flex flex-col gap-8 items-center">
+        <H2 className="text-primary">Engaging and authentic conversations.</H2>
+        <H3 className="text-primary">
+          Delight your customers with organic customer service interactions
+          while improving customer satisfaction.
+        </H3>
+      </div>
+      <FeaturesMobile />
+      <FeaturesDesktop />
+    </Container>
   );
 }

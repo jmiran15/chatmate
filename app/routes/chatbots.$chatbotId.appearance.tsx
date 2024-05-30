@@ -59,5 +59,6 @@ export default function Appearance() {
 }
 
 export const handle = {
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/appearance`,
   breadcrumb: "appearance",
 };

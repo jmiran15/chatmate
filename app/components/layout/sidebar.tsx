@@ -1,4 +1,4 @@
-import { Link, useMatches } from "@remix-run/react";
+import { Link, useMatches, useParams } from "@remix-run/react";
 import {
   AreaChart,
   Brush,
@@ -8,53 +8,60 @@ import {
   Settings,
   Share,
 } from "lucide-react";
-import { cn } from "~/lib/utils";
+import { cn, isActive } from "~/lib/utils";
 
 export default function Sidebar() {
   const matches = useMatches();
+  const { chatbotId } = useParams();
+
+  if (!chatbotId) {
+    return null;
+  }
+
   const links = [
     {
       title: "Chats",
-      path: "chats",
+      path: `/chatbots/${chatbotId}/chats`,
       icon: MessagesSquare,
+      navigate: true,
     },
     {
       title: "Data",
-      path: "data",
+      path: `/chatbots/${chatbotId}/data`,
       icon: Database,
+      navigate: true,
     },
     {
       title: "Appearance",
-      path: "appearance",
+      path: `/chatbots/${chatbotId}/appearance`,
       icon: Brush,
+      navigate: true,
     },
     {
       title: "Share",
-      path: "share",
+      path: `/chatbots/${chatbotId}/share`,
       icon: Share,
+      navigate: true,
     },
     {
       title: "Analytics",
-      path: "analytics",
+      path: `/chatbots/${chatbotId}/analytics`,
       icon: AreaChart,
+      navigate: true,
     },
     {
       title: "Chat",
-      path: "chat",
+      path: `/chatbots/${chatbotId}/chat`,
       icon: MessageSquareMore,
+      navigate: true,
     },
     {
       title: "Settings",
-      path: "settings",
+      path: `/chatbots/${chatbotId}/settings`,
       icon: Settings,
+      navigate: true,
     },
   ];
-
-  function isActive(path: string) {
-    return matches.filter((match) =>
-      match.handle ? match.handle.breadcrumb === path : false,
-    ).length;
-  }
 
   return (
     // large and medium screens
@@ -68,7 +75,11 @@ export default function Sidebar() {
               to={link.path}
               className={cn(
                 "flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary",
-                isActive(link.path)
+                isActive({
+                  matches,
+                  path: link.path,
+                  chatbotId,
+                })
                   ? "bg-muted text-primary"
                   : "text-muted-foreground",
               )}

@@ -1,15 +1,5 @@
 import { LoaderFunctionArgs, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
-import {
-  MessageSquareMore,
-  Database,
-  Brush,
-  Share,
-  Settings,
-  MessagesSquare,
-  AreaChart,
-} from "lucide-react";
-
 import Sidebar from "~/components/layout/sidebar";
 import { getChatbotById } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";

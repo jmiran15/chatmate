@@ -21,6 +21,13 @@ import {
 } from "~/components/ui/card";
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
+import {
+  createCustomer,
+  createFreeSubscription,
+} from "~/models/subscription.server";
+import { prisma } from "~/db.server";
+import { Loader2 } from "lucide-react";
+import { useIsPending } from "~/hooks/use-is-pending";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -32,7 +39,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/");
+  const redirectTo = safeRedirect(formData.get("redirectTo"), "/chatbots");
 
   if (!validateEmail(email)) {
     return json(
@@ -69,6 +76,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const user = await createUser(email, password);
+  await createCustomer({ userId: user.id });
+  const subscription = await prisma.subscription.findUnique({
+    where: { userId: user.id },
+  });
+  if (!subscription) await createFreeSubscription({ userId: user.id });
 
   return createUserSession({
     redirectTo,
@@ -86,6 +98,7 @@ export default function Join() {
   const actionData = useActionData<typeof action>();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const isPending = useIsPending({ intent: "signUp" });
 
   useEffect(() => {
     if (actionData?.errors?.email) {
@@ -159,9 +172,13 @@ export default function Join() {
               ) : null}
             </div>
             <input type="hidden" name="redirectTo" value={redirectTo} />
-
-            <Button type="submit" className="w-full">
-              Create an account
+            <input type="hidden" name="intent" value="signUp" />
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Create an account"
+              )}
             </Button>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}

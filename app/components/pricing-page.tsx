@@ -1,7 +1,88 @@
-import { Button } from "~/components/landing/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Container } from "~/components/landing/container";
 import { cn } from "~/lib/utils";
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
+import { Price, User } from "@prisma/client";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./ui/card";
+import H2 from "./landing/h2";
+import H3 from "./landing/h3";
+import { useOptionalUser } from "~/utils";
+import { Loader2 } from "lucide-react";
+import { useIsPending } from "~/hooks/use-is-pending";
+
+export const PLANS = {
+  FREE: `free`,
+  PRO: `pro`,
+} as const;
+
+export type Plan = (typeof PLANS)[keyof typeof PLANS];
+
+export const INTERVALS = {
+  MONTH: "month",
+  YEAR: "year",
+} as const;
+
+export type Interval = (typeof INTERVALS)[keyof typeof INTERVALS];
+
+type PricingPlan<T extends Plan = Plan> = {
+  [key in T]: {
+    id: string;
+    name: string;
+    description: string;
+    prices: PriceInterval;
+  };
+};
+
+export const CURRENCIES = {
+  DEFAULT: "usd",
+  USD: "usd",
+} as const;
+
+export type Currency = (typeof CURRENCIES)[keyof typeof CURRENCIES];
+
+export const PRICING_PLANS = {
+  [PLANS.FREE]: {
+    id: PLANS.FREE,
+    name: "Free",
+    description: "Start with the basics, upgrade anytime.",
+    prices: {
+      [INTERVALS.MONTH]: {
+        [CURRENCIES.USD]: 0,
+      },
+      [INTERVALS.YEAR]: {
+        [CURRENCIES.USD]: 0,
+      },
+    },
+  },
+  [PLANS.PRO]: {
+    id: PLANS.PRO,
+    name: "Pro",
+    description: "Access to all features and unlimited projects.",
+    prices: {
+      [INTERVALS.MONTH]: {
+        [CURRENCIES.USD]: 500,
+      },
+      [INTERVALS.YEAR]: {
+        [CURRENCIES.USD]: 5000,
+      },
+    },
+  },
+} satisfies PricingPlan;
+
+type PriceInterval<
+  I extends Interval = Interval,
+  C extends Currency = Currency,
+> = {
+  [interval in I]: {
+    [currency in C]: Price["amount"];
+  };
+};
 
 function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -51,133 +132,158 @@ function Plan({
   name,
   price,
   price_id,
-  description,
   features,
-  featured = false,
-  enterprise = false,
+  canCheckout,
+  button,
+  to,
 }: {
   name: string;
   price: string;
   price_id: string;
-  description: string;
   features: string[];
-  featured?: boolean;
-  enterprise?: boolean;
+  canCheckout: boolean;
+  button: string;
+  to: (user: User | undefined) => string;
 }) {
+  const user = useOptionalUser();
+  const isPending = useIsPending({ intent: "createCheckout" });
+
   return (
-    <section
-      className={cn(
-        "flex flex-col rounded-3xl px-6 sm:px-8",
-        featured ? "order-first bg-orange-400 py-8 lg:order-none" : "lg:py-8",
-      )}
-    >
-      <h3 className="mt-5 font-display text-lg text-white">{name}</h3>
-      <p
-        className={cn(
-          "mt-2 text-base",
-          featured ? "text-white" : "text-slate-400",
-        )}
-      >
-        {description}
-      </p>
-      <p className="order-first font-display text-5xl font-light tracking-tight text-white">
-        {enterprise ? "♾️" : price}
-      </p>
-      <ul
-        className={cn(
-          "order-last mt-10 flex flex-col gap-y-3 text-sm",
-          featured ? "text-white" : "text-slate-200",
-        )}
-      >
-        {features.map((feature) => (
-          <li key={feature} className="flex">
-            <CheckIcon className={featured ? "text-white" : "text-slate-400"} />
-            <span className="ml-4">{feature}</span>
-          </li>
-        ))}
-      </ul>
-      {enterprise ? (
-        <Button
-          to="mailto:chatmate.dev@gmail.com"
-          variant={featured ? "solid" : "outline"}
-          color="white"
-          className="mt-8"
-          aria-label={`Get started with the ${name} plan for ${price}`}
-        >
-          Contact us
-        </Button>
-      ) : (
-        <Form method="POST">
-          <input type="hidden" name="price" value={price_id} />
-          <Button
-            type="submit"
-            variant={featured ? "solid" : "outline"}
-            color="white"
-            className="mt-8"
-            aria-label={`Get started with the ${name} plan for ${price}`}
+    <Card className="rounded-xl">
+      <CardHeader>
+        <CardTitle>{name}</CardTitle>
+        <CardTitle className="text-4xl">{price}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className={cn("order-last flex flex-col gap-y-3 text-primary")}>
+          {features.map((feature) => (
+            <li key={feature} className="flex">
+              <CheckIcon className="text-primary" />
+              <span className="ml-4">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+      <CardFooter>
+        {user && canCheckout ? (
+          <Form
+            method="post"
+            action="/chatbots/settings/billing"
+            className="w-full"
           >
-            Start trial
-          </Button>
-        </Form>
-      )}
-    </section>
+            <input type="hidden" name="planId" value={price_id} />
+            <input type="hidden" name="planInterval" value={INTERVALS.MONTH} />
+            <Button
+              type="submit"
+              name="intent"
+              value="createCheckout"
+              className="w-full"
+              disabled={isPending}
+            >
+              {isPending ? <Loader2 className="animate-spin" /> : button}
+            </Button>
+          </Form>
+        ) : (
+          <Link
+            to={to(user)}
+            className={cn(buttonVariants({ variant: "default" }), "w-full")}
+          >
+            {button}
+          </Link>
+        )}
+      </CardFooter>
+    </Card>
   );
 }
 
 export default function Pricing() {
   return (
-    <section
-      id="pricing"
-      aria-label="Pricing"
-      className="bg-slate-900 py-20 sm:py-32"
-    >
+    <section id="pricing" aria-label="Pricing" className="bg-primary">
       <Container>
-        <div className="md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
-            <span className="relative whitespace-nowrap">
-              <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
-              <span className="relative">Simple pricing,</span>
-            </span>{" "}
-            for everyone.
-          </h2>
-          <p className="mt-4 text-lg text-slate-400">
-            It doesn’t matter what size your business is, our plans are designed
-            to fit all your needs.
-          </p>
-        </div>
-        <div className="-mx-4 mt-16 grid max-w-2xl grid-cols-1 gap-y-10 sm:mx-auto lg:-mx-8 lg:max-w-none lg:grid-cols-2 xl:mx-0 xl:gap-x-8">
-          <Plan
-            featured
-            name="Small business"
-            price="$20"
-            price_id="price_1OyctNFSz9CUblnBMBJkmSuB"
-            description="Perfect for small / medium sized businesses."
-            features={[
-              "Unlimited chats",
-              "Unlimited chatbots",
-              "Unlimited document uploads",
-              "Analytics",
-              "AI chat insights",
-              "AI follow ups",
-              "Model customization",
-              "Widget customization",
-              "24/7 customer support",
-            ]}
-          />
-          <Plan
-            name="Enterprise"
-            price="$39"
-            price_id=""
-            description="Dedicated support and infrastructure for your company."
-            features={[
-              "Everything in the scale plan",
-              "Custom integrations",
-              "Custom features",
-            ]}
-            enterprise
-          />
+        <div className="flex flex-col gap-16 items-center">
+          <div className="flex flex-col gap-8 items-center">
+            <H2 className="text-white">
+              <span className="relative whitespace-nowrap">
+                <SwirlyDoodle className="absolute left-0 top-1/2 h-[1em] w-full fill-orange-400" />
+                <span className="relative">Simple pricing,</span>
+              </span>{" "}
+              for everyone.
+            </H2>
+            <H3 className="text-white">
+              It doesn’t matter what size your business is, our plans are
+              designed to fit all your needs.
+            </H3>
+          </div>
+          <div className="grid max-w-7xl w-full grid-cols-1 gap-x-10 gap-y-10 mx-auto lg:grid-cols-3 items-start">
+            {plans.map((plan) => (
+              <Plan
+                key={plan.name}
+                name={plan.name}
+                price={plan.price}
+                price_id={plan.price_id}
+                features={plan.features}
+                canCheckout={plan.canCheckout}
+                button={plan.button}
+                to={plan.to}
+              />
+            ))}
+          </div>
         </div>
       </Container>
     </section>
   );
 }
+
+const plans = [
+  {
+    name: "Everyone starts",
+    price: "Free",
+    price_id: PLANS.FREE,
+    features: [
+      "1 chatbot",
+      "Unlimited chats",
+      "Unlimited document uploads",
+      "Widget customization",
+      "Model customization",
+      "AI chat insights",
+      "AI follow ups",
+    ],
+    canCheckout: false,
+    button: "Start for free",
+    to: (user: User | undefined) => (user ? "/chatbots" : "/join"),
+  },
+  {
+    name: "Pro",
+    price: "$5/mo",
+    price_id: PLANS.PRO,
+    features: [
+      "Unlimited chatbots",
+      "Unlimited chats",
+      "Unlimited document uploads",
+      "Widget customization",
+      "Model customization",
+      "AI chat insights",
+      "AI follow ups",
+      "24/7 customer support",
+      "Analytics",
+    ],
+    button: "Start",
+    canCheckout: true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    to: (user: User | undefined) => "/join",
+  },
+  {
+    name: "Enterprise",
+    price: "Contact us",
+    price_id: "enterprise",
+    features: [
+      "Everything in the pro plan",
+      "Custom integrations",
+      "Custom features",
+    ],
+    canCheckout: false,
+    button: "Contact us",
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    to: (user: User | undefined) => "mailto:jonathan@chatmate.so",
+  },
+];

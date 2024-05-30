@@ -131,5 +131,6 @@ export default function ModelC() {
 }
 
 export const handle = {
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/data`,
   breadcrumb: "data",
 };
