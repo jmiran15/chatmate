@@ -39,7 +39,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const chatbot = await createChatbot({ name, userId });
-  return redirect(`/chatbots/${chatbot.id}/chat`);
+  return redirect(`/chatbots/${chatbot.id}/chats`);
 };
 
 export const meta: MetaFunction = () => [{ title: "New chatbot" }];
