@@ -64,17 +64,17 @@ export const Header = () => {
 
   const unauthenticatedLinks = [
     {
-      path: "#features",
+      path: "/#features",
       title: "Features",
     },
 
     {
-      path: "#pricing",
+      path: "/#pricing",
       title: "Pricing",
     },
 
     {
-      path: "#faq",
+      path: "/#faq",
       title: "FAQ",
     },
   ];

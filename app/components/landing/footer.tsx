@@ -4,17 +4,17 @@ import { Container } from "./container";
 export function Footer() {
   const marketingLinks = [
     {
-      path: "#features",
+      path: "/#features",
       title: "Features",
     },
 
     {
-      path: "#pricing",
+      path: "/#pricing",
       title: "Pricing",
     },
 
     {
-      path: "#faq",
+      path: "/#faq",
       title: "FAQ",
     },
   ];

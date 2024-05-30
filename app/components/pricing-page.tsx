@@ -148,7 +148,6 @@ function Plan({
   const user = useOptionalUser();
   const isPending = useIsPending();
 
-  console.log("isPending", isPending);
   return (
     <Card className="rounded-xl">
       <CardHeader>
