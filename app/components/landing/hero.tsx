@@ -1,3 +1,10 @@
+import {
+  motion,
+  useTransform,
+  useScroll,
+  useMotionValueEvent,
+  useMotionValue,
+} from "framer-motion";
 import screenshotChats from "../../images/screenshots/chats.png";
 import { Link } from "@remix-run/react";
 import { buttonVariants } from "../ui/button";
@@ -5,13 +12,78 @@ import { useOptionalUser } from "~/utils";
 import H3 from "./h3";
 import { Container } from "./container";
 import { cn } from "~/lib/utils";
+import { useEffect, useRef, useState } from "react";
 
 export function Hero() {
   const user = useOptionalUser();
+  const { scrollY } = useScroll();
+  const ref = useRef<HTMLImageElement>(null);
+  const [initialDistanceFromCenter, setInitialDistanceFromCenter] = useState(0);
+  const distance = useMotionValue(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (ref.current && typeof window !== "undefined") {
+        const el = ref.current.getBoundingClientRect();
+        const imgCenter = el.bottom - el.height / 2;
+        const distanceFromCenter = imgCenter - window.innerHeight / 2;
+        distance.set(distanceFromCenter);
+        console.log("hero.tsx: distanceFromCenter", {
+          distanceFromCenter,
+        });
+      }
+    };
+
+    handleResize();
+    if (ref.current && typeof window !== "undefined") {
+      const el = ref.current.getBoundingClientRect();
+      const imgCenter = el.bottom - el.height / 2;
+      const distanceFromCenter = imgCenter - window.innerHeight / 2;
+      setInitialDistanceFromCenter(distanceFromCenter);
+      console.log("hero.tsx: initialDistanceFromCenter", {
+        distanceFromCenter,
+      });
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const rotateX = useTransform(
+    distance,
+    [initialDistanceFromCenter, 0],
+    [20, 0],
+  );
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (ref.current && typeof window !== "undefined") {
+      const el = ref.current.getBoundingClientRect();
+      const imgCenter = el.bottom - el.height / 2;
+      const distanceFromCenter = imgCenter - window.innerHeight / 2;
+      distance.set(distanceFromCenter);
+      console.log("hero.tsx: distanceFromCenter", {
+        distanceFromCenter,
+      });
+    }
+  });
+
+  useMotionValueEvent(distance, "change", (latest) => {
+    console.log("hero.tsx: dCenter", latest);
+  });
+
+  if (typeof window === "undefined") {
+    return null;
+  }
 
   return (
     <Container>
-      <div className="flex flex-col gap-16 items-center">
+      <div
+        className="flex flex-col gap-16 items-center"
+        style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
+      >
         <div className="flex flex-col gap-8 items-center">
           <H1 />
           <H3 className="text-muted-foreground">
@@ -19,7 +91,6 @@ export function Hero() {
             resolving customer inquiries and instantly reducing your team’s
             ticket volume
           </H3>
-
           <div className="flex flex-col gap-1 items-center">
             <Link
               className={cn(
@@ -42,10 +113,18 @@ export function Hero() {
             ) : null}
           </div>
         </div>
-        <img
+        <motion.img
+          ref={ref}
           className="w-full hidden md:block rounded-xl border"
           src={screenshotChats}
           alt=""
+          style={{ rotateX }}
+          transition={{
+            duration: 0.5,
+            type: "spring",
+            stiffness: 100,
+            damping: 30,
+          }}
         />
       </div>
     </Container>
