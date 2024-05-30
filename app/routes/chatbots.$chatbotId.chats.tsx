@@ -213,10 +213,10 @@ export default function Chats() {
   }, [fetcher.data]);
 
   return (
-    <div className="flex flex-col lg:grid lg:grid-cols-10 h-full overflow-none ">
+    <div className="flex flex-col sm:grid sm:grid-cols-10 h-full overflow-none ">
       <div
         ref={divRef}
-        className="lg:col-span-4 overflow-y-auto flex flex-col items-center justify-start gap-4 lg:border-r border-b border-gray-200 p-4"
+        className="flex flex-col h-full w-full overflow-y-auto items-center justify-start p-2 gap-4 sm:border-r sm:p-4 sm:col-span-3"
       >
         <Tabs
           value={tab}
@@ -225,7 +225,7 @@ export default function Chats() {
             setTab(value);
           }}
         >
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList>
             <TabsTrigger value="all">All chats</TabsTrigger>
             <TabsTrigger value="starred">Starred</TabsTrigger>
           </TabsList>
@@ -248,7 +248,7 @@ export default function Chats() {
           </div>
           <TabsContent value="all">
             {chatsState.length === 0 ? (
-              <p className="self-start">No chats</p>
+              <p className="w-full self-start">No chats</p>
             ) : (
               <ol className="w-full space-y-4">
                 {chatsState.map((chat) => (
@@ -261,7 +261,7 @@ export default function Chats() {
           </TabsContent>
           <TabsContent value="starred">
             {chatsState.length === 0 ? (
-              <p className="self-start">No chats</p>
+              <p className="w-full self-start">No chats</p>
             ) : (
               <ol className="w-full space-y-4">
                 {chatsState.map((chat) => (
@@ -274,9 +274,7 @@ export default function Chats() {
           </TabsContent>
         </Tabs>
       </div>
-      <div className="col-span-6 lg:overflow-y-auto h-full">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 }

@@ -110,6 +110,7 @@ export default function App() {
           <Scripts />
           <LiveReload />
           <Toaster />
+          <div id="modal-container" />
         </Theme>
       </body>
     </html>

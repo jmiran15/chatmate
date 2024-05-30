@@ -7,13 +7,7 @@ import { useState } from "react";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ChatsCard({ chat }: { chat: any }) {
-  // const messages = chat.messages;
-  // const numberOfUserMessages = messages.filter(
-  //   (message: any) => message.role === "user",
-  // ).length;
-
   const { chatsId, chatbotId } = useParams();
-
   const selected = chatsId === chat.id;
   const [starred, setStarred] = useState(chat.starred);
 

@@ -19,9 +19,9 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
 export default function ChatbotLayout() {
   return (
-    <div className="flex flex-col md:grid md:grid-cols-6 w-full h-full overflow-hidden">
+    <div className="flex flex-col w-full h-full lg:grid lg:grid-cols-6 overflow-hidden">
       <Sidebar />
-      <div className="grow md:col-span-5 h-full overflow-hidden">
+      <div className="grow lg:col-span-5 h-full overflow-hidden">
         <Outlet />
       </div>
     </div>
