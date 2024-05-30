@@ -1,7 +1,14 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
+import { Form, useLoaderData } from "@remix-run/react";
 import ChatbotCard from "~/components/chatbot-card";
+import { Button } from "~/components/ui/button";
 import { getAllChatbots } from "~/models/chatbot.server";
+import { seed } from "~/models/seed.server";
 import { requireUserId } from "~/session.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -16,6 +23,22 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({ chatbots });
 };
 
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const userId = await requireUserId(request);
+  // jmiran15@jhu.edu
+  if (userId !== "47ea213c-227a-42f4-9a91-b1ac4580330f") {
+    return redirect("/chatbots");
+  }
+
+  return await seed()
+    .catch((e) => {
+      console.error(e);
+    })
+    .finally(() => {
+      console.log("seeded db");
+    });
+};
+
 export default function Admin() {
   const data = useLoaderData<typeof loader>();
 
@@ -26,6 +49,9 @@ export default function Admin() {
           All chatbots
         </h1>
       </div>
+      <Form method="post">
+        <Button type="submit">Seed db</Button>
+      </Form>
 
       {data.chatbots.length === 0 ? (
         <p className="p-4">No chatbots yet</p>
