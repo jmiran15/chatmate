@@ -7,6 +7,7 @@ import {
 import { Form, useLoaderData } from "@remix-run/react";
 import ChatbotCard from "~/components/chatbot-card";
 import { Button } from "~/components/ui/button";
+import { prisma } from "~/db.server";
 import { getAllChatbots } from "~/models/chatbot.server";
 import { seed } from "~/models/seed.server";
 import { requireUserId } from "~/session.server";
@@ -29,6 +30,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   if (userId !== "47ea213c-227a-42f4-9a91-b1ac4580330f") {
     return redirect("/chatbots");
   }
+
+  const plans = await prisma.plan.findMany();
+
+  console.log("current plans: ", plans);
 
   return await seed()
     .catch((e) => {

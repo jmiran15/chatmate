@@ -1,6 +1,74 @@
+import { Price } from "@prisma/client";
 import { prisma } from "~/db.server";
 import { stripe } from "~/models/subscription.server";
-import { Interval, PLANS, PRICING_PLANS } from "~/components/pricing-page";
+
+export const PLANS = {
+  FREE: `free`,
+  PRO: `pro`,
+} as const;
+
+export type Plan = (typeof PLANS)[keyof typeof PLANS];
+
+export const INTERVALS = {
+  MONTH: "month",
+  YEAR: "year",
+} as const;
+
+export type Interval = (typeof INTERVALS)[keyof typeof INTERVALS];
+
+type PricingPlan<T extends Plan = Plan> = {
+  [key in T]: {
+    id: string;
+    name: string;
+    description: string;
+    prices: PriceInterval;
+  };
+};
+
+export const CURRENCIES = {
+  DEFAULT: "usd",
+  USD: "usd",
+} as const;
+
+export type Currency = (typeof CURRENCIES)[keyof typeof CURRENCIES];
+
+export const PRICING_PLANS = {
+  [PLANS.FREE]: {
+    id: PLANS.FREE,
+    name: "Free",
+    description: "Start with the basics, upgrade anytime.",
+    prices: {
+      [INTERVALS.MONTH]: {
+        [CURRENCIES.USD]: 0,
+      },
+      [INTERVALS.YEAR]: {
+        [CURRENCIES.USD]: 0,
+      },
+    },
+  },
+  [PLANS.PRO]: {
+    id: PLANS.PRO,
+    name: "Pro",
+    description: "Access to all features and unlimited projects.",
+    prices: {
+      [INTERVALS.MONTH]: {
+        [CURRENCIES.USD]: 500,
+      },
+      [INTERVALS.YEAR]: {
+        [CURRENCIES.USD]: 5000,
+      },
+    },
+  },
+} satisfies PricingPlan;
+
+type PriceInterval<
+  I extends Interval = Interval,
+  C extends Currency = Currency,
+> = {
+  [interval in I]: {
+    [currency in C]: Price["amount"];
+  };
+};
 
 export async function seed() {
   // stripe
@@ -9,6 +77,10 @@ export async function seed() {
     limit: 3,
   });
 
+  console.info(`🌱 Seeding database...`);
+
+  console.info(`🔍 Checking for existing Stripe products...`);
+
   if (products?.data?.length) {
     console.info(
       `🏃‍♂️ Skipping Stripe products creation and seeding. ${products?.data
@@ -16,6 +88,8 @@ export async function seed() {
     );
     return true;
   }
+
+  console.info(`🚀 Creating Stripe products...`);
 
   const seedProducts = Object.values(PRICING_PLANS).map(
     async ({ id, name, description, prices }) => {
@@ -29,6 +103,9 @@ export async function seed() {
           }));
         },
       );
+      console.info(
+        `🌱 Creating product: ${name} with ${pricesByInterval.length} prices.`,
+      );
 
       // Create Stripe product.
       await stripe.products.create({
@@ -36,6 +113,8 @@ export async function seed() {
         name,
         description: description || undefined,
       });
+
+      console.info(`🌱 Creating prices for product: ${name}.`);
 
       // Create Stripe price for the current product.
       const stripePrices = await Promise.all(
@@ -50,6 +129,10 @@ export async function seed() {
             },
           });
         }),
+      );
+
+      console.info(
+        `🌱 Prices for product: ${name} has been successfully created.`,
       );
 
       // Store product into database.
@@ -68,6 +151,8 @@ export async function seed() {
           },
         },
       });
+
+      console.info(`🌱 Product: ${name} has been successfully created.`);
 
       // Return product ID and prices.
       // Used to configure the Customer Portal.
