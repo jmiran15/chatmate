@@ -1,5 +1,4 @@
 import { Bot, CircleUser, LogOut, Settings } from "lucide-react";
-import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +10,6 @@ import { useFetcher, useNavigate } from "@remix-run/react";
 import { useOptionalUser } from "~/utils";
 import { useRef } from "react";
 import { useHoverEffect } from "~/hooks/use-hover-effect";
-import { MarketingLink } from "./marketing-link";
 import { useMobileScreen } from "~/utils/mobile";
 
 export default function ProfileDropdown() {

@@ -17,8 +17,8 @@ import { Loader2 } from "lucide-react";
 import { useIsPending } from "~/hooks/use-is-pending";
 
 export const PLANS = {
-  FREE: "free",
-  PRO: "pro",
+  FREE: `free`,
+  PRO: `pro`,
 } as const;
 
 export type Plan = (typeof PLANS)[keyof typeof PLANS];
@@ -66,10 +66,10 @@ export const PRICING_PLANS = {
     description: "Access to all features and unlimited projects.",
     prices: {
       [INTERVALS.MONTH]: {
-        [CURRENCIES.USD]: 1990,
+        [CURRENCIES.USD]: 500,
       },
       [INTERVALS.YEAR]: {
-        [CURRENCIES.USD]: 19990,
+        [CURRENCIES.USD]: 5000,
       },
     },
   },
@@ -143,7 +143,7 @@ function Plan({
   features: string[];
   canCheckout: boolean;
   button: string;
-  to: (user: User | null) => string;
+  to: (user: User | undefined) => string;
 }) {
   const user = useOptionalUser();
   const isPending = useIsPending({ intent: "createCheckout" });
@@ -238,7 +238,7 @@ const plans = [
   {
     name: "Everyone starts",
     price: "Free",
-    price_id: "free",
+    price_id: PLANS.FREE,
     features: [
       "1 chatbot",
       "Unlimited chats",
@@ -250,12 +250,12 @@ const plans = [
     ],
     canCheckout: false,
     button: "Start for free",
-    to: (user: User | null) => (user ? "/chatbots" : "/join"),
+    to: (user: User | undefined) => (user ? "/chatbots" : "/join"),
   },
   {
     name: "Pro",
     price: "$5/mo",
-    price_id: "pro",
+    price_id: PLANS.PRO,
     features: [
       "Unlimited chatbots",
       "Unlimited chats",
@@ -269,7 +269,8 @@ const plans = [
     ],
     button: "Start",
     canCheckout: true,
-    to: (user: User | null) => "/join",
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    to: (user: User | undefined) => "/join",
   },
   {
     name: "Enterprise",
@@ -282,6 +283,7 @@ const plans = [
     ],
     canCheckout: false,
     button: "Contact us",
-    to: (user: User | null) => "mailto:info@chatmate.so",
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    to: (user: User | undefined) => "mailto:jonathan@chatmate.so",
   },
 ];

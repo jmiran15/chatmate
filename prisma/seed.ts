@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { stripe } from "~/models/subscription.server";
-import { Interval, PRICING_PLANS } from "~/components/pricing-page";
+import { Interval, PLANS, PRICING_PLANS } from "~/components/pricing-page";
 
 const prisma = new PrismaClient();
 
@@ -101,7 +101,9 @@ async function seed() {
         enabled: true,
         default_allowed_updates: ["price"],
         proration_behavior: "always_invoice",
-        products: seededProducts.filter(({ product }) => product !== "free"),
+        products: seededProducts.filter(
+          ({ product }) => product !== PLANS.FREE,
+        ),
       },
     },
   });

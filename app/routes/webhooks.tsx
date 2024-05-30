@@ -154,6 +154,7 @@ export async function action({ request }: ActionFunctionArgs) {
       case "checkout.session.completed": {
         const session = event.data.object;
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { customer: customerId, subscription: subscriptionId } = z
           .object({ customer: z.string(), subscription: z.string() })
           .parse(session);
@@ -168,6 +169,7 @@ export async function action({ request }: ActionFunctionArgs) {
       case "customer.subscription.updated": {
         const subscription = event.data.object;
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { id: subscriptionId, customer: customerId } = z
           .object({ id: z.string(), customer: z.string() })
           .parse(subscription);

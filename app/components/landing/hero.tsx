@@ -58,7 +58,7 @@ export function Hero() {
     [20, 0],
   );
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, "change", () => {
     if (ref.current && typeof window !== "undefined") {
       const el = ref.current.getBoundingClientRect();
       const imgCenter = el.bottom - el.height / 2;
@@ -91,7 +91,7 @@ export function Hero() {
             resolving customer inquiries and instantly reducing your team’s
             ticket volume
           </H3>
-          <div className="flex flex-col gap-1 items-center">
+          <div className="flex flex-col gap-1 items-center w-full">
             <Link
               className={cn(
                 buttonVariants({ variant: "default" }),

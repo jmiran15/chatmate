@@ -1,4 +1,3 @@
-import { useMatches } from "@remix-run/react";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -11,7 +10,8 @@ export function isActive({
   path,
   chatbotId,
 }: {
-  matches: ReturnType<typeof useMatches>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  matches: any;
   path: string;
   chatbotId: string | undefined;
 }) {
@@ -21,7 +21,13 @@ export function isActive({
 
   return (
     matches
-      .filter((match) => match.handle && match.handle.PATH)
-      .filter((match) => match.handle.PATH(chatbotId) === path).length > 0
+      .filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (match: any) => match.handle && match.handle.PATH,
+      )
+      .filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (match: any) => match.handle.PATH(chatbotId) === path,
+      ).length > 0
   );
 }

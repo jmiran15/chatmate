@@ -48,10 +48,12 @@ export async function createFreeSubscription({ userId }: { userId: string }) {
   if (subscription) return false;
 
   const currency = "usd";
+  console.log("subscription.server.ts: PLANS.FREE ", PLANS.FREE);
   const plan = await prisma.plan.findUnique({
     where: { id: PLANS.FREE },
     include: { prices: true },
   });
+  console.log("subscription.server.ts: plan ", plan);
   const yearlyPrice = plan?.prices.find(
     (price) => price.interval === "year" && price.currency === currency,
   );
