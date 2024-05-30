@@ -1,13 +1,13 @@
 // Note: This can be open-sourced if others need to use it (possible names oxo-hotkeys)
-type HotkeyNode = {
+interface HotkeyNode {
   children: Map<string, HotkeyNode>;
   callback?: (e: KeyboardEvent) => void;
-};
+}
 
-type HotkeyScope = {
+interface HotkeyScope {
   root: HotkeyNode;
   currentNode: HotkeyNode;
-};
+}
 
 let currentScopeName = "global";
 let hasBoundKeyListenerToDom = false;
