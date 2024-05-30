@@ -13,6 +13,8 @@ import {
 import H2 from "./landing/h2";
 import H3 from "./landing/h3";
 import { useOptionalUser } from "~/utils";
+import { Loader2 } from "lucide-react";
+import { useIsPending } from "~/hooks/use-is-pending";
 
 export const PLANS = {
   FREE: "free",
@@ -144,7 +146,9 @@ function Plan({
   to: (user: User | null) => string;
 }) {
   const user = useOptionalUser();
+  const isPending = useIsPending();
 
+  console.log("isPending", isPending);
   return (
     <Card className="rounded-xl">
       <CardHeader>
@@ -176,7 +180,7 @@ function Plan({
               value="createCheckout"
               className="w-full"
             >
-              {button}
+              {isPending ? <Loader2 className="animate-spin" /> : button}
             </Button>
           </Form>
         ) : (

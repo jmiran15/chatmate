@@ -1,9 +1,11 @@
 // // this page /chatbots shows a list of your chatbots and has a button that takes you to /chatbots/new where you can create a new chatbot
 import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
+import { Loader2 } from "lucide-react";
 import ChatbotCard from "~/components/chatbot-card";
 import { INTERVALS, PLANS } from "~/components/pricing-page";
 import { Button } from "~/components/ui/button";
+import { useIsPending } from "~/hooks/use-is-pending";
 
 import { getChatbotsByUserId } from "~/models/chatbot.server";
 import { isProUser } from "~/models/user.server";
@@ -20,6 +22,7 @@ export const meta: MetaFunction = () => [{ title: "Chatbots" }];
 
 export default function MyChatbots() {
   const data = useLoaderData<typeof loader>();
+  const isPending = useIsPending();
 
   return (
     <div className="flex flex-col gap-8 w-full py-12 px-8 md:px-20 xl:px-96">
@@ -49,7 +52,11 @@ export default function MyChatbots() {
                 value={INTERVALS.MONTH}
               />
               <Button type="submit" name="intent" value="createCheckout">
-                Upgrade to Pro
+                {isPending ? (
+                  <Loader2 className="animate-spin" />
+                ) : (
+                  "Upgrade to Pro"
+                )}
               </Button>
             </Form>
           ) : null}

@@ -20,6 +20,8 @@ import {
 import { Switch } from "../ui/switch";
 import { loader } from "~/routes/chatbots.settings.billing";
 import { Badge } from "../ui/badge";
+import { Loader2 } from "lucide-react";
+import { useIsPending } from "~/hooks/use-is-pending";
 
 export default function ChangePlan() {
   const { subscription, currency } = useLoaderData<typeof loader>();
@@ -30,6 +32,7 @@ export default function ChangePlan() {
   const [selectedPlanInterval, setSelectedPlanInterval] = useState<Interval>(
     INTERVALS.MONTH,
   );
+  const isPending = useIsPending();
 
   return (
     <Card>
@@ -167,7 +170,11 @@ export default function ChangePlan() {
               value="createCheckout"
               disabled={selectedPlanId === PLANS.FREE}
             >
-              Upgrade to PRO
+              {isPending ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Upgrade to Pro"
+              )}
             </Button>
           </Form>
         </CardFooter>
