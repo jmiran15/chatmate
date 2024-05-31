@@ -32,8 +32,6 @@ export default function SidebarSheet({
     return;
   }
 
-  console.log("sidebar-sheet.tsx: open", open);
-
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <Button

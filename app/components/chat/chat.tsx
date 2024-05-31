@@ -49,10 +49,7 @@ export default function Chat() {
     setMessages(data.messages);
     setChatbot(data.chatbot);
     setBASE_URL(data.BASE_URL);
-    console.log(
-      "show: ",
-      data.messages.length <= data.chatbot.introMessages.length,
-    );
+
     setFollowUps(
       data.messages.length <= data.chatbot.introMessages.length
         ? data.chatbot?.starterQuestions
@@ -443,7 +440,6 @@ function handleChat(
       pending: false,
     });
   } else if (type === "textResponse") {
-    console.log("got last part? ", textResponse);
     setLoadingResponse(false);
     setChatHistory([
       ...remHistory,

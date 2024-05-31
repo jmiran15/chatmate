@@ -95,18 +95,13 @@ export const Header = () => {
   const matches = useMatches();
 
   useEffect(() => {
-    console.log("sidebar-sheet.tsx: location.hash", location.hash);
     if (location.hash) {
       const element = document.querySelector(location.hash);
-      console.log("sidebar-sheet.tsx: element", element);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [location.hash]);
-
-  console.log("Header.tsx: matches", matches);
-  console.log("Header.tsx: sheet bool", sheet);
 
   return (
     <header className="sticky h-14 border-b bg-muted/40">

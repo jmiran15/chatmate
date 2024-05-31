@@ -28,9 +28,6 @@ export function Hero() {
         const imgCenter = el.bottom - el.height / 2;
         const distanceFromCenter = imgCenter - window.innerHeight / 2;
         distance.set(distanceFromCenter);
-        console.log("hero.tsx: distanceFromCenter", {
-          distanceFromCenter,
-        });
       }
     };
 
@@ -40,9 +37,6 @@ export function Hero() {
       const imgCenter = el.bottom - el.height / 2;
       const distanceFromCenter = imgCenter - window.innerHeight / 2;
       setInitialDistanceFromCenter(distanceFromCenter);
-      console.log("hero.tsx: initialDistanceFromCenter", {
-        distanceFromCenter,
-      });
     }
 
     window.addEventListener("resize", handleResize);
@@ -64,14 +58,7 @@ export function Hero() {
       const imgCenter = el.bottom - el.height / 2;
       const distanceFromCenter = imgCenter - window.innerHeight / 2;
       distance.set(distanceFromCenter);
-      console.log("hero.tsx: distanceFromCenter", {
-        distanceFromCenter,
-      });
     }
-  });
-
-  useMotionValueEvent(distance, "change", (latest) => {
-    console.log("hero.tsx: dCenter", latest);
   });
 
   if (typeof window === "undefined") {

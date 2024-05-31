@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useWindowSize() {
+export function useWindowSize() {
   const [size, setSize] = useState({
     width: 0,
     height: 0,
@@ -32,6 +32,5 @@ function useWindowSize() {
 export const MOBILE_MAX_WIDTH = 640; // based on tailwindcss breakpoint
 export function useMobileScreen() {
   const { width } = useWindowSize();
-
   return width <= MOBILE_MAX_WIDTH;
 }
