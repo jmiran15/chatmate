@@ -314,6 +314,19 @@ export function getPublicChatsCount({
   });
 }
 
+// get first public chat
+export function getFirstPublicChat({
+  chatbotId,
+}: {
+  chatbotId: Chat["chatbotId"];
+}) {
+  return prisma.chat.findFirst({
+    where: {
+      chatbotId,
+      userId: null,
+    },
+  });
+}
 // pagination
 export async function getChatsPagination({
   chatbotId,
