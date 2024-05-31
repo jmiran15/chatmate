@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
-import { BoltIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import { BoltIcon, EnvelopeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 // import { useMobileScreen } from "@/utils/mobile";
 import { colors } from "./preview";
 import { Chatbot } from "@prisma/client";
+import { useMobileScreen } from "~/utils/mobile";
 
-export default function ChatWindowHeader({ chatbot }: { chatbot: Chatbot }) {
+export default function ChatWindowHeader({
+  chatbot,
+  closeChat,
+}: {
+  chatbot: Chatbot;
+  closeChat: () => void;
+}) {
   const [showingOptions, setShowOptions] = useState(false);
-  //   const isMobile = useMobileScreen();
+  const isMobile = useMobileScreen();
 
   return (
     <nav
@@ -37,6 +44,15 @@ export default function ChatWindowHeader({ chatbot }: { chatbot: Chatbot }) {
         >
           <EllipsisVerticalIcon className="text-white w-auto min-h-[24px] h-[24px]" />
         </button>
+        {isMobile && (
+          <button
+            type="button"
+            onClick={closeChat}
+            className="min-w-[48px] max-h-[48px] h-[48px] w-[48px] bg-transparent border-none box-border rounded-[10px] flex items-center justify-center px-[12px] text-white settings-button chat-header-btn"
+          >
+            <XMarkIcon className="text-white w-auto min-h-[24px] h-[24px]" />
+          </button>
+        )}
       </div>
       {showingOptions && <OptionsMenu />}
     </nav>

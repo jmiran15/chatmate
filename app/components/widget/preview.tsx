@@ -2,7 +2,8 @@ import { Chatbot } from "@prisma/client";
 import OpenButton from "./open-button";
 import ChatWindow from "./chat-window";
 import "./styles.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useMobileScreen } from "~/utils/mobile";
 
 export const colors = {
   zinc: "zinc-900",
@@ -25,14 +26,30 @@ export const colors = {
   rose: "rose-500",
 };
 
-export default function Preview({ chatbot }: { chatbot: Chatbot }) {
+export default function Preview({
+  chatbot,
+  isMobile,
+}: {
+  chatbot: Chatbot;
+  isMobile: boolean;
+}) {
   const [isChatOpen, setIsChatOpen] = useState(true);
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsChatOpen(false);
+    } else {
+      setIsChatOpen(true);
+    }
+  }, [isMobile]);
 
   if (!chatbot) return null;
 
   return (
     <>
-      {isChatOpen && <ChatWindow chatbot={chatbot} />}
+      {isChatOpen && (
+        <ChatWindow chatbot={chatbot} closeChat={() => setIsChatOpen(false)} />
+      )}
       <OpenButton
         chatbot={chatbot}
         setIsChatOpen={setIsChatOpen}

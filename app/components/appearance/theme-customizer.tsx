@@ -65,7 +65,7 @@ export default function Customizer({
   return (
     <fetcher.Form
       method="POST"
-      className="flex flex-col space-y-8 lg:col-span-2 lg:h-full lg:overflow-y-auto lg:border-r border-b border-gray-200 p-4"
+      className="flex flex-col space-y-8 md:col-span-2 overflow-y-auto  md:border-r p-4"
     >
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="name">Name</Label>
