@@ -18,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { useMobileScreen } from "~/utils/mobile";
+import InboxIndexMd from "~/components/indexes/inbox-md";
 
 const getPage = (searchParams: URLSearchParams) =>
   searchParams.get("cursor") || "";
@@ -212,11 +214,13 @@ export default function Chats() {
     }
   }, [fetcher.data]);
 
+  const isMobile = useMobileScreen();
+
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-10 h-full overflow-none ">
       <div
         ref={divRef}
-        className="flex flex-col h-full w-full overflow-y-auto items-center justify-start p-2 gap-4 sm:border-r sm:p-4 sm:col-span-3"
+        className="flex flex-col h-full w-full overflow-y-auto items-center justify-start p-4 gap-4 sm:border-r sm:p-6 sm:col-span-3"
       >
         <Tabs
           value={tab}
@@ -248,7 +252,14 @@ export default function Chats() {
           </div>
           <TabsContent value="all">
             {chatsState.length === 0 ? (
-              <p className="w-full self-start">No chats</p>
+              isMobile ? (
+                <InboxIndexMd />
+              ) : (
+                <p className="text-sm text-muted-foreground self-start w-full">
+                  This is where you will see all incoming messages from your
+                  customers.
+                </p>
+              )
             ) : (
               <ol className="w-full space-y-4">
                 {chatsState.map((chat) => (
@@ -261,7 +272,13 @@ export default function Chats() {
           </TabsContent>
           <TabsContent value="starred">
             {chatsState.length === 0 ? (
-              <p className="w-full self-start">No chats</p>
+              isMobile ? (
+                <InboxIndexMd />
+              ) : (
+                <p className="text-sm text-muted-foreground self-start w-full">
+                  No starred chats
+                </p>
+              )
             ) : (
               <ol className="w-full space-y-4">
                 {chatsState.map((chat) => (

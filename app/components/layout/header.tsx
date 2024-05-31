@@ -4,7 +4,7 @@ import { Icons } from "../icons";
 import { useOptionalUser } from "~/utils";
 
 import {
-  MessageSquareMore,
+  TestTube,
   Database,
   Brush,
   Share,
@@ -58,9 +58,9 @@ export const Header = () => {
       navigate: true,
     },
     {
-      title: "Chat",
+      title: "Test chatbot",
       path: `/chatbots/${chatbotId}/chat`,
-      icon: MessageSquareMore,
+      icon: TestTube,
       navigate: true,
     },
     {
