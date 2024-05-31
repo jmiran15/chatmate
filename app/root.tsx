@@ -101,6 +101,25 @@ export default function App() {
               `,
               }}
             />
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=AW-16589884223`}
+            />
+            <script
+              async
+              id="gtag-init"
+              dangerouslySetInnerHTML={{
+                __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'AW-16589884223', {
+                  page_path: window.location.pathname,
+                });
+              `,
+              }}
+            />
           </>
         )}
         <Theme>
