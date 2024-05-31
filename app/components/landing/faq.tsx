@@ -69,7 +69,7 @@ export function Faqs() {
                   "inline-block text-xl p-0",
                 )}
               >
-                info@chatmate.so
+                help@chatmate.so
               </Link>
             </H3>
           </div>
