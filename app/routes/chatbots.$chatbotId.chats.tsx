@@ -122,9 +122,7 @@ export default function Chats() {
       setChatsState([]);
     });
 
-    fetcher.load(
-      `/chatbots/${chatbotId}/chats?index&starred=${tab === "starred"}`,
-    );
+    fetcher.load(`/chatbots/${chatbotId}/chats?starred=${tab === "starred"}`);
   }, [tab]);
 
   useEffect(() => {
@@ -133,9 +131,7 @@ export default function Chats() {
     });
 
     fetcher.load(
-      `/chatbots/${chatbotId}/chats?index&starred=${
-        tab === "starred"
-      }&sort=${sort}`,
+      `/chatbots/${chatbotId}/chats?starred=${tab === "starred"}&sort=${sort}`,
     );
   }, [sort]);
 
@@ -186,7 +182,7 @@ export default function Chats() {
     if (clientHeight + scrollPosition + 100 < height) return;
     if (fetcher.state === "loading") return;
     fetcher.load(
-      `/chatbots/${chatbotId}/chats?index&cursor=${cursor}&starred=${
+      `/chatbots/${chatbotId}/chats?cursor=${cursor}&starred=${
         tab === "starred"
       }&sort=${sort}`,
     );
@@ -233,12 +229,12 @@ export default function Chats() {
             <TabsTrigger value="all">All chats</TabsTrigger>
             <TabsTrigger value="starred">Starred</TabsTrigger>
           </TabsList>
-          <div className="flex w-full justify-between items-center my-4">
-            <p className="text-muted-foreground text-sm">
+          <div className="flex w-full justify-between items-center my-4 flex-wrap md:flex-nowrap gap-2">
+            <p className="text-muted-foreground text-sm text-nowrap	shrink-0">
               Showing {chatsState.length} of {totalChatsCount} chats
             </p>
             <Select value={sort} onValueChange={setSort}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="shrink">
                 <SelectValue placeholder="Sort" />
               </SelectTrigger>
               <SelectContent>
