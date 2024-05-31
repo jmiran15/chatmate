@@ -3,7 +3,7 @@ import {
   AreaChart,
   Brush,
   Database,
-  MessageSquareMore,
+  TestTube,
   MessagesSquare,
   Settings,
   Share,
@@ -50,9 +50,9 @@ export default function Sidebar() {
       navigate: true,
     },
     {
-      title: "Chat",
+      title: "Test chatbot",
       path: `/chatbots/${chatbotId}/chat`,
-      icon: MessageSquareMore,
+      icon: TestTube,
       navigate: true,
     },
     {

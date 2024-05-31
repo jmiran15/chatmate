@@ -1,9 +1,9 @@
-// no chat selected index
+import TestChatbotIndex from "~/components/indexes/test-chatbot";
 
 export default function ChatIndex() {
   return (
-    <div className="flex flex-col p-4">
-      <h1>Create a new chat, or select one from the list</h1>
+    <div className="h-full w-full flex flex-col items-center md:justify-center justify-start p-4 lg:p-6 overflow-y-auto">
+      <TestChatbotIndex />
     </div>
   );
 }

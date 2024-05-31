@@ -10,7 +10,7 @@ export default function Blur() {
     intent: "createCheckout",
   });
   return (
-    <Card className="w-full h-full items-center justify-center flex flex-col">
+    <Card className="w-full h-full items-center justify-center flex flex-col p-4 lg:p-6">
       <div className="flex flex-col items-start justify-center gap-4">
         <CardTitle>Upgrade to Pro</CardTitle>
         <CardDescription>

@@ -1,9 +1,8 @@
 import { Chat } from "@prisma/client";
-import { useNavigation, useLocation } from "@remix-run/react";
+import { useNavigation, useLocation, Form, Link } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
 import { buttonVariants } from "./ui/button";
-import { Form, Link } from "react-router-dom";
 import { Trash2, Pencil, Check } from "lucide-react";
 
 export default function ChatLink({ chat }: { chat: Chat }) {
@@ -24,6 +23,8 @@ export default function ChatLink({ chat }: { chat: Chat }) {
       setEditing(false);
     }
   }, [isSubmitting]);
+
+  console.log("editing state", editing);
 
   return (
     <div

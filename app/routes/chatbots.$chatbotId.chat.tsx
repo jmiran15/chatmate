@@ -33,16 +33,43 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (action) {
     case "create": {
+      const userMessage = formData.get("userMessage");
+
+      console.log("userMessage", userMessage);
+
       const chat = await createChatWithStartersAndUser({ chatbotId, userId });
-      return redirect(chat.id);
+      return redirect(
+        userMessage
+          ? `/chatbots/${chatbotId}/chat/${chat.id}?userMessage=${String(
+              userMessage,
+            )}`
+          : `/chatbots/${chatbotId}/chat/${chat.id}`,
+      );
     }
     case "delete": {
+      const chats = await getChatsByUserAndChatbotId({ chatbotId, userId });
+      const deletedChatIndex = chats.findIndex((chat) => chat.id === chatId);
+
+      const redirectChatId =
+        deletedChatIndex > 0
+          ? chats[deletedChatIndex - 1].id
+          : chats.length > 1
+          ? chats[deletedChatIndex + 1].id
+          : "";
       await deleteChatByChatId({ chatId });
-      return redirect(`/chatbots/${chatbotId}/chat`);
+      return redirect(
+        `/chatbots/${chatbotId}/chat${
+          redirectChatId ? `/${redirectChatId}` : ""
+        }`,
+      );
     }
     case "update": {
       const chatName = formData.get("updateName") as string;
       return await updateChatName({ chatId, chatName });
+    }
+
+    default: {
+      throw new Error("Invalid action type");
     }
   }
 };

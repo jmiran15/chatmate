@@ -1,5 +1,5 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
-import { useLoaderData, useParams } from "@remix-run/react";
+import { useLoaderData, useParams, useSearchParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
 
 import { ScrollArea } from "../ui/scroll-area";
@@ -29,7 +29,7 @@ export const CHAT_PAGE_SIZE = 15;
 export default function Chat() {
   const data = useLoaderData();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [userInput, setUserInput] = useState("");
+  const [userInput, setUserInput] = useState(data?.userMessage ?? "");
   const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
   const { chatId, chatbotId } = useParams();
   const [chatbot, setChatbot] = useState(data?.chatbot);
@@ -37,6 +37,8 @@ export default function Chat() {
   const [messages, setMessages] = useState<
     { role: "user" | "assistant"; content: string }[]
   >(data.messages);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_, setSearchParams] = useSearchParams();
 
   const showInitalStarterQuestions =
     messages.length <= chatbot.introMessages.length;
@@ -55,11 +57,19 @@ export default function Chat() {
         ? data.chatbot?.starterQuestions
         : [],
     );
+
+    if (data?.userMessage) {
+      handleSubmit();
+      setSearchParams((prev) => {
+        prev.delete("userMessage");
+        return prev;
+      });
+    }
   }, [chatId]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!userInput || userInput === "") return false;
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    if ((!userInput || userInput === "") && !data.submit) return false;
 
     const prevChatHistory = [
       ...messages,
