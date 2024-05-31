@@ -3,7 +3,6 @@ import OpenButton from "./open-button";
 import ChatWindow from "./chat-window";
 import "./styles.css";
 import { useEffect, useState } from "react";
-import { useMobileScreen } from "~/utils/mobile";
 
 export const colors = {
   zinc: "zinc-900",
