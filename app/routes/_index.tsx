@@ -15,18 +15,11 @@ export default function Index() {
   return (
     <>
       <Header />
-      {/* widget */}
-      <script
-        data-chatmate-widget-script="true"
-        data-embed-id="45fa2e63-fd62-422f-ae83-383022baedc6"
-        src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
-      ></script>
       <main>
         <Hero />
         <PrimaryFeatures />
         <SecondaryFeatures />
         <PricingPage />
-        {/* <CallToAction /> */}
         <Faqs />
       </main>
       <Footer />

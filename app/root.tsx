@@ -77,7 +77,6 @@ export default function App() {
       })(window, document, "clarity", "script", "l2cwgd2upk");`,
           }}
         ></script>
-        <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
       </head>
 
       <body className="h-full bg-transparent">
@@ -112,6 +111,12 @@ export default function App() {
           <Toaster />
           <div id="modal-container" />
         </Theme>
+        {/* widget */}
+        <script
+          data-chatmate-widget-script="true"
+          data-embed-id="f4fce919-86f4-481f-93b7-1b4dd58dee2a"
+          src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
+        ></script>
       </body>
     </html>
   );
