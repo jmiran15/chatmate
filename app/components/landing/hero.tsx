@@ -61,9 +61,9 @@ export function Hero() {
     }
   });
 
-  if (typeof window === "undefined") {
-    return null;
-  }
+  // if (typeof window === "undefined") {
+  //   return null;
+  // }
 
   return (
     <Container>
