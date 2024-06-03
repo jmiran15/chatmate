@@ -49,4 +49,5 @@ export interface Chunk {
 }
 
 export const UNSTRUCTURED_URL =
-  "https://chatmatedev-0tyi7426.api.unstructuredapp.io/general/v0/general";
+  // "https://chatmatedev-0tyi7426.api.unstructuredapp.io/general/v0/general";
+  "https://api.unstructured.io/general/v0/general";
