@@ -32,8 +32,8 @@ export default function CopyEmbedCode({ code }: { code: string }) {
       <CardHeader>
         <CardTitle>JavaScript code snippet</CardTitle>
         <CardDescription>
-          Embed this code snippet in the head section of your website to display
-          your chatbot as a floating icon.
+          Embed this code snippet at the end of the body section of your website
+          to display your chatbot as a floating icon.
         </CardDescription>
       </CardHeader>
       <CardContent>
