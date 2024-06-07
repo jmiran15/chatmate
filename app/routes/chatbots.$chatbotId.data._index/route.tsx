@@ -37,6 +37,7 @@ import {
   FullDocument,
   OVERLAP,
 } from "~/utils/types";
+import { DialogDemo } from "./modal";
 
 const columnDefs = [
   { field: "metadata.sourceURL", checkboxSelection: true, flex: 1 },
@@ -53,12 +54,24 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return json({ documents });
 };
 
+export function shouldRevalidate({ actionResult, defaultShouldRevalidate }) {
+  console.log("actionResult", actionResult);
+
+  if (actionResult?.intent === "crawl") {
+    console.log("set revalidate to false");
+    return false;
+  }
+
+  return defaultShouldRevalidate;
+}
+
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const action = formData.get("action") as string;
+  const intent = formData.get("intent") as string;
   const { chatbotId } = params;
+  console.log("intent", intent);
 
-  switch (action) {
+  switch (intent) {
     case "getLinks": {
       const url = formData.get("url") as string;
       const links = await getDocuments([url], "crawl", 100, true);
@@ -196,6 +209,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
     }
+    case "crawl": {
+      console.log("crawling");
+      return json({ intent, jobId: "123" });
+    }
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
     }
@@ -273,9 +290,10 @@ export default function Data() {
 
   return (
     <>
+      <DialogDemo />
       <div className="flex flex-col p-4 gap-8 w-full overflow-y-auto h-full">
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold">Data</h1>
+          <h1 className="text-lg font-semibold md:text-2xl">Data</h1>
           <h1 className="font-normal text-gray-700 dark:text-gray-400">
             This is the data that your chatbot will be able to reference in it's
             responses
