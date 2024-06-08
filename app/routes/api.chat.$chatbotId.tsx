@@ -1,5 +1,5 @@
 import { ActionFunctionArgs, json } from "@remix-run/node";
-import { chat } from "~/utils/openai";
+import { chat } from "~/utils/llm/openai";
 
 export async function action({ request }: ActionFunctionArgs) {
   // data is coming in as json not formdata

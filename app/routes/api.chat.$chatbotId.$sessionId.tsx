@@ -10,7 +10,7 @@ import {
   updateChatNameWithAI,
 } from "~/models/chat.server";
 import { v4 as uuidv4 } from "uuid";
-import { chat } from "~/utils/openai";
+import { chat } from "~/utils/llm/openai";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { sessionId, chatbotId } = params;

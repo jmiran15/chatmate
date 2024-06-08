@@ -12,7 +12,6 @@ export interface DataTableProps<TData, TValue> {
 
 export const urlSchema = z.object({
   url: z.string(),
-  title: z.string(),
 });
 
 export type Url = z.infer<typeof urlSchema>;

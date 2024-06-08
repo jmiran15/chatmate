@@ -2,25 +2,47 @@ import { Chatbot, Document } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
-import { getEmbeddings } from "~/utils/openai";
+import { embed } from "~/utils/llm/openai";
 export type { Chatbot } from "@prisma/client";
 
-// takes full, non chuncked documents, inserts the full document as "Document", and also creates Embeddings from it (chunked)
-// this function is WRONG, IT SHOULD HAVE NO SIDE EFFECTS
+// function to create a single document
+export async function createDocument({
+  name,
+  content,
+  chatbotId,
+}: {
+  name: Document["name"];
+  content: Document["content"];
+  chatbotId: Document["chatbotId"];
+}) {
+  return prisma.document.create({ data: { name, content, chatbotId } });
+}
+
+// function to createMany documents at once
 export async function createDocuments({
   documents,
 }: {
   documents: Pick<Document, "name" | "content" | "chatbotId">[];
 }) {
-  // call createDocumentWithEmbeddings for each document
-  const documentObjects = await Promise.all(
-    documents.map(async (document) => {
-      return createDocumentWithEmbeddings({ document });
-    }),
-  );
-
-  return documentObjects;
+  return prisma.document.createMany({ data: documents });
 }
+
+// takes full, non chuncked documents, inserts the full document as "Document", and also creates Embeddings from it (chunked)
+// this function is WRONG, IT SHOULD HAVE NO SIDE EFFECTS
+// export async function createDocuments({
+//   documents,
+// }: {
+//   documents: Pick<Document, "name" | "content" | "chatbotId">[];
+// }) {
+//   // call createDocumentWithEmbeddings for each document
+//   const documentObjects = await Promise.all(
+//     documents.map(async (document) => {
+//       return createDocumentWithEmbeddings({ document });
+//     }),
+//   );
+
+//   return documentObjects;
+// }
 
 function splitTextIntoChunks(text: string, chunkSize: number, overlap: number) {
   const chunks = [];
@@ -43,7 +65,7 @@ export async function createDocumentWithEmbeddings({
 
   await Promise.all(
     chunks.map(async (chunk) => {
-      const embedding = await getEmbeddings({ input: chunk });
+      const embedding = await embed({ input: chunk });
 
       await prisma.$executeRaw`
       INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
@@ -95,50 +117,6 @@ export const updateDocumentById = async ({
     data: { name, content },
   });
 };
-
-// export async function processFiles({ files }: { files: FormDataEntryValue[] }) {
-//   const fileContents = await Promise.all(
-//     files.map(async (file) => {
-//       if (!(file instanceof File)) {
-//         throw new Error("Expected file");
-//       }
-
-//       const fileExtension = file.name.split(".").pop();
-//       let fileContent = "";
-
-//       switch (fileExtension) {
-//         case "txt":
-//         case "csv":
-//         case "html":
-//         case "json":
-//         case "md":
-//         case "mdx":
-//           fileContent = await file.text();
-//           break;
-//         case "pdf": {
-//           const fileBuffer = await file.arrayBuffer();
-//           const pdfParser = new PDFParser(this, 1);
-
-//           fileContent = await new Promise((resolve, reject) => {
-//             pdfParser.on("pdfParser_dataError", reject);
-//             pdfParser.on("pdfParser_dataReady", () => {
-//               resolve(pdfParser.getRawTextContent());
-//             });
-//             pdfParser.parseBuffer(new Buffer(fileBuffer));
-//           });
-//           break;
-//         }
-//         default:
-//           fileContent = "Unsupported file type";
-//           break;
-//       }
-
-//       return { name: file.name, content: fileContent };
-//     }),
-//   );
-
-//   return fileContents;
-// }
 
 // delete a document by id
 export const deleteDocumentById = async ({ id }: { id: Document["id"] }) => {

@@ -29,21 +29,6 @@ export const columns: ColumnDef<Url>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "title",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Title" />
-    ),
-    cell: ({ row }) => {
-      return (
-        <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
-          </span>
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: "url",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Url" />

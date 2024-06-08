@@ -1,5 +1,6 @@
 import {
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -28,8 +29,12 @@ import { DataTablePagination } from "./pagination";
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = useState({});
+  rowSelection,
+  setRowSelection,
+}: DataTableProps<TData, TValue> & {
+  rowSelection: RowSelectionState;
+  setRowSelection: (rowSelection: RowSelectionState) => void;
+}) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -46,7 +51,7 @@ export function DataTable<TData, TValue>({
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: 5,
+        pageSize: 10,
       },
     },
     enableRowSelection: true,

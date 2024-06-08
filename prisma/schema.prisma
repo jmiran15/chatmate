@@ -68,10 +68,11 @@ model Document {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   name       String
-  embeddings Embedding[]
   content    String
   chatbot    Chatbot     @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
+  embeddings Embedding[]
+  ingestionProgress IngestionProgress @default(PENDING)
 }
 
 model Embedding {
@@ -142,3 +143,10 @@ model Subscription {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+enum IngestionProgress {
+PENDING
+COMPLETE
+}
+

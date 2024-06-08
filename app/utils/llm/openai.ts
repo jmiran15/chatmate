@@ -1,30 +1,18 @@
-import { Chatbot, Embedding } from "@prisma/client";
-import OpenAI from "openai";
+import { Chatbot, Document, Embedding } from "@prisma/client";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
-import { system_prompt, user_prompt } from "./prompts";
-import Groq from "groq-sdk";
+import { system_prompt, user_prompt } from "../prompts";
 import { v4 as uuidv4 } from "uuid";
 import {
   ANYSCALE_MODELS,
   GROQ_MODELS,
 } from "~/routes/chatbots.$chatbotId.settings";
-import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
+import { openai, groq, anyscale } from "./providers.server";
 
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export const CHUNK_SIZE = 1024;
+export const OVERLAP = 20;
 
-export const anyscale = new OpenAI({
-  baseURL: process.env.ANYSCALE_BASE_URL,
-  apiKey: process.env.ANYSCALE_API_KEY,
-});
-
-export const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
-export async function getEmbeddings({ input }: { input: string }) {
+export async function embed({ input }: { input: string }) {
   try {
     const embedding = await openai.embeddings.create({
       model: "text-embedding-ada-002",
@@ -34,7 +22,6 @@ export async function getEmbeddings({ input }: { input: string }) {
 
     return embedding.data[0].embedding as number[];
   } catch (e) {
-    console.log("Error calling OpenAI embedding API: ", e);
     throw new Error(`Error calling OpenAI embedding API: ${e}`);
   }
 }
@@ -46,7 +33,6 @@ export async function chat({
   chatbot: Chatbot;
   messages: { role: "user" | "assistant"; content: string }[];
 }) {
-  console.log("messages", messages);
   invariant(messages.length > 0, "Messages must not be empty");
   invariant(
     messages[messages.length - 1].role === "user",
@@ -55,6 +41,7 @@ export async function chat({
 
   const query = messages[messages.length - 1].content;
 
+  // THIS STUFF SHOULD BE DONE OUTSIDE OF THE "CHAT" FUNCTION SO THAT IT IS PURE
   const references = (await fetchRelevantDocs({
     chatbotId: chatbot.id,
     input: query,
@@ -120,7 +107,7 @@ export async function fetchRelevantDocs({
   chatbotId: string;
   input: string;
 }) {
-  const userEmbedding = await getEmbeddings({ input });
+  const userEmbedding = await embed({ input });
 
   const relevantDocs = await prisma.$queryRaw`
   SELECT id, content, "documentId",
@@ -185,7 +172,7 @@ export async function generateChatSummary(
 }
 
 export function splitStringIntoChunks(
-  document: FullDocument,
+  document: Document,
   chunkSize: number,
   overlap: number,
 ): Chunk[] {
@@ -279,55 +266,56 @@ export async function generatePossibleQuestionsForChunk(
   });
 }
 
-export async function convertUploadedFilesToDocuments(
-  files: FormDataEntryValue[],
-): Promise<FullDocument[]> {
-  const newFormData = new FormData();
+// switching this to llamaparse
+// export async function convertUploadedFilesToDocuments(
+//   files: FormDataEntryValue[],
+// ): Promise<FullDocument[]> {
+//   const newFormData = new FormData();
 
-  // Append each file to the new FormData instance
-  files.forEach((file) => {
-    newFormData.append("files", file);
-  });
+//   // Append each file to the new FormData instance
+//   files.forEach((file) => {
+//     newFormData.append("files", file);
+//   });
 
-  const response = await fetch(UNSTRUCTURED_URL, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
-    },
-    body: newFormData,
-  });
+//   const response = await fetch(UNSTRUCTURED_URL, {
+//     method: "POST",
+//     headers: {
+//       accept: "application/json",
+//       "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
+//     },
+//     body: newFormData,
+//   });
 
-  if (!response.ok) {
-    throw new Error(
-      `Failed to partition file with error ${
-        response.status
-      } and message ${await response.text()}`,
-    );
-  }
+//   if (!response.ok) {
+//     throw new Error(
+//       `Failed to partition file with error ${
+//         response.status
+//       } and message ${await response.text()}`,
+//     );
+//   }
 
-  const elements = await response.json();
-  if (!Array.isArray(elements)) {
-    throw new Error(
-      `Expected partitioning request to return an array, but got ${elements}`,
-    );
-  }
+//   const elements = await response.json();
+//   if (!Array.isArray(elements)) {
+//     throw new Error(
+//       `Expected partitioning request to return an array, but got ${elements}`,
+//     );
+//   }
 
-  if (elements[0].constructor !== Array) {
-    return [
-      {
-        name: elements[0].metadata.filename,
-        content: elements.map((element) => element.text).join("\n"),
-        id: uuidv4(),
-      },
-    ];
-  } else {
-    return elements.map((fileElements) => {
-      return {
-        name: fileElements[0].metadata.filename,
-        content: fileElements.map((element) => element.text).join("\n"),
-        id: uuidv4(),
-      };
-    });
-  }
-}
+//   if (elements[0].constructor !== Array) {
+//     return [
+//       {
+//         name: elements[0].metadata.filename,
+//         content: elements.map((element) => element.text).join("\n"),
+//         id: uuidv4(),
+//       },
+//     ];
+//   } else {
+//     return elements.map((fileElements) => {
+//       return {
+//         name: fileElements[0].metadata.filename,
+//         content: fileElements.map((element) => element.text).join("\n"),
+//         id: uuidv4(),
+//       };
+//     });
+//   }
+// }
