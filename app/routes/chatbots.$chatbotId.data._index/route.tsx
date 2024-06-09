@@ -1,62 +1,63 @@
-import { Dialog, Transition } from "@headlessui/react";
-
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   json,
   redirect,
 } from "@remix-run/node";
-import {
-  Form,
-  useFetcher,
-  useLoaderData,
-  useNavigation,
-  useParams,
-} from "@remix-run/react";
-import { prisma } from "~/db.server";
-
-import { useEffect, useState, useRef, Fragment } from "react";
-import { AgGridReact } from "ag-grid-react";
-import AgGridStyles from "ag-grid-community/styles/ag-grid.css";
-import AgThemeAlpineStyles from "ag-grid-community/styles/ag-theme-alpine.css";
-
-import { v4 as uuidv4 } from "uuid";
-
-import DocumentCard from "~/components/document-card";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
+import DocumentCard from "~/routes/chatbots.$chatbotId.data._index/document-card";
 import {
   createDocument,
   createDocuments,
   getDocumentsByChatbotId,
 } from "~/models/document.server";
-import {
-  convertUploadedFilesToDocuments,
-  generatePossibleQuestionsForChunk,
-  generateSummaryForChunk,
-  getEmbeddings,
-  splitStringIntoChunks,
-} from "~/utils/llm/openai";
+import { convertUploadedFilesToDocuments } from "~/utils/llm/openai";
 import { getDocuments } from "~/utils/webscraper/scrape";
-import {
-  CHUNK_SIZE,
-  Chunk,
-  Document,
-  FullDocument,
-  OVERLAP,
-} from "~/utils/types";
-import { DialogDemo } from "./modal/modal";
+import { Document, FullDocument } from "~/utils/types";
+import { DialogDemo } from "./modal";
+import { useEffect } from "react";
+import { requireUserId } from "~/session.server";
+import { prisma } from "~/db.server";
+import { PaginationBar } from "./pagination-bar";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const chatbotId = params.chatbotId as string;
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+  const { chatbotId } = params;
+  const url = new URL(request.url);
+  const $top = Number(url.searchParams.get("$top")) || 5;
+  const $skip = Number(url.searchParams.get("$skip")) || 0;
+  const userId = await requireUserId(request);
 
   if (!chatbotId) {
-    return json({ error: "Chatbot id is required" }, { status: 400 });
+    throw new Error("Chatbot id is required");
   }
 
-  const documents = await getDocumentsByChatbotId({ chatbotId });
-  return json({ documents });
+  const chatbot = await prisma.chatbot.findUnique({
+    where: { id: chatbotId },
+  });
+
+  if (chatbot?.userId !== userId) {
+    throw new Error("User does not have access to chatbot");
+  }
+
+  const [total, documents] = await prisma.$transaction([
+    prisma.document.count({
+      where: { chatbotId },
+    }),
+    prisma.document.findMany({
+      where: { chatbotId },
+      orderBy: { createdAt: "desc" },
+      skip: $skip,
+      take: $top,
+    }),
+  ]);
+
+  const documents_ = await getDocumentsByChatbotId({ id: chatbotId });
+
+  return json({
+    total,
+    documents,
+    documents_: documents_,
+  });
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
@@ -72,137 +73,28 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "getLinks": {
       const url = String(formData.get("url"));
 
-      // lets change this to a standalone pure function that gets the links and is optimized
       const links = await getDocuments([url], "crawl", 100, true);
-      // these are the links we will show in the table
       return json({ intent, links });
     }
-
     case "crawlLinks": {
       let links = JSON.parse(formData.get("links") as string);
       links = links.map((link: Document) => link.metadata.sourceURL);
 
       const documents = await getDocuments(links, "single_urls", 100, false);
 
-      // const documents: FullDocument[] = scrapedDocuments.map(
-      //   (document: Document) => {
-      //     const id = uuidv4();
-      //     return {
-      //       name: document.metadata.sourceURL
-      //         ? document.metadata.sourceURL
-      //         : "Untitled document",
-      //       content: document.content,
-      //       id,
-      //     };
-      //   },
-      // );
+      return json({ intent, documents });
+    }
+    case "parseFiles": {
+      // do same parallel stuff that we do in the scrapeLinks action
 
-      // // Create the documents in the database first
-      // const createdDocuments = await prisma.document.createMany({
-      //   data: documents.map((document) => ({
-      //     name: document.name,
-      //     content: document.content,
-      //     chatbotId: chatbotId as string,
-      //     id: document.id,
-      //   })),
-      // });
+      // Get all file entries from the original formData
+      const files = formData.getAll("files");
 
-      // const baseChunks: Chunk[] = documents.flatMap((document) =>
-      //   splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP),
-      // );
-
-      // console.log("starting");
-      // const BATCH_SIZE = 10;
-      // const chunkedBaseChunks = [];
-      // for (let i = 0; i < baseChunks.length; i += BATCH_SIZE) {
-      //   chunkedBaseChunks.push(baseChunks.slice(i, i + BATCH_SIZE));
-      // }
-
-      // for (const batchChunks of chunkedBaseChunks) {
-      //   console.log("Processing batch of chunks");
-      //   await Promise.all(
-      //     batchChunks.map(async (chunk, index) => {
-      //       const [summary, questions] = await Promise.all([
-      //         generateSummaryForChunk(chunk),
-      //         generatePossibleQuestionsForChunk(chunk),
-      //       ]);
-
-      //       await Promise.all(
-      //         [chunk, summary, ...questions].map(async (node) => {
-      //           const embedding = await getEmbeddings({ input: node.content });
-      //           await prisma.$executeRaw`
-      //             INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
-      //             VALUES (${uuidv4()}, ${embedding}::vector, ${
-      //               node.documentId
-      //             }, ${chatbotId}, ${chunk.content})
-      //           `;
-
-      //           console.log(
-      //             `Inserted embedding for chunk ${index} out of ${baseChunks.length}`,
-      //           );
-      //           return {
-      //             chunk: chunk.content,
-      //             embedding: embedding,
-      //             documentId: chunk.documentId,
-      //             chatbotId,
-      //           };
-      //         }),
-      //       );
-      //     }),
-      //   );
-      // }
-
-      // console.log("Inserted all embeddings");
+      const documents: FullDocument[] =
+        await convertUploadedFilesToDocuments(files);
 
       return json({ intent, documents });
     }
-
-    // case "upload": {
-    //   // do same parallel stuff that we do in the scrapeLinks action
-
-    //   // Get all file entries from the original formData
-    //   const files = formData.getAll("file");
-
-    //   const fileContents: FullDocument[] =
-    //     await convertUploadedFilesToDocuments(files);
-
-    //   const baseChunks: Chunk[] = fileContents.flatMap((document) =>
-    //     splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP),
-    //   );
-
-    //   baseChunks.forEach(async (chunk) => {
-    //     const summary = await generateSummaryForChunk(chunk);
-    //     const questions = await generatePossibleQuestionsForChunk(chunk);
-
-    //     await [chunk, summary, ...questions].map(async (node) => {
-    //       const embedding = await getEmbeddings({ input: node.content });
-
-    //       await prisma.$executeRaw`
-    //       INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
-    //       VALUES (${uuidv4()}, ${embedding}::vector, ${
-    //         node.documentId
-    //       }, ${chatbotId}, ${chunk.content})
-    //       `;
-
-    //       return {
-    //         chunk: chunk.content,
-    //         embedding: embedding,
-    //         documentId: chunk.documentId,
-    //         chatbotId,
-    //       };
-    //     });
-    //   });
-
-    //   // insert the document
-    //   return await prisma.document.createMany({
-    //     data: fileContents.map((document) => ({
-    //       name: document.name,
-    //       content: document.content,
-    //       chatbotId: chatbotId as string,
-    //       id: document.id,
-    //     })),
-    //   });
-    // }
     case "createDocument": {
       const content = String(formData.get("content"));
       const name = String(formData.get("name"));
@@ -211,17 +103,20 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       // enqueue a ingestion job - bullmq
 
       return redirect(`/chatbots/${chatbotId}/data`);
-
-      // return json({ intent, createdDocument: document });
     }
     case "createDocuments": {
-      const documents = JSON.parse(String(formData.get("documents")));
+      const documents = JSON.parse(String(formData.get("documents"))).map(
+        (document: FullDocument) => ({
+          name: document.name,
+          content: document.content,
+          chatbotId,
+        }),
+      );
       const createdDocuments = await createDocuments({ documents });
 
       // enqueue a batch of ingestion jobs - bullmq
 
       return redirect(`/chatbots/${chatbotId}/data`);
-      // return json({ intent, createdDocuments });
     }
 
     default: {
@@ -232,30 +127,40 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log(data.documents_);
+
+  useEffect(() => {
+    if (searchParams.get("step")) {
+      setSearchParams({});
+    }
+  }, []);
 
   return (
-    <>
-      <DialogDemo />
-      <div className="flex flex-col p-4 gap-8 w-full overflow-y-auto h-full">
+    <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
+      <div className="flex flex-row items-start justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-lg font-semibold md:text-2xl">Data</h1>
-          <h1 className="font-normal text-gray-700 dark:text-gray-400">
+          <h1 className="text-sm text-muted-foreground">
             This is the data that your chatbot will be able to reference in it's
             responses
           </h1>
         </div>
-
-        {data.documents.length === 0 ? (
-          <p className="p-4">No documents yet</p>
-        ) : (
-          <ol className="space-y-4 ">
-            {data.documents.map((document) => (
-              <DocumentCard key={document.id} document={document} />
-            ))}
-          </ol>
-        )}
+        <DialogDemo />
       </div>
-    </>
+
+      {data.documents.length === 0 ? (
+        <p className="p-4">No documents yet</p>
+      ) : (
+        <ol className="space-y-4 ">
+          {data.documents.map((document) => (
+            <DocumentCard key={document.id} document={document} />
+          ))}
+        </ol>
+      )}
+      <PaginationBar total={data.total} />
+    </div>
   );
 }
 

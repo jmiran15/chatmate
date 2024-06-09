@@ -15,11 +15,11 @@ import {
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { DataTable } from "../../table/table";
+import { DataTable } from "./table/table";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { z } from "zod";
-import { urlSchema } from "../../table/types";
-import { columns } from "../../table/columns";
+import { urlSchema } from "./table/types";
+import { columns } from "./table/columns";
 import { Document } from "~/utils/types";
 
 export default function Website() {

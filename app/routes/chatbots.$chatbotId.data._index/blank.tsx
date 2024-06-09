@@ -1,3 +1,5 @@
+import { Form, useParams, useSearchParams, useSubmit } from "@remix-run/react";
+import { useRef } from "react";
 import { Button } from "~/components/ui/button";
 import {
   DialogDescription,
@@ -10,6 +12,11 @@ import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 
 export default function BlankUpload() {
+  const formRef = useRef<HTMLFormElement>(null);
+  const submit = useSubmit();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { chatbotId } = useParams();
+
   return (
     <>
       <DialogHeader>
@@ -18,7 +25,13 @@ export default function BlankUpload() {
           Upload a blank file to use as a starting point for your chatbot.
         </DialogDescription>
       </DialogHeader>
-      <div className="grid gap-4">
+      <Form
+        ref={formRef}
+        className="grid gap-4"
+        method="post"
+        action={`/chatbots/${chatbotId}/data`}
+      >
+        <input type="hidden" name="intent" value="createDocument" />
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
           <Input
@@ -40,12 +53,15 @@ export default function BlankUpload() {
             required
           />
         </div>
-      </div>
+      </Form>
       <DialogFooter>
-        <Button variant="secondary" onClick={() => {}}>
+        <Button
+          variant="secondary"
+          onClick={() => setSearchParams({ step: "type" })}
+        >
           Cancel
         </Button>
-        <Button onClick={() => {}}>Upload</Button>
+        <Button onClick={() => submit(formRef.current)}>Upload</Button>
       </DialogFooter>
     </>
   );

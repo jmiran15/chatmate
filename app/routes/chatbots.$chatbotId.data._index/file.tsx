@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { FileUploader } from "./file-uploader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { useParams, useFetcher } from "@remix-run/react";
 import { Badge } from "~/components/ui/badge";
@@ -30,6 +30,28 @@ export function FileUpload() {
       encType: "multipart/form-data",
     });
   };
+
+  useEffect(() => {
+    console.log("file.tsx - fetcher", fetcher);
+
+    if (
+      fetcher.state === "idle" &&
+      fetcher.data &&
+      fetcher.data.intent === "parseFiles"
+    ) {
+      console.log("file.tsx - fetcher.data", fetcher.data);
+      fetcher.submit(
+        {
+          intent: "createDocuments",
+          documents: JSON.stringify(fetcher.data.documents),
+        },
+        {
+          method: "post",
+          action: `/chatbots/${chatbotId}/data?index`,
+        },
+      );
+    }
+  }, [fetcher]);
 
   const SUPPORTED_FILE_TYPES = [
     "txt",
