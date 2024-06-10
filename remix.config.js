@@ -9,6 +9,7 @@ module.exports = {
   serverBuildPath: "build/index.js",
   browserNodeBuiltinsPolyfill: { modules: { punycode: true } },
   serverDependenciesToBundle: [
+    /^remix-utils.*/,
     /^rehype.*/,
     /^remark.*/,
     /^unified.*/,

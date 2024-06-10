@@ -32,7 +32,7 @@ model Chatbot {
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
   user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId           String       
+  userId           String
   chats            Chat[]
   publicName       String      @default("Your Chatbot")
   logoUrl          String?
@@ -64,14 +64,14 @@ model Chat {
 }
 
 model Document {
-  id         String      @id @default(uuid())
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  name       String
-  content    String
-  chatbot    Chatbot     @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  chatbotId  String
-  embeddings Embedding[]
+  id                String            @id @default(uuid())
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  name              String
+  content           String
+  chatbot           Chatbot           @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  chatbotId         String
+  embeddings        Embedding[]
   ingestionProgress IngestionProgress @default(PENDING)
 }
 
@@ -144,9 +144,7 @@ model Subscription {
   updatedAt DateTime @updatedAt
 }
 
-
 enum IngestionProgress {
-PENDING
-COMPLETE
+  PENDING
+  COMPLETE
 }
-

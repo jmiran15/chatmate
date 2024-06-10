@@ -4,7 +4,11 @@ import {
   json,
   redirect,
 } from "@remix-run/node";
-import { useLoaderData, useSearchParams } from "@remix-run/react";
+import {
+  useActionData,
+  useLoaderData,
+  useSearchParams,
+} from "@remix-run/react";
 import DocumentCard from "~/routes/chatbots.$chatbotId.data._index/document-card";
 import {
   createDocument,
@@ -19,6 +23,12 @@ import { useEffect } from "react";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
 import { PaginationBar } from "./pagination-bar";
+import { Input } from "~/components/ui/input";
+import { SearchIcon } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { queue } from "~/queues/ingestion.server";
+import { Document as PrismaDocument } from "@prisma/client";
+import { useToast } from "~/components/ui/use-toast";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
@@ -101,8 +111,17 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const document = await createDocument({ name, content, chatbotId });
 
       // enqueue a ingestion job - bullmq
+      await queue.add(
+        "ingestion",
+        {
+          documentId: document.id,
+        },
+        {
+          jobId: document.id,
+        },
+      );
 
-      return redirect(`/chatbots/${chatbotId}/data`);
+      return json({ intent, ok: true });
     }
     case "createDocuments": {
       const documents = JSON.parse(String(formData.get("documents"))).map(
@@ -115,8 +134,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const createdDocuments = await createDocuments({ documents });
 
       // enqueue a batch of ingestion jobs - bullmq
+      createdDocuments.forEach((document: PrismaDocument) => {
+        queue.add(
+          "ingestion",
+          {
+            documentId: document.id,
+          },
+          {
+            jobId: document.id,
+          },
+        );
+      });
 
-      return redirect(`/chatbots/${chatbotId}/data`);
+      return json({ intent, ok: true });
     }
 
     default: {
@@ -127,15 +157,29 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
   const [searchParams, setSearchParams] = useSearchParams();
-
-  console.log(data.documents_);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (searchParams.get("step")) {
       setSearchParams({});
     }
   }, []);
+
+  useEffect(() => {
+    if (
+      (actionData?.intent === "createDocument" ||
+        actionData?.intent === "createDocuments") &&
+      actionData?.ok
+    ) {
+      toast({
+        title: "Your documents have been created",
+        description:
+          "Your documents are being processed in the background - feel free to navigate around and do other things while they're being processed.",
+      });
+    }
+  }, [actionData]);
 
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
@@ -148,6 +192,13 @@ export default function Data() {
           </h1>
         </div>
         <DialogDemo />
+      </div>
+      <div className="flex flex-row items-center gap-2">
+        <Input type="text" placeholder="Search" />
+        <Button className="flex flex-row items-center gap-2">
+          <SearchIcon className="w-4 h-4" />
+          Search
+        </Button>
       </div>
 
       {data.documents.length === 0 ? (

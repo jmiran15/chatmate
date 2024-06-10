@@ -1,0 +1,43 @@
+import { Processor, QueueEvents, Queue as BullQueue, Worker } from "bullmq";
+import { redis } from "./redis.server";
+
+interface AugmentedQueue<T> extends BullQueue<T> {
+  events: QueueEvents;
+}
+
+interface RegisteredQueue {
+  queue: BullQueue;
+  queueEvents: QueueEvents;
+  worker: Worker;
+}
+
+declare global {
+  var __registeredQueues: Record<string, RegisteredQueue> | undefined;
+}
+
+const registeredQueues =
+  global.__registeredQueues || (global.__registeredQueues = {});
+
+export function Queue<Payload>(
+  name: string,
+  handler: Processor<Payload>,
+): AugmentedQueue<Payload> {
+  if (!registeredQueues[name]) {
+    const queue = new BullQueue(name, { connection: redis });
+    const queueEvents = new QueueEvents(name, { connection: redis });
+    const worker = new Worker<Payload>(name, handler, {
+      connection: redis,
+    });
+
+    registeredQueues[name] = {
+      queue,
+      queueEvents,
+      worker,
+    };
+  }
+
+  const queue = registeredQueues[name].queue as AugmentedQueue<Payload>;
+  queue.events = registeredQueues[name].queueEvents;
+
+  return queue;
+}

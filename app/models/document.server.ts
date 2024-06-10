@@ -24,7 +24,7 @@ export async function createDocuments({
 }: {
   documents: Pick<Document, "name" | "content" | "chatbotId">[];
 }) {
-  return prisma.document.createMany({ data: documents });
+  return prisma.document.createManyAndReturn({ data: documents });
 }
 
 // takes full, non chuncked documents, inserts the full document as "Document", and also creates Embeddings from it (chunked)
@@ -121,4 +121,14 @@ export const updateDocumentById = async ({
 // delete a document by id
 export const deleteDocumentById = async ({ id }: { id: Document["id"] }) => {
   return prisma.document.delete({ where: { id } });
+};
+
+export const updateDocument = async ({
+  id,
+  data,
+}: {
+  id: Document["id"];
+  data: Partial<Document>;
+}) => {
+  return prisma.document.update({ where: { id }, data });
 };

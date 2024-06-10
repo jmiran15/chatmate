@@ -55,13 +55,15 @@ export default function BlankUpload() {
         </div>
       </Form>
       <DialogFooter>
-        <Button
-          variant="secondary"
-          onClick={() => setSearchParams({ step: "type" })}
-        >
-          Cancel
-        </Button>
-        <Button onClick={() => submit(formRef.current)}>Upload</Button>
+        <div className="w-full flex flex-row justify-between">
+          <Button
+            variant="ghost"
+            onClick={() => setSearchParams({ step: "type" })}
+          >
+            Cancel
+          </Button>
+          <Button onClick={() => submit(formRef.current)}>Upload</Button>
+        </div>
       </DialogFooter>
     </>
   );

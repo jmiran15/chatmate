@@ -7,15 +7,14 @@ import {
 import { FileUploader } from "./file-uploader";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
-import { useParams, useFetcher } from "@remix-run/react";
+import { useParams, useFetcher, useSearchParams } from "@remix-run/react";
 import { Badge } from "~/components/ui/badge";
 
 export function FileUpload() {
   const { chatbotId } = useParams();
   const [files, setFiles] = useState<File[]>([]);
   const fetcher = useFetcher();
-
-  console.log("file.tsx - ", files);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleUpload = async () => {
     const formData = new FormData();
@@ -101,11 +100,22 @@ export function FileUpload() {
           </Badge>
         ))}
       </div>
-      <DialogFooter className="w-full flex justify-between">
-        <Button variant="ghost">Back</Button>
-        <Button onClick={handleUpload} disabled={fetcher.state !== "idle"}>
-          {fetcher.state === "submitting" ? "Uploading..." : "Upload"}
-        </Button>
+      <DialogFooter>
+        <div className="w-full flex flex-row justify-between">
+          <Button
+            variant="ghost"
+            onClick={() =>
+              setSearchParams({
+                step: "type",
+              })
+            }
+          >
+            Back
+          </Button>
+          <Button onClick={handleUpload} disabled={fetcher.state !== "idle"}>
+            {fetcher.state === "submitting" ? "Uploading..." : "Upload"}
+          </Button>
+        </div>
       </DialogFooter>
     </>
   );

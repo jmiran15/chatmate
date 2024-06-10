@@ -21,6 +21,7 @@ import { z } from "zod";
 import { urlSchema } from "./table/types";
 import { columns } from "./table/columns";
 import { Document } from "~/utils/types";
+import { Switch } from "~/components/ui/switch";
 
 export default function Website() {
   const navigation = useNavigation();
@@ -104,6 +105,10 @@ export default function Website() {
               placeholder="https://example.com"
               required
             />
+          </div>
+          <div className="flex items-center space-x-2">
+            <Switch id="crawl" />
+            <Label htmlFor="crawl">Crawl entire website</Label>
           </div>
         </Form>
       )}
