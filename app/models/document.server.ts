@@ -6,23 +6,26 @@ import { embed } from "~/utils/llm/openai";
 export type { Chatbot } from "@prisma/client";
 
 // function to create a single document
+// probably revamp this function to use Pick<Document, "name" | "content" | "chatbotId" | "type">
 export async function createDocument({
   name,
   content,
   chatbotId,
+  type,
 }: {
   name: Document["name"];
   content: Document["content"];
   chatbotId: Document["chatbotId"];
+  type: Document["type"];
 }) {
-  return prisma.document.create({ data: { name, content, chatbotId } });
+  return prisma.document.create({ data: { name, content, chatbotId, type } });
 }
 
 // function to createMany documents at once
 export async function createDocuments({
   documents,
 }: {
-  documents: Pick<Document, "name" | "content" | "chatbotId">[];
+  documents: Pick<Document, "name" | "content" | "chatbotId" | "type">[];
 }) {
   return prisma.document.createManyAndReturn({ data: documents });
 }

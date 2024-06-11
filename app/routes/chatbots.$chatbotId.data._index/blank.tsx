@@ -1,3 +1,4 @@
+import { DocumentType } from "@prisma/client";
 import { Form, useParams, useSearchParams, useSubmit } from "@remix-run/react";
 import { useRef } from "react";
 import { Button } from "~/components/ui/button";
@@ -32,6 +33,7 @@ export default function BlankUpload() {
         action={`/chatbots/${chatbotId}/data`}
       >
         <input type="hidden" name="intent" value="createDocument" />
+        <input type="hidden" name="type" value={DocumentType.RAW} />
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
           <Input

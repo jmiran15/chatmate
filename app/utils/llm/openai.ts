@@ -1,4 +1,4 @@
-import { Chatbot, Document, Embedding } from "@prisma/client";
+import { Chatbot, Document, DocumentType, Embedding } from "@prisma/client";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { system_prompt, user_prompt } from "../prompts";
@@ -269,7 +269,7 @@ export async function generatePossibleQuestionsForChunk(
 
 export async function convertUploadedFilesToDocuments(
   files: FormDataEntryValue[],
-): Promise<FullDocument[]> {
+): Promise<(FullDocument & { type: DocumentType })[]> {
   const newFormData = new FormData();
 
   // Append each file to the new FormData instance
@@ -306,6 +306,7 @@ export async function convertUploadedFilesToDocuments(
       {
         name: elements[0].metadata.filename,
         content: elements.map((element) => element.text).join("\n"),
+        type: DocumentType.FILE,
         id: uuidv4(),
       },
     ];
@@ -315,6 +316,7 @@ export async function convertUploadedFilesToDocuments(
         name: fileElements[0].metadata.filename,
         content: fileElements.map((element) => element.text).join("\n"),
         id: uuidv4(),
+        type: DocumentType.FILE,
       };
     });
   }

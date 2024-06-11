@@ -16,12 +16,14 @@ import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { DataTable } from "./table/table";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { urlSchema } from "./table/types";
 import { columns } from "./table/columns";
 import { Document } from "~/utils/types";
-import { Switch } from "~/components/ui/switch";
+import { Checkbox } from "~/components/ui/checkbox";
+import { v4 as uuidv4 } from "uuid";
+import { DocumentType } from "@prisma/client";
 
 export default function Website() {
   const navigation = useNavigation();
@@ -51,10 +53,12 @@ export default function Website() {
       submit(
         {
           intent: "createDocuments",
+          // can probly clean up this logic to just use Prisma Document type all throughout
           documents: JSON.stringify(
             actionData.documents.map((d) => ({
               name: d.metadata.sourceURL,
               content: d.content,
+              type: DocumentType.WEBSITE,
               chatbotId,
             })),
           ),
@@ -93,8 +97,7 @@ export default function Website() {
           setRowSelection={setRowSelection}
         />
       ) : (
-        <Form className="grid gap-4" method="post" ref={formRef}>
-          <input type="hidden" name="intent" value="getLinks" />
+        <Form className="grid gap-6" method="post" ref={formRef}>
           <div className="grid gap-2">
             <Label htmlFor="url">URL</Label>
             <Input
@@ -106,9 +109,14 @@ export default function Website() {
               required
             />
           </div>
-          <div className="flex items-center space-x-2">
-            <Switch id="crawl" />
-            <Label htmlFor="crawl">Crawl entire website</Label>
+          <div className="grid gap-2">
+            <div className="flex items-center space-x-2">
+              <Checkbox name="crawl" id="crawl" />
+              <Label htmlFor="crawl">Crawl entire website</Label>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Leave this unchecked if you want to scrape a single URL.
+            </p>
           </div>
         </Form>
       )}
@@ -132,6 +140,23 @@ export default function Website() {
                   ? {
                       intent: "crawlLinks",
                       links: JSON.stringify(selectedLinks),
+                    }
+                  : !formRef.current?.crawl["1"].checked
+                  ? {
+                      intent: "crawlLinks",
+                      links: JSON.stringify([
+                        {
+                          id: uuidv4(),
+                          content: "",
+                          createdAt: new Date(),
+                          updatedAt: new Date(),
+                          type: "website",
+                          provider: "website",
+                          metadata: {
+                            sourceURL: formRef.current?.url.value,
+                          },
+                        } as Document,
+                      ]),
                     }
                   : {
                       intent: "getLinks",

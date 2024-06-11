@@ -1,9 +1,4 @@
-import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  json,
-  redirect,
-} from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
   useActionData,
   useLoaderData,
@@ -27,7 +22,7 @@ import { Input } from "~/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { queue } from "~/queues/ingestion.server";
-import { Document as PrismaDocument } from "@prisma/client";
+import { DocumentType, Document as PrismaDocument } from "@prisma/client";
 import { useToast } from "~/components/ui/use-toast";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -83,6 +78,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "getLinks": {
       const url = String(formData.get("url"));
 
+      // check if we need to crawl or not (i.e. crawl vs scrape single url)
+
       const links = await getDocuments([url], "crawl", 100, true);
       return json({ intent, links });
     }
@@ -108,7 +105,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "createDocument": {
       const content = String(formData.get("content"));
       const name = String(formData.get("name"));
-      const document = await createDocument({ name, content, chatbotId });
+      const type = String(formData.get("type")) as DocumentType;
+      const document = await createDocument({ name, content, chatbotId, type });
 
       // enqueue a ingestion job - bullmq
       await queue.add(
@@ -125,9 +123,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "createDocuments": {
       const documents = JSON.parse(String(formData.get("documents"))).map(
-        (document: FullDocument) => ({
+        (document: FullDocument & { type: DocumentType }) => ({
           name: document.name,
           content: document.content,
+          type: document.type,
           chatbotId,
         }),
       );

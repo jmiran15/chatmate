@@ -72,7 +72,8 @@ model Document {
   chatbot           Chatbot           @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId         String
   embeddings        Embedding[]
-  ingestionProgress IngestionProgress @default(PENDING)
+  ingestionProgress IngestionProgress @default(PENDING) // probably need to change this to a number???
+  type              DocumentType      @default(RAW)
 }
 
 model Embedding {
@@ -99,7 +100,6 @@ model Message {
 }
 
 // subscription models
-
 model Plan {
   id            String         @id @unique
   name          String
@@ -147,4 +147,10 @@ model Subscription {
 enum IngestionProgress {
   PENDING
   COMPLETE
+}
+
+enum DocumentType {
+  WEBSITE
+  FILE
+  RAW
 }
