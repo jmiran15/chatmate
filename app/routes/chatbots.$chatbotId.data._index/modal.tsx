@@ -1,5 +1,3 @@
-import { useSearchParams } from "@remix-run/react";
-
 import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
 
@@ -7,32 +5,33 @@ import SelectType from "./select-type";
 import Website from "./website";
 import { FileUpload } from "./file";
 import BlankUpload from "./blank";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { STEPS } from "~/utils/types";
 
 export function DialogDemo() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  // we should pass these two down - as parentmodalcontrols ...
+  const [step, setStep] = useState(STEPS.SELECT_TYPE);
   const [open, setOpen] = useState(false);
-  const step = searchParams?.get("step");
-  const type = searchParams?.get("type");
 
-  useEffect(() => {
-    if (!searchParams.get("step")) {
-      setOpen(false);
-    }
-  }, [searchParams]);
+  // on mount - stop all jobs that can come from the modal (website, file, blank. ...)
+  // and on unmount?
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => setSearchParams({ step: "type" })}>
-          Add data
-        </Button>
+        <Button onClick={() => setStep(STEPS.SELECT_TYPE)}>Add data</Button>
       </DialogTrigger>
       <DialogContent className="max-w-lg max-h-screen overflow-auto">
-        {step === "type" ? <SelectType /> : null}
-        {step === "data" && type === "website" ? <Website /> : null}
-        {step === "data" && type === "file" ? <FileUpload /> : null}
-        {step === "data" && type === "blank" ? <BlankUpload /> : null}
+        {step === STEPS.SELECT_TYPE ? <SelectType setStep={setStep} /> : null}
+        {step === STEPS.WEBSITE ? (
+          <Website setStep={setStep} setOpen={setOpen} />
+        ) : null}
+        {step === STEPS.FILE ? (
+          <FileUpload setStep={setStep} setOpen={setOpen} />
+        ) : null}
+        {step === STEPS.BLANK ? (
+          <BlankUpload setStep={setStep} setOpen={setOpen} />
+        ) : null}
       </DialogContent>
     </Dialog>
   );

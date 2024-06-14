@@ -64,16 +64,17 @@ model Chat {
 }
 
 model Document {
-  id                String            @id @default(uuid())
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  name              String
-  content           String
-  chatbot           Chatbot           @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  chatbotId         String
-  embeddings        Embedding[]
-  ingestionProgress IngestionProgress @default(PENDING) // probably need to change this to a number???
-  type              DocumentType      @default(RAW)
+  id         String       @id @default(uuid())
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  name       String
+  content    String?
+  url        String?
+  chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  chatbotId  String
+  embeddings Embedding[]
+  isPending  Boolean      @default(true)
+  type       DocumentType @default(RAW)
 }
 
 model Embedding {
@@ -142,11 +143,6 @@ model Subscription {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-enum IngestionProgress {
-  PENDING
-  COMPLETE
 }
 
 enum DocumentType {

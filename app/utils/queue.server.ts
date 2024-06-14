@@ -5,7 +5,7 @@ interface AugmentedQueue<T> extends BullQueue<T> {
   events: QueueEvents;
 }
 
-interface RegisteredQueue {
+export interface RegisteredQueue {
   queue: BullQueue;
   queueEvents: QueueEvents;
   worker: Worker;
@@ -27,6 +27,8 @@ export function Queue<Payload>(
     const queueEvents = new QueueEvents(name, { connection: redis });
     const worker = new Worker<Payload>(name, handler, {
       connection: redis,
+      lockDuration: 1000 * 60 * 15,
+      concurrency: 8,
     });
 
     registeredQueues[name] = {

@@ -1,61 +1,68 @@
-import { Document, DocumentType, IngestionProgress } from "@prisma/client";
+import { Document } from "@prisma/client";
 import { Link } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
 import { Badge } from "../../components/ui/badge";
-import { useEventSource } from "remix-utils/sse/react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { memo } from "react";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 
-export default function DocumentCard({ document }: { document: Document }) {
-  const progress = useEventSource(`/jobs/${document.id}/progress`, {
-    event: "progress",
-  });
-  const progressLabel =
-    document.ingestionProgress === IngestionProgress.COMPLETE
-      ? "Processed"
-      : progress
-      ? progress === "100"
-        ? "Processed"
-        : "Processing"
-      : "Processing";
+export const DocumentCard = memo(function DocumentCard({
+  item,
+  ingestionProgress,
+  preprocessingProgress,
+}: {
+  item: Document;
+  ingestionProgress: ProgressData | null;
+  preprocessingProgress: ProgressData | null;
+}) {
+  let content;
+  let status;
 
-  const typeLabel =
-    document.type === DocumentType.WEBSITE
-      ? "Website"
-      : document.type === DocumentType.FILE
-      ? "File"
-      : "Raw";
+  if (item.content) {
+    content = item.content;
+  } else {
+    content = preprocessingProgress?.completed ? (
+      preprocessingProgress?.returnvalue?.content
+    ) : (
+      <Skeleton count={10} />
+    );
+  }
+
+  if (!item.isPending) {
+    status = "Ingested";
+  } else {
+    status = ingestionProgress?.completed
+      ? "Ingested"
+      : ingestionProgress?.progress
+      ? `Ingesting ${Math.trunc(Number(ingestionProgress?.progress))}%`
+      : "Preprocessing";
+  }
 
   return (
     <Link
-      to={document.id}
-      className="flex items-start justify-between rounded-lg border bg-card text-card-foreground shadow-sm hover:bg-accent p-6 gap-2 md:gap-8"
+      to={item.id}
+      className="flex flex-col-reverse sm:flex-row items-start justify-between rounded-lg border bg-card text-card-foreground shadow-sm hover:bg-accent p-6 gap-2 md:gap-8"
     >
-      <div className="flex flex-col space-y-1.5 items-start justify-start shrink">
-        <div className="font-semibold">{document.name}</div>
-        <div className="line-clamp-2 text-sm text-muted-foreground text-wrap">
-          {document.content}
+      <div className="flex flex-col space-y-1.5 items-start justify-start shrink w-full">
+        <div className="font-semibold">{item.name}</div>
+        <div className="line-clamp-2 text-sm text-muted-foreground text-wrap w-full">
+          {content}
         </div>
         <div className="flex flex-row items-center gap-4">
           <div className="text-xs text-muted-foreground text-nowrap">
-            {typeLabel}
+            {item.type}
           </div>
           <div className="text-xs text-muted-foreground text-nowrap">
-            {formatDistanceToNow(new Date(document.createdAt), {
+            {formatDistanceToNow(new Date(item.createdAt), {
               addSuffix: true,
             })}
           </div>
         </div>
       </div>
       <div className="flex flex-col items-end justify-start space-y-1.5 flex-1 shrink-0">
-        <Badge
-          variant={
-            document.ingestionProgress === IngestionProgress.COMPLETE
-              ? "default"
-              : "secondary"
-          }
-        >
-          {progressLabel}
-        </Badge>
+        <Badge variant={"secondary"}>{status}</Badge>
       </div>
     </Link>
   );
-}
+});

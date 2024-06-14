@@ -25,7 +25,7 @@ export async function createDocument({
 export async function createDocuments({
   documents,
 }: {
-  documents: Pick<Document, "name" | "content" | "chatbotId" | "type">[];
+  documents: Partial<Document>[];
 }) {
   return prisma.document.createManyAndReturn({ data: documents });
 }

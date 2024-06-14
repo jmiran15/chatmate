@@ -1,4 +1,4 @@
-import { Document, IngestionProgress } from "@prisma/client";
+import { Document } from "@prisma/client";
 import { prisma } from "~/db.server";
 import {
   embed,
@@ -11,8 +11,8 @@ import { v4 as uuid } from "uuid";
 import invariant from "tiny-invariant";
 import { updateDocument } from "~/models/document.server";
 
-interface QueueData {
-  documentId: Document["id"];
+export interface QueueData {
+  document: Document;
 }
 
 interface Chunk {
@@ -25,55 +25,11 @@ const CHUNK_SIZE = 1024;
 const OVERLAP = 20;
 const BATCH_SIZE = 10;
 
-async function batchProcess<T>(
-  array: T[],
-  batchSize: number,
-  asyncFunction: (item: T, index: number) => Promise<void>,
-): Promise<void> {
-  const batches = [];
-  for (let i = 0; i < array.length; i += batchSize) {
-    const batch = array.slice(i, i + batchSize);
-    batches.push(batch);
-  }
-
-  for (const batch of batches) {
-    await Promise.all(batch.map((item, index) => asyncFunction(item, index)));
-  }
-}
-
-async function embedChunk(chunk: Chunk & { chatbotId: Document["chatbotId"] }) {
-  const summary: Chunk = await generateSummaryForChunk(chunk);
-  const questions: Chunk[] = await generatePossibleQuestionsForChunk(chunk);
-
-  await batchProcess(
-    [chunk, summary, ...questions],
-    BATCH_SIZE,
-    async (node: Chunk) => {
-      const embedding = await embed({ input: node.content });
-
-      await prisma.$executeRaw`
-            INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
-            VALUES (${uuid()}, ${embedding}::vector, ${node.documentId}, ${
-              chunk.chatbotId
-            }, ${chunk.content})
-            `;
-    },
-  );
-}
-
 export const queue = Queue<QueueData>("ingestion", async (job) => {
-  console.log("ingestion.server.ts - started ingestion job id: ", job.id);
+  const children = await job.getChildrenValues();
+  const document = Object.values(children)[0];
 
-  invariant(
-    job.id === job.data.documentId,
-    "Job id and document id should be the same",
-  );
-
-  const document = await prisma.document.findUnique({
-    where: {
-      id: job.data.documentId,
-    },
-  });
+  invariant(document?.id === job.data.document.id, "Document ids should match");
 
   console.log(
     "ingestion.server.ts - started ingestion job for document: ",
@@ -81,26 +37,72 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
   );
 
   try {
+    let progress = 0;
+
     await prisma.$executeRaw`
       DELETE FROM "Embedding" WHERE "documentId" = ${document.id}
     `;
 
-    const chunks: Chunk[] = splitStringIntoChunks(
-      document,
-      CHUNK_SIZE,
-      OVERLAP,
-    );
+    await job.updateProgress(progress);
 
-    await batchProcess(
-      chunks.map((chunk) => ({ ...chunk, chatbotId: document.chatbotId })),
-      BATCH_SIZE,
-      embedChunk,
-    );
+    const raw: Chunk[] = splitStringIntoChunks(document, CHUNK_SIZE, OVERLAP);
 
-    console.log(
-      "ingestion.server.ts - finished ingestion job for document: ",
-      document?.id,
-    );
+    const chunks = raw.map((chunk) => ({
+      ...chunk,
+      chatbotId: document.chatbotId,
+    }));
+
+    const chunkBatches = [];
+    for (let i = 0; i < chunks.length; i += BATCH_SIZE) {
+      const batch = chunks.slice(i, i + BATCH_SIZE);
+      chunkBatches.push(batch);
+    }
+
+    const totalChunks = raw.length;
+    const stepsPerChunk = 100 / totalChunks;
+    console.log(`ingestion.server.ts - total chunks: ${totalChunks}`);
+    console.log(`ingestion.server.ts - current progress: ${progress}`);
+    console.log(`ingestion.server.ts - steps per chunk: ${stepsPerChunk}`);
+
+    for (const batch of chunkBatches) {
+      await Promise.all(
+        batch.map(async (chunk) => {
+          const summary: Chunk = await generateSummaryForChunk(chunk);
+          const questions: Chunk[] =
+            await generatePossibleQuestionsForChunk(chunk);
+
+          const totalSubChunks = 2 + questions.length;
+          const add = stepsPerChunk / totalSubChunks;
+
+          const chunks = [chunk, summary, ...questions];
+          const embeddingChunks = [];
+          for (let i = 0; i < chunks.length; i += BATCH_SIZE) {
+            const batch = chunks.slice(i, i + BATCH_SIZE);
+            embeddingChunks.push(batch);
+          }
+
+          for (const batch of embeddingChunks) {
+            await Promise.all(
+              batch.map(async (node: Chunk) => {
+                const embedding = await embed({ input: node.content });
+
+                await prisma.$executeRaw`
+                    INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
+                    VALUES (${uuid()}, ${embedding}::vector, ${
+                      node.documentId
+                    }, ${chunk.chatbotId}, ${chunk.content})
+                    `;
+                progress += add;
+                await job.updateProgress(progress);
+              }),
+            );
+          }
+        }),
+      );
+    }
+
+    console.log(`ingestion.server.ts - current progress: ${progress}`);
+
     console.log(
       "ingestion.server.ts - finished ingestion job for document: ",
       document?.id,
@@ -109,10 +111,9 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
     await updateDocument({
       id: document.id,
       data: {
-        ingestionProgress: IngestionProgress.COMPLETE,
+        isPending: false,
       },
     });
-    await job.updateProgress(100);
   } catch (error) {
     console.error("ingestion.server.ts - error during ingestion job:", error);
     throw error; // Re-throw the error to mark the job as failed

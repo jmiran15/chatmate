@@ -6,70 +6,74 @@ import {
 } from "~/components/ui/dialog";
 import {
   Form,
+  SubmitOptions,
   useActionData,
   useNavigation,
   useParams,
-  useSearchParams,
   useSubmit,
 } from "@remix-run/react";
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { DataTable } from "./table/table";
-import { useEffect, useRef, useState } from "react";
-import { z } from "zod";
-import { urlSchema } from "./table/types";
-import { columns } from "./table/columns";
-import { Document } from "~/utils/types";
+import { useRef, useState } from "react";
+
+import { Document, STEPS } from "~/utils/types";
 import { Checkbox } from "~/components/ui/checkbox";
 import { v4 as uuidv4 } from "uuid";
-import { DocumentType } from "@prisma/client";
+import { useEventSource } from "remix-utils/sse/react";
+import LinksTable from "./links-table";
 
-export default function Website() {
+export default function Website({
+  setStep,
+  setOpen,
+}: {
+  setStep: (step: string) => void;
+  setOpen: (open: boolean) => void;
+}) {
   const navigation = useNavigation();
-  const [rowSelection, setRowSelection] = useState({});
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { chatbotId } = useParams();
-  const pending =
-    (navigation.state === "submitting" &&
-      navigation.formData?.get("intent") === "getLinks") ||
-    navigation.formData?.get("intent") === "createDocuments" ||
-    navigation.formData?.get("intent") === "crawlLinks";
   const actionData = useActionData();
-  const [links, setLinks] = useState<Document[]>([]);
-  const showDataTable =
-    actionData?.intent === "getLinks" && actionData?.links.length > 0; // we got links back
-  const canSubmit =
-    actionData?.intent === "crawlLinks" && actionData?.documents.length > 0; // we got documents back
-  const formRef = useRef<HTMLFormElement>(null);
   const submit = useSubmit();
+  const { chatbotId } = useParams();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [rowSelection, setRowSelection] = useState({});
+  const [isTableVisible, setIsTableVisible] = useState(false);
+  const job = actionData?.job;
+  const completionEvent = useEventSource(`/jobs/${job?.id}/progress/crawl`, {
+    event: "completed",
+  });
+  console.log("website.tsx - completionEvent", completionEvent);
+  const links = completionEvent ? JSON.parse(completionEvent) : [];
+  const disableNextButton = navigation.state === "submitting";
 
-  useEffect(() => {
-    console.log("actionData", actionData);
-    if (showDataTable) {
-      setLinks(actionData.links);
-    } else if (canSubmit) {
-      console.log("website.tsx - creating documents", actionData.documents);
-      submit(
-        {
-          intent: "createDocuments",
-          // can probly clean up this logic to just use Prisma Document type all throughout
-          documents: JSON.stringify(
-            actionData.documents.map((d) => ({
-              name: d.metadata.sourceURL,
-              content: d.content,
-              type: DocumentType.WEBSITE,
-              chatbotId,
-            })),
-          ),
-        },
-        {
-          method: "post",
-          action: `/chatbots/${chatbotId}/data?index`,
-        },
-      );
-    }
-  }, [actionData]);
+  // useEffect(() => {
+  //   console.log("actionData", actionData);
+
+  //   // we are going to optimistically show the data table.
+
+  //   if (showDataTable) {
+  //     setLinks(actionData.links);
+  //   } else if (canSubmit) {
+  //     console.log("website.tsx - creating documents", actionData.documents);
+  //     submit(
+  //       {
+  //         intent: "createDocuments",
+  //         // can probly clean up this logic to just use Prisma Document type all throughout
+  //         documents: JSON.stringify(
+  //           actionData.documents.map((d) => ({
+  //             name: d.metadata.sourceURL,
+  //             content: d.content,
+  //             type: DocumentType.WEBSITE,
+  //             chatbotId,
+  //           })),
+  //         ),
+  //       },
+  //       {
+  //         method: "post",
+  //         action: `/chatbots/${chatbotId}/data?index`,
+  //       },
+  //     );
+  //   }
+  // }, [actionData]);
 
   const selectedLinks =
     links?.length > 0
@@ -85,14 +89,9 @@ export default function Website() {
         <DialogDescription>Add a website/s to your chatbot.</DialogDescription>
       </DialogHeader>
 
-      {showDataTable ? (
-        <DataTable
-          data={z.array(urlSchema).parse(
-            links.map((link) => ({
-              url: link.metadata.sourceURL,
-            })),
-          )}
-          columns={columns}
+      {isTableVisible ? (
+        <LinksTable
+          links={links}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
         />
@@ -124,50 +123,60 @@ export default function Website() {
         <div className="w-full flex flex-row justify-between">
           <Button
             variant="ghost"
-            onClick={() =>
-              setSearchParams({
-                step: "type",
-              })
-            }
+            onClick={() => {
+              if (isTableVisible) {
+                setIsTableVisible(false);
+              } else {
+                setStep(STEPS.SELECT_TYPE);
+              }
+            }}
           >
             Back
           </Button>
           <Button
-            disabled={pending}
-            onClick={() =>
-              submit(
-                showDataTable
-                  ? {
-                      intent: "crawlLinks",
-                      links: JSON.stringify(selectedLinks),
-                    }
-                  : !formRef.current?.crawl["1"].checked
-                  ? {
-                      intent: "crawlLinks",
-                      links: JSON.stringify([
-                        {
-                          id: uuidv4(),
-                          content: "",
-                          createdAt: new Date(),
-                          updatedAt: new Date(),
-                          type: "website",
-                          provider: "website",
-                          metadata: {
-                            sourceURL: formRef.current?.url.value,
-                          },
-                        } as Document,
-                      ]),
-                    }
-                  : {
+            disabled={disableNextButton}
+            onClick={() => {
+              const options = {
+                method: "post",
+                action: `/chatbots/${chatbotId}/data?index&step=data&type=website`,
+              } as SubmitOptions;
+
+              // the formRef is rendered
+              if (formRef.current) {
+                if (formRef.current.crawl["1"].checked) {
+                  setIsTableVisible(true);
+                  submit(
+                    {
                       intent: "getLinks",
                       url: formRef.current?.url.value,
                     },
-                {
-                  method: "post",
-                  action: `/chatbots/${chatbotId}/data?index&step=data&type=website`,
-                },
-              )
-            }
+                    options,
+                  );
+                } else {
+                  setOpen(false);
+
+                  // call "createDocuments" instead of crawl - crawl inside the createDocuments api
+
+                  submit(
+                    {
+                      intent: "scrapeLinks",
+                      links: JSON.stringify([formRef.current?.url.value]),
+                    },
+                    options,
+                  );
+                }
+              } else {
+                // call "createDocuments" instead of crawl - crawl inside the createDocuments api
+                setOpen(false);
+                submit(
+                  {
+                    intent: "scrapeLinks",
+                    links: JSON.stringify(selectedLinks),
+                  },
+                  options,
+                );
+              }
+            }}
           >
             Next
           </Button>

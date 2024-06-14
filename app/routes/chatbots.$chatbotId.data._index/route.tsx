@@ -1,35 +1,45 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
-  useActionData,
   useLoaderData,
+  useBeforeUnload,
   useSearchParams,
+  useNavigation,
+  useParams,
 } from "@remix-run/react";
-import DocumentCard from "~/routes/chatbots.$chatbotId.data._index/document-card";
-import {
-  createDocument,
-  createDocuments,
-  getDocumentsByChatbotId,
-} from "~/models/document.server";
 import { convertUploadedFilesToDocuments } from "~/utils/llm/openai";
-import { getDocuments } from "~/utils/webscraper/scrape";
-import { Document, FullDocument } from "~/utils/types";
+import { FullDocument } from "~/utils/types";
 import { DialogDemo } from "./modal";
-import { useEffect } from "react";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
-import { PaginationBar } from "./pagination-bar";
 import { Input } from "~/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { queue } from "~/queues/ingestion.server";
-import { DocumentType, Document as PrismaDocument } from "@prisma/client";
-import { useToast } from "~/components/ui/use-toast";
+import { Document, DocumentType } from "@prisma/client";
+import { crawlQueue } from "~/queues/crawl.server";
+import invariant from "tiny-invariant";
+import { webFlow } from "./flows.server";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { useVirtual } from "react-virtual";
+import { useEventSource } from "remix-utils/sse/react";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
+import { DocumentCard } from "./document-card";
+
+const LIMIT = 20;
+const DATA_OVERSCAN = 4;
+
+const getStartLimit = (searchParams: URLSearchParams) => ({
+  start: Number(searchParams.get("start") || "0"),
+  limit: Number(searchParams.get("limit") || LIMIT.toString()),
+});
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
-  const url = new URL(request.url);
-  const $top = Number(url.searchParams.get("$top")) || 5;
-  const $skip = Number(url.searchParams.get("$skip")) || 0;
   const userId = await requireUserId(request);
 
   if (!chatbotId) {
@@ -44,26 +54,40 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     throw new Error("User does not have access to chatbot");
   }
 
-  const [total, documents] = await prisma.$transaction([
+  const { start, limit } = getStartLimit(new URL(request.url).searchParams);
+
+  // we should probably do some caching with localforage here - especially for search
+
+  const [totalItems, items] = await prisma.$transaction([
     prisma.document.count({
       where: { chatbotId },
     }),
     prisma.document.findMany({
       where: { chatbotId },
       orderBy: { createdAt: "desc" },
-      skip: $skip,
-      take: $top,
+      skip: start,
+      take: limit,
     }),
   ]);
 
-  const documents_ = await getDocumentsByChatbotId({ id: chatbotId });
-
-  return json({
-    total,
-    documents,
-    documents_: documents_,
-  });
+  return json(
+    {
+      items,
+      totalItems,
+    },
+    { headers: { "Cache-Control": "public, max-age=120" } },
+  );
 };
+
+const isServerRender = typeof document === "undefined";
+const useSSRLayoutEffect = isServerRender ? () => {} : useLayoutEffect;
+
+function useIsHydrating(queryString: string) {
+  const [isHydrating] = useState(
+    () => !isServerRender && Boolean(document.querySelector(queryString)),
+  );
+  return isHydrating;
+}
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -78,20 +102,43 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "getLinks": {
       const url = String(formData.get("url"));
 
-      // check if we need to crawl or not (i.e. crawl vs scrape single url)
-
-      const links = await getDocuments([url], "crawl", 100, true);
-      return json({ intent, links });
+      // return the job, so that we can get job.id and watch it for progress in the table
+      return json({
+        intent,
+        job: await crawlQueue.add("crawl", {
+          url,
+        }),
+      });
     }
-    case "crawlLinks": {
-      let links = JSON.parse(formData.get("links") as string);
-      links = links.map((link: Document) => link.metadata.sourceURL);
+    case "scrapeLinks": {
+      const urls = JSON.parse(String(formData.get("links")));
+      invariant(Array.isArray(urls), "Links must be an array");
+      invariant(urls.length > 0, "Links must be an array");
 
-      const documents = await getDocuments(links, "single_urls", 100, false);
+      const documents = await prisma.document.createManyAndReturn({
+        data: urls.map((url: string) => ({
+          name: url,
+          url,
+          type: DocumentType.WEBSITE,
+          chatbotId,
+        })),
+      });
 
-      return json({ intent, documents });
+      const trees = await webFlow({ documents });
+      return json({ intent, trees, documents });
     }
     case "parseFiles": {
+      // enqueue the parseFile job - return the job id
+
+      // we need to push the files to cloudinary first - then send the url to the job
+      // batch send jobs - for each file url
+
+      // const jobId = await queue.add("parseFile", {
+      //   files: formData.getAll("files"),
+      // });
+
+      // return json({ intent, jobId });
+
       // do same parallel stuff that we do in the scrapeLinks action
 
       // Get all file entries from the original formData
@@ -102,51 +149,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
       return json({ intent, documents });
     }
-    case "createDocument": {
-      const content = String(formData.get("content"));
-      const name = String(formData.get("name"));
-      const type = String(formData.get("type")) as DocumentType;
-      const document = await createDocument({ name, content, chatbotId, type });
-
-      // enqueue a ingestion job - bullmq
-      await queue.add(
-        "ingestion",
-        {
-          documentId: document.id,
-        },
-        {
-          jobId: document.id,
-        },
-      );
-
-      return json({ intent, ok: true });
-    }
-    case "createDocuments": {
-      const documents = JSON.parse(String(formData.get("documents"))).map(
-        (document: FullDocument & { type: DocumentType }) => ({
-          name: document.name,
-          content: document.content,
-          type: document.type,
-          chatbotId,
-        }),
-      );
-      const createdDocuments = await createDocuments({ documents });
-
-      // enqueue a batch of ingestion jobs - bullmq
-      createdDocuments.forEach((document: PrismaDocument) => {
-        queue.add(
-          "ingestion",
-          {
-            documentId: document.id,
-          },
-          {
-            jobId: document.id,
-          },
-        );
-      });
-
-      return json({ intent, ok: true });
-    }
 
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
@@ -156,29 +158,137 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
-  const actionData = useActionData<typeof action>();
+  const { chatbotId } = useParams();
+  const navigation = useNavigation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { toast } = useToast();
+  const { start, limit } = getStartLimit(searchParams);
+  const [initialStart] = useState(() => start);
+  const hydrating = useIsHydrating("[data-hydrating-signal]");
+  const isMountedRef = useRef(false);
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const [progressStates, setProgressStates] = useState<
+    Record<string, Record<Document["id"], ProgressData>>
+  >({});
+
+  const lastCompletedEvent = useEventSource(
+    `/api/chatbot/${chatbotId}/data/progress`,
+    {
+      event: "completed",
+    },
+  );
+  const lastProgressEvent = useEventSource(
+    `/api/chatbot/${chatbotId}/data/progress`,
+    {
+      event: "progress",
+    },
+  );
 
   useEffect(() => {
-    if (searchParams.get("step")) {
-      setSearchParams({});
+    const data: ProgressData = lastCompletedEvent
+      ? JSON.parse(lastCompletedEvent)
+      : lastProgressEvent
+      ? JSON.parse(lastProgressEvent)
+      : null;
+
+    if (!data) return;
+    console.log("data - ", data);
+    setProgressStates((prev) => ({
+      ...prev,
+      [data.queueName]: {
+        ...prev[data.queueName],
+        [data.documentId]: data,
+      },
+    }));
+  }, [lastCompletedEvent, lastProgressEvent]);
+
+  console.log("progress state: ", progressStates);
+
+  const rowVirtualizer = useVirtual({
+    size: data.totalItems,
+    parentRef,
+    estimateSize: useCallback(() => 200, []),
+    initialRect: { width: 0, height: 800 },
+  });
+
+  // saving the user's scroll position
+  useBeforeUnload(
+    useCallback(() => {
+      if (!parentRef.current) return;
+      sessionStorage.setItem(
+        "infiniteScrollTop",
+        parentRef.current.scrollTop.toString(),
+      );
+    }, []),
+  );
+
+  // hydrating the scroll position
+  useSSRLayoutEffect(() => {
+    if (!hydrating) return;
+    if (!parentRef.current) return;
+
+    const infiniteScrollTop = sessionStorage.getItem("infiniteScrollTop");
+    if (!infiniteScrollTop) return;
+
+    parentRef.current.scrollTop = Number(infiniteScrollTop);
+
+    return () => {
+      sessionStorage.removeItem("infiniteScrollTop");
+    };
+  }, [initialStart, hydrating]);
+
+  const lowerBoundary = start + DATA_OVERSCAN;
+  const upperBoundary = start + limit - DATA_OVERSCAN;
+  const middleCount = Math.ceil(limit / 2);
+
+  const [firstVirtualItem] = rowVirtualizer.virtualItems;
+  const [lastVirtualItem] = [...rowVirtualizer.virtualItems].reverse();
+  if (!firstVirtualItem || !lastVirtualItem) {
+    throw new Error("this should never happen");
+  }
+
+  let neededStart = start;
+
+  if (firstVirtualItem.index < lowerBoundary) {
+    // user is scrolling up. Move the window up
+    neededStart =
+      Math.floor((firstVirtualItem.index - middleCount) / DATA_OVERSCAN) *
+      DATA_OVERSCAN;
+  } else if (lastVirtualItem.index > upperBoundary) {
+    // user is scrolling down. Move the window down
+    neededStart =
+      Math.ceil((lastVirtualItem.index - middleCount) / DATA_OVERSCAN) *
+      DATA_OVERSCAN;
+  }
+
+  // can't go below 0
+  if (neededStart < 0) {
+    neededStart = 0;
+  }
+
+  // can't go above our data
+  if (neededStart + limit > data.totalItems) {
+    neededStart = data.totalItems - limit;
+  }
+
+  useEffect(() => {
+    if (!isMountedRef.current) {
+      return;
     }
+    if (neededStart !== start) {
+      setSearchParams(
+        {
+          start: String(neededStart),
+          limit: LIMIT.toString(),
+        },
+        { replace: true },
+      );
+    }
+  }, [start, neededStart, setSearchParams]);
+
+  useEffect(() => {
+    isMountedRef.current = true;
   }, []);
-
-  useEffect(() => {
-    if (
-      (actionData?.intent === "createDocument" ||
-        actionData?.intent === "createDocuments") &&
-      actionData?.ok
-    ) {
-      toast({
-        title: "Your documents have been created",
-        description:
-          "Your documents are being processed in the background - feel free to navigate around and do other things while they're being processed.",
-      });
-    }
-  }, [actionData]);
 
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
@@ -199,17 +309,57 @@ export default function Data() {
           Search
         </Button>
       </div>
+      <div
+        ref={parentRef}
+        data-hydrating-signal
+        className="List"
+        style={{
+          height: `800px`,
+          width: `100%`,
+          overflow: "auto",
+        }}
+      >
+        <div
+          style={{
+            height: `${rowVirtualizer.totalSize}px`,
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {rowVirtualizer.virtualItems.map((virtualRow) => {
+            const index = isMountedRef.current
+              ? Math.abs(start - virtualRow.index)
+              : virtualRow.index;
+            const item = data.items[index];
 
-      {data.documents.length === 0 ? (
-        <p className="p-4">No documents yet</p>
-      ) : (
-        <ol className="space-y-4 ">
-          {data.documents.map((document) => (
-            <DocumentCard key={document.id} document={document} />
-          ))}
-        </ol>
-      )}
-      <PaginationBar total={data.total} />
+            return (
+              <div
+                key={virtualRow.key}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: `${virtualRow.size}px`,
+                  transform: `translateY(${virtualRow.start}px)`,
+                }}
+              >
+                {item ? (
+                  <DocumentCard
+                    item={item}
+                    ingestionProgress={progressStates["ingestion"]?.[item.id]}
+                    preprocessingProgress={progressStates["scrape"]?.[item.id]}
+                  />
+                ) : navigation.state === "loading" ? (
+                  <span>Loading...</span>
+                ) : (
+                  <span>Nothing to see here...</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
@@ -218,3 +368,9 @@ export const handle = {
   PATH: (chatbotId: string) => `/chatbots/${chatbotId}/data`,
   breadcrumb: "data",
 };
+
+// memoize the card content, dependent on that item in progress state
+// (i.e. if the component never changes progress, its element in progress state will always be null)
+// so the values will never recalculate
+
+// we need to memo the component, so that it doesnt rerender when its props dont change?

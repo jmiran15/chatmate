@@ -1,8 +1,7 @@
 import * as cheerio from "cheerio";
 import { ScrapingBeeClient } from "scrapingbee";
-import { attemptScrapWithRequests, sanitizeText } from "./utils/utils";
-import { extractMetadata } from "./utils/metadata";
-import { Document } from "../types";
+import { attemptScrapWithRequests, sanitizeText } from "./utils";
+import { extractMetadata } from "./webscraper/utils/metadata";
 
 async function scrapWithScrapingBee(url: string): Promise<string | null> {
   try {
@@ -32,7 +31,7 @@ async function scrapWithScrapingBee(url: string): Promise<string | null> {
   }
 }
 
-export async function scrapSingleUrl(urlToScrap: string): Promise<Document> {
+export async function scrapSingleUrl(urlToScrap: string) {
   urlToScrap = urlToScrap.trim();
 
   try {
@@ -78,21 +77,18 @@ export async function scrapSingleUrl(urlToScrap: string): Promise<Document> {
     if (metadata) {
       return {
         content: text,
-        provider: "web-scraper",
         metadata: { ...metadata, sourceURL: urlToScrap },
-      } as Document;
+      };
     }
     return {
       content: text,
-      provider: "web-scraper",
       metadata: { sourceURL: urlToScrap },
-    } as Document;
+    };
   } catch (error) {
     console.error(`Error: ${error} - Failed to fetch URL: ${urlToScrap}`);
     return {
       content: "",
-      provider: "web-scraper",
       metadata: { sourceURL: urlToScrap },
-    } as Document;
+    };
   }
 }

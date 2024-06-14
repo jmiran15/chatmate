@@ -10,6 +10,7 @@ import { CgWebsite, CgFile, CgFormatText } from "react-icons/cg";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Label } from "~/components/ui/label";
 import { useState } from "react";
+import { STEPS } from "~/utils/types";
 // import {
 //   SiZendesk,
 //   SiConfluence,
@@ -22,17 +23,17 @@ import { useState } from "react";
 
 const DataTypes = [
   {
-    value: "website",
+    value: STEPS.WEBSITE,
     label: "Website",
     icon: CgWebsite,
   },
   {
-    value: "file",
+    value: STEPS.FILE,
     label: "File",
     icon: CgFile,
   },
   {
-    value: "blank",
+    value: STEPS.BLANK,
     label: "Blank",
     icon: CgFormatText,
   },
@@ -73,9 +74,13 @@ const DataTypes = [
   // },
 ];
 
-export default function SelectType() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [type, setType] = useState(searchParams.get("type") || "website");
+export default function SelectType({
+  setStep,
+}: {
+  setStep: (step: string) => void;
+}) {
+  // const [searchParams, setSearchParams] = useSearchParams();
+  const [type, setType] = useState("website");
 
   return (
     <>
@@ -109,9 +114,7 @@ export default function SelectType() {
         ))}
       </RadioGroup>
       <DialogFooter>
-        <Button onClick={() => setSearchParams({ step: "data", type: type })}>
-          Next
-        </Button>
+        <Button onClick={() => setStep(type)}>Next</Button>
       </DialogFooter>
     </>
   );

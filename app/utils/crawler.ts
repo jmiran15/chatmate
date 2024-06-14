@@ -1,16 +1,13 @@
 import axios from "axios";
 import cheerio from "cheerio";
 import { URL } from "url";
-import { getLinksFromSitemap } from "./sitemap";
 import async from "async";
-// import { glob } from "glob";
-import { Progress } from "../types";
+import { Progress } from "./types";
+import { getLinksFromSitemap } from "./sitemap";
 
 export class WebCrawler {
   private initialUrl: string;
   private baseUrl: string; // Added to store the base URL
-  //   private includes: string[];
-  //   private excludes: string[];
   private maxCrawledLinks: number;
   // eslint-disable-next-line @typescript-eslint/consistent-generic-constructors
   private visited: Set<string> = new Set();
@@ -19,19 +16,13 @@ export class WebCrawler {
 
   constructor({
     initialUrl,
-    // includes,
-    // excludes,
     maxCrawledLinks = 100,
   }: {
     initialUrl: string;
-    includes?: string[];
-    excludes?: string[];
     maxCrawledLinks?: number;
   }) {
     this.initialUrl = initialUrl;
     this.baseUrl = new URL(initialUrl).origin; // Initialize the base URL
-    // this.includes = includes ?? [];
-    // this.excludes = excludes ?? [];
     this.maxCrawledLinks = maxCrawledLinks;
   }
 
@@ -42,12 +33,10 @@ export class WebCrawler {
     // Attempt to fetch and return sitemap links before any crawling
     const sitemapLinks = await this.tryFetchSitemapLinks(this.initialUrl);
     if (sitemapLinks.length > 0) {
-      //   console.log('Sitemap found, returning sitemap links.');
       return sitemapLinks;
     }
     // Proceed with crawling if no sitemap links found
 
-    console.log("starting crawling with initial url", this.initialUrl);
     return await this.crawlUrls(
       [this.initialUrl],
       concurrencyLimit,
@@ -61,8 +50,6 @@ export class WebCrawler {
     inProgress?: (progress: Progress) => void,
   ): Promise<string[]> {
     const queue = async.queue(async (task: string, callback) => {
-      console.log("type of callback", typeof callback);
-
       if (this.crawledUrls.size >= this.maxCrawledLinks) {
         callback();
         return;
@@ -87,10 +74,6 @@ export class WebCrawler {
       await this.crawlUrls(newUrls, concurrencyLimit, inProgress);
       callback();
     }, concurrencyLimit);
-
-    // queue.error(function (err, task) {
-    //   console.error(err, task);
-    // });
 
     queue.push(
       urls.filter((url) => !this.visited.has(url)),
@@ -123,42 +106,30 @@ export class WebCrawler {
       return [];
     }
 
-    // Perform the crawl
     try {
       const response = await axios.get(url);
-      // console.log("response", response);
-
       const $ = cheerio.load(response.data);
       const links: string[] = [];
       const baseUrl = this.initialUrl.split("/").slice(0, 3).join("/");
-      console.log("baseUrl", baseUrl);
 
       $("a").each((_, element) => {
         const href = $(element).attr("href");
-        // console.log("href", href);
         if (href) {
           let fullUrl = href;
           if (!href.startsWith("http")) {
             fullUrl = new URL(href, this.baseUrl).toString(); // Use base URL for relative links
-            console.log("fulllink does not start with http", fullUrl);
           }
 
           if (
             fullUrl.startsWith(baseUrl) && // Ensure it starts with the initial URL
             this.isInternalLink(fullUrl) &&
-            this.matchesPattern(fullUrl) &&
             this.noSections(fullUrl)
           ) {
-            console.log("adding link", fullUrl);
             links.push(fullUrl);
           }
         }
       });
 
-      console.log(
-        "returning links",
-        links.filter((link) => !this.visited.has(link)),
-      );
       return links.filter((link) => !this.visited.has(link));
     } catch (error) {
       return [];
@@ -175,13 +146,6 @@ export class WebCrawler {
     return urlObj.hostname === domainWithoutProtocol;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private matchesPattern(link: string): boolean {
-    // TODO: implement pattern matching following the glob syntax
-    return true;
-  }
-
-  // function to check if the url is a file
   private isFile(url: string): boolean {
     const fileExtensions = [
       ".png",
@@ -225,7 +189,6 @@ export class WebCrawler {
     try {
       const response = await axios.get(sitemapUrl);
       if (response.status === 200) {
-        // console.log('Sitemap found at ' + sitemapUrl);
         return await getLinksFromSitemap(sitemapUrl);
       }
     } catch (error) {
