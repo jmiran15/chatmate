@@ -30,7 +30,6 @@ export default function Website({
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
 }) {
-  const navigation = useNavigation();
   const actionData = useActionData();
   const submit = useSubmit();
   const { chatbotId } = useParams();
@@ -42,12 +41,13 @@ export default function Website({
   const [links, setLinks] = useState<string[]>(
     Array(MAX_CRAWLED_LINKS).fill(""),
   );
-  const disableNextButton = navigation.state === "submitting";
+  const disableNextButton = isTableVisible && links.length === 0;
   const selectedLinks =
     links?.length > 0
       ? Object.keys(rowSelection).map((index) => links[index as number])
       : [];
 
+  // showing crawl progress
   useEffect(() => {
     if (!job) return;
     if (!eventSource) return;
@@ -116,7 +116,7 @@ export default function Website({
             onClick={() => {
               const options = {
                 method: "post",
-                action: `/chatbots/${chatbotId}/data?index&step=data&type=website`,
+                action: `/chatbots/${chatbotId}/data?index`,
               } as SubmitOptions;
 
               // the formRef is rendered

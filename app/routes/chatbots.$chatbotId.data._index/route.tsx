@@ -29,8 +29,7 @@ import { useVirtual } from "react-virtual";
 import { useEventSource } from "remix-utils/sse/react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { DocumentCard } from "./document-card";
-import axios from "axios";
-import FD from "form-data";
+import { queue } from "~/queues/ingestion.server";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -136,8 +135,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       return json({ intent, trees, documents });
     }
     case "parseFiles": {
-      // const files = formData.getAll("files");
-
       try {
         const response = await fetch("http://localhost:3000/api/upload", {
           method: "POST",
@@ -174,6 +171,24 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       } catch (error) {
         throw new Error(`Error uploading files: ${error}`);
       }
+    }
+    case "blank": {
+      const name = String(formData.get("name"));
+      const content = String(formData.get("content"));
+
+      const document = await prisma.document.create({
+        data: {
+          name,
+          content,
+          chatbotId,
+        },
+      });
+
+      return await queue.add(
+        `ingestion-${document.id}`,
+        { document },
+        { jobId: document.id },
+      );
     }
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
@@ -226,8 +241,6 @@ export default function Data() {
       },
     }));
   }, [lastCompletedEvent, lastProgressEvent]);
-
-  console.log("progress state: ", progressStates);
 
   const rowVirtualizer = useVirtual({
     size: data.totalItems,

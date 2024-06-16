@@ -1,4 +1,3 @@
-import { useSearchParams } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import {
   DialogDescription,
@@ -79,8 +78,7 @@ export default function SelectType({
 }: {
   setStep: (step: string) => void;
 }) {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const [type, setType] = useState("website");
+  const [type, setType] = useState(STEPS.SELECT_TYPE);
 
   return (
     <>

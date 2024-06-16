@@ -1,5 +1,5 @@
 import { DocumentType } from "@prisma/client";
-import { Form, useParams, useSearchParams, useSubmit } from "@remix-run/react";
+import { Form, useParams, useSubmit } from "@remix-run/react";
 import { useRef } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -11,11 +11,17 @@ import {
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
+import { STEPS } from "~/utils/types";
 
-export default function BlankUpload() {
+export default function BlankUpload({
+  setStep,
+  setOpen,
+}: {
+  setStep: (step: string) => void;
+  setOpen: (open: boolean) => void;
+}) {
   const formRef = useRef<HTMLFormElement>(null);
   const submit = useSubmit();
-  const [searchParams, setSearchParams] = useSearchParams();
   const { chatbotId } = useParams();
 
   return (
@@ -32,7 +38,7 @@ export default function BlankUpload() {
         method="post"
         action={`/chatbots/${chatbotId}/data`}
       >
-        <input type="hidden" name="intent" value="createDocument" />
+        <input type="hidden" name="intent" value="blank" />
         <input type="hidden" name="type" value={DocumentType.RAW} />
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
@@ -60,11 +66,20 @@ export default function BlankUpload() {
         <div className="w-full flex flex-row justify-between">
           <Button
             variant="ghost"
-            onClick={() => setSearchParams({ step: "type" })}
+            onClick={() => {
+              setStep(STEPS.SELECT_TYPE);
+            }}
           >
-            Cancel
+            Back
           </Button>
-          <Button onClick={() => submit(formRef.current)}>Upload</Button>
+          <Button
+            onClick={() => {
+              setOpen(false);
+              submit(formRef.current);
+            }}
+          >
+            Upload
+          </Button>
         </div>
       </DialogFooter>
     </>

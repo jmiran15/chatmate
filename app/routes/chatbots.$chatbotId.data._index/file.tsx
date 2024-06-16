@@ -5,26 +5,28 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { FileUploader } from "./file-uploader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "~/components/ui/button";
-import {
-  useParams,
-  useFetcher,
-  useSearchParams,
-  useActionData,
-} from "@remix-run/react";
+import { useParams, useFetcher, useActionData } from "@remix-run/react";
 import { Badge } from "~/components/ui/badge";
+import { STEPS } from "~/utils/types";
 
-export function FileUpload() {
+export function FileUpload({
+  setStep,
+  setOpen,
+}: {
+  setStep: (step: string) => void;
+  setOpen: (open: boolean) => void;
+}) {
   const { chatbotId } = useParams();
   const [files, setFiles] = useState<File[]>([]);
   const fetcher = useFetcher();
-  const [searchParams, setSearchParams] = useSearchParams();
   const actionData = useActionData();
 
   console.log("actionData - ", actionData);
 
   const handleUpload = async () => {
+    setOpen(false);
     const formData = new FormData();
     files.forEach((file) => {
       formData.append("files", file);
@@ -90,17 +92,13 @@ export function FileUpload() {
         <div className="w-full flex flex-row justify-between">
           <Button
             variant="ghost"
-            onClick={() =>
-              setSearchParams({
-                step: "type",
-              })
-            }
+            onClick={() => {
+              setStep(STEPS.SELECT_TYPE);
+            }}
           >
             Back
           </Button>
-          <Button onClick={handleUpload} disabled={fetcher.state !== "idle"}>
-            {fetcher.state === "submitting" ? "Uploading..." : "Upload"}
-          </Button>
+          <Button onClick={handleUpload}>Next</Button>
         </div>
       </DialogFooter>
     </>
