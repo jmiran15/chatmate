@@ -39,14 +39,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return eventStream(
       request.signal,
       function setup(send: (event: { event: string; data: string }) => void) {
-        console.log(`api.chatbot.$chatbotId.data.progress - setup`);
-
         async function listener(
           event: "failed" | "completed" | "progress",
           registeredQueue: RegisteredQueue,
           jobId: string,
         ) {
-          //   console.log(`trying to send out an event: ${event}`);
           const job = await registeredQueue?.queue.getJob(jobId);
           if (!job || !isRelatedToChatbot(job, chatbotId)) return;
 
@@ -65,7 +62,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
               }),
             });
           } catch (error) {
-            console.log(`error sending event: ${error}`);
+            console.error(`error sending event: ${error}`);
           }
         }
 

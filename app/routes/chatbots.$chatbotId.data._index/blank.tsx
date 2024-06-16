@@ -1,5 +1,5 @@
 import { DocumentType } from "@prisma/client";
-import { Form, useParams, useSubmit } from "@remix-run/react";
+import { Form, useFetcher, useParams } from "@remix-run/react";
 import { useRef } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -21,7 +21,7 @@ export default function BlankUpload({
   setOpen: (open: boolean) => void;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const submit = useSubmit();
+  const fetcher = useFetcher();
   const { chatbotId } = useParams();
 
   return (
@@ -36,7 +36,7 @@ export default function BlankUpload({
         ref={formRef}
         className="grid gap-4"
         method="post"
-        action={`/chatbots/${chatbotId}/data`}
+        action={`/chatbots/${chatbotId}/data?index`}
       >
         <input type="hidden" name="intent" value="blank" />
         <input type="hidden" name="type" value={DocumentType.RAW} />
@@ -75,7 +75,7 @@ export default function BlankUpload({
           <Button
             onClick={() => {
               setOpen(false);
-              submit(formRef.current);
+              fetcher.submit(formRef.current);
             }}
           >
             Upload

@@ -12,24 +12,18 @@ export interface ParseFileQueueData {
 export const parseFileQueue = Queue<ParseFileQueueData>(
   "parseFile",
   async (job): Promise<Document> => {
-    console.log(`parsefile.server.ts - got called with job ${job}`);
     invariant(job.data.document.filepath, "Filepath is required");
 
     try {
       const file = await getFileFromUrl(job.data.document.filepath);
       const parsedContents = await parseFile(file);
-      // console.log(`parsefile.server.ts - parsedContents ${parsedContents}`);
       const updatedDocument = await prisma.document.update({
         where: { id: job.data.document.id },
         data: {
           content: parsedContents,
         },
       });
-      console.log(
-        `parsefile.server.ts - updatedDocument ${JSON.stringify(
-          updatedDocument,
-        )}`,
-      );
+
       return updatedDocument;
     } catch (error) {
       console.error(`parsefile.server.ts - error parsing file ${error}`);
@@ -44,8 +38,6 @@ const UNSTRUCTURED_URL =
 async function parseFile(file: File): Promise<string> {
   const formData = new FormData();
   formData.append("files", file);
-
-  console.log("Sending file with name:", file.name); // Debugging: log file name
 
   try {
     const response = await axios({
@@ -94,10 +86,8 @@ async function getFileFromUrl(fileUrl: string): Promise<File> {
       response.headers["content-type"] || "application/octet-stream";
 
     if (contentDisposition) {
-      console.log(`getFileFromUrl - contentDisposition ${contentDisposition}`);
       const fileNameMatch = contentDisposition.match(/filename="?([^"]+)"?/i);
       if (fileNameMatch && fileNameMatch[1]) {
-        console.log(`getFileFromUrl - fileNameMatch ${fileNameMatch[1]}`);
         fileName = fileNameMatch[1];
       }
     }

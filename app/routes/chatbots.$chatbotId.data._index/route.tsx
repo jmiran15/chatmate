@@ -5,6 +5,10 @@ import {
   useSearchParams,
   useNavigation,
   useParams,
+  useActionData,
+  useFetcher,
+  useFetchers,
+  Fetcher,
 } from "@remix-run/react";
 import { DialogDemo } from "./modal";
 import { requireUserId } from "~/session.server";
@@ -30,6 +34,7 @@ import { useEventSource } from "remix-utils/sse/react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { DocumentCard } from "./document-card";
 import { queue } from "~/queues/ingestion.server";
+import { validateUrl } from "~/utils";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -101,11 +106,17 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (intent) {
     case "getLinks": {
-      // add validation - i.e. no empty urls - no invalid urls
-
       const url = String(formData.get("url"));
 
+      if (!validateUrl(url)) {
+        return json(
+          { errors: { url: "Url is invalid" }, intent, job: null },
+          { status: 400 },
+        );
+      }
+
       return json({
+        errors: null,
         intent,
         job: await crawlQueue.add("crawl", {
           url,
@@ -114,9 +125,26 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "scrapeLinks": {
       const urls = JSON.parse(String(formData.get("links")));
+      const crawled = formData.get("crawled");
+      console.log("crawled", crawled, formData.get("crawled"));
+      invariant(Array.isArray(urls), "Links must be an array");
+
+      if (!crawled) {
+        invariant(urls.length === 1, "urls must be an array of length 1");
+        if (!validateUrl(urls[0])) {
+          return json(
+            {
+              errors: { url: "Url is invalid" },
+              intent,
+              tress: null,
+              documents: null,
+            },
+            { status: 400 },
+          );
+        }
+      }
 
       // should do this stuff in validation for user feedback
-      invariant(Array.isArray(urls), "Links must be an array");
       invariant(urls.length > 0, "Links must be an array");
 
       const documents = await prisma.document.createManyAndReturn({
@@ -132,7 +160,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         documents,
         preprocessingQueue: scrapeQueue,
       });
-      return json({ intent, trees, documents });
+      return json({ errors: null, intent, trees, documents });
     }
     case "parseFiles": {
       try {
@@ -167,8 +195,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           documents,
           preprocessingQueue: parseFileQueue,
         });
+
+        console.log("trees", trees);
         return json({ intent, trees, documents });
       } catch (error) {
+        console.log("error parsing files", error);
         throw new Error(`Error uploading files: ${error}`);
       }
     }
@@ -184,11 +215,13 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
-      return await queue.add(
+      await queue.add(
         `ingestion-${document.id}`,
         { document },
         { jobId: document.id },
       );
+
+      return json({ intent, documents: [document] });
     }
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
@@ -198,6 +231,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   const data = useLoaderData<typeof loader>();
+  const fetchers = useFetchers();
   const { chatbotId } = useParams();
   const navigation = useNavigation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -206,7 +240,6 @@ export default function Data() {
   const hydrating = useIsHydrating("[data-hydrating-signal]");
   const isMountedRef = useRef(false);
   const parentRef = useRef<HTMLDivElement>(null);
-
   const [progressStates, setProgressStates] = useState<
     Record<string, Record<Document["id"], ProgressData>>
   >({});
@@ -327,6 +360,49 @@ export default function Data() {
   useEffect(() => {
     isMountedRef.current = true;
   }, []);
+
+  // optimistic documents
+  if (fetchers.length > 0) {
+    fetchers.forEach((fetcher: Fetcher) => {
+      let newDocs = [];
+
+      switch (fetcher.formData?.get("intent")) {
+        case "parseFiles": {
+          const files = JSON.parse(String(fetcher?.formData.getAll("files")));
+          newDocs = files.map((file: File) => ({
+            name: file.name,
+            type: DocumentType.FILE,
+            chatbotId,
+          }));
+          break;
+        }
+        case "scrapeLinks": {
+          const urls = JSON.parse(String(fetcher?.formData.getAll("links")));
+          console.log("urls", urls);
+          newDocs = urls.map((url: string) => ({
+            name: url,
+            url,
+            type: DocumentType.WEBSITE,
+            chatbotId,
+          }));
+          break;
+        }
+        case "blank": {
+          const name = String(fetcher?.formData.get("name"));
+          const content = String(fetcher?.formData.get("content"));
+          newDocs = [{ name, content, chatbotId }];
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+
+      console.log("newDocs", newDocs);
+      data.items = [...data.items, ...newDocs];
+      data.totalItems = data.totalItems + newDocs.length;
+    });
+  }
 
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">

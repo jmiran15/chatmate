@@ -78,7 +78,9 @@ export default function SelectType({
 }: {
   setStep: (step: string) => void;
 }) {
-  const [type, setType] = useState(STEPS.SELECT_TYPE);
+  const [type, setType] = useState<
+    typeof STEPS.WEBSITE | typeof STEPS.FILE | typeof STEPS.BLANK
+  >(STEPS.WEBSITE);
 
   return (
     <>

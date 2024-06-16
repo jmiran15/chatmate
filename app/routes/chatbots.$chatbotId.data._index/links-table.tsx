@@ -15,31 +15,30 @@ export default function LinksTable({
   rowSelection: RowSelectionState;
   setRowSelection: (selection: RowSelectionState) => void;
 }) {
+  const tableData = useMemo(
+    () =>
+      z.array(urlSchema).parse(
+        (links.length === 0 ? Array(10).fill("") : links).map((url) => ({
+          url,
+        })),
+      ),
+    [links],
+  );
+
   const tableColumns = useMemo(
     () =>
-      columns.map((column) => ({
-        ...column,
-        cell: (props: any) => {
-          const link = props.row.original.url;
-          return link ? (
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              {link}
-            </a>
-          ) : (
-            <Skeleton />
-          );
-        },
-      })),
-    [columns],
+      links.length === 0
+        ? columns.map((column) => ({
+            ...column,
+            cell: <Skeleton />,
+          }))
+        : columns,
+    [columns, links],
   );
 
   return (
     <DataTable
-      data={z.array(urlSchema).parse(
-        links.map((url) => ({
-          url,
-        })),
-      )}
+      data={tableData}
       columns={tableColumns}
       rowSelection={rowSelection}
       setRowSelection={setRowSelection}

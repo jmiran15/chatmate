@@ -9,7 +9,6 @@ import {
 import { uploadFile } from "~/utils/cloudinary.server";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  console.log("got called");
   const uploadHandler: UploadHandler = unstable_composeUploadHandlers(
     async ({ name, filename, data }) => {
       if (name !== "files") {

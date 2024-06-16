@@ -5,7 +5,7 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { FileUploader } from "./file-uploader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { useParams, useFetcher, useActionData } from "@remix-run/react";
 import { Badge } from "~/components/ui/badge";

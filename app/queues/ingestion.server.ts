@@ -35,19 +35,7 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
     document = job.data.document;
   }
 
-  console.log(`ingestion.server.ts - document ${JSON.stringify(document)}`);
-  console.log(
-    `ingestion.server.ts - job.data.document ${JSON.stringify(
-      job.data.document,
-    )}`,
-  );
-
   invariant(document?.id === job.data.document.id, "Document ids should match");
-
-  console.log(
-    "ingestion.server.ts - started ingestion job for document: ",
-    document?.id,
-  );
 
   try {
     let progress = 0;
