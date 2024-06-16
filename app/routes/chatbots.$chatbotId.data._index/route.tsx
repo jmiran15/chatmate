@@ -207,7 +207,7 @@ export default function Data() {
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
     parentRef,
-    estimateSize: useCallback(() => 200, []),
+    estimateSize: useCallback(() => 142 + 16, []),
     initialRect: { width: 0, height: 800 },
   });
 
@@ -340,7 +340,7 @@ export default function Data() {
                   top: 0,
                   left: 0,
                   width: "100%",
-                  height: `${virtualRow.size}px`,
+                  height: `${virtualRow.size - 16}px`,
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
@@ -368,9 +368,3 @@ export const handle = {
   PATH: (chatbotId: string) => `/chatbots/${chatbotId}/data`,
   breadcrumb: "data",
 };
-
-// memoize the card content, dependent on that item in progress state
-// (i.e. if the component never changes progress, its element in progress state will always be null)
-// so the values will never recalculate
-
-// we need to memo the component, so that it doesnt rerender when its props dont change?

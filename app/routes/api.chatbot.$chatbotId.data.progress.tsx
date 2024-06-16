@@ -39,7 +39,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return eventStream(
       request.signal,
       function setup(send: (event: { event: string; data: string }) => void) {
-        console.log(`eventStream - setup`);
+        console.log(`api.chatbot.$chatbotId.data.progress - setup`);
 
         async function listener(
           event: "failed" | "completed" | "progress",
@@ -53,9 +53,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
           // we should send better info
 
           try {
-            console.log(
-              `job completion ${job.queueName}: ${await job.isCompleted()}`,
-            );
             send({
               event,
               data: JSON.stringify({
@@ -86,11 +83,8 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
         return function clear() {
           queues.forEach((queue) => {
-            console.log(`clear - queue: ${queue.name}`);
-
             const registeredQueue = global.__registeredQueues[queue.name];
             eventsToListenTo.forEach((event) => {
-              console.log(`clear - event: ${event}`);
               registeredQueue?.queueEvents.off(
                 event as keyof QueueEventsListener,
                 (args) => listener(event, registeredQueue, args.jobId),

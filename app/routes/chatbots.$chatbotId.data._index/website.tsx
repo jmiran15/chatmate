@@ -15,13 +15,13 @@ import {
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { useRef, useState } from "react";
-
-import { Document, STEPS } from "~/utils/types";
+import { useEffect, useRef, useState } from "react";
+import { STEPS } from "~/utils/types";
 import { Checkbox } from "~/components/ui/checkbox";
-import { v4 as uuidv4 } from "uuid";
 import { useEventSource } from "remix-utils/sse/react";
 import LinksTable from "./links-table";
+
+const MAX_CRAWLED_LINKS = 100;
 
 export default function Website({
   setStep,
@@ -38,49 +38,27 @@ export default function Website({
   const [rowSelection, setRowSelection] = useState({});
   const [isTableVisible, setIsTableVisible] = useState(false);
   const job = actionData?.job;
-  const completionEvent = useEventSource(`/jobs/${job?.id}/progress/crawl`, {
-    event: "completed",
-  });
-  console.log("website.tsx - completionEvent", completionEvent);
-  const links = completionEvent ? JSON.parse(completionEvent) : [];
+  const eventSource = useEventSource(`/api/crawl/${job?.id}/progress`);
+  const [links, setLinks] = useState<string[]>(
+    Array(MAX_CRAWLED_LINKS).fill(""),
+  );
   const disableNextButton = navigation.state === "submitting";
-
-  // useEffect(() => {
-  //   console.log("actionData", actionData);
-
-  //   // we are going to optimistically show the data table.
-
-  //   if (showDataTable) {
-  //     setLinks(actionData.links);
-  //   } else if (canSubmit) {
-  //     console.log("website.tsx - creating documents", actionData.documents);
-  //     submit(
-  //       {
-  //         intent: "createDocuments",
-  //         // can probly clean up this logic to just use Prisma Document type all throughout
-  //         documents: JSON.stringify(
-  //           actionData.documents.map((d) => ({
-  //             name: d.metadata.sourceURL,
-  //             content: d.content,
-  //             type: DocumentType.WEBSITE,
-  //             chatbotId,
-  //           })),
-  //         ),
-  //       },
-  //       {
-  //         method: "post",
-  //         action: `/chatbots/${chatbotId}/data?index`,
-  //       },
-  //     );
-  //   }
-  // }, [actionData]);
-
   const selectedLinks =
     links?.length > 0
       ? Object.keys(rowSelection).map((index) => links[index as number])
       : [];
 
-  console.log("website.tsx - selectedLinks", selectedLinks);
+  useEffect(() => {
+    if (!job) return;
+    if (!eventSource) return;
+    console.log("website.tsx - progress caused a rerender");
+    const progress = JSON.parse(eventSource);
+    if (progress?.completed && progress.returnvalue) {
+      setLinks(progress.returnvalue.urls || []);
+    } else if (progress?.progress) {
+      setLinks((prev) => [...prev, progress.progress.currentDocumentUrl ?? ""]);
+    }
+  }, [eventSource, job]);
 
   return (
     <>
@@ -154,9 +132,6 @@ export default function Website({
                   );
                 } else {
                   setOpen(false);
-
-                  // call "createDocuments" instead of crawl - crawl inside the createDocuments api
-
                   submit(
                     {
                       intent: "scrapeLinks",
@@ -166,7 +141,6 @@ export default function Website({
                   );
                 }
               } else {
-                // call "createDocuments" instead of crawl - crawl inside the createDocuments api
                 setOpen(false);
                 submit(
                   {

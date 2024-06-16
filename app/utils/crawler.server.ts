@@ -2,8 +2,16 @@ import axios from "axios";
 import cheerio from "cheerio";
 import { URL } from "url";
 import async from "async";
-import { Progress } from "./types";
-import { getLinksFromSitemap } from "./sitemap";
+import { getLinksFromSitemap } from "./sitemap.server";
+
+interface Progress {
+  current: number;
+  total: number;
+  status: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  metadata?: any;
+  currentDocumentUrl?: string;
+}
 
 export class WebCrawler {
   private initialUrl: string;
@@ -27,44 +35,58 @@ export class WebCrawler {
   }
 
   public async start(
-    inProgress?: (progress: Progress) => void,
+    inProgress?: (progress: Progress) => Promise<void>,
     concurrencyLimit = 5,
   ): Promise<string[]> {
+    console.log("crawler - start");
     // Attempt to fetch and return sitemap links before any crawling
-    const sitemapLinks = await this.tryFetchSitemapLinks(this.initialUrl);
-    if (sitemapLinks.length > 0) {
-      return sitemapLinks;
-    }
+    // try {
+    //   const sitemapLinks = await this.tryFetchSitemapLinks(this.initialUrl);
+    //   console.log("crawler - sitemapLinks", sitemapLinks);
+    //   if (sitemapLinks.length > 0) {
+    //     return sitemapLinks;
+    //   }
+    // } catch (error) {
+    //   console.error("crawler - error", error);
+    // }
+    console.log("crawler - here");
     // Proceed with crawling if no sitemap links found
-
-    return await this.crawlUrls(
-      [this.initialUrl],
-      concurrencyLimit,
-      inProgress,
-    );
+    try {
+      return await this.crawlUrls(
+        [this.initialUrl],
+        concurrencyLimit,
+        inProgress,
+      );
+    } catch (error) {
+      console.error("crawler - error", error);
+      return [];
+    }
   }
 
   private async crawlUrls(
     urls: string[],
     concurrencyLimit: number,
-    inProgress?: (progress: Progress) => void,
+    inProgress?: (progress: Progress) => Promise<void>,
   ): Promise<string[]> {
     const queue = async.queue(async (task: string, callback) => {
       if (this.crawledUrls.size >= this.maxCrawledLinks) {
-        callback();
+        if (callback && typeof callback === "function") {
+          callback();
+        }
         return;
       }
       const newUrls = await this.crawl(task);
       newUrls.forEach((url) => this.crawledUrls.add(url));
+
       if (inProgress && newUrls.length > 0) {
-        inProgress({
+        await inProgress({
           current: this.crawledUrls.size,
           total: this.maxCrawledLinks,
           status: "SCRAPING",
           currentDocumentUrl: newUrls[newUrls.length - 1],
         });
       } else if (inProgress) {
-        inProgress({
+        await inProgress({
           current: this.crawledUrls.size,
           total: this.maxCrawledLinks,
           status: "SCRAPING",
@@ -72,7 +94,9 @@ export class WebCrawler {
         });
       }
       await this.crawlUrls(newUrls, concurrencyLimit, inProgress);
-      callback();
+      if (callback && typeof callback === "function") {
+        callback();
+      }
     }, concurrencyLimit);
 
     queue.push(

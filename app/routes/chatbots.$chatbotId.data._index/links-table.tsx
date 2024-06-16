@@ -3,6 +3,8 @@ import { urlSchema } from "./table/types";
 import { columns } from "./table/columns";
 import { DataTable } from "./table/table";
 import { RowSelectionState } from "@tanstack/react-table";
+import { useMemo } from "react";
+import Skeleton from "react-loading-skeleton";
 
 export default function LinksTable({
   links,
@@ -13,6 +15,24 @@ export default function LinksTable({
   rowSelection: RowSelectionState;
   setRowSelection: (selection: RowSelectionState) => void;
 }) {
+  const tableColumns = useMemo(
+    () =>
+      columns.map((column) => ({
+        ...column,
+        cell: (props: any) => {
+          const link = props.row.original.url;
+          return link ? (
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              {link}
+            </a>
+          ) : (
+            <Skeleton />
+          );
+        },
+      })),
+    [columns],
+  );
+
   return (
     <DataTable
       data={z.array(urlSchema).parse(
@@ -20,7 +40,7 @@ export default function LinksTable({
           url,
         })),
       )}
-      columns={columns}
+      columns={tableColumns}
       rowSelection={rowSelection}
       setRowSelection={setRowSelection}
     />
