@@ -2,7 +2,7 @@ import { Chatbot, Document } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
-import { embed } from "~/utils/llm/openai";
+import { embed } from "~/utils/openai";
 export type { Chatbot } from "@prisma/client";
 
 // function to create a single document

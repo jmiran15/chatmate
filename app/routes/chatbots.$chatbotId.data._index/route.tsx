@@ -6,8 +6,6 @@ import {
   useNavigation,
   useParams,
 } from "@remix-run/react";
-import { convertUploadedFilesToDocuments } from "~/utils/llm/openai";
-import { FullDocument } from "~/utils/types";
 import { DialogDemo } from "./modal";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
@@ -16,6 +14,8 @@ import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Document, DocumentType } from "@prisma/client";
 import { crawlQueue } from "~/queues/crawl.server";
+import { scrapeQueue } from "~/queues/scrape.server";
+import { parseFileQueue } from "~/queues/parsefile.server";
 import invariant from "tiny-invariant";
 import { webFlow } from "./flows.server";
 import {
@@ -29,6 +29,8 @@ import { useVirtual } from "react-virtual";
 import { useEventSource } from "remix-utils/sse/react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { DocumentCard } from "./document-card";
+import axios from "axios";
+import FD from "form-data";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -100,9 +102,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (intent) {
     case "getLinks": {
+      // add validation - i.e. no empty urls - no invalid urls
+
       const url = String(formData.get("url"));
 
-      // return the job, so that we can get job.id and watch it for progress in the table
       return json({
         intent,
         job: await crawlQueue.add("crawl", {
@@ -112,6 +115,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "scrapeLinks": {
       const urls = JSON.parse(String(formData.get("links")));
+
+      // should do this stuff in validation for user feedback
       invariant(Array.isArray(urls), "Links must be an array");
       invariant(urls.length > 0, "Links must be an array");
 
@@ -124,32 +129,52 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
-      const trees = await webFlow({ documents });
+      const trees = await webFlow({
+        documents,
+        preprocessingQueue: scrapeQueue,
+      });
       return json({ intent, trees, documents });
     }
     case "parseFiles": {
-      // enqueue the parseFile job - return the job id
+      // const files = formData.getAll("files");
 
-      // we need to push the files to cloudinary first - then send the url to the job
-      // batch send jobs - for each file url
+      try {
+        const response = await fetch("http://localhost:3000/api/upload", {
+          method: "POST",
+          body: formData,
+        });
 
-      // const jobId = await queue.add("parseFile", {
-      //   files: formData.getAll("files"),
-      // });
+        const cloudinaryResponse = await response.json();
 
-      // return json({ intent, jobId });
+        console.log("response", cloudinaryResponse);
 
-      // do same parallel stuff that we do in the scrapeLinks action
+        if (cloudinaryResponse.error) {
+          throw new Error(`Error uploading files: ${cloudinaryResponse.error}`);
+        }
 
-      // Get all file entries from the original formData
-      const files = formData.getAll("files");
+        const fileSrcs = cloudinaryResponse.fileSrcs;
+        invariant(Array.isArray(fileSrcs), "File srcs must be an array");
+        invariant(fileSrcs.length > 0, "File srcs must be an array");
+        console.log(`Uploading files: ${fileSrcs.join(", ")}`);
 
-      const documents: FullDocument[] =
-        await convertUploadedFilesToDocuments(files);
+        const documents = await prisma.document.createManyAndReturn({
+          data: fileSrcs.map((file: { src: string; name: string }) => ({
+            name: file.name,
+            filepath: file.src,
+            type: DocumentType.FILE,
+            chatbotId,
+          })),
+        });
 
-      return json({ intent, documents });
+        const trees = await webFlow({
+          documents,
+          preprocessingQueue: parseFileQueue,
+        });
+        return json({ intent, trees, documents });
+      } catch (error) {
+        throw new Error(`Error uploading files: ${error}`);
+      }
     }
-
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
     }
@@ -332,6 +357,14 @@ export default function Data() {
               : virtualRow.index;
             const item = data.items[index];
 
+            // problem with queue initialization here
+            const preprocessingQueueName =
+              item.type === DocumentType.FILE
+                ? "parseFile"
+                : DocumentType.WEBSITE
+                ? "scrape"
+                : null;
+
             return (
               <div
                 key={virtualRow.key}
@@ -348,7 +381,9 @@ export default function Data() {
                   <DocumentCard
                     item={item}
                     ingestionProgress={progressStates["ingestion"]?.[item.id]}
-                    preprocessingProgress={progressStates["scrape"]?.[item.id]}
+                    preprocessingProgress={
+                      progressStates[preprocessingQueueName ?? ""]?.[item.id]
+                    }
                   />
                 ) : navigation.state === "loading" ? (
                   <span>Loading...</span>

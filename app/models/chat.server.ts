@@ -2,7 +2,7 @@ import { type Chat, type Message } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
-import { generateChatName, generateChatSummary } from "~/utils/llm/openai";
+import { generateChatName, generateChatSummary } from "~/utils/openai";
 export type { Chat, Message } from "@prisma/client";
 
 export function createChat({ chatbotId }: { chatbotId: Chat["chatbotId"] }) {

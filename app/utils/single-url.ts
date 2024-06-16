@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 import { ScrapingBeeClient } from "scrapingbee";
 import { attemptScrapWithRequests, sanitizeText } from "./utils";
-import { extractMetadata } from "./webscraper/utils/metadata";
+import { extractMetadata } from "./metadata";
 
 async function scrapWithScrapingBee(url: string): Promise<string | null> {
   try {

@@ -1,17 +1,21 @@
 import { Document } from "@prisma/client";
-import { FlowProducer } from "bullmq";
-import { queue as scrapeQueue } from "~/queues/scrape.server";
+import { FlowProducer, Queue } from "bullmq";
 import { queue as ingestionQueue } from "~/queues/ingestion.server";
 import { redis } from "~/utils/redis.server";
+import { RegisteredQueue } from "~/utils/queue.server";
 
 // move this so it is a singleton
 export const flow = new FlowProducer({
   connection: redis,
 });
 
-export async function webFlow({ documents }: { documents: Document[] }) {
-  //   queue.add("scrape", { document: documents[0] });
-
+export async function webFlow({
+  documents,
+  preprocessingQueue,
+}: {
+  documents: Document[];
+  preprocessingQueue: Queue;
+}) {
   return await flow.addBulk(
     documents.map((document) => ({
       name: `ingestion-${document.id}`,
@@ -22,8 +26,8 @@ export async function webFlow({ documents }: { documents: Document[] }) {
       },
       children: [
         {
-          name: `scrape`,
-          queueName: scrapeQueue.name,
+          name: `${preprocessingQueue.name}-${document.id}`,
+          queueName: preprocessingQueue.name,
           data: { document },
         },
       ],

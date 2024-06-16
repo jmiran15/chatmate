@@ -70,6 +70,7 @@ model Document {
   name       String
   content    String?
   url        String?
+  filepath   String?
   chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
   embeddings Embedding[]

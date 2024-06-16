@@ -4,12 +4,10 @@ import {
   QueueData as IngestionQueueData,
   queue as ingestionQueue,
 } from "~/queues/ingestion.server";
-import {
-  QueueData as ScrapeQueueData,
-  queue as scrapeQueue,
-} from "~/queues/scrape.server";
+import { ScrapeQueueData, scrapeQueue } from "~/queues/scrape.server";
 import { Job, QueueEventsListener } from "bullmq";
 import { RegisteredQueue } from "~/utils/queue.server";
+import { parseFileQueue } from "~/queues/parsefile.server";
 
 export interface ProgressData {
   documentId: string;
@@ -23,10 +21,12 @@ export interface ProgressData {
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { chatbotId } = params;
 
+  // maybe make a single preprocessing queue that has a switch inside for getting the content - since the rest is the same?
   if (
     !global.__registeredQueues ||
     !global.__registeredQueues[ingestionQueue.name] ||
-    !global.__registeredQueues[scrapeQueue.name]
+    !global.__registeredQueues[scrapeQueue.name] ||
+    !global.__registeredQueues[parseFileQueue.name]
   ) {
     return json({ error: "Queues are not registered" }, { status: 500 });
   }
@@ -61,7 +61,8 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
                 progress: job.progress,
                 completed: Boolean(await job.isCompleted()),
                 returnvalue: job.returnvalue,
-              } as ProgressData),
+                failedReason: job.failedReason,
+              }),
             });
           } catch (error) {
             console.log(`error sending event: ${error}`);
@@ -69,7 +70,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
         }
 
         // all the queues we listen to
-        const queues = [ingestionQueue, scrapeQueue];
+        const queues = [ingestionQueue, scrapeQueue, parseFileQueue];
         const eventsToListenTo = ["failed", "completed", "progress"];
         queues.forEach((queue) => {
           const registeredQueue = global.__registeredQueues[queue.name];

@@ -5,7 +5,7 @@ import {
   generatePossibleQuestionsForChunk,
   generateSummaryForChunk,
   splitStringIntoChunks,
-} from "~/utils/llm/openai";
+} from "~/utils/openai";
 import { Queue } from "~/utils/queue.server";
 import { v4 as uuid } from "uuid";
 import invariant from "tiny-invariant";
@@ -28,6 +28,13 @@ const BATCH_SIZE = 10;
 export const queue = Queue<QueueData>("ingestion", async (job) => {
   const children = await job.getChildrenValues();
   const document = Object.values(children)[0];
+
+  console.log(`ingestion.server.ts - document ${JSON.stringify(document)}`);
+  console.log(
+    `ingestion.server.ts - job.data.document ${JSON.stringify(
+      job.data.document,
+    )}`,
+  );
 
   invariant(document?.id === job.data.document.id, "Document ids should match");
 

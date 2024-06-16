@@ -7,7 +7,12 @@ import {
 import { FileUploader } from "./file-uploader";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
-import { useParams, useFetcher, useSearchParams } from "@remix-run/react";
+import {
+  useParams,
+  useFetcher,
+  useSearchParams,
+  useActionData,
+} from "@remix-run/react";
 import { Badge } from "~/components/ui/badge";
 
 export function FileUpload() {
@@ -15,6 +20,9 @@ export function FileUpload() {
   const [files, setFiles] = useState<File[]>([]);
   const fetcher = useFetcher();
   const [searchParams, setSearchParams] = useSearchParams();
+  const actionData = useActionData();
+
+  console.log("actionData - ", actionData);
 
   const handleUpload = async () => {
     const formData = new FormData();
@@ -29,28 +37,6 @@ export function FileUpload() {
       encType: "multipart/form-data",
     });
   };
-
-  useEffect(() => {
-    console.log("file.tsx - fetcher", fetcher);
-
-    if (
-      fetcher.state === "idle" &&
-      fetcher.data &&
-      fetcher.data.intent === "parseFiles"
-    ) {
-      console.log("file.tsx - fetcher.data", fetcher.data);
-      fetcher.submit(
-        {
-          intent: "createDocuments",
-          documents: JSON.stringify(fetcher.data.documents),
-        },
-        {
-          method: "post",
-          action: `/chatbots/${chatbotId}/data?index`,
-        },
-      );
-    }
-  }, [fetcher]);
 
   const SUPPORTED_FILE_TYPES = [
     "txt",

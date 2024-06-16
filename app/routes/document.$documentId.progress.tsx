@@ -6,10 +6,8 @@ import {
   QueueData as IngestionQueueData,
   queue as ingestionQueue,
 } from "~/queues/ingestion.server";
-import {
-  QueueData as ScrapeQueueData,
-  queue as scrapeQueue,
-} from "~/queues/scrape.server";
+import { scrapeQueue, ScrapeQueueData } from "~/queues/scrape.server";
+
 import { Job } from "bullmq";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
