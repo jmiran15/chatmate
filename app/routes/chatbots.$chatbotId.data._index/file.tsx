@@ -40,31 +40,6 @@ export function FileUpload({
     });
   };
 
-  const SUPPORTED_FILE_TYPES = [
-    "txt",
-    "eml",
-    "msg",
-    "xml",
-    "html",
-    "md",
-    "rst",
-    "json",
-    "rtf",
-    "jpeg",
-    "png",
-    "doc",
-    "docx",
-    "ppt",
-    "pptx",
-    "pdf",
-    "odt",
-    "epub",
-    "csv",
-    "tsv",
-    "xlsx",
-    "gz",
-  ];
-
   return (
     <>
       <DialogHeader>
@@ -78,16 +53,6 @@ export function FileUpload({
         maxSize={8 * 1024 * 1024}
         onValueChange={setFiles}
       />
-      <div className="flex flex-row gap-1 flex-wrap">
-        <span className="text-sm font-normal text-gray-700">
-          Supported file types:
-        </span>
-        {SUPPORTED_FILE_TYPES.map((fileType, index) => (
-          <Badge key={index} variant="secondary">
-            {fileType}
-          </Badge>
-        ))}
-      </div>
       <DialogFooter>
         <div className="w-full flex flex-row justify-between">
           <Button

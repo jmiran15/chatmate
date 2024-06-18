@@ -9,20 +9,26 @@ cloudinary.v2.config({
 
 async function uploadFile(file: AsyncIterable<Uint8Array>, public_id?: string) {
   const uploadPromise = new Promise(async (resolve, reject) => {
+    console.log("files public_id - ", public_id);
     const options = public_id
       ? {
           folder: "remix",
-          resource_type: "raw",
+          resource_type: "auto",
           public_id,
-          use_filename: true,
+          // use_filename: true,
         }
       : {
           folder: "remix",
-          resource_type: "raw",
+          resource_type: "auto",
         };
 
     const uploadStream = cloudinary.v2.uploader.upload_stream(
-      options,
+      {
+        folder: "remix",
+        resource_type: "auto",
+        public_id,
+        filename_override: public_id,
+      },
       (error, result) => {
         if (error) {
           reject(error);

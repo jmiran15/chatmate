@@ -361,7 +361,8 @@ export default function Data() {
 
       switch (fetcher.formData?.get("intent")) {
         case "parseFiles": {
-          const files = JSON.parse(String(fetcher?.formData.getAll("files")));
+          console.log("parseFiles - ", fetcher?.formData.getAll("files"));
+          const files = fetcher?.formData.getAll("files");
           newDocs = files.map((file: File) => ({
             name: file.name,
             type: DocumentType.FILE,
@@ -399,6 +400,9 @@ export default function Data() {
           break;
         }
       }
+      console.log("newDocs - ", newDocs);
+
+      // this needs to be state if we want it to rerender
       data.items = [...data.items, ...newDocs];
       data.totalItems = data.totalItems + newDocs.length;
     });

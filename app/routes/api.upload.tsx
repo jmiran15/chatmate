@@ -17,6 +17,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
       const uploadedFile = await uploadFile(data, filename);
 
+      console.log("uploadedFile - ", uploadedFile);
+
       // return the name of the file as well
       return JSON.stringify({
         src: uploadedFile.secure_url,
