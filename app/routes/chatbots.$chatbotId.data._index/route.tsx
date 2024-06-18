@@ -15,7 +15,7 @@ import { prisma } from "~/db.server";
 import { Input } from "~/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { Document, DocumentType } from "@prisma/client";
+import { DocumentType } from "@prisma/client";
 import { crawlQueue } from "~/queues/crawl.server";
 import { scrapeQueue } from "~/queues/scrape.server";
 import { parseFileQueue } from "~/queues/parsefile.server";
@@ -239,48 +239,10 @@ export default function Data() {
   const hydrating = useIsHydrating("[data-hydrating-signal]");
   const isMountedRef = useRef(false);
   const parentRef = useRef<HTMLDivElement>(null);
-  const [progressStates, setProgressStates] = useState<
-    Record<string, Record<Document["id"], ProgressData>>
-  >({});
-
-  // const lastCompletedEvent = useEventSource(
-  //   `/api/chatbot/${chatbotId}/data/progress`,
-  //   {
-  //     event: "completed",
-  //   },
-  // );
-  // const lastProgressEvent = useEventSource(
-  //   `/api/chatbot/${chatbotId}/data/progress`,
-  //   {
-  //     event: "progress",
-  //   },
-  // );
-
   const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
   const progress: ProgressData | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
-
-  // when event stream comes in - it is ProgressData - we dont need to store prev info
-
-  // TODO -  this is causing rerender - so it is not working as expected with the optimistic documents!
-  // try to do without state
-  // useEffect(() => {
-  //   const data: ProgressData = lastCompletedEvent
-  //     ? JSON.parse(lastCompletedEvent)
-  //     : lastProgressEvent
-  //     ? JSON.parse(lastProgressEvent)
-  //     : null;
-
-  //   if (!data) return;
-  //   setProgressStates((prev) => ({
-  //     ...prev,
-  //     [data.queueName]: {
-  //       ...prev[data.queueName],
-  //       [data.documentId]: data,
-  //     },
-  //   }));
-  // }, [lastCompletedEvent, lastProgressEvent]);
 
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
@@ -471,14 +433,6 @@ export default function Data() {
               : virtualRow.index;
             const item = data.items[index];
 
-            // problem with queue initialization here
-            // const preprocessingQueueName =
-            //   item.type === DocumentType.FILE
-            //     ? "parseFile"
-            //     : DocumentType.WEBSITE
-            //     ? "scrape"
-            //     : null;
-
             return (
               <div
                 key={virtualRow.key}
@@ -497,10 +451,6 @@ export default function Data() {
                     progress={
                       progress?.documentId === item.id ? progress : undefined
                     }
-                    // ingestionProgress={progressStates["ingestion"]?.[item.id]}
-                    // preprocessingProgress={
-                    //   progressStates[preprocessingQueueName ?? ""]?.[item.id]
-                    // }
                   />
                 ) : navigation.state === "loading" ? (
                   <span>Loading...</span>
