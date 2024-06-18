@@ -23,6 +23,7 @@ import { Badge } from "~/components/ui/badge";
 import { cn } from "~/lib/utils";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
+import { queue } from "~/queues/ingestion.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
@@ -60,7 +61,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   switch (intent) {
     case "delete": {
       await deleteDocumentById({ id: documentId });
-      return redirect(`/chatbots/${params.chatbotId}/data`);
+      return redirect(`/chatbots/${params.chatbotId}/data?index`);
     }
     case "save": {
       const name = formData.get("name") as string;
@@ -71,7 +72,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         content,
       });
 
-      // queue the ingestion
+      await queue.add(
+        `ingestion-${document.id}`,
+        { document },
+        { jobId: document.id },
+      );
 
       return json({
         intent: "save",
@@ -112,24 +117,26 @@ export default function ModelC() {
 
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
-      <div className="flex items-center gap-4 w-full">
-        <Link
-          to={`/chatbots/${chatbotId}/data`}
-          className={cn(
-            buttonVariants({ variant: "outline", size: "icon" }),
-            "h-7 w-7",
-          )}
-        >
-          <ChevronLeft className="h-4 w-4" />
-          <span className="sr-only">Back</span>
-        </Link>
-        <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-          {data.document!.name}
-        </h1>
-        <Badge variant="outline" className="ml-auto sm:ml-0">
-          Ingesting
-        </Badge>
-        <div className="hidden items-center gap-2 md:ml-auto md:flex">
+      <div className="flex items-center justify-between w-full flex-wrap gap-4">
+        <div className="flex items-center justify-start gap-4 max-w-full shrink">
+          <Link
+            to={`/chatbots/${chatbotId}/data`}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "icon" }),
+              "h-7 w-7",
+            )}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            <span className="sr-only">Back</span>
+          </Link>
+          <h1 className="flex-1 whitespace-nowrap text-xl font-semibold tracking-tight text-ellipsis">
+            {data.document?.name}
+          </h1>
+          <Badge variant="secondary" className="ml-auto sm:ml-0">
+            {data.document?.isPending ? "Pending" : "Ingested"}
+          </Badge>
+        </div>
+        <div className="flex items-center gap-2">
           <Button
             variant="outline"
             size="sm"

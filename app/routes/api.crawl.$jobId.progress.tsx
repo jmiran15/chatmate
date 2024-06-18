@@ -5,18 +5,20 @@ import {
   CrawlQueueReturn,
   CrawlQueueProgress,
 } from "~/queues/crawl.server";
+import { Job } from "bullmq";
 
 export interface Progress {
-  progress: CrawlQueueProgress;
+  progress: CrawlQueueProgress | null;
   completed: boolean;
-  returnvalue: CrawlQueueReturn;
+  returnvalue: CrawlQueueReturn | null;
+  job: Job | null;
 }
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { jobId } = params;
 
   if (!jobId) {
-    throw new Error("Job ID is required");
+    return undefined;
   }
 
   const registeredQueue = global.__registeredQueues[crawlQueue?.name];
@@ -43,7 +45,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
               completed: Boolean(await job.isCompleted()),
               returnvalue: job.returnvalue,
               job,
-            }),
+            } as Progress),
           });
         } catch (error) {
           console.log(`error sending event: ${error}`);

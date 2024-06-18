@@ -4,25 +4,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import {
-  Form,
-  SubmitOptions,
-  useActionData,
-  useFetcher,
-  useNavigation,
-  useParams,
-  useSubmit,
-} from "@remix-run/react";
+import { Form, SubmitOptions, useFetcher, useParams } from "@remix-run/react";
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { STEPS } from "~/utils/types";
 import { Checkbox } from "~/components/ui/checkbox";
 import { useEventSource } from "remix-utils/sse/react";
 import LinksTable from "./links-table";
-
-const MAX_CRAWLED_LINKS = 10;
+import { action } from "./route";
+import { Progress } from "../api.crawl.$jobId.progress";
 
 export default function Website({
   setStep,
@@ -32,34 +24,54 @@ export default function Website({
   setOpen: (open: boolean) => void;
 }) {
   const { chatbotId } = useParams();
-  const fetcher = useFetcher();
+
+  // TODO - fix type
+  const fetcher = useFetcher<typeof action>();
   const formRef = useRef<HTMLFormElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
+  const [links, setLinks] = useState<string[]>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [isTableVisible, setIsTableVisible] = useState(false);
   const job = fetcher.data?.job;
-  const eventSource = useEventSource(`/api/crawl/${job?.id}/progress`);
-  const [links, setLinks] = useState<string[]>([]);
+  const eventSource: string | undefined = useEventSource(
+    `/api/crawl/${job?.id}/progress`,
+  );
+
+  const progress: Progress | undefined = useMemo(() => {
+    return eventSource ? JSON.parse(eventSource) : undefined;
+  }, [eventSource]);
+
+  // console.log("website.tsx - progress: ", progress);
+  // console.log("website.tsx - links: ", links);
+
   const disableNextButton = isTableVisible && links.length === 0;
   const selectedLinks =
     links?.length > 0
-      ? Object.keys(rowSelection).map((index) => links[index as number])
+      ? Object.keys(rowSelection).map((index) => links[Number(index)])
       : [];
 
   // crawl progress
+  // TODO - lots of unneeded re-renders here - causing performance issues
   useEffect(() => {
-    if (!job) return;
-    if (!eventSource) return;
-    console.log("website.tsx - progress caused a rerender");
-    const progress = JSON.parse(eventSource);
-    if (progress?.completed && progress.returnvalue) {
-      setLinks(progress.returnvalue.urls || []);
-    } else if (progress?.progress) {
-      setLinks((prev) => [...prev, progress.progress.currentDocumentUrl ?? ""]);
+    console.log("website.tsx - progress: ", progress);
+    if (job?.id !== progress?.job?.id) {
+      setLinks([]);
+      return;
+    } else {
+      if (progress?.completed && progress?.returnvalue) {
+        setLinks(progress.returnvalue.urls || []);
+      } else if (progress?.progress) {
+        setLinks((prev) => [
+          ...prev,
+          progress.progress?.currentDocumentUrl ?? "",
+        ]);
+      }
     }
-  }, [eventSource, job]);
+  }, [progress?.progress?.currentDocumentUrl, progress?.returnvalue]);
 
   useEffect(() => {
+    // TODO - this is not optimistic - it is waiting for data
+
     if (!fetcher.data?.errors) {
       switch (fetcher.data?.intent) {
         case "scrapeLinks":

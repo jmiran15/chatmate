@@ -5,8 +5,6 @@ import {
   useSearchParams,
   useNavigation,
   useParams,
-  useActionData,
-  useFetcher,
   useFetchers,
   Fetcher,
 } from "@remix-run/react";
@@ -126,7 +124,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "scrapeLinks": {
       const urls = JSON.parse(String(formData.get("links")));
       const crawled = formData.get("crawled");
-      console.log("crawled", crawled, formData.get("crawled"));
       invariant(Array.isArray(urls), "Links must be an array");
 
       if (!crawled) {
@@ -171,8 +168,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
         const cloudinaryResponse = await response.json();
 
-        console.log("response", cloudinaryResponse);
-
         if (cloudinaryResponse.error) {
           throw new Error(`Error uploading files: ${cloudinaryResponse.error}`);
         }
@@ -180,7 +175,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         const fileSrcs = cloudinaryResponse.fileSrcs;
         invariant(Array.isArray(fileSrcs), "File srcs must be an array");
         invariant(fileSrcs.length > 0, "File srcs must be an array");
-        console.log(`Uploading files: ${fileSrcs.join(", ")}`);
 
         const documents = await prisma.document.createManyAndReturn({
           data: fileSrcs.map((file: { src: string; name: string }) => ({
@@ -196,10 +190,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           preprocessingQueue: parseFileQueue,
         });
 
-        console.log("trees", trees);
         return json({ intent, trees, documents });
       } catch (error) {
-        console.log("error parsing files", error);
         throw new Error(`Error uploading files: ${error}`);
       }
     }
@@ -265,7 +257,6 @@ export default function Data() {
       : null;
 
     if (!data) return;
-    console.log("data - ", data);
     setProgressStates((prev) => ({
       ...prev,
       [data.queueName]: {
@@ -314,32 +305,34 @@ export default function Data() {
 
   const [firstVirtualItem] = rowVirtualizer.virtualItems;
   const [lastVirtualItem] = [...rowVirtualizer.virtualItems].reverse();
-  if (!firstVirtualItem || !lastVirtualItem) {
-    throw new Error("this should never happen");
-  }
 
   let neededStart = start;
 
-  if (firstVirtualItem.index < lowerBoundary) {
-    // user is scrolling up. Move the window up
-    neededStart =
-      Math.floor((firstVirtualItem.index - middleCount) / DATA_OVERSCAN) *
-      DATA_OVERSCAN;
-  } else if (lastVirtualItem.index > upperBoundary) {
-    // user is scrolling down. Move the window down
-    neededStart =
-      Math.ceil((lastVirtualItem.index - middleCount) / DATA_OVERSCAN) *
-      DATA_OVERSCAN;
-  }
-
-  // can't go below 0
-  if (neededStart < 0) {
+  if (!firstVirtualItem || !lastVirtualItem) {
+    // throw new Error("this should never happen");
     neededStart = 0;
-  }
+  } else {
+    if (firstVirtualItem?.index < lowerBoundary) {
+      // user is scrolling up. Move the window up
+      neededStart =
+        Math.floor((firstVirtualItem?.index - middleCount) / DATA_OVERSCAN) *
+        DATA_OVERSCAN;
+    } else if (lastVirtualItem?.index > upperBoundary) {
+      // user is scrolling down. Move the window down
+      neededStart =
+        Math.ceil((lastVirtualItem?.index - middleCount) / DATA_OVERSCAN) *
+        DATA_OVERSCAN;
+    }
 
-  // can't go above our data
-  if (neededStart + limit > data.totalItems) {
-    neededStart = data.totalItems - limit;
+    // can't go above our data
+    if (neededStart + limit > data.totalItems) {
+      neededStart = data.totalItems - limit;
+    }
+
+    // can't go below 0
+    if (neededStart < 0) {
+      neededStart = 0;
+    }
   }
 
   useEffect(() => {
@@ -373,32 +366,39 @@ export default function Data() {
             name: file.name,
             type: DocumentType.FILE,
             chatbotId,
+            createdAt: new Date(),
           }));
           break;
         }
         case "scrapeLinks": {
           const urls = JSON.parse(String(fetcher?.formData.getAll("links")));
-          console.log("urls", urls);
           newDocs = urls.map((url: string) => ({
             name: url,
             url,
             type: DocumentType.WEBSITE,
             chatbotId,
+            createdAt: new Date(),
           }));
           break;
         }
         case "blank": {
           const name = String(fetcher?.formData.get("name"));
           const content = String(fetcher?.formData.get("content"));
-          newDocs = [{ name, content, chatbotId }];
+          newDocs = [
+            {
+              name,
+              content,
+              chatbotId,
+              createdAt: new Date(),
+              type: DocumentType.RAW,
+            },
+          ];
           break;
         }
         default: {
           break;
         }
       }
-
-      console.log("newDocs", newDocs);
       data.items = [...data.items, ...newDocs];
       data.totalItems = data.totalItems + newDocs.length;
     });
