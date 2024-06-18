@@ -38,7 +38,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
     return eventStream(
       request.signal,
-      function setup(send: (event: { event: string; data: string }) => void) {
+      function setup(send: (event: { event?: string; data: string }) => void) {
+        // IF IT FINISHES REMOVE THE LISTENERS AND SEND FINAL EVENT
+
         async function listener(
           event: "failed" | "completed" | "progress",
           registeredQueue: RegisteredQueue,
@@ -51,7 +53,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
           try {
             send({
-              event,
+              // event,
               data: JSON.stringify({
                 documentId: job.data.document.id,
                 queueName: registeredQueue.queue.name,

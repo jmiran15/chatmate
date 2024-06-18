@@ -25,6 +25,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -44,7 +45,6 @@ const getStartLimit = (searchParams: URLSearchParams) => ({
 });
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  console.log("loader got called ...");
   const { chatbotId } = params;
   const userId = await requireUserId(request);
 
@@ -162,7 +162,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       return json({ errors: null, intent, trees, documents });
     }
     case "parseFiles": {
-      console.log("parseFiles - got into action");
       try {
         const response = await fetch("http://localhost:3000/api/upload", {
           method: "POST",
@@ -188,14 +187,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           })),
         });
 
-        console.log("documents - ", documents);
-
         const trees = await webFlow({
           documents,
           preprocessingQueue: parseFileQueue,
         });
-
-        console.log("trees - ", trees);
 
         return json({ intent, trees, documents });
       } catch (error) {
@@ -224,7 +219,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       return json({ intent, documents: [document] });
     }
     case "reset": {
-      console.log("reset action called");
       return null;
     }
     default: {
@@ -249,36 +243,44 @@ export default function Data() {
     Record<string, Record<Document["id"], ProgressData>>
   >({});
 
-  const lastCompletedEvent = useEventSource(
-    `/api/chatbot/${chatbotId}/data/progress`,
-    {
-      event: "completed",
-    },
-  );
-  const lastProgressEvent = useEventSource(
-    `/api/chatbot/${chatbotId}/data/progress`,
-    {
-      event: "progress",
-    },
-  );
+  // const lastCompletedEvent = useEventSource(
+  //   `/api/chatbot/${chatbotId}/data/progress`,
+  //   {
+  //     event: "completed",
+  //   },
+  // );
+  // const lastProgressEvent = useEventSource(
+  //   `/api/chatbot/${chatbotId}/data/progress`,
+  //   {
+  //     event: "progress",
+  //   },
+  // );
+
+  const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
+  const progress: ProgressData | undefined = useMemo(() => {
+    return eventSource ? JSON.parse(eventSource) : undefined;
+  }, [eventSource]);
+
+  // when event stream comes in - it is ProgressData - we dont need to store prev info
 
   // TODO -  this is causing rerender - so it is not working as expected with the optimistic documents!
-  useEffect(() => {
-    const data: ProgressData = lastCompletedEvent
-      ? JSON.parse(lastCompletedEvent)
-      : lastProgressEvent
-      ? JSON.parse(lastProgressEvent)
-      : null;
+  // try to do without state
+  // useEffect(() => {
+  //   const data: ProgressData = lastCompletedEvent
+  //     ? JSON.parse(lastCompletedEvent)
+  //     : lastProgressEvent
+  //     ? JSON.parse(lastProgressEvent)
+  //     : null;
 
-    if (!data) return;
-    setProgressStates((prev) => ({
-      ...prev,
-      [data.queueName]: {
-        ...prev[data.queueName],
-        [data.documentId]: data,
-      },
-    }));
-  }, [lastCompletedEvent, lastProgressEvent]);
+  //   if (!data) return;
+  //   setProgressStates((prev) => ({
+  //     ...prev,
+  //     [data.queueName]: {
+  //       ...prev[data.queueName],
+  //       [data.documentId]: data,
+  //     },
+  //   }));
+  // }, [lastCompletedEvent, lastProgressEvent]);
 
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
@@ -371,6 +373,7 @@ export default function Data() {
   // there is a bug - because this entire component rerenders when we close the modal ???? - so it clears the optimistic components ??
   // optimistic documents
   // we can do this a lot cleaner with a custom hook like - https://github.com/remix-run/example-trellix/blob/577f539409b057a34d2b760de3d5277af03bebd7/app/routes/board.%24id/board.tsx#L3
+  console.log("fetchers", fetchers.length);
   if (fetchers.length > 0) {
     const updatedData = { ...data };
 
@@ -421,7 +424,9 @@ export default function Data() {
       updatedData.items = [...newDocs, ...updatedData.items]; // Prepend new documents
       updatedData.totalItems = updatedData.totalItems + newDocs.length;
     });
+
     data = updatedData;
+    console.log("data", data);
   }
 
   return (
@@ -467,12 +472,12 @@ export default function Data() {
             const item = data.items[index];
 
             // problem with queue initialization here
-            const preprocessingQueueName =
-              item.type === DocumentType.FILE
-                ? "parseFile"
-                : DocumentType.WEBSITE
-                ? "scrape"
-                : null;
+            // const preprocessingQueueName =
+            //   item.type === DocumentType.FILE
+            //     ? "parseFile"
+            //     : DocumentType.WEBSITE
+            //     ? "scrape"
+            //     : null;
 
             return (
               <div
@@ -489,10 +494,13 @@ export default function Data() {
                 {item ? (
                   <DocumentCard
                     item={item}
-                    ingestionProgress={progressStates["ingestion"]?.[item.id]}
-                    preprocessingProgress={
-                      progressStates[preprocessingQueueName ?? ""]?.[item.id]
+                    progress={
+                      progress?.documentId === item.id ? progress : undefined
                     }
+                    // ingestionProgress={progressStates["ingestion"]?.[item.id]}
+                    // preprocessingProgress={
+                    //   progressStates[preprocessingQueueName ?? ""]?.[item.id]
+                    // }
                   />
                 ) : navigation.state === "loading" ? (
                   <span>Loading...</span>

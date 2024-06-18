@@ -4,38 +4,57 @@ import { formatDistanceToNow } from "date-fns";
 import { Badge } from "../../components/ui/badge";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { memo } from "react";
+import { memo, useMemo, useRef } from "react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 
 export const DocumentCard = memo(function DocumentCard({
   item,
-  ingestionProgress,
-  preprocessingProgress,
+  progress,
 }: {
   item: Document;
-  ingestionProgress: ProgressData | null;
-  preprocessingProgress: ProgressData | null;
+  progress: ProgressData | undefined;
 }) {
-  let content;
-  let status;
+  // TODO - we should extract all this stuff into a custom hook!
 
-  if (item.content) {
-    content = item.content;
-  } else {
-    content = preprocessingProgress?.completed ? (
-      preprocessingProgress?.returnvalue?.content
-    ) : (
-      <Skeleton count={10} />
-    );
-  }
+  // TODO - maybe we need to memo both of these calculations so that they dont change if the progress queuename changes
+  const previousProgress = useRef();
+  const preprocessingQueueNames = ["scrape", "parseFile"];
+
+  const memoizedContent = useMemo(() => {
+    let content;
+
+    if (item.content) {
+      content = item.content;
+    } else if (!progress) {
+      content = previousProgress.current || <Skeleton count={10} />;
+    } else {
+      const cond =
+        !preprocessingQueueNames.includes(progress?.queueName) &&
+        !progress?.returnvalue?.content;
+
+      if (cond) {
+        content = previousProgress.current || <Skeleton count={10} />;
+      } else {
+        // we are preprocessing and have a return value
+        content = progress?.returnvalue?.content;
+        previousProgress.current = content;
+      }
+    }
+
+    return content;
+  }, [item, progress]);
+
+  // TODO - percentage works - but there is a glitch - goes back and forth between certain values - should probably do as above
+  // since it's last progress will be the ingestion step - this might still work - but we should be careful.
+  let status;
 
   if (!item.isPending) {
     status = "Ingested";
   } else {
-    status = ingestionProgress?.completed
+    status = progress?.completed
       ? "Ingested"
-      : ingestionProgress?.progress
-      ? `Ingesting ${Math.trunc(Number(ingestionProgress?.progress))}%`
+      : progress?.progress
+      ? `Ingesting ${Math.trunc(Number(progress?.progress))}%`
       : "Preprocessing";
   }
 
@@ -47,7 +66,7 @@ export const DocumentCard = memo(function DocumentCard({
       <div className="flex flex-col space-y-1.5 items-start justify-start shrink w-full">
         <div className="font-semibold">{item?.name}</div>
         <div className="line-clamp-2 text-sm text-muted-foreground text-wrap w-full">
-          {content}
+          {memoizedContent}
         </div>
         <div className="flex flex-row items-center gap-4">
           <div className="text-xs text-muted-foreground text-nowrap">
@@ -65,4 +84,22 @@ export const DocumentCard = memo(function DocumentCard({
       </div>
     </Link>
   );
-});
+}, arePropsEqual);
+
+function arePropsEqual(prev: any, next: any) {
+  console.log(
+    "arePropsEqual - ",
+    prev.item.name,
+    prev.progress,
+    next.progress,
+    Object.is(prev.progress, next.progress) ||
+      (!next.progress && prev.progress),
+  );
+
+  // can probably combine the two checks into one
+  return (
+    (Object.is(prev.progress, next.progress) ||
+      (!next.progress && prev.progress)) &&
+    Object.is(prev.item, next.item)
+  );
+}
