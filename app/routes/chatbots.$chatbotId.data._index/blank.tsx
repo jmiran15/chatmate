@@ -1,5 +1,5 @@
 import { DocumentType } from "@prisma/client";
-import { Form, useFetcher, useParams } from "@remix-run/react";
+import { Form, useParams, useSubmit } from "@remix-run/react";
 import { useRef } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -16,12 +16,13 @@ import { STEPS } from "~/utils/types";
 export default function BlankUpload({
   setStep,
   setOpen,
+  submit,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
+  submit: ReturnType<typeof useSubmit>;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const fetcher = useFetcher();
   const { chatbotId } = useParams();
 
   return (
@@ -75,7 +76,11 @@ export default function BlankUpload({
           <Button
             onClick={() => {
               setOpen(false);
-              fetcher.submit(formRef.current);
+              submit(formRef.current, {
+                method: "post",
+                navigate: false,
+                fetcherKey: `${chatbotId}-${Date.now()}`,
+              });
             }}
           >
             Upload

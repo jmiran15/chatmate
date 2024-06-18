@@ -4,98 +4,32 @@ import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { Queue } from "~/utils/queue.server";
 import axios from "axios";
-import { json } from "@remix-run/node";
 
 export interface ParseFileQueueData {
   document: Document;
 }
+
+const LLAMAPARSE_BASE_URL = "https://api.cloud.llamaindex.ai/api/parsing";
+const UNSTRUCTURED_URL =
+  "https://chatmate-cqdx54s5.api.unstructuredapp.io/general/v0/general";
 
 export const parseFileQueue = Queue<ParseFileQueueData>(
   "parseFile",
   async (job): Promise<Document> => {
     invariant(job.data.document.filepath, "Filepath is required");
 
-    try {
-      const file = await getFileFromUrl(job.data.document.filepath);
-      const parsedContents = await parseFile(file);
-      const updatedDocument = await prisma.document.update({
-        where: { id: job.data.document.id },
-        data: {
-          content: parsedContents,
-        },
-      });
+    const file = await getFileFromUrl(job.data.document.filepath);
+    const parsedContents = await parseFileWithLlamaparse(file);
+    const updatedDocument = await prisma.document.update({
+      where: { id: job.data.document.id },
+      data: {
+        content: parsedContents,
+      },
+    });
 
-      return updatedDocument;
-    } catch (error) {
-      console.error(`parsefile.server.ts - error parsing file ${error}`);
-      return json({ error });
-      // throw error;
-    }
+    return updatedDocument;
   },
 );
-
-const LLAMAPARSE_BASE_URL = "https://api.cloud.llamaindex.ai/api/parsing";
-
-async function parseFile(file: File): Promise<string> {
-  const formData = new FormData();
-  console.log(`parsefile.server.ts - file - ${file.name}`);
-  formData.append("file", file);
-
-  const uploadUrl = `${LLAMAPARSE_BASE_URL}/upload`;
-  const uploadResponse = await axios.post(uploadUrl, formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Accept: "application/json",
-      Authorization: `Bearer ${process.env.LLAMAPARSE_API_KEY}`,
-    },
-  });
-
-  // if (uploadResponse.status !== 200) {
-  //   throw new Error(
-  //     `Failed to upload file with error ${uploadResponse.status} and message ${uploadResponse.statusText}`,
-  //   );
-  // }
-
-  console.log(
-    `parsefile.server.ts - uploadResponse - ${uploadResponse.data.id}`,
-  );
-
-  // const jobId = uploadResponse.data.id;
-  // const resultType = "text";
-  // const resultUrl = `${LLAMAPARSE_BASE_URL}/job/${jobId}/result/${resultType}`;
-
-  // let resultResponse;
-  // let attempt = 0;
-  // const maxAttempts = 10;
-  // let resultAvailable = false;
-
-  // while (attempt < maxAttempts && !resultAvailable) {
-  //   try {
-  //     resultResponse = await axios.get(resultUrl, {
-  //       headers: {
-  //         accept: "application/json",
-  //         Authorization: `Bearer ${process.env.LLAMAPARSE_API_KEY}`,
-  //       },
-  //     });
-  //     if (resultResponse.status === 200) {
-  //       resultAvailable = true;
-  //     } else {
-  //       attempt++;
-  //       await new Promise((resolve) => setTimeout(resolve, 250));
-  //     }
-  //   } catch (error) {
-  //     attempt++;
-  //     await new Promise((resolve) => setTimeout(resolve, 250));
-  //   }
-  // }
-
-  // if (!resultAvailable) {
-  //   throw new Error("Failed to fetch parsing result");
-  // }
-
-  // return resultResponse.data[resultType];
-  return "";
-}
 
 async function getFileFromUrl(fileUrl: string): Promise<File> {
   try {
@@ -118,5 +52,112 @@ async function getFileFromUrl(fileUrl: string): Promise<File> {
     return file;
   } catch (error) {
     throw new Error(`Failed to fetch file from URL: ${error.message}`);
+  }
+}
+
+async function parseFileWithLlamaparse(file: File): Promise<string> {
+  let content = "";
+
+  if (process.env.LLAMAPARSE_API_KEY) {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const uploadUrl = `${LLAMAPARSE_BASE_URL}/upload`;
+      const uploadResponse = await axios.post(uploadUrl, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: `Bearer ${process.env.LLAMAPARSE_API_KEY}`,
+        },
+      });
+
+      const jobId = uploadResponse.data.id;
+      const resultType = "markdown";
+      const resultUrl = `${LLAMAPARSE_BASE_URL}/job/${jobId}/result/${resultType}`;
+
+      let resultResponse;
+      let attempt = 0;
+      const maxAttempts = 10; // Maximum number of attempts
+      let resultAvailable = false;
+
+      while (attempt < maxAttempts && !resultAvailable) {
+        try {
+          resultResponse = await axios.get(resultUrl, {
+            headers: {
+              Authorization: `Bearer ${process.env.LLAMAPARSE_API_KEY}`,
+            },
+          });
+          if (resultResponse.status === 200) {
+            resultAvailable = true; // Exit condition met
+          } else {
+            // If the status code is not 200, increment the attempt counter and wait
+            attempt++;
+            await new Promise((resolve) => setTimeout(resolve, 250)); // Wait for 2 seconds
+          }
+        } catch (error) {
+          // console.error("Error fetching result:", error);
+          attempt++;
+          await new Promise((resolve) => setTimeout(resolve, 250)); // Wait for 2 seconds before retrying
+          // You may want to handle specific errors differently
+        }
+      }
+
+      if (!resultAvailable) {
+        content = await parseFileWithUnstructured(file);
+      }
+      content = resultResponse?.data[resultType];
+    } catch (error) {
+      // console.error(
+      //   `parsefile.server.ts - error parsing file with llamaparse ${error}`,
+      // );
+      content = await parseFileWithUnstructured(file);
+    }
+  } else {
+    content = await parseFileWithUnstructured(file);
+  }
+
+  return content;
+}
+
+async function parseFileWithUnstructured(file: File): Promise<string> {
+  const formData = new FormData();
+  formData.append("files", file);
+
+  try {
+    const response = await axios({
+      method: "post",
+      url: UNSTRUCTURED_URL,
+      headers: {
+        accept: "application/json",
+        "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
+      },
+      data: formData,
+    });
+
+    if (response.status !== 200) {
+      throw new Error(
+        `Failed to partition file with error ${response.status} and message ${response.statusText}`,
+      );
+    }
+
+    const elements = response.data;
+    if (!Array.isArray(elements)) {
+      throw new Error(
+        `Expected partitioning request to return an array, but got ${typeof elements}`,
+      );
+    }
+
+    if (elements[0].constructor !== Array) {
+      return elements.map((element: any) => element.text).join("\n");
+    }
+
+    return "unstructured error";
+  } catch (error) {
+    // console.error(
+    //   "Error during file parsing:",
+    //   error.response?.data || error.message,
+    // ); // Enhanced error logging
+    return "unstructured error";
   }
 }

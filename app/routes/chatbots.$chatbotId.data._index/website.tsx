@@ -4,7 +4,15 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import { Form, SubmitOptions, useFetcher, useParams } from "@remix-run/react";
+import {
+  Form,
+  SubmitOptions,
+  useActionData,
+  useFetcher,
+  useFetchers,
+  useParams,
+  useSubmit,
+} from "@remix-run/react";
 import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
@@ -15,28 +23,40 @@ import { useEventSource } from "remix-utils/sse/react";
 import LinksTable from "./links-table";
 import { action } from "./route";
 import { Progress } from "../api.crawl.$jobId.progress";
+import { v4 as uuidv4 } from "uuid";
+import { s } from "vitest/dist/reporters-5f784f42";
 
 export default function Website({
   setStep,
   setOpen,
+  submit,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
+  submit: ReturnType<typeof useSubmit>;
 }) {
   const { chatbotId } = useParams();
+  const actionData = useActionData();
+  const fetchers = useFetchers();
 
   // TODO - fix type
-  const fetcher = useFetcher<typeof action>();
   const formRef = useRef<HTMLFormElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
   const [links, setLinks] = useState<string[]>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [isTableVisible, setIsTableVisible] = useState(false);
-  const job = fetcher.data?.job;
+  const linksFetcherKey = useRef(uuidv4());
+  const scrapeFetcherKey = useRef(uuidv4());
+  const linksFetcher = fetchers.find(
+    (fetcher) => fetcher.key === linksFetcherKey.current,
+  );
+  const scrapeFetcher = fetchers.find(
+    (fetcher) => fetcher.key === scrapeFetcherKey.current,
+  );
+  const job = linksFetcher?.data?.job;
   const eventSource: string | undefined = useEventSource(
     `/api/crawl/${job?.id}/progress`,
   );
-
   const progress: Progress | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
@@ -66,24 +86,28 @@ export default function Website({
     }
   }, [progress?.progress?.currentDocumentUrl, progress?.returnvalue, job?.id]);
 
+  // TODO - these are not optimistic - it is waiting for data
   useEffect(() => {
-    // TODO - this is not optimistic - it is waiting for data
-
-    if (!fetcher.data?.errors) {
-      switch (fetcher.data?.intent) {
-        case "scrapeLinks":
-          setOpen(false);
-          break;
-        case "getLinks":
-          setIsTableVisible(true);
-          break;
-      }
+    if (!scrapeFetcher) return;
+    if (!scrapeFetcher?.data?.errors) {
+      setOpen(false);
     } else {
-      if (fetcher.data?.errors?.url) {
+      if (scrapeFetcher?.data?.errors?.url) {
         urlRef.current?.focus();
       }
     }
-  }, [fetcher.data]);
+  }, [scrapeFetcher]);
+
+  useEffect(() => {
+    if (!linksFetcher) return;
+    if (!linksFetcher?.data?.errors) {
+      setIsTableVisible(true);
+    } else {
+      if (linksFetcher?.data?.errors?.url) {
+        urlRef.current?.focus();
+      }
+    }
+  }, [linksFetcher]);
 
   return (
     <>
@@ -106,7 +130,7 @@ export default function Website({
               autoFocus={true}
               name="url"
               autoComplete="url"
-              aria-invalid={fetcher.data?.errors?.url ? true : undefined}
+              aria-invalid={actionData?.errors?.url ? true : undefined}
               aria-describedby="url-error"
               id="url"
               type="url"
@@ -114,12 +138,12 @@ export default function Website({
               required
             />
 
-            {fetcher.data?.errors?.url ? (
+            {actionData?.errors?.url ? (
               <p
                 className="pt-1 text-red-700 text-sm font-medium leading-none"
                 id="email-error"
               >
-                {fetcher.data.errors.url}
+                {actionData.errors.url}
               </p>
             ) : null}
           </div>
@@ -141,6 +165,7 @@ export default function Website({
             onClick={() => {
               if (isTableVisible) {
                 setIsTableVisible(false);
+                linksFetcherKey.current = uuidv4();
               } else {
                 setStep(STEPS.SELECT_TYPE);
               }
@@ -154,35 +179,36 @@ export default function Website({
               const options = {
                 method: "post",
                 action: `/chatbots/${chatbotId}/data?index`,
+                navigate: false,
               } as SubmitOptions;
 
               // the formRef is rendered
               if (formRef.current) {
                 if (formRef.current.crawl["1"].checked) {
-                  fetcher.submit(
+                  submit(
                     {
                       intent: "getLinks",
                       url: formRef.current?.url.value,
                     },
-                    options,
+                    { ...options, fetcherKey: linksFetcherKey.current },
                   );
                 } else {
-                  fetcher.submit(
+                  submit(
                     {
                       intent: "scrapeLinks",
                       links: JSON.stringify([formRef.current?.url.value]),
                     },
-                    options,
+                    { ...options, fetcherKey: scrapeFetcherKey.current },
                   );
                 }
               } else {
-                fetcher.submit(
+                submit(
                   {
                     intent: "scrapeLinks",
                     links: JSON.stringify(selectedLinks),
                     crawled: true,
                   },
-                  options,
+                  { ...options, fetcherKey: scrapeFetcherKey.current },
                 );
               }
             }}

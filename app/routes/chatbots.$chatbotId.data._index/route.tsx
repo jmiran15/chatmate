@@ -7,6 +7,7 @@ import {
   useParams,
   useFetchers,
   Fetcher,
+  useSubmit,
 } from "@remix-run/react";
 import { DialogDemo } from "./modal";
 import { requireUserId } from "~/session.server";
@@ -43,6 +44,7 @@ const getStartLimit = (searchParams: URLSearchParams) => ({
 });
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+  console.log("loader got called ...");
   const { chatbotId } = params;
   const userId = await requireUserId(request);
 
@@ -160,6 +162,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       return json({ errors: null, intent, trees, documents });
     }
     case "parseFiles": {
+      console.log("parseFiles - got into action");
       try {
         const response = await fetch("http://localhost:3000/api/upload", {
           method: "POST",
@@ -185,13 +188,18 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           })),
         });
 
+        console.log("documents - ", documents);
+
         const trees = await webFlow({
           documents,
           preprocessingQueue: parseFileQueue,
         });
 
+        console.log("trees - ", trees);
+
         return json({ intent, trees, documents });
       } catch (error) {
+        console.error("Error uploading files: ", error);
         throw new Error(`Error uploading files: ${error}`);
       }
     }
@@ -215,6 +223,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
       return json({ intent, documents: [document] });
     }
+    case "reset": {
+      console.log("reset action called");
+      return null;
+    }
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
     }
@@ -222,10 +234,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 };
 
 export default function Data() {
-  const data = useLoaderData<typeof loader>();
-  const fetchers = useFetchers();
+  let data = useLoaderData<typeof loader>();
   const { chatbotId } = useParams();
   const navigation = useNavigation();
+  const fetchers = useFetchers();
+  const submit = useSubmit();
   const [searchParams, setSearchParams] = useSearchParams();
   const { start, limit } = getStartLimit(searchParams);
   const [initialStart] = useState(() => start);
@@ -249,6 +262,7 @@ export default function Data() {
     },
   );
 
+  // TODO -  this is causing rerender - so it is not working as expected with the optimistic documents!
   useEffect(() => {
     const data: ProgressData = lastCompletedEvent
       ? JSON.parse(lastCompletedEvent)
@@ -354,14 +368,17 @@ export default function Data() {
     isMountedRef.current = true;
   }, []);
 
+  // there is a bug - because this entire component rerenders when we close the modal ???? - so it clears the optimistic components ??
   // optimistic documents
+  // we can do this a lot cleaner with a custom hook like - https://github.com/remix-run/example-trellix/blob/577f539409b057a34d2b760de3d5277af03bebd7/app/routes/board.%24id/board.tsx#L3
   if (fetchers.length > 0) {
+    const updatedData = { ...data };
+
     fetchers.forEach((fetcher: Fetcher) => {
       let newDocs = [];
 
       switch (fetcher.formData?.get("intent")) {
         case "parseFiles": {
-          console.log("parseFiles - ", fetcher?.formData.getAll("files"));
           const files = fetcher?.formData.getAll("files");
           newDocs = files.map((file: File) => ({
             name: file.name,
@@ -400,12 +417,11 @@ export default function Data() {
           break;
         }
       }
-      console.log("newDocs - ", newDocs);
 
-      // this needs to be state if we want it to rerender
-      data.items = [...data.items, ...newDocs];
-      data.totalItems = data.totalItems + newDocs.length;
+      updatedData.items = [...newDocs, ...updatedData.items]; // Prepend new documents
+      updatedData.totalItems = updatedData.totalItems + newDocs.length;
     });
+    data = updatedData;
   }
 
   return (
@@ -418,7 +434,7 @@ export default function Data() {
             responses
           </h1>
         </div>
-        <DialogDemo />
+        <DialogDemo submit={submit} />
       </div>
       <div className="flex flex-row items-center gap-2">
         <Input type="text" placeholder="Search" />

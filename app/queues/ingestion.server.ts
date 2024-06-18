@@ -28,6 +28,8 @@ const BATCH_SIZE = 10;
 export const queue = Queue<QueueData>("ingestion", async (job) => {
   const children = await job.getChildrenValues();
 
+  return;
+
   let document;
   if (Object.keys(children).length > 0) {
     document = Object.values(children)[0];

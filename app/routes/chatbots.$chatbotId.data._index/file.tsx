@@ -7,25 +7,30 @@ import {
 import { FileUploader } from "./file-uploader";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
-import { useParams, useFetcher, useActionData } from "@remix-run/react";
-import { Badge } from "~/components/ui/badge";
+import {
+  useParams,
+  useFetcher,
+  useActionData,
+  useSubmit,
+} from "@remix-run/react";
 import { STEPS } from "~/utils/types";
 
 export function FileUpload({
   setStep,
   setOpen,
+  submit,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
+  submit: ReturnType<typeof useSubmit>;
 }) {
   const { chatbotId } = useParams();
   const [files, setFiles] = useState<File[]>([]);
-  const fetcher = useFetcher();
-  const actionData = useActionData();
 
-  console.log("actionData - ", actionData);
+  // the fetcher gets canceled because the component unmounts ???
+  // also if you close it manually (i.e. click outside of it) it gets cancelled
 
-  const handleUpload = async () => {
+  const handleUpload = () => {
     setOpen(false);
     const formData = new FormData();
     files.forEach((file) => {
@@ -33,10 +38,12 @@ export function FileUpload({
     });
     formData.append("intent", "parseFiles");
 
-    fetcher.submit(formData, {
-      method: "post",
+    submit(formData, {
+      method: "POST",
       action: `/chatbots/${chatbotId}/data?index`,
       encType: "multipart/form-data",
+      navigate: false,
+      fetcherKey: `${chatbotId}-${Date.now()}`,
     });
   };
 
