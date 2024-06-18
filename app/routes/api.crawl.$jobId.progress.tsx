@@ -5,20 +5,19 @@ import {
   CrawlQueueReturn,
   CrawlQueueProgress,
 } from "~/queues/crawl.server";
-import { Job } from "bullmq";
 
 export interface Progress {
   progress: CrawlQueueProgress | null;
   completed: boolean;
   returnvalue: CrawlQueueReturn | null;
-  job: Job | null;
+  jobId: string;
 }
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { jobId } = params;
 
   if (!jobId) {
-    return undefined;
+    return null;
   }
 
   const registeredQueue = global.__registeredQueues[crawlQueue?.name];
@@ -27,43 +26,60 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     throw new Error("Queue not found");
   }
 
+  const job = await registeredQueue.queue.getJob(jobId);
+  if (!job) {
+    return null;
+  }
+
   return eventStream(
     request.signal,
     function setup(send: (event: { event?: string; data: string }) => void) {
-      async function listener(
-        event: "failed" | "completed" | "progress",
-        id: string,
-      ) {
-        if (id !== jobId) return;
-        const job = await registeredQueue.queue.getJob(id);
-        if (!job) return;
+      const eventsToListenTo = ["failed", "completed", "progress"];
+
+      job.isCompleted().then((completed) => {
+        if (completed) {
+          send({
+            data: JSON.stringify({
+              progress: job.progress,
+              completed,
+              returnvalue: job.returnvalue,
+              jobId: job.id,
+            } as Progress),
+          });
+          return null;
+        }
+      });
+
+      async function listener(args: any) {
+        if (args.jobId !== jobId) return null;
         try {
           send({
             // event,
             data: JSON.stringify({
-              progress: job.progress,
-              completed: Boolean(await job.isCompleted()),
-              returnvalue: job.returnvalue,
-              job,
+              progress: args.data ?? undefined,
+              returnvalue: args.returnvalue ?? undefined,
+              jobId: args.jobId ?? undefined,
             } as Progress),
           });
+
+          if (args.returnvalue) {
+            eventsToListenTo.forEach((event) => {
+              registeredQueue?.queueEvents.off(event, (args) => listener(args));
+            });
+            return null;
+          }
         } catch (error) {
           console.log(`error sending event: ${error}`);
         }
       }
-      const eventsToListenTo = ["failed", "completed", "progress"];
 
       eventsToListenTo.forEach((event) => {
-        registeredQueue?.queueEvents.on(event, (args) =>
-          listener(event, args.jobId),
-        );
+        registeredQueue?.queueEvents.on(event, (args) => listener(args));
       });
 
       return function clear() {
         eventsToListenTo.forEach((event) => {
-          registeredQueue?.queueEvents.off(event, (args) =>
-            listener(event, args.jobId),
-          );
+          registeredQueue?.queueEvents.off(event, (args) => listener(args));
         });
       };
     },

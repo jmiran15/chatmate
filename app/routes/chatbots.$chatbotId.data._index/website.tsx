@@ -41,9 +41,6 @@ export default function Website({
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
 
-  // console.log("website.tsx - progress: ", progress);
-  // console.log("website.tsx - links: ", links);
-
   const disableNextButton = isTableVisible && links.length === 0;
   const selectedLinks =
     links?.length > 0
@@ -54,11 +51,11 @@ export default function Website({
   // TODO - lots of unneeded re-renders here - causing performance issues
   useEffect(() => {
     console.log("website.tsx - progress: ", progress);
-    if (job?.id !== progress?.job?.id) {
+    if (job?.id !== progress?.jobId) {
       setLinks([]);
       return;
     } else {
-      if (progress?.completed && progress?.returnvalue) {
+      if (progress?.returnvalue) {
         setLinks(progress.returnvalue.urls || []);
       } else if (progress?.progress) {
         setLinks((prev) => [
@@ -67,7 +64,7 @@ export default function Website({
         ]);
       }
     }
-  }, [progress?.progress?.currentDocumentUrl, progress?.returnvalue]);
+  }, [progress?.progress?.currentDocumentUrl, progress?.returnvalue, job?.id]);
 
   useEffect(() => {
     // TODO - this is not optimistic - it is waiting for data

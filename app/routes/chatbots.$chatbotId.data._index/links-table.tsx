@@ -17,8 +17,6 @@ export default function LinksTable({
   rowSelection: RowSelectionState;
   setRowSelection: (selection: RowSelectionState) => void;
 }) {
-  console.log("links-table.tsx - links: ", links);
-
   const tableData = useMemo(
     () =>
       z.array(urlSchema).parse(
@@ -44,8 +42,9 @@ export default function LinksTable({
 
   return (
     <DataTable
-      data={tableData}
+      links={links}
       columns={tableColumns}
+      data={tableData}
       rowSelection={rowSelection}
       setRowSelection={setRowSelection}
     />

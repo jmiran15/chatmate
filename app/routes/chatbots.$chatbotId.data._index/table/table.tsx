@@ -1,5 +1,6 @@
 import {
   ColumnFiltersState,
+  OnChangeFn,
   RowSelectionState,
   SortingState,
   VisibilityState,
@@ -27,13 +28,15 @@ import { DataTableToolbar } from "./toolbar";
 import { DataTablePagination } from "./pagination";
 
 export function DataTable<TData, TValue>({
+  links,
   columns,
   data,
   rowSelection,
   setRowSelection,
 }: DataTableProps<TData, TValue> & {
+  links: string[];
   rowSelection: RowSelectionState;
-  setRowSelection: (rowSelection: RowSelectionState) => void;
+  setRowSelection: OnChangeFn<RowSelectionState>;
 }) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -54,7 +57,7 @@ export function DataTable<TData, TValue>({
         pageSize: 10,
       },
     },
-    enableRowSelection: true,
+    enableRowSelection: links.length > 0,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -69,7 +72,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4 flex flex-col">
-      <DataTableToolbar table={table} />
+      {links.length > 0 && <DataTableToolbar table={table} />}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -120,7 +123,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {links.length > 0 && <DataTablePagination table={table} />}
     </div>
   );
 }
