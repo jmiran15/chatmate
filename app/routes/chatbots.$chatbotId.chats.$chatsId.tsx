@@ -66,7 +66,7 @@ export default function ChatRoute() {
 
   return isMobile ? (
     <AnimatePresence onExitComplete={handleExitComplete}>
-      {isModalOpen && (
+      {isModalOpen ? (
         <Modal title={`${data.chatbot.name} Chat`} onDismiss={handleDismiss}>
           <div className="max-h-[80vh] overflow-y-auto p-4">
             <div className="space-y-5">
@@ -144,7 +144,7 @@ export default function ChatRoute() {
             </div>
           </div>
         </Modal>
-      )}
+      ) : null}
     </AnimatePresence>
   ) : (
     <div className="hidden sm:flex flex-col col-span-7 overflow-y-auto h-full">

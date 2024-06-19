@@ -74,3 +74,21 @@ export function useUser(): User {
 export function validateEmail(email: unknown): email is string {
   return typeof email === "string" && email.length > 3 && email.includes("@");
 }
+
+export function validateUrl(url: string): boolean {
+  try {
+    const urlObj = new URL(url);
+
+    if (urlObj.protocol !== "http:" && urlObj.protocol !== "https:") {
+      return false;
+    }
+
+    if (!urlObj.hostname) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+}

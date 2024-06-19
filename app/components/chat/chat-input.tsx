@@ -50,7 +50,6 @@ export default function ChatInput({
     },
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(measure, [userInput]);
 
   // const showError = (errMsg: string) => {

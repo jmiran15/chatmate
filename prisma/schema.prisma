@@ -64,14 +64,18 @@ model Chat {
 }
 
 model Document {
-  id         String      @id @default(uuid())
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  id         String       @id @default(uuid())
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
   name       String
-  embeddings Embedding[]
-  content    String
-  chatbot    Chatbot     @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  content    String?
+  url        String?
+  filepath   String?
+  chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
+  embeddings Embedding[]
+  isPending  Boolean      @default(true)
+  type       DocumentType @default(RAW)
 }
 
 model Embedding {
@@ -98,7 +102,6 @@ model Message {
 }
 
 // subscription models
-
 model Plan {
   id            String         @id @unique
   name          String
@@ -141,4 +144,10 @@ model Subscription {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum DocumentType {
+  WEBSITE
+  FILE
+  RAW
 }

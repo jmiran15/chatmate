@@ -14,6 +14,7 @@ module.exports = {
       jsx: true,
     },
   },
+
   env: {
     browser: true,
     commonjs: true,
