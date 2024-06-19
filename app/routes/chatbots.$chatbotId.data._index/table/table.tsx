@@ -42,6 +42,8 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  console.log(`table.tsx - selected rows ${rowSelection.length}`, rowSelection);
+
   const table = useReactTable({
     data,
     columns,

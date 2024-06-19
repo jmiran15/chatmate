@@ -6,6 +6,8 @@ import {
   useNavigation,
   useParams,
   useSubmit,
+  useFetchers,
+  useActionData,
 } from "@remix-run/react";
 import { DialogDemo } from "./modal";
 import { requireUserId } from "~/session.server";
@@ -34,6 +36,8 @@ import { DocumentCard } from "./document-card";
 import { queue } from "~/queues/ingestion.server";
 import { validateUrl } from "~/utils";
 import { usePendingDocuments } from "./hooks/use-pending-documents";
+import { deleteDocumentById } from "~/models/document.server";
+import { useToast } from "~/components/ui/use-toast";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -234,6 +238,13 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "reset": {
       return null;
     }
+    case "delete": {
+      const documentId = String(formData.get("documentId"));
+      return json({
+        intent: "delete",
+        document: await deleteDocumentById({ id: documentId }),
+      });
+    }
     default: {
       return json({ error: "Invalid action" }, { status: 400 });
     }
@@ -242,8 +253,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   let data = useLoaderData<typeof loader>();
+  const { toast } = useToast();
   const { chatbotId } = useParams();
   const navigation = useNavigation();
+  const actionData = useActionData<typeof action>();
   const submit = useSubmit();
   const [searchParams, setSearchParams] = useSearchParams();
   const { start, limit } = getStartLimit(searchParams);
@@ -351,6 +364,15 @@ export default function Data() {
   updatedData.totalItems = data.totalItems + pendingDocuments.length;
   data = updatedData;
 
+  useEffect(() => {
+    if (actionData?.intent === "delete" && actionData?.document) {
+      toast({
+        title: "Delete document",
+        description: `Document ${actionData.document.name} deleted`,
+      });
+    }
+  }, [actionData]);
+
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
       <div className="flex flex-row items-start justify-between">
@@ -363,13 +385,13 @@ export default function Data() {
         </div>
         <DialogDemo submit={submit} />
       </div>
-      <div className="flex flex-row items-center gap-2">
+      {/* <div className="flex flex-row items-center gap-2">
         <Input type="text" placeholder="Search" />
         <Button className="flex flex-row items-center gap-2">
           <SearchIcon className="w-4 h-4" />
           Search
         </Button>
-      </div>
+      </div> */}
       <div
         ref={parentRef}
         data-hydrating-signal
@@ -421,6 +443,7 @@ export default function Data() {
               </div>
             );
           })}
+          {rowVirtualizer.virtualItems.length === 0 && <p>No documents yet</p>}
         </div>
       </div>
     </div>

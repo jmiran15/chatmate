@@ -1,21 +1,18 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Form,
   Link,
   useFetcher,
   useLoaderData,
   useParams,
+  useSubmit,
 } from "@remix-run/react";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
-import {
-  deleteDocumentById,
-  getDocumentById,
-  updateDocumentById,
-} from "~/models/document.server";
+import { getDocumentById, updateDocumentById } from "~/models/document.server";
 import { useToast } from "~/components/ui/use-toast";
 import { useEffect, useMemo, useRef } from "react";
 import { ChevronLeft } from "lucide-react";
@@ -25,17 +22,9 @@ import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
 import { queue } from "~/queues/ingestion.server";
 import { usePendingDocuments } from "../chatbots.$chatbotId.data._index/hooks/use-pending-documents";
-import Skeleton from "react-loading-skeleton";
 import { useDocumentProgress } from "../chatbots.$chatbotId.data._index/hooks/use-document-progress";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { useEventSource } from "remix-utils/sse/react";
-
-// TODO - account for optimistic UI, i.e. we could have got here with the data in the fetchers but not yet in the db
-// TODO - we also need to carry forward the optimistic ui (CRUD)
-// TODO - make deletion optimistic
-// TODO - defer the intial loading - with skeletons
-// TODO - if we don't have the body - show skeleton
-// TODO - show ingestion status - (percentage, etc...)
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
@@ -72,13 +61,26 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 
   switch (intent) {
-    case "delete": {
-      await deleteDocumentById({ id: documentId });
-      return redirect(`/chatbots/${params.chatbotId}/data?index`);
-    }
     case "save": {
+      // validate - make sure they are not empty
+
       const name = formData.get("name") as string;
       const content = formData.get("content") as string;
+
+      if (name.length === 0) {
+        return json(
+          { errors: { name: "Name is required", content: null } },
+          { status: 400 },
+        );
+      }
+
+      if (content.length === 0) {
+        return json(
+          { errors: { name: null, content: "Content is required" } },
+          { status: 400 },
+        );
+      }
+
       const document = await updateDocumentById({
         id: documentId,
         name,
@@ -94,6 +96,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       return json({
         intent: "save",
         document,
+        errors: null,
       });
     }
     default: {
@@ -104,6 +107,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function DocumentPage() {
   const { toast } = useToast();
+  const submit = useSubmit();
   const fetcher = useFetcher<typeof action>();
   const { chatbotId, documentId } = useParams();
   const { document } = useLoaderData<typeof loader>();
@@ -119,6 +123,7 @@ export default function DocumentPage() {
     document || optimisticDocument,
     progress,
   );
+  // const navigate = useNavigate();
 
   const isSaving =
     fetcher.state === "submitting" &&
@@ -127,12 +132,21 @@ export default function DocumentPage() {
     fetcher.state === "submitting" &&
     fetcher.formData?.get("intent") === "delete";
   const formRef = useRef<HTMLFormElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    if (fetcher?.data?.errors?.name) {
+      nameRef.current?.focus();
+    } else if (fetcher?.data?.errors?.content) {
+      contentRef.current?.focus();
+    }
+
     if (
       fetcher.state === "idle" &&
       fetcher.data?.intent === "save" &&
-      fetcher.data?.document
+      fetcher.data?.document &&
+      !fetcher.data.errors
     ) {
       toast({
         title: "Success",
@@ -150,7 +164,7 @@ export default function DocumentPage() {
       ? String(fetcher.formData.get("name"))
       : document?.name || optimisticDocument?.name;
 
-  console.log("content", { content });
+  if (!documentId) return;
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
       <div className="flex items-center justify-between w-full flex-wrap gap-4">
@@ -177,7 +191,14 @@ export default function DocumentPage() {
             variant="outline"
             size="sm"
             onClick={() =>
-              fetcher.submit({ intent: "delete" }, { method: "post" })
+              submit(
+                { intent: "delete", documentId },
+                {
+                  action: `/chatbots/${chatbotId}/data?index`,
+                  method: "post",
+                  navigate: true,
+                },
+              )
             }
           >
             Discard
@@ -203,23 +224,47 @@ export default function DocumentPage() {
           <div className="grid gap-2">
             <Label htmlFor="name">Name</Label>
             <Input
+              ref={nameRef}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus={true}
               type="text"
               name="name"
               id="name"
               placeholder="Name"
               defaultValue={document?.name || optimisticDocument?.name}
             />
+            {fetcher?.data?.errors?.name ? (
+              <p
+                className="pt-1 text-red-500 text-sm font-medium leading-none"
+                id="url-error"
+              >
+                {fetcher.data.errors.name}
+              </p>
+            ) : null}
           </div>
           <div className="grid gap-2">
             <Label htmlFor="content">Content</Label>
             {typeof content === "string" ? (
-              <Textarea
-                placeholder="Type your message here."
-                id="content"
-                name="content"
-                rows={16}
-                defaultValue={content}
-              />
+              <>
+                <Textarea
+                  ref={contentRef}
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
+                  autoFocus={true}
+                  placeholder="Type your message here."
+                  id="content"
+                  name="content"
+                  rows={16}
+                  defaultValue={content}
+                />
+                {fetcher?.data?.errors?.content ? (
+                  <p
+                    className="pt-1 text-red-500 text-sm font-medium leading-none"
+                    id="url-error"
+                  >
+                    {fetcher.data.errors.content}
+                  </p>
+                ) : null}
+              </>
             ) : (
               content
             )}

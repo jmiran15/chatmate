@@ -14,9 +14,10 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder="Filter urls..."
           value={(table.getColumn("url")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("url")?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            table.getColumn("url")?.setFilterValue(event.target.value);
+            table.resetRowSelection();
+          }}
           className="h-8 w-[150px] lg:w-[250px]"
         />
 
