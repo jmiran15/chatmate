@@ -17,13 +17,18 @@ import {
   updateDocumentById,
 } from "~/models/document.server";
 import { useToast } from "~/components/ui/use-toast";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Badge } from "~/components/ui/badge";
 import { cn } from "~/lib/utils";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
 import { queue } from "~/queues/ingestion.server";
+import { usePendingDocuments } from "../chatbots.$chatbotId.data._index/hooks/use-pending-documents";
+import Skeleton from "react-loading-skeleton";
+import { useDocumentProgress } from "../chatbots.$chatbotId.data._index/hooks/use-document-progress";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
+import { useEventSource } from "remix-utils/sse/react";
 
 // TODO - account for optimistic UI, i.e. we could have got here with the data in the fetchers but not yet in the db
 // TODO - we also need to carry forward the optimistic ui (CRUD)
@@ -53,6 +58,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   }
 
   const document = await getDocumentById({ id: documentId });
+
   return json({ document });
 };
 
@@ -96,11 +102,24 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
-export default function ModelC() {
-  const data = useLoaderData<typeof loader>();
+export default function DocumentPage() {
   const { toast } = useToast();
+  const fetcher = useFetcher<typeof action>();
   const { chatbotId, documentId } = useParams();
-  const fetcher = useFetcher();
+  const { document } = useLoaderData<typeof loader>();
+  const pendingDocuments = usePendingDocuments();
+  const optimisticDocument = pendingDocuments.find(
+    (document) => document.id === documentId,
+  );
+  const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
+  const progress: ProgressData | undefined = useMemo(() => {
+    return eventSource ? JSON.parse(eventSource) : undefined;
+  }, [eventSource]);
+  const { status, content } = useDocumentProgress(
+    document || optimisticDocument,
+    progress,
+  );
+
   const isSaving =
     fetcher.state === "submitting" &&
     fetcher.formData?.get("intent") === "save";
@@ -122,6 +141,16 @@ export default function ModelC() {
     }
   }, [fetcher]);
 
+  if (!document && !optimisticDocument) {
+    throw new Error("Document not found");
+  }
+
+  const optimisticDocumentName =
+    fetcher.formData && String(fetcher.formData.get("intent")) === "save"
+      ? String(fetcher.formData.get("name"))
+      : document?.name || optimisticDocument?.name;
+
+  console.log("content", { content });
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
       <div className="flex items-center justify-between w-full flex-wrap gap-4">
@@ -137,10 +166,10 @@ export default function ModelC() {
             <span className="sr-only">Back</span>
           </Link>
           <h1 className="flex-1 whitespace-nowrap text-xl font-semibold tracking-tight text-ellipsis">
-            {data.document?.name}
+            {optimisticDocumentName}
           </h1>
           <Badge variant="secondary" className="ml-auto sm:ml-0">
-            {data.document?.isPending ? "Pending" : "Ingested"}
+            {status}
           </Badge>
         </div>
         <div className="flex items-center gap-2">
@@ -178,20 +207,22 @@ export default function ModelC() {
               name="name"
               id="name"
               placeholder="Name"
-              defaultValue={data ? data.document!.name : undefined}
+              defaultValue={document?.name || optimisticDocument?.name}
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="content">Content</Label>
-            <Textarea
-              placeholder="Type your message here."
-              id="content"
-              name="content"
-              rows={16}
-              defaultValue={
-                data ? (data.document!.content as string) : undefined
-              }
-            />
+            {typeof content === "string" ? (
+              <Textarea
+                placeholder="Type your message here."
+                id="content"
+                name="content"
+                rows={16}
+                defaultValue={content}
+              />
+            ) : (
+              content
+            )}
           </div>
         </fieldset>
       </Form>

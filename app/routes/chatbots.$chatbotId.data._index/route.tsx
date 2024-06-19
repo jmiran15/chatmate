@@ -5,8 +5,6 @@ import {
   useSearchParams,
   useNavigation,
   useParams,
-  useFetchers,
-  Fetcher,
   useSubmit,
 } from "@remix-run/react";
 import { DialogDemo } from "./modal";
