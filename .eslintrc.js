@@ -14,10 +14,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["eslint-plugin-react-compiler"],
-  rules: {
-    "react-compiler/react-compiler": "error",
-  },
+
   env: {
     browser: true,
     commonjs: true,

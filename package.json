@@ -88,7 +88,6 @@
     "cuid": "^3.0.0",
     "date-fns": "^3.3.1",
     "dompurify": "^3.0.8",
-    "eslint-plugin-react-compiler": "^0.0.0-experimental-51a85ea-20240601",
     "express": "^4.18.2",
     "form-data": "^4.0.0",
     "framer-motion": "^11.2.6",
