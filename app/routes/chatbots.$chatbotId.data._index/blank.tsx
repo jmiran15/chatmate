@@ -1,6 +1,6 @@
 import { DocumentType } from "@prisma/client";
 import { Form, useParams, useSubmit } from "@remix-run/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
   DialogDescription,
@@ -25,6 +25,40 @@ export default function BlankUpload({
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const { chatbotId } = useParams();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const [nameError, setNameError] = useState<string | null>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const [contentError, setContentError] = useState<string | null>(null);
+
+  function handleSubmit() {
+    if (nameRef.current?.value.length === 0) {
+      setNameError("Name is required");
+      nameRef.current?.focus();
+      return;
+    } else {
+      setNameError(null);
+    }
+
+    if (contentRef.current?.value.length === 0) {
+      setContentError("Content is required");
+      contentRef.current?.focus();
+      return;
+    } else {
+      setContentError(null);
+    }
+
+    if (
+      nameRef.current?.value.length !== 0 &&
+      contentRef.current?.value.length !== 0
+    ) {
+      setOpen(false);
+      submit(formRef.current, {
+        method: "post",
+        navigate: false,
+        fetcherKey: `${chatbotId}-${Date.now()}`,
+      });
+    }
+  }
 
   return (
     <>
@@ -46,6 +80,10 @@ export default function BlankUpload({
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
           <Input
+            ref={nameRef}
+            aria-invalid={nameError ? true : undefined}
+            aria-describedby="name-error"
+            autoFocus={true}
             name="name"
             autoComplete="name"
             id="name"
@@ -53,16 +91,37 @@ export default function BlankUpload({
             placeholder="Name"
             required
           />
+
+          {nameError ? (
+            <p
+              className="pt-1 text-red-500 text-sm font-medium leading-none"
+              id="url-error"
+            >
+              {nameError}
+            </p>
+          ) : null}
         </div>
         <div className="grid gap-2">
           <Label htmlFor="content">Content</Label>
           <Textarea
+            ref={contentRef}
+            aria-invalid={contentError ? true : undefined}
+            aria-describedby="content-error"
+            autoFocus={true}
             name="content"
             autoComplete="content"
             id="content"
             placeholder="Content"
             required
           />
+          {contentError ? (
+            <p
+              className="pt-1 text-red-500 text-sm font-medium leading-none"
+              id="content-error"
+            >
+              {contentError}
+            </p>
+          ) : null}
         </div>
       </Form>
       <DialogFooter>
@@ -75,18 +134,7 @@ export default function BlankUpload({
           >
             Back
           </Button>
-          <Button
-            onClick={() => {
-              setOpen(false);
-              submit(formRef.current, {
-                method: "post",
-                navigate: false,
-                fetcherKey: `${chatbotId}-${Date.now()}`,
-              });
-            }}
-          >
-            Upload
-          </Button>
+          <Button onClick={handleSubmit}>Upload</Button>
         </div>
       </DialogFooter>
     </>

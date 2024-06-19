@@ -6,7 +6,6 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { memo, useMemo, useRef } from "react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
-import { cn } from "~/lib/utils";
 
 export const DocumentCard = memo(function DocumentCard({
   item,
@@ -27,6 +26,7 @@ export const DocumentCard = memo(function DocumentCard({
     if (item.content) {
       content = item.content;
     } else if (!progress) {
+      // TODO - there is a bug here, where the content is not changing even though the item changed completely
       content = previousProgress.current || <Skeleton count={10} />;
     } else {
       const cond =

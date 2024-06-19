@@ -144,6 +144,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         }
       }
 
+      console.log("the urls are: ", urls);
+
       // should do this stuff in validation for user feedback
       invariant(urls.length > 0, "Links must be an array");
 
@@ -348,66 +350,6 @@ export default function Data() {
 
   // there is a bug - because this entire component rerenders when we close the modal ???? - so it clears the optimistic components ??
   // optimistic documents
-  // if (fetchers.length > 0) {
-  //   const updatedData = { ...data };
-
-  //   fetchers.forEach((fetcher: Fetcher) => {
-  //     let newDocs = [];
-
-  //     switch (fetcher.formData?.get("intent")) {
-  //       case "parseFiles": {
-  //         const files = fetcher?.formData.getAll("files");
-  //         const fileIds = JSON.parse(String(fetcher?.formData.get("fileIds")));
-  //         console.log("fileIds", fileIds);
-  //         newDocs = files.map((file: File) => ({
-  //           id: fileIds[file.name],
-  //           name: file.name,
-  //           type: DocumentType.FILE,
-  //           chatbotId,
-  //           createdAt: new Date(),
-  //         }));
-  //         break;
-  //       }
-  //       case "scrapeLinks": {
-  //         const urls = JSON.parse(String(fetcher?.formData.getAll("links")));
-  //         newDocs = urls.map((el: { id: string; url: string }) => ({
-  //           id: el.id,
-  //           name: el.url,
-  //           url: el.url,
-  //           type: DocumentType.WEBSITE,
-  //           chatbotId,
-  //           createdAt: new Date(),
-  //         }));
-  //         break;
-  //       }
-  //       case "blank": {
-  //         const name = String(fetcher?.formData.get("name"));
-  //         const content = String(fetcher?.formData.get("content"));
-  //         newDocs = [
-  //           {
-  //             id: String(fetcher?.formData.get("documentId")),
-  //             name,
-  //             content,
-  //             chatbotId,
-  //             createdAt: new Date(),
-  //             type: DocumentType.RAW,
-  //           },
-  //         ];
-  //         break;
-  //       }
-  //       default: {
-  //         break;
-  //       }
-  //     }
-
-  //     updatedData.items = [...newDocs, ...updatedData.items]; // Prepend new documents
-  //     updatedData.totalItems = updatedData.totalItems + newDocs.length;
-  //   });
-
-  //   data = updatedData;
-  //   console.log("data", data);
-  // }
-
   const pendingDocuments = usePendingDocuments();
   const updatedData = { ...data };
   updatedData.items = [...pendingDocuments, ...data.items];

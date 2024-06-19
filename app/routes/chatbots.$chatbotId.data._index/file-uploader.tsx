@@ -10,9 +10,11 @@ import { useControllableState } from "~/hooks/use-controllable-state";
 import { Button } from "~/components/ui/button";
 import { Progress } from "~/components/ui/progress";
 import { ScrollArea } from "~/components/ui/scroll-area";
-import { useCallback, useEffect } from "react";
+import { forwardRef, useCallback, useEffect } from "react";
 
 interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  validationError?: string | null;
+  setValidationError?: React.Dispatch<React.SetStateAction<string | null>>;
   /**
    * Value of the uploader.
    * @type File[]
@@ -89,8 +91,13 @@ interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-export function FileUploader(props: FileUploaderProps) {
+export const FileUploader = forwardRef(function FileUploader(
+  props: FileUploaderProps,
+  ref,
+) {
   const {
+    validationError,
+    setValidationError,
     value: valueProp,
     onValueChange,
     onUpload,
@@ -157,6 +164,7 @@ export function FileUploader(props: FileUploaderProps) {
       const updatedFiles = files ? [...files, ...newFiles] : newFiles;
 
       setFiles(updatedFiles);
+      setValidationError(null);
 
       if (rejectedFiles.length > 0) {
         rejectedFiles.forEach(({ file }) => {
@@ -226,8 +234,14 @@ export function FileUploader(props: FileUploaderProps) {
               "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
               isDragActive && "border-muted-foreground/50",
               isDisabled && "pointer-events-none opacity-60",
+              // only apply if it is focused
+              document?.activeElement === ref?.current &&
+                validationError &&
+                "border-red-500",
               className,
             )}
+            ref={ref}
+            autoFocus={true}
             {...dropzoneProps}
           >
             <input {...getInputProps()} />
@@ -284,7 +298,7 @@ export function FileUploader(props: FileUploaderProps) {
       ) : null}
     </div>
   );
-}
+});
 
 interface FileCardProps {
   file: File;

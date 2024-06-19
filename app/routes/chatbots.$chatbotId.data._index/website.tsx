@@ -7,7 +7,6 @@ import {
 import {
   Form,
   SubmitOptions,
-  useActionData,
   useFetchers,
   useParams,
   useSubmit,
@@ -22,6 +21,7 @@ import { useEventSource } from "remix-utils/sse/react";
 import LinksTable from "./links-table";
 import { Progress } from "../api.crawl.$jobId.progress";
 import { createId } from "@paralleldrive/cuid2";
+import { validateUrl } from "~/utils";
 
 export default function Website({
   setStep,
@@ -33,7 +33,6 @@ export default function Website({
   submit: ReturnType<typeof useSubmit>;
 }) {
   const { chatbotId } = useParams();
-  const actionData = useActionData();
   const fetchers = useFetchers();
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -46,9 +45,6 @@ export default function Website({
   const linksFetcher = fetchers.find(
     (fetcher) => fetcher.key === linksFetcherKey.current,
   );
-  const scrapeFetcher = fetchers.find(
-    (fetcher) => fetcher.key === scrapeFetcherKey.current,
-  );
   const job = linksFetcher?.data?.job;
   const eventSource: string | undefined = useEventSource(
     `/api/crawl/${job?.id}/progress`,
@@ -56,12 +52,14 @@ export default function Website({
   const progress: Progress | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
-
-  const disableNextButton = isTableVisible && links.length === 0;
   const selectedLinks =
     links?.length > 0
       ? Object.keys(rowSelection).map((index) => links[Number(index)])
       : [];
+  const disableNextButton =
+    isTableVisible && (links.length === 0 || selectedLinks.length === 0);
+
+  const [urlError, setUrlError] = useState<string | null>(null);
 
   // crawl progress
   // TODO - lots of unneeded re-renders here - causing performance issues
@@ -82,28 +80,45 @@ export default function Website({
     }
   }, [progress?.progress?.currentDocumentUrl, progress?.returnvalue, job?.id]);
 
-  // TODO - these are not optimistic - it is waiting for data
-  useEffect(() => {
-    if (!scrapeFetcher) return;
-    if (!scrapeFetcher?.data?.errors) {
-      setOpen(false);
+  function handleSubmit(url: string, intent: "scrape" | "links") {
+    const isValid = validateUrl(url);
+    if (!isValid) {
+      setUrlError("Url is invalid");
+      urlRef.current?.focus();
     } else {
-      if (scrapeFetcher?.data?.errors?.url) {
-        urlRef.current?.focus();
-      }
-    }
-  }, [scrapeFetcher]);
+      setUrlError(null);
+      const options = {
+        method: "post",
+        action: `/chatbots/${chatbotId}/data?index`,
+        navigate: false,
+      } as SubmitOptions;
 
-  useEffect(() => {
-    if (!linksFetcher) return;
-    if (!linksFetcher?.data?.errors) {
-      setIsTableVisible(true);
-    } else {
-      if (linksFetcher?.data?.errors?.url) {
-        urlRef.current?.focus();
+      if (intent === "scrape") {
+        setOpen(false);
+        submit(
+          {
+            intent: "scrapeLinks",
+            links: JSON.stringify([
+              { id: createId(), url: formRef.current?.url.value },
+            ]),
+          },
+          {
+            ...options,
+            fetcherKey: scrapeFetcherKey.current,
+          },
+        );
+      } else if (intent === "links") {
+        setIsTableVisible(true);
+        submit(
+          {
+            intent: "getLinks",
+            url: formRef.current?.url.value,
+          },
+          { ...options, fetcherKey: linksFetcherKey.current },
+        );
       }
     }
-  }, [linksFetcher]);
+  }
 
   return (
     <>
@@ -126,7 +141,7 @@ export default function Website({
               autoFocus={true}
               name="url"
               autoComplete="url"
-              aria-invalid={actionData?.errors?.url ? true : undefined}
+              aria-invalid={urlError ? true : undefined}
               aria-describedby="url-error"
               id="url"
               type="url"
@@ -134,12 +149,12 @@ export default function Website({
               required
             />
 
-            {actionData?.errors?.url ? (
+            {urlError ? (
               <p
-                className="pt-1 text-red-700 text-sm font-medium leading-none"
-                id="email-error"
+                className="pt-1 text-red-500 text-sm font-medium leading-none"
+                id="url-error"
               >
-                {actionData.errors.url}
+                {urlError}
               </p>
             ) : null}
           </div>
@@ -181,25 +196,12 @@ export default function Website({
               // the formRef is rendered
               if (formRef.current) {
                 if (formRef.current.crawl["1"].checked) {
-                  submit(
-                    {
-                      intent: "getLinks",
-                      url: formRef.current?.url.value,
-                    },
-                    { ...options, fetcherKey: linksFetcherKey.current },
-                  );
+                  handleSubmit(formRef.current?.url.value, "links");
                 } else {
-                  submit(
-                    {
-                      intent: "scrapeLinks",
-                      links: JSON.stringify([
-                        { id: createId(), url: formRef.current?.url.value },
-                      ]),
-                    },
-                    { ...options, fetcherKey: scrapeFetcherKey.current },
-                  );
+                  handleSubmit(formRef.current?.url.value, "scrape");
                 }
               } else {
+                setOpen(false);
                 submit(
                   {
                     intent: "scrapeLinks",
