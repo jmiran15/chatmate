@@ -256,12 +256,10 @@ export default function Data() {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
 
-  // const pendingDocuments/Items = usePending...();
-
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
     parentRef,
-    estimateSize: useCallback(() => 142 + 16, []),
+    estimateSize: useCallback(() => 142, []),
     initialRect: { width: 0, height: 800 },
   });
 
@@ -346,7 +344,6 @@ export default function Data() {
     isMountedRef.current = true;
   }, []);
 
-  // there is a bug - because this entire component rerenders when we close the modal ???? - so it clears the optimistic components ??
   // optimistic documents
   const pendingDocuments = usePendingDocuments();
   const updatedData = { ...data };
@@ -399,12 +396,13 @@ export default function Data() {
             return (
               <div
                 key={virtualRow.key}
+                data-index={virtualRow.index}
+                ref={virtualRow.measureRef}
                 style={{
                   position: "absolute",
                   top: 0,
                   left: 0,
                   width: "100%",
-                  height: `${virtualRow.size - 16}px`,
                   transform: `translateY(${virtualRow.start}px)`,
                 }}
               >
