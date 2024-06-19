@@ -93,7 +93,7 @@ interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const FileUploader = forwardRef(function FileUploader(
   props: FileUploaderProps,
-  ref,
+  ref: React.Ref<HTMLDivElement>,
 ) {
   const {
     validationError,
@@ -211,7 +211,6 @@ export const FileUploader = forwardRef(function FileUploader(
         }
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const isDisabled = disabled || (files?.length ?? 0) >= maxFiles;
@@ -241,6 +240,7 @@ export const FileUploader = forwardRef(function FileUploader(
               className,
             )}
             ref={ref}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus={true}
             {...dropzoneProps}
           >

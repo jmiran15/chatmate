@@ -50,6 +50,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
         }
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       async function listener(args: any) {
         if (args.jobId !== jobId) return null;
         try {

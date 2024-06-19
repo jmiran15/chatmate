@@ -12,6 +12,7 @@ export interface RegisteredQueue {
 }
 
 declare global {
+  // eslint-disable-next-line no-var
   var __registeredQueues: Record<string, RegisteredQueue> | undefined;
 }
 

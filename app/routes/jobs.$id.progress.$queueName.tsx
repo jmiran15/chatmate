@@ -40,6 +40,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       returnvalue,
     }: {
       jobId: string;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       returnvalue: any;
     }) {
       if (jobId !== id) return;

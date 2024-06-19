@@ -8,20 +8,8 @@ cloudinary.v2.config({
 });
 
 async function uploadFile(file: AsyncIterable<Uint8Array>, public_id?: string) {
+  // eslint-disable-next-line no-async-promise-executor
   const uploadPromise = new Promise(async (resolve, reject) => {
-    console.log("files public_id - ", public_id);
-    const options = public_id
-      ? {
-          folder: "remix",
-          resource_type: "auto",
-          public_id,
-          // use_filename: true,
-        }
-      : {
-          folder: "remix",
-          resource_type: "auto",
-        };
-
     const uploadStream = cloudinary.v2.uploader.upload_stream(
       {
         folder: "remix",

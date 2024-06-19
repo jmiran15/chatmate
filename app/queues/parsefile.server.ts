@@ -149,6 +149,7 @@ async function parseFileWithUnstructured(file: File): Promise<string> {
     }
 
     if (elements[0].constructor !== Array) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return elements.map((element: any) => element.text).join("\n");
     }
 

@@ -83,6 +83,7 @@ export default function BlankUpload({
             ref={nameRef}
             aria-invalid={nameError ? true : undefined}
             aria-describedby="name-error"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus={true}
             name="name"
             autoComplete="name"
@@ -107,6 +108,7 @@ export default function BlankUpload({
             ref={contentRef}
             aria-invalid={contentError ? true : undefined}
             aria-describedby="content-error"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
             autoFocus={true}
             name="content"
             autoComplete="content"

@@ -6,15 +6,11 @@ import {
   useNavigation,
   useParams,
   useSubmit,
-  useFetchers,
   useActionData,
 } from "@remix-run/react";
 import { DialogDemo } from "./modal";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
-import { Input } from "~/components/ui/input";
-import { SearchIcon } from "lucide-react";
-import { Button } from "~/components/ui/button";
 import { DocumentType } from "@prisma/client";
 import { crawlQueue } from "~/queues/crawl.server";
 import { scrapeQueue } from "~/queues/scrape.server";
@@ -89,6 +85,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 const isServerRender = typeof document === "undefined";
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const useSSRLayoutEffect = isServerRender ? () => {} : useLayoutEffect;
 
 function useIsHydrating(queryString: string) {

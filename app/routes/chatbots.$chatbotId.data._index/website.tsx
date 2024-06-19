@@ -138,6 +138,7 @@ export default function Website({
             <Label htmlFor="url">URL</Label>
             <Input
               ref={urlRef}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus={true}
               name="url"
               autoComplete="url"

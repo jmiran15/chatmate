@@ -87,6 +87,7 @@ export const DocumentCard = memo(function DocumentCard({
   );
 }, arePropsEqual);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function arePropsEqual(prev: any, next: any) {
   // can probably combine the two checks into one
   return (
