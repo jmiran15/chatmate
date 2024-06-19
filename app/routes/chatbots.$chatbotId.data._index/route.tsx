@@ -35,6 +35,7 @@ import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { DocumentCard } from "./document-card";
 import { queue } from "~/queues/ingestion.server";
 import { validateUrl } from "~/utils";
+import { usePendingDocuments } from "./hooks/use-pending-documents";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -130,12 +131,12 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
       if (!crawled) {
         invariant(urls.length === 1, "urls must be an array of length 1");
-        if (!validateUrl(urls[0])) {
+        if (!validateUrl(urls[0].url)) {
           return json(
             {
               errors: { url: "Url is invalid" },
               intent,
-              tress: null,
+              trees: null,
               documents: null,
             },
             { status: 400 },
@@ -147,9 +148,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       invariant(urls.length > 0, "Links must be an array");
 
       const documents = await prisma.document.createManyAndReturn({
-        data: urls.map((url: string) => ({
-          name: url,
-          url,
+        data: urls.map((el: { id: string; url: string }) => ({
+          id: el.id,
+          name: el.url,
+          url: el.url,
           type: DocumentType.WEBSITE,
           chatbotId,
         })),
@@ -175,11 +177,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         }
 
         const fileSrcs = cloudinaryResponse.fileSrcs;
+        const fileIds = cloudinaryResponse.fileIds;
+
+        console.log("cloudinaryResponse", {
+          fileSrcs,
+          fileIds,
+        });
+
         invariant(Array.isArray(fileSrcs), "File srcs must be an array");
         invariant(fileSrcs.length > 0, "File srcs must be an array");
 
         const documents = await prisma.document.createManyAndReturn({
           data: fileSrcs.map((file: { src: string; name: string }) => ({
+            id: fileIds[file.name],
             name: file.name,
             filepath: file.src,
             type: DocumentType.FILE,
@@ -198,12 +208,15 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         throw new Error(`Error uploading files: ${error}`);
       }
     }
+
     case "blank": {
       const name = String(formData.get("name"));
       const content = String(formData.get("content"));
+      const id = String(formData.get("documentId"));
 
       const document = await prisma.document.create({
         data: {
+          id,
           name,
           content,
           chatbotId,
@@ -231,7 +244,6 @@ export default function Data() {
   let data = useLoaderData<typeof loader>();
   const { chatbotId } = useParams();
   const navigation = useNavigation();
-  const fetchers = useFetchers();
   const submit = useSubmit();
   const [searchParams, setSearchParams] = useSearchParams();
   const { start, limit } = getStartLimit(searchParams);
@@ -243,6 +255,8 @@ export default function Data() {
   const progress: ProgressData | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
+
+  // const pendingDocuments/Items = usePending...();
 
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
@@ -334,62 +348,71 @@ export default function Data() {
 
   // there is a bug - because this entire component rerenders when we close the modal ???? - so it clears the optimistic components ??
   // optimistic documents
-  // we can do this a lot cleaner with a custom hook like - https://github.com/remix-run/example-trellix/blob/577f539409b057a34d2b760de3d5277af03bebd7/app/routes/board.%24id/board.tsx#L3
-  console.log("fetchers", fetchers.length);
-  if (fetchers.length > 0) {
-    const updatedData = { ...data };
+  // if (fetchers.length > 0) {
+  //   const updatedData = { ...data };
 
-    fetchers.forEach((fetcher: Fetcher) => {
-      let newDocs = [];
+  //   fetchers.forEach((fetcher: Fetcher) => {
+  //     let newDocs = [];
 
-      switch (fetcher.formData?.get("intent")) {
-        case "parseFiles": {
-          const files = fetcher?.formData.getAll("files");
-          newDocs = files.map((file: File) => ({
-            name: file.name,
-            type: DocumentType.FILE,
-            chatbotId,
-            createdAt: new Date(),
-          }));
-          break;
-        }
-        case "scrapeLinks": {
-          const urls = JSON.parse(String(fetcher?.formData.getAll("links")));
-          newDocs = urls.map((url: string) => ({
-            name: url,
-            url,
-            type: DocumentType.WEBSITE,
-            chatbotId,
-            createdAt: new Date(),
-          }));
-          break;
-        }
-        case "blank": {
-          const name = String(fetcher?.formData.get("name"));
-          const content = String(fetcher?.formData.get("content"));
-          newDocs = [
-            {
-              name,
-              content,
-              chatbotId,
-              createdAt: new Date(),
-              type: DocumentType.RAW,
-            },
-          ];
-          break;
-        }
-        default: {
-          break;
-        }
-      }
+  //     switch (fetcher.formData?.get("intent")) {
+  //       case "parseFiles": {
+  //         const files = fetcher?.formData.getAll("files");
+  //         const fileIds = JSON.parse(String(fetcher?.formData.get("fileIds")));
+  //         console.log("fileIds", fileIds);
+  //         newDocs = files.map((file: File) => ({
+  //           id: fileIds[file.name],
+  //           name: file.name,
+  //           type: DocumentType.FILE,
+  //           chatbotId,
+  //           createdAt: new Date(),
+  //         }));
+  //         break;
+  //       }
+  //       case "scrapeLinks": {
+  //         const urls = JSON.parse(String(fetcher?.formData.getAll("links")));
+  //         newDocs = urls.map((el: { id: string; url: string }) => ({
+  //           id: el.id,
+  //           name: el.url,
+  //           url: el.url,
+  //           type: DocumentType.WEBSITE,
+  //           chatbotId,
+  //           createdAt: new Date(),
+  //         }));
+  //         break;
+  //       }
+  //       case "blank": {
+  //         const name = String(fetcher?.formData.get("name"));
+  //         const content = String(fetcher?.formData.get("content"));
+  //         newDocs = [
+  //           {
+  //             id: String(fetcher?.formData.get("documentId")),
+  //             name,
+  //             content,
+  //             chatbotId,
+  //             createdAt: new Date(),
+  //             type: DocumentType.RAW,
+  //           },
+  //         ];
+  //         break;
+  //       }
+  //       default: {
+  //         break;
+  //       }
+  //     }
 
-      updatedData.items = [...newDocs, ...updatedData.items]; // Prepend new documents
-      updatedData.totalItems = updatedData.totalItems + newDocs.length;
-    });
+  //     updatedData.items = [...newDocs, ...updatedData.items]; // Prepend new documents
+  //     updatedData.totalItems = updatedData.totalItems + newDocs.length;
+  //   });
 
-    data = updatedData;
-    console.log("data", data);
-  }
+  //   data = updatedData;
+  //   console.log("data", data);
+  // }
+
+  const pendingDocuments = usePendingDocuments();
+  const updatedData = { ...data };
+  updatedData.items = [...pendingDocuments, ...data.items];
+  updatedData.totalItems = data.totalItems + pendingDocuments.length;
+  data = updatedData;
 
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">

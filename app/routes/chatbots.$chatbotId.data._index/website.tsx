@@ -8,7 +8,6 @@ import {
   Form,
   SubmitOptions,
   useActionData,
-  useFetcher,
   useFetchers,
   useParams,
   useSubmit,
@@ -21,10 +20,8 @@ import { STEPS } from "~/utils/types";
 import { Checkbox } from "~/components/ui/checkbox";
 import { useEventSource } from "remix-utils/sse/react";
 import LinksTable from "./links-table";
-import { action } from "./route";
 import { Progress } from "../api.crawl.$jobId.progress";
-import { v4 as uuidv4 } from "uuid";
-import { s } from "vitest/dist/reporters-5f784f42";
+import { createId } from "@paralleldrive/cuid2";
 
 export default function Website({
   setStep,
@@ -39,14 +36,13 @@ export default function Website({
   const actionData = useActionData();
   const fetchers = useFetchers();
 
-  // TODO - fix type
   const formRef = useRef<HTMLFormElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
   const [links, setLinks] = useState<string[]>([]);
   const [rowSelection, setRowSelection] = useState({});
   const [isTableVisible, setIsTableVisible] = useState(false);
-  const linksFetcherKey = useRef(uuidv4());
-  const scrapeFetcherKey = useRef(uuidv4());
+  const linksFetcherKey = useRef(createId());
+  const scrapeFetcherKey = useRef(createId());
   const linksFetcher = fetchers.find(
     (fetcher) => fetcher.key === linksFetcherKey.current,
   );
@@ -165,7 +161,7 @@ export default function Website({
             onClick={() => {
               if (isTableVisible) {
                 setIsTableVisible(false);
-                linksFetcherKey.current = uuidv4();
+                linksFetcherKey.current = createId();
               } else {
                 setStep(STEPS.SELECT_TYPE);
               }
@@ -196,7 +192,9 @@ export default function Website({
                   submit(
                     {
                       intent: "scrapeLinks",
-                      links: JSON.stringify([formRef.current?.url.value]),
+                      links: JSON.stringify([
+                        { id: createId(), url: formRef.current?.url.value },
+                      ]),
                     },
                     { ...options, fetcherKey: scrapeFetcherKey.current },
                   );
@@ -205,7 +203,12 @@ export default function Website({
                 submit(
                   {
                     intent: "scrapeLinks",
-                    links: JSON.stringify(selectedLinks),
+                    links: JSON.stringify(
+                      selectedLinks.map((link) => ({
+                        id: createId(),
+                        url: link,
+                      })),
+                    ),
                     crawled: true,
                   },
                   { ...options, fetcherKey: scrapeFetcherKey.current },

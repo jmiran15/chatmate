@@ -25,6 +25,13 @@ import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
 import { queue } from "~/queues/ingestion.server";
 
+// TODO - account for optimistic UI, i.e. we could have got here with the data in the fetchers but not yet in the db
+// TODO - we also need to carry forward the optimistic ui (CRUD)
+// TODO - make deletion optimistic
+// TODO - defer the intial loading - with skeletons
+// TODO - if we don't have the body - show skeleton
+// TODO - show ingestion status - (percentage, etc...)
+
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
   const userId = await requireUserId(request);

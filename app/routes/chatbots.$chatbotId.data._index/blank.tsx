@@ -12,6 +12,7 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { STEPS } from "~/utils/types";
+import { createId } from "@paralleldrive/cuid2";
 
 export default function BlankUpload({
   setStep,
@@ -41,6 +42,7 @@ export default function BlankUpload({
       >
         <input type="hidden" name="intent" value="blank" />
         <input type="hidden" name="type" value={DocumentType.RAW} />
+        <input type="hidden" name="documentId" value={createId()} />
         <div className="grid gap-2">
           <Label htmlFor="name">Name</Label>
           <Input

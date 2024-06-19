@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { memo, useMemo, useRef } from "react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
+import { cn } from "~/lib/utils";
 
 export const DocumentCard = memo(function DocumentCard({
   item,
@@ -61,13 +62,14 @@ export const DocumentCard = memo(function DocumentCard({
   return (
     <Link
       to={item?.id}
-      className="flex flex-col-reverse sm:flex-row items-start justify-between rounded-lg border bg-card text-card-foreground shadow-sm hover:bg-accent p-6 gap-2 md:gap-8"
+      className="flex flex-col-reverse sm:flex-row items-start justify-between rounded-lg border bg-card text-card-foreground shadow-sm p-6 gap-2 md:gap-8"
     >
       <div className="flex flex-col space-y-1.5 items-start justify-start shrink w-full">
         <div className="font-semibold">{item?.name}</div>
         <div className="line-clamp-2 text-sm text-muted-foreground text-wrap w-full">
           {memoizedContent}
         </div>
+        <div>Optimistic: {item?.id ?? "Yes"}</div>
         <div className="flex flex-row items-center gap-4">
           <div className="text-xs text-muted-foreground text-nowrap">
             {item?.type}

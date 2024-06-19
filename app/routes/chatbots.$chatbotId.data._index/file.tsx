@@ -5,15 +5,11 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { FileUploader } from "./file-uploader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "~/components/ui/button";
-import {
-  useParams,
-  useFetcher,
-  useActionData,
-  useSubmit,
-} from "@remix-run/react";
+import { useParams, useSubmit } from "@remix-run/react";
 import { STEPS } from "~/utils/types";
+import { createId } from "@paralleldrive/cuid2";
 
 export function FileUpload({
   setStep,
@@ -33,10 +29,16 @@ export function FileUpload({
   const handleUpload = () => {
     setOpen(false);
     const formData = new FormData();
+    const fileIds: Record<string, string> = {};
+
     files.forEach((file) => {
+      const fileId = createId();
+      fileIds[file.name] = fileId;
       formData.append("files", file);
     });
+
     formData.append("intent", "parseFiles");
+    formData.append("fileIds", JSON.stringify(fileIds));
 
     submit(formData, {
       method: "POST",

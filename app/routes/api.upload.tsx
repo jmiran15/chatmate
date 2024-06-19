@@ -33,6 +33,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     uploadHandler,
   );
   const fileSrcs = formData.getAll("files");
+  const fileIdsJson = formData.get("fileIds");
+
   if (!fileSrcs || fileSrcs.length === 0) {
     return json({
       error: "No files uploaded",
@@ -45,5 +47,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     fileSrcsArray = [fileSrcsArray];
   }
 
-  return json({ error: null, fileSrcs: fileSrcsArray });
+  const fileIds = JSON.parse(fileIdsJson as string);
+
+  return json({ error: null, fileSrcs: fileSrcsArray, fileIds });
 };
