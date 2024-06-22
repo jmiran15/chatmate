@@ -64,7 +64,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
               }),
             });
           } catch (error) {
-            console.error(`error sending event: ${error}`);
+            console.error(
+              `error sending event: ${event} - ${JSON.stringify(
+                job.failedReason,
+              )}`,
+            );
           }
         }
 
