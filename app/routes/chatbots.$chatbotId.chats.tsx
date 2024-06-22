@@ -1,5 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
+  Form,
   Outlet,
   useBeforeUnload,
   useFetcher,
@@ -7,6 +8,7 @@ import {
   useNavigation,
   useParams,
   useSearchParams,
+  useSubmit,
 } from "@remix-run/react";
 import {
   useCallback,
@@ -30,23 +32,27 @@ import { useMobileScreen } from "~/utils/mobile";
 import InboxIndexMd from "~/components/indexes/inbox-md";
 import { prisma } from "~/db.server";
 import { useVirtual } from "react-virtual";
-import { Button } from "~/components/ui/button";
 import { createId } from "@paralleldrive/cuid2";
+import { Prisma } from "@prisma/client";
 
 const LIMIT = 64;
 const DATA_OVERSCAN = 8;
 
-const getStartLimit = (searchParams: URLSearchParams) => ({
+const getStartLimit = (
+  searchParams: URLSearchParams,
+): {
+  start: number;
+  limit: number;
+} => ({
   start: Number(searchParams.get("start") || "0"),
   limit: Number(searchParams.get("limit") || LIMIT.toString()),
 });
 
-const getCreatedAt = (searchParams: URLSearchParams) => ({
-  createdAt: String(searchParams.get("createdAt") || "asc"),
-});
+const getCreatedAt = (searchParams: URLSearchParams): "asc" | "desc" =>
+  String(searchParams.get("createdAt")) === "asc" ? "asc" : "desc";
 
-const getStarred = (searchParams: URLSearchParams) =>
-  searchParams.get("starred") || "";
+const getStarred = (searchParams: URLSearchParams): "1" | "0" =>
+  String(searchParams.get("starred")) === "1" ? "1" : "0";
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   await requireUserId(request);
@@ -62,23 +68,29 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   const { start, limit } = getStartLimit(new URL(request.url).searchParams);
 
-  const where = starred
-    ? {
-        chatbotId,
-        userId: null,
-        starred: true,
-      }
-    : {
-        chatbotId,
-        userId: null,
-      };
+  const starredQuery = starred === "1" ? { starred: true } : {};
+  const createdAtQuery = {
+    createdAt: (createdAt === "asc" ? "asc" : "desc") as Prisma.SortOrder,
+  };
+
+  console.log("starredQuery", starredQuery);
+  console.log("createdAtQuery", createdAtQuery);
+
   const [totalItems, items] = await prisma.$transaction([
     prisma.chat.count({
-      where,
+      where: {
+        chatbotId,
+        ...starredQuery,
+      },
     }),
     prisma.chat.findMany({
-      where,
-      orderBy: createdAt,
+      where: {
+        chatbotId,
+        ...starredQuery,
+      },
+      orderBy: {
+        ...createdAtQuery,
+      },
       skip: start,
       take: limit,
       include: {
@@ -181,29 +193,30 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
 const SORT_LABELS = [
   {
-    value: "dateNewToOld",
+    value: "desc",
     label: "Date: New to old",
   },
   {
-    value: "dateOldToNew",
+    value: "asc",
     label: "Date: Old to new",
   },
 ];
 
 export default function Chats() {
-  let data = useLoaderData<typeof loader>();
-
-  const [tab, setTab] = useState<"all" | "starred">("all");
-  const [sort, setSort] = useState<
-    "dateNewToOld" | "dateOldToNew" | "messagesHighToLow" | "messagesLowToHigh"
-  >("dateNewToOld");
-
-  // infinite scroll
-  const navigation = useNavigation();
+  const submit = useSubmit();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { start, limit } = getStartLimit(searchParams);
+  const starred: "1" | "0" = getStarred(searchParams);
+  const createdAt: "asc" | "desc" = getCreatedAt(searchParams);
+  const formRef = useRef();
 
-  // initiliazing with the function is somehow more efficient - because it is only called once
+  // const [tab, setTab] = useState<"all" | "starred">("all");
+  // const [sort, setSort] = useState<
+  //   "dateNewToOld" | "dateOldToNew" | "messagesHighToLow" | "messagesLowToHigh"
+  // >("dateNewToOld");
+
+  const data = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
+  const { start, limit } = getStartLimit(searchParams);
   const [initialStart] = useState(() => start);
   const hydrating = useIsHydrating("[data-hydrating-signal]");
   const isMountedRef = useRef(false);
@@ -285,9 +298,10 @@ export default function Chats() {
     }
     if (neededStart !== start) {
       setSearchParams(
-        {
-          start: String(neededStart),
-          limit: LIMIT.toString(),
+        (prev) => {
+          prev.set("start", String(neededStart));
+          prev.set("limit", LIMIT.toString());
+          return prev;
         },
         { replace: true },
       );
@@ -298,142 +312,120 @@ export default function Chats() {
     isMountedRef.current = true;
   }, []);
 
-  const fetcher = useFetcher();
-  // const isMobile = useMobileScreen();
+  const { chatbotId } = useParams();
 
   return (
-    <div className="flex flex-col sm:grid sm:grid-cols-10 h-full overflow-none ">
+    <div className="flex flex-col  sm:grid sm:grid-cols-10 h-full overflow-none py-4 sm:py-6">
       {/* need to keep this in sync with the searchParams - Remix should how to do
         it in one of their guides */}
-
-      {/* <div> */}
-      {/* <Tabs
-          value={tab}
-          className="w-full"
-          onValueChange={(value: "all" | "starred") => {
-            setTab(value);
+      <div className="flex flex-col gap-2 sm:col-span-3 h-full sm:border-r overflow-auto">
+        <Tabs
+          defaultValue={starred}
+          className="w-full px-4 sm:px-6"
+          onValueChange={(val) => {
+            const newParams = new URLSearchParams(searchParams);
+            newParams.set("starred", val);
+            setSearchParams(newParams);
           }}
         >
           <TabsList>
-            <TabsTrigger value="all">All chats</TabsTrigger>
-            <TabsTrigger value="starred">Starred</TabsTrigger>
+            <TabsTrigger value="0">All chats</TabsTrigger>
+            <TabsTrigger value="1">Starred</TabsTrigger>
           </TabsList>
-          <div className="flex w-full justify-between items-center my-4 flex-wrap md:flex-nowrap gap-2">
-            <p className="text-muted-foreground text-sm text-nowrap	shrink-0">
-              Showing {chatsState.length} of {totalChatsCount} chats
-            </p>
-            <Select value={sort} onValueChange={setSort}>
-              <SelectTrigger className="shrink">
-                <SelectValue placeholder="Sort" />
-              </SelectTrigger>
-              <SelectContent>
-                {SORT_LABELS.map((sort) => (
-                  <SelectItem key={sort.value} value={sort.value}>
-                    {sort.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <TabsContent value="all">
-            {chatsState.length === 0 ? (
-              isMobile ? (
-                <InboxIndexMd />
-              ) : (
-                <p className="text-sm text-muted-foreground self-start w-full">
-                  This is where you will see all incoming messages from your
-                  customers.
-                </p>
-              )
-            ) : (
-              <ol className="w-full space-y-4">
-                {chatsState.map((chat) => (
-                  <li key={chat.id}>
-                    <ChatsCard chat={chat} />
-                  </li>
-                ))}
-              </ol>
-            )}
-          </TabsContent>
-          <TabsContent value="starred">
-            {chatsState.length === 0 ? (
-              isMobile ? (
-                <InboxIndexMd />
-              ) : (
-                <p className="text-sm text-muted-foreground self-start w-full">
-                  No starred chats
-                </p>
-              )
-            ) : (
-              <ol className="w-full space-y-4">
-                {chatsState.map((chat) => (
-                  <li key={chat.id}>
-                    <ChatsCard chat={chat} />
-                  </li>
-                ))}
-              </ol>
-            )}
-          </TabsContent>
-        </Tabs> */}
-      {/* the tabs */}
-      {/* the filters */}
-      {/* the list of chats */}
-      <div
-        ref={parentRef}
-        data-hydrating-signal
-        // className="flex flex-col h-full w-full items-center justify-start p-4 gap-4 sm:border-r sm:p-6 sm:col-span-3 bg-red-100 overflow-auto"
+        </Tabs>
+        <div className="flex w-full justify-between items-center flex-wrap md:flex-nowrap gap-2 px-4 sm:px-6">
+          <p className="text-muted-foreground text-sm text-nowrap	shrink-0">
+            {data?.totalItems} Chats
+          </p>
+          <Select
+            name="createdAt"
+            defaultValue={createdAt}
+            onValueChange={(value) => {
+              const newParams = new URLSearchParams(searchParams);
+              newParams.set("createdAt", value);
+              setSearchParams(newParams);
+            }}
+          >
+            <SelectTrigger className="shrink">
+              <SelectValue placeholder="Sort" />
+            </SelectTrigger>
+            <SelectContent>
+              {SORT_LABELS.map((sort) => (
+                <SelectItem key={sort.value} value={sort.value}>
+                  {sort.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
 
-        className="col-span-3 bg-red-100 p-4 h-full"
-        style={{
-          width: `100%`,
-          overflow: "auto",
-        }}
-      >
         <div
+          ref={parentRef}
+          data-hydrating-signal
+          className="px-4 sm:px-6"
           style={{
-            height: `${rowVirtualizer.totalSize}px`,
-            width: "100%",
-            position: "relative",
+            height: `100%`,
+            width: `100%`,
+            overflow: "auto",
           }}
         >
-          {rowVirtualizer.virtualItems.map((virtualRow) => {
-            const index = isMountedRef.current
-              ? Math.abs(start - virtualRow.index)
-              : virtualRow.index;
-            const item = data.items[index];
+          <div
+            style={{
+              height: `${rowVirtualizer.totalSize}px`,
+              width: "100%",
+              position: "relative",
+            }}
+          >
+            {rowVirtualizer.virtualItems.map((virtualRow) => {
+              const index = isMountedRef.current
+                ? Math.abs(start - virtualRow.index)
+                : virtualRow.index;
+              const item = data.items[index];
 
-            return (
-              <div
-                key={virtualRow.key}
-                data-index={virtualRow.index}
-                ref={virtualRow.measureRef}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  transform: `translateY(${virtualRow.start}px)`,
-                }}
-              >
-                {item ? (
-                  <ChatsCard chat={item} />
-                ) : navigation.state === "loading" ? (
-                  <span>Loading...</span>
-                ) : (
-                  <span>Nothing to see here...</span>
-                )}
-              </div>
-            );
-          })}
-          {rowVirtualizer.virtualItems.length === 0 && <p>No documents yet</p>}
+              return (
+                <div
+                  key={virtualRow.key}
+                  data-index={virtualRow.index}
+                  ref={virtualRow.measureRef}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    transform: `translateY(${virtualRow.start}px)`,
+                  }}
+                >
+                  {item ? (
+                    <ChatsCard chat={item} />
+                  ) : navigation.state === "loading" ? (
+                    <span>Loading...</span>
+                  ) : (
+                    <span>Nothing to see here...</span>
+                  )}
+                </div>
+              );
+            })}
+            {rowVirtualizer.virtualItems.length === 0 && <EmptyState />}
+          </div>
         </div>
       </div>
-      {/* </div> */}
       {/* the actual content */}
-      <Outlet />
+      {/* <Outlet /> */}
     </div>
   );
 }
+
+function EmptyState() {
+  const isMobile = useMobileScreen();
+  return isMobile ? (
+    <InboxIndexMd />
+  ) : (
+    <p className="text-sm text-muted-foreground self-start w-full">
+      This is where you will see all incoming messages from your customers.
+    </p>
+  );
+}
+
 export const handle = {
   PATH: (chatbotId: string) => `/chatbots/${chatbotId}/chats`,
   breadcrumb: "chats",

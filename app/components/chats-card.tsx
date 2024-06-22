@@ -14,7 +14,7 @@ export default function ChatsCard({ chat }: { chat: any }) {
   return (
     <Link
       to={`${chat.id}`}
-      className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"
+      className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent mb-4 pointer-events-none"
       style={{
         backgroundColor: selected ? "#f5f5f4" : "#fff",
       }}
