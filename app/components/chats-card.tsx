@@ -1,24 +1,45 @@
-import { Form, Link, useParams, useSearchParams } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useFetcher,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
 import { Button } from "./ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
-import { useState } from "react";
+
+import { cn } from "~/lib/utils";
+import { Chat } from "@prisma/client";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export default function ChatsCard({ chat }: { chat: any }) {
+export default function ChatsCard({
+  chat,
+}: {
+  chat: Chat & {
+    _count: {
+      messages: number;
+    };
+  };
+}) {
   const { chatsId, chatbotId } = useParams();
-  const selected = chatsId === chat.id;
-  const [starred, setStarred] = useState(chat.starred);
+  // const [starred, setStarred] = useState(chat.starred);
   const [searchParams] = useSearchParams();
+  const active = chatsId === chat.id;
+  const fetcher = useFetcher();
+
+  const starred = fetcher.formData
+    ? fetcher.formData.get("star") === "true"
+    : chat.starred;
 
   return (
     <Link
       to={`${chat.id}?${searchParams.toString()}`}
-      className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent mb-4"
-      style={{
-        backgroundColor: selected ? "#f5f5f4" : "#fff",
-      }}
+      className={cn(
+        "flex flex-col items-start gap-2 text-left text-sm transition-all hover:bg-accent mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
+        active && "bg-accent",
+      )}
     >
       <div className="flex w-full flex-col gap-1">
         <div className="flex items-center">
@@ -48,28 +69,36 @@ export default function ChatsCard({ chat }: { chat: any }) {
         <p className="text-muted-foreground text-xs">
           {chat._count.messages} messages
         </p>
-        <Form
-          method="POST"
-          action={`/chatbots/${chatbotId}/chats`}
-          className="self-end"
-          onSubmit={() => setStarred((starred) => !starred)} // optimistic UI? might not be in sync with backend
+
+        <Button
+          onClick={(e) => {
+            fetcher.submit(
+              {
+                action: "star",
+                star: !starred,
+                chatId: chat.id,
+              },
+              {
+                method: "POST",
+                action: `/chatbots/${chatbotId}/chats`,
+                preventScrollReset: true,
+                unstable_flushSync: true,
+                navigate: false,
+              },
+            );
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          type="submit"
+          variant="ghost"
+          size="icon"
         >
-          <input type="hidden" name="action" value="star" />
-          <input type="hidden" name="star" value={!chat.starred} />
-          <input type="hidden" name="chatId" value={chat.id} />
-          <Button
-            onClick={(e) => e.stopPropagation()}
-            type="submit"
-            variant={"outline"}
-            className="h-[36px] w-[36px] p-0 m-0  items-center justify-center flex"
-          >
-            {starred ? (
-              <StarIconSolid className="w-[18px] h-[18px]" />
-            ) : (
-              <StarIcon className="w-[18px] h-[18px]" />
-            )}
-          </Button>
-        </Form>
+          {starred ? (
+            <StarIconSolid className="w-4 h-4" />
+          ) : (
+            <StarIcon className="w-4 h-4" />
+          )}
+        </Button>
       </div>
     </Link>
   );

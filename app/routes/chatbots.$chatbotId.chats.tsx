@@ -120,6 +120,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   switch (action) {
     case "star": {
+      console.log({ chatId, star });
       return await updateChatStarredStatus({
         chatId,
         starred: star === "true",
@@ -156,7 +157,6 @@ export default function Chats() {
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
     parentRef,
-    // change estimated size ...
     estimateSize: useCallback(() => 50, []),
     initialRect: { width: 0, height: 800 },
   });
@@ -243,9 +243,11 @@ export default function Chats() {
     isMountedRef.current = true;
   }, []);
 
+  // TODO - fix bugs with react-virtual rerenders
+
   return (
-    <div className="flex flex-col  sm:grid sm:grid-cols-10 h-full overflow-none py-4 sm:py-6">
-      <div className="flex flex-col gap-2 sm:col-span-3 h-full sm:border-r overflow-auto">
+    <div className="flex flex-col  sm:grid sm:grid-cols-10 h-full overflow-none ">
+      <div className="flex flex-col gap-2 sm:col-span-3 h-full sm:border-r overflow-auto py-4 sm:py-6">
         <Tabs
           defaultValue={starred}
           className="w-full px-4 sm:px-6"
@@ -328,7 +330,18 @@ export default function Chats() {
                 >
                   {item ? (
                     <ChatsCard chat={item} />
-                  ) : navigation.state === "loading" ? (
+                  ) : // <pre>
+                  //   {JSON.stringify(
+                  //     {
+                  //       id: item.id,
+                  //       name: item.name,
+                  //       starred: item.starred,
+                  //     },
+                  //     null,
+                  //     2,
+                  //   )}
+                  // </pre>
+                  navigation.state === "loading" ? (
                     <span>Loading...</span>
                   ) : (
                     <span>Nothing to see here...</span>
