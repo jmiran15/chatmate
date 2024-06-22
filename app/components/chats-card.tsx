@@ -1,4 +1,4 @@
-import { Form, Link, useParams } from "@remix-run/react";
+import { Form, Link, useParams, useSearchParams } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
 import { Button } from "./ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
@@ -10,11 +10,12 @@ export default function ChatsCard({ chat }: { chat: any }) {
   const { chatsId, chatbotId } = useParams();
   const selected = chatsId === chat.id;
   const [starred, setStarred] = useState(chat.starred);
+  const [searchParams] = useSearchParams();
 
   return (
     <Link
-      to={`${chat.id}`}
-      className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent mb-4 pointer-events-none"
+      to={`${chat.id}?${searchParams.toString()}`}
+      className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent mb-4"
       style={{
         backgroundColor: selected ? "#f5f5f4" : "#fff",
       }}

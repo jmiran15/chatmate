@@ -32,3 +32,6 @@
 //     </div>
 //   );
 // }
+
+const T = () => <p>index</p>;
+export default T;

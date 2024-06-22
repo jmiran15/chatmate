@@ -1,12 +1,9 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
-  Form,
   Outlet,
   useBeforeUnload,
-  useFetcher,
   useLoaderData,
   useNavigation,
-  useParams,
   useSearchParams,
   useSubmit,
 } from "@remix-run/react";
@@ -18,7 +15,7 @@ import {
   useState,
 } from "react";
 import ChatsCard from "~/components/chats-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { updateChatStarredStatus } from "~/models/chat.server";
 import { requireUserId } from "~/session.server";
 import {
@@ -32,7 +29,6 @@ import { useMobileScreen } from "~/utils/mobile";
 import InboxIndexMd from "~/components/indexes/inbox-md";
 import { prisma } from "~/db.server";
 import { useVirtual } from "react-virtual";
-import { createId } from "@paralleldrive/cuid2";
 import { Prisma } from "@prisma/client";
 
 const LIMIT = 64;
@@ -65,16 +61,11 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const searchParams = new URL(request.url).searchParams;
   const starred = getStarred(searchParams);
   const createdAt = getCreatedAt(searchParams);
-
   const { start, limit } = getStartLimit(new URL(request.url).searchParams);
-
   const starredQuery = starred === "1" ? { starred: true } : {};
   const createdAtQuery = {
     createdAt: (createdAt === "asc" ? "asc" : "desc") as Prisma.SortOrder,
   };
-
-  console.log("starredQuery", starredQuery);
-  console.log("createdAtQuery", createdAtQuery);
 
   const [totalItems, items] = await prisma.$transaction([
     prisma.chat.count({
@@ -121,16 +112,11 @@ function useIsHydrating(queryString: string) {
   return isHydrating;
 }
 
-export const action = async ({ params, request }: ActionFunctionArgs) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const action = formData.get("action");
   const star = formData.get("star") as string;
   const chatId = formData.get("chatId") as string;
-  const { chatbotId } = params;
-
-  // if (!chatId) {
-  //   throw new Error("chatId is required");
-  // }
 
   switch (action) {
     case "star": {
@@ -139,53 +125,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         starred: star === "true",
       });
     }
-    case "seed": {
-      if (!chatbotId) {
-        throw new Error("chatbotId is required");
-      }
-
-      const chatData = Array.from({ length: 100 }, (_, i) => {
-        const id_ = createId();
-        return {
-          id: id_,
-          chatbotId,
-          name: `Untitled Chat ${i}-${createId()}`,
-          aiInsights:
-            "this is insight 1, this is insight 2, this is insight 3, this is insight 4",
-          sessionId: id_,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
-      });
-
-      const messageData = chatData.flatMap((chat, i) => [
-        {
-          role: "assistant",
-          content: "Hello",
-          chatId: chat.id,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
-        {
-          role: "user",
-          content: "Hi",
-          chatId: chat.id,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
-      ]);
-
-      return await prisma.$transaction(async (prisma) => {
-        await prisma.chat.createMany({
-          data: chatData,
-        });
-
-        await prisma.message.createMany({
-          data: messageData,
-        });
-      });
-    }
-
     default:
       throw new Error("Invalid action");
   }
@@ -203,24 +142,16 @@ const SORT_LABELS = [
 ];
 
 export default function Chats() {
-  const submit = useSubmit();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const starred: "1" | "0" = getStarred(searchParams);
-  const createdAt: "asc" | "desc" = getCreatedAt(searchParams);
-  const formRef = useRef();
-
-  // const [tab, setTab] = useState<"all" | "starred">("all");
-  // const [sort, setSort] = useState<
-  //   "dateNewToOld" | "dateOldToNew" | "messagesHighToLow" | "messagesLowToHigh"
-  // >("dateNewToOld");
-
   const data = useLoaderData<typeof loader>();
   const navigation = useNavigation();
-  const { start, limit } = getStartLimit(searchParams);
-  const [initialStart] = useState(() => start);
+  const [searchParams, setSearchParams] = useSearchParams();
   const hydrating = useIsHydrating("[data-hydrating-signal]");
   const isMountedRef = useRef(false);
   const parentRef = useRef<HTMLDivElement>(null);
+  const starred: "1" | "0" = getStarred(searchParams);
+  const createdAt: "asc" | "desc" = getCreatedAt(searchParams);
+  const { start, limit } = getStartLimit(searchParams);
+  const [initialStart] = useState(() => start);
 
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
@@ -312,12 +243,8 @@ export default function Chats() {
     isMountedRef.current = true;
   }, []);
 
-  const { chatbotId } = useParams();
-
   return (
     <div className="flex flex-col  sm:grid sm:grid-cols-10 h-full overflow-none py-4 sm:py-6">
-      {/* need to keep this in sync with the searchParams - Remix should how to do
-        it in one of their guides */}
       <div className="flex flex-col gap-2 sm:col-span-3 h-full sm:border-r overflow-auto">
         <Tabs
           defaultValue={starred}
@@ -351,7 +278,11 @@ export default function Chats() {
             </SelectTrigger>
             <SelectContent>
               {SORT_LABELS.map((sort) => (
-                <SelectItem key={sort.value} value={sort.value}>
+                <SelectItem
+                  key={sort.value}
+                  value={sort.value}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {sort.label}
                 </SelectItem>
               ))}
@@ -410,7 +341,7 @@ export default function Chats() {
         </div>
       </div>
       {/* the actual content */}
-      {/* <Outlet /> */}
+      <Outlet />
     </div>
   );
 }
