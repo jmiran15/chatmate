@@ -85,7 +85,7 @@ export default function ChatsList({
   const rowVirtualizer = useVirtual({
     size: totalItems,
     parentRef,
-    estimateSize: useCallback(() => 150, []),
+    // estimateSize: useCallback(() => 150, []),
     initialRect: { width: 0, height: 800 },
   });
 
@@ -301,7 +301,8 @@ const ItemMeasurer = ({ children, measure, tagName, ...restProps }) => {
     }
   }, []);
 
-  useLayoutEffect(() => {
+  // TODO - useLayoutEffect - SSR?
+  useEffect(() => {
     const update = () => {
       measureRef.current(elRef.current);
     };
