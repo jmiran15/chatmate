@@ -1,17 +1,12 @@
-import {
-  Form,
-  Link,
-  useFetcher,
-  useParams,
-  useSearchParams,
-} from "@remix-run/react";
+import { Link, useFetcher, useParams, useSearchParams } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
-import { Button } from "./ui/button";
+import { Button } from "../../components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 import { cn } from "~/lib/utils";
 import { Chat } from "@prisma/client";
+import Skeleton from "react-loading-skeleton";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ChatsCard({
@@ -35,6 +30,8 @@ export default function ChatsCard({
 
   return (
     <Link
+      prefetch="intent"
+      onClick={() => console.log(`clicked "${chat.name}" card`)}
       to={`${chat.id}?${searchParams.toString()}`}
       className={cn(
         "flex flex-col items-start gap-2 text-left text-sm transition-all hover:bg-accent mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
@@ -42,7 +39,7 @@ export default function ChatsCard({
       )}
     >
       <div className="flex w-full flex-col gap-1">
-        <div className="flex items-center">
+        <div className="flex items-center flex-wrap">
           <div className="font-semibold">{chat.name}</div>
           <div className="ml-auto text-xs text-muted-foreground">
             {formatDistanceToNow(new Date(chat.createdAt), {
@@ -101,5 +98,22 @@ export default function ChatsCard({
         </Button>
       </div>
     </Link>
+  );
+}
+
+export function LoadingChatCard() {
+  return (
+    <div
+      className={cn(
+        "flex flex-col items-start gap-2 text-left text-sm transition-all mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
+      )}
+    >
+      <div className="w-full ">
+        <Skeleton width={"70%"} />
+      </div>
+      <div className="text-xs text-muted-foreground w-full">
+        <Skeleton count={3} />
+      </div>
+    </div>
   );
 }

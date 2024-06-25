@@ -1,5 +1,10 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import { useLoaderData, useNavigate, useParams } from "@remix-run/react";
+import {
+  useLoaderData,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
 import { getMessagesByChatId } from "~/models/chat.server";
 import { getChatbotById } from "~/models/chatbot.server";
 import { ScrollArea } from "~/components/ui/scroll-area";
@@ -51,13 +56,15 @@ export default function ChatRoute() {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const navigate = useNavigate();
   const { chatbotId } = useParams();
+  const [searchParams] = useSearchParams();
 
   function handleDismiss() {
     setIsModalOpen(false);
   }
 
   function handleExitComplete() {
-    navigate(`/chatbots/${chatbotId}/chats`, { replace: true });
+    // navigate(`/chatbots/${chatbotId}/chats`, { replace: true });
+    navigate(-1);
   }
 
   if (!data?.messages || !data?.chatbot) {
@@ -68,7 +75,7 @@ export default function ChatRoute() {
     <AnimatePresence onExitComplete={handleExitComplete}>
       {isModalOpen ? (
         <Modal title={`${data.chatbot.name} Chat`} onDismiss={handleDismiss}>
-          <div className="max-h-[80vh] overflow-y-auto p-4">
+          <div className="h-[80vh] overflow-y-auto p-4">
             <div className="space-y-5">
               {data.messages.map((message, i) => {
                 const isUser = message.role === "user";
@@ -147,7 +154,7 @@ export default function ChatRoute() {
       ) : null}
     </AnimatePresence>
   ) : (
-    <div className="hidden sm:flex flex-col col-span-7 overflow-y-auto h-full">
+    <div className="flex flex-col col-span-7 overflow-y-auto h-full">
       <ScrollArea
         ref={scrollRef}
         className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-5"
