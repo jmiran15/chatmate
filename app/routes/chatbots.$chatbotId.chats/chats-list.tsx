@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { getCreatedAt } from "./route";
+import { flushSync } from "react-dom";
 
 export const LIMIT = 64;
 const DATA_OVERSCAN = 8;
@@ -65,12 +66,11 @@ export default function ChatsList({
   items,
 }: {
   totalItems: number;
-  items: Chat &
-    {
-      _count: {
-        messages: number;
-      };
-    }[];
+  items: (Chat & {
+    _count: {
+      messages: number;
+    };
+  })[];
 }) {
   const navigation = useNavigation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -85,7 +85,7 @@ export default function ChatsList({
   const rowVirtualizer = useVirtual({
     size: totalItems,
     parentRef,
-    estimateSize: useCallback(() => 50, []),
+    estimateSize: useCallback(() => 150, []),
     initialRect: { width: 0, height: 800 },
   });
 
@@ -169,6 +169,9 @@ export default function ChatsList({
 
   useEffect(() => {
     isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
   }, []);
 
   // TODO - fix bugs with react-virtual rerenders
@@ -237,10 +240,10 @@ export default function ChatsList({
             const item = items[index];
 
             return (
-              <div
-                key={virtualRow.key}
-                data-index={virtualRow.index}
-                ref={virtualRow.measureRef}
+              <ItemMeasurer
+                tagName="div"
+                key={virtualRow.index}
+                measure={virtualRow.measureRef}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -256,7 +259,7 @@ export default function ChatsList({
                 ) : (
                   <span>Nothing to see here...</span>
                 )}
-              </div>
+              </ItemMeasurer>
             );
           })}
           {rowVirtualizer.virtualItems.length === 0 && <EmptyState />}
@@ -276,3 +279,54 @@ function EmptyState() {
     </p>
   );
 }
+
+const ItemMeasurer = ({ children, measure, tagName, ...restProps }) => {
+  const roRef = useRef(null);
+  const elRef = useRef(null);
+
+  const measureRef = useRef(measure);
+  measureRef.current = measure;
+
+  const refSetter = useCallback((el) => {
+    const ro = roRef.current;
+
+    if (ro !== null && elRef.current !== null) {
+      ro.unobserve(elRef.current);
+    }
+
+    elRef.current = el;
+
+    if (ro !== null && elRef.current !== null) {
+      ro.observe(elRef.current);
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const update = () => {
+      measureRef.current(elRef.current);
+    };
+
+    // sync measure for initial render ?
+    update();
+
+    const ro = roRef.current ? roRef.current : new ResizeObserver(update);
+
+    const el = elRef.current;
+    if (el !== null) {
+      ro.observe(el);
+    }
+    roRef.current = ro;
+
+    return () => {
+      ro.disconnect();
+    };
+  }, []);
+
+  const Tag = tagName;
+
+  return (
+    <Tag ref={refSetter} {...restProps}>
+      {children}
+    </Tag>
+  );
+};
