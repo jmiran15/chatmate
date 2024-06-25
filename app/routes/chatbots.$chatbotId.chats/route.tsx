@@ -83,7 +83,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   switch (action) {
     case "star": {
-      console.log({ chatId, star });
       return await updateChatStarredStatus({
         chatId,
         starred: star === "true",
@@ -102,7 +101,6 @@ export default function Chats() {
   // TODO - fix bugs with react-virtual rerenders
   // TODO - defer is not working - throwing server timout, but works on tab switch?
 
-  console.log("route.tsx - rendered");
   return (
     <div className="flex flex-col sm:grid sm:grid-cols-10 h-full overflow-none ">
       <div className="flex flex-col h-full gap-2 sm:col-span-3 sm:border-r overflow-auto py-4 sm:py-6">

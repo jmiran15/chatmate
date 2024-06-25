@@ -24,7 +24,8 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { getCreatedAt } from "./route";
-import { flushSync } from "react-dom";
+import { ItemMeasurer } from "./item-measurer";
+import { EmptyState } from "./empty-state";
 
 export const LIMIT = 64;
 const DATA_OVERSCAN = 8;
@@ -188,7 +189,6 @@ export default function ChatsList({
           onValueChange={(value) => {
             const newParams = new URLSearchParams(searchParams);
             newParams.set("createdAt", value);
-            console.log("newParams", newParams.toString());
             setSearchParams(newParams);
           }}
         >
@@ -268,66 +268,3 @@ export default function ChatsList({
     </>
   );
 }
-
-function EmptyState() {
-  const isMobile = useMobileScreen();
-  return isMobile ? (
-    <InboxIndexMd />
-  ) : (
-    <p className="text-sm text-muted-foreground self-start w-full">
-      This is where you will see all incoming messages from your customers.
-    </p>
-  );
-}
-
-const ItemMeasurer = ({ children, measure, tagName, ...restProps }) => {
-  const roRef = useRef(null);
-  const elRef = useRef(null);
-
-  const measureRef = useRef(measure);
-  measureRef.current = measure;
-
-  const refSetter = useCallback((el) => {
-    const ro = roRef.current;
-
-    if (ro !== null && elRef.current !== null) {
-      ro.unobserve(elRef.current);
-    }
-
-    elRef.current = el;
-
-    if (ro !== null && elRef.current !== null) {
-      ro.observe(elRef.current);
-    }
-  }, []);
-
-  // TODO - useLayoutEffect - SSR?
-  useEffect(() => {
-    const update = () => {
-      measureRef.current(elRef.current);
-    };
-
-    // sync measure for initial render ?
-    update();
-
-    const ro = roRef.current ? roRef.current : new ResizeObserver(update);
-
-    const el = elRef.current;
-    if (el !== null) {
-      ro.observe(el);
-    }
-    roRef.current = ro;
-
-    return () => {
-      ro.disconnect();
-    };
-  }, []);
-
-  const Tag = tagName;
-
-  return (
-    <Tag ref={refSetter} {...restProps}>
-      {children}
-    </Tag>
-  );
-};

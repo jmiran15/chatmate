@@ -31,7 +31,6 @@ export default function ChatsCard({
   return (
     <Link
       prefetch="intent"
-      onClick={() => console.log(`clicked "${chat.name}" card`)}
       to={`${chat.id}?${searchParams.toString()}`}
       className={cn(
         "flex flex-col items-start gap-2 text-left text-sm transition-all hover:bg-accent mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
