@@ -12,8 +12,6 @@ import {
 } from "react";
 import ChatsCard from "~/routes/chatbots.$chatbotId.chats/chats-card";
 
-import { useMobileScreen } from "~/utils/mobile";
-import InboxIndexMd from "~/components/indexes/inbox-md";
 import { useVirtual } from "react-virtual";
 import { Chat } from "@prisma/client";
 import {
@@ -197,19 +195,15 @@ export default function ChatsList({
           </SelectTrigger>
           <SelectContent
             ref={(ref) => {
+              console.log("ref -", ref);
               if (!ref) return;
-              ref.ontouchstart = (e) => {
+              ref.ontouchend = (e) => {
                 e.preventDefault();
               };
             }}
           >
             {SORT_LABELS.map((sort) => (
-              <SelectItem
-                key={sort.value}
-                value={sort.value}
-                onMouseDown={(e) => e.stopPropagation()}
-                onClick={(e) => e.stopPropagation()}
-              >
+              <SelectItem key={sort.value} value={sort.value}>
                 {sort.label}
               </SelectItem>
             ))}

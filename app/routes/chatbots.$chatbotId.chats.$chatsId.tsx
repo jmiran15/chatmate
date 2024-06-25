@@ -13,7 +13,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "~/components/ui/hover-card";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { Loading } from "~/components/ui/loading";
 import Markdown from "~/components/ui/markdown";
 import { useScrollToBottom } from "~/hooks/useScroll";
@@ -53,19 +53,17 @@ export default function ChatRoute() {
   const { scrollRef } = useScrollToBottom();
   const { toast } = useToast();
   const isMobile = useMobileScreen();
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const navigate = useNavigate();
-  const { chatsId } = useParams();
+  const { chatbotId } = useParams();
+  const [searchParams] = useSearchParams();
 
   function handleExitComplete() {
-    navigate(-1);
+    navigate(`/chatbots/${chatbotId}/chats?${searchParams.toString()}`);
   }
 
   if (!data?.messages || !data?.chatbot) {
     return null;
   }
-
-  console.log("here for chatId", chatsId, isMobile, isModalOpen);
 
   return isMobile ? (
     <AnimatePresence onExitComplete={handleExitComplete}>
