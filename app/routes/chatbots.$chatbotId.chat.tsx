@@ -35,8 +35,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "create": {
       const userMessage = formData.get("userMessage");
 
-      console.log("userMessage", userMessage);
-
       const chat = await createChatWithStartersAndUser({ chatbotId, userId });
       return redirect(
         userMessage
