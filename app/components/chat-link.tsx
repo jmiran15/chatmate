@@ -24,8 +24,6 @@ export default function ChatLink({ chat }: { chat: Chat }) {
     }
   }, [isSubmitting]);
 
-  console.log("editing state", editing);
-
   return (
     <div
       onMouseEnter={() => setActive(true)}

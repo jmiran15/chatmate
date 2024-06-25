@@ -143,8 +143,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         }
       }
 
-      console.log("the urls are: ", urls);
-
       // should do this stuff in validation for user feedback
       invariant(urls.length > 0, "Links must be an array");
 
@@ -179,11 +177,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
         const fileSrcs = cloudinaryResponse.fileSrcs;
         const fileIds = cloudinaryResponse.fileIds;
-
-        console.log("cloudinaryResponse", {
-          fileSrcs,
-          fileIds,
-        });
 
         invariant(Array.isArray(fileSrcs), "File srcs must be an array");
         invariant(fileSrcs.length > 0, "File srcs must be an array");

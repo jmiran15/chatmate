@@ -64,7 +64,6 @@ export default function Website({
   // crawl progress
   // TODO - lots of unneeded re-renders here - causing performance issues
   useEffect(() => {
-    console.log("website.tsx - progress: ", progress);
     if (job?.id !== progress?.jobId) {
       setLinks([]);
       return;
