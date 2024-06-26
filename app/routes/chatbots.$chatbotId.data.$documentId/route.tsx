@@ -24,9 +24,7 @@ import { queue } from "~/queues/ingestion.server";
 import { usePendingDocuments } from "../chatbots.$chatbotId.data._index/hooks/use-pending-documents";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { useEventSource } from "remix-utils/sse/react";
-import Skeleton from "react-loading-skeleton";
 import { useDocumentProgress } from "../chatbots.$chatbotId.data._index/hooks/use-document-progress";
-import { Document } from "@prisma/client";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
