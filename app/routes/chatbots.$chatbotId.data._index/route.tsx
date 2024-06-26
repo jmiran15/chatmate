@@ -266,7 +266,7 @@ export default function Data() {
   const rowVirtualizer = useVirtual({
     size: data.totalItems,
     parentRef,
-    // estimateSize: useCallback(() => 142, []),
+    estimateSize: useCallback(() => 142, []),
     initialRect: { width: 0, height: 800 },
   });
 
