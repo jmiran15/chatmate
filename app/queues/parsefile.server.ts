@@ -20,6 +20,7 @@ export const parseFileQueue = Queue<ParseFileQueueData>(
 
     const file = await getFileFromUrl(job.data.document.filepath);
     const parsedContents = await parseFileWithLlamaparse(file);
+    console.log("parsedContents", parsedContents);
     const updatedDocument = await prisma.document.update({
       where: { id: job.data.document.id },
       data: {
@@ -96,7 +97,7 @@ async function parseFileWithLlamaparse(file: File): Promise<string> {
             await new Promise((resolve) => setTimeout(resolve, 250)); // Wait for 2 seconds
           }
         } catch (error) {
-          // console.error("Error fetching result:", error);
+          console.error("Error fetching result:", error);
           attempt++;
           await new Promise((resolve) => setTimeout(resolve, 250)); // Wait for 2 seconds before retrying
           // You may want to handle specific errors differently
@@ -108,9 +109,9 @@ async function parseFileWithLlamaparse(file: File): Promise<string> {
       }
       content = resultResponse?.data[resultType];
     } catch (error) {
-      // console.error(
-      //   `parsefile.server.ts - error parsing file with llamaparse ${error}`,
-      // );
+      console.error(
+        `parsefile.server.ts - error parsing file with llamaparse ${error}`,
+      );
       content = await parseFileWithUnstructured(file);
     }
   } else {
@@ -155,10 +156,10 @@ async function parseFileWithUnstructured(file: File): Promise<string> {
 
     return "unstructured error";
   } catch (error) {
-    // console.error(
-    //   "Error during file parsing:",
-    //   error.response?.data || error.message,
-    // ); // Enhanced error logging
+    console.error(
+      "Error during file parsing:",
+      error.response?.data || error.message,
+    ); // Enhanced error logging
     return "unstructured error";
   }
 }
