@@ -77,7 +77,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const chats = await getChatsByChatbotId({ chatbotId });
   const isPro = await isProUser(userId);
 
-  return json({ chats, isPro });
+  return json({ chats, isPro: true });
 };
 
 export default function Analytics() {
