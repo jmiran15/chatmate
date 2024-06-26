@@ -121,7 +121,7 @@ export default function DocumentPage() {
   }, [eventSource]);
 
   const { content, status } = useDocumentProgress({
-    item: document,
+    item: document || optimisticDocument,
     progress,
   });
 
