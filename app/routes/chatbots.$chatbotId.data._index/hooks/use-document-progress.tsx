@@ -1,38 +1,69 @@
 import { Document } from "@prisma/client";
-import { useMemo, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import { ProgressData } from "~/routes/api.chatbot.$chatbotId.data.progress";
 
-export function useDocumentProgress(item: Document, progress: ProgressData) {
-  const previousProgress = useRef<JSX.Element | string | undefined>();
-  const previousStatus = useRef<string | undefined>();
-  const preprocessingQueueNames = ["scrape", "parseFile"];
+// TODO - cache last progress values - e.g, user refreshes the page, wont see progress update until next progress event is sent. We can probably save in localforage indexDB on leave (like the infinte scroll restoration)
+// TODO - percentage works - but there is a glitch - goes back and forth between certain values - should probably do as above
+export function useDocumentProgress({
+  item,
+  progress,
+}: {
+  item: Document;
+  progress: ProgressData | undefined;
+}) {
+  const { value: latestPreprocessingProgress } = useLatestProgress({
+    queueNames: ["scrape", "parseFile"],
+    progress,
+  });
+  const { value: latestIngestionProgress } = useLatestProgress({
+    queueNames: ["ingestion"],
+    progress,
+  });
 
-  return useMemo(() => {
-    let content = previousProgress.current || <Skeleton />;
-    let status = previousStatus.current || "Preprocessing";
+  const content = item?.content ??
+    latestPreprocessingProgress?.returnvalue?.content ?? (
+      <Skeleton count={10} />
+    );
 
-    if (item.content) {
-      content = item.content;
-      status = "Ingested";
-    } else if (progress) {
-      if (
-        preprocessingQueueNames.includes(progress?.queueName) &&
-        progress?.returnvalue?.content
-      ) {
-        content = progress?.returnvalue?.content;
-        previousProgress.current = content;
-      }
+  const INGESTED = "Ingested";
+  const PREPROCESSING = "Preprocessing";
+  const INGESTING = `Ingesting ${Math.trunc(
+    Number(latestIngestionProgress?.progress),
+  )}%`;
+  const status = item?.isPending
+    ? latestIngestionProgress
+      ? latestIngestionProgress.completed
+        ? INGESTED
+        : INGESTING
+      : PREPROCESSING
+    : INGESTED;
 
-      status = progress?.completed
-        ? "Ingested"
-        : progress?.progress
-        ? `Ingesting ${Math.trunc(Number(progress?.progress))}%`
-        : "Preprocessing";
+  return {
+    content,
+    status,
+  };
+}
 
-      previousStatus.current = status;
+export function useLatestProgress({
+  queueNames,
+  progress,
+}: {
+  queueNames: string[];
+  progress: ProgressData | undefined;
+}) {
+  const [value, setValue] = useState<ProgressData | undefined>(undefined);
+  const latestValueRef = useRef<ProgressData | undefined>(undefined);
+
+  useEffect(() => {
+    if (progress && queueNames.includes(progress.queueName)) {
+      const newValue = progress;
+      setValue(newValue);
+      latestValueRef.current = newValue;
     }
+  }, [progress]);
 
-    return { status, content };
-  }, [item.id, progress]);
+  // If progress is undefined, return the last known value
+  return { value: progress === undefined ? latestValueRef.current : value };
 }

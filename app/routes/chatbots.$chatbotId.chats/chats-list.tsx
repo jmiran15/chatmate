@@ -84,7 +84,6 @@ export default function ChatsList({
   const rowVirtualizer = useVirtual({
     size: totalItems,
     parentRef,
-    // estimateSize: useCallback(() => 150, []),
     initialRect: { width: 0, height: 800 },
   });
 

@@ -34,6 +34,7 @@ import { validateUrl } from "~/utils";
 import { usePendingDocuments } from "./hooks/use-pending-documents";
 import { deleteDocumentById } from "~/models/document.server";
 import { useToast } from "~/components/ui/use-toast";
+import { ItemMeasurer } from "../chatbots.$chatbotId.chats/item-measurer";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -164,7 +165,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "parseFiles": {
       try {
-        const response = await fetch("http://localhost:3000/api/upload", {
+        const isDev = process.env.NODE_ENV === "development";
+        const BASE_URL = isDev ? process.env.DEV_BASE : process.env.PROD_BASE;
+
+        const response = await fetch(`${BASE_URL}/api/upload`, {
           method: "POST",
           body: formData,
         });
@@ -375,13 +379,7 @@ export default function Data() {
         </div>
         <DialogDemo submit={submit} />
       </div>
-      {/* <div className="flex flex-row items-center gap-2">
-        <Input type="text" placeholder="Search" />
-        <Button className="flex flex-row items-center gap-2">
-          <SearchIcon className="w-4 h-4" />
-          Search
-        </Button>
-      </div> */}
+
       <div
         ref={parentRef}
         data-hydrating-signal
@@ -406,10 +404,10 @@ export default function Data() {
             const item = data.items[index];
 
             return (
-              <div
-                key={virtualRow.key}
-                data-index={virtualRow.index}
-                ref={virtualRow.measureRef}
+              <ItemMeasurer
+                tagName="div"
+                key={virtualRow.index}
+                measure={virtualRow.measureRef}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -430,7 +428,7 @@ export default function Data() {
                 ) : (
                   <span>Nothing to see here...</span>
                 )}
-              </div>
+              </ItemMeasurer>
             );
           })}
           {rowVirtualizer.virtualItems.length === 0 && <p>No documents yet</p>}
