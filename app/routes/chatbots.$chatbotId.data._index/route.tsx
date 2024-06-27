@@ -247,6 +247,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   let data = useLoaderData<typeof loader>();
+  const [totalItems, setTotalItems] = useState(data.totalItems);
   const { toast } = useToast();
   const { chatbotId } = useParams();
   const navigation = useNavigation();
@@ -264,7 +265,7 @@ export default function Data() {
   }, [eventSource]);
 
   const rowVirtualizer = useVirtual({
-    size: data.totalItems,
+    size: totalItems,
     parentRef,
     estimateSize: useCallback(() => 142, []),
     initialRect: { width: 0, height: 800 },
@@ -352,11 +353,17 @@ export default function Data() {
   }, []);
 
   // optimistic documents
+
+  // on slow networks, the last document gets cut off the virtual list
   const pendingDocuments = usePendingDocuments();
   const updatedData = { ...data };
   updatedData.items = [...pendingDocuments, ...data.items];
   updatedData.totalItems = data.totalItems + pendingDocuments.length;
   data = updatedData;
+
+  useEffect(() => {
+    setTotalItems(data.totalItems);
+  }, [data.totalItems]);
 
   useEffect(() => {
     if (actionData?.intent === "delete" && actionData?.document) {
@@ -381,6 +388,7 @@ export default function Data() {
       </div>
 
       <div
+        key={`list-${updatedData.totalItems}`}
         ref={parentRef}
         data-hydrating-signal
         className="List"

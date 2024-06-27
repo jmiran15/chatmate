@@ -16,6 +16,7 @@ const UNSTRUCTURED_URL =
 export const parseFileQueue = Queue<ParseFileQueueData>(
   "parseFile",
   async (job): Promise<Document> => {
+    console.log("parseFileQueue", job.data.document.filepath);
     invariant(job.data.document.filepath, "Filepath is required");
 
     const file = await getFileFromUrl(job.data.document.filepath);
