@@ -12,6 +12,11 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { Chatbot } from "@prisma/client";
+import { useCallback, useState } from "react";
+import { FileWithPreview, ImageCropper } from "./image-cropper";
+import { FileWithPath, useDropzone } from "react-dropzone";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { LogoPicker } from "./logo-picker";
 
 const THEME_COLORS = [
   "zinc",
@@ -39,6 +44,10 @@ const OPEN_ICONS = ["plus", "chevron", "chat"];
 
 const INTENT = "update";
 
+const accept = {
+  "image/*": [],
+};
+
 export default function Customizer({
   fetcher,
   chatbot,
@@ -54,12 +63,62 @@ export default function Customizer({
     introMessages,
     starterQuestions,
   } = chatbot;
-
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
+  const [selectedFile, setSelectedFile] = useState<FileWithPreview | null>(
+    null,
+  );
+  const [isDialogOpen, setDialogOpen] = useState(false);
 
+  const onDrop = useCallback(
+    (acceptedFiles: FileWithPath[]) => {
+      const file = acceptedFiles[0];
+      if (!file) {
+        alert("Selected image is too large!");
+        return;
+      }
+
+      const fileWithPreview = Object.assign(file, {
+        preview: URL.createObjectURL(file),
+      });
+
+      setSelectedFile(fileWithPreview);
+      setDialogOpen(true);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept,
+  });
+
+  // IF we have a selected file - show the ImageCropper inside the fileuplaoder UI - with a cancel button
+  // I should be able to drag in a new image onto the file uploader to replace the current image
+  // if no url, show the default file uploader
   return (
     <div className="flex flex-col space-y-8 md:col-span-2 overflow-y-auto  md:border-r p-4">
+      <LogoPicker />
+      {/* <div className="flex flex-col gap-1.5">
+        {selectedFile ? (
+          <ImageCropper
+            dialogOpen={isDialogOpen}
+            setDialogOpen={setDialogOpen}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
+          />
+        ) : (
+          <Avatar
+            {...getRootProps()}
+            className="size-36 cursor-pointer ring-offset-2 ring-2 ring-slate-200"
+          >
+            <input {...getInputProps()} />
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        )}
+      </div> */}
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="name">Name</Label>
         <Input

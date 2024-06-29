@@ -5,6 +5,7 @@ import { useFetcher, useLoaderData } from "@remix-run/react";
 import Preview from "~/routes/chatbots.$chatbotId.appearance/widget/preview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { useIsMediumScreen } from "~/hooks/use-is-medium-screen";
+import { LogoPicker } from "./logo-picker";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
