@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  SyntheticEvent,
+} from "react";
 import { useDropzone } from "react-dropzone";
 import ReactCrop, {
   centerCrop,
@@ -19,25 +25,18 @@ interface FileWithPreview extends File {
   preview: string;
 }
 
-export function LogoPicker() {
+export function ImagePicker() {
+  const aspect = 1;
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<FileWithPreview | null>(
     null,
   );
-  const [isDialogOpen, setDialogOpen] = useState(false);
-  const [crop, setCrop] = useState<Crop>();
-  const lastCrop = useRef<Crop>();
-  const [croppedImageUrl, setCroppedImageUrl] = useState<string>("");
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [isFileDropped, setIsFileDropped] = useState(false);
-
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const [croppedImageUrl, setCroppedImageUrl] = useState<string>("");
+  const [croppedImage, setCroppedImage] = useState<string>("");
+  const lastCrop = useRef<Crop>();
+  const [crop, setCrop] = useState<Crop | undefined>(() => lastCrop.current);
   const controls = useAnimation();
-
-  useEffect(() => {
-    if (crop) {
-      lastCrop.current = crop;
-    }
-  }, [crop]);
 
   useEffect(() => {
     return () => {
@@ -55,13 +54,11 @@ export function LogoPicker() {
           preview: URL.createObjectURL(file),
         }) as FileWithPreview;
         setSelectedFile(fileWithPreview);
-        setIsFileDropped(true);
         controls.start({
           scale: [1, 0.95, 1.05, 1],
           transition: { duration: 0.4 },
         });
         setTimeout(() => {
-          setIsFileDropped(false);
           setDialogOpen(true);
         }, 400);
       }
@@ -75,61 +72,68 @@ export function LogoPicker() {
     maxFiles: 1,
   });
 
-  const onImageLoad = useCallback(
-    (e: React.SyntheticEvent<HTMLImageElement>) => {
+  function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
+    if (aspect) {
       const { width, height } = e.currentTarget;
-      setCrop(centerAspectCrop(width, height, 1));
-    },
-    [],
-  );
-
-  const onCropComplete = useCallback((crop: PixelCrop) => {
+      if (lastCrop.current) {
+        setCrop(lastCrop.current);
+      } else {
+        setCrop(centerAspectCrop(width, height, aspect));
+      }
+    }
+  }
+  function onCropComplete(crop: PixelCrop) {
     if (imgRef.current && crop.width && crop.height) {
       const croppedImageUrl = getCroppedImg(imgRef.current, crop);
       setCroppedImageUrl(croppedImageUrl);
     }
-  }, []);
+  }
 
-  const getCroppedImg = useCallback(
-    (image: HTMLImageElement, crop: PixelCrop): string => {
-      const canvas = document.createElement("canvas");
-      const scaleX = image.naturalWidth / image.width;
-      const scaleY = image.naturalHeight / image.height;
-      canvas.width = crop.width;
-      canvas.height = crop.height;
-      const ctx = canvas.getContext("2d");
+  function getCroppedImg(image: HTMLImageElement, crop: PixelCrop): string {
+    const canvas = document.createElement("canvas");
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
 
-      if (ctx) {
-        ctx.drawImage(
-          image,
-          crop.x * scaleX,
-          crop.y * scaleY,
-          crop.width * scaleX,
-          crop.height * scaleY,
-          0,
-          0,
-          crop.width,
-          crop.height,
-        );
-      }
+    canvas.width = crop.width * scaleX;
+    canvas.height = crop.height * scaleY;
 
-      return canvas.toDataURL("image/png");
-    },
-    [],
-  );
+    const ctx = canvas.getContext("2d");
 
-  const onCrop = useCallback(() => {
-    setIsProcessing(true);
-    setTimeout(() => {
-      setCroppedImageUrl(croppedImageUrl);
+    if (ctx) {
+      ctx.imageSmoothingEnabled = false;
+
+      ctx.drawImage(
+        image,
+        crop.x * scaleX,
+        crop.y * scaleY,
+        crop.width * scaleX,
+        crop.height * scaleY,
+        0,
+        0,
+        crop.width * scaleX,
+        crop.height * scaleY,
+      );
+    }
+
+    return canvas.toDataURL("image/png", 1.0);
+  }
+
+  async function onCrop() {
+    try {
+      setCroppedImage(croppedImageUrl);
       setDialogOpen(false);
-      setIsProcessing(false);
-    }, 500);
-  }, [croppedImageUrl]);
-
+      lastCrop.current = crop;
+      setCrop(crop); // Add this line
+    } catch (error) {
+      alert("Something went wrong!");
+    }
+  }
   const removeImage = useCallback(() => {
     setSelectedFile(null);
     setCroppedImageUrl("");
+    setCroppedImage("");
+    lastCrop.current = undefined;
+    setCrop(undefined); // Add this line
   }, []);
 
   return (
@@ -167,7 +171,7 @@ export function LogoPicker() {
                 className="w-full h-full"
               >
                 <img
-                  src={croppedImageUrl || selectedFile.preview}
+                  src={croppedImage ? croppedImage : selectedFile?.preview}
                   alt="Selected"
                   className="w-full h-full object-cover rounded-lg"
                 />
@@ -238,86 +242,38 @@ export function LogoPicker() {
         </AnimatePresence>
       </motion.div>
 
-      <AnimatePresence>
-        {isDialogOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-          >
-            <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
-              <DialogContent className="sm:max-w-[425px]">
-                <div className="mt-4">
-                  {selectedFile && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ReactCrop
-                        crop={lastCrop.current || crop}
-                        onChange={(_, percentCrop) => setCrop(percentCrop)}
-                        onComplete={(c) => onCropComplete(c)}
-                        aspect={1}
-                      >
-                        <motion.img
-                          ref={imgRef}
-                          src={selectedFile.preview}
-                          alt="Crop me"
-                          onLoad={onImageLoad}
-                          layoutId="preview-image"
-                        />
-                      </ReactCrop>
-                    </motion.div>
-                  )}
-                </div>
-                <DialogFooter>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button
-                      variant="outline"
-                      onClick={() => setDialogOpen(false)}
-                    >
-                      <Trash2Icon className="mr-2 h-4 w-4" />
-                      Cancel
-                    </Button>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button onClick={onCrop} disabled={isProcessing}>
-                      <CropIcon className="mr-2 h-4 w-4" />
-                      {isProcessing ? "Processing..." : "Crop"}
-                    </Button>
-                  </motion.div>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isDialogOpen ? (
+        <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <div className="mt-4">
+              <ReactCrop
+                crop={crop}
+                onChange={(_, percentCrop) => setCrop(percentCrop)}
+                onComplete={(c) => onCropComplete(c)}
+                aspect={1}
+              >
+                <img
+                  ref={imgRef}
+                  src={selectedFile?.preview}
+                  alt="Crop me"
+                  onLoad={onImageLoad}
+                />
+              </ReactCrop>
+            </div>
+            <DialogFooter>
+              <Button variant="outline" onClick={() => setDialogOpen(false)}>
+                <Trash2Icon className="mr-2 h-4 w-4" />
+                Cancel
+              </Button>
 
-      <AnimatePresence>
-        {isProcessing && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-lg"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-t-2 border-white rounded-full"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <Button onClick={onCrop}>
+                <CropIcon className="mr-2 h-4 w-4" />
+                Crop
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      ) : null}
     </div>
   );
 }
