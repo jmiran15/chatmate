@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { Chatbot } from "@prisma/client";
+import { ImagePicker } from "./image-picker";
 
 const THEME_COLORS = [
   "zinc",
@@ -37,7 +38,7 @@ const THEME_COLORS = [
 
 const OPEN_ICONS = ["plus", "chevron", "chat"];
 
-const INTENT = "update";
+const INTENT = "generalUpdate";
 
 export default function Customizer({
   fetcher,
@@ -48,19 +49,20 @@ export default function Customizer({
 }) {
   const {
     publicName,
-    logoUrl,
+    originalLogoFilepath,
+    croppedLogoFilepath,
+    lastCrop,
     themeColor,
     openIcon,
     introMessages,
     starterQuestions,
   } = chatbot;
-
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
 
   return (
-    <div className="flex flex-col space-y-8 md:col-span-2 overflow-y-auto  md:border-r p-4">
-      <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 md:border-r w-full">
+      <div className="flex flex-col gap-1.5 w-full">
         <Label htmlFor="name">Name</Label>
         <Input
           id="name"
@@ -72,26 +74,19 @@ export default function Customizer({
                 intent: INTENT,
                 update: JSON.stringify({ publicName: e.target.value }),
               },
-              { method: "post" },
+              { method: "post", encType: "multipart/form-data" },
             )
           }
         />
       </div>
+
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="url">Logo url</Label>
-        <Input
-          id="url"
-          placeholder="Enter your logo url"
-          defaultValue={logoUrl ?? ""}
-          onChange={(e) =>
-            fetcher.submit(
-              {
-                intent: INTENT,
-                update: JSON.stringify({ logoUrl: e.target.value }),
-              },
-              { method: "post" },
-            )
-          }
+        <Label>Logo url</Label>
+        <ImagePicker
+          originalLogoFilepath={originalLogoFilepath}
+          croppedLogoFilepath={croppedLogoFilepath}
+          savedCrop={lastCrop}
+          fetcher={fetcher}
         />
       </div>
 
@@ -106,7 +101,7 @@ export default function Customizer({
                 intent: INTENT,
                 update: JSON.stringify({ themeColor: value }),
               },
-              { method: "post" },
+              { method: "post", encType: "multipart/form-data" },
             );
           }}
         >
@@ -137,7 +132,7 @@ export default function Customizer({
                 intent: INTENT,
                 update: JSON.stringify({ openIcon: value }),
               },
-              { method: "post" },
+              { method: "post", encType: "multipart/form-data" },
             );
           }}
         >
@@ -173,7 +168,7 @@ export default function Customizer({
                   introMessages: e.target.value.split("\n"),
                 }),
               },
-              { method: "post" },
+              { method: "post", encType: "multipart/form-data" },
             )
           }
         />
@@ -198,7 +193,7 @@ export default function Customizer({
                   starterQuestions: e.target.value.split("\n"),
                 }),
               },
-              { method: "post" },
+              { method: "post", encType: "multipart/form-data" },
             )
           }
         />
