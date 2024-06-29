@@ -28,14 +28,18 @@ model Password {
 }
 
 model Chatbot {
-  id               String      @id @default(uuid())
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId           String
-  chats            Chat[]
-  publicName       String      @default("Your Chatbot")
-  logoUrl          String?
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  chats      Chat[]
+  publicName String   @default("Your Chatbot")
+
+  originalLogoFilepath String?
+  croppedLogoFilepath  String?
+  lastCrop             Json?
+
   themeColor       String      @default("zinc")
   introMessages    String[]    @default(["Hello, how can I help you today?"])
   openIcon         String      @default("plus") // plus, chevron, chat

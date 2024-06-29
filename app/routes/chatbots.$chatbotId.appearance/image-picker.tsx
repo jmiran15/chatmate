@@ -11,6 +11,7 @@ import ReactCrop, {
   makeAspectCrop,
   Crop,
   PixelCrop,
+  convertToPixelCrop,
 } from "react-image-crop";
 import { Dialog, DialogContent, DialogFooter } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
@@ -20,22 +21,36 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 
 import "react-image-crop/dist/ReactCrop.css";
 import { cn } from "~/lib/utils";
+import { useFetcher } from "@remix-run/react";
+import { Prisma } from "@prisma/client";
+import { v4 } from "uuid";
 
 interface FileWithPreview extends File {
   preview: string;
 }
 
-export function ImagePicker() {
+export function ImagePicker({
+  originalLogoFilepath,
+  croppedLogoFilepath,
+  savedCrop,
+  fetcher,
+}: {
+  originalLogoFilepath: string | null; // the path to the full image
+  croppedLogoFilepath: string | null; // the path to the cropped image which should be the thumbnail
+  savedCrop: Prisma.JsonValue | null; // the saved cropped value
+  fetcher: ReturnType<typeof useFetcher>;
+}) {
   const aspect = 1;
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<FileWithPreview | null>(
     null,
   );
   const imgRef = useRef<HTMLImageElement | null>(null);
-  const [croppedImageUrl, setCroppedImageUrl] = useState<string>("");
   const [croppedImage, setCroppedImage] = useState<string>("");
-  const lastCrop = useRef<Crop>();
-  const [crop, setCrop] = useState<Crop | undefined>(() => lastCrop.current);
+  const lastCrop = useRef<Crop | undefined>(savedCrop as Crop | undefined);
+  const [crop, setCrop] = useState<Crop | undefined>(
+    savedCrop as Crop | undefined,
+  );
   const controls = useAnimation();
 
   useEffect(() => {
@@ -45,6 +60,19 @@ export function ImagePicker() {
       }
     };
   }, [selectedFile]);
+
+  useEffect(() => {
+    if (croppedLogoFilepath) {
+      setCroppedImage(croppedLogoFilepath);
+    }
+  }, [croppedLogoFilepath]);
+
+  useEffect(() => {
+    if (savedCrop) {
+      lastCrop.current = savedCrop as Crop;
+      setCrop(savedCrop as Crop);
+    }
+  }, [savedCrop]);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -58,7 +86,10 @@ export function ImagePicker() {
           scale: [1, 0.95, 1.05, 1],
           transition: { duration: 0.4 },
         });
+
         setTimeout(() => {
+          lastCrop.current = undefined;
+          setCrop(undefined);
           setDialogOpen(true);
         }, 400);
       }
@@ -71,33 +102,43 @@ export function ImagePicker() {
     accept: { "image/*": [] },
     maxFiles: 1,
   });
-
   function onImageLoad(e: SyntheticEvent<HTMLImageElement>) {
     if (aspect) {
       const { width, height } = e.currentTarget;
+      let newCrop: Crop;
       if (lastCrop.current) {
-        setCrop(lastCrop.current);
+        newCrop = lastCrop.current;
       } else {
-        setCrop(centerAspectCrop(width, height, aspect));
+        newCrop = convertToPixelCrop(
+          centerAspectCrop(width, height, aspect),
+          width,
+          height,
+        );
       }
-    }
-  }
-  function onCropComplete(crop: PixelCrop) {
-    if (imgRef.current && crop.width && crop.height) {
-      const croppedImageUrl = getCroppedImg(imgRef.current, crop);
-      setCroppedImageUrl(croppedImageUrl);
+      setCrop(newCrop);
+      onCropComplete(newCrop as PixelCrop);
     }
   }
 
-  function getCroppedImg(image: HTMLImageElement, crop: PixelCrop): string {
+  async function onCropComplete(pixelCrop: PixelCrop) {
+    if (imgRef.current && pixelCrop.width && pixelCrop.height) {
+      lastCrop.current = pixelCrop;
+      const croppedBlob = await getCroppedImg(imgRef.current, pixelCrop);
+      setCroppedImage(URL.createObjectURL(croppedBlob));
+    }
+  }
+  function getCroppedImg(
+    image: HTMLImageElement,
+    crop: PixelCrop,
+  ): Promise<Blob> {
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-
     canvas.width = crop.width * scaleX;
     canvas.height = crop.height * scaleY;
-
     const ctx = canvas.getContext("2d");
+
+    console.log("crop: ", crop);
 
     if (ctx) {
       ctx.imageSmoothingEnabled = false;
@@ -115,26 +156,89 @@ export function ImagePicker() {
       );
     }
 
-    return canvas.toDataURL("image/png", 1.0);
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Canvas is empty"));
+            return;
+          }
+          resolve(blob);
+        },
+        "image/png",
+        1.0,
+      );
+    });
   }
 
   async function onCrop() {
     try {
-      setCroppedImage(croppedImageUrl);
+      if (!imgRef.current || !crop) {
+        throw new Error("Missing image or crop data");
+      }
+
+      const croppedBlob = await getCroppedImg(
+        imgRef.current,
+        crop as PixelCrop,
+      );
+      const croppedFile = new File(
+        [croppedBlob],
+        "cropped_" + selectedFile?.name ?? v4(),
+        {
+          type: selectedFile?.type ?? "",
+        },
+      );
+
+      const croppedFileUrl = URL.createObjectURL(croppedFile);
+      setCroppedImage(croppedFileUrl);
       setDialogOpen(false);
       lastCrop.current = crop;
-      setCrop(crop); // Add this line
+      setCrop(crop);
+
+      // also send the cropped image url - for optimistic rendering
+      const formData = new FormData();
+      formData.append("intent", "logoImageUpdate");
+      if (!selectedFile) {
+        if (!originalLogoFilepath) {
+          throw new Error("Missing original logo file path");
+        }
+      } else {
+        formData.append("originalLogoFile", selectedFile);
+      }
+      formData.append("croppedLogoFile", croppedFile);
+      formData.append("lastCrop", JSON.stringify(lastCrop.current));
+      formData.append("optimisticPath", croppedFileUrl);
+
+      fetcher.submit(formData, {
+        method: "POST",
+        encType: "multipart/form-data",
+        navigate: false,
+      });
     } catch (error) {
       alert("Something went wrong!");
+      console.error(error);
     }
   }
+
   const removeImage = useCallback(() => {
     setSelectedFile(null);
-    setCroppedImageUrl("");
     setCroppedImage("");
     lastCrop.current = undefined;
-    setCrop(undefined); // Add this line
+    setCrop(undefined);
+    fetcher.submit(
+      {
+        intent: "removeLogoImage",
+      },
+      {
+        method: "POST",
+        encType: "multipart/form-data",
+
+        navigate: false,
+      },
+    );
   }, []);
+
+  // TODO - revert back to the github example - where the only set the croppedImage after the user confirms the crop
 
   return (
     <div className="relative w-full">
@@ -152,7 +256,7 @@ export function ImagePicker() {
       >
         <input {...getInputProps()} />
         <AnimatePresence>
-          {selectedFile ? (
+          {selectedFile || originalLogoFilepath ? (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -248,14 +352,19 @@ export function ImagePicker() {
             <div className="mt-4">
               <ReactCrop
                 crop={crop}
-                onChange={(_, percentCrop) => setCrop(percentCrop)}
+                onChange={(pixelCrop, _) => setCrop(pixelCrop)}
                 onComplete={(c) => onCropComplete(c)}
-                aspect={1}
+                aspect={aspect}
               >
                 <img
                   ref={imgRef}
-                  src={selectedFile?.preview}
+                  src={
+                    selectedFile
+                      ? selectedFile.preview
+                      : originalLogoFilepath ?? ""
+                  }
                   alt="Crop me"
+                  crossOrigin="anonymous"
                   onLoad={onImageLoad}
                 />
               </ReactCrop>
@@ -297,3 +406,17 @@ function centerAspectCrop(
     mediaHeight,
   );
 }
+
+// function convertToPixelCrop(
+//   crop: Crop,
+//   imageWidth: number,
+//   imageHeight: number,
+// ): PixelCrop {
+//   return {
+//     unit: "px",
+//     x: (crop.x * imageWidth) / 100,
+//     y: (crop.y * imageHeight) / 100,
+//     width: (crop.width * imageWidth) / 100,
+//     height: (crop.height * imageHeight) / 100,
+//   };
+// }
