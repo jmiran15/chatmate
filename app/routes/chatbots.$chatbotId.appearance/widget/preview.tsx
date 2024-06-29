@@ -3,6 +3,7 @@ import OpenButton from "./open-button";
 import ChatWindow from "./chat-window";
 import "./styles.css";
 import { useEffect, useState } from "react";
+import { useMobileScreen } from "~/utils/mobile";
 
 export const colors = {
   zinc: "zinc-900",
@@ -25,14 +26,9 @@ export const colors = {
   rose: "rose-500",
 };
 
-export default function Preview({
-  chatbot,
-  isMobile,
-}: {
-  chatbot: Chatbot;
-  isMobile: boolean;
-}) {
+export default function Preview({ chatbot }: { chatbot: Chatbot }) {
   const [isChatOpen, setIsChatOpen] = useState(true);
+  const isMobile = useMobileScreen();
 
   useEffect(() => {
     if (isMobile) {

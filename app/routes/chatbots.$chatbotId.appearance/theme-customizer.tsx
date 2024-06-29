@@ -1,8 +1,7 @@
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
+import { Label } from "../../components/ui/label";
+import { Textarea } from "../../components/ui/textarea";
 import { useFetcher } from "@remix-run/react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Input } from "../../components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,7 +10,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../components/ui/select";
+import { Chatbot } from "@prisma/client";
 
 const THEME_COLORS = [
   "zinc",
@@ -37,58 +37,79 @@ const THEME_COLORS = [
 
 const OPEN_ICONS = ["plus", "chevron", "chat"];
 
+const INTENT = "update";
+
 export default function Customizer({
-  name,
-  url,
-  color,
-  icon,
-  introMessages,
-  starterQuestions,
+  fetcher,
+  chatbot,
 }: {
-  name: string;
-  url: string;
-  color: string;
-  icon: string;
-  introMessages: string[];
-  starterQuestions: string[];
+  fetcher: ReturnType<typeof useFetcher>;
+  chatbot: Chatbot;
 }) {
+  const {
+    publicName,
+    logoUrl,
+    themeColor,
+    openIcon,
+    introMessages,
+    starterQuestions,
+  } = chatbot;
+
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
-  const fetcher = useFetcher();
-
-  function handleSubmit(event) {
-    fetcher.submit(event.currentTarget.form, {
-      method: "POST",
-    });
-  }
 
   return (
-    <fetcher.Form
-      method="POST"
-      className="flex flex-col space-y-8 md:col-span-2 overflow-y-auto  md:border-r p-4"
-    >
+    <div className="flex flex-col space-y-8 md:col-span-2 overflow-y-auto  md:border-r p-4">
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="name">Name</Label>
         <Input
           id="name"
-          name="name"
           placeholder="Enter your chatbot name"
-          defaultValue={name}
+          defaultValue={publicName}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ publicName: e.target.value }),
+              },
+              { method: "post" },
+            )
+          }
         />
       </div>
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="url">Logo url</Label>
         <Input
           id="url"
-          name="url"
           placeholder="Enter your logo url"
-          defaultValue={url}
+          defaultValue={logoUrl ?? ""}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ logoUrl: e.target.value }),
+              },
+              { method: "post" },
+            )
+          }
         />
       </div>
 
       <div className="flex flex-col gap-1.5">
         <Label>Theme color</Label>
-        <Select name="color" defaultValue={color}>
+        <Select
+          name="color"
+          defaultValue={themeColor}
+          onValueChange={(value) => {
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ themeColor: value }),
+              },
+              { method: "post" },
+            );
+          }}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a theme color" />
           </SelectTrigger>
@@ -107,7 +128,19 @@ export default function Customizer({
 
       <div className="flex flex-col gap-1.5">
         <Label>Open button icon</Label>
-        <Select name="icon" defaultValue={icon}>
+        <Select
+          name="icon"
+          defaultValue={openIcon}
+          onValueChange={(value) => {
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ openIcon: value }),
+              },
+              { method: "post" },
+            );
+          }}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select an icon" />
           </SelectTrigger>
@@ -132,6 +165,17 @@ export default function Customizer({
           placeholder={`Enter your intro messages\nOne per line\nLike this`}
           rows={5}
           defaultValue={intro}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({
+                  introMessages: e.target.value.split("\n"),
+                }),
+              },
+              { method: "post" },
+            )
+          }
         />
         <p className="text-sm text-muted-foreground">
           These messages will be shown when the chatbot is first opened.
@@ -146,14 +190,22 @@ export default function Customizer({
           placeholder={`Enter your starter questions\nOne per line\nLike this`}
           rows={5}
           defaultValue={starter}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({
+                  starterQuestions: e.target.value.split("\n"),
+                }),
+              },
+              { method: "post" },
+            )
+          }
         />
         <p className="text-sm text-muted-foreground">
           These questions will be shown when the chatbot is first opened.
         </p>
       </div>
-      <Button type="submit" className="self-start" onClick={handleSubmit}>
-        Update appearance
-      </Button>
-    </fetcher.Form>
+    </div>
   );
 }
