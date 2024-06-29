@@ -352,6 +352,7 @@ export function ImagePicker({
             <div className="mt-4">
               <ReactCrop
                 crop={crop}
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 onChange={(pixelCrop, _) => setCrop(pixelCrop)}
                 onComplete={(c) => onCropComplete(c)}
                 aspect={aspect}

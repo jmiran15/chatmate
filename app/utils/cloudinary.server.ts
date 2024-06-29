@@ -32,6 +32,7 @@ async function uploadFile(file: AsyncIterable<Uint8Array>, public_id?: string) {
 }
 
 async function uploadImage(data: AsyncIterable<Uint8Array>) {
+  // eslint-disable-next-line no-async-promise-executor
   const uploadPromise = new Promise(async (resolve, reject) => {
     const uploadStream = cloudinary.v2.uploader.upload_stream(
       {
