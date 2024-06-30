@@ -36,6 +36,17 @@ const THEME_COLORS = [
   "rose",
 ];
 
+const CONTAINER_RADIUS = [
+  { label: "none", value: "0" },
+  { label: "sm", value: "0.3" },
+  { label: "md", value: "0.5" },
+  {
+    label: "lg",
+    value: "0.75",
+  },
+  { label: "xl", value: "1.0" },
+];
+
 const OPEN_ICONS = ["plus", "chevron", "chat"];
 
 const INTENT = "generalUpdate";
@@ -56,6 +67,7 @@ export default function Customizer({
     openIcon,
     introMessages,
     starterQuestions,
+    containerRadius,
   } = chatbot;
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
@@ -145,6 +157,38 @@ export default function Customizer({
               {OPEN_ICONS.map((icon) => (
                 <SelectItem key={icon} value={icon}>
                   {icon}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <Label>Container border radius</Label>
+        <Select
+          name="containerRadius"
+          defaultValue={String(containerRadius) ?? "0"}
+          onValueChange={(value) => {
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ containerRadius: value }),
+              },
+              { method: "post", encType: "multipart/form-data" },
+            );
+            console.log(value);
+          }}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a border radius" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Border radius</SelectLabel>
+              {CONTAINER_RADIUS.map((radius, index) => (
+                <SelectItem key={index} value={radius.value}>
+                  {radius.label}
                 </SelectItem>
               ))}
             </SelectGroup>
