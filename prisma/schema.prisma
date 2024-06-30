@@ -52,6 +52,8 @@ model Chatbot {
   embeddings       Embedding[]
 
   containerRadius String? @default("1.0")
+
+  openButtonText String?
 }
 
 model Chat {
