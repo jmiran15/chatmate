@@ -69,8 +69,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const croppedLogoFilepath = String(formData.get("croppedLogoFile"));
       const lastCrop = JSON.parse(String(formData.get("lastCrop")));
 
-      console.log({ originalLogoFilepath, croppedLogoFilepath, lastCrop });
-
       if (!croppedLogoFilepath || !lastCrop) {
         throw new Error("Invalid image update");
       }

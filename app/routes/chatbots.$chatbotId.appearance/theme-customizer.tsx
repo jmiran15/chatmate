@@ -177,7 +177,6 @@ export default function Customizer({
               },
               { method: "post", encType: "multipart/form-data" },
             );
-            console.log(value);
           }}
         >
           <SelectTrigger className="w-[180px]">
