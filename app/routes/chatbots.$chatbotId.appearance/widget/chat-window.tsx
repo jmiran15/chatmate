@@ -12,11 +12,16 @@ export default function ChatWindow({
 }) {
   const isMobile = useMobileScreen();
   const desktopStyle =
-    "bg-red-100 flex flex-col flex-1 mb-[16px] z-9999 min-h-[80px] w-[400px] max-h-[704px] rounded-[16px] opacity-100 overflow-hidden chat-window-custom";
+    "bg-red-100 flex flex-col flex-1 mb-[16px] z-9999 min-h-[80px] w-[400px] max-h-[704px] opacity-100 overflow-hidden chat-window-custom";
   const mobileStyle =
     "flex flex-col flex-1 fixed bottom-0 right-0 z-9999 opacity-100 overflow-hidden h-dvh w-dvw";
   return (
-    <div className={isMobile ? mobileStyle : desktopStyle}>
+    <div
+      className={isMobile ? mobileStyle : desktopStyle}
+      style={{
+        borderRadius: isMobile ? "0rem" : chatbot.containerRadius + "rem",
+      }}
+    >
       <ChatWindowHeader chatbot={chatbot} closeChat={closeChat} />
       <ChatContainer chatbot={chatbot} />
     </div>

@@ -50,6 +50,8 @@ model Chatbot {
   responseLength   String?     @default("short")
   documents        Document[]
   embeddings       Embedding[]
+
+  containerRadius String? @default("1.0")
 }
 
 model Chat {
