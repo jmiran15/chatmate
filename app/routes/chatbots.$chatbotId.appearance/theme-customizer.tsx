@@ -68,6 +68,7 @@ export default function Customizer({
     introMessages,
     starterQuestions,
     containerRadius,
+    openButtonText,
   } = chatbot;
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
@@ -162,6 +163,24 @@ export default function Customizer({
             </SelectGroup>
           </SelectContent>
         </Select>
+      </div>
+
+      <div className="flex flex-col gap-1.5 w-full">
+        <Label htmlFor="opentext">Open button text</Label>
+        <Input
+          id="opentext"
+          placeholder="Chat with us..."
+          defaultValue={openButtonText ?? ""}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ openButtonText: e.target.value }),
+              },
+              { method: "post", encType: "multipart/form-data" },
+            )
+          }
+        />
       </div>
 
       <div className="flex flex-col gap-1.5">
