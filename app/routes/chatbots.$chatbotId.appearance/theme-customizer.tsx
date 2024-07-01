@@ -69,9 +69,11 @@ export default function Customizer({
     starterQuestions,
     containerRadius,
     openButtonText,
+    widgetRestrictedUrls,
   } = chatbot;
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
+  const restrictedUrls = widgetRestrictedUrls.join("\n");
 
   return (
     <div className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 md:border-r w-full">
@@ -92,7 +94,6 @@ export default function Customizer({
           }
         />
       </div>
-
       <div className="flex flex-col gap-1.5">
         <Label>Logo url</Label>
         <ImagePicker
@@ -102,7 +103,6 @@ export default function Customizer({
           fetcher={fetcher}
         />
       </div>
-
       <div className="flex flex-col gap-1.5">
         <Label>Theme color</Label>
         <Select
@@ -133,7 +133,6 @@ export default function Customizer({
           </SelectContent>
         </Select>
       </div>
-
       <div className="flex flex-col gap-1.5">
         <Label>Open button icon</Label>
         <Select
@@ -164,7 +163,6 @@ export default function Customizer({
           </SelectContent>
         </Select>
       </div>
-
       <div className="flex flex-col gap-1.5 w-full">
         <Label htmlFor="opentext">Open button text</Label>
         <Input
@@ -182,7 +180,6 @@ export default function Customizer({
           }
         />
       </div>
-
       <div className="flex flex-col gap-1.5">
         <Label>Container border radius</Label>
         <Select
@@ -213,7 +210,6 @@ export default function Customizer({
           </SelectContent>
         </Select>
       </div>
-
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="intro">Intro messages</Label>
         <Textarea
@@ -238,7 +234,6 @@ export default function Customizer({
           These messages will be shown when the chatbot is first opened.
         </p>
       </div>
-
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="starter">Starter questions</Label>
         <Textarea
@@ -263,6 +258,30 @@ export default function Customizer({
           These questions will be shown when the chatbot is first opened.
         </p>
       </div>
+      <div className="flex flex-col gap-1.5">
+        <Label htmlFor="restrict">Restrict paths</Label>
+        <Textarea
+          id="restrict"
+          placeholder={`Enter paths to restrict\nOne per line\nLike this\nYou can use * as a wildcard to match any characters\nExample: /blog/*`}
+          rows={5}
+          defaultValue={restrictedUrls}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({
+                  widgetRestrictedUrls: e.target.value.split("\n"),
+                }),
+              },
+              { method: "post", encType: "multipart/form-data" },
+            )
+          }
+        />
+        <p className="text-sm text-muted-foreground">
+          Include all paths to your website where you would like the chatbot
+          widget to not appear.
+        </p>
+      </div>{" "}
     </div>
   );
 }

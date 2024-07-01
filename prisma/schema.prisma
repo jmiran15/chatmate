@@ -54,6 +54,8 @@ model Chatbot {
   containerRadius String? @default("1.0")
 
   openButtonText String?
+
+  widgetRestrictedUrls String[] @default([])
 }
 
 model Chat {
