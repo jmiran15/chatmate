@@ -5,7 +5,7 @@ import {
   createMessage,
   getChatById,
   getChatBySessionId,
-  getMessagesByChatId,
+  getMessagesAndUnseenCount,
   updateChatAIInsights,
   updateChatNameWithAI,
 } from "~/models/chat.server";
@@ -42,7 +42,11 @@ export async function loader({ params }: LoaderFunctionArgs) {
     return json({ error: "Failed to create chat" }, { status: 500 });
   }
 
-  const messages = await getMessagesByChatId({ chatId: _chat.id });
+  const { allMessages, unseenMessagesCount } = await getMessagesAndUnseenCount({
+    chatId: _chat.id,
+  });
+
+  console.log("unsenMessagesCount", unseenMessagesCount);
 
   const headers = {
     "Access-Control-Allow-Origin": "*", // Allow any domain
@@ -50,7 +54,14 @@ export async function loader({ params }: LoaderFunctionArgs) {
     "Access-Control-Allow-Headers": "Content-Type",
   };
 
-  return json(messages, { headers });
+  return json(
+    {
+      chat: _chat,
+      messages: allMessages,
+      unseenMessagesCount,
+    },
+    { headers },
+  );
 }
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
