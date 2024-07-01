@@ -107,6 +107,7 @@ model Message {
   content   String
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String
+  seen      Boolean? @default(false)
 }
 
 // subscription models

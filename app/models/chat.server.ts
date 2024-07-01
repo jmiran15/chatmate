@@ -134,6 +134,33 @@ export function getMessagesByChatId({ chatId }: { chatId: Chat["id"] }) {
   });
 }
 
+export async function getMessagesAndUnseenCount({
+  chatId,
+}: {
+  chatId: Chat["id"];
+}) {
+  const [allMessages, unseenMessagesCount] = await prisma.$transaction([
+    prisma.message.findMany({
+      where: {
+        chatId,
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    }),
+    prisma.message.count({
+      where: {
+        chatId,
+        seen: false,
+        role: "assistant", // we only care about non user messages for now
+      },
+    }),
+  ]);
+  return {
+    allMessages,
+    unseenMessagesCount,
+  };
+}
 export function createMessage({
   chatId,
   role,
