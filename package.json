@@ -135,6 +135,7 @@
     "remix-utils": "^7.6.0",
     "request-ip": "^3.3.0",
     "scrapingbee": "^1.7.4",
+    "socket.io": "^4.7.5",
     "sonner": "^1.4.41",
     "source-map-support": "^0.5.21",
     "stripe": "^14.22.0",

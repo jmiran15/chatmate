@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import { createServer } from "http";
 
 import prom from "@isaacs/express-prometheus-middleware";
 import { createRequestHandler } from "@remix-run/express";
@@ -11,6 +12,7 @@ import type { RequestHandler } from "express";
 import express from "express";
 import morgan from "morgan";
 import sourceMapSupport from "source-map-support";
+import { Server } from "socket.io";
 
 sourceMapSupport.install();
 installGlobals();
@@ -30,6 +32,27 @@ async function run() {
         });
 
   const app = express();
+
+  // You need to create the HTTP server from the Express app
+  const httpServer = createServer(app);
+
+  // And then attach the socket.io server to the HTTP server
+  const io = new Server(httpServer);
+
+  // Then you can use `io` to listen the `connection` event and get a socket
+  // from a client
+  io.on("connection", (socket) => {
+    // from this point you are on the WS connection with a specific client
+    console.log(socket.id, "connected");
+
+    socket.emit("confirmation", "connected!");
+
+    socket.on("event", (data) => {
+      console.log(socket.id, data);
+      socket.emit("event", "pong");
+    });
+  });
+
   const metricsApp = express();
   app.use(
     prom({
