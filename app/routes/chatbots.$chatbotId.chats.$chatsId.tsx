@@ -35,7 +35,7 @@ import { Send } from "lucide-react";
 import { useDebouncedCallback } from "use-debounce";
 import { autoGrowTextArea } from "~/utils/autogrow";
 import { useSubmitHandler } from "~/hooks/useSubmit";
-import { Separator } from "~/components/ui/separator";
+// import { Separator } from "~/components/ui/separator";
 import { Button } from "~/components/ui/button";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -80,7 +80,7 @@ export default function ChatRoute() {
   const navigate = useNavigate();
   const { chatbotId } = useParams();
   const [searchParams] = useSearchParams();
-  const inputRef = useRef();
+  // const inputRef = useRef();
 
   function handleExitComplete() {
     navigate(`/chatbots/${chatbotId}/chats?${searchParams.toString()}`);
@@ -316,7 +316,7 @@ export default function ChatRoute() {
   );
 }
 
-function PromptInput({
+export function PromptInput({
   userInput,
   setUserInput,
   inputRef,
