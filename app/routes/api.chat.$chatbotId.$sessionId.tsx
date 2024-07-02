@@ -47,13 +47,13 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   if (!_anonymousUser) {
     const isDev = process.env.NODE_ENV === "development";
     const ipAddress = isDev ? "8.8.8.8" : getClientIPAddress(request);
-    console.log(`api.chat.${chatbotId}.${sessionId} - ipAddress: ${ipAddress}`);
-    console.log(`api.chat.${chatbotId}.${sessionId} - user agent: `, ua);
+    // console.log(`api.chat.${chatbotId}.${sessionId} - ipAddress: ${ipAddress}`);
+    // console.log(`api.chat.${chatbotId}.${sessionId} - user agent: `, ua);
 
     try {
       const ipapiResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
       const ipData = await ipapiResponse.json();
-      console.log(`api.chat.${chatbotId}.${sessionId} - ipData: `, ipData);
+      // console.log(`api.chat.${chatbotId}.${sessionId} - ipData: `, ipData);
       _anonymousUser = await prisma.anonymousUser.create({
         data: {
           sessionId: sessionId,
@@ -78,10 +78,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       );
     }
   }
-  console.log(
-    `api.chat.${chatbotId}.${sessionId} - _anonymousUser: `,
-    _anonymousUser,
-  );
+  // console.log(
+  //   `api.chat.${chatbotId}.${sessionId} - _anonymousUser: `,
+  //   _anonymousUser,
+  // );
 
   if (!_chat) {
     return json({ error: "Failed to create chat" }, { status: 500 });
@@ -124,7 +124,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     case "POST": {
       // chat
       const body = JSON.parse(await request.text());
-      const { chatbot, messages } = body;
+      const { chatbot, messages, chattingWithAgent } = body;
 
       // try to find the sessionId in the chats
       let _chat: Chat | null = null;
@@ -167,6 +167,18 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
       console.log("createdMessage", createdMessage);
 
+      const headers = {
+        "Access-Control-Allow-Origin": "*", // Allow any domain
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      };
+
+      if (chattingWithAgent)
+        return new Response(null, { status: 200, headers });
+
       const stream = new ReadableStream({
         start(controller) {
           (async () => {
@@ -179,12 +191,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 messages,
               });
 
-              console.log("chatStream", chatStream);
-
               for await (const chunk of chatStream) {
                 for (const choice of chunk.choices) {
-                  console.log("choice", choice);
-
                   const delta = choice.delta?.content;
                   if (!delta) continue;
 
@@ -213,7 +221,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                   })}\n\n`,
                 );
               }
-              console.log("fullText", fullText);
 
               // push the final text as a new messsgae in the chat
               const assistantResponse = await createMessage({
@@ -221,8 +228,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 role: "assistant",
                 content: fullText,
               });
-
-              console.log("assistantResponse", assistantResponse);
             } catch (error) {
               console.log("error", error);
 
@@ -248,15 +253,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         updateChatNameWithAI({ chatId: _chat.id }),
         updateChatAIInsights({ chatId: _chat.id }),
       ]);
-
-      const headers = {
-        "Access-Control-Allow-Origin": "*", // Allow any domain
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-      };
 
       return new Response(stream, {
         headers,

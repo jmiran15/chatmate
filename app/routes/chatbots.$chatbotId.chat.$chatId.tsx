@@ -25,8 +25,6 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const chatbotRes = await fetch(`${BASE_URL}/api/chatbot/${chatbotId}`);
   const chatbot = await chatbotRes.json();
 
-  console.log("userMessage", userMessage);
-
   return json({
     chatbot,
     messages,
