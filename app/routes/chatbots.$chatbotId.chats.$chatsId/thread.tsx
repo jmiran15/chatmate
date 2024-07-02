@@ -1,7 +1,7 @@
 import { Message } from "@prisma/client";
 import { format } from "date-fns";
 import { Clipboard } from "lucide-react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { ChatAction } from "~/components/chat/chat-action";
 import {
   HoverCard,

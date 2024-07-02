@@ -228,6 +228,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 role: "assistant",
                 content: fullText,
               });
+              console.log("assistantResponse", assistantResponse);
             } catch (error) {
               console.log("error", error);
 
