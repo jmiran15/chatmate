@@ -3,6 +3,10 @@ import { Outlet } from "@remix-run/react";
 import Sidebar from "~/components/layout/sidebar";
 import { getChatbotById } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
+import type { Socket } from "socket.io-client";
+import io from "socket.io-client";
+import { SocketProvider } from "~/providers/socket";
+import { useEffect, useState } from "react";
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
@@ -18,12 +22,31 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 };
 
 export default function ChatbotLayout() {
+  const [socket, setSocket] = useState<Socket>();
+
+  useEffect(() => {
+    const socket = io();
+    setSocket(socket);
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.on("confirmation", (data) => {
+      console.log(data);
+    });
+  }, [socket]);
+
   return (
-    <div className="flex flex-col w-full h-full lg:grid lg:grid-cols-6 overflow-hidden">
-      <Sidebar />
-      <div className="grow lg:col-span-5 h-full overflow-hidden">
-        <Outlet />
+    <SocketProvider socket={socket}>
+      <div className="flex flex-col w-full h-full lg:grid lg:grid-cols-6 overflow-hidden">
+        <Sidebar />
+        <div className="grow lg:col-span-5 h-full overflow-hidden">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </SocketProvider>
   );
 }

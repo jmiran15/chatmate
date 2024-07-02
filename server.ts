@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import url from "node:url";
+import { createServer } from "http";
 
 import prom from "@isaacs/express-prometheus-middleware";
 import { createRequestHandler } from "@remix-run/express";
@@ -11,6 +12,7 @@ import type { RequestHandler } from "express";
 import express from "express";
 import morgan from "morgan";
 import sourceMapSupport from "source-map-support";
+import { Server } from "socket.io";
 
 sourceMapSupport.install();
 installGlobals();
@@ -30,6 +32,55 @@ async function run() {
         });
 
   const app = express();
+
+  // You need to create the HTTP server from the Express app
+  const httpServer = createServer(app);
+
+  // And then attach the socket.io server to the HTTP server
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "*", // Be cautious with this in production
+      // TODO - change cors origins to local widget and prod widget
+      methods: ["GET", "POST"],
+    },
+  });
+  // Then you can use `io` to listen the `connection` event and get a socket
+  // from a client
+  io.on("connection", (socket) => {
+    // from this point you are on the WS connection with a specific client
+    console.log(socket.id, "connected");
+
+    socket.emit("confirmation", "connected!");
+
+    socket.on("messages", (data) => {
+      console.log(`${socket.id} - messages: `, data);
+      socket.broadcast.emit("messages", data);
+    });
+
+    socket.on("isAgent", (data: { sessionId: string; isAgent: boolean }) => {
+      console.log(`${socket.id} - isAgent: `, data);
+      socket.broadcast.emit("isAgent", data);
+    });
+
+    socket.on("pollingAgent", (data: { sessionId: string }) => {
+      console.log(`${socket.id} - pollingAgent: `, data);
+      socket.broadcast.emit("pollingAgent", data);
+    });
+
+    socket.on(
+      "widgetConnected",
+      (data: { sessionId: string; connected: boolean }) => {
+        console.log(`${socket.id} - widgetConnected: `, data);
+        socket.broadcast.emit("widgetConnected", data);
+      },
+    );
+
+    socket.on("pollingWidgetStatus", (data: { sessionId: string }) => {
+      console.log(`${socket.id} - pollingWidgetStatus: `, data);
+      socket.broadcast.emit("pollingWidgetStatus", data);
+    });
+  });
+
   const metricsApp = express();
   app.use(
     prom({
@@ -101,7 +152,7 @@ async function run() {
   app.all("*", remixHandler);
 
   const port = process.env.PORT || 3000;
-  app.listen(port, () => {
+  httpServer.listen(port, () => {
     console.log(`✅ app ready: http://localhost:${port}`);
 
     if (process.env.NODE_ENV === "development") {
