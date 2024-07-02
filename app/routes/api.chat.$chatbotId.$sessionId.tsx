@@ -11,9 +11,13 @@ import {
 } from "~/models/chat.server";
 import { v4 as uuidv4 } from "uuid";
 import { chat } from "~/utils/openai";
+import { getClientIPAddress } from "remix-utils/get-client-ip-address";
+import uap from "ua-parser-js";
+import { prisma } from "~/db.server";
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   const { sessionId, chatbotId } = params;
+  const ua = uap(request.headers.get("User-Agent")!);
 
   if (!sessionId) {
     return json({ error: "No sessionId provided" }, { status: 400 });
@@ -23,20 +27,61 @@ export async function loader({ params }: LoaderFunctionArgs) {
     return json({ error: "No chatbotId provided" }, { status: 400 });
   }
 
-  // first try to find the chat with that session ID, if it exists, get the messages and return, otherwise, create the chat with that id and return the messages in that chat
   let _chat = await getChatBySessionId({ sessionId });
 
-  console.log("_chat", _chat);
-
   if (!_chat) {
-    // CREATE NEW ID
     const id = uuidv4();
     _chat = await createChatWithStarterMessages({
-      sessionId: id,
+      sessionId: id, // TODO - this is chat id - sId below is the actual sessionId -- bad API!
       chatbotId,
       sId: sessionId,
     });
   }
+
+  let _anonymousUser = await prisma.anonymousUser.findUnique({
+    where: {
+      sessionId: sessionId,
+    },
+  });
+
+  if (!_anonymousUser) {
+    const isDev = process.env.NODE_ENV === "development";
+    const ipAddress = isDev ? "8.8.8.8" : getClientIPAddress(request);
+    console.log(`api.chat.${chatbotId}.${sessionId} - ipAddress: ${ipAddress}`);
+    console.log(`api.chat.${chatbotId}.${sessionId} - user agent: `, ua);
+
+    try {
+      const ipapiResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+      const ipData = await ipapiResponse.json();
+      console.log(`api.chat.${chatbotId}.${sessionId} - ipData: `, ipData);
+      _anonymousUser = await prisma.anonymousUser.create({
+        data: {
+          sessionId: sessionId,
+          ...ipData,
+          ua: ua.ua,
+          browser_name: ua.browser.name,
+          browser_version: ua.browser.version,
+          browser_major: ua.browser.major,
+          cpu_architecture: ua.cpu.architecture,
+          device_type: ua.device.type,
+          device_vendor: ua.device.vendor,
+          device_model: ua.device.model,
+          engine_name: ua.engine.name,
+          engine_version: ua.engine.version,
+          os_name: ua.os.name,
+          os_version: ua.os.version,
+        },
+      });
+    } catch (error) {
+      console.log(
+        `api.chat.${chatbotId}.${sessionId} - ipData error: ${error}`,
+      );
+    }
+  }
+  console.log(
+    `api.chat.${chatbotId}.${sessionId} - _anonymousUser: `,
+    _anonymousUser,
+  );
 
   if (!_chat) {
     return json({ error: "Failed to create chat" }, { status: 500 });
@@ -46,10 +91,8 @@ export async function loader({ params }: LoaderFunctionArgs) {
     chatId: _chat.id,
   });
 
-  console.log("unsenMessagesCount", unseenMessagesCount);
-
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow any domain
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
@@ -59,6 +102,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
       chat: _chat,
       messages: allMessages,
       unseenMessagesCount,
+      anonymousUser: _anonymousUser,
     },
     { headers },
   );
