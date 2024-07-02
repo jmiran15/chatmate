@@ -175,14 +175,14 @@ export default function ChatRoute() {
           </p>
         </div>
         <div>
-          {/* actions go here */}
-          <Button onClick={() => {}} variant="ghost" size="icon">
+          {/* TODO - actions go here */}
+          {/* <Button onClick={() => {}} variant="ghost" size="icon">
             {data?.chat?.starred ? (
               <StarIconSolid className="w-4 h-4" />
             ) : (
               <StarIcon className="w-4 h-4" />
             )}
-          </Button>
+          </Button> */}
         </div>
       </div>
       {/* below it is a grid, with chats taking up most of it, and user info space taking up the rest */}
