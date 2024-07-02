@@ -73,56 +73,6 @@ model Chat {
   sessionId  String?
 }
 
-// https://ipapi.co/json/
-// https://docs.uaparser.dev/
-model AnonymousUser {
-  id                   String   @id @default(cuid())
-  sessionId            String   @unique
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-  ip                   String?
-  network              String?
-  version              String?
-  city                 String?
-  region               String?
-  region_code          String?
-  country              String?
-  country_code         String?
-  country_code_iso3    String?
-  country_name         String?
-  country_capital      String?
-  country_tld          String?
-  country_area         Float?
-  country_population   Float?
-  continent_code       String?
-  in_eu                Boolean?
-  postal               String?
-  latitude             Float?
-  longitude            Float?
-  latlong              String?
-  timezone             String?
-  utc_offset           String?
-  country_calling_code String?
-  currency             String?
-  currency_name        String?
-  languages            String?
-  asn                  String?
-  org                  String?
-  hostname             String?
-  ua                   String?
-  browser_name         String?
-  browser_version      String?
-  browser_major        String?
-  cpu_architecture     String?
-  device_type          String?
-  device_vendor        String?
-  device_model         String?
-  engine_name          String?
-  engine_version       String?
-  os_name              String?
-  os_version           String?
-}
-
 model Document {
   id         String       @id @default(uuid())
   createdAt  DateTime     @default(now())
