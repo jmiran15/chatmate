@@ -51,12 +51,14 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
       where: {
         chatbotId,
         ...starredQuery,
+        userId: null,
       },
     }),
     prisma.chat.findMany({
       where: {
         chatbotId,
         ...starredQuery,
+        userId: null,
       },
       orderBy: {
         ...createdAtQuery,
