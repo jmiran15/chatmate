@@ -36,6 +36,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { autoGrowTextArea } from "~/utils/autogrow";
 import { useSubmitHandler } from "~/hooks/useSubmit";
 import { Separator } from "~/components/ui/separator";
+import { Button } from "~/components/ui/button";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -274,17 +275,18 @@ export default function ChatRoute() {
               })}
             </div>
           </ScrollArea>
-          <Separator />
-          <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">
+          {/* <Separator /> */}
+          {/* <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">
             <PromptInput
               userInput={""}
+              // unexpected arro
               setUserInput={() => {}}
               inputRef={inputRef}
               handleSendMessage={() => {}}
               scrollToBottom={() => {}}
               setAutoScroll={() => {}}
             />
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-col col-span-3 overflow-y-auto h-full border-l p-5 gap-2">
           {data?.anonUser
