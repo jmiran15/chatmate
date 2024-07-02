@@ -13,7 +13,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "~/components/ui/hover-card";
-import { Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Loading } from "~/components/ui/loading";
 import Markdown from "~/components/ui/markdown";
 import { useScrollToBottom } from "~/hooks/useScroll";
@@ -30,6 +30,12 @@ import { Button } from "~/components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { prisma } from "~/db.server";
+import { Textarea } from "~/components/ui/textarea";
+import { Send } from "lucide-react";
+import { useDebouncedCallback } from "use-debounce";
+import { autoGrowTextArea } from "~/utils/autogrow";
+import { useSubmitHandler } from "~/hooks/useSubmit";
+import { Separator } from "~/components/ui/separator";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -73,6 +79,7 @@ export default function ChatRoute() {
   const navigate = useNavigate();
   const { chatbotId } = useParams();
   const [searchParams] = useSearchParams();
+  const inputRef = useRef();
 
   function handleExitComplete() {
     navigate(`/chatbots/${chatbotId}/chats?${searchParams.toString()}`);
@@ -188,7 +195,7 @@ export default function ChatRoute() {
       {/* below it is a grid, with chats taking up most of it, and user info space taking up the rest */}
 
       <div className="grid grid-cols-10 flex-1 overflow-y-auto">
-        <div className="flex flex-col col-span-7 overflow-y-auto h-full">
+        <div className="flex flex-col col-span-7 overflow-y-auto h-full relative">
           <ScrollArea
             ref={scrollRef}
             className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-5"
@@ -267,30 +274,150 @@ export default function ChatRoute() {
               })}
             </div>
           </ScrollArea>
+          <Separator />
+          <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">
+            <PromptInput
+              userInput={""}
+              setUserInput={() => {}}
+              inputRef={inputRef}
+              handleSendMessage={() => {}}
+              scrollToBottom={() => {}}
+              setAutoScroll={() => {}}
+            />
+          </div>
         </div>
         <div className="flex flex-col col-span-3 overflow-y-auto h-full border-l p-5 gap-2">
-          {data?.anonUser &&
-            Object.keys(data.anonUser).map(
-              (key) =>
-                key !== "id" &&
-                key !== "createdAt" &&
-                key !== "updatedAt" &&
-                key !== "sessionId" &&
-                data.anonUser?.[key] &&
-                key !== "ua" && (
-                  <div
-                    className="flex items-center justify-start gap-2 w-full"
-                    key={key}
-                  >
-                    <p className="text-sm text-muted-foreground">{key}</p>
-                    <small className="text-sm font-medium leading-none">
-                      {data.anonUser?.[key]}
-                    </small>
-                  </div>
-                ),
-            )}
+          {data?.anonUser
+            ? Object.keys(data.anonUser).map(
+                (key) =>
+                  key !== "id" &&
+                  key !== "createdAt" &&
+                  key !== "updatedAt" &&
+                  key !== "sessionId" &&
+                  data.anonUser?.[key] &&
+                  key !== "ua" && (
+                    <div
+                      className="flex items-center justify-start gap-2 w-full"
+                      key={key}
+                    >
+                      <p className="text-sm text-muted-foreground">{key}</p>
+                      <small className="text-sm font-medium leading-none">
+                        {data.anonUser?.[key]}
+                      </small>
+                    </div>
+                  ),
+              )
+            : null}
         </div>
       </div>
     </div>
+  );
+}
+
+function PromptInput({
+  userInput,
+  setUserInput,
+  inputRef,
+  scrollToBottom,
+  handleSendMessage,
+  setAutoScroll,
+}: {
+  userInput: string;
+  setUserInput: (value: string) => void;
+  inputRef: React.RefObject<HTMLTextAreaElement>;
+  scrollToBottom: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handleSendMessage: any;
+  setAutoScroll: (autoScroll: boolean) => void;
+}) {
+  const formRef = useRef<HTMLFormElement>();
+  const isSubmitting = false;
+  const { shouldSubmit } = useSubmitHandler();
+
+  const isMobileScreen = useMobileScreen();
+
+  const [inputRows, setInputRows] = useState(2);
+  const measure = useDebouncedCallback(
+    () => {
+      const rows = inputRef.current ? autoGrowTextArea(inputRef.current) : 1;
+      const inputRows = Math.min(
+        20,
+        Math.max(1 + Number(!isMobileScreen), rows),
+      );
+      setInputRows(inputRows);
+    },
+    100,
+    {
+      leading: true,
+      trailing: true,
+    },
+  );
+
+  useEffect(measure, [userInput]);
+
+  useEffect(() => {
+    if (isSubmitting) {
+      formRef.current?.reset();
+      setUserInput("");
+      setAutoScroll(true);
+    } else {
+      inputRef.current?.focus();
+    }
+  }, [isSubmitting]);
+
+  const autoFocus = !isMobileScreen; // wont auto focus on mobile screen
+
+  // check if should send message
+  const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (shouldSubmit(e)) {
+      if (!isSubmitting) {
+        handleSendMessage(e);
+      }
+      e.preventDefault();
+    }
+  };
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSendMessage(e);
+      }}
+      ref={formRef}
+      className="flex flex-1 items-end relative"
+    >
+      <Textarea
+        className={cn(
+          "ring-inset focus-visible:ring-offset-0 pr-28 md:pr-40 min-h-[56px]",
+        )}
+        ref={inputRef}
+        placeholder={
+          isMobileScreen
+            ? "Enter to send"
+            : "Enter to send, Shift + Enter to wrap"
+        }
+        onFocus={scrollToBottom}
+        onClick={scrollToBottom}
+        rows={inputRows}
+        onKeyDown={onInputKeyDown}
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={autoFocus}
+      />
+
+      <div className="my-2 flex items-center gap-2.5 absolute right-[15px]">
+        {isMobileScreen ? (
+          <Button type="submit" size="icon" disabled={isSubmitting}>
+            <Send className="h-4 w-4" />
+          </Button>
+        ) : (
+          <Button type="submit" disabled={isSubmitting}>
+            <Send className="h-4 w-4 mr-2" />
+            Send
+          </Button>
+        )}
+      </div>
+    </form>
   );
 }
