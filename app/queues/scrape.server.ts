@@ -12,7 +12,18 @@ export const scrapeQueue = Queue<ScrapeQueueData>(
   "scrape",
   async (job): Promise<Document> => {
     invariant(job.data.document.url, "Document URL is required");
-    const scrapedContents = await scrapSingleUrl(job.data.document.url);
+    const isDev = process.env.NODE_ENV === "development";
+    const scrapedContents = isDev
+      ? {
+          content: "isDev: this is a test",
+          metadata: {
+            sourceURL: job.data.document.url,
+            title: "dev test",
+            description: "dev test description",
+            language: "en",
+          },
+        }
+      : await scrapSingleUrl(job.data.document.url);
     const updatedDocument = await prisma.document.update({
       where: { id: job.data.document.id },
       data: {

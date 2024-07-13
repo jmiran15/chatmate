@@ -10,6 +10,7 @@ import { Queue } from "~/utils/queue.server";
 import { v4 as uuid } from "uuid";
 import invariant from "tiny-invariant";
 import { updateDocument } from "~/models/document.server";
+import { createId } from "@paralleldrive/cuid2";
 
 export interface QueueData {
   document: Document;
@@ -68,9 +69,22 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
     for (const batch of chunkBatches) {
       await Promise.all(
         batch.map(async (chunk) => {
-          const summary: Chunk = await generateSummaryForChunk(chunk);
-          const questions: Chunk[] =
-            await generatePossibleQuestionsForChunk(chunk);
+          const dev = process.env.NODE_ENV === "development";
+
+          const summary: Chunk = dev
+            ? {
+                id: createId(),
+                documentId: chunk.documentId,
+                content: "This is a summary",
+              }
+            : await generateSummaryForChunk(chunk);
+          const questions: Chunk[] = dev
+            ? Array.from({ length: 100 }, (_, i) => ({
+                id: createId(),
+                documentId: chunk.documentId,
+                content: `This is question ${i + 1}`,
+              }))
+            : await generatePossibleQuestionsForChunk(chunk);
 
           const totalSubChunks = 2 + questions.length;
           const add = stepsPerChunk / totalSubChunks;
@@ -85,7 +99,9 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
           for (const batch of embeddingChunks) {
             await Promise.all(
               batch.map(async (node: Chunk) => {
-                const embedding = await embed({ input: node.content });
+                const embedding = dev
+                  ? Array.from({ length: 1536 }, () => 0.1)
+                  : await embed({ input: node.content });
 
                 await prisma.$executeRaw`
                     INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")
@@ -94,9 +110,9 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
                     }, ${chunk.chatbotId}, ${chunk.content})
                     `;
                 progress += add;
-                await job.updateProgress(progress);
               }),
             );
+            await job.updateProgress(progress); // TODO - this is causing errors if we put it inside the promise.all
           }
         }),
       );

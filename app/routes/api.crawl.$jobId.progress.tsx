@@ -79,9 +79,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       });
 
       return function clear() {
-        eventsToListenTo.forEach((event) => {
-          registeredQueue?.queueEvents.off(event, (args) => listener(args));
-        });
+        registeredQueue?.queueEvents.removeAllListeners();
+        // eventsToListenTo.forEach((event) => {
+        //   registeredQueue?.queueEvents.off(event, (args) => listener(args));
+        // });
       };
     },
   );

@@ -88,12 +88,14 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
         return function clear() {
           queues.forEach((queue) => {
             const registeredQueue = global.__registeredQueues[queue.name];
-            eventsToListenTo.forEach((event) => {
-              registeredQueue?.queueEvents.off(
-                event as keyof QueueEventsListener,
-                (args) => listener(event, registeredQueue, args.jobId),
-              );
-            });
+            registeredQueue?.queueEvents.removeAllListeners();
+
+            // eventsToListenTo.forEach((event) => {
+            //   registeredQueue?.queueEvents.off(
+            //     event as keyof QueueEventsListener,
+            //     (args) => listener(event, registeredQueue, args.jobId),
+            //   );
+            // });
           });
         };
       },
