@@ -1,4 +1,9 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
 import {
   useLoaderData,
   useNavigate,
@@ -16,7 +21,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { Loading } from "~/components/ui/loading";
 import Markdown from "~/components/ui/markdown";
 import { useScrollToBottom } from "~/hooks/useScroll";
-import { format, formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 import { ChatAction } from "~/components/chat/chat-action";
 import { copyToClipboard } from "~/utils/clipboard";
 import { Clipboard } from "lucide-react";
@@ -25,8 +30,7 @@ import { cn } from "~/lib/utils";
 import { useMobileScreen } from "~/utils/mobile";
 import { AnimatePresence } from "framer-motion";
 import Modal from "~/components/custom-mobile-modal";
-// import { StarIcon } from "@heroicons/react/24/outline";
-// import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
+
 import { prisma } from "~/db.server";
 import { Separator } from "~/components/ui/separator";
 
@@ -35,6 +39,7 @@ import AnonSidebar from "./anon-sidebar";
 import Thread from "./thread";
 import { useSocket } from "~/providers/socket";
 import axios from "axios";
+import Subheader from "./subheader";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -72,6 +77,40 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       ? process.env.DEV_BASE
       : process.env.PROD_BASE;
   return json({ messages, chatbot, chat, anonUser, API_PATH });
+};
+
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const intent = String(formData.get("intent"));
+  const { chatbotId } = params;
+  const { searchParams } = new URL(request.url);
+
+  if (!chatbotId) {
+    throw new Error("Chatbot id missing");
+  }
+
+  switch (intent) {
+    case "archive-chat-thread": {
+      const chatId = String(formData.get("chatId"));
+      const nextChatId = String(formData.get("nextChatId"));
+
+      await prisma.chat.update({
+        where: {
+          id: chatId,
+        },
+        data: {
+          deleted: true,
+        },
+      });
+
+      // we need to redirect with search params as well
+      return redirect(
+        `/chatbots/${chatbotId}/chats/${nextChatId}?${searchParams.toString()}`,
+      );
+    }
+    default:
+      throw new Error("undefined intent");
+  }
 };
 
 export default function ChatRoute() {
@@ -220,26 +259,7 @@ export default function ChatRoute() {
   ) : (
     <div className="flex flex-col col-span-7 overflow-y-auto h-full">
       {/* a subheader here with more info */}
-      <div className="flex justify-between items-center w-full h-14 border-b bg-muted/40 p-5">
-        <div className="flex flex-col items-start justify-center">
-          <div className="text-md font-semibold">{chat?.name}</div>
-          <p className="text-xs text-muted-foreground">
-            {formatDistanceToNow(new Date(chat?.createdAt), {
-              addSuffix: true,
-            })}
-          </p>
-        </div>
-        <div>
-          {/* TODO - actions go here */}
-          {/* <Button onClick={() => {}} variant="ghost" size="icon">
-            {data?.chat?.starred ? (
-              <StarIconSolid className="w-4 h-4" />
-            ) : (
-              <StarIcon className="w-4 h-4" />
-            )}
-          </Button> */}
-        </div>
-      </div>
+      <Subheader chat={chat} />
       {/* below it is a grid, with chats taking up most of it, and user info space taking up the rest */}
 
       <div className="grid grid-cols-10 flex-1 overflow-y-auto">

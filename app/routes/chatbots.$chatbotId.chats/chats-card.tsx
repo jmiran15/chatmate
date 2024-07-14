@@ -1,4 +1,10 @@
-import { Link, useFetcher, useParams, useSearchParams } from "@remix-run/react";
+import {
+  Link,
+  useFetcher,
+  useFetchers,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
 import { Button } from "../../components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
@@ -11,31 +17,47 @@ import Skeleton from "react-loading-skeleton";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ChatsCard({
   chat,
+  nextChatId,
 }: {
   chat: Chat & {
     _count: {
       messages: number;
     };
   };
+  nextChatId: string | null;
 }) {
   const { chatsId, chatbotId } = useParams();
-  // const [starred, setStarred] = useState(chat.starred);
   const [searchParams] = useSearchParams();
   const active = chatsId === chat.id;
-  const fetcher = useFetcher();
+  const fetcher = useFetcher({ key: `star-chat-${chat.id}-card` });
+  const fetchers = useFetchers();
+  const starredFetcher = fetchers.find(
+    (fetcher) => fetcher.key === `star-chat-${chat.id}-thread`,
+  );
 
-  const starred = fetcher.formData
-    ? fetcher.formData.get("star") === "true"
-    : chat.starred;
+  const starredFetcherFormDataValue =
+    starredFetcher?.formData &&
+    starredFetcher.formData.get("chatId") === chat?.id
+      ? starredFetcher.formData.get("star") === "true"
+      : null;
+
+  let starred = chat.starred;
+
+  if (fetcher.formData) {
+    starred = fetcher.formData.get("star") === "true";
+  } else if (starredFetcherFormDataValue !== null) {
+    starred = starredFetcherFormDataValue;
+  }
 
   return (
     <Link
-      prefetch="intent"
+      // prefetch="intent" TODO - if this is prefetch, then optimistic starring does work, because we fetch the loader data before the action returns - need some revalidation or conditional prefetching?
       to={`${chat.id}?${searchParams.toString()}`}
       className={cn(
         "flex flex-col items-start gap-2 text-left text-sm transition-all hover:bg-accent mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
         active && "bg-accent",
       )}
+      state={{ nextChatId: nextChatId ?? "" }}
     >
       <div className="flex w-full flex-col gap-1">
         <div className="flex items-center flex-wrap">

@@ -1,5 +1,7 @@
 import {
+  Fetcher,
   useBeforeUnload,
+  useFetchers,
   useNavigation,
   useSearchParams,
 } from "@remix-run/react";
@@ -72,6 +74,7 @@ export default function ChatsList({
   })[];
 }) {
   const navigation = useNavigation();
+  const [total, setTotal] = useState(totalItems);
   const [searchParams, setSearchParams] = useSearchParams();
   const createdAt: "asc" | "desc" = getCreatedAt(searchParams);
   const hydrating = useIsHydrating("[data-hydrating-signal]");
@@ -82,7 +85,7 @@ export default function ChatsList({
   const [initialStart] = useState(() => start);
 
   const rowVirtualizer = useVirtual({
-    size: totalItems,
+    size: total,
     parentRef,
     initialRect: { width: 0, height: 800 },
   });
@@ -139,8 +142,8 @@ export default function ChatsList({
     }
 
     // can't go above our data
-    if (neededStart + limit > totalItems) {
-      neededStart = totalItems - limit;
+    if (neededStart + limit > total) {
+      neededStart = total - limit;
     }
 
     // can't go below 0
@@ -174,11 +177,32 @@ export default function ChatsList({
 
   // TODO - fix bugs with react-virtual rerenders
 
+  // get inflight archive
+  const fetchers = useFetchers();
+  const inflightArchives = fetchers
+    .filter(
+      (fetcher: Fetcher) =>
+        fetcher.formData &&
+        fetcher.formData.get("intent") === "archive-chat-thread",
+    )
+    .map((fetcher: Fetcher) => fetcher.formData?.get("chatId"));
+
+  const newItems = items.filter(
+    (item) =>
+      !inflightArchives.some((archivedChatId) => archivedChatId === item.id),
+  );
+  items = newItems;
+  totalItems -= inflightArchives.length;
+
+  useEffect(() => {
+    setTotal(totalItems - inflightArchives.length);
+  }, [inflightArchives]);
+
   return (
     <>
       <div className="flex w-full justify-between items-center flex-wrap md:flex-nowrap gap-2 px-4 sm:px-6">
         <p className="text-muted-foreground text-sm text-nowrap shrink-0">
-          {totalItems} Chats
+          {total} Chats
         </p>
         <Select
           name="createdAt"
@@ -231,6 +255,8 @@ export default function ChatsList({
               ? Math.abs(start - virtualRow.index)
               : virtualRow.index;
             const item = items[index];
+            const nextItem = items[index + 1];
+            const nextChatId = nextItem ? nextItem.id : null;
 
             return (
               <ItemMeasurer
@@ -246,7 +272,7 @@ export default function ChatsList({
                 }}
               >
                 {item ? (
-                  <ChatsCard chat={item} />
+                  <ChatsCard chat={item} nextChatId={nextChatId} />
                 ) : navigation.state === "loading" ? (
                   <span>Loading...</span>
                 ) : (

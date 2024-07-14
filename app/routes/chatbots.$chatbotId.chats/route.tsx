@@ -46,12 +46,15 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Error("chatbotId is required");
   }
 
+  // ALL CHATS THAT ARE NOT SAFE DELETED
+
   const dataPromise = prisma.$transaction([
     prisma.chat.count({
       where: {
         chatbotId,
         ...starredQuery,
         userId: null,
+        deleted: false,
       },
     }),
     prisma.chat.findMany({
@@ -59,6 +62,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         chatbotId,
         ...starredQuery,
         userId: null,
+        deleted: false,
       },
       orderBy: {
         ...createdAtQuery,
