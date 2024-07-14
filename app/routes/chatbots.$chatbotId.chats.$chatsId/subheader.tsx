@@ -3,18 +3,34 @@ import { formatDistanceToNow } from "date-fns";
 import { Button } from "~/components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
-import { useFetcher, useParams } from "@remix-run/react";
+import { useFetcher, useFetchers, useParams } from "@remix-run/react";
 
 export default function Subheader({
   chat,
 }: {
   chat: Partial<Chat> & { createdAt: string; updatedAt: string };
 }) {
-  const fetcher = useFetcher();
+  const fetcher = useFetcher({ key: `star-chat-${chat.id}-thread` });
   const { chatbotId, chatsId } = useParams();
-  const starred = fetcher.formData
-    ? fetcher.formData.get("star") === "true"
-    : chat?.starred;
+
+  const fetchers = useFetchers();
+  const starredFetcher = fetchers.find(
+    (fetcher) => fetcher.key === `star-chat-${chat.id}-card`,
+  );
+
+  const starredFetcherFormDataValue =
+    starredFetcher?.formData &&
+    starredFetcher.formData.get("chatId") === chat?.id
+      ? starredFetcher.formData.get("star") === "true"
+      : null;
+
+  let starred = chat.starred;
+
+  if (fetcher.formData) {
+    starred = fetcher.formData.get("star") === "true";
+  } else if (starredFetcherFormDataValue !== null) {
+    starred = starredFetcherFormDataValue;
+  }
 
   return (
     <div className="flex justify-between items-center w-full h-14 border-b bg-muted/40 p-5">
