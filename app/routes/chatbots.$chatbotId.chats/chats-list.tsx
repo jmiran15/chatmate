@@ -255,6 +255,8 @@ export default function ChatsList({
               ? Math.abs(start - virtualRow.index)
               : virtualRow.index;
             const item = items[index];
+            const nextItem = items[index + 1];
+            const nextChatId = nextItem ? nextItem.id : null;
 
             return (
               <ItemMeasurer
@@ -270,7 +272,7 @@ export default function ChatsList({
                 }}
               >
                 {item ? (
-                  <ChatsCard chat={item} />
+                  <ChatsCard chat={item} nextChatId={nextChatId} />
                 ) : navigation.state === "loading" ? (
                   <span>Loading...</span>
                 ) : (

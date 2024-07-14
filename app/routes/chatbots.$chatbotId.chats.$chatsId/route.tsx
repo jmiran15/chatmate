@@ -83,6 +83,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const intent = String(formData.get("intent"));
   const { chatbotId } = params;
+  const { searchParams } = new URL(request.url);
 
   if (!chatbotId) {
     throw new Error("Chatbot id missing");
@@ -91,6 +92,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   switch (intent) {
     case "archive-chat-thread": {
       const chatId = String(formData.get("chatId"));
+      const nextChatId = String(formData.get("nextChatId"));
+
       await prisma.chat.update({
         where: {
           id: chatId,
@@ -100,7 +103,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
-      return redirect(`/chatbots/${chatbotId}/chats`);
+      // we need to redirect with search params as well
+      return redirect(
+        `/chatbots/${chatbotId}/chats/${nextChatId}?${searchParams.toString()}`,
+      );
     }
     default:
       throw new Error("undefined intent");

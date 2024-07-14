@@ -17,12 +17,14 @@ import Skeleton from "react-loading-skeleton";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ChatsCard({
   chat,
+  nextChatId,
 }: {
   chat: Chat & {
     _count: {
       messages: number;
     };
   };
+  nextChatId: string | null;
 }) {
   const { chatsId, chatbotId } = useParams();
   const [searchParams] = useSearchParams();
@@ -55,6 +57,7 @@ export default function ChatsCard({
         "flex flex-col items-start gap-2 text-left text-sm transition-all hover:bg-accent mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
         active && "bg-accent",
       )}
+      state={{ nextChatId: nextChatId ?? "" }}
     >
       <div className="flex w-full flex-col gap-1">
         <div className="flex items-center flex-wrap">

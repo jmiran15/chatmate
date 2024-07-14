@@ -3,7 +3,13 @@ import { formatDistanceToNow } from "date-fns";
 import { Button } from "~/components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
-import { Form, useFetcher, useFetchers, useParams } from "@remix-run/react";
+import {
+  Form,
+  useFetcher,
+  useFetchers,
+  useLocation,
+  useParams,
+} from "@remix-run/react";
 import { Archive } from "lucide-react";
 
 export default function Subheader({
@@ -11,8 +17,8 @@ export default function Subheader({
 }: {
   chat: Partial<Chat> & { createdAt: string; updatedAt: string };
 }) {
+  const location = useLocation();
   const fetcher = useFetcher({ key: `star-chat-${chat.id}-thread` });
-
   const { chatbotId, chatsId } = useParams();
 
   const fetchers = useFetchers();
@@ -33,6 +39,7 @@ export default function Subheader({
   } else if (starredFetcherFormDataValue !== null) {
     starred = starredFetcherFormDataValue;
   }
+
   return (
     <div className="flex justify-between items-center w-full h-14 border-b bg-muted/40 p-5">
       <div className="flex flex-col items-start justify-center">
@@ -73,9 +80,19 @@ export default function Subheader({
         </p>
       </div>
 
-      <Form method="post" className="flex items-center justify-center gap-2">
+      <Form
+        method="post"
+        className="flex items-center justify-center gap-2"
+        preventScrollReset
+        navigate={false}
+      >
         <input type="hidden" name="intent" value="archive-chat-thread" />
         <input type="hidden" name="chatId" value={chatsId} />
+        <input
+          type="hidden"
+          name="nextChatId"
+          value={location.state?.nextChatId ?? ""}
+        />
         <Button variant={"outline"} type="submit">
           <Archive className="mr-2 h-4 w-4" />
           Archive
