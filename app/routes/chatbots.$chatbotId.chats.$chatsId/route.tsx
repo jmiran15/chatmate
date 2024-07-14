@@ -1,4 +1,9 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import {
+  ActionFunctionArgs,
+  LoaderFunctionArgs,
+  json,
+  redirect,
+} from "@remix-run/node";
 import {
   useLoaderData,
   useNavigate,
@@ -72,6 +77,34 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       ? process.env.DEV_BASE
       : process.env.PROD_BASE;
   return json({ messages, chatbot, chat, anonUser, API_PATH });
+};
+
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const intent = String(formData.get("intent"));
+  const { chatbotId } = params;
+
+  if (!chatbotId) {
+    throw new Error("Chatbot id missing");
+  }
+
+  switch (intent) {
+    case "archive-chat-thread": {
+      const chatId = String(formData.get("chatId"));
+      await prisma.chat.update({
+        where: {
+          id: chatId,
+        },
+        data: {
+          deleted: true,
+        },
+      });
+
+      return redirect(`/chatbots/${chatbotId}/chats`);
+    }
+    default:
+      throw new Error("undefined intent");
+  }
 };
 
 export default function ChatRoute() {

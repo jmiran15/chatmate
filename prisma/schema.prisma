@@ -71,6 +71,7 @@ model Chat {
   aiInsights String?
   starred    Boolean?  @default(false)
   sessionId  String?
+  deleted    Boolean   @default(false)
 }
 
 // https://ipapi.co/json/
