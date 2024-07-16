@@ -46,24 +46,25 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Error("chatbotId is required");
   }
 
-  // ALL CHATS THAT ARE NOT SAFE DELETED
+  // All chats that are not safe deleted - and have some user message
+  const WHERE = {
+    chatbotId,
+    ...starredQuery,
+    userId: null,
+    deleted: false,
+    messages: {
+      some: {
+        role: "user",
+      },
+    },
+  };
 
   const dataPromise = prisma.$transaction([
     prisma.chat.count({
-      where: {
-        chatbotId,
-        ...starredQuery,
-        userId: null,
-        deleted: false,
-      },
+      where: WHERE,
     }),
     prisma.chat.findMany({
-      where: {
-        chatbotId,
-        ...starredQuery,
-        userId: null,
-        deleted: false,
-      },
+      where: WHERE,
       orderBy: {
         ...createdAtQuery,
       },
