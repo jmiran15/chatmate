@@ -108,6 +108,17 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         `/chatbots/${chatbotId}/chats/${nextChatId}?${searchParams.toString()}`,
       );
     }
+    case "mark-seen": {
+      const chatId = String(formData.get("chatId"));
+      return await prisma.chat.update({
+        where: {
+          id: chatId,
+        },
+        data: {
+          seen: true,
+        },
+      });
+    }
     default:
       throw new Error("undefined intent");
   }
@@ -265,9 +276,11 @@ export default function ChatRoute() {
       <div className="grid grid-cols-10 flex-1 overflow-y-auto">
         <div className="flex flex-col col-span-7 overflow-y-auto h-full relative">
           <Thread
+            key={chat.id}
             thread={thread}
             setThread={setThread}
             sessionId={chat?.sessionId}
+            seen={chat?.seen}
           />
           <Separator />
           <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">

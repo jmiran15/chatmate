@@ -7,6 +7,7 @@ import type { Socket } from "socket.io-client";
 import io from "socket.io-client";
 import { SocketProvider } from "~/providers/socket";
 import { useEffect, useState } from "react";
+import { prisma } from "~/db.server";
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
@@ -18,7 +19,24 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   ) {
     return redirect("/chatbots");
   }
-  return { chatbot };
+
+  // TODO - parallelize + defer this
+  const WHERE = {
+    chatbotId,
+    userId: null,
+    deleted: false,
+    messages: {
+      some: {
+        role: "user",
+      },
+    },
+    seen: false,
+  };
+  const unseenChats = await prisma.chat.count({
+    where: WHERE,
+  });
+
+  return { chatbot, unseenChats };
 };
 
 export default function ChatbotLayout() {

@@ -72,6 +72,7 @@ model Chat {
   starred    Boolean?  @default(false)
   sessionId  String?
   deleted    Boolean   @default(false)
+  seen       Boolean?  @default(false)
 }
 
 // https://ipapi.co/json/

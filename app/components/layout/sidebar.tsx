@@ -1,4 +1,4 @@
-import { Link, useMatches, useParams } from "@remix-run/react";
+import { Link, useLoaderData, useMatches, useParams } from "@remix-run/react";
 import {
   AreaChart,
   Brush,
@@ -9,10 +9,13 @@ import {
   Share,
 } from "lucide-react";
 import { cn, isActive } from "~/lib/utils";
+import { Badge } from "../ui/badge";
+import { loader } from "~/routes/chatbots.$chatbotId";
 
 export default function Sidebar() {
   const matches = useMatches();
   const { chatbotId } = useParams();
+  const data = useLoaderData<typeof loader>();
 
   if (!chatbotId) {
     return null;
@@ -24,6 +27,7 @@ export default function Sidebar() {
       path: `/chatbots/${chatbotId}/chats`,
       icon: MessagesSquare,
       navigate: true,
+      badge: data?.unseenChats || null,
     },
     {
       title: "Data",
@@ -86,6 +90,11 @@ export default function Sidebar() {
             >
               <link.icon className="h-4 w-4" />
               {link.title}
+              {link.badge ? (
+                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                  {link.badge}
+                </Badge>
+              ) : null}
             </Link>
           ))}
         </nav>

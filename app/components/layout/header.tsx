@@ -25,6 +25,12 @@ export const Header = () => {
   const sheet = (user && chatbotId) || !user;
   const isMobile = useMobileScreen();
   const location = useLocation();
+  const matches = useMatches();
+  const chatbotIdRoute = matches.find(
+    (match) => match.id === "routes/chatbots.$chatbotId",
+  );
+
+  const unseenChats = chatbotIdRoute?.data?.unseenChats || 0;
 
   const chatbotSidebarLinks = [
     {
@@ -32,6 +38,7 @@ export const Header = () => {
       path: `/chatbots/${chatbotId}/chats`,
       icon: MessagesSquare,
       navigate: true,
+      badge: unseenChats,
     },
     {
       title: "Data",
@@ -92,7 +99,6 @@ export const Header = () => {
   ];
 
   const routes = user && chatbotId ? chatbotSidebarLinks : unauthenticatedLinks;
-  const matches = useMatches();
 
   useEffect(() => {
     if (location.hash) {
