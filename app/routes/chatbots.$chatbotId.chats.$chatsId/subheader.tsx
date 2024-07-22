@@ -3,13 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Button } from "~/components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
-import {
-  Form,
-  useFetcher,
-  useFetchers,
-  useLocation,
-  useParams,
-} from "@remix-run/react";
+import { Form, useFetcher, useFetchers, useParams } from "@remix-run/react";
 import { Archive } from "lucide-react";
 
 export default function Subheader({
@@ -17,7 +11,6 @@ export default function Subheader({
 }: {
   chat: Partial<Chat> & { createdAt: string; updatedAt: string };
 }) {
-  const location = useLocation();
   const fetcher = useFetcher({ key: `star-chat-${chat.id}-thread` });
   const { chatbotId, chatsId } = useParams();
 
