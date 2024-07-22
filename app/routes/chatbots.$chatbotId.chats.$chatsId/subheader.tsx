@@ -83,16 +83,11 @@ export default function Subheader({
       <Form
         method="post"
         className="flex items-center justify-center gap-2"
-        preventScrollReset
-        navigate={false}
+        // preventScrollReset
+        // navigate={false}
       >
         <input type="hidden" name="intent" value="archive-chat-thread" />
         <input type="hidden" name="chatId" value={chatsId} />
-        <input
-          type="hidden"
-          name="nextChatId"
-          value={location.state?.nextChatId ?? ""}
-        />
         <Button variant={"outline"} type="submit">
           <Archive className="mr-2 h-4 w-4" />
           Archive
