@@ -1,7 +1,8 @@
 import { Message } from "@prisma/client";
+import { useParams, useFetcher } from "@remix-run/react";
 import { format } from "date-fns";
 import { Clipboard } from "lucide-react";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { ChatAction } from "~/components/chat/chat-action";
 import {
   HoverCard,
@@ -16,20 +17,62 @@ import { useScrollToBottom } from "~/hooks/useScroll";
 import { cn } from "~/lib/utils";
 import { useSocket } from "~/providers/socket";
 import { copyToClipboard } from "~/utils/clipboard";
+import { useInView } from "react-intersection-observer";
 
 export default function Thread({
   // from loader
   thread,
   setThread,
   sessionId,
+  seen = false,
 }: {
   thread: Message[];
   setThread: (thread: Message[]) => void;
   sessionId: string;
+  seen: boolean;
 }) {
   const { scrollRef } = useScrollToBottom();
   const { toast } = useToast();
   const socket = useSocket();
+  const { chatsId: chatId } = useParams();
+  const fetcher = useFetcher({ key: `mark-seen-${chatId}` });
+
+  const findLastUserMessage = () => {
+    for (let i = thread.length - 1; i >= 0; i--) {
+      if (thread[i].role === "user") {
+        return i;
+      }
+    }
+    return -1;
+  };
+
+  const lastUserMessageIndex = findLastUserMessage();
+
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
+
+  const [hasMarkedSeen, setHasMarkedSeen] = useState(false);
+
+  useEffect(() => {
+    setHasMarkedSeen(false);
+  }, [chatId, seen]);
+
+  useEffect(() => {
+    if (inView && !seen && lastUserMessageIndex !== -1 && !hasMarkedSeen) {
+      fetcher.submit(
+        { chatId, intent: "mark-seen" },
+        {
+          method: "post",
+          preventScrollReset: true,
+          navigate: false,
+        },
+      );
+      setHasMarkedSeen(true);
+      console.log("marking as seen");
+    }
+  }, [inView, seen, lastUserMessageIndex, fetcher, chatId, hasMarkedSeen]);
 
   useEffect(() => {
     if (!socket) return;
@@ -49,6 +92,10 @@ export default function Thread({
     };
   }, [socket, sessionId]);
 
+  if (!chatId) {
+    return null;
+  }
+
   return (
     <ScrollArea
       ref={scrollRef}
@@ -58,6 +105,7 @@ export default function Thread({
         {thread.map((message, i) => {
           const isUser = message.role === "user";
           const showActions = i > 0 && !(message.content.length === 0);
+          const isLastUserMessage = i === lastUserMessageIndex;
 
           return (
             <div className="space-y-5" key={i}>
@@ -66,6 +114,9 @@ export default function Thread({
                   isUser
                     ? "flex flex-row-reverse"
                     : "flex flex-row last:animate-[slide-in_ease_0.3s]"
+                }
+                ref={
+                  isLastUserMessage && !seen && !hasMarkedSeen ? ref : undefined
                 }
               >
                 <HoverCard openDelay={200}>

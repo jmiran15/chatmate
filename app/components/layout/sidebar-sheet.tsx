@@ -5,12 +5,14 @@ import { cn, isActive } from "~/lib/utils";
 import { LucideIcon, Menu } from "lucide-react";
 import { Icons } from "../icons";
 import { useEffect, useState } from "react";
+import { Badge } from "../ui/badge";
 
 interface RouteProps {
   path: string;
   title: string;
   icon?: LucideIcon;
   navigate?: boolean;
+  badge?: number;
 }
 
 export default function SidebarSheet({
@@ -72,6 +74,11 @@ export default function SidebarSheet({
               >
                 {link.icon ? <link.icon className="h-5 w-5" /> : null}
                 {link.title}
+                {link.badge ? (
+                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                    {link.badge}
+                  </Badge>
+                ) : null}
               </Link>
             ) : (
               <div

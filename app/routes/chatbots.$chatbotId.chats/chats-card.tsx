@@ -49,6 +49,13 @@ export default function ChatsCard({
     starred = starredFetcherFormDataValue;
   }
 
+  const readFetcher = fetchers.find(
+    (fetcher) => fetcher.key === `mark-read-${chat.id}`,
+  );
+  const read = readFetcher?.formData
+    ? readFetcher.formData.get("intent") === "mark-seen"
+    : chat.seen;
+
   return (
     <Link
       // prefetch="intent" TODO - if this is prefetch, then optimistic starring does work, because we fetch the loader data before the action returns - need some revalidation or conditional prefetching?
@@ -61,7 +68,12 @@ export default function ChatsCard({
     >
       <div className="flex w-full flex-col gap-1">
         <div className="flex items-center flex-wrap">
-          <div className="font-semibold">{chat.name}</div>
+          <div className="flex items-center gap-2">
+            <div className="font-semibold">{chat.name}</div>
+            {!read ? (
+              <span className="flex h-2 w-2 rounded-full bg-blue-600" />
+            ) : null}
+          </div>
           <div className="ml-auto text-xs text-muted-foreground">
             {formatDistanceToNow(new Date(chat.createdAt), {
               addSuffix: true,
