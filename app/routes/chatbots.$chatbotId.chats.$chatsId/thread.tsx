@@ -60,7 +60,6 @@ export default function Thread({
   }, [chatId, seen]);
 
   useEffect(() => {
-    console.log("LO: ", inView, seen, lastUserMessageIndex, hasMarkedSeen);
     if (inView && !seen && lastUserMessageIndex !== -1 && !hasMarkedSeen) {
       fetcher.submit(
         { chatId, intent: "mark-seen" },

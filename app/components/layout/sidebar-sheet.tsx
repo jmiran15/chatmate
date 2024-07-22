@@ -1,12 +1,6 @@
 import { Sheet, SheetContent } from "../ui/sheet";
 import { Button } from "../ui/button";
-import {
-  Link,
-  useLocation,
-  useMatch,
-  useMatches,
-  useParams,
-} from "@remix-run/react";
+import { Link, useLocation, useMatches, useParams } from "@remix-run/react";
 import { cn, isActive } from "~/lib/utils";
 import { LucideIcon, Menu } from "lucide-react";
 import { Icons } from "../icons";
