@@ -26,6 +26,7 @@ import Thread from "./thread";
 import { useSocket } from "~/providers/socket";
 import axios from "axios";
 import Subheader from "./subheader";
+import { Prisma } from "@prisma/client";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -65,6 +66,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return json({ messages, chatbot, chat, anonUser, API_PATH });
 };
 
+const getStarred = (searchParams: URLSearchParams): "1" | "0" =>
+  String(searchParams.get("starred")) === "1" ? "1" : "0";
+
+export const getCreatedAt = (searchParams: URLSearchParams): "asc" | "desc" =>
+  String(searchParams.get("createdAt")) === "asc" ? "asc" : "desc";
+
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const intent = String(formData.get("intent"));
@@ -78,7 +85,38 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   switch (intent) {
     case "archive-chat-thread": {
       const chatId = String(formData.get("chatId"));
-      const nextChatId = String(formData.get("nextChatId"));
+
+      const starred = getStarred(searchParams);
+      const createdAt = getCreatedAt(searchParams);
+      const starredQuery = starred === "1" ? { starred: true } : {};
+      const createdAtQuery = {
+        createdAt: (createdAt === "asc" ? "asc" : "desc") as Prisma.SortOrder,
+      };
+
+      const WHERE = {
+        chatbotId,
+        ...starredQuery,
+        userId: null,
+        deleted: false,
+        messages: {
+          some: {
+            role: "user",
+          },
+        },
+      };
+
+      const nextChat = await prisma.chat.findFirst({
+        where: WHERE,
+        cursor: {
+          id: chatId,
+        },
+        skip: 1,
+        orderBy: {
+          ...createdAtQuery,
+        },
+      });
+
+      const nextChatId = nextChat ? nextChat.id : null;
 
       await prisma.chat.update({
         where: {
@@ -89,10 +127,15 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
-      // we need to redirect with search params as well
-      return redirect(
-        `/chatbots/${chatbotId}/chats/${nextChatId}?${searchParams.toString()}`,
-      );
+      if (nextChatId) {
+        return redirect(
+          `/chatbots/${chatbotId}/chats/${nextChatId}?${searchParams.toString()}`,
+        );
+      } else {
+        return redirect(
+          `/chatbots/${chatbotId}/chats?${searchParams.toString()}`,
+        );
+      }
     }
     case "mark-seen": {
       const chatId = String(formData.get("chatId"));
