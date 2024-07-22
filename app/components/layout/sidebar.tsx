@@ -1,4 +1,10 @@
-import { Link, useLoaderData, useMatches, useParams } from "@remix-run/react";
+import {
+  Link,
+  useFetchers,
+  useLoaderData,
+  useMatches,
+  useParams,
+} from "@remix-run/react";
 import {
   AreaChart,
   Brush,
@@ -16,6 +22,14 @@ export default function Sidebar() {
   const matches = useMatches();
   const { chatbotId } = useParams();
   const data = useLoaderData<typeof loader>();
+  const fetchers = useFetchers();
+  const readFetchers = fetchers.filter((fetcher) =>
+    fetcher.key.startsWith(`mark-seen-`),
+  );
+
+  const unseenChats = data?.unseenChats
+    ? data.unseenChats - readFetchers.length
+    : null;
 
   if (!chatbotId) {
     return null;
@@ -27,7 +41,7 @@ export default function Sidebar() {
       path: `/chatbots/${chatbotId}/chats`,
       icon: MessagesSquare,
       navigate: true,
-      badge: data?.unseenChats || null,
+      badge: unseenChats,
     },
     {
       title: "Data",

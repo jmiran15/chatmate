@@ -1,5 +1,11 @@
 import { buttonVariants } from "../ui/button";
-import { Link, useLocation, useMatches, useParams } from "@remix-run/react";
+import {
+  Link,
+  useFetchers,
+  useLocation,
+  useMatches,
+  useParams,
+} from "@remix-run/react";
 import { Icons } from "../icons";
 import { useOptionalUser } from "~/utils";
 
@@ -30,7 +36,14 @@ export const Header = () => {
     (match) => match.id === "routes/chatbots.$chatbotId",
   );
 
-  const unseenChats = chatbotIdRoute?.data?.unseenChats || 0;
+  const fetchers = useFetchers();
+  const readFetchers = fetchers.filter((fetcher) =>
+    fetcher.key.startsWith(`mark-seen-`),
+  );
+
+  const unseenChats = chatbotIdRoute?.data?.unseenChats
+    ? chatbotIdRoute?.data?.unseenChats - readFetchers.length
+    : null;
 
   const chatbotSidebarLinks = [
     {

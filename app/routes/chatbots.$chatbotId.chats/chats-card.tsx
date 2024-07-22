@@ -50,8 +50,9 @@ export default function ChatsCard({
   }
 
   const readFetcher = fetchers.find(
-    (fetcher) => fetcher.key === `mark-read-${chat.id}`,
+    (fetcher) => fetcher.key === `mark-seen-${chat.id}`,
   );
+
   const read = readFetcher?.formData
     ? readFetcher.formData.get("intent") === "mark-seen"
     : chat.seen;
