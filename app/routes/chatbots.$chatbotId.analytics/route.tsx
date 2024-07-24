@@ -8,6 +8,18 @@ import { useMemo } from "react";
 import Blur from "~/components/analytics/blur";
 import { requireUserId } from "~/session.server";
 import { isProUser } from "~/models/user.server";
+import KPIs from "./kpis";
+import {
+  BarChart2,
+  Users,
+  Clock,
+  ArrowUpRight,
+  MessageSquareDot,
+  MessageSquare,
+} from "lucide-react";
+import ChatsChart from "./charts/chats";
+import { TagsChart } from "./charts/tags";
+import BarListExample, { FAQBarlist } from "./charts/faq";
 
 // Types for the data
 interface ChatMessage {
@@ -144,78 +156,74 @@ export default function Analytics() {
     };
   }, [data]);
 
+  // const kpiData = [
+  //   {
+  //     name: "Total chats",
+  //     stat: totalChats,
+  //     change: `${parseFloat(percentChangeTotalChats.toFixed(1))}%`,
+  //     changeType: percentChangeTotalChats > 0 ? "positive" : "negative",
+  //   },
+  //   {
+  //     name: "Weekly chats",
+  //     stat: weeklyChats,
+  //     change: `${parseFloat(percentChangeWeeklyChats.toFixed(1))}%`,
+  //     changeType: percentChangeWeeklyChats > 0 ? "positive" : "negative",
+  //   },
+  //   {
+  //     name: "Average messages per chat",
+  //     stat: averageMessagesPerChat,
+  //     change: `${parseFloat(percentChangeAverageMessagesPerChat.toFixed(1))}%`,
+  //     changeType:
+  //       percentChangeAverageMessagesPerChat > 0 ? "positive" : "negative",
+  //   },
+  // ];
+
   const kpiData = [
     {
       name: "Total chats",
-      stat: totalChats,
-      change: `${parseFloat(percentChangeTotalChats.toFixed(1))}%`,
-      changeType: percentChangeTotalChats > 0 ? "positive" : "negative",
+      stat: "1,869",
+      change: 40,
+      changeType: "negative",
+      icon: MessageSquare,
     },
     {
-      name: "Weekly chats",
-      stat: weeklyChats,
-      change: `${parseFloat(percentChangeWeeklyChats.toFixed(1))}%`,
-      changeType: percentChangeWeeklyChats > 0 ? "positive" : "negative",
+      name: "Resolution time",
+      stat: "5m 19s",
+      change: 5,
+      changeType: "negative",
+      icon: BarChart2,
     },
     {
-      name: "Average messages per chat",
-      stat: averageMessagesPerChat,
-      change: `${parseFloat(percentChangeAverageMessagesPerChat.toFixed(1))}%`,
-      changeType:
-        percentChangeAverageMessagesPerChat > 0 ? "positive" : "negative",
+      name: "Resolution rate",
+      stat: "89%",
+      change: 1,
+      changeType: "positive",
+      icon: Clock,
+    },
+    {
+      name: "Time saved",
+      stat: "2h 13m",
+      change: 4,
+      changeType: "negative",
+      icon: ArrowUpRight,
     },
   ];
-
   return (
-    <div className="h-full w-full flex flex-col gap-4 p-4 overflow-y-auto lg:gap-6 lg:p-6">
-      {isPro ? (
-        <>
-          <KPICards data={kpiData} />
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <LineChartHero data={chats} />
-          </div>
-        </>
-      ) : (
-        <Blur />
-      )}
-    </div>
-  );
-}
+    <div className="h-full max-w-5xl flex flex-col gap-4 p-4 overflow-y-auto lg:gap-6 lg:p-6">
+      <KPIs data={kpiData} />
 
-export function KPICards({
-  data,
-}: {
-  data: {
-    name: string;
-    stat: number;
-    change: number;
-    changeType: "positive" | "negative";
-  }[];
-}) {
-  return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {data.map((item) => (
-        <Card key={item.name}>
-          <div className="flex items-center justify-between">
-            <p className="text-tremor-default font-medium text-tremor-content dark:text-dark-tremor-content">
-              {item.name}
-            </p>
-            <span
-              className={cn(
-                item.changeType === "positive"
-                  ? "bg-emerald-100 text-emerald-800 ring-emerald-600/10 dark:bg-emerald-400/10 dark:text-emerald-500 dark:ring-emerald-400/20"
-                  : "bg-red-100 text-red-800 ring-red-600/10 dark:bg-red-400/10 dark:text-red-500 dark:ring-red-400/20",
-                "inline-flex items-center rounded-tremor-small px-2 py-1 text-tremor-label font-medium ring-1 ring-inset",
-              )}
-            >
-              {item.change}
-            </span>
-          </div>
-          <p className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
-            {item.stat}
-          </p>
-        </Card>
-      ))}
+      <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2">
+        <ChatsChart />
+        {/* <TagsChart />
+        <BarListExample />
+        <BarListExample />
+        <BarListExample />
+        <BarListExample /> */}
+      </div>
+
+      {/* <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <LineChartHero data={chats} />
+      </div> */}
     </div>
   );
 }
@@ -224,32 +232,32 @@ const dataFormatter = (number) =>
   //   `$${Intl.NumberFormat("us").format(number).toString()}`;
   `${number}`;
 
-export function LineChartHero({
-  data,
-}: {
-  data: {
-    date: string;
-    chats: number;
-  }[];
-}) {
-  return (
-    <Card className="col-span-3">
-      <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-        Chats per day
-      </h3>
-      <LineChart
-        className="h-80"
-        data={data}
-        index="date"
-        categories={["chats"]}
-        colors={["indigo"]}
-        valueFormatter={dataFormatter}
-        yAxisWidth={60}
-        onValueChange={(v) => console.log(v)}
-      />
-    </Card>
-  );
-}
+// export function LineChartHero({
+//   data,
+// }: {
+//   data: {
+//     date: string;
+//     chats: number;
+//   }[];
+// }) {
+//   return (
+//     <Card className="col-span-3">
+//       <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+//         Chats per day
+//       </h3>
+//       <LineChart
+//         className="h-80"
+//         data={data}
+//         index="date"
+//         categories={["chats"]}
+//         colors={["indigo"]}
+//         valueFormatter={dataFormatter}
+//         yAxisWidth={60}
+//         onValueChange={(v) => console.log(v)}
+//       />
+//     </Card>
+//   );
+// }
 
 export const handle = {
   PATH: (chatbotId: string) => `/chatbots/${chatbotId}/analytics`,
