@@ -19,7 +19,11 @@ import {
 } from "lucide-react";
 import ChatsChart from "./charts/chats";
 import { TagsChart } from "./charts/tags";
-import BarListExample, { FAQBarlist } from "./charts/faq";
+// import BarListExample, { FAQBarlist } from "./charts/faq";
+import BattleFieldChart from "./charts/faq";
+import VisitorsBarlist from "./charts/visitors";
+import Sources from "./charts/sources";
+import GapsBarlist from "./charts/gaps";
 
 // Types for the data
 interface ChatMessage {
@@ -209,21 +213,18 @@ export default function Analytics() {
     },
   ];
   return (
-    <div className="h-full max-w-5xl flex flex-col gap-4 p-4 overflow-y-auto lg:gap-6 lg:p-6">
-      <KPIs data={kpiData} />
-
-      <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2">
-        <ChatsChart />
-        {/* <TagsChart />
-        <BarListExample />
-        <BarListExample />
-        <BarListExample />
-        <BarListExample /> */}
+    <div className="h-full w-full overflow-y-auto">
+      <div className="max-w-screen-lg flex flex-col gap-4 p-8">
+        <KPIs data={kpiData} />
+        <div className="grid gap-4 lg:grid-cols-2 items-start">
+          <ChatsChart />
+          <TagsChart />
+          <BattleFieldChart />
+          <GapsBarlist />
+          <Sources />
+          <VisitorsBarlist />
+        </div>
       </div>
-
-      {/* <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <LineChartHero data={chats} />
-      </div> */}
     </div>
   );
 }

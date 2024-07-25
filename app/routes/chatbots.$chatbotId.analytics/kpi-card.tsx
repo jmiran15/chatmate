@@ -1,4 +1,5 @@
 import { TrendingDown } from "lucide-react";
+import { Card } from "~/components/ui/card";
 
 export default function KPICard({
   className,
@@ -16,8 +17,8 @@ export default function KPICard({
   icon: React.ComponentType<{ className: string }>;
 }) {
   return (
-    <div
-      className={`flex flex-col gap-3 md:justify-between items-start ${className}`}
+    <Card
+      className={`px-6 py-4 flex flex-col gap-3 md:justify-between items-start ${className}`}
     >
       <div className="flex flex-col gap-1">
         <div className="font-medium leading-none flex items-center text-sm">
@@ -39,6 +40,6 @@ export default function KPICard({
           {Math.abs(change)}%
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
