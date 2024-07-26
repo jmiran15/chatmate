@@ -88,7 +88,7 @@ model Chat {
   seen       Boolean?      @default(false)
   status     TicketStatus? @default(OPEN)
   labels     Label[]
-  // elapsedNs  BigInt?       @default(0) TODO - Do not know how to serialize a BigInt
+  elapsedMs  String        @default("0")
   referrer   String?
 }
 
