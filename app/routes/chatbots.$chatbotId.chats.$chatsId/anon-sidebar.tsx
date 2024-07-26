@@ -1,7 +1,8 @@
 import { AnonymousUser } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { Fragment } from "react/jsx-runtime";
 import { useSocket } from "~/providers/socket";
+import StatusComboboxPopover from "./status-combobox";
+import { FancyBox } from "./labels/labels-combobox";
 
 export default function AnonSidebar({
   anonUser,
@@ -13,9 +14,16 @@ export default function AnonSidebar({
   const { status } = useWidgetConnectionStatus(sessionId);
 
   return (
-    <Fragment>
+    <div className="flex flex-col col-span-3 overflow-y-auto h-full border-l p-5 gap-2">
+      {/* actions stuff */}
+      <StatusComboboxPopover />
+      <div className="flex items-start justify-start gap-2 w-full">
+        <p className="text-sm text-muted-foreground">Labels</p>
+        <FancyBox />
+      </div>
+
       <div className="flex items-center justify-start gap-2 w-full">
-        <p className="text-sm text-muted-foreground">Status: </p>
+        <p className="text-sm text-muted-foreground">User </p>
         <small className="text-sm font-medium leading-none">{status}</small>
       </div>
       {anonUser
@@ -39,7 +47,7 @@ export default function AnonSidebar({
               ),
           )
         : null}
-    </Fragment>
+    </div>
   );
 }
 

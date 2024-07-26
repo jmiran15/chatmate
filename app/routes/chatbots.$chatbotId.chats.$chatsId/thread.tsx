@@ -70,7 +70,6 @@ export default function Thread({
         },
       );
       setHasMarkedSeen(true);
-      console.log("marking as seen");
     }
   }, [inView, seen, lastUserMessageIndex, fetcher, chatId, hasMarkedSeen]);
 

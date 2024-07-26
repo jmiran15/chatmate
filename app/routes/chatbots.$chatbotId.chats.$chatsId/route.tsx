@@ -26,7 +26,7 @@ import Thread from "./thread";
 import { useSocket } from "~/providers/socket";
 import axios from "axios";
 import Subheader from "./subheader";
-import { Prisma } from "@prisma/client";
+import { Prisma, TicketStatus } from "@prisma/client";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -63,6 +63,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     process.env.NODE_ENV === "development"
       ? process.env.DEV_BASE
       : process.env.PROD_BASE;
+
   return json({ messages, chatbot, chat, anonUser, API_PATH });
 };
 
@@ -75,11 +76,15 @@ export const getCreatedAt = (searchParams: URLSearchParams): "asc" | "desc" =>
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const intent = String(formData.get("intent"));
-  const { chatbotId } = params;
+  const { chatbotId, chatsId } = params;
   const { searchParams } = new URL(request.url);
 
   if (!chatbotId) {
     throw new Error("Chatbot id missing");
+  }
+
+  if (!chatsId) {
+    throw new Error("Chat id missing");
   }
 
   switch (intent) {
@@ -148,6 +153,99 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
     }
+
+    case "create-label": {
+      const name = String(formData.get("label-name"));
+
+      const label = await prisma.label.create({
+        data: {
+          name,
+          chatbotId,
+        },
+      });
+
+      return json({ label });
+    }
+    case "update-label": {
+      const labelId = String(formData.get("label-id"));
+      const name = String(formData.get("label-name"));
+      const color = String(formData.get("label-color"));
+
+      const label = await prisma.label.update({
+        where: {
+          id: labelId,
+        },
+        data: {
+          name,
+          color,
+        },
+      });
+
+      return json({ label });
+    }
+    case "delete-label": {
+      const labelId = String(formData.get("label-id"));
+
+      const label = await prisma.label.delete({
+        where: {
+          id: labelId,
+        },
+      });
+
+      return json({ label });
+    }
+    case "connect-label": {
+      const labelId = String(formData.get("label-id"));
+
+      const chat = await prisma.chat.update({
+        where: {
+          id: chatsId,
+        },
+        data: {
+          labels: {
+            connect: {
+              id: labelId,
+            },
+          },
+        },
+      });
+
+      return json({ chat });
+    }
+    case "disconnect-label": {
+      const labelId = String(formData.get("label-id"));
+
+      const chat = await prisma.chat.update({
+        where: {
+          id: chatsId,
+        },
+        data: {
+          labels: {
+            disconnect: {
+              id: labelId,
+            },
+          },
+        },
+      });
+
+      return json({ chat });
+    }
+
+    case "update-status": {
+      const status = String(formData.get("status"));
+
+      const chat = await prisma.chat.update({
+        where: {
+          id: chatsId,
+        },
+        data: {
+          status: status as TicketStatus,
+        },
+      });
+
+      return json({ chat });
+    }
+
     default:
       throw new Error("undefined intent");
   }
@@ -255,9 +353,7 @@ export default function ChatRoute() {
             />
           </div>
         </div>
-        <div className="flex flex-col col-span-3 overflow-y-auto h-full border-l p-5 gap-2">
-          <AnonSidebar anonUser={anonUser} sessionId={chat?.sessionId} />
-        </div>
+        <AnonSidebar anonUser={anonUser} sessionId={chat?.sessionId} />
       </div>
     </div>
   );
