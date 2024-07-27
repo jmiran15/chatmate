@@ -1,187 +1,148 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { LineChart, Card } from "@tremor/react";
-import { cn } from "~/lib/utils";
-import { getChatsByChatbotId } from "~/models/chat.server";
-import { format, parseISO, startOfWeek, endOfWeek } from "date-fns";
-import { useMemo } from "react";
-import Blur from "~/components/analytics/blur";
 import { requireUserId } from "~/session.server";
-import { isProUser } from "~/models/user.server";
 import KPIs from "./kpis";
-import {
-  BarChart2,
-  Users,
-  Clock,
-  ArrowUpRight,
-  MessageSquareDot,
-  MessageSquare,
-} from "lucide-react";
+import { BarChart2, Clock, ArrowUpRight, MessageSquare } from "lucide-react";
 import ChatsChart from "./charts/chats";
 import { TagsChart } from "./charts/tags";
-// import BarListExample, { FAQBarlist } from "./charts/faq";
 import BattleFieldChart from "./charts/faq";
 import VisitorsBarlist from "./charts/visitors";
 import Sources from "./charts/sources";
 import GapsBarlist from "./charts/gaps";
 
-// Types for the data
-interface ChatMessage {
-  createdAt: string;
-}
+import { prisma } from "~/db.server";
+import { Prisma, TicketStatus } from "@prisma/client";
 
-interface Chat {
-  createdAt: string;
-  messages: ChatMessage[];
-}
-
-type ChatData = Chat[];
-
-// Function to get total chats
-const getTotalChats = (data: ChatData): number => {
-  return data.length;
-};
-
-// Function to calculate percent change
-const calculatePercentChange = (oldValue: number, newValue: number): number => {
-  if (oldValue === 0) return newValue === 0 ? 0 : 100;
-  return ((newValue - oldValue) / oldValue) * 100;
-};
-
-// Function to get weekly chats
-const getWeeklyChats = (data: ChatData, date: Date): number => {
-  const start = startOfWeek(date, { weekStartsOn: 1 });
-  const end = endOfWeek(date, { weekStartsOn: 1 });
-  return data.filter((chat) => {
-    const chatDate = parseISO(chat.createdAt);
-    return chatDate >= start && chatDate <= end;
-  }).length;
-};
-
-// Function to get average messages per chat
-const getAverageMessagesPerChat = (data: ChatData): number => {
-  const totalMessages = data.reduce(
-    (acc, chat) => acc + chat.messages.length,
-    0,
-  );
-  const average = data.length > 0 ? totalMessages / data.length : 0;
-  return parseFloat(average.toFixed(1));
-};
-
-// Function to get chats per day
-const getChatsPerDay = (data: ChatData): { date: string; chats: number }[] => {
-  const chatsByDay: Record<string, number> = {};
-  data.forEach((chat) => {
-    const date = format(parseISO(chat.createdAt), "yyyy-MM-dd");
-    chatsByDay[date] = (chatsByDay[date] || 0) + 1;
-  });
-
-  return Object.entries(chatsByDay)
-    .map(([date, chats]) => ({ date, chats }))
-    .sort((a, b) => new Date(a.date) - new Date(b.date));
-};
-
-export const loader = async ({ params, request }: LoaderFunctionArgs) => {
-  // get all messages for the chatbotId
-
-  const userId = await requireUserId(request);
-  const { chatbotId } = params;
+export const loader = async ({
+  params,
+  request,
+}: LoaderFunctionArgs): Promise<Response> => {
+  await requireUserId(request);
+  const chatbotId = params.chatbotId;
 
   if (!chatbotId) {
     throw new Error("chatbotId is required");
   }
-  const chats = await getChatsByChatbotId({ chatbotId });
-  const isPro = await isProUser(userId);
 
-  return json({ chats, isPro });
+  const chatWhereClause = {
+    chatbotId,
+    deleted: false,
+    messages: {
+      some: {
+        role: "user",
+      },
+    },
+  };
+
+  // Total chats
+  const totalChats = await prisma.chat.count({
+    where: chatWhereClause,
+  });
+
+  // Average resolution time and total time saved
+  const timeStats = await prisma.chat.aggregate({
+    _avg: { elapsedMs: true },
+    _sum: { elapsedMs: true },
+    where: {
+      ...chatWhereClause,
+      status: TicketStatus.CLOSED,
+    },
+  });
+
+  // Resolution rate
+  const closedChats = await prisma.chat.count({
+    where: {
+      ...chatWhereClause,
+      status: TicketStatus.CLOSED,
+    },
+  });
+  const resolutionRate = totalChats > 0 ? (closedChats / totalChats) * 100 : 0;
+
+  // Fetch distinct labels
+  const distinctLabels = await prisma.label.findMany({
+    where: {
+      chatbot: { id: chatbotId },
+    },
+    select: { name: true },
+    distinct: ["name"],
+  });
+
+  const labelNames = distinctLabels.map((label) => label.name);
+
+  // Chats - bar chart with labels
+  let chatsByDateAndLabel;
+
+  if (labelNames.length > 0) {
+    const labelColumns = labelNames
+      .map(
+        (name) =>
+          `COALESCE(SUM(CASE WHEN l.name = '${name}' THEN 1 ELSE 0 END), 0) AS "${name}"`,
+      )
+      .join(", ");
+
+    const unlabeledColumn = `COUNT(*) - ${labelNames
+      .map(
+        (name) =>
+          `COALESCE(SUM(CASE WHEN l.name = '${name}' THEN 1 ELSE 0 END), 0)`,
+      )
+      .join(" - ")}`;
+
+    chatsByDateAndLabel = await prisma.$queryRaw(Prisma.sql`
+      SELECT DATE(c."createdAt") as date, 
+             COUNT(*) as total,
+             ${Prisma.raw(labelColumns)},
+             ${Prisma.raw(unlabeledColumn)} as unlabeled
+      FROM "Chat" c
+      LEFT JOIN "_ChatToLabel" cl ON c.id = cl."A"
+      LEFT JOIN "Label" l ON l.id = cl."B"
+      WHERE c."chatbotId" = ${chatbotId}
+        AND c.deleted = false
+        AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
+      GROUP BY DATE(c."createdAt")
+      ORDER BY DATE(c."createdAt")
+    `);
+  } else {
+    // If there are no labels, just count total chats per day
+    chatsByDateAndLabel = await prisma.$queryRaw(Prisma.sql`
+      SELECT DATE(c."createdAt") as date, 
+             COUNT(*) as total,
+             COUNT(*) as unlabeled
+      FROM "Chat" c
+      WHERE c."chatbotId" = ${chatbotId}
+        AND c.deleted = false
+        AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
+      GROUP BY DATE(c."createdAt")
+      ORDER BY DATE(c."createdAt")
+    `);
+  }
+
+  // Tags - pie chart
+  const tagsCount = await prisma.$queryRaw(Prisma.sql`
+    SELECT 
+      COALESCE(l.name, 'Unlabeled') as label,
+      COUNT(DISTINCT c.id) as count
+    FROM "Chat" c
+    LEFT JOIN "_ChatToLabel" cl ON c.id = cl."A"
+    LEFT JOIN "Label" l ON l.id = cl."B"
+    WHERE c."chatbotId" = ${chatbotId}
+      AND c.deleted = false
+      AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
+    GROUP BY COALESCE(l.name, 'Unlabeled')
+    ORDER BY count DESC
+  `);
+
+  console.log("analytics: ", {
+    totalChats,
+    avgResolutionTime: timeStats._avg.elapsedMs || 0,
+    resolutionRate,
+    totalTimeSaved: timeStats._sum.elapsedMs || 0,
+    chatsByDate: chatsByDateAndLabel,
+    tagsCount,
+  });
+
+  return json({ success: true });
 };
 
 export default function Analytics() {
-  const { chats: data, isPro } = useLoaderData<typeof loader>();
-
-  const {
-    totalChats,
-    percentChangeTotalChats,
-    weeklyChats,
-    percentChangeWeeklyChats,
-    averageMessagesPerChat,
-    percentChangeAverageMessagesPerChat,
-    chats,
-  } = useMemo(() => {
-    const now = new Date();
-    const lastWeek = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() - 7,
-    );
-
-    const totalChats = getTotalChats(data);
-    const totalChatsCurrentWeek = getWeeklyChats(data, now);
-    const totalChatsLastWeek = getWeeklyChats(data, lastWeek);
-
-    const avgMessagesCurrent = getAverageMessagesPerChat(
-      data.filter((chat) => {
-        const chatDate = new Date(chat.createdAt);
-        return chatDate >= lastWeek && chatDate <= now;
-      }),
-    );
-
-    const avgMessagesLastWeek = getAverageMessagesPerChat(
-      data.filter((chat) => {
-        const chatDate = new Date(chat.createdAt);
-        return (
-          chatDate >=
-            new Date(
-              lastWeek.getFullYear(),
-              lastWeek.getMonth(),
-              lastWeek.getDate() - 7,
-            ) && chatDate < lastWeek
-        );
-      }),
-    );
-
-    return {
-      totalChats,
-      percentChangeTotalChats: calculatePercentChange(
-        totalChatsLastWeek,
-        totalChatsCurrentWeek,
-      ),
-      weeklyChats: totalChatsCurrentWeek,
-      percentChangeWeeklyChats: calculatePercentChange(
-        totalChatsLastWeek,
-        totalChatsCurrentWeek,
-      ),
-      averageMessagesPerChat: avgMessagesCurrent,
-      percentChangeAverageMessagesPerChat: calculatePercentChange(
-        avgMessagesLastWeek,
-        avgMessagesCurrent,
-      ),
-      chats: getChatsPerDay(data),
-    };
-  }, [data]);
-
-  // const kpiData = [
-  //   {
-  //     name: "Total chats",
-  //     stat: totalChats,
-  //     change: `${parseFloat(percentChangeTotalChats.toFixed(1))}%`,
-  //     changeType: percentChangeTotalChats > 0 ? "positive" : "negative",
-  //   },
-  //   {
-  //     name: "Weekly chats",
-  //     stat: weeklyChats,
-  //     change: `${parseFloat(percentChangeWeeklyChats.toFixed(1))}%`,
-  //     changeType: percentChangeWeeklyChats > 0 ? "positive" : "negative",
-  //   },
-  //   {
-  //     name: "Average messages per chat",
-  //     stat: averageMessagesPerChat,
-  //     change: `${parseFloat(percentChangeAverageMessagesPerChat.toFixed(1))}%`,
-  //     changeType:
-  //       percentChangeAverageMessagesPerChat > 0 ? "positive" : "negative",
-  //   },
-  // ];
-
   const kpiData = [
     {
       name: "Total chats",
@@ -228,37 +189,6 @@ export default function Analytics() {
     </div>
   );
 }
-
-const dataFormatter = (number) =>
-  //   `$${Intl.NumberFormat("us").format(number).toString()}`;
-  `${number}`;
-
-// export function LineChartHero({
-//   data,
-// }: {
-//   data: {
-//     date: string;
-//     chats: number;
-//   }[];
-// }) {
-//   return (
-//     <Card className="col-span-3">
-//       <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-//         Chats per day
-//       </h3>
-//       <LineChart
-//         className="h-80"
-//         data={data}
-//         index="date"
-//         categories={["chats"]}
-//         colors={["indigo"]}
-//         valueFormatter={dataFormatter}
-//         yAxisWidth={60}
-//         onValueChange={(v) => console.log(v)}
-//       />
-//     </Card>
-//   );
-// }
 
 export const handle = {
   PATH: (chatbotId: string) => `/chatbots/${chatbotId}/analytics`,

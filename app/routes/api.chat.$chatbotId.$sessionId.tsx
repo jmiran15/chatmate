@@ -14,6 +14,7 @@ import { chat } from "~/utils/openai";
 import { getClientIPAddress } from "remix-utils/get-client-ip-address";
 import uap from "ua-parser-js";
 import { prisma } from "~/db.server";
+import { connect } from "http2";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { sessionId, chatbotId } = params;
@@ -70,6 +71,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
           engine_version: ua.engine.version,
           os_name: ua.os.name,
           os_version: ua.os.version,
+          chat: {
+            connect: {
+              id: _chat.id,
+            },
+          },
         },
       });
     } catch (error) {
