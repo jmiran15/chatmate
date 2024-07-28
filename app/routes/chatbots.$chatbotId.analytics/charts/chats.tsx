@@ -1,5 +1,5 @@
 import { TrendingUp } from "lucide-react";
-import { Bar, BarChart, XAxis, ResponsiveContainer } from "recharts";
+import { Bar, BarChart, XAxis } from "recharts";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import {
   ChartConfig,
@@ -63,7 +63,9 @@ const getDateInterval = (period: string) => {
 const fillMissingDates = (chats: Chat[], period: string) => {
   const { interval, unit } = getDateInterval(period);
   const now = DateTime.now().setZone("utc");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const startDate = now.minus(getPeriodDuration(period)).startOf(unit as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const endDate = now.endOf(unit as any);
 
   let currentDate = startDate;
@@ -72,6 +74,7 @@ const fillMissingDates = (chats: Chat[], period: string) => {
   while (currentDate <= endDate) {
     const existingChats = chats.filter((chat) => {
       const chatDate = DateTime.fromISO(chat.date, { zone: "utc" });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return chatDate.hasSame(currentDate, unit as any);
     });
 
@@ -106,6 +109,7 @@ const getPeriodDuration = (period: string) => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ChatsChart({ chats, period, percentageChanges }: any) {
   const filledChats = fillMissingDates(chats, period);
   const totalChats = filledChats.reduce((sum, chat) => sum + chat.chats, 0);

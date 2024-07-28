@@ -3,24 +3,6 @@ import { BarList } from "./barlist";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { useState } from "react";
 
-const countryData = [
-  {
-    name: "United States",
-    value: 91,
-    img: (
-      <img
-        className="h-full w-full"
-        alt="DE"
-        src="https://purecatamphetamine.github.io/country-flag-icons/3x2/DE.svg"
-      />
-    ),
-  },
-  {
-    name: "India",
-    value: 45,
-  },
-];
-
 export default function VisitorsBarlist({
   countryData,
   browserData,

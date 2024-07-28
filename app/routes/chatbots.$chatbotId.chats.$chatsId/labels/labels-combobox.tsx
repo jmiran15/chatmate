@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown, Edit2, Plus } from "lucide-react";
+import { Check, Edit2, Plus } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
