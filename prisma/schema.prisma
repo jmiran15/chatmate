@@ -91,6 +91,8 @@ model Chat {
   elapsedMs  Int            @default(0)
   referrer   String?
   anonUser   AnonymousUser?
+
+  @@index([chatbotId, deleted, createdAt])
 }
 
 model Label {
@@ -155,6 +157,8 @@ model AnonymousUser {
   engine_version       String?
   os_name              String?
   os_version           String?
+
+  @@index([chatId])
 }
 
 model Document {
@@ -196,6 +200,8 @@ model Message {
   seen      Boolean? @default(false)
   cluster   Cluster? @relation(fields: [clusterId], references: [id])
   clusterId String?
+
+  @@index([chatId, role])
 }
 
 // subscription models

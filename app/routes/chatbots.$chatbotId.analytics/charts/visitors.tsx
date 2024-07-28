@@ -60,7 +60,7 @@ export default function VisitorsBarlist({
   }));
 
   const devices = deviceData.map((device) => ({
-    name: device.device,
+    name: device.device || "unknown",
     value: device.count,
   }));
 

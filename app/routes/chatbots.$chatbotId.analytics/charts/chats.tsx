@@ -22,7 +22,8 @@ interface Chat {
 }
 
 const formatXAxis = (tickItem: string, period: string) => {
-  const date = DateTime.fromISO(tickItem);
+  const date = DateTime.fromISO(tickItem, { zone: "utc" });
+
   switch (period) {
     case "1hr":
       return date.toFormat("HH:mm");
@@ -61,19 +62,19 @@ const getDateInterval = (period: string) => {
 
 const fillMissingDates = (chats: Chat[], period: string) => {
   const { interval, unit } = getDateInterval(period);
-  const now = DateTime.now();
-  const startDate = now.minus(getPeriodDuration(period));
-  const endDate = now;
+  const now = DateTime.now().setZone("utc");
+  const startDate = now.minus(getPeriodDuration(period)).startOf(unit as any);
+  const endDate = now.endOf(unit as any);
 
   let currentDate = startDate;
   const filledChats = [];
 
   while (currentDate <= endDate) {
-    const existingChats = chats.filter((chat) =>
-      DateTime.fromISO(chat.date).hasSame(currentDate, unit as any),
-    );
+    const existingChats = chats.filter((chat) => {
+      const chatDate = DateTime.fromISO(chat.date, { zone: "utc" });
+      return chatDate.hasSame(currentDate, unit as any);
+    });
 
-    // combine all the counts
     const chatsCount = existingChats.reduce((sum, chat) => sum + chat.chats, 0);
     filledChats.push({
       date: currentDate.toISO(),
@@ -111,10 +112,10 @@ export default function ChatsChart({ chats, period, percentageChanges }: any) {
 
   return (
     <Card>
-      <CardHeader className="w-full flex flex-row items-center justify-between">
+      <CardHeader className="w-full flex flex-row items-start justify-between">
         <div className="flex flex-col gap-1">
           <div className="font-medium leading-none">Chats</div>
-          <div>
+          {/* <div>
             <div className="flex gap-2 items-center text-secondary leading-none">
               <div className="relative w-2 h-2">
                 <div className="animate-[pulsate_1s_ease-out_infinite] opacity-0 absolute h-2 w-2 rounded-full bg-green-600"></div>
@@ -124,7 +125,7 @@ export default function ChatsChart({ chats, period, percentageChanges }: any) {
                 {filledChats[filledChats.length - 1].chats} online
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex gap-2 items-start">
           <div className="text-[32px] leading-none tracking-[-0.1px] font-bold">
@@ -170,9 +171,11 @@ export default function ChatsChart({ chats, period, percentageChanges }: any) {
             />
 
             <ChartTooltip
+              cursor={false}
               content={
                 <ChartTooltipContent
-                  formatter={(value, name) => [value.toLocaleString(), "Chats"]}
+                  formatter={(value) => [value.toLocaleString(), " Chats"]}
+                  hideLabel
                 />
               }
             />

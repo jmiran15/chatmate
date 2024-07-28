@@ -2,12 +2,7 @@ import { LoaderFunctionArgs, ActionFunctionArgs, json } from "@remix-run/node";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
 import { Prisma, TicketStatus } from "@prisma/client";
-import {
-  Form,
-  useLoaderData,
-  useSearchParams,
-  useSubmit,
-} from "@remix-run/react";
+import { useLoaderData, useSearchParams, useSubmit } from "@remix-run/react";
 import { DateTime, Duration } from "luxon";
 import {
   Select,
@@ -68,7 +63,7 @@ export const loader = async ({
   const searchParams = new URL(request.url).searchParams;
   const period = searchParams.get("period") || "30d";
   const currentStartDate = getPeriodFilter(searchParams).toJSDate();
-  const now = new Date();
+  const now = DateTime.now().setZone("utc").toJSDate();
   const previousStartDate = getPeriodFilter(
     new URLSearchParams(`period=${period}`),
   )
@@ -152,7 +147,7 @@ export const loader = async ({
     where: {
       chatbot: { id: chatbotId },
     },
-    select: { name: true },
+    select: { name: true, color: true },
     distinct: ["name"],
   });
 
@@ -168,7 +163,8 @@ export const loader = async ({
    LEFT JOIN "Label" l ON l.id = cl."B"
    WHERE c."chatbotId" = ${chatbotId}
      AND c.deleted = false
-     AND c."createdAt" >= ${currentStartDate}
+     AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
+     AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
      AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
    GROUP BY COALESCE(l.name, 'Unlabeled')
    ORDER BY count DESC
@@ -176,19 +172,25 @@ export const loader = async ({
 
   // Total chat counts by day
   const chatCountsByDay = await prisma.$queryRaw<
-    { date: Date; chats: number }[]
-  >(Prisma.sql`
+    {
+      date: Date;
+      chats: number;
+    }[]
+  >(
+    Prisma.sql`
   SELECT 
-    DATE(c."createdAt") as date,
+    DATE(c."createdAt" AT TIME ZONE 'UTC') as date,
     COUNT(*)::integer as chats
   FROM "Chat" c
   WHERE c."chatbotId" = ${chatbotId}
     AND c.deleted = false
-    AND c."createdAt" >= ${currentStartDate}
+    AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
+    AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
     AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
-  GROUP BY DATE(c."createdAt")
-  ORDER BY DATE(c."createdAt")
-`);
+  GROUP BY DATE(c."createdAt" AT TIME ZONE 'UTC')
+  ORDER BY DATE(c."createdAt" AT TIME ZONE 'UTC')
+`,
+  );
 
   // Calculate percentage changes
   const calculatePercentageChange = (current: number, previous: number) =>
@@ -196,8 +198,13 @@ export const loader = async ({
 
   // New queries for anonymous user data
   const countryData = await prisma.$queryRaw<
-    { country: string; country_code: string; count: number }[]
-  >`
+    {
+      country: string;
+      country_code: string;
+      count: number;
+    }[]
+  >(
+    Prisma.sql`
     SELECT 
       au.country,
       au.country_code,
@@ -205,14 +212,18 @@ export const loader = async ({
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
-      AND c."createdAt" >= ${currentStartDate}
-      AND c."createdAt" <= ${now}
+      AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
+      AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
     GROUP BY au.country, au.country_code
     ORDER BY count DESC
-  `;
+  `,
+  );
 
   const browserData = await prisma.$queryRaw<
-    { browser: string; count: number }[]
+    {
+      browser: string;
+      count: number;
+    }[]
   >`
     SELECT 
       au.browser_name as browser,
@@ -220,14 +231,17 @@ export const loader = async ({
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
-      AND c."createdAt" >= ${currentStartDate}
-      AND c."createdAt" <= ${now}
+      AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
+      AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
     GROUP BY au.browser_name
     ORDER BY count DESC
   `;
 
   const deviceData = await prisma.$queryRaw<
-    { device: string; count: number }[]
+    {
+      device: string;
+      count: number;
+    }[]
   >`
     SELECT 
       au.device_type as device,
@@ -235,8 +249,8 @@ export const loader = async ({
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
-      AND c."createdAt" >= ${currentStartDate}
-      AND c."createdAt" <= ${now}
+      AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
+      AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
     GROUP BY au.device_type
     ORDER BY count DESC
   `;
@@ -274,6 +288,7 @@ export const loader = async ({
     countryData,
     browserData,
     deviceData,
+    distinctLabels,
   });
 };
 
@@ -295,7 +310,7 @@ const generateRandomMessages = (count: number) => {
 };
 
 const seedChats = async (chatbotId: string) => {
-  const now = DateTime.now();
+  const now = DateTime.now().setZone("utc");
   const oneYearAgo = now.minus({ months: 12 });
 
   const labels = await prisma.label.findMany({
@@ -317,8 +332,8 @@ const seedChats = async (chatbotId: string) => {
     const chat = await prisma.chat.create({
       data: {
         chatbotId,
-        createdAt: createdAt.toJSDate(),
-        updatedAt: createdAt.toJSDate(),
+        createdAt: createdAt.toUTC().toJSDate(),
+        updatedAt: createdAt.toUTC().toJSDate(),
         deleted: false,
         seen: Math.random() > 0.5,
         status,
@@ -414,6 +429,7 @@ export default function Analytics() {
     countryData,
     browserData,
     deviceData,
+    distinctLabels,
   } = useLoaderData<typeof loader>();
 
   const submit = useSubmit();
@@ -424,22 +440,6 @@ export default function Analytics() {
     newSearchParams.set("period", value);
     submit(newSearchParams, { replace: true, method: "get" });
   };
-
-  console.log("Analytics: ", {
-    totalChats,
-    avgResolutionTime,
-    resolutionRate,
-    totalTimeSaved,
-    tagsCount,
-    chatCountsByDay,
-    labelNames,
-    period,
-    previousPeriod,
-    percentageChanges,
-    countryData,
-    browserData,
-    deviceData,
-  });
 
   return (
     <div className="h-full w-full overflow-y-auto">
@@ -479,13 +479,13 @@ export default function Analytics() {
               change: Math.abs(percentageChanges.avgResolutionTime).toFixed(1),
               changeType:
                 percentageChanges.avgResolutionTime > 0
-                  ? "positive"
-                  : "negative",
+                  ? "negative"
+                  : "positive",
               icon: MessageSquare,
             },
             {
               name: "Resolution rate",
-              stat: resolutionRate,
+              stat: Math.round(resolutionRate) + "%",
               change: Math.abs(percentageChanges.resolutionRate).toFixed(1),
               changeType:
                 percentageChanges.resolutionRate > 0 ? "positive" : "negative",
@@ -507,7 +507,7 @@ export default function Analytics() {
             period={period}
             percentageChanges={percentageChanges}
           />
-          <TagsChart tags={tagsCount} labelNames={labelNames} />
+          <TagsChart tags={tagsCount} labels={distinctLabels} />
           <VisitorsBarlist
             countryData={countryData}
             browserData={browserData}

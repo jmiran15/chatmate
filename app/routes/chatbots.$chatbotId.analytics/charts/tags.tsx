@@ -6,6 +6,8 @@ import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
 } from "~/components/ui/chart";
 
 function getRandomColor() {
@@ -17,19 +19,28 @@ function getRandomColor() {
   return color;
 }
 
-export function TagsChart({ tags, labelNames }: any) {
-  const chartConfig = labelNames.reduce(
-    (config: ChartConfig, label: string, index: number) => {
-      config[label] = {
-        label: label.charAt(0).toUpperCase() + label.slice(1),
-        color: getRandomColor(),
+export function TagsChart({
+  tags,
+  labels,
+}: {
+  tags: { label: string; count: number }[];
+  labels: {
+    name: string;
+    color: string;
+  }[];
+}) {
+  const chartConfig = labels.reduce(
+    (config: ChartConfig, label: { name: string; color: string }) => {
+      config[label.name] = {
+        label: label.name.charAt(0).toUpperCase() + label.name.slice(1),
+        color: label.color,
       };
       return config;
     },
     {
       Unlabeled: {
         label: "Unlabeled",
-        color: getRandomColor(),
+        color: "#e5e7eb", // gray-200
       },
     },
   );
@@ -40,16 +51,15 @@ export function TagsChart({ tags, labelNames }: any) {
     fill: chartConfig[tag.label]?.color || getRandomColor(),
   }));
 
-  console.log("TAGS: ", { chartConfig, chartData });
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-start pb-0">
         <div className="flex flex-col gap-1">
-          <div className="font-medium leading-none">Pages</div>
+          <div className="font-medium leading-none">Labels</div>
           <div>
             <div className="flex gap-2 items-center text-secondary leading-none">
               <div className="text-sm text-muted-foreground leading-none">
-                17 unique pages viewed
+                {tags.length} labels
               </div>
             </div>
           </div>
@@ -61,6 +71,10 @@ export function TagsChart({ tags, labelNames }: any) {
           className="mx-auto aspect-square max-h-[300px]"
         >
           <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
             <Pie data={chartData} dataKey="value" />
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
