@@ -227,6 +227,15 @@ export function getChatById({ chatId }: { chatId: Chat["id"] }) {
     where: {
       id: chatId,
     },
+    include: {
+      labels: {
+        select: {
+          id: true,
+          name: true,
+          color: true,
+        },
+      },
+    },
   });
 }
 

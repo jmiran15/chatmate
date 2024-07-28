@@ -40,46 +40,80 @@ model Chatbot {
   croppedLogoFilepath  String?
   lastCrop             Json?
 
-  themeColor       String      @default("zinc")
-  introMessages    String[]    @default(["Hello, how can I help you today?"])
-  openIcon         String      @default("plus") // plus, chevron, chat
-  starterQuestions String[]    @default(["What are your features?"])
-  name             String
-  systemPrompt     String?
-  model            String?     @default("gpt-3.5-turbo-0125")
-  responseLength   String?     @default("short")
-  documents        Document[]
-  embeddings       Embedding[]
+  themeColor           String      @default("zinc")
+  introMessages        String[]    @default(["Hello, how can I help you today?"])
+  openIcon             String      @default("plus") // plus, chevron, chat
+  starterQuestions     String[]    @default(["What are your features?"])
+  name                 String
+  systemPrompt         String?
+  model                String?     @default("gpt-3.5-turbo-0125")
+  responseLength       String?     @default("short")
+  documents            Document[]
+  embeddings           Embedding[]
+  containerRadius      String?     @default("1.0")
+  openButtonText       String?
+  widgetRestrictedUrls String[]    @default([])
+  labels               Label[]
+  commonClusters       Cluster[]   @relation("CommonClusters")
+  gapClusters          Cluster[]   @relation("GapClusters")
+}
 
-  containerRadius String? @default("1.0")
-
-  openButtonText String?
-
-  widgetRestrictedUrls String[] @default([])
+model Cluster {
+  id              String    @id @default(uuid())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  commonChatbot   Chatbot   @relation(fields: [commonChatbotId], references: [id], onDelete: Cascade, name: "CommonClusters")
+  gapChatbot      Chatbot   @relation(fields: [gapChatbotId], references: [id], onDelete: Cascade, name: "GapClusters")
+  commonChatbotId String
+  gapChatbotId    String
+  chatbotId       String
+  label           String
+  messages        Message[]
 }
 
 model Chat {
-  id         String    @id @default(uuid())
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  user       User?     @relation(fields: [userId], references: [id])
+  id         String         @id @default(uuid())
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  user       User?          @relation(fields: [userId], references: [id])
   userId     String?
-  chatbot    Chatbot   @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  chatbot    Chatbot        @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
   messages   Message[]
-  name       String?   @default("Untitled Chat")
+  name       String?        @default("Untitled Chat")
   aiInsights String?
-  starred    Boolean?  @default(false)
+  starred    Boolean?       @default(false)
   sessionId  String?
-  deleted    Boolean   @default(false)
-  seen       Boolean?  @default(false)
+  deleted    Boolean        @default(false)
+  seen       Boolean?       @default(false)
+  status     TicketStatus?  @default(OPEN)
+  labels     Label[]
+  elapsedMs  Int            @default(0)
+  referrer   String?
+  anonUser   AnonymousUser?
+
+  @@index([chatbotId, deleted, createdAt])
+}
+
+model Label {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  color     String   @default("#ffffff")
+  chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  chatbotId String
+  chats     Chat[]
 }
 
 // https://ipapi.co/json/
 // https://docs.uaparser.dev/
+// TODO - this should def be connected to the user - NEEDS TO BE CONNECTED TO CHAT FOR ANALYTICS QUERIES
 model AnonymousUser {
   id                   String   @id @default(cuid())
   sessionId            String   @unique
+  chat                 Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId               String   @unique
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
   ip                   String?
@@ -123,6 +157,8 @@ model AnonymousUser {
   engine_version       String?
   os_name              String?
   os_version           String?
+
+  @@index([chatId])
 }
 
 model Document {
@@ -162,6 +198,10 @@ model Message {
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String
   seen      Boolean? @default(false)
+  cluster   Cluster? @relation(fields: [clusterId], references: [id])
+  clusterId String?
+
+  @@index([chatId, role])
 }
 
 // subscription models
@@ -213,4 +253,9 @@ enum DocumentType {
   WEBSITE
   FILE
   RAW
+}
+
+enum TicketStatus {
+  OPEN
+  CLOSED
 }

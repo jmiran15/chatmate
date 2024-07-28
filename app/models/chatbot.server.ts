@@ -31,6 +31,15 @@ export function createChatbot({
 export function getChatbotById({ id }: { id: Chatbot["id"] }) {
   return prisma.chatbot.findUnique({
     where: { id },
+    include: {
+      labels: {
+        select: {
+          id: true,
+          name: true,
+          color: true,
+        },
+      },
+    },
   });
 }
 

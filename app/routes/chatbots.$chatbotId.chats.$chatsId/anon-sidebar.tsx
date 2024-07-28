@@ -1,7 +1,11 @@
 import { AnonymousUser } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { Fragment } from "react/jsx-runtime";
 import { useSocket } from "~/providers/socket";
+import StatusComboboxPopover from "./status-combobox";
+import { FancyBox } from "./labels/labels-combobox";
+import { formatDuration, intervalToDuration } from "date-fns";
+import { useLoaderData } from "@remix-run/react";
+import { loader } from "./route";
 
 export default function AnonSidebar({
   anonUser,
@@ -11,12 +15,36 @@ export default function AnonSidebar({
   sessionId: string;
 }) {
   const { status } = useWidgetConnectionStatus(sessionId);
+  const { chat } = useLoaderData<typeof loader>();
+  const duration = intervalToDuration({
+    start: 0,
+    end: Number(chat?.elapsedMs),
+  });
+  const formattedDuration = formatDuration(duration, {
+    format: ["hours", "minutes", "seconds"],
+    zero: true,
+    delimiter: ":",
+  });
 
   return (
-    <Fragment>
+    <div className="flex flex-col col-span-3 overflow-y-auto h-full border-l p-5 gap-2">
+      {/* actions stuff */}
+      <StatusComboboxPopover />
+      <div className="flex items-start justify-start gap-2 w-full">
+        <p className="text-sm text-muted-foreground">Labels</p>
+        <FancyBox />
+      </div>
+
       <div className="flex items-center justify-start gap-2 w-full">
-        <p className="text-sm text-muted-foreground">Status: </p>
+        <p className="text-sm text-muted-foreground">User </p>
         <small className="text-sm font-medium leading-none">{status}</small>
+      </div>
+
+      <div className="flex items-center justify-start gap-2 w-full">
+        <p className="text-sm text-muted-foreground">Active time</p>
+        <small className="text-sm font-medium leading-none">
+          {formattedDuration}
+        </small>
       </div>
       {anonUser
         ? (Object.keys(anonUser) as (keyof AnonymousUser)[]).map(
@@ -39,7 +67,7 @@ export default function AnonSidebar({
               ),
           )
         : null}
-    </Fragment>
+    </div>
   );
 }
 
