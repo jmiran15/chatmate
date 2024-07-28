@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { BarList } from "./barlist";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import ReactCountryFlag from "react-country-flag";
+import { useState } from "react";
 
-const chartData = [
+const countryData = [
   {
     name: "United States",
     value: 91,
@@ -19,125 +19,55 @@ const chartData = [
     name: "India",
     value: 45,
   },
-  {
-    name: "United Kingdom",
-    value: 23,
-  },
-  {
-    name: "Canada",
-    value: 12,
-  },
-  {
-    name: "Australia",
-    value: 9,
-  },
-  {
-    name: "Germany",
-    value: 8,
-  },
-  {
-    name: "France",
-    value: 7,
-  },
-  {
-    name: "Netherlands",
-    value: 6,
-  },
-  {
-    name: "Brazil",
-    value: 5,
-  },
-  {
-    name: "Italy",
-    value: 4,
-  },
-  {
-    name: "Spain",
-    value: 3,
-  },
-  {
-    name: "Japan",
-    value: 2,
-  },
-  {
-    name: "China",
-    value: 1,
-  },
-  {
-    name: "Russia",
-    value: 1,
-  },
-  {
-    name: "South Korea",
-    value: 1,
-  },
-  {
-    name: "Mexico",
-    value: 1,
-  },
-  {
-    name: "Indonesia",
-    value: 1,
-  },
-  {
-    name: "Turkey",
-    value: 1,
-  },
-  {
-    name: "Saudi Arabia",
-    value: 1,
-  },
-  {
-    name: "South Africa",
-    value: 1,
-  },
-  {
-    name: "Nigeria",
-    value: 1,
-  },
-  {
-    name: "Egypt",
-    value: 1,
-  },
-  {
-    name: "Kenya",
-    value: 1,
-  },
-  {
-    name: "Ghana",
-    value: 1,
-  },
-  {
-    name: "Uganda",
-    value: 1,
-  },
-  {
-    name: "Morocco",
-    value: 1,
-  },
-  {
-    name: "Algeria",
-    value: 1,
-  },
-  {
-    name: "Tunisia",
-    value: 1,
-  },
-  {
-    name: "Libya",
-    value: 1,
-  },
-  {
-    name: "Ethiopia",
-    value: 1,
-  },
-  {
-    name: "Sudan",
-    value: 1,
-  },
 ];
 
-export default function VisitorsBarlist() {
+export default function VisitorsBarlist({
+  countryData,
+  browserData,
+  deviceData,
+}: {
+  countryData: {
+    country: string;
+    country_code: string;
+    count: number;
+  }[];
+  browserData: {
+    browser: string;
+    count: number;
+  }[];
+  deviceData: {
+    device: string;
+    count: number;
+  }[];
+}) {
+  const [tab, setTab] = useState<"country" | "browser" | "device">("country");
+
+  const countries = countryData.map((country) => ({
+    name: country.country,
+    value: country.count,
+    img: (
+      <img
+        className="h-full w-full"
+        alt={country.country_code}
+        src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${country.country_code}.svg`}
+      />
+    ),
+  }));
+
+  const browsers = browserData.map((browser) => ({
+    name: browser.browser,
+    value: browser.count,
+  }));
+
+  const devices = deviceData.map((device) => ({
+    name: device.device,
+    value: device.count,
+  }));
+
+  const onTabChange = (value) => {
+    setTab(value);
+  };
+
   return (
     <Card className="w-full">
       <CardHeader className="w-full flex flex-row items-center justify-between">
@@ -153,7 +83,7 @@ export default function VisitorsBarlist() {
         </div>
 
         <div className="flex gap-2 items-start">
-          <Tabs defaultValue="country">
+          <Tabs defaultValue="country" onValueChange={onTabChange} value={tab}>
             <TabsList>
               <TabsTrigger value="country">Country</TabsTrigger>
               <TabsTrigger value="browser">Browser</TabsTrigger>
@@ -163,11 +93,27 @@ export default function VisitorsBarlist() {
         </div>
       </CardHeader>
       <CardContent>
-        <BarList
-          data={chartData}
-          showAnimation={true}
-          onValueChange={console.log}
-        />
+        {tab === "country" ? (
+          <BarList
+            data={countries}
+            showAnimation={true}
+            onValueChange={console.log}
+          />
+        ) : null}
+        {tab === "browser" ? (
+          <BarList
+            data={browsers}
+            showAnimation={true}
+            onValueChange={console.log}
+          />
+        ) : null}
+        {tab === "device" ? (
+          <BarList
+            data={devices}
+            showAnimation={true}
+            onValueChange={console.log}
+          />
+        ) : null}
       </CardContent>
     </Card>
   );

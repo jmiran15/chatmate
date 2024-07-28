@@ -37,7 +37,7 @@ export async function action({ request }: ActionFunctionArgs) {
       id: chat.id,
     },
     data: {
-      elapsedMs: String(activeTime),
+      elapsedMs: Number(activeTime),
     },
   });
 
