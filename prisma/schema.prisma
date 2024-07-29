@@ -108,11 +108,12 @@ model Label {
 
 // https://ipapi.co/json/
 // https://docs.uaparser.dev/
+// TODO - this should def be connected to the user - NEEDS TO BE CONNECTED TO CHAT FOR ANALYTICS QUERIES
 model AnonymousUser {
   id                   String   @id @default(cuid())
   sessionId            String   @unique
-  chat                 Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId               String?  @unique
+  chat                 Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId               String   @unique
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
   ip                   String?
