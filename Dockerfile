@@ -34,6 +34,8 @@ COPY --from=deps /myapp/node_modules /myapp/node_modules
 ADD prisma .
 RUN npx prisma generate
 # RUN npx prisma migrate resolve --applied "20240727012958_"
+RUN prisma migrate resolve --rolled-back "20240727012958_"
+
 
 ADD . .
 RUN npm run build
