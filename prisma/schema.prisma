@@ -112,8 +112,8 @@ model Label {
 model AnonymousUser {
   id                   String   @id @default(cuid())
   sessionId            String   @unique
-  chat                 Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  chatId               String   @unique
+  chat                 Chat?     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId               String?   @unique
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
   ip                   String?
