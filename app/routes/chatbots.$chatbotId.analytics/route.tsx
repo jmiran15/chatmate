@@ -16,7 +16,7 @@ import KPIs from "./kpis";
 import { MessageSquare } from "lucide-react";
 import { TagsChart } from "./charts/tags";
 import VisitorsBarlist from "./charts/visitors";
-import { faker } from "@faker-js/faker";
+// import { faker } from "@faker-js/faker";
 
 const DATE_RANGES = [
   { label: "Last hour", value: "1hr" },
@@ -309,76 +309,76 @@ const generateRandomMessages = (count: number) => {
   return messages;
 };
 
-const seedChats = async (chatbotId: string) => {
-  const now = DateTime.now().setZone("utc");
-  const oneYearAgo = now.minus({ months: 12 });
+// const seedChats = async (chatbotId: string) => {
+//   const now = DateTime.now().setZone("utc");
+//   const oneYearAgo = now.minus({ months: 12 });
 
-  const labels = await prisma.label.findMany({
-    where: { chatbotId },
-    select: { id: true },
-  });
+//   const labels = await prisma.label.findMany({
+//     where: { chatbotId },
+//     select: { id: true },
+//   });
 
-  for (let i = 0; i < 100; i++) {
-    const createdAt = generateRandomDate(oneYearAgo, now);
-    const messageCount = Math.floor(Math.random() * 10) + 1;
-    const status =
-      Math.random() > 0.5 ? TicketStatus.OPEN : TicketStatus.CLOSED;
-    const elapsedMs = Math.floor(Math.random() * 300000);
+//   for (let i = 0; i < 100; i++) {
+//     const createdAt = generateRandomDate(oneYearAgo, now);
+//     const messageCount = Math.floor(Math.random() * 10) + 1;
+//     const status =
+//       Math.random() > 0.5 ? TicketStatus.OPEN : TicketStatus.CLOSED;
+//     const elapsedMs = Math.floor(Math.random() * 300000);
 
-    const chatLabels = labels
-      .sort(() => 0.5 - Math.random())
-      .slice(0, Math.floor(Math.random() * 3));
+//     const chatLabels = labels
+//       .sort(() => 0.5 - Math.random())
+//       .slice(0, Math.floor(Math.random() * 3));
 
-    const chat = await prisma.chat.create({
-      data: {
-        chatbotId,
-        createdAt: createdAt.toUTC().toJSDate(),
-        updatedAt: createdAt.toUTC().toJSDate(),
-        deleted: false,
-        seen: Math.random() > 0.5,
-        status,
-        elapsedMs,
-        messages: {
-          create: generateRandomMessages(messageCount),
-        },
-        labels: {
-          connect: chatLabels.map((label) => ({ id: label.id })),
-        },
-      },
-    });
+//     const chat = await prisma.chat.create({
+//       data: {
+//         chatbotId,
+//         createdAt: createdAt.toUTC().toJSDate(),
+//         updatedAt: createdAt.toUTC().toJSDate(),
+//         deleted: false,
+//         seen: Math.random() > 0.5,
+//         status,
+//         elapsedMs,
+//         messages: {
+//           create: generateRandomMessages(messageCount),
+//         },
+//         labels: {
+//           connect: chatLabels.map((label) => ({ id: label.id })),
+//         },
+//       },
+//     });
 
-    // Create anonymous user data for each chat
-    await prisma.anonymousUser.create({
-      data: {
-        sessionId: faker.datatype.uuid(),
-        chatId: chat.id,
-        ip: faker.internet.ip(),
-        country: faker.address.country(),
-        country_code: faker.address.countryCode(),
-        city: faker.address.city(),
-        browser_name: faker.helpers.arrayElement([
-          "Chrome",
-          "Firefox",
-          "Safari",
-          "Edge",
-        ]),
-        browser_version: faker.system.semver(),
-        device_type: faker.helpers.arrayElement([
-          "desktop",
-          "mobile",
-          "tablet",
-        ]),
-        os_name: faker.helpers.arrayElement([
-          "Windows",
-          "MacOS",
-          "Linux",
-          "iOS",
-          "Android",
-        ]),
-      },
-    });
-  }
-};
+//     // Create anonymous user data for each chat
+//     await prisma.anonymousUser.create({
+//       data: {
+//         sessionId: faker.datatype.uuid(),
+//         chatId: chat.id,
+//         ip: faker.internet.ip(),
+//         country: faker.address.country(),
+//         country_code: faker.address.countryCode(),
+//         city: faker.address.city(),
+//         browser_name: faker.helpers.arrayElement([
+//           "Chrome",
+//           "Firefox",
+//           "Safari",
+//           "Edge",
+//         ]),
+//         browser_version: faker.system.semver(),
+//         device_type: faker.helpers.arrayElement([
+//           "desktop",
+//           "mobile",
+//           "tablet",
+//         ]),
+//         os_name: faker.helpers.arrayElement([
+//           "Windows",
+//           "MacOS",
+//           "Linux",
+//           "iOS",
+//           "Android",
+//         ]),
+//       },
+//     });
+//   }
+// };
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const { chatbotId } = params;
