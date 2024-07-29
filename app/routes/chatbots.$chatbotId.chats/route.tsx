@@ -1,13 +1,5 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, defer } from "@remix-run/node";
-import {
-  Await,
-  Outlet,
-  useAsyncError,
-  useLoaderData,
-  useSearchParams,
-} from "@remix-run/react";
-import { Suspense } from "react";
-import { LoadingChatCard } from "~/routes/chatbots.$chatbotId.chats/chats-card";
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
+import { Outlet, useLoaderData, useSearchParams } from "@remix-run/react";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { updateChatStarredStatus } from "~/models/chat.server";
 import { requireUserId } from "~/session.server";
@@ -33,6 +25,11 @@ export const getCreatedAt = (searchParams: URLSearchParams): "asc" | "desc" =>
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
+
+  if (!chatbotId) {
+    throw new Error("chatbotId is required");
+  }
+
   const searchParams = new URL(request.url).searchParams;
   const starred = getStarred(searchParams);
   const createdAt = getCreatedAt(searchParams);
@@ -41,10 +38,6 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const createdAtQuery = {
     createdAt: (createdAt === "asc" ? "asc" : "desc") as Prisma.SortOrder,
   };
-
-  if (!chatbotId) {
-    throw new Error("chatbotId is required");
-  }
 
   // All chats that are not safe deleted - and have some user message
   const WHERE = {
@@ -59,7 +52,8 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     },
   };
 
-  const dataPromise = prisma.$transaction([
+  // TODO - defer this
+  const [totalItems, items] = await prisma.$transaction([
     prisma.chat.count({
       where: WHERE,
     }),
@@ -79,7 +73,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   ]);
   await requireUserId(request);
 
-  return defer({ dataPromise });
+  return json({ totalItems, items });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -101,7 +95,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function Chats() {
-  const { dataPromise } = useLoaderData<typeof loader>(); // defered promise
+  const { totalItems, items } = useLoaderData<typeof loader>();
   const [searchParams, setSearchParams] = useSearchParams();
   const starred: "1" | "0" = getStarred(searchParams);
 
@@ -125,30 +119,11 @@ export default function Chats() {
             <TabsTrigger value="1">Starred</TabsTrigger>
           </TabsList>
         </Tabs>
-
-        <Suspense
-          fallback={
-            <div className="px-4 sm:px-6">
-              {Array.from({ length: LIMIT }, (_, i) => (
-                <LoadingChatCard key={i} />
-              ))}
-            </div>
-          }
-        >
-          <Await resolve={dataPromise} errorElement={<ChatsLoadingError />}>
-            {([totalItems, items]) => {
-              return <ChatsList totalItems={totalItems} items={items} />;
-            }}
-          </Await>
-        </Suspense>
+        <ChatsList totalItems={totalItems} items={items} />
       </div>
       <Outlet />
     </div>
   );
-}
-function ChatsLoadingError() {
-  const error = useAsyncError();
-  return <p>{error.message}</p>;
 }
 
 export const handle = {

@@ -1,13 +1,26 @@
-import { useCallback, useEffect, useRef } from "react";
+import { ReactNode, useCallback, useEffect, useRef } from "react";
 
-export const ItemMeasurer = ({ children, measure, tagName, ...restProps }) => {
-  const roRef = useRef(null);
-  const elRef = useRef(null);
+interface ItemMeasurerProps {
+  children: ReactNode;
+  measure: (element: HTMLElement | null) => void;
+  tagName: keyof JSX.IntrinsicElements;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
+
+export const ItemMeasurer: React.FC<ItemMeasurerProps> = ({
+  children,
+  measure,
+  tagName,
+  ...restProps
+}) => {
+  const roRef = useRef<ResizeObserver | null>(null);
+  const elRef = useRef<HTMLElement | null>(null);
 
   const measureRef = useRef(measure);
   measureRef.current = measure;
 
-  const refSetter = useCallback((el) => {
+  const refSetter = useCallback((el: HTMLElement | null) => {
     const ro = roRef.current;
 
     if (ro !== null && elRef.current !== null) {

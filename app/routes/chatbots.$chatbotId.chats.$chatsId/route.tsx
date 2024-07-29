@@ -27,6 +27,7 @@ import { useSocket } from "~/providers/socket";
 import axios from "axios";
 import Subheader from "./subheader";
 import { Prisma, TicketStatus } from "@prisma/client";
+import useAgent from "./use-agent";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -255,7 +256,6 @@ export default function ChatRoute() {
   const { messages, chatbot, chat, anonUser, API_PATH } =
     useLoaderData<typeof loader>();
   const { setAutoScroll, scrollDomToBottom } = useScrollToBottom();
-
   const isMobile = useMobileScreen();
   const navigate = useNavigate();
   const { chatbotId } = useParams();
@@ -357,29 +357,4 @@ export default function ChatRoute() {
       </div>
     </div>
   );
-}
-
-function useAgent(sessionId: string | null): void {
-  const socket = useSocket();
-
-  useEffect(() => {
-    if (!socket || !sessionId) return;
-
-    const handlePollingIsAgent = (data: { sessionId: string }) => {
-      if (sessionId === data.sessionId) {
-        console.log(`${socket.id} - isAgent: `, { ...data, isAgent: true });
-        socket.emit("isAgent", { ...data, isAgent: true });
-      }
-    };
-
-    socket.on("pollingAgent", handlePollingIsAgent);
-    console.log(`${socket.id} - isAgent: `, { sessionId, isAgent: true });
-    socket.emit("isAgent", { sessionId, isAgent: true });
-
-    return () => {
-      socket.off("pollingAgent", handlePollingIsAgent);
-      console.log(`${socket.id} - isAgent: `, { sessionId, isAgent: false });
-      socket.emit("isAgent", { sessionId, isAgent: false });
-    };
-  }, [socket, sessionId]);
 }

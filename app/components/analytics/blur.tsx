@@ -1,7 +1,7 @@
 import { Form } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Card, CardDescription, CardTitle } from "~/components/ui/card";
-import { INTERVALS, PLANS } from "../pricing-page";
+import { INTERVALS, PLANS } from "../../routes/_index/pricing-page";
 import { Loader2 } from "lucide-react";
 import { useIsPending } from "~/hooks/use-is-pending";
 

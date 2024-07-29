@@ -5,7 +5,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import ChatbotCard from "~/components/chatbot-card";
+import ChatbotCard from "~/routes/chatbots._index/chatbot-card";
 import { Button } from "~/components/ui/button";
 import { prisma } from "~/db.server";
 import { getAllChatbots } from "~/models/chatbot.server";

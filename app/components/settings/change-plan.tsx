@@ -16,9 +16,9 @@ import {
   PLANS,
   PRICING_PLANS,
   Plan,
-} from "../pricing-page";
+} from "../../routes/_index/pricing-page";
 import { Switch } from "../ui/switch";
-import { loader } from "~/routes/chatbots.settings.billing";
+import { loader } from "~/routes/chatbots.settings.billing/route";
 import { Badge } from "../ui/badge";
 import { Loader2 } from "lucide-react";
 import { useIsPending } from "~/hooks/use-is-pending";

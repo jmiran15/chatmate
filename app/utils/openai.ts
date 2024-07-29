@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
   ANYSCALE_MODELS,
   GROQ_MODELS,
-} from "~/routes/chatbots.$chatbotId.settings";
+} from "~/routes/chatbots.$chatbotId.settings/route";
 import { openai, groq, anyscale } from "./providers.server";
 import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
 
