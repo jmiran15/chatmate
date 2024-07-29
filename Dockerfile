@@ -4,12 +4,8 @@ FROM node:18-bullseye-slim as base
 # set for base and all layer that inherit from it
 ENV NODE_ENV production
 
-# Install openssl for Prisma and other necessary tools
-RUN apt-get update && apt-get install -y openssl curl
-
-# Install Node.js and npm
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-RUN apt-get install -y nodejs
+# Install openssl for Prisma
+RUN apt-get update && apt-get install -y openssl
 
 # Install all node_modules, including dev dependencies
 FROM base as deps
@@ -18,9 +14,6 @@ WORKDIR /myapp
 
 ADD package.json package-lock.json .npmrc ./
 RUN npm install --include=dev
-
-# Install Prisma CLI globally
-RUN npm install -g prisma
 
 # Setup production node_modules
 FROM base as production-deps
@@ -58,8 +51,5 @@ COPY --from=build /myapp/node_modules/.prisma /myapp/node_modules/.prisma
 COPY --from=build /myapp/build /myapp/build
 COPY --from=build /myapp/public /myapp/public
 ADD . .
-
-# Install Prisma CLI globally in the final image
-RUN npm install -g prisma
 
 CMD ["npm", "start"]
