@@ -19,9 +19,7 @@ const redisOptions: RedisOptions = {
 if (process.env.NODE_ENV === "production") {
   redis = new Redis(process.env.REDIS_URL || "", redisOptions);
 } else {
-  console.log("creating redis connection - ", process.env.REDIS_URL);
   if (!global.__redis) {
-    console.log("creating redis connection - ", process.env.REDIS_URL);
     global.__redis = new Redis(process.env.REDIS_URL || "", redisOptions);
   }
   redis = global.__redis;

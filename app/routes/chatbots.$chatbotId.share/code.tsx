@@ -7,7 +7,8 @@ import {
   CardTitle,
 } from "../../components/ui/card";
 import { useState } from "react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import pkg from "react-copy-to-clipboard";
+const { CopyToClipboard } = pkg;
 import { Clipboard, ClipboardCheck } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { useToast } from "../../components/ui/use-toast";

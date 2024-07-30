@@ -2,7 +2,7 @@ import { Message } from "@prisma/client";
 import { useParams, useFetcher } from "@remix-run/react";
 import { format } from "date-fns";
 import { Clipboard } from "lucide-react";
-import { Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { ChatAction } from "~/components/chat/chat-action";
 import {
   HoverCard,
@@ -10,7 +10,7 @@ import {
   HoverCardTrigger,
 } from "~/components/ui/hover-card";
 import { Loading } from "~/components/ui/loading";
-import Markdown from "~/components/ui/markdown";
+const Markdown = lazy(() => import("~/components/ui/markdown"));
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { useToast } from "~/components/ui/use-toast";
 import { useScrollToBottom } from "~/hooks/useScroll";

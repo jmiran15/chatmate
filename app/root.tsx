@@ -1,4 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
 import type {
   LinksFunction,
   LoaderFunctionArgs,
@@ -7,7 +6,6 @@ import type {
 import { json } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -19,9 +17,9 @@ import * as gtag from "~/utils/gtags.client";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 
-import stylesheet from "~/tailwind.css";
-import markdownStyle from "./styles/lib/markdown.css";
-import highlightStyle from "./styles/lib/highlight.css";
+import stylesheet from "~/tailwind.css?url";
+import markdownStyle from "./styles/lib/markdown.css?url";
+import highlightStyle from "./styles/lib/highlight.css?url";
 import { Toaster } from "./components/ui/toaster";
 import { useEffect } from "react";
 import { getUser } from "./session.server";
@@ -30,7 +28,6 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
   { rel: "stylesheet", href: markdownStyle },
   { rel: "stylesheet", href: highlightStyle },
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
 // Load the GA tracking id from the .env
@@ -126,7 +123,6 @@ export default function App() {
           <Outlet />
           <ScrollRestoration />
           <Scripts />
-          <LiveReload />
           <Toaster />
           <div id="modal-container" />
         </Theme>
