@@ -1,4 +1,4 @@
-import Groq from "groq-sdk";
+// import Groq from "groq-sdk";
 import OpenAI from "openai";
 
 export const openai = new OpenAI({
@@ -10,6 +10,6 @@ export const anyscale = new OpenAI({
   apiKey: process.env.ANYSCALE_API_KEY,
 });
 
-export const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
+// export const groq = new Groq({
+//   apiKey: process.env.GROQ_API_KEY,
+// });
