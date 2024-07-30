@@ -183,7 +183,7 @@ export function ImagePicker({
       );
       const croppedFile = new File(
         [croppedBlob],
-        "cropped_" + selectedFile?.name ?? v4(),
+        "cropped_" + (selectedFile?.name ?? v4()),
         {
           type: selectedFile?.type ?? "",
         },

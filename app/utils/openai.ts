@@ -7,7 +7,7 @@ import {
   ANYSCALE_MODELS,
   GROQ_MODELS,
 } from "~/routes/chatbots.$chatbotId.settings/route";
-import { openai, groq, anyscale } from "./providers.server";
+import { openai, anyscale } from "./providers.server";
 import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
 
 export const CHUNK_SIZE = 1024;
@@ -80,11 +80,7 @@ export async function chat({
 
   messages[messages.length - 1].content = UP;
 
-  const client = ANYSCALE_MODELS.includes(chatbot.model)
-    ? anyscale
-    : GROQ_MODELS.includes(chatbot.model)
-    ? groq
-    : openai;
+  const client = ANYSCALE_MODELS.includes(chatbot.model) ? anyscale : openai;
 
   console.log("messages going to openai: ", [
     { role: "system", content: SP },

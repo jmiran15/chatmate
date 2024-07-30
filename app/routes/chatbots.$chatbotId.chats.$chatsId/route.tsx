@@ -29,12 +29,11 @@ import {
   connectLabel,
   disconnectLabel,
   updateChatStatus,
-} from "./queries";
+} from "./queries.server";
 import { createId } from "@paralleldrive/cuid2";
 import MobileThread from "./mobile-thread";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  console.log("LOADER");
   const { chatsId, chatbotId } = params;
 
   if (!chatsId) {
