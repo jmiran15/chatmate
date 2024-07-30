@@ -1,5 +1,5 @@
 import { Form } from "@remix-run/react";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../components/ui/card";
 import { useIsPending } from "~/hooks/use-is-pending";
 import { Loader2 } from "lucide-react";
 

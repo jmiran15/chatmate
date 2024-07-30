@@ -1,6 +1,6 @@
 import { useParams } from "@remix-run/react";
-import CopyEmbedCode from "~/components/share/code";
-import HowTo from "~/components/share/how-to";
+import CopyEmbedCode from "./code";
+import HowTo from "./how-to";
 
 export default function Share() {
   const { chatbotId } = useParams();

@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import ChangeEmail from "~/components/settings/change-email";
-import DeleteAccount from "~/components/settings/delete-account";
+import ChangeEmail from "./change-email";
+import DeleteAccount from "./delete-account";
 
 import { deleteUserByEmail, updateUserEmail } from "~/models/user.server";
 import { requireUser, requireUserId } from "~/session.server";

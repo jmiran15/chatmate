@@ -15,7 +15,7 @@ import {
   Share,
 } from "lucide-react";
 import { cn, isActive } from "~/lib/utils";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../components/ui/badge";
 import { loader } from "~/routes/chatbots.$chatbotId/route";
 
 export default function Sidebar() {

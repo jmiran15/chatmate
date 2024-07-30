@@ -5,12 +5,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../components/ui/card";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Clipboard, ClipboardCheck } from "lucide-react";
-import { Button } from "../ui/button";
-import { useToast } from "../ui/use-toast";
+import { Button } from "../../components/ui/button";
+import { useToast } from "../../components/ui/use-toast";
 
 export default function CopyEmbedCode({ code }: { code: string }) {
   const [copied, setCopied] = useState(false);

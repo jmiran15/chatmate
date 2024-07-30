@@ -1,4 +1,4 @@
-import InboxIndexMd from "~/components/indexes/inbox-md";
+import InboxIndexMd from "./inbox-md";
 import { useMobileScreen } from "~/utils/mobile";
 
 export function EmptyState() {

@@ -1,4 +1,4 @@
-import ChangePlan from "~/components/settings/change-plan";
+import ChangePlan from "./change-plan";
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -13,7 +13,7 @@ import {
 import { requireUserId } from "~/session.server";
 import { CURRENCIES } from "~/routes/_index/pricing-page";
 import { prisma } from "~/db.server";
-import ManageSubscription from "~/components/settings/manage-subscription";
+import ManageSubscription from "./manage-subscription";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Chatmate - Billing" }];

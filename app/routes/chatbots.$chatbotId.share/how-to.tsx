@@ -6,14 +6,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { buttonVariants } from "../ui/button";
+} from "../../components/ui/card";
+import { buttonVariants } from "../../components/ui/button";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "../ui/accordion";
+} from "../../components/ui/accordion";
 import { cn } from "~/lib/utils";
 
 const PLATFORMS = [

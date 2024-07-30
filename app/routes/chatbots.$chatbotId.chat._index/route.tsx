@@ -1,4 +1,4 @@
-import TestChatbotIndex from "~/components/indexes/test-chatbot";
+import TestChatbotIndex from "./test-chatbot";
 
 export default function ChatIndex() {
   return (

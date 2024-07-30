@@ -16,10 +16,10 @@ import {
   PLANS,
   PRICING_PLANS,
   Plan,
-} from "../../routes/_index/pricing-page";
-import { Switch } from "../ui/switch";
+} from "../_index/pricing-page";
+import { Switch } from "../../components/ui/switch";
 import { loader } from "~/routes/chatbots.settings.billing/route";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../components/ui/badge";
 import { Loader2 } from "lucide-react";
 import { useIsPending } from "~/hooks/use-is-pending";
 

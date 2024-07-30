@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
-import Sidebar from "~/components/layout/sidebar";
+import Sidebar from "./sidebar";
 import { requireUserId } from "~/session.server";
 import type { Socket } from "socket.io-client";
 import { io } from "socket.io-client";

@@ -7,9 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../components/ui/card";
 import { Form, useParams } from "@remix-run/react";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
+import { cn } from "~/lib/utils";
 
 const items = [
   {
@@ -25,10 +26,6 @@ const items = [
     icon: BanknotesIcon,
   },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function TestChatbotIndex() {
   const { chatbotId } = useParams();
@@ -49,7 +46,7 @@ export default function TestChatbotIndex() {
               <div className="group relative flex items-start space-x-3 py-4">
                 <div className="flex-shrink-0">
                   <span
-                    className={classNames(
+                    className={cn(
                       item.iconColor,
                       "inline-flex h-10 w-10 items-center justify-center rounded-lg",
                     )}

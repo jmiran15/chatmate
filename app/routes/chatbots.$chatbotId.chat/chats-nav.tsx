@@ -1,10 +1,10 @@
 import { Form, useParams } from "@remix-run/react";
 
-import { Button } from "./ui/button";
+import { Button } from "../../components/ui/button";
 import { Chat } from "@prisma/client";
 import ChatLink from "./chat-link";
 import { Plus } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../../components/ui/sheet";
 import { useState } from "react";
 
 interface NavProps {

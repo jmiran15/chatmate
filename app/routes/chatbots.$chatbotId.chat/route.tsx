@@ -12,7 +12,7 @@ import {
   updateChatName,
 } from "~/models/chat.server";
 import { requireUserId } from "~/session.server";
-import { ChatsNav } from "~/components/chats-nav";
+import { ChatsNav } from "./chats-nav";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const chatbotId = params.chatbotId as string;
