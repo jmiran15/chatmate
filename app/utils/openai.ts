@@ -3,10 +3,7 @@ import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { system_prompt, user_prompt } from "./prompts";
 import { v4 as uuidv4 } from "uuid";
-import {
-  ANYSCALE_MODELS,
-  GROQ_MODELS,
-} from "~/routes/chatbots.$chatbotId.settings/route";
+import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings/route";
 import { openai, anyscale } from "./providers.server";
 import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
 

@@ -1,9 +1,3 @@
-/**
- * This is intended to be a basic starting point for linting in the Blues Stack.
- * It relies on recommended configs out of the box for simplicity, but you can
- * and should modify this configuration to best suit your team's needs.
- */
-
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
@@ -84,16 +78,7 @@ module.exports = {
         "plugin:import/typescript",
         "prettier",
       ],
-      rules: {
-        // "import/order": [
-        //   "error",
-        //   {
-        //     alphabetize: { caseInsensitive: true, order: "asc" },
-        //     groups: ["builtin", "external", "internal", "parent", "sibling"],
-        //     "newlines-between": "always",
-        //   },
-        // ],
-      },
+      rules: {},
     },
 
     // Markdown
@@ -118,9 +103,6 @@ module.exports = {
       },
       settings: {
         jest: {
-          // we're using vitest which has a very similar API to jest
-          // (so the linting plugins work nicely), but it means we have to explicitly
-          // set the jest version.
           version: 28,
         },
       },
