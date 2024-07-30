@@ -5,11 +5,12 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { Form, useFetcher, useFetchers, useParams } from "@remix-run/react";
 import { Archive } from "lucide-react";
+import { SerializeFrom } from "@remix-run/node";
 
 export default function Subheader({
   chat,
 }: {
-  chat: Partial<Chat> & { createdAt: string; updatedAt: string };
+  chat: Partial<SerializeFrom<Chat>>;
 }) {
   const fetcher = useFetcher({ key: `star-chat-${chat.id}-thread` });
   const { chatbotId, chatsId } = useParams();
@@ -51,7 +52,6 @@ export default function Subheader({
                   action: `/chatbots/${chatbotId}/chats`,
                   preventScrollReset: true,
                   unstable_flushSync: true,
-                  navigate: false,
                 },
               )
             }
@@ -67,18 +67,15 @@ export default function Subheader({
           </Button>
         </div>
         <p className="text-xs text-muted-foreground">
-          {formatDistanceToNow(new Date(chat?.createdAt), {
-            addSuffix: true,
-          })}
+          {chat?.createdAt
+            ? formatDistanceToNow(new Date(chat.createdAt), {
+                addSuffix: true,
+              })
+            : "Unknown date"}
         </p>
       </div>
 
-      <Form
-        method="post"
-        className="flex items-center justify-center gap-2"
-        // preventScrollReset
-        // navigate={false}
-      >
+      <Form method="post" className="flex items-center justify-center gap-2">
         <input type="hidden" name="intent" value="archive-chat-thread" />
         <input type="hidden" name="chatId" value={chatsId} />
         <Button variant={"outline"} type="submit">

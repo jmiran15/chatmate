@@ -26,6 +26,7 @@ import {
 import { getCreatedAt } from "./route";
 import { ItemMeasurer } from "./item-measurer";
 import { EmptyState } from "./empty-state";
+import { SerializeFrom } from "@remix-run/node";
 
 export const LIMIT = 64;
 const DATA_OVERSCAN = 8;
@@ -67,7 +68,7 @@ export default function ChatsList({
   items,
 }: {
   totalItems: number;
-  items: (Chat & {
+  items: (SerializeFrom<Chat> & {
     _count: {
       messages: number;
     };
@@ -279,7 +280,7 @@ export default function ChatsList({
               </ItemMeasurer>
             );
           })}
-          {rowVirtualizer.virtualItems.length === 0 && <EmptyState />}
+          {rowVirtualizer.virtualItems.length === 0 ? <EmptyState /> : null}
         </div>
       </div>
     </>

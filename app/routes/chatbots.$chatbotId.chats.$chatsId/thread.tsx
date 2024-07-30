@@ -18,18 +18,18 @@ import { cn } from "~/lib/utils";
 import { useSocket } from "~/providers/socket";
 import { copyToClipboard } from "~/utils/clipboard";
 import { useInView } from "react-intersection-observer";
+import { SerializeFrom } from "@remix-run/node";
 
 export default function Thread({
-  // from loader
   thread,
   setThread,
   sessionId,
   seen = false,
 }: {
-  thread: Message[];
-  setThread: (thread: Message[]) => void;
-  sessionId: string;
-  seen: boolean;
+  thread: SerializeFrom<Message[]>;
+  setThread: (thread: SerializeFrom<Message[]>) => void;
+  sessionId: string | null;
+  seen: boolean | null;
 }) {
   const { scrollRef } = useScrollToBottom();
   const { toast } = useToast();
@@ -60,13 +60,18 @@ export default function Thread({
   }, [chatId, seen]);
 
   useEffect(() => {
-    if (inView && !seen && lastUserMessageIndex !== -1 && !hasMarkedSeen) {
+    if (
+      inView &&
+      !seen &&
+      lastUserMessageIndex !== -1 &&
+      !hasMarkedSeen &&
+      chatId
+    ) {
       fetcher.submit(
         { chatId, intent: "mark-seen" },
         {
           method: "post",
           preventScrollReset: true,
-          navigate: false,
         },
       );
       setHasMarkedSeen(true);
@@ -76,8 +81,10 @@ export default function Thread({
   useEffect(() => {
     if (!socket) return;
 
-    const handleThread = (data: { sessionId: string; messages: Message[] }) => {
-      console.log("received data: ", data);
+    const handleThread = (data: {
+      sessionId: string;
+      messages: SerializeFrom<Message[]>;
+    }) => {
       if (sessionId === data.sessionId) {
         console.log(`${sessionId} - messagesChanged: `, data.messages);
         setThread(data.messages);

@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { stripe } from "~/models/subscription.server";
-import { Interval, PLANS, PRICING_PLANS } from "~/components/pricing-page";
+import { Interval, PLANS, PRICING_PLANS } from "~/routes/_index/pricing-page";
 
 const prisma = new PrismaClient();
 

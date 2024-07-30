@@ -4,20 +4,11 @@ import {
   json,
   redirect,
 } from "@remix-run/node";
-import {
-  useLoaderData,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "@remix-run/react";
-import { getChatById, getMessagesByChatId } from "~/models/chat.server";
-import { getChatbotById } from "~/models/chatbot.server";
+import { useLoaderData } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { format } from "date-fns";
 import { useMobileScreen } from "~/utils/mobile";
-import { AnimatePresence } from "framer-motion";
-import Modal from "~/components/custom-mobile-modal";
 import { prisma } from "~/db.server";
 import { Separator } from "~/components/ui/separator";
 import PromptInput from "./prompt-input";
@@ -27,11 +18,24 @@ import { useSocket } from "~/providers/socket";
 import axios from "axios";
 import Subheader from "./subheader";
 import { Prisma, TicketStatus } from "@prisma/client";
+import useAgent from "./use-agent";
+import {
+  deleteChat,
+  getChatInfo,
+  markChatAsSeen,
+  createLabel,
+  updateLabel,
+  deleteLabel,
+  connectLabel,
+  disconnectLabel,
+  updateChatStatus,
+} from "./queries";
+import { createId } from "@paralleldrive/cuid2";
+import MobileThread from "./mobile-thread";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
+  console.log("LOADER");
   const { chatsId, chatbotId } = params;
-
-  // if is mobile, wrap in Modal, o/w wrap in grid col span stuff
 
   if (!chatsId) {
     throw new Error("chatId is required");
@@ -41,30 +45,33 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     throw new Error("chatbotId is required");
   }
 
-  const [messages, chatbot, chat] = await Promise.all([
-    getMessagesByChatId({ chatId: chatsId }),
-    getChatbotById({ id: chatbotId }),
-    getChatById({ chatId: chatsId }),
-  ]);
+  const chat = await getChatInfo(chatsId);
 
   if (!chat) {
     throw new Error("Chat not found");
   }
 
-  const anonUser =
-    chat.sessionId &&
-    (await prisma.anonymousUser.findUnique({
-      where: {
-        sessionId: chat.sessionId,
-      },
-    }));
+  // TODO - defer
+  const anonUser = chat.sessionId
+    ? await prisma.anonymousUser.findUnique({
+        where: {
+          sessionId: chat.sessionId,
+        },
+      })
+    : null;
 
   const API_PATH =
     process.env.NODE_ENV === "development"
       ? process.env.DEV_BASE
       : process.env.PROD_BASE;
 
-  return json({ messages, chatbot, chat, anonUser, API_PATH });
+  return json({
+    messages: chat.messages,
+    chatbot: chat.chatbot,
+    chat,
+    anonUser,
+    API_PATH,
+  });
 };
 
 const getStarred = (searchParams: URLSearchParams): "1" | "0" =>
@@ -98,38 +105,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         createdAt: (createdAt === "asc" ? "asc" : "desc") as Prisma.SortOrder,
       };
 
-      const WHERE = {
+      const nextChatId = await deleteChat({
+        chatId,
         chatbotId,
-        ...starredQuery,
-        userId: null,
-        deleted: false,
-        messages: {
-          some: {
-            role: "user",
-          },
-        },
-      };
-
-      const nextChat = await prisma.chat.findFirst({
-        where: WHERE,
-        cursor: {
-          id: chatId,
-        },
-        skip: 1,
-        orderBy: {
-          ...createdAtQuery,
-        },
-      });
-
-      const nextChatId = nextChat ? nextChat.id : null;
-
-      await prisma.chat.update({
-        where: {
-          id: chatId,
-        },
-        data: {
-          deleted: true,
-        },
+        starredQuery,
+        createdAtQuery,
       });
 
       if (nextChatId) {
@@ -144,108 +124,40 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "mark-seen": {
       const chatId = String(formData.get("chatId"));
-      return await prisma.chat.update({
-        where: {
-          id: chatId,
-        },
-        data: {
-          seen: true,
-        },
-      });
+      return await markChatAsSeen(chatId);
     }
-
     case "create-label": {
       const name = String(formData.get("label-name"));
-
-      const label = await prisma.label.create({
-        data: {
-          name,
-          chatbotId,
-        },
-      });
-
+      const label = await createLabel(name, chatbotId);
       return json({ label });
     }
     case "update-label": {
       const labelId = String(formData.get("label-id"));
       const name = String(formData.get("label-name"));
       const color = String(formData.get("label-color"));
-
-      const label = await prisma.label.update({
-        where: {
-          id: labelId,
-        },
-        data: {
-          name,
-          color,
-        },
-      });
-
+      const label = await updateLabel(labelId, name, color);
       return json({ label });
     }
     case "delete-label": {
       const labelId = String(formData.get("label-id"));
-
-      const label = await prisma.label.delete({
-        where: {
-          id: labelId,
-        },
-      });
-
+      const label = await deleteLabel(labelId);
       return json({ label });
     }
     case "connect-label": {
       const labelId = String(formData.get("label-id"));
-
-      const chat = await prisma.chat.update({
-        where: {
-          id: chatsId,
-        },
-        data: {
-          labels: {
-            connect: {
-              id: labelId,
-            },
-          },
-        },
-      });
-
+      const chat = await connectLabel(chatsId, labelId);
       return json({ chat });
     }
     case "disconnect-label": {
       const labelId = String(formData.get("label-id"));
-
-      const chat = await prisma.chat.update({
-        where: {
-          id: chatsId,
-        },
-        data: {
-          labels: {
-            disconnect: {
-              id: labelId,
-            },
-          },
-        },
-      });
-
+      const chat = await disconnectLabel(chatsId, labelId);
       return json({ chat });
     }
-
     case "update-status": {
-      const status = String(formData.get("status"));
-
-      const chat = await prisma.chat.update({
-        where: {
-          id: chatsId,
-        },
-        data: {
-          status: status as TicketStatus,
-        },
-      });
-
+      const status = String(formData.get("status")) as TicketStatus;
+      const chat = await updateChatStatus(chatsId, status);
       return json({ chat });
     }
-
     default:
       throw new Error("undefined intent");
   }
@@ -255,31 +167,18 @@ export default function ChatRoute() {
   const { messages, chatbot, chat, anonUser, API_PATH } =
     useLoaderData<typeof loader>();
   const { setAutoScroll, scrollDomToBottom } = useScrollToBottom();
-
   const isMobile = useMobileScreen();
-  const navigate = useNavigate();
-  const { chatbotId } = useParams();
-  const [searchParams] = useSearchParams();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const [thread, setThread] = useState(() => messages ?? []); // we can move this by just using Remix - action?
   const [userInput, setUserInput] = useState("");
   const socket = useSocket();
-
   useAgent(chat?.sessionId);
-
-  function handleExitComplete() {
-    navigate(`/chatbots/${chatbotId}/chats?${searchParams.toString()}`);
-  }
 
   useEffect(() => {
     setThread(messages);
   }, [messages]);
 
-  if (!messages || !chatbot || !chat) {
-    return null;
-  }
-
-  async function handleSubmit(event) {
+  async function handleSubmit(event: React.SyntheticEvent) {
     if (!socket) return;
 
     event.preventDefault();
@@ -288,12 +187,19 @@ export default function ChatRoute() {
     const currentDate = new Date();
     const formattedDate = format(currentDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 
-    const prevChatHistory = [
-      ...thread,
-      { content: userInput, role: "assistant", createdAt: formattedDate },
-    ];
+    const newMessage = {
+      id: createId(),
+      content: userInput,
+      role: "assistant",
+      createdAt: formattedDate,
+      updatedAt: formattedDate,
+      chatId: chat.id,
+      seen: false,
+      clusterId: null,
+    };
 
-    // need to create in db
+    const prevChatHistory = [...thread, newMessage];
+
     await axios.post(`${API_PATH}/api/chat/${chatbot?.id}/${chat?.sessionId}`, {
       chatbot,
       messages: prevChatHistory,
@@ -303,11 +209,6 @@ export default function ChatRoute() {
     setThread(prevChatHistory);
     setUserInput("");
 
-    console.log("emitting; ", {
-      sessionId: chat?.sessionId,
-      messages: prevChatHistory,
-    });
-
     socket.emit("messages", {
       sessionId: chat?.sessionId,
       messages: prevChatHistory,
@@ -315,24 +216,15 @@ export default function ChatRoute() {
   }
 
   return isMobile ? (
-    <AnimatePresence onExitComplete={handleExitComplete}>
-      <Modal title={`${chatbot.name} Chat`} onDismiss={handleExitComplete}>
-        <div className="h-[80vh] overflow-y-auto">
-          <Thread
-            thread={thread}
-            setThread={setThread}
-            sessionId={chat?.sessionId}
-            seen={chat?.seen}
-          />
-        </div>
-      </Modal>
-    </AnimatePresence>
+    <MobileThread
+      thread={thread}
+      setThread={setThread}
+      chat={chat}
+      chatbot={chatbot}
+    />
   ) : (
     <div className="flex flex-col col-span-7 overflow-y-auto h-full">
-      {/* a subheader here with more info */}
       <Subheader chat={chat} />
-      {/* below it is a grid, with chats taking up most of it, and user info space taking up the rest */}
-
       <div className="grid grid-cols-10 flex-1 overflow-y-auto">
         <div className="flex flex-col col-span-7 overflow-y-auto h-full relative">
           <Thread
@@ -357,29 +249,4 @@ export default function ChatRoute() {
       </div>
     </div>
   );
-}
-
-function useAgent(sessionId: string | null): void {
-  const socket = useSocket();
-
-  useEffect(() => {
-    if (!socket || !sessionId) return;
-
-    const handlePollingIsAgent = (data: { sessionId: string }) => {
-      if (sessionId === data.sessionId) {
-        console.log(`${socket.id} - isAgent: `, { ...data, isAgent: true });
-        socket.emit("isAgent", { ...data, isAgent: true });
-      }
-    };
-
-    socket.on("pollingAgent", handlePollingIsAgent);
-    console.log(`${socket.id} - isAgent: `, { sessionId, isAgent: true });
-    socket.emit("isAgent", { sessionId, isAgent: true });
-
-    return () => {
-      socket.off("pollingAgent", handlePollingIsAgent);
-      console.log(`${socket.id} - isAgent: `, { sessionId, isAgent: false });
-      socket.emit("isAgent", { sessionId, isAgent: false });
-    };
-  }, [socket, sessionId]);
 }

@@ -9,16 +9,14 @@ import { formatDistanceToNow } from "date-fns";
 import { Button } from "../../components/ui/button";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
-
 import { cn } from "~/lib/utils";
 import { Chat } from "@prisma/client";
-import Skeleton from "react-loading-skeleton";
+import { SerializeFrom } from "@remix-run/node";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function ChatsCard({
   chat,
 }: {
-  chat: Chat & {
+  chat: SerializeFrom<Chat> & {
     _count: {
       messages: number;
     };
@@ -111,7 +109,6 @@ export default function ChatsCard({
                 action: `/chatbots/${chatbotId}/chats`,
                 preventScrollReset: true,
                 unstable_flushSync: true,
-                navigate: false,
               },
             );
             e.preventDefault();
@@ -129,22 +126,5 @@ export default function ChatsCard({
         </Button>
       </div>
     </Link>
-  );
-}
-
-export function LoadingChatCard() {
-  return (
-    <div
-      className={cn(
-        "flex flex-col items-start gap-2 text-left text-sm transition-all mb-4 p-2 rounded-lg border bg-card text-card-foreground shadow-sm",
-      )}
-    >
-      <div className="w-full ">
-        <Skeleton width={"70%"} />
-      </div>
-      <div className="text-xs text-muted-foreground w-full">
-        <Skeleton count={3} />
-      </div>
-    </div>
   );
 }

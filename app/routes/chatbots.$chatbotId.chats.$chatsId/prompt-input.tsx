@@ -20,11 +20,10 @@ export default function PromptInput({
   setUserInput: (value: string) => void;
   inputRef: React.RefObject<HTMLTextAreaElement>;
   scrollToBottom: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleSendMessage: any;
+  handleSendMessage: (e: React.SyntheticEvent) => void;
   setAutoScroll: (autoScroll: boolean) => void;
 }) {
-  const formRef = useRef<HTMLFormElement>();
+  const formRef = useRef<HTMLFormElement | null>(null);
   const isSubmitting = false;
   const { shouldSubmit } = useSubmitHandler();
   const isMobileScreen = useMobileScreen();
