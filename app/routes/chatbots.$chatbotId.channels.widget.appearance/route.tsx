@@ -1,4 +1,4 @@
-import Customizer from "~/routes/chatbots.$chatbotId.appearance/theme-customizer";
+import Customizer from "./theme-customizer";
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -10,7 +10,7 @@ import {
 } from "@remix-run/node";
 import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import Preview from "~/routes/chatbots.$chatbotId.appearance/widget/preview";
+import Preview from "./widget/preview";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { useIsMediumScreen } from "~/hooks/use-is-medium-screen";
 import { uploadImage } from "~/utils/cloudinary.server";
@@ -148,9 +148,9 @@ export default function Appearance() {
           </Tabs>
         </div>
       ) : (
-        <div className="grid grid-cols-4 overflow-y-auto h-full">
+        <div className="grid grid-cols-4 overflow-y-auto h-full w-full">
           <Customizer fetcher={fetcher} chatbot={optimisticChatbot} />
-          <div className="col-span-2 flex flex-col items-end justify-end p-[20px] h-full bg-muted/40">
+          <div className="col-span-2 flex flex-col items-end justify-end h-full p-[20px]">
             <Preview chatbot={optimisticChatbot} />
           </div>
         </div>
@@ -160,6 +160,7 @@ export default function Appearance() {
 }
 
 export const handle = {
-  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/appearance`,
-  breadcrumb: "appearance",
+  PATH: (chatbotId: string) =>
+    `/chatbots/${chatbotId}/channels/widget/appearance`,
+  breadcrumb: "Appearance",
 };
