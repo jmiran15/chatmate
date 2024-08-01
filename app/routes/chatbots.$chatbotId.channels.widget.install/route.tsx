@@ -15,6 +15,6 @@ export default function Share() {
 }
 
 export const handle = {
-  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/share`,
-  breadcrumb: "share",
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/channels/widget/install`,
+  breadcrumb: "install",
 };

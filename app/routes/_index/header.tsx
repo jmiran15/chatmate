@@ -1,5 +1,5 @@
 import { buttonVariants } from "../../components/ui/button";
-import { Link, useLocation, useMatches, useParams } from "@remix-run/react";
+import { Link, useLocation, useParams } from "@remix-run/react";
 import { Icons } from "../../components/icons";
 import { useOptionalUser } from "~/utils";
 
@@ -9,7 +9,6 @@ import { useMobileScreen } from "~/utils/mobile";
 import MarketingLinks from "./marketing-links";
 import { cn } from "~/lib/utils";
 import { useEffect } from "react";
-import { useLinks } from "./use-links";
 
 export const Header = () => {
   const user = useOptionalUser();
@@ -17,8 +16,6 @@ export const Header = () => {
   const sheet = (user && chatbotId) || !user;
   const isMobile = useMobileScreen();
   const location = useLocation();
-  const { routes } = useLinks();
-  const matches = useMatches();
 
   useEffect(() => {
     if (location.hash) {
@@ -38,14 +35,14 @@ export const Header = () => {
         )}
       >
         <div className="flex items-center gap-8">
-          {sheet ? <SidebarSheet routes={routes} matches={matches} /> : null}
+          {sheet ? <SidebarSheet /> : null}
           {!isMobile || user ? (
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Icons.logo className="h-6 w-6" />
               <span>Chatmate</span>
             </Link>
           ) : null}
-          {!user || !chatbotId ? <MarketingLinks routes={routes} /> : null}
+          {!user || !chatbotId ? <MarketingLinks /> : null}
         </div>
 
         {user ? (

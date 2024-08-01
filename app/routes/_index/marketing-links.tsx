@@ -1,7 +1,8 @@
 import { MarketingLink } from "./marketing-link";
-import { RouteLink } from "./use-links";
+import { useLinks } from "./use-links";
 
-export default function MarketingLinks({ routes }: { routes: RouteLink[] }) {
+export default function MarketingLinks() {
+  const { routes } = useLinks();
   return (
     <nav className="hidden lg:flex items-center justify-center">
       {routes.map((route, index) => (

@@ -123,38 +123,38 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "mark-seen": {
       const chatId = String(formData.get("chatId"));
-      return await markChatAsSeen(chatId);
+      return await markChatAsSeen({ chatId });
     }
     case "create-label": {
       const name = String(formData.get("label-name"));
-      const label = await createLabel(name, chatbotId);
+      const label = await createLabel({ name, chatbotId });
       return json({ label });
     }
     case "update-label": {
       const labelId = String(formData.get("label-id"));
       const name = String(formData.get("label-name"));
       const color = String(formData.get("label-color"));
-      const label = await updateLabel(labelId, name, color);
+      const label = await updateLabel({ labelId, name, color });
       return json({ label });
     }
     case "delete-label": {
       const labelId = String(formData.get("label-id"));
-      const label = await deleteLabel(labelId);
+      const label = await deleteLabel({ labelId });
       return json({ label });
     }
     case "connect-label": {
       const labelId = String(formData.get("label-id"));
-      const chat = await connectLabel(chatsId, labelId);
+      const chat = await connectLabel({ chatId: chatsId, labelId });
       return json({ chat });
     }
     case "disconnect-label": {
       const labelId = String(formData.get("label-id"));
-      const chat = await disconnectLabel(chatsId, labelId);
+      const chat = await disconnectLabel({ chatId: chatsId, labelId });
       return json({ chat });
     }
     case "update-status": {
       const status = String(formData.get("status")) as TicketStatus;
-      const chat = await updateChatStatus(chatsId, status);
+      const chat = await updateChatStatus({ chatId: chatsId, status });
       return json({ chat });
     }
     default:

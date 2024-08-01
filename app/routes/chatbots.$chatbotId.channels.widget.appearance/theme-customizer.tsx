@@ -76,7 +76,7 @@ export default function Customizer({
   const restrictedUrls = widgetRestrictedUrls.join("\n");
 
   return (
-    <div className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 md:border-r w-full">
+    <div className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 w-full">
       <div className="flex flex-col gap-1.5 w-full">
         <Label htmlFor="name">Name</Label>
         <Input
