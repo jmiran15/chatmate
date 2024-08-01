@@ -49,3 +49,25 @@ export function formatBytes(
     sizeType === "accurate" ? accurateSizes[i] ?? "Bytest" : sizes[i] ?? "Bytes"
   }`;
 }
+
+export function formatBadgeNumber(value: number | string): string {
+  const num = typeof value === "string" ? parseInt(value, 10) : value;
+
+  if (isNaN(num)) {
+    return "0";
+  }
+
+  if (num <= 99) {
+    return num.toString();
+  }
+
+  if (num <= 999) {
+    return "99+";
+  }
+
+  if (num < 10000) {
+    return `${Math.floor(num / 1000)}k+`;
+  }
+
+  return "9k+";
+}

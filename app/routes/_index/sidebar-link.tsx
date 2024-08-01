@@ -1,7 +1,7 @@
 import { Link, useMatches, useParams } from "@remix-run/react";
 import { Fragment } from "react/jsx-runtime";
 import { RouteLink } from "./use-links";
-import { cn, isActive } from "~/lib/utils";
+import { cn, isActive, formatBadgeNumber } from "~/lib/utils";
 import { Badge } from "~/components/ui/badge";
 
 export default function SidebarLink({
@@ -42,8 +42,8 @@ export default function SidebarLink({
           ) : null}
           {link.title}
           {link.badge ? (
-            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-              {link.badge}
+            <Badge className="ml-auto flex h-6 min-w-[1.5rem] shrink-0 items-center justify-center rounded-full px-1">
+              {formatBadgeNumber(link.badge)}
             </Badge>
           ) : null}
         </Link>
