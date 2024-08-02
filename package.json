@@ -2,6 +2,7 @@
   "name": "chatmate",
   "private": true,
   "sideEffects": false,
+  "type": "module",
   "scripts": {
     "dev": "tsx ./server.ts",
     "build": "remix vite:build",
