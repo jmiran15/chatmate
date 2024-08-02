@@ -4,6 +4,40 @@ import CopyEmbedCode from "./code";
 import HowTo from "./how-to";
 import { useState, useEffect } from "react";
 import { checkInstallation } from "~/queues/installationPing.server";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+
+interface InstallationStatusProps {
+  isInstalled: boolean;
+}
+
+export function InstallationStatus({ isInstalled }: InstallationStatusProps) {
+  return (
+    <Card className="w-full max-w-xl">
+      <CardHeader>
+        <CardTitle>Installation status</CardTitle>
+      </CardHeader>
+      <CardContent className="flex items-center gap-2">
+        <div className="relative w-2 h-2">
+          <div
+            className={`animate-[pulsate_1s_ease-out_infinite] opacity-0 absolute h-2 w-2 rounded-full ${
+              isInstalled ? "bg-green-600" : "bg-yellow-600"
+            }`}
+          ></div>
+          <div
+            className={`h-2 w-2 absolute rounded-full ${
+              isInstalled ? "bg-green-600" : "bg-yellow-600"
+            }`}
+          ></div>
+        </div>
+        <div>
+          {isInstalled
+            ? "Your chatbot has been installed successfully!"
+            : "Your chatbot is not installed yet."}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
@@ -50,21 +84,13 @@ export default function Share() {
 
   return (
     <div className="flex flex-col h-full w-full p-4 gap-4 overflow-y-auto">
-      <InstallationStatus installationStatus={installationStatus} />
+      <InstallationStatus isInstalled={installationStatus} />
       <CopyEmbedCode
         code={`<script data-chatmate-widget-script="true" data-embed-id="${chatbotId}" src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"></script>`}
       />
       <HowTo />
     </div>
   );
-}
-
-function InstallationStatus({
-  installationStatus,
-}: {
-  installationStatus: boolean;
-}) {
-  return <div>{installationStatus ? "Installed" : "Not installed"}</div>;
 }
 
 export const handle = {
