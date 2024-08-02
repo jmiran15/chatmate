@@ -1,12 +1,12 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
 datasource db {
   provider   = "postgresql"
   url        = env("DATABASE_URL")
   extensions = [vector]
-}
-
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
 }
 
 model User {
@@ -14,53 +14,49 @@ model User {
   email        String        @unique
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  password     Password?
-  chatbots     Chatbot[]
-  chats        Chat[]
   customerId   String?       @unique
+  chats        Chat[]
+  chatbots     Chatbot[]
+  password     Password?
   subscription Subscription?
 }
 
 model Password {
   hash   String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Chatbot {
-  id         String   @id @default(uuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId     String
-  chats      Chat[]
-  publicName String   @default("Your Chatbot")
-
+  id                   String      @id @default(uuid())
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+  userId               String
+  publicName           String      @default("Your Chatbot")
   originalLogoFilepath String?
   croppedLogoFilepath  String?
   lastCrop             Json?
-
   themeColor           String      @default("zinc")
   introMessages        String[]    @default(["Hello, how can I help you today?"])
-  openIcon             String      @default("plus") // plus, chevron, chat
+  openIcon             String      @default("plus")
   starterQuestions     String[]    @default(["What are your features?"])
   name                 String
   systemPrompt         String?
   model                String?     @default("gpt-3.5-turbo-0125")
   responseLength       String?     @default("short")
-  documents            Document[]
-  embeddings           Embedding[]
   containerRadius      String?     @default("1.0")
   openButtonText       String?
   widgetRestrictedUrls String[]    @default([])
-  labels               Label[]
+  installed            Boolean     @default(false)
+  embeddedOn           String?
+  lastPingedAt         DateTime?
+  chats                Chat[]
+  user                 User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   commonClusters       Cluster[]   @relation("CommonClusters")
   gapClusters          Cluster[]   @relation("GapClusters")
-
-  // installation
-  installed    Boolean   @default(false)
-  embeddedOn   String?
-  lastPingedAt DateTime?
+  documents            Document[]
+  embeddings           Embedding[]
+  labels               Label[]
 
   @@index([userId, createdAt(sort: Desc)])
 }
@@ -69,12 +65,12 @@ model Cluster {
   id              String    @id @default(uuid())
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-  commonChatbot   Chatbot   @relation(fields: [commonChatbotId], references: [id], onDelete: Cascade, name: "CommonClusters")
-  gapChatbot      Chatbot   @relation(fields: [gapChatbotId], references: [id], onDelete: Cascade, name: "GapClusters")
   commonChatbotId String
   gapChatbotId    String
   chatbotId       String
   label           String
+  commonChatbot   Chatbot   @relation("CommonClusters", fields: [commonChatbotId], references: [id], onDelete: Cascade)
+  gapChatbot      Chatbot   @relation("GapClusters", fields: [gapChatbotId], references: [id], onDelete: Cascade)
   messages        Message[]
 }
 
@@ -82,11 +78,8 @@ model Chat {
   id         String         @id @default(uuid())
   createdAt  DateTime       @default(now())
   updatedAt  DateTime       @updatedAt
-  user       User?          @relation(fields: [userId], references: [id])
   userId     String?
-  chatbot    Chatbot        @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
-  messages   Message[]
   name       String?        @default("Untitled Chat")
   aiInsights String?
   starred    Boolean?       @default(false)
@@ -94,10 +87,13 @@ model Chat {
   deleted    Boolean        @default(false)
   seen       Boolean?       @default(false)
   status     TicketStatus?  @default(OPEN)
-  labels     Label[]
   elapsedMs  Int            @default(0)
   referrer   String?
   anonUser   AnonymousUser?
+  chatbot    Chatbot        @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  user       User?          @relation(fields: [userId], references: [id])
+  messages   Message[]
+  labels     Label[]        @relation("ChatToLabel")
 
   @@index([chatbotId, deleted, createdAt])
 }
@@ -108,18 +104,14 @@ model Label {
   updatedAt DateTime @updatedAt
   name      String
   color     String   @default("#ffffff")
-  chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId String
-  chats     Chat[]
+  chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  chats     Chat[]   @relation("ChatToLabel")
 }
 
-// https://ipapi.co/json/
-// https://docs.uaparser.dev/
-// TODO - this should def be connected to the user - NEEDS TO BE CONNECTED TO CHAT FOR ANALYTICS QUERIES
 model AnonymousUser {
   id                   String   @id @default(cuid())
   sessionId            String   @unique
-  chat                 Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId               String?  @unique
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
@@ -164,6 +156,7 @@ model AnonymousUser {
   engine_version       String?
   os_name              String?
   os_version           String?
+  chat                 Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
 }
@@ -176,24 +169,24 @@ model Document {
   content    String?
   url        String?
   filepath   String?
-  chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
-  embeddings Embedding[]
   isPending  Boolean      @default(true)
   type       DocumentType @default(RAW)
+  chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  embeddings Embedding[]
 }
 
 model Embedding {
-  id         String                      @id @default(uuid())
-  createdAt  DateTime                    @default(now())
-  embedding  Unsupported("vector(1536)")
-  document   Document                    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  id         String                @id @default(uuid())
+  createdAt  DateTime              @default(now())
+  embedding  Unsupported("vector")
   documentId String
-  chatbot    Chatbot                     @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chatbotId  String
   content    String
+  chatbot    Chatbot               @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  document   Document              @relation(fields: [documentId], references: [id], onDelete: Cascade)
 
-  @@index(fields: [chatbotId])
+  @@index([chatbotId])
 }
 
 model Message {
@@ -202,58 +195,52 @@ model Message {
   updatedAt DateTime @updatedAt
   role      String
   content   String
-  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    String
   seen      Boolean? @default(false)
-  cluster   Cluster? @relation(fields: [clusterId], references: [id])
   clusterId String?
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  cluster   Cluster? @relation(fields: [clusterId], references: [id])
 
   @@index([chatId, role])
 }
 
-// subscription models
 model Plan {
   id            String         @id @unique
   name          String
   description   String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   prices        Price[]
   subscriptions Subscription[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Price {
-  id     String @id @unique
-  plan   Plan   @relation(fields: [planId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  planId String
-
+  id            String         @id @unique
+  planId        String
   amount        Int
   currency      String
   interval      String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  plan          Plan           @relation(fields: [planId], references: [id], onDelete: Cascade)
   subscriptions Subscription[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Subscription {
-  id     String @id @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId String @unique
-
-  plan               Plan    @relation(fields: [planId], references: [id])
+  id                 String   @id @unique
+  userId             String   @unique
   planId             String
-  price              Price   @relation(fields: [priceId], references: [id])
   priceId            String
   interval           String
   status             String
   currentPeriodStart Int
   currentPeriodEnd   Int
-  cancelAtPeriodEnd  Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  cancelAtPeriodEnd  Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  plan               Plan     @relation(fields: [planId], references: [id])
+  price              Price    @relation(fields: [priceId], references: [id])
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum DocumentType {
