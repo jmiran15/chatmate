@@ -179,7 +179,7 @@ export default function DocumentPage() {
             <ChevronLeft className="h-4 w-4" />
             <span className="sr-only">Back</span>
           </Link>
-          <h1 className="flex-1 whitespace-nowrap text-xl font-semibold tracking-tight text-ellipsis">
+          <h1 className="flex-1 text-xl font-semibold tracking-tight overflow-hidden text-ellipsis whitespace-nowrap">
             {optimisticDocumentName}
           </h1>
           <Badge variant="secondary" className="ml-auto sm:ml-0">
