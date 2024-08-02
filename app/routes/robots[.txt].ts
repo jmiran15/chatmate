@@ -1,14 +1,17 @@
 import { generateRobotsTxt } from "@nasa-gcn/remix-seo";
-import { siteMetadata } from "~/utils/siteMetadata";
+import { type LoaderFunctionArgs } from "@remix-run/node";
 
-const siteUrl =
-  process.env.NODE_ENV === "production"
-    ? siteMetadata.siteUrl
-    : "http://localhost:3000";
+function getDomainUrl(request: Request) {
+  const host =
+    request.headers.get("X-Forwarded-Host") ??
+    request.headers.get("host") ??
+    new URL(request.url).host;
+  const protocol = request.headers.get("X-Forwarded-Proto") ?? "http";
+  return `${protocol}://${host}`;
+}
 
-export function loader() {
+export function loader({ request }: LoaderFunctionArgs) {
   return generateRobotsTxt([
-    { type: "sitemap", value: `${siteUrl}/sitemap.xml` },
-    { type: "disallow", value: "/admin" },
+    { type: "sitemap", value: `${getDomainUrl(request)}/sitemap.xml` },
   ]);
 }

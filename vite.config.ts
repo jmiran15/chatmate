@@ -6,6 +6,7 @@ import { envOnlyMacros } from "vite-env-only";
 import mdx from "@mdx-js/rollup";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import rehypePrettyCode from "rehype-pretty-code";
 
 installGlobals();
 
@@ -32,6 +33,7 @@ export default defineConfig({
   plugins: [
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+      rehypePlugins: [rehypePrettyCode],
     }),
     envOnlyMacros(),
     remix({

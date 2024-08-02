@@ -2,7 +2,7 @@ import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { Loader2 } from "lucide-react";
 import ChatbotCard from "~/routes/chatbots._index/chatbot-card";
-import { INTERVALS, PLANS } from "~/routes/_index/pricing-page";
+import { INTERVALS, PLANS } from "~/routes/_header._index/pricing-page";
 import { Button } from "~/components/ui/button";
 import { useIsPending } from "~/hooks/use-is-pending";
 import { isProUser } from "~/models/user.server";

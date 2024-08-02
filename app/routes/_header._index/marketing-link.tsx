@@ -11,10 +11,6 @@ export function MarketingLink({
   const elementRef = useRef(null);
   const Effect = useHoverEffect(elementRef);
 
-  if (typeof document === "undefined") {
-    return;
-  }
-
   return (
     <button
       ref={elementRef}

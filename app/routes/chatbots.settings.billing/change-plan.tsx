@@ -16,7 +16,7 @@ import {
   PLANS,
   PRICING_PLANS,
   Plan,
-} from "../_index/pricing-page";
+} from "../_header._index/pricing-page";
 import { Switch } from "../../components/ui/switch";
 import { loader } from "~/routes/chatbots.settings.billing/route";
 import { Badge } from "../../components/ui/badge";

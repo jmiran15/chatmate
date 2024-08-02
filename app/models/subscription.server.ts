@@ -1,6 +1,6 @@
 import { prisma } from "~/db.server";
 import Stripe from "stripe";
-import { PLANS } from "~/routes/_index/pricing-page";
+import { PLANS } from "~/routes/_header._index/pricing-page";
 
 if (!process.env.STRIPE_SECRET_KEY) {
   throw new Error("STRIPE_SECRET_KEY must be set");

@@ -11,6 +11,7 @@ import {
   Megaphone,
 } from "lucide-react";
 import { useOptionalUser } from "~/utils";
+import { useMemo } from "react";
 
 export interface RouteLink {
   title: string;
@@ -22,6 +23,7 @@ export interface RouteLink {
 }
 
 export const useLinks = () => {
+  console.log("ROUTES");
   const { chatbotId } = useParams();
   const user = useOptionalUser();
   const matches = useMatches();
@@ -118,24 +120,27 @@ export const useLinks = () => {
       title: "Features",
       navigate: false,
     },
-
     {
       path: "/#pricing",
       title: "Pricing",
       navigate: false,
     },
-
     {
       path: "/#faq",
       title: "FAQ",
       navigate: false,
     },
+    {
+      path: "/blog",
+      title: "Blog",
+      navigate: true,
+    },
   ];
 
-  const routes: RouteLink[] =
-    user && chatbotId ? chatbotSidebarLinks : unauthenticatedLinks;
+  return useMemo(() => {
+    const routes: RouteLink[] =
+      user && chatbotId ? chatbotSidebarLinks : unauthenticatedLinks;
 
-  return {
-    routes,
-  };
+    return { routes };
+  }, [user, chatbotId, unseenChats]);
 };

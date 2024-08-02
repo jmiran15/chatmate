@@ -40,8 +40,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export const meta: MetaFunction = () => [
   {
     charset: "utf-8",
-    title: "Chatmate",
+    title: "Chatmate - | AI Chat Bot for Your Website",
     viewport: "width=device-width,initial-scale=1",
+  },
+  {
+    name: "description",
+    content:
+      "Solve 80% of your customers' support inflow instantly on web using our AI customer support platform",
   },
 ];
 
