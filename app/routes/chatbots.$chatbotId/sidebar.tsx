@@ -29,7 +29,7 @@ export default function Sidebar() {
                 collapsible
               >
                 <AccordionItem value={link.title} className="border-b-0">
-                  <AccordionTrigger className="flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary hover:no-underline">
+                  <AccordionTrigger className="flex items-center rounded-lg pl-3 py-2 transition-all hover:no-underline [&[data-state=open]>div]:text-primary hover:text-primary text-muted-foreground">
                     <div className="flex items-center gap-3">
                       {link.icon ? <link.icon className="h-4 w-4" /> : null}
                       {link.title}
