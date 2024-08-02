@@ -277,14 +277,27 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       });
     }
     case "DELETE": {
+      const corsHeader =
+        process.env.NODE_ENV === "production"
+          ? {
+              "Access-Control-Allow-Origin": "*",
+            }
+          : {};
+      const headers = {
+        ...corsHeader,
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      } as HeadersInit;
+
       // create a new chat with the given sessionId
       const id = uuidv4();
-      return await createChatWithStarterMessages({
+      const newChat = await createChatWithStarterMessages({
         sessionId: id,
         chatbotId,
         sId: sessionId,
       });
-      // return await clearChatMessages({ chatId: sessionId });
+
+      return json(newChat, { headers });
     }
     default: {
       return json({ error: "Invalid method" }, { status: 405 });
