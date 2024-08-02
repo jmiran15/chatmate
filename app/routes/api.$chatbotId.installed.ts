@@ -19,11 +19,18 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   const chatbot = await checkInstallation({ chatbotId });
 
+  const corsHeader =
+    process.env.NODE_ENV === "production"
+      ? {
+          "Access-Control-Allow-Origin": "*",
+        }
+      : {};
   const headers = {
-    // "Access-Control-Allow-Origin": "*", // Allow any domain
+    ...corsHeader,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
-  };
+  } as HeadersInit;
+
   return json({ chatbot }, { headers });
 }
 
@@ -50,11 +57,17 @@ export async function action({ params, request }: ActionFunctionArgs) {
     },
   );
 
+  const corsHeader =
+    process.env.NODE_ENV === "production"
+      ? {
+          "Access-Control-Allow-Origin": "*",
+        }
+      : {};
   const headers = {
-    // "Access-Control-Allow-Origin": "*",
+    ...corsHeader,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
-  };
+  } as HeadersInit;
 
   return json({ chatbot }, { headers });
 }

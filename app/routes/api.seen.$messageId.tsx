@@ -17,14 +17,20 @@ export const action = async ({ params }: ActionFunctionArgs) => {
     },
   });
 
+  const corsHeader =
+    process.env.NODE_ENV === "production"
+      ? {
+          "Access-Control-Allow-Origin": "*",
+        }
+      : {};
   const headers = {
-    // "Access-Control-Allow-Origin": "*", // Allow any domain
+    ...corsHeader,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
     Connection: "keep-alive",
-  };
+  } as HeadersInit;
 
   return json(
     {

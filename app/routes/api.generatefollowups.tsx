@@ -4,11 +4,17 @@ import { follow_up_system_prompt } from "~/utils/prompts";
 
 export async function loader() {
   console.log("loader");
+  const corsHeader =
+    process.env.NODE_ENV === "production"
+      ? {
+          "Access-Control-Allow-Origin": "*",
+        }
+      : {};
   const headers = {
-    // "Access-Control-Allow-Origin": "*", // Allow any domain
+    ...corsHeader,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
-  };
+  } as HeadersInit;
   return json({ headers });
 }
 
@@ -27,12 +33,17 @@ export async function action({ request }: ActionFunctionArgs) {
 
   const followUps = await generateFollowUps(history);
 
-  // Set CORS headers
+  const corsHeader =
+    process.env.NODE_ENV === "production"
+      ? {
+          "Access-Control-Allow-Origin": "*",
+        }
+      : {};
   const headers = {
-    // "Access-Control-Allow-Origin": "*", // Allow any domain
+    ...corsHeader,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
-  };
+  } as HeadersInit;
 
   console.log(
     "followUps",
