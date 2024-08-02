@@ -97,7 +97,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   });
 
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
@@ -173,7 +173,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       console.log("createdMessage", createdMessage);
 
       const headers = {
-        "Access-Control-Allow-Origin": "*", // Allow any domain
+        // "Access-Control-Allow-Origin": "*", // Allow any domain
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type",
         "Content-Type": "text/event-stream",

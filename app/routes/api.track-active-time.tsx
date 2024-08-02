@@ -3,7 +3,7 @@ import { prisma } from "~/db.server";
 
 export async function loader() {
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
@@ -29,7 +29,9 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (!chat) {
-    throw new Error("Chat not found");
+    // throw new Error("Chat not found");
+    console.log("api.track-active-time - chat not found");
+    return json({ success: true });
   }
 
   const updatedChat = await prisma.chat.update({
@@ -44,7 +46,7 @@ export async function action({ request }: ActionFunctionArgs) {
   console.log("api.track-active-time - updatedChat: ", updatedChat);
 
   const headers = {
-    "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };

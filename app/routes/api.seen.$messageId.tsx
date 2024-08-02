@@ -18,7 +18,7 @@ export const action = async ({ params }: ActionFunctionArgs) => {
   });
 
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow any domain
+    // "Access-Control-Allow-Origin": "*", // Allow any domain
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Content-Type": "text/event-stream",

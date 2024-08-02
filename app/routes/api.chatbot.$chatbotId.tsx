@@ -4,11 +4,16 @@ import { getChatbotById } from "~/models/chatbot.server";
 export async function loader({ params }: LoaderFunctionArgs) {
   const { chatbotId } = params;
 
+  console.log("api.chatbot.$chatbotId - chatbotId: ", chatbotId);
+  if (!chatbotId) {
+    throw new Error("Chatbot ID is required");
+  }
+
   const chatbot = await getChatbotById({ id: chatbotId });
 
   // Set CORS headers
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow any domain
+    // "Access-Control-Allow-Origin": "*", // Allow any domain
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };

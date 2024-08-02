@@ -5,7 +5,7 @@ import { follow_up_system_prompt } from "~/utils/prompts";
 export async function loader() {
   console.log("loader");
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow any domain
+    // "Access-Control-Allow-Origin": "*", // Allow any domain
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
@@ -29,7 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Set CORS headers
   const headers = {
-    "Access-Control-Allow-Origin": "*", // Allow any domain
+    // "Access-Control-Allow-Origin": "*", // Allow any domain
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };

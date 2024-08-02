@@ -57,6 +57,11 @@ model Chatbot {
   commonClusters       Cluster[]   @relation("CommonClusters")
   gapClusters          Cluster[]   @relation("GapClusters")
 
+  // installation
+  installed    Boolean   @default(false)
+  embeddedOn   String?
+  lastPingedAt DateTime?
+
   @@index([userId, createdAt(sort: Desc)])
 }
 
