@@ -1,7 +1,7 @@
 import { json, type MetaFunction, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, useSearchParams, Form } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import debounce from "lodash.debounce";
+import { useDebouncedCallback } from "use-debounce";
 
 import { getPosts, searchPosts, invalidateCache } from "./posts.server";
 import { Post } from "./post";
@@ -36,14 +36,17 @@ export default function Component() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(query || "");
 
-  const debouncedSearch = debounce((term: string) => {
+  const debouncedSearch = useDebouncedCallback((term: string) => {
     setSearchParams(term ? { q: term } : {});
   }, 300);
 
   useEffect(() => {
     debouncedSearch(searchTerm);
-    return () => debouncedSearch.cancel();
-  }, [searchTerm]);
+  }, [searchTerm, debouncedSearch]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -55,7 +58,7 @@ export default function Component() {
           type="text"
           name="q"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleSearchChange}
           placeholder="Search blog posts..."
           className="w-full max-w-md mx-auto block px-4 py-2 border border-gray-300 rounded-md"
         />
