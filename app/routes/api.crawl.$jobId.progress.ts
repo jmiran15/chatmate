@@ -76,7 +76,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
               return null;
             }
           } catch (error) {
-            console.log(`error sending event: ${error}`);
+            // console.log(`error sending event: ${error}`);
           }
         }
 
@@ -92,6 +92,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       },
     );
   } catch (error) {
-    console.log(`error sending event: ${error}`);
+    // console.log(`error sending event: ${error}`);
   }
 }

@@ -35,6 +35,11 @@ import { usePendingDocuments } from "./hooks/use-pending-documents";
 import { deleteDocumentById } from "~/models/document.server";
 import { useToast } from "~/components/ui/use-toast";
 import { ItemMeasurer } from "../chatbots.$chatbotId.chats/item-measurer";
+import { searchDocuments, getDocuments } from "./documents.server";
+import { LRUCache } from "lru-cache";
+import debounce from "lodash.debounce";
+import { invalidateIndex } from "./documents.server";
+import { Input } from "~/components/ui/input";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -42,6 +47,11 @@ const DATA_OVERSCAN = 4;
 const getStartLimit = (searchParams: URLSearchParams) => ({
   start: Number(searchParams.get("start") || "0"),
   limit: Number(searchParams.get("limit") || LIMIT.toString()),
+});
+
+export const searchCache = new LRUCache<string, any>({
+  max: 100,
+  ttl: 1000 * 60 * 5, // 5 minutes
 });
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -60,29 +70,55 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     throw new Error("User does not have access to chatbot");
   }
 
-  const { start, limit } = getStartLimit(new URL(request.url).searchParams);
+  const url = new URL(request.url);
+  const { start, limit } = getStartLimit(url.searchParams);
+  const query = url.searchParams.get("q");
 
-  // we should probably do some caching with localforage here - especially for search
+  const cacheKey = `${chatbotId}:${query || ""}:${start}:${limit}`;
+  const cachedResult = searchCache.get(cacheKey);
 
-  const [totalItems, items] = await prisma.$transaction([
-    prisma.document.count({
-      where: { chatbotId },
-    }),
-    prisma.document.findMany({
-      where: { chatbotId },
-      orderBy: { createdAt: "desc" },
-      skip: start,
-      take: limit,
-    }),
-  ]);
+  if (cachedResult) {
+    console.log(`Cache hit for ${cacheKey}`);
+    return json(cachedResult);
+  }
 
-  return json(
-    {
-      items,
-      totalItems,
-    },
-    { headers: { "Cache-Control": "public, max-age=120" } },
-  );
+  console.log(`Cache miss for ${cacheKey}`);
+
+  let items, totalItems, searchResults;
+
+  try {
+    if (query) {
+      const searchResult = await searchDocuments(
+        chatbotId,
+        query,
+        start,
+        limit,
+      );
+      items = searchResult.items;
+      totalItems = searchResult.totalItems;
+      searchResults = searchResult.searchResults;
+    } else {
+      const result = await getDocuments(chatbotId, start, limit);
+      items = result.items;
+      totalItems = result.totalItems;
+    }
+
+    const result = { items, totalItems, query, searchResults };
+    searchCache.set(cacheKey, result);
+
+    return json(result);
+  } catch (error) {
+    console.error("Error fetching documents:", error);
+    return json(
+      {
+        items: [],
+        totalItems: 0,
+        query,
+        error: "An error occurred while fetching documents.",
+      },
+      { status: 500 },
+    );
+  }
 };
 
 const isServerRender = typeof document === "undefined";
@@ -157,6 +193,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
+      // Invalidate the index after creating new documents
+      invalidateIndex(chatbotId);
+
       const trees = await webFlow({
         documents,
         preprocessingQueue: scrapeQueue,
@@ -195,6 +234,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           })),
         });
 
+        // Invalidate the index after creating new documents
+        invalidateIndex(chatbotId);
+
         const trees = await webFlow({
           documents,
           preprocessingQueue: parseFileQueue,
@@ -221,6 +263,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
+      console.log(`Invalidating cache for chatbot ${chatbotId}`);
+      invalidateIndex(chatbotId);
+
       await queue.add(
         `ingestion-${document.id}`,
         { document },
@@ -234,9 +279,16 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "delete": {
       const documentId = String(formData.get("documentId"));
+      const deletedDocument = await deleteDocumentById({ id: documentId });
+
+      // Invalidate the index after deleting a document
+      if (deletedDocument) {
+        invalidateIndex(deletedDocument.chatbotId);
+      }
+
       return json({
         intent: "delete",
-        document: await deleteDocumentById({ id: documentId }),
+        document: deletedDocument,
       });
     }
     default: {
@@ -247,8 +299,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   let data = useLoaderData<typeof loader>();
-  const [totalItems, setTotalItems] = useState(data.totalItems);
   const { toast } = useToast();
+  const [totalItems, setTotalItems] = useState(data.totalItems);
+  const [searchTerm, setSearchTerm] = useState(data.query || "");
   const { chatbotId } = useParams();
   const navigation = useNavigation();
   const actionData = useActionData<typeof action>();
@@ -337,29 +390,56 @@ export default function Data() {
     if (!isMountedRef.current) {
       return;
     }
-    if (neededStart !== start) {
+    if (neededStart !== start || searchTerm !== data.query) {
       setSearchParams(
         {
           start: String(neededStart),
           limit: LIMIT.toString(),
+          ...(searchTerm ? { q: searchTerm } : {}),
         },
         { replace: true },
       );
     }
-  }, [start, neededStart, setSearchParams]);
+  }, [start, neededStart, setSearchParams, searchTerm, data.query]);
 
   useEffect(() => {
     isMountedRef.current = true;
   }, []);
 
+  const debouncedSearch = useCallback(
+    debounce((term: string) => {
+      setSearchParams(
+        {
+          start: String(neededStart),
+          limit: LIMIT.toString(),
+          ...(term ? { q: term } : {}),
+        },
+        { replace: true },
+      );
+    }, 300),
+    [setSearchParams],
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    debouncedSearch(term);
+  };
+
   // optimistic documents
 
   // on slow networks, the last document gets cut off the virtual list
   const pendingDocuments = usePendingDocuments();
-  const updatedData = { ...data };
-  updatedData.items = [...pendingDocuments, ...data.items];
-  updatedData.totalItems = data.totalItems + pendingDocuments.length;
+  const updatedData = useMemo(() => {
+    const newData = { ...data };
+    newData.items = [...pendingDocuments, ...data.items];
+    newData.totalItems = data.totalItems + pendingDocuments.length;
+    return newData;
+  }, [data, pendingDocuments]);
+
   data = updatedData;
+
+  console.log("pendingDocuments", { pendingDocuments, data });
 
   useEffect(() => {
     setTotalItems(data.totalItems);
@@ -380,15 +460,34 @@ export default function Data() {
         <div className="flex flex-col gap-2">
           <h1 className="text-lg font-semibold md:text-2xl">Data</h1>
           <h1 className="text-sm text-muted-foreground">
-            This is the data that your chatbot will be able to reference in it's
+            This is the data that your chatbot will be able to reference in its
             responses
           </h1>
         </div>
         <DialogDemo submit={submit} />
       </div>
 
+      <div className="w-full max-w-md self-start">
+        <Input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          placeholder="Search documents..."
+          className="w-full"
+        />
+        {searchTerm && (
+          <p className="text-sm text-muted-foreground mt-2">
+            {data.error ? (
+              <span className="text-red-500">{data.error}</span>
+            ) : (
+              `Showing ${totalItems} results for: "${searchTerm}"`
+            )}
+          </p>
+        )}
+      </div>
+
       <div
-        key={`list-${updatedData.totalItems}`}
+        key={`list-${data.totalItems}`}
         ref={parentRef}
         data-hydrating-signal
         className="List"
@@ -410,6 +509,8 @@ export default function Data() {
               ? Math.abs(start - virtualRow.index)
               : virtualRow.index;
             const item = data.items[index];
+            const searchMatches =
+              data.searchResults?.[index]?.matchData.metadata;
 
             return (
               <ItemMeasurer
@@ -429,6 +530,9 @@ export default function Data() {
                     item={item}
                     progress={
                       progress?.documentId === item.id ? progress : undefined
+                    }
+                    searchMatches={
+                      searchMatches ? Object.keys(searchMatches) : undefined
                     }
                   />
                 ) : navigation.state === "loading" ? (
