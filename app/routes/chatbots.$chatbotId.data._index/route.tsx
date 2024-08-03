@@ -37,9 +37,9 @@ import { useToast } from "~/components/ui/use-toast";
 import { ItemMeasurer } from "../chatbots.$chatbotId.chats/item-measurer";
 import { searchDocuments, getDocuments } from "./documents.server";
 import { LRUCache } from "lru-cache";
-import debounce from "lodash.debounce";
 import { invalidateIndex } from "./documents.server";
 import { Input } from "~/components/ui/input";
+import { useDebouncedCallback } from "use-debounce";
 
 const LIMIT = 20;
 const DATA_OVERSCAN = 4;
@@ -386,39 +386,40 @@ export default function Data() {
     }
   }
 
-  useEffect(() => {
-    if (!isMountedRef.current) {
-      return;
-    }
-    if (neededStart !== start || searchTerm !== data.query) {
+  const debouncedSearch = useDebouncedCallback((term: string) => {
+    setSearchParams(
+      {
+        start: "0", // Reset to first page on search
+        limit: LIMIT.toString(),
+        ...(term ? { q: term } : {}),
+      },
+      { replace: true },
+    );
+  }, 300);
+
+  const updatePagination = useCallback(
+    (newStart: number) => {
       setSearchParams(
         {
-          start: String(neededStart),
+          start: String(newStart),
           limit: LIMIT.toString(),
           ...(searchTerm ? { q: searchTerm } : {}),
         },
         { replace: true },
       );
+    },
+    [setSearchParams, searchTerm],
+  );
+
+  useEffect(() => {
+    if (isMountedRef.current && neededStart !== start) {
+      updatePagination(neededStart);
     }
-  }, [start, neededStart, setSearchParams, searchTerm, data.query]);
+  }, [neededStart, start, updatePagination]);
 
   useEffect(() => {
     isMountedRef.current = true;
   }, []);
-
-  const debouncedSearch = useCallback(
-    debounce((term: string) => {
-      setSearchParams(
-        {
-          start: String(neededStart),
-          limit: LIMIT.toString(),
-          ...(term ? { q: term } : {}),
-        },
-        { replace: true },
-      );
-    }, 300),
-    [setSearchParams],
-  );
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
