@@ -6,9 +6,16 @@ featured: true
 image: https://images.ctfassets.net/19dvw6heztyg/75jh1Rlr1qUwhvOgByobDn/7489b088b8c0e6565a9371baa6a1c937/community-platforms.jpeg?w=1440&q=75
 ---
 
-# {frontmatter.title}
+import { BlogPost } from "~/components/BlogPost";
+import { Link } from "@remix-run/react";
 
-This is an MDX test page that showcases various MDX elements and code blocks.
+export const handle = {
+  breadcrumb: () => (
+    <Link to="/blog/markdown-and-mdx">{frontmatter.title}</Link>
+  ),
+};
+
+<BlogPost post={frontmatter} >
 
 ## MDX
 
@@ -72,3 +79,5 @@ This is an example of `inline code`.
 const add = (a, b) => a + b;
 console.log(add(2, 3)); // Output: 5
 ```
+
+</BlogPost>
