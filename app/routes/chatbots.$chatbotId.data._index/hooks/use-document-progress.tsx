@@ -1,3 +1,83 @@
+// import { Document } from "@prisma/client";
+// import { useEffect, useRef, useState } from "react";
+// import Skeleton from "react-loading-skeleton";
+// import "react-loading-skeleton/dist/skeleton.css";
+// import { ProgressData } from "~/routes/api.chatbot.$chatbotId.data.progress";
+
+// export function useDocumentProgress({
+//   item,
+//   progress,
+// }: {
+//   item: Document;
+//   progress: ProgressData | undefined;
+// }) {
+//   const [content, setContent] = useState<React.ReactNode>(
+//     item?.content ?? <Skeleton count={10} />,
+//   );
+//   const [status, setStatus] = useState<string>("Pending");
+//   const latestProgressRef = useRef<ProgressData | undefined>(undefined);
+
+//   useEffect(() => {
+//     if (progress) {
+//       latestProgressRef.current = progress;
+//       updateProgressState(progress);
+//     }
+//   }, [progress]);
+
+//   useEffect(() => {
+//     // Load persisted progress from localStorage on mount
+//     const persistedProgress = JSON.parse(
+//       localStorage.getItem(`document-${item.id}`) || "{}",
+//     );
+//     if (persistedProgress) {
+//       setContent(persistedProgress.content);
+//       setStatus(persistedProgress.status);
+//     }
+//   }, [item.id]);
+
+//   useEffect(() => {
+//     // Save progress to localStorage on state change
+//     const handleStateChange = () => {
+//       const currentState = { content, status };
+//       localStorage.setItem(`document-${item.id}`, JSON.stringify(currentState));
+//     };
+
+//     const handleProgressChange = () => {
+//       if (latestProgressRef.current) {
+//         handleStateChange();
+//       }
+//     };
+
+//     handleProgressChange();
+//   }, [content, status, item.id, latestProgressRef]);
+
+//   const updateProgressState = (newProgress: ProgressData) => {
+//     const { documentId, queueName, progress, completed, returnvalue } =
+//       newProgress;
+//     if (documentId === item.id) {
+//       if (queueName === "scrape" || queueName === "parseFile") {
+//         if (progress === 100) {
+//           setContent(returnvalue?.content ?? <Skeleton count={10} />);
+//           setStatus("Ingested");
+//         } else {
+//           setContent(<Skeleton count={10} />);
+//           setStatus(`Ingesting ${Math.trunc(progress)}%`);
+//         }
+//       } else if (queueName === "ingestion") {
+//         if (completed) {
+//           setContent(returnvalue?.content ?? <Skeleton count={10} />);
+//           setStatus("Ingested");
+//         } else {
+//           setContent(<Skeleton count={10} />);
+//           setStatus(`Ingesting ${Math.trunc(progress)}%`);
+//         }
+//       }
+//     }
+//   };
+
+//   return { content, status };
+// }
+
 import { Document } from "@prisma/client";
 import { useEffect, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";

@@ -4,6 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 import { Badge } from "../../components/ui/badge";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { useDocumentProgress } from "./hooks/use-document-progress";
+import { useMemo } from "react";
 
 function highlightText(text: string, matches: string[]): JSX.Element {
   const parts = text.split(new RegExp(`(${matches.join("|")})`, "gi"));
@@ -55,14 +56,24 @@ export function DocumentCard({
 }) {
   const { content, status } = useDocumentProgress({ item, progress });
 
-  // Check if content is a string before processing
-  const isContentString = typeof content === "string";
-
-  const displayContent = isContentString
-    ? searchMatches
+  const displayContent = useMemo(() => {
+    if (typeof content !== "string") return content;
+    return searchMatches
       ? extractRelevantContent(content, searchMatches)
-      : content.slice(0, 100) + (content.length > 100 ? "..." : "")
-    : content;
+      : content.slice(0, 100) + (content.length > 100 ? "..." : "");
+  }, [content, searchMatches]);
+
+  const highlightedName = useMemo(() => {
+    return searchMatches && typeof item?.name === "string"
+      ? highlightText(item.name, searchMatches)
+      : item?.name;
+  }, [item?.name, searchMatches]);
+
+  const highlightedContent = useMemo(() => {
+    return searchMatches && typeof displayContent === "string"
+      ? highlightText(displayContent, searchMatches)
+      : displayContent;
+  }, [displayContent, searchMatches]);
 
   return (
     <Link
@@ -70,15 +81,9 @@ export function DocumentCard({
       className="flex flex-col-reverse sm:flex-row items-start justify-between rounded-lg border bg-card text-card-foreground shadow-sm hover:bg-accent p-6 gap-2 md:gap-8 mb-4"
     >
       <div className="flex flex-col space-y-1.5 items-start justify-start shrink w-full">
-        <div className="font-semibold">
-          {searchMatches && isContentString
-            ? highlightText(item?.name || "", searchMatches)
-            : item?.name}
-        </div>
+        <div className="font-semibold">{highlightedName}</div>
         <div className="line-clamp-2 text-sm text-muted-foreground text-wrap w-full">
-          {searchMatches && isContentString
-            ? highlightText(displayContent, searchMatches)
-            : displayContent}
+          {highlightedContent}
         </div>
         <div className="flex flex-row items-center gap-4">
           <div className="text-xs text-muted-foreground text-nowrap">

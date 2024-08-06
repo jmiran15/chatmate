@@ -95,9 +95,9 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
                     }, ${chunk.chatbotId}, ${chunk.content})
                     `;
                 progress += add;
-                await job.updateProgress(progress);
               }),
             );
+            await job.updateProgress(progress);
           }
         }),
       );
