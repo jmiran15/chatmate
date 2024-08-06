@@ -27,7 +27,7 @@ export function usePendingDocuments(): PendingDocument[] {
           newDocs = files.map((file: File) => ({
             id: fileIds[file.name],
             name: file.name,
-            content: null,
+            content: null, // Keep content null for files until processed
             type: DocumentType.FILE,
             chatbotId,
             createdAt: new Date().toISOString(),
@@ -50,11 +50,11 @@ export function usePendingDocuments(): PendingDocument[] {
             chatbotId,
             name: el.url,
             url: el.url,
+            content: null, // Keep content null for websites until scraped
             type: DocumentType.WEBSITE,
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             isPending: true,
-            content: null,
             filepath: null,
           }));
           break;
@@ -67,7 +67,7 @@ export function usePendingDocuments(): PendingDocument[] {
             {
               id,
               name,
-              content,
+              content, // Use the provided content for blank documents
               chatbotId,
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),

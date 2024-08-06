@@ -1,91 +1,16 @@
-// import { Document } from "@prisma/client";
-// import { useEffect, useRef, useState } from "react";
-// import Skeleton from "react-loading-skeleton";
-// import "react-loading-skeleton/dist/skeleton.css";
-// import { ProgressData } from "~/routes/api.chatbot.$chatbotId.data.progress";
-
-// export function useDocumentProgress({
-//   item,
-//   progress,
-// }: {
-//   item: Document;
-//   progress: ProgressData | undefined;
-// }) {
-//   const [content, setContent] = useState<React.ReactNode>(
-//     item?.content ?? <Skeleton count={10} />,
-//   );
-//   const [status, setStatus] = useState<string>("Pending");
-//   const latestProgressRef = useRef<ProgressData | undefined>(undefined);
-
-//   useEffect(() => {
-//     if (progress) {
-//       latestProgressRef.current = progress;
-//       updateProgressState(progress);
-//     }
-//   }, [progress]);
-
-//   useEffect(() => {
-//     // Load persisted progress from localStorage on mount
-//     const persistedProgress = JSON.parse(
-//       localStorage.getItem(`document-${item.id}`) || "{}",
-//     );
-//     if (persistedProgress) {
-//       setContent(persistedProgress.content);
-//       setStatus(persistedProgress.status);
-//     }
-//   }, [item.id]);
-
-//   useEffect(() => {
-//     // Save progress to localStorage on state change
-//     const handleStateChange = () => {
-//       const currentState = { content, status };
-//       localStorage.setItem(`document-${item.id}`, JSON.stringify(currentState));
-//     };
-
-//     const handleProgressChange = () => {
-//       if (latestProgressRef.current) {
-//         handleStateChange();
-//       }
-//     };
-
-//     handleProgressChange();
-//   }, [content, status, item.id, latestProgressRef]);
-
-//   const updateProgressState = (newProgress: ProgressData) => {
-//     const { documentId, queueName, progress, completed, returnvalue } =
-//       newProgress;
-//     if (documentId === item.id) {
-//       if (queueName === "scrape" || queueName === "parseFile") {
-//         if (progress === 100) {
-//           setContent(returnvalue?.content ?? <Skeleton count={10} />);
-//           setStatus("Ingested");
-//         } else {
-//           setContent(<Skeleton count={10} />);
-//           setStatus(`Ingesting ${Math.trunc(progress)}%`);
-//         }
-//       } else if (queueName === "ingestion") {
-//         if (completed) {
-//           setContent(returnvalue?.content ?? <Skeleton count={10} />);
-//           setStatus("Ingested");
-//         } else {
-//           setContent(<Skeleton count={10} />);
-//           setStatus(`Ingesting ${Math.trunc(progress)}%`);
-//         }
-//       }
-//     }
-//   };
-
-//   return { content, status };
-// }
+// app/routes/chatbots.$chatbotId.data._index/hooks/use-document-progress.tsx
 
 import { Document } from "@prisma/client";
 import { useEffect, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ProgressData } from "~/routes/api.chatbot.$chatbotId.data.progress";
+import {
+  useLocalStorage,
+  getFromLocalStorage,
+  setToLocalStorage,
+} from "./use-local-storage";
 
-// TODO - cache last progress values - e.g, user refreshes the page, wont see progress update until next progress event is sent. We can probably save in localforage indexDB on leave (like the infinte scroll restoration)
-// TODO - percentage works - but there is a glitch - goes back and forth between certain values - should probably do as above
 export function useDocumentProgress({
   item,
   progress,
@@ -93,32 +18,66 @@ export function useDocumentProgress({
   item: Document;
   progress: ProgressData | undefined;
 }) {
+  const [cachedProgress, setCachedProgress] = useLocalStorage<
+    ProgressData | undefined
+  >(`document-progress-${item.id}`, undefined);
+
+  const [content, setContent] = useState<React.ReactNode>(() => {
+    const storedContent = getFromLocalStorage<string | null>(
+      `document-content-${item.id}`,
+      null,
+    );
+    return storedContent ?? item?.content ?? <Skeleton count={10} />;
+  });
+
   const { value: latestPreprocessingProgress } = useLatestProgress({
     queueNames: ["scrape", "parseFile"],
     progress,
+    cachedProgress,
   });
   const { value: latestIngestionProgress } = useLatestProgress({
     queueNames: ["ingestion"],
     progress,
+    cachedProgress,
   });
 
-  const content = item?.content ??
-    latestPreprocessingProgress?.returnvalue?.content ?? (
-      <Skeleton count={10} />
-    );
+  useEffect(() => {
+    if (item?.content) {
+      setContent(item.content);
+      setToLocalStorage(`document-content-${item.id}`, item.content);
+    } else if (latestPreprocessingProgress?.returnvalue?.content) {
+      setContent(latestPreprocessingProgress.returnvalue.content);
+      setToLocalStorage(
+        `document-content-${item.id}`,
+        latestPreprocessingProgress.returnvalue.content,
+      );
+    }
+  }, [item?.content, latestPreprocessingProgress, item.id]);
 
   const INGESTED = "Ingested";
   const PREPROCESSING = "Preprocessing";
   const INGESTING = `Ingesting ${Math.trunc(
     Number(latestIngestionProgress?.progress),
   )}%`;
-  const status = item?.isPending
-    ? latestIngestionProgress
-      ? latestIngestionProgress.completed
-        ? INGESTED
-        : INGESTING
-      : PREPROCESSING
-    : INGESTED;
+
+  let status = INGESTED;
+  if (item?.isPending) {
+    if (latestIngestionProgress) {
+      status = latestIngestionProgress.completed ? INGESTED : INGESTING;
+    } else if (latestPreprocessingProgress) {
+      status = latestPreprocessingProgress.completed
+        ? PREPROCESSING
+        : PREPROCESSING;
+    } else {
+      status = PREPROCESSING;
+    }
+  }
+
+  useEffect(() => {
+    if (progress && progress.documentId === item.id) {
+      setCachedProgress(progress);
+    }
+  }, [progress, item.id, setCachedProgress]);
 
   return {
     content,
@@ -129,12 +88,14 @@ export function useDocumentProgress({
 export function useLatestProgress({
   queueNames,
   progress,
+  cachedProgress,
 }: {
   queueNames: string[];
   progress: ProgressData | undefined;
+  cachedProgress: ProgressData | undefined;
 }) {
-  const [value, setValue] = useState<ProgressData | undefined>(undefined);
-  const latestValueRef = useRef<ProgressData | undefined>(undefined);
+  const [value, setValue] = useState<ProgressData | undefined>(cachedProgress);
+  const latestValueRef = useRef<ProgressData | undefined>(cachedProgress);
 
   useEffect(() => {
     if (progress && queueNames.includes(progress.queueName)) {
@@ -142,8 +103,7 @@ export function useLatestProgress({
       setValue(newValue);
       latestValueRef.current = newValue;
     }
-  }, [progress]);
+  }, [progress, queueNames]);
 
-  // If progress is undefined, return the last known value
   return { value: progress === undefined ? latestValueRef.current : value };
 }

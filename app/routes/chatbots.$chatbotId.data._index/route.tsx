@@ -455,6 +455,34 @@ export default function Data() {
     }
   }, [actionData]);
 
+  const handleProgressUpdate = useCallback(
+    (progressData: ProgressData) => {
+      setTotalItems((prevTotalItems) => {
+        const updatedData = { ...data };
+        const documentIndex = updatedData.items.findIndex(
+          (item) => item.id === progressData.documentId,
+        );
+        if (documentIndex !== -1) {
+          updatedData.items[documentIndex] = {
+            ...updatedData.items[documentIndex],
+            isPending: !progressData.completed,
+            content:
+              progressData.returnvalue?.content ??
+              updatedData.items[documentIndex].content,
+          };
+        }
+        return prevTotalItems;
+      });
+    },
+    [data],
+  );
+
+  useEffect(() => {
+    if (progress) {
+      handleProgressUpdate(progress);
+    }
+  }, [progress, handleProgressUpdate]);
+
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
       <div className="flex flex-row items-start justify-between">
@@ -528,6 +556,7 @@ export default function Data() {
               >
                 {item ? (
                   <DocumentCard
+                    key={item.id} // Add a key prop to force re-render on content change
                     item={item}
                     progress={
                       progress?.documentId === item.id ? progress : undefined
