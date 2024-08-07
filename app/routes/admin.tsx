@@ -11,6 +11,7 @@ import { prisma } from "~/db.server";
 import { getAllChatbots } from "~/models/chatbot.server";
 import { seed } from "~/models/seed.server";
 import { requireUserId } from "~/session.server";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await requireUserId(request);
@@ -72,3 +73,7 @@ export default function Admin() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

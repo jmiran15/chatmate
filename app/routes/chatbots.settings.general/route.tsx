@@ -5,6 +5,7 @@ import DeleteAccount from "./delete-account";
 import { deleteUserByEmail, updateUserEmail } from "~/models/user.server";
 import { requireUser, requireUserId } from "~/session.server";
 import { validateEmail } from "~/utils";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({ user: await requireUser(request) });
@@ -14,8 +15,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const userId = await requireUserId(request);
   const intent = String(formData.get("intent"));
-
-  console.log("intent", intent);
 
   switch (intent) {
     case "changeEmail": {
@@ -45,3 +44,7 @@ export default function GeneralSettings() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

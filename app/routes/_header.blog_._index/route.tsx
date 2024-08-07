@@ -2,14 +2,21 @@ import { json, type MetaFunction, LoaderFunction } from "@remix-run/node";
 import { useLoaderData, useSearchParams, Form } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
 
 import { getPosts, searchPosts, invalidateCache } from "./posts.server";
 import { Post } from "./post";
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ location }) => {
+  const canonicalUrl = generateCanonicalUrl(location.pathname);
+
   return [
-    { title: "Blog Posts" },
-    { name: "description", content: "Explore our latest blog posts" },
+    ...generateMetaTags({
+      title: "Chatmate Blog - AI Customer Support Insights",
+      description:
+        "Explore the latest insights on AI-powered customer support, chatbots, and improving customer experience with Chatmate's innovative solutions.",
+      url: canonicalUrl,
+    }),
   ];
 };
 
@@ -50,8 +57,10 @@ export default function Component() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center mb-4">Blog Posts</h1>
-      <p className="text-xl text-center mb-8">Explore our latest blog posts</p>
+      <h1 className="text-4xl font-bold text-center mb-4">Chatmate Blog</h1>
+      <p className="text-xl text-center mb-8">
+        Explore the latest insights on AI-powered customer support
+      </p>
 
       <Form className="mb-12">
         <input

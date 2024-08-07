@@ -1,3 +1,4 @@
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 import { Outlet } from "@remix-run/react";
 import { Header } from "~/routes/_header._index/header";
 
@@ -13,3 +14,7 @@ export default function ChatbotsLayout() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

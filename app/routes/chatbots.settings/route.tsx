@@ -30,3 +30,7 @@ export default function Settings() {
     </main>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

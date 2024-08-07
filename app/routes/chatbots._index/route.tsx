@@ -8,6 +8,7 @@ import { useIsPending } from "~/hooks/use-is-pending";
 import { isProUser } from "~/models/user.server";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const meta: MetaFunction = () => [{ title: "Chatbots" }];
 
@@ -89,3 +90,7 @@ export default function MyChatbots() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

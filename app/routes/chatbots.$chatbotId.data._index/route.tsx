@@ -306,8 +306,6 @@ export default function Data() {
 
   data = updatedData;
 
-  console.log("pendingDocuments", { pendingDocuments, data });
-
   useEffect(() => {
     setTotalItems(data.totalItems);
   }, [data.totalItems]);

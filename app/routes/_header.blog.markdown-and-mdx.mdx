@@ -8,11 +8,26 @@ image: https://images.ctfassets.net/19dvw6heztyg/75jh1Rlr1qUwhvOgByobDn/7489b088
 
 import { BlogPost } from "~/components/BlogPost";
 import { Link } from "@remix-run/react";
+import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
 
 export const handle = {
   breadcrumb: () => (
     <Link to="/blog/markdown-and-mdx">{frontmatter.title}</Link>
   ),
+};
+
+export const meta = ({ location }) => {
+  const canonicalUrl = generateCanonicalUrl(location.pathname);
+  return [
+    ...generateMetaTags({
+      title: frontmatter.title,
+      description: frontmatter.description,
+      image: frontmatter.image,
+      url: canonicalUrl,
+      type: "article",
+      publishedTime: frontmatter.published,
+    }),
+  ];
 };
 
 <BlogPost post={frontmatter} >

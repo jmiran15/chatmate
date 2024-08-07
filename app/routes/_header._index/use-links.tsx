@@ -23,7 +23,6 @@ export interface RouteLink {
 }
 
 export const useLinks = () => {
-  console.log("ROUTES");
   const { chatbotId } = useParams();
   const user = useOptionalUser();
   const matches = useMatches();

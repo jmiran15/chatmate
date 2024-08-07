@@ -28,6 +28,7 @@ import {
 import { prisma } from "~/db.server";
 import { Loader2 } from "lucide-react";
 import { useIsPending } from "~/hooks/use-is-pending";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -192,3 +193,7 @@ export default function Join() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

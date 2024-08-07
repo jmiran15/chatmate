@@ -15,6 +15,7 @@ import * as gtag from "~/utils/gtags.client";
 import { createChatbot, getChatbotsByUserId } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
 import { isProUser } from "~/models/user.server";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   // check if user can create a new chatbot, if not, redirect them back to chatbots page
@@ -97,3 +98,7 @@ export default function NewChatbot() {
     </Form>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

@@ -22,6 +22,7 @@ import highlightStyle from "./styles/lib/highlight.css?url";
 import { Toaster } from "./components/ui/toaster";
 import { useEffect } from "react";
 import { getUser } from "./session.server";
+import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -29,7 +30,6 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: highlightStyle },
 ];
 
-// Load the GA tracking id from the .env
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({
     user: await getUser(request),
@@ -37,18 +37,21 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   });
 };
 
-export const meta: MetaFunction = () => [
-  {
-    charset: "utf-8",
-    title: "Chatmate - | AI Chat Bot for Your Website",
-    viewport: "width=device-width,initial-scale=1",
-  },
-  {
-    name: "description",
-    content:
-      "Solve 80% of your customers' support inflow instantly on web using our AI customer support platform",
-  },
-];
+export const meta: MetaFunction = ({ location }) => {
+  const canonicalUrl = generateCanonicalUrl(location.pathname);
+  return [
+    ...generateMetaTags({
+      title: "Chatmate - AI Chat Bot for Your Website",
+      description:
+        "Solve 80% of your customers' support inflow instantly on web using our AI customer support platform",
+      url: canonicalUrl,
+      type: "website",
+      applicationName: "Chatmate",
+    }),
+    { charset: "utf-8" },
+    { viewport: "width=device-width,initial-scale=1" },
+  ];
+};
 
 export default function App() {
   const location = useLocation();
@@ -63,10 +66,9 @@ export default function App() {
   return (
     <html lang="en" className="h-full">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <link rel="canonical" href={generateCanonicalUrl(location.pathname)} />
         <script
           type="text/javascript"
           dangerouslySetInnerHTML={{
@@ -77,7 +79,7 @@ export default function App() {
           y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "l2cwgd2upk");`,
           }}
-        ></script>
+        />
       </head>
 
       <body className="h-full bg-transparent">
