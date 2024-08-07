@@ -10,12 +10,13 @@ import {
   getFromLocalStorage,
   setToLocalStorage,
 } from "./use-local-storage";
+import { SerializeFrom } from "@remix-run/node";
 
 export function useDocumentProgress({
   item,
   progress,
 }: {
-  item: Document;
+  item: SerializeFrom<Document>;
   progress: ProgressData | undefined;
 }) {
   const [cachedProgress, setCachedProgress] = useLocalStorage<

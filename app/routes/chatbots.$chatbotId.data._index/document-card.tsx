@@ -5,6 +5,7 @@ import { Badge } from "../../components/ui/badge";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { useDocumentProgress } from "./hooks/use-document-progress";
 import { useMemo } from "react";
+import { SerializeFrom } from "@remix-run/node";
 
 function highlightText(text: string, matches: string[]): JSX.Element {
   const parts = text.split(new RegExp(`(${matches.join("|")})`, "gi"));
@@ -50,7 +51,7 @@ export function DocumentCard({
   progress,
   searchMatches,
 }: {
-  item: Document;
+  item: SerializeFrom<Document>;
   progress: ProgressData | undefined;
   searchMatches?: string[];
 }) {
