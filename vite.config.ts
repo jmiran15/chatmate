@@ -7,6 +7,8 @@ import mdx from "@mdx-js/rollup";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import rehypePrettyCode from "rehype-pretty-code";
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
 
 installGlobals();
 
@@ -35,6 +37,8 @@ export default defineConfig({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       rehypePlugins: [rehypePrettyCode],
     }),
+    wasm(),
+    topLevelAwait(),
     envOnlyMacros(),
     remix({
       ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{ts,tsx}"],

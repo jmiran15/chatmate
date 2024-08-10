@@ -1,0 +1,3132 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-09T01:45:29.784Z
+Model: gpt-4o-mini
+
+Request:
+[user]: Given the following scraped website content from multiple pages, extract all relevant information needed to write features, pricing, pros, and cons sections about the product. Use direct quotes from the provided content and do not summarize or paraphrase. Include the source URL for each piece of information.
+
+Content:
+[Source: https://www.intercom.com/]
+Intercom: The complete AI-first customer service solution
+===============
+ 
+
+blankblankblankblankblank
+
+[](https://www.intercom.com/)
+
+[](https://www.intercom.com/)
+
+*   Product
+    
+    [For customers ![Image 1: Instant service, exceptional experiences](https://www.intercom.com/) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)
+    
+    [Fin AI Agent More than a chatbot. Resolves 50% of support volume. Instantly.](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel Meet your customers where they already are.](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center Help customers find accurate answers themselves.](https://www.intercom.com/support-for-customers#help-center)
+    
+    [For support agents ![Image 2: AI-first tools for more efficient agents ](https://www.intercom.com/) AI-first tools for more efficient agents](https://www.intercom.com/support-for-agents)
+    
+    [Inbox Maximize productivity with an AI‑enhanced inbox.](https://www.intercom.com/support-for-agents#inbox)[Fin AI Copilot Make every agent an instant AI-powered expert.](https://www.intercom.com/support-for-agents/ai-copilot)[Tickets Optimized to resolve complex issues efficiently.](https://www.intercom.com/support-for-agents#tickets)
+    
+    [For support leaders ![Image 3: Tools and insights to empower your team](https://www.intercom.com/) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+    
+    [AI Insights & Reporting Performance-boosting AI optimization tools.](https://www.intercom.com/support-for-leaders#reporting)[Workflows Automate at scale with our visual builder.](https://www.intercom.com/support-for-leaders#workflows)[Outbound messaging Get ahead of known issues and reduce volume.](https://www.intercom.com/support-for-leaders#outbound-messaging)
+    
+*   Resources
+    
+    Featured
+    
+    [![Image 4](blob:https://www.intercom.com/33493406b817813d168aec66c7cc44b2)![Image 5: The Intercom Customer Service Trends Report 2024](https://images.ctfassets.net/xny2w179f4ki/6YkffnaBVtfA4kWlwZaVjP/a509120ca840f7664bc761f741f4691e/CSTrends-2024.webp?&q=90) The Intercom Customer Service Trends Report 2024Gripping insights from top companies…](https://www.intercom.com/campaign/customer-service-trends-2024)[![Image 6](blob:https://www.intercom.com/a06f207c7b5ee3b3f8bdbce8a9158289)![Image 7: How AI is transforming customer service tech stacks](https://images.ctfassets.net/xny2w179f4ki/2bnAm34T5p0GoHlWEDwzLK/5fdac80d66ea81978772d37aaa2a74ea/Ticket-hero.webp?&q=90) How AI is transforming customer service tech stacksTake your tech stack into a new age…](https://www.intercom.com/blog/videos/customer-service-tech-stack-platform-ai/)
+    
+    [Why Intercom? Six reasons to choose Intercom](https://www.intercom.com/why-choose-intercom)[Customers Browse real world CS case studies](https://www.intercom.com/customers)[Events Sign up to hear from industry experts](https://events.intercom.com/)[Help Center How to install, set up & use Intercom](https://www.intercom.com/help)[Intercom Community Find expert answers and inspiration](https://community.intercom.com/)[Academy Take a deep dive course on Intercom](https://academy.intercom.com/)[Blog Customer service news and insights](https://www.intercom.com/blog)[Developer Hub Integrate with, or build on Intercom](https://developers.intercom.com/)
+    
+*   [Pricing](https://www.intercom.com/pricing)
+*   [Demo](https://www.intercom.com/watch-demo)
+
+[Contact sales](https://www.intercom.com/contact-sales)[Sign in](https://app.intercom.com/admins/sign_in)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+![Image 8](blob:https://www.intercom.com/54db852319c801bb1e639cb9de88128e)![Image 9: background](https://images.ctfassets.net/xny2w179f4ki/4hSa4PqT8hc38vwdXMwAcN/541d6322a174645b2c9573afb5d02a25/hero-bg.webp?&q=80)
+
+![Image 10](blob:https://www.intercom.com/d2ad42c282c7dc48172f7bd969244874)![Image 11: background](https://images.ctfassets.net/xny2w179f4ki/27GkkGcmLIhisyZGAXTS4W/93692929c381734e6fd9e879bfd7e7e4/home_hero_mob.webp?&q=80)
+
+The new ageof customer serviceis AI-first
+=========================================
+
+AI-first is a totally new way to deliver customer service. The entire Intercom platform is powered by AI—so customers get instant support with an AI agent, agents get instant answers with an AI copilot, and support leaders get instant AI insights.
+
+[Contact sales](https://www.intercom.com/contact-sales)
+
+[View demo](https://www.intercom.com/view-demos)
+
+[Start free trial](https://app.intercom.com/admins/sign_up)
+
+Intercom is the only complete AI-first customer service platform
+----------------------------------------------------------------
+
+InboxFin AI CopilotFin AI AgentTicketsHelp CenterOmnichannelReportingWorkflowsOutbound MessagingApps & IntegrationsKnowledge Hub
+
+![Image 12: Maximize productivity with an AI-enhanced inbox.](https://images.ctfassets.net/xny2w179f4ki/UZCWt2v2WqTKyEjf3akG6/57de14744376c4ea9d01ec3dc03312ce/product-inbox.webp?&q=90)
+
+![Image 13: Maximize productivity with an AI-enhanced inbox.](https://images.ctfassets.net/xny2w179f4ki/49Dk4GaS13KZGTfj8nWvGy/570bb46ff82f832d4c828a2870f7f8e2/product-inbox-mobile.webp?&q=90)
+
+Maximize productivity with an AI-enhanced inbox.
+
+### An open letter from our CEO: welcome to the age of AI-first
+
+In customer service, we all share the same goal: to provide best-in-class customer experiences.
+
+AI represents an unprecedented new way—not just to achieve that goal—but to redefine it. Our AI-first platform is built on a single AI system with three major components designed to transform customer service for everyone.
+
+AI Agent provides instant, accurate answers for customers 24/7. AI Copilot provides instant, always-on assistance for support agents. AI Analyst (coming in 2024) provides holistic AI insights and recommendations for support leaders.
+
+All three learn from every customer conversation to improve the system. That’s what makes Intercom the only complete AI-first customer service platform. And we are determined to make Intercom the best, and the only customer service platform you will ever need.
+
+![Image 14: signature](https://images.ctfassets.net/xny2w179f4ki/1aKnL9Zb7CZkBwcOUka4UB/4e3d24d259bc862390df98e05fe9dc40/signature.svg)
+
+![Image 15: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F2aap84o1FhGRJzRwuWvJxh%2Fdd3b99a7228cfd0270c56a3c73abf307%2F04.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 16: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F2XyUVrnhxdwlFJdXd3tnja%2Fbc527e120a046892653a71ecab4d1ca4%2F13.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 17: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F4HeHSzAAizxrbji2mfOzAc%2F1031910b7ec7d2b5f0086e216a391878%2F05.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 18: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F7InGjQ3eU8dfJ75nLOWAVx%2Ff9bb80e9ea1376aa9952da8fc3a1445d%2F09.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 19: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F7qD9LERdYhkeaLb0UU7ks3%2F78367c8651227ece49804c7edf1d9bce%2F10.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 20: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F4Z3ZIix6BtS15XKty2KPLF%2Fa4b4b3c6d10ba99b6074d9d82b99a0de%2F06.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 21: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F285S3xOzxoyi0IO7tJT5kz%2F0d8e7f485d90b27c7c9e0d57024f12b9%2F11.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 22: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F5JH6Ul8UUDFMNjYeL0Bios%2Fff4a1a3a453ade3650a9b7814d3d47e7%2F07.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 23: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2Fb0ed7tW1LzkGVmHSYHtyV%2F824f21246c345d279370f8386c34c776%2F14.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 24: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F3vIIpcudXwTJ0xeJ589FDz%2F0f47339b26dc09d018cd9d90e2002280%2F12.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 25: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2FdLgWk4cbuAqwzIYY7Uor8%2F09c4b0c8362c390aea23234ce87cf4ed%2F08.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 26: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F4jng1MdYi1fCDowvFom7QA%2F9eded8e1e9430ccf34e72fed31a3eceb%2F03.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 27: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F6gAWZf08Qo6uy3onnHZSiR%2F62b295420460b27f84c543084663a718%2F02.png%3Ffm%3Dwebp&w=768&q=80)
+
+![Image 28: signature](https://www.intercom.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fxny2w179f4ki%2F6wOmTQHwepv5orqZkccQvx%2F254c492fe321b5a26c7320c15bbf311b%2F01.png%3Ffm%3Dwebp&w=768&q=80)
+
+1.  Eoghan McCabe  
+    CEO and Co-founder
+2.  PS. Read our [Things we believe](https://www.intercom.com/believe) page to see our take on the future of Customer Service
+
+![Image 29: Planets coming out of a compass](https://www.intercom.com/)
+
+AI-first customer service for customers, agents, and leaders
+------------------------------------------------------------
+
+For customers
+
+### Instant service, exceptional experiences
+
+[Learn more](https://www.intercom.com/support-for-customers)
+
+Fin AI AgentProvide 24/7 support and resolve 50% of support volume, instantly. It's so much more than an AI chatbot.
+
+![Image 30](blob:https://www.intercom.com/995e7cc74608a7134cb7b5b69abdd5c0)![Image 31: Missing Alt Text](https://www.intercom.com/)
+
+OmnichannelDeliver exceptional experiences wherever your customers are.
+
+![Image 32](blob:https://www.intercom.com/98cee4117a5006516a90f12886d0fbdc)![Image 33: Missing Alt Text](https://www.intercom.com/)
+
+![Image 34: Missing Alt Text](https://www.intercom.com/)
+
+Help CenterHelp customers find accurate answers when and where they need them.
+
+![Image 35](blob:https://www.intercom.com/08032bfdddc2210d352919814d66ca34)![Image 36: Missing Alt Text](https://www.intercom.com/)
+
+![Image 37: Missing Alt Text](https://www.intercom.com/)
+
+![Image 38](blob:https://www.intercom.com/995e7cc74608a7134cb7b5b69abdd5c0)![Image 39: Missing Alt Text](https://www.intercom.com/)
+
+For support agents
+
+### AI-first tools for more efficient agents
+
+[Learn more](https://www.intercom.com/support-for-agents)
+
+InboxMaximize productivity with an AI-enhanced inbox.
+
+![Image 40](blob:https://www.intercom.com/f81d9763ec1459ce0d91c09ecd3bc2b5)![Image 41: Missing Alt Text](https://www.intercom.com/)
+
+Fin AI CopilotA personal AI assistant for every support agent.
+
+![Image 42](blob:https://www.intercom.com/bf8c14a20457a9ebd9a8db4551b57e7e)![Image 43: Missing Alt Text](https://www.intercom.com/)
+
+![Image 44: Missing Alt Text](https://www.intercom.com/)
+
+TicketsResolve complex issues quickly with tickets optimized for collaboration.
+
+![Image 45](blob:https://www.intercom.com/a4413bdcb6750d5d8e2921d9980bfcbb)![Image 46: Missing Alt Text](https://www.intercom.com/)
+
+![Image 47: Missing Alt Text](https://www.intercom.com/)
+
+![Image 48](blob:https://www.intercom.com/f81d9763ec1459ce0d91c09ecd3bc2b5)![Image 49: Missing Alt Text](https://www.intercom.com/)
+
+For support leaders
+
+### Tools and insights to empower your support team
+
+[Learn more](https://www.intercom.com/support-for-leaders)
+
+AI Insights & ReportingRobust reporting and insights for your entire support operation.
+
+![Image 50](blob:https://www.intercom.com/c03a7039771ff7aa256a226d943f8763)![Image 51: Missing Alt Text](https://www.intercom.com/)
+
+WorkflowsBuild powerful automations with our no-code visual builder.
+
+![Image 52](blob:https://www.intercom.com/9bd9982e2f666b173b16c218d6b871b0)![Image 53: Missing Alt Text](https://www.intercom.com/)
+
+![Image 54: Missing Alt Text](https://www.intercom.com/)
+
+Outbound messagingSend proactive messages to get ahead of issues and reduce inbound volume.
+
+![Image 55](blob:https://www.intercom.com/136bb815f000cc904cf12016b853f922)![Image 56: Missing Alt Text](https://www.intercom.com/)
+
+![Image 57: Missing Alt Text](https://www.intercom.com/)
+
+![Image 58](blob:https://www.intercom.com/c03a7039771ff7aa256a226d943f8763)![Image 59: Missing Alt Text](https://www.intercom.com/)
+
+The results speak for themselves, so do our customers
+-----------------------------------------------------
+
+![Image 60](blob:https://www.intercom.com/2be333a7cbb34112945ef9aef54c1463)![Image 61: Angelo Livanos](https://www.intercom.com/)
+
+Lightspeed
+
+Read quote by $Lightspeed
+
+> The results we have seen with Fin are groundbreaking, double-digit gains in engagement and resolution rates.
+> 
+> Sam FordeMerchant Support Manager, Zapiet
+> 
+> Read quote by Sam Forde
+
+![Image 62](blob:https://www.intercom.com/4b35779014514e2dcbacb4dff8f048fb)![Image 63: Hazel Maw](https://www.intercom.com/)
+
+TravelPerk
+
+Read quote by $TravelPerk
+
+![Image 64](blob:https://www.intercom.com/298beeac6426e6321599cbbf7d3c57cc)![Image 65: Doreen Berard](https://www.intercom.com/)
+
+MOO
+
+Read quote by $MOO
+
+> Meeting customer demand has never been smoother, leading to an impressive 98% CSAT.
+> 
+> Jeff CardosoVice President Operations, Azazie
+> 
+> Read quote by Jeff Cardoso
+
+![Image 66](blob:https://www.intercom.com/db09a2da0b1fd21f545b4f1e4bbe963d)![Image 67: Jared Ellis](https://www.intercom.com/)
+
+Culture Amp
+
+Read quote by $Culture Amp
+
+![Image 68](blob:https://www.intercom.com/d340f45fe8a86b103e32fd1e96a0d1d1)![Image 69: Lee Burkhill](https://www.intercom.com/)
+
+MoneySupermarket
+
+Read quote by $MoneySupermarket
+
+![Image 70](blob:https://www.intercom.com/f32d1a2ca7de4bf177914e96a02e3204)![Image 71: Alison Schreuder](https://www.intercom.com/)
+
+Coda
+
+Read quote by $Coda
+
+Load More
+
+### We’re leading the competition in every single category
+
+In G2’s most recent User Satisfaction Ratings for Customer Service, Intercom rates highest across the board. Based on over 19,000 reviews from real customers.
+
+[Read the G2 Report](https://www.g2.com/compare_reports/intercom-vs-zendesk-support-suite-freshdesk-zoho-desk-and-hubspot-service-hub-2024.embed?featured=intercom&secure%5Bgated_consumer%5D=4bb30a85-ead5-4509-a1e1-3dfb9c2ff67f&secure%5Btoken%5D=8abdf35a30b65882eeb2bdaf2f30e4051447d2ba9c7d2b66b94f3fba3b22679a&utm_campaign=gate-1949869)
+
+Number of categories won
+
+Intercom
+
+![Image 72: Intercom](https://www.intercom.com/)
+
+79
+
+Freshdesk
+
+![Image 73: Freshdesk](https://www.intercom.com/)
+
+6
+
+ZohoDesk
+
+![Image 74: ZohoDesk](https://www.intercom.com/)
+
+4
+
+Hubspot
+
+![Image 75: Hubspot](https://www.intercom.com/)
+
+1
+
+Zendesk
+
+0
+
+![Image 76](https://www.intercom.com/)
+
+The complete customer service platform
+--------------------------------------
+
+*   Messenger
+    
+*   Inbox views
+    
+*   Help Center customization
+    
+*   Multiple Help Centers
+    
+*   Workload management
+    
+*   Multiple team Inboxes
+    
+*   Macros
+    
+*   Inbound and outbound phone calls
+    
+*   Messenger calls
+    
+*   Messenger screensharing
+    
+*   Interactive voice response
+    
+*   Fin Custom Answers
+    
+*   Workflows for Fin
+    
+*   Content targeting
+    
+*   Multiple content sources
+    
+*   Pre-built reports
+    
+*   Custom reports
+    
+*   Conversation topics
+    
+*   App Store
+    
+*   APIs and SDKs
+    
+*   Custom roles
+    
+*   Custom objects
+    
+*   Custom actions
+    
+*   Custom events
+    
+*   SSO & identity management
+    
+*   Banner messages
+    
+*   Tooltips
+    
+*   Product tours
+    
+*   Surveys
+    
+*   1:1 Posts/Chats
+    
+*   Series
+    
+
+![Image 77](https://www.intercom.com/)
+
+![Image 78](https://www.intercom.com/)
+
+![Image 79](https://www.intercom.com/)
+
+![Image 80](https://www.intercom.com/)
+
+![Image 81](https://www.intercom.com/)
+
+![Image 82](https://www.intercom.com/)
+
+![Image 83](https://www.intercom.com/)
+
+![Image 84](https://www.intercom.com/)
+
+![Image 85](https://www.intercom.com/)
+
+![Image 86](https://www.intercom.com/)
+
+![Image 87](https://www.intercom.com/)
+
+![Image 88](https://www.intercom.com/)
+
+![Image 89](https://www.intercom.com/)
+
+![Image 90](https://www.intercom.com/)
+
+![Image 91](https://www.intercom.com/)
+
+![Image 92](https://www.intercom.com/)
+
+![Image 93](https://www.intercom.com/)
+
+![Image 94](https://www.intercom.com/)
+
+![Image 95](https://www.intercom.com/)
+
+![Image 96](https://www.intercom.com/)
+
+![Image 97](https://www.intercom.com/)
+
+![Image 98](https://www.intercom.com/)
+
+![Image 99](https://www.intercom.com/)
+
+![Image 100](https://www.intercom.com/)
+
+![Image 101](https://www.intercom.com/)
+
+![Image 102](https://www.intercom.com/)
+
+![Image 103](https://www.intercom.com/)
+
+![Image 104](https://www.intercom.com/)
+
+![Image 105](https://www.intercom.com/)
+
+![Image 106](https://www.intercom.com/)
+
+![Image 107](https://www.intercom.com/)
+
+### Simple, transparent  
+pricing for all
+
+The best of AI-first customer service.  
+Free for 14 days. No credit card required.
+
+#### From$29per month
+
+[View our pricing](https://www.intercom.com/pricing)
+
+![Image 108](blob:https://www.intercom.com/34138112d886e216229f62a0bfaf2de4)![Image 109: background](https://www.intercom.com/)
+
+![Image 110](blob:https://www.intercom.com/e3f0942255298fe64835cd6093839bf7)![Image 111: background](https://www.intercom.com/)
+
+The new age of AI-first customer service starts here
+----------------------------------------------------
+
+[Start free trial](https://app.intercom.com/admins/sign_up)
+
+Use cases
+
+*   [For customers](https://www.intercom.com/support-for-customers)
+*   [For support agents](https://www.intercom.com/support-for-agents)
+*   [For support leaders](https://www.intercom.com/support-for-leaders)
+
+Company size
+
+*   [Mid-market / enterprise](https://www.intercom.com/enterprise)
+*   [Small business](https://www.intercom.com/small-business)
+*   [Early stage](https://www.intercom.com/early-stage)
+
+Industries
+
+*   [Financial services](https://www.intercom.com/industry/financial-services)
+*   [E-commerce](https://www.intercom.com/industry/ecommerce)
+*   [Software and technology](https://www.intercom.com/customers/fresh-technology)
+*   [Healthcare](https://www.intercom.com/industry/healthcare)
+
+Features
+
+*   [Business messenger](https://www.intercom.com/messenger)
+*   [Customizable bots](https://www.intercom.com/customizable-bots)
+*   [Automated answers](https://www.intercom.com/automated-answers)
+*   [Product tours](https://www.intercom.com/product-tours)
+*   [Outbound messaging](https://www.intercom.com/proactive-support)
+*   [Inbox](https://www.intercom.com/help-desk/inbox)
+*   [Help center articles](https://www.intercom.com/articles)
+*   [Apps and integrations](https://www.intercom.com/apps-integrations)
+*   [Customer data](https://www.intercom.com/customer-data-platform)
+*   [Live chat](https://www.intercom.com/live-chat)
+*   [Mobile apps](https://www.intercom.com/mobile)
+*   [Mobile carousels](https://www.intercom.com/mobile-carousels)
+*   [Series](https://www.intercom.com/series)
+*   [Tickets](https://www.intercom.com/help-desk/tickets)
+*   [Transactional messaging](https://www.intercom.com/transactional-messaging)
+*   [Surveys](https://www.intercom.com/surveys)
+*   [Phone](https://www.intercom.com/support-for-agents/phone)
+*   [SMS](https://www.intercom.com/sms)
+
+Customers
+
+*   [Coda](https://www.intercom.com/customers/coda)
+*   [Atlassian](https://www.intercom.com/customers/atlassian)
+*   [Frame.io](https://www.intercom.com/customers/frame-io)
+*   [Spendesk](https://www.intercom.com/customers/spendesk)
+*   [Synthesia](https://www.intercom.com/customers/synthesia)
+*   [Bailey Nelson](https://www.intercom.com/customers/bailey-nelson)
+*   [Fresh Technology](https://www.intercom.com/customers/fresh-technology)
+*   [Hospitable](https://www.intercom.com/customers/hospitable)
+*   [Wolt](https://www.intercom.com/customers/wolt)
+*   [Fathom](https://www.intercom.com/customers/fathom)
+
+Company
+
+*   [About](https://www.intercom.com/about)
+*   [Customers](https://www.intercom.com/customers)
+*   [Community forum](https://community.intercom.com/)
+*   [Careers](https://www.intercom.com/careers)
+*   [Newsroom](https://www.intercom.com/newsroom)
+*   [App partner program](https://www.intercom.com/app-partner-program)
+*   [Service partner program](https://www.intercom.com/partner/services-program)
+*   [Contact us](mailto:team@intercom.com)
+*   [Status](https://www.intercomstatus.com/)
+
+Resources
+
+*   [Blog](https://www.intercom.com/blog)
+*   [Watch a demo](https://www.intercom.com/watch-demo)
+*   [Academy](https://academy.intercom.com/)
+*   [Events](https://www.intercom.com/webinars)
+*   [Product changes](https://www.intercom.com/changes)
+*   [App store](https://www.intercom.com/app-store)
+*   [Docs](https://www.intercom.com/help)
+*   [Developers](https://developers.intercom.com/)
+*   [Books and guides](https://www.intercom.com/resources)
+*   [Services](https://www.intercom.com/premier-services)
+
+[Terms](https://www.intercom.com/terms-and-policies)[Privacy](https://www.intercom.com/legal/privacy)[Security](https://www.intercom.com/security)
+
+![Image 112: privacy check icon](https://images.ctfassets.net/xny2w179f4ki/2goqOciQz7y5kKhux8W6kN/18f143c6dd113be35d7b7adc67e783a5/CCPA-Privacy-Options-icon.png?fm=webp&q=80&w=25&h=12)Your Privacy Choices
+
+ 
+
+This site employs cookies and other technologies that we and our third party vendors use to monitor and record personal information about you and your interactions with the site (including content viewed, cursor movements, screen recordings, and chat contents) for the purposes described in our Cookie Policy. By continuing to visit our site, you agree to our [Website Terms of Use](https://www.intercom.com/legal/website-terms-of-use), [Privacy Policy](https://www.intercom.com/legal/privacy) and [Cookie Policy](https://www.intercom.com/legal/cookie-policy).
+
+![Image 114](https://bat.bing.com/action/0?ti=25016221&tm=gtm002&Ver=2&mid=a2c92e68-264a-4933-8f57-1a8f3565fac0&sid=f342b92055ef11efac7d5bbba638baf9&vid=f342dc4055ef11ef97426b0bbcc616ea&vids=1&msclkid=N&uach=pv%3D10.0&pi=918639831&lg=en-US&sw=800&sh=600&sc=24&tl=Intercom%3A%20The%20complete%20AI-first%20customer%20service%20solution&p=https%3A%2F%2Fwww.intercom.com%2F&r=&lt=3468&evt=pageLoad&sv=1&cdb=AQET&rn=412679)
+
+[Source: https://www.intercom.com/pricing]
+Get AI-powered customer service from US$29/mo
+===============
+ 
+
+blankblankblankblankblank
+
+[](https://www.intercom.com/)
+
+[](https://www.intercom.com/)
+
+*   Product
+    
+    [For customers ![Image 1: Instant service, exceptional experiences](https://www.intercom.com/pricing) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)
+    
+    [Fin AI Agent More than a chatbot. Resolves 50% of support volume. Instantly.](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel Meet your customers where they already are.](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center Help customers find accurate answers themselves.](https://www.intercom.com/support-for-customers#help-center)
+    
+    [For support agents ![Image 2: AI-first tools for more efficient agents ](https://www.intercom.com/pricing) AI-first tools for more efficient agents](https://www.intercom.com/support-for-agents)
+    
+    [Inbox Maximize productivity with an AI‑enhanced inbox.](https://www.intercom.com/support-for-agents#inbox)[Fin AI Copilot Make every agent an instant AI-powered expert.](https://www.intercom.com/support-for-agents/ai-copilot)[Tickets Optimized to resolve complex issues efficiently.](https://www.intercom.com/support-for-agents#tickets)
+    
+    [For support leaders ![Image 3: Tools and insights to empower your team](https://www.intercom.com/pricing) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+    
+    [AI Insights & Reporting Performance-boosting AI optimization tools.](https://www.intercom.com/support-for-leaders#reporting)[Workflows Automate at scale with our visual builder.](https://www.intercom.com/support-for-leaders#workflows)[Outbound messaging Get ahead of known issues and reduce volume.](https://www.intercom.com/support-for-leaders#outbound-messaging)
+    
+*   Resources
+    
+    Featured
+    
+    [![Image 4](blob:https://www.intercom.com/33493406b817813d168aec66c7cc44b2)![Image 5: The Intercom Customer Service Trends Report 2024](https://images.ctfassets.net/xny2w179f4ki/6YkffnaBVtfA4kWlwZaVjP/a509120ca840f7664bc761f741f4691e/CSTrends-2024.webp?&q=90) The Intercom Customer Service Trends Report 2024Gripping insights from top companies…](https://www.intercom.com/campaign/customer-service-trends-2024)[![Image 6](blob:https://www.intercom.com/a06f207c7b5ee3b3f8bdbce8a9158289)![Image 7: How AI is transforming customer service tech stacks](https://images.ctfassets.net/xny2w179f4ki/2bnAm34T5p0GoHlWEDwzLK/5fdac80d66ea81978772d37aaa2a74ea/Ticket-hero.webp?&q=90) How AI is transforming customer service tech stacksTake your tech stack into a new age…](https://www.intercom.com/blog/videos/customer-service-tech-stack-platform-ai/)
+    
+    [Why Intercom? Six reasons to choose Intercom](https://www.intercom.com/why-choose-intercom)[Customers Browse real world CS case studies](https://www.intercom.com/customers)[Events Sign up to hear from industry experts](https://events.intercom.com/)[Help Center How to install, set up & use Intercom](https://www.intercom.com/help)[Intercom Community Find expert answers and inspiration](https://community.intercom.com/)[Academy Take a deep dive course on Intercom](https://academy.intercom.com/)[Blog Customer service news and insights](https://www.intercom.com/blog)[Developer Hub Integrate with, or build on Intercom](https://developers.intercom.com/)
+    
+*   [Pricing](https://www.intercom.com/pricing)
+*   [Demo](https://www.intercom.com/watch-demo)
+
+[Contact sales](https://www.intercom.com/contact-sales)[Sign in](https://app.intercom.com/admins/sign_in)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+Get AI-first customer service with every plan
+=============================================
+
+Try free for 14 days.No credit card required.
+
+Compare plans
+-------------
+
+Seats
+
+Billed yearly
+
+[Try our pricing calculator](https://www.intercom.com/pricing/calculator)
+
+### Essential$29per seat/mo
+
+$348/yr for 1 seat
+
+The customer support plan for individuals, startups, and small businesses.
+
+### Essential
+
+$29per seat/mo
+
+[Start a free trial](https://app.intercom.com/admins/sign_up?solution_id=28)
+
+#### Includes:
+
+*   Shared inbox
+*   Fin AI Agent
+*   Ticketing system
+*   Fin AI Copilot
+*   Macros
+*   AI Compose
+*   Public help center
+*   Unlimited articles
+*   Basic automation
+*   Proactive support
+
+Recommended
+
+### Advanced$85per seat/mo
+
+$1,020/yr for 1 seat
+
+Powerful automation tools and AI features for growing support teams.
+
+### Advanced
+
+$85per seat/mo
+
+[Start a free trial](https://app.intercom.com/admins/sign_up?solution_id=29)
+
+Get a demo
+
+#### Includes:
+
+*   Shared inbox
+*   Fin AI Agent
+*   Team inboxes
+*   Fin AI Copilot
+*   Ticketing system
+*   AI Compose
+*   AI Autofill
+*   AI Summarize
+*   Public help center
+*   Tickets portal
+*   Private help center
+*   Unlimited articles
+*   Proactive support
+*   Side conversations
+*   Multilingual help center
+*   Workflows for advanced automation
+
+### Expert$132per seat/mo
+
+$1,584/yr for 1 seat
+
+Collaboration, security and reporting tools for large support teams.
+
+### Expert
+
+$132per seat/mo
+
+Get a demo
+
+#### Includes:
+
+*   Shared inbox
+*   Fin AI Agent
+*   Team inboxes
+*   Fin AI Copilot
+*   Ticketing system
+*   AI Compose
+*   AI Autofill
+*   AI Summarize
+*   Public help center
+*   Tickets portal
+*   Private help center
+*   Unlimited articles
+*   Proactive support
+*   Side conversations
+*   Multilingual help center
+*   Workflows for advanced automation
+*   Multiple help centers
+*   Workload management
+*   Multibrand messenger
+*   Single sign-on
+*   Real-time dashboard
+
+### Proactive Support Plusfrom$99/mo
+
+Addon
+
+Get advanced in-app and outbound support, with our most sophisticated Proactive Support features. Plus unlimited use of customer engagement and automation tools.
+
+Including 500 messages sent/mo
+
+#### Key features include:
+
+*   Product tours
+*   Surveys
+*   Mobile carousels
+*   Checklists
+*   News items
+*   Push notifications
+*   Posts
+*   Series campaign builder\*
+
+Help Desk
+---------
+
+Connect your inbox, tickets, and help center in one central, AI-enhanced workspace.
+
+| Feature | Essential Plan | Advanced Plan | Expert Plan |
+| --- | --- | --- | --- |
+| 
+Shared inbox
+
+
+
+ | Available | Available | Available |
+| 
+
+Basic chatbots and automations
+
+
+
+ | Available | Available | Available |
+| 
+
+AI Compose
+
+
+
+ | Available | Available | Available |
+| 
+
+Ticketing system
+
+
+
+ | Available | Available | Available |
+| 
+
+Public help center
+
+
+
+ | Available | Available | Available |
+| 
+
+Unlimited articles & collections
+
+
+
+ | Available | Available | Available |
+| 
+
+Multiple team inboxes
+
+
+
+ | Not Available | Available | Available |
+| 
+
+Workflows for advanced automations
+
+
+
+ | Not Available | Available | Available |
+| 
+
+Workload management
+
+
+
+ | Not Available | Not Available | Available |
+| 
+
+Multiple help centers
+
+
+
+ | Not Available | Not Available | Available |Help Desk
+
+Fin AI Copilot
+--------------
+
+Increase agent efficiency by 31% with a personal AI assistant in the inbox.
+
+| Feature | Essential Plan | Advanced Plan | Expert Plan |
+| --- | --- | --- | --- |
+| 
+Included usage
+
+
+
+ | Free to use in 10 tickets or conversations per agent/mo |
+| 
+
+Unlimited usage
+
+
+
+ | Upgrade any agent to unlimited for $29/mo |
+| 
+
+Conversation history
+
+
+
+ | Available | Available | Available |
+| 
+
+External & internal sources
+
+
+
+ | Available | Available | Available |
+| 
+
+Reporting
+
+
+
+ | Available | Available | Available |
+| 
+
+Multilingual
+
+
+
+ | Available | Available | Available |Fin AI Copilot
+
+Fin AI Agent
+------------
+
+Dramatically reduce your support volume with our breakthrough AI Agent.
+
+| Feature | Essential Plan | Advanced Plan | Expert Plan |
+| --- | --- | --- | --- |
+| 
+Fin AI Agent
+
+
+
+ | $0.99 per resolution |
+| 
+
+Fin AI Answers
+
+
+
+ | Available | Available | Available |
+| 
+
+Fin Custom Answers
+
+
+
+ | Available | Available | Available |
+| 
+
+Multiple content sources
+
+
+
+ | Available | Available | Available |
+| 
+
+Content targeting
+
+
+
+ | Available | Available | Available |
+| 
+
+Workflows for Fin
+
+
+
+ | Not Available | Available | Available |Fin AI Agent
+
+Proactive Support
+-----------------
+
+Give customers the support they need before they need it with in-context automated messages.
+
+| Feature | Essential Plan | Advanced Plan | Expert Plan |
+| --- | --- | --- | --- |
+| Unlimited use |
+| 
+Chats
+
+
+
+ | Available | Available | Available |
+| 
+
+Banner messages
+
+
+
+ | Available | Available | Available |
+| 
+
+Tooltips
+
+
+
+ | Available | Available | Available |Proactive Support
+
+Proactive Support Plus
+----------------------
+
+Add on
+
+Advanced in-app and outbound support features
+
+Add to any plan for $99/mo
+
+PostsChecklistsProduct toursSurveysSeries and more...
+
+Channels
+--------
+
+Deliver conversational support where it works best for your customers.
+
+| Feature | Essential Plan | Advanced Plan | Expert Plan |
+| --- | --- | --- | --- |
+| Unlimited use |
+| 
+Live chat
+
+
+
+ | Available | Available | Available |
+| 
+
+Inbound email
+
+
+
+ | Available | Available | Available |
+| 
+
+Social
+
+
+
+ | Not Available | Available | Available |
+| Billed on usage |
+| 
+
+Email campaigns
+
+
+
+ | From $0.00025 to $0.045 per email sent |
+| 
+
+SMS
+
+
+
+ | From $0.01 to $0.09 per SMS sent/received |
+| 
+
+WhatsApp
+
+
+
+ | From $0.03 to $0.10 per conversation |
+| PhonePhone calls, voice/video calls & screen sharing\* | 
+
+From $0.0035 per minute
+
+ |
+| 
+
+### Phone
+
+ |Channels
+
+Platform
+--------
+
+One central platform connecting everything together, from apps and automations to customer data and reporting.
+
+| Feature | Essential Plan | Advanced Plan | Expert Plan |
+| --- | --- | --- | --- |
+| 
+Custom objects
+
+
+
+ | Available | Available | Available |
+| 
+
+Custom events
+
+
+
+ | Available | Available | Available |
+| 
+
+Pre-built reports
+
+
+
+ | Available | Available | Available |
+| 
+
+Custom reports
+
+
+
+ | Not Available | Available | Available |
+| 
+
+Custom roles
+
+
+
+ | Not Available | Not Available | Available |
+| 
+
+SSO & identity management
+
+
+
+ | Not Available | Not Available | Available |Platform
+
+### Customize your plan and get an instant price estimate
+
+[Calculate your price](https://www.intercom.com/pricing/calculator)
+
+Get a 90% discount with Intercom for startups
+---------------------------------------------
+
+Maximize efficiency and savings while starting more valuable conversations with your customers.
+
+[Apply now](https://www.intercom.com/early-stage)
+
+![Image 8](https://www.intercom.com/pricing)
+
+Trusted by over 25k customers
+-----------------------------
+
+![Image 9](blob:https://www.intercom.com/2be333a7cbb34112945ef9aef54c1463)![Image 10: Angelo Livanos](https://www.intercom.com/pricing)
+
+Lightspeed
+
+![Image 11](blob:https://www.intercom.com/4b35779014514e2dcbacb4dff8f048fb)![Image 12: Hazel Maw](https://www.intercom.com/pricing)
+
+TravelPerk
+
+![Image 13](blob:https://www.intercom.com/298beeac6426e6321599cbbf7d3c57cc)![Image 14: Doreen Berard](https://www.intercom.com/pricing)
+
+MOO
+
+Your questions, answered
+------------------------
+
+How does Intercom pricing work?
+
+Intercom offers three plans (Essential, Advanced, Expert), which all give you access to the Intercom platform. Access to Intercom requires a seat for the help desk. Every plan includes access to Intercom’s AI Agent and channels, both of which are subject to additional usage charges. Proactive support includes usage of banners, in-product chats, tooltips and more. You can include the Proactive Support Plus add-on in any plan from $99/month (additional charges may apply, see below).
+
+[Learn more about Intercom pricing](https://www.intercom.com/help/en/articles/9061614-intercom-plans-explained)
+
+Full Seats
+----------
+
+Seats provide access to Intercom’s products and features within your chosen plan. Each teammate using Intercom must have a designated seat assigned to them.
+
+[Learn more about seat pricing](https://www.intercom.com/help/en/articles/8205716-seats)
+
+Lite Seats
+----------
+
+Lite seats provide limited access to Intercom to support cross-functional collaboration. A set number of Lite seats are included without additional charge on the Advanced and Expert plans. Note that Lite seats are not included on the Essential plan.
+
+[Learn more about Lite seats](https://www.intercom.com/help/en/articles/8205716-seats#h_b37e53dd64)
+
+What payment methods does Intercom accept?
+
+For customers who sign up and pay online, we accept all major credit cards.  To pay via ACH or wire, please contact our sales team.
+
+Please note: Intercom is billed in United States Dollars (USD) only.
+
+Can I pay in my local currency?
+
+Intercom is billed in United States Dollars (USD) only. This applies across our whole platform, including seat pricing, additional usage charges, add-ons, and Premier Services. Right now, we can’t bill in any other currencies.
+
+Are there any additional usage charges?
+
+In addition to Seats and ‘Proactive Support Plus’, you only pay for what you use. Here’s a breakdown:
+
+WhatsApp:
+---------
+
+WhatsApp is charged per ‘conversation’, with unit costs varying by volume. We have different pricing for inbound and outbound WhatsApp. [Learn more about WhatsApp pricing](https://www.intercom.com/help/en/articles/9061703-usage-based-channels#h_13e2dcaf16)
+
+SMS:
+----
+
+SMS is charged per the number of “SMS sent and/or received” with unit costs varying by volume. Prices also vary by region. [Learn more about SMS pricing](https://www.intercom.com/help/en/articles/9061703-usage-based-channels#h_ee3403f06b)
+
+Emails and Email Campaigns:
+---------------------------
+
+Emails sent from the Inbox have no additional charge. Inbound emails from your customers and responses to those emails are included in your plan, with no additional charge. Email campaigns are charged per the number of ‘Bulk Emails Sent’, which are emails sent to more than one customer. [Learn more about Email pricing](https://www.intercom.com/help/en/articles/9061703-usage-based-channels#h_6fdc658267)
+
+Fin Resolutions:
+----------------
+
+Fin AI Agent usage is measured in ‘resolutions.’ This ensures that you only pay when Fin achieves the outcome you and your customers care about most – resolved conversations. Resolutions are counted if Fin provides an answer (AI Answer or Custom Answer) in a conversation and the customer confirms the answer provided is satisfactory or exits the conversation without requesting further assistance. [Learn more about Fin AI Agent pricing](https://www.intercom.com/help/en/articles/8205718-fin-resolutions-and-custom-answers)
+
+Proactive Support Plus & Messages Sent:
+---------------------------------------
+
+Purchasing the ‘Proactive Support Plus’ add-on unlocks a number of capabilities including product tours, surveys, in-app posts, mobile push, and mobile carousels. The baseline monthly fee includes 500 Messages Sent every month (see below for how ‘Messages Sent’ is calculated). Any messages sent above 500 per month are at an additional cost and charged per ‘Message Sent.’ [Learn more about Proactive Support Plus](https://www.intercom.com/help/en/articles/9061648-proactive-support-plus)
+
+How does the free trial work?
+
+Intercom’s free trial requires no credit card to sign up. During the 14-day trial, you’ll have access to all the products & features available in the Advanced plan as well as Proactive Support Plus. After the free trial period, simply add your credit card details to continue using Intercom.
+
+If you’re interested in a free trial of the Expert plan, [contact sales](https://www.intercom.com/pricing#talk_to_sales).
+
+How can I change my plan or number of seats?
+
+You can easily upgrade or downgrade between the Essential, Advanced or Expert plans, and add or remove the Proactive Support Plus add-on at any time.
+
+Customers on annual plans can upgrade and manage seats at any time. Downgrades will be processed at renewal.
+
+To add seats, simply head to ‘Settings’ > ‘Teammates’ to add or remove seats. If you have the Advanced or Expert plan, you can also swap a teammate's full Seat for a free Lite Seat. To change your plan, simply head to ‘Billing’ > ‘Subscriptions’.
+
+[Learn more about changing or canceling your plans](https://www.intercom.com/help/en/articles/8344189-how-to-upgrade-or-downgrade-from-a-plan)
+
+What is Fin?
+
+Fin is the identity of Intercom’s AI tools that are integrated across the Intercom platform. Fin AI Agent provides instant, accurate answers for customers 24/7 over live chat and email. Fin AI Copilot provides instant, always-on assistance for support agents directly in the inbox.
+
+Fin AI Agent is priced per resolution, and Fin AI Copilot is priced as a per seat add-on.
+
+What is Fin AI Copilot?
+
+Fin AI Copilot is an AI assistant in the inbox designed specifically for customer support agents. Fin AI Copilot helps your team instantly find answers, figure out next steps, troubleshoot issues, and answer follow-up questions. That means your agents spend less time searching for information and more time building deeper customer relationships.
+
+How much does it cost?
+
+Every Intercom plan includes limited usage of Fin AI Copilot. Teammates can use Fin on 10 conversations or tickets per month.
+
+For unlimited usage (subject to the [Additional Product Terms](https://www.intercom.com/legal/terms-and-policies/additional-product-terms) for AI Products) you can add unlimited Fin AI Copilot to any Full seat, and will be charged an additional $35 per seat per month.
+
+Learn more about [seat pricing](https://www.intercom.com/help/en/articles/8205716-intercom-seats-full-seats-and-lite-seats)
+
+How does the included usage work?
+
+Every Intercom plan includes limited usage of Fin AI Copilot. Teammates can use Fin on 10 conversations or tickets per month. Your included usage will reset on the first day of every month.
+
+For unlimited usage (subject to the [Additional Product Terms](https://www.intercom.com/legal/terms-and-policies/additional-product-terms) for AI Products) you can add unlimited Fin AI Copilot to any Full seat, and will be charged an additional $35 per seat per month.
+
+Do I need to purchase Fin AI Copilot unlimited seats for my entire team?
+
+Fin AI Copilot unlimited seats can be purchased for any teammate with a Full Seat. You can buy as many seats as you need.
+
+What does the Proactive Support Plus add-on include?
+
+The ‘Proactive Support Plus’ add-on is charged at a fixed monthly fee of $99. Purchasing the ‘Proactive Support Plus’ add-on unlocks a number of capabilities including product tours, surveys, in-app posts, mobile push, and mobile carousels. This includes 500 ‘Messages Sent’ every month. Any Messages Sent above 500 per month are an additional cost and charged on the ‘Messages Sent’ metric. [Learn more about Proactive Support Plus](https://www.intercom.com/help/en/articles/9061648-proactive-support-plus)
+
+How is ‘Messages Sent’ calculated?
+
+‘Messages Sent’ is the metric that Intercom uses to calculate charges for certain message types within the Proactive Support Plus add-on. These message types are: product tours, surveys, in-app posts, mobile push, and mobile carousels.
+
+‘Messages Sent’ is calculated by totaling all messages sent through product tours, surveys, in-app posts, mobile push, and mobile carousels during a billing month.
+
+The baseline monthly fee for ‘Proactive Support Plus’ includes 500 Messages Sent every month. Usage above this amount will be charged per unit (see additional usage question above).
+
+For example: If you send 1000 product tours, 1000 surveys, and 2000 mobile push messages during a billing month, your ‘Messages Sent’ total for that billing month would be 4000. Since the first 500 ‘Messages Sent’ are included each billing month, they are free. Only the additional 3500 Messages Sent’ would be billed as an additional charge.
+
+[Learn more about ‘Messages Sent’](https://www.intercom.com/help/en/articles/9061648-proactive-support-plus#h_45c5377e15)
+
+Do you offer discounts for startups?
+
+Intercom offers an Early Stage program for eligible startups. You can find more information and apply for this program [on this page](https://www.intercom.com/early-stage?).
+
+What apps and integrations does Intercom offer?
+
+Intercom provides over 450+ apps and integrations, including Salesforce, Hubspot, and Jira
+
+[Learn more about apps and integrations](https://www.intercom.com/apps-integrations?on_pageview_event=nav)
+
+Intercom offers three plans (Essential, Advanced, Expert), which all give you access to the Intercom platform. Access to Intercom requires a seat for the help desk. Every plan includes access to Intercom’s AI Agent and channels, both of which are subject to additional usage charges. Proactive support includes usage of banners, in-product chats, tooltips and more. You can include the Proactive Support Plus add-on in any plan from $99/month (additional charges may apply, see below).
+
+[Learn more about Intercom pricing](https://www.intercom.com/help/en/articles/9061614-intercom-plans-explained)
+
+Full Seats
+----------
+
+Seats provide access to Intercom’s products and features within your chosen plan. Each teammate using Intercom must have a designated seat assigned to them.
+
+[Learn more about seat pricing](https://www.intercom.com/help/en/articles/8205716-seats)
+
+Lite Seats
+----------
+
+Lite seats provide limited access to Intercom to support cross-functional collaboration. A set number of Lite seats are included without additional charge on the Advanced and Expert plans. Note that Lite seats are not included on the Essential plan.
+
+[Learn more about Lite seats](https://www.intercom.com/help/en/articles/8205716-seats#h_b37e53dd64)
+
+![Image 15](blob:https://www.intercom.com/34138112d886e216229f62a0bfaf2de4)![Image 16: background](https://www.intercom.com/pricing)
+
+![Image 17](blob:https://www.intercom.com/e3f0942255298fe64835cd6093839bf7)![Image 18: background](https://www.intercom.com/pricing)
+
+Journey into the AI-first future with us
+----------------------------------------
+
+[Start free trial](https://app.intercom.com/admins/sign_up)
+
+Use cases
+
+*   [For customers](https://www.intercom.com/support-for-customers)
+*   [For support agents](https://www.intercom.com/support-for-agents)
+*   [For support leaders](https://www.intercom.com/support-for-leaders)
+
+Company size
+
+*   [Mid-market / enterprise](https://www.intercom.com/enterprise)
+*   [Small business](https://www.intercom.com/small-business)
+*   [Early stage](https://www.intercom.com/early-stage)
+
+Industries
+
+*   [Financial services](https://www.intercom.com/industry/financial-services)
+*   [E-commerce](https://www.intercom.com/industry/ecommerce)
+*   [Software and technology](https://www.intercom.com/customers/fresh-technology)
+*   [Healthcare](https://www.intercom.com/industry/healthcare)
+
+Features
+
+*   [Business messenger](https://www.intercom.com/messenger)
+*   [Customizable bots](https://www.intercom.com/customizable-bots)
+*   [Automated answers](https://www.intercom.com/automated-answers)
+*   [Product tours](https://www.intercom.com/product-tours)
+*   [Outbound messaging](https://www.intercom.com/proactive-support)
+*   [Inbox](https://www.intercom.com/help-desk/inbox)
+*   [Help center articles](https://www.intercom.com/articles)
+*   [Apps and integrations](https://www.intercom.com/apps-integrations)
+*   [Customer data](https://www.intercom.com/customer-data-platform)
+*   [Live chat](https://www.intercom.com/live-chat)
+*   [Mobile apps](https://www.intercom.com/mobile)
+*   [Mobile carousels](https://www.intercom.com/mobile-carousels)
+*   [Series](https://www.intercom.com/series)
+*   [Tickets](https://www.intercom.com/help-desk/tickets)
+*   [Transactional messaging](https://www.intercom.com/transactional-messaging)
+*   [Surveys](https://www.intercom.com/surveys)
+*   [Phone](https://www.intercom.com/support-for-agents/phone)
+*   [SMS](https://www.intercom.com/sms)
+
+Customers
+
+*   [Coda](https://www.intercom.com/customers/coda)
+*   [Atlassian](https://www.intercom.com/customers/atlassian)
+*   [Frame.io](https://www.intercom.com/customers/frame-io)
+*   [Spendesk](https://www.intercom.com/customers/spendesk)
+*   [Synthesia](https://www.intercom.com/customers/synthesia)
+*   [Bailey Nelson](https://www.intercom.com/customers/bailey-nelson)
+*   [Fresh Technology](https://www.intercom.com/customers/fresh-technology)
+*   [Hospitable](https://www.intercom.com/customers/hospitable)
+*   [Wolt](https://www.intercom.com/customers/wolt)
+*   [Fathom](https://www.intercom.com/customers/fathom)
+
+Company
+
+*   [About](https://www.intercom.com/about)
+*   [Customers](https://www.intercom.com/customers)
+*   [Community forum](https://community.intercom.com/)
+*   [Careers](https://www.intercom.com/careers)
+*   [Newsroom](https://www.intercom.com/newsroom)
+*   [App partner program](https://www.intercom.com/app-partner-program)
+*   [Service partner program](https://www.intercom.com/partner/services-program)
+*   [Contact us](mailto:team@intercom.com)
+*   [Status](https://www.intercomstatus.com/)
+
+Resources
+
+*   [Blog](https://www.intercom.com/blog)
+*   [Watch a demo](https://www.intercom.com/watch-demo)
+*   [Academy](https://academy.intercom.com/)
+*   [Events](https://www.intercom.com/webinars)
+*   [Product changes](https://www.intercom.com/changes)
+*   [App store](https://www.intercom.com/app-store)
+*   [Docs](https://www.intercom.com/help)
+*   [Developers](https://developers.intercom.com/)
+*   [Books and guides](https://www.intercom.com/resources)
+*   [Services](https://www.intercom.com/premier-services)
+
+[Terms](https://www.intercom.com/terms-and-policies)[Privacy](https://www.intercom.com/legal/privacy)[Security](https://www.intercom.com/security)
+
+![Image 19: privacy check icon](https://images.ctfassets.net/xny2w179f4ki/2goqOciQz7y5kKhux8W6kN/18f143c6dd113be35d7b7adc67e783a5/CCPA-Privacy-Options-icon.png?fm=webp&q=80&w=25&h=12)Your Privacy Choices
+
+ 
+
+This site employs cookies and other technologies that we and our third party vendors use to monitor and record personal information about you and your interactions with the site (including content viewed, cursor movements, screen recordings, and chat contents) for the purposes described in our Cookie Policy. By continuing to visit our site, you agree to our [Website Terms of Use](https://www.intercom.com/legal/website-terms-of-use), [Privacy Policy](https://www.intercom.com/legal/privacy) and [Cookie Policy](https://www.intercom.com/legal/cookie-policy).
+
+![Image 21](https://bat.bing.com/action/0?ti=25016221&tm=gtm002&Ver=2&mid=b8f44a8f-430b-4f22-829b-df29da5a0d0d&sid=04e10f8055f011efb696e19640c90278&vid=04e1650055f011ef8cee59ea077d6db3&vids=1&msclkid=N&uach=pv%3D10.0&pi=918639831&lg=en-US&sw=800&sh=600&sc=24&tl=Get%20AI-powered%20customer%20service%20from%20US%2429%2Fmo&p=https%3A%2F%2Fwww.intercom.com%2Fpricing&r=&lt=2635&evt=pageLoad&sv=1&cdb=AQET&rn=232886)
+
+[Source: https://www.intercom.com/support-for-customers]
+Offer an exceptional customer service experience | Intercom
+===============
+ 
+
+blankblankblankblankblank
+
+[](https://www.intercom.com/)
+
+[](https://www.intercom.com/)
+
+*   Product
+    
+    [For customers ![Image 1: Instant service, exceptional experiences](https://www.intercom.com/support-for-customers) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)
+    
+    [Fin AI Agent More than a chatbot. Resolves 50% of support volume. Instantly.](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel Meet your customers where they already are.](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center Help customers find accurate answers themselves.](https://www.intercom.com/support-for-customers#help-center)
+    
+    [For support agents ![Image 2: AI-first tools for more efficient agents ](https://www.intercom.com/support-for-customers) AI-first tools for more efficient agents](https://www.intercom.com/support-for-agents)
+    
+    [Inbox Maximize productivity with an AI‑enhanced inbox.](https://www.intercom.com/support-for-agents#inbox)[Fin AI Copilot Make every agent an instant AI-powered expert.](https://www.intercom.com/support-for-agents/ai-copilot)[Tickets Optimized to resolve complex issues efficiently.](https://www.intercom.com/support-for-agents#tickets)
+    
+    [For support leaders ![Image 3: Tools and insights to empower your team](https://www.intercom.com/support-for-customers) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+    
+    [AI Insights & Reporting Performance-boosting AI optimization tools.](https://www.intercom.com/support-for-leaders#reporting)[Workflows Automate at scale with our visual builder.](https://www.intercom.com/support-for-leaders#workflows)[Outbound messaging Get ahead of known issues and reduce volume.](https://www.intercom.com/support-for-leaders#outbound-messaging)
+    
+*   Resources
+    
+    Featured
+    
+    [![Image 4](blob:https://www.intercom.com/33493406b817813d168aec66c7cc44b2)![Image 5: The Intercom Customer Service Trends Report 2024](https://images.ctfassets.net/xny2w179f4ki/6YkffnaBVtfA4kWlwZaVjP/a509120ca840f7664bc761f741f4691e/CSTrends-2024.webp?&q=90) The Intercom Customer Service Trends Report 2024Gripping insights from top companies…](https://www.intercom.com/campaign/customer-service-trends-2024)[![Image 6](blob:https://www.intercom.com/a06f207c7b5ee3b3f8bdbce8a9158289)![Image 7: How AI is transforming customer service tech stacks](https://images.ctfassets.net/xny2w179f4ki/2bnAm34T5p0GoHlWEDwzLK/5fdac80d66ea81978772d37aaa2a74ea/Ticket-hero.webp?&q=90) How AI is transforming customer service tech stacksTake your tech stack into a new age…](https://www.intercom.com/blog/videos/customer-service-tech-stack-platform-ai/)
+    
+    [Why Intercom? Six reasons to choose Intercom](https://www.intercom.com/why-choose-intercom)[Customers Browse real world CS case studies](https://www.intercom.com/customers)[Events Sign up to hear from industry experts](https://events.intercom.com/)[Help Center How to install, set up & use Intercom](https://www.intercom.com/help)[Intercom Community Find expert answers and inspiration](https://community.intercom.com/)[Academy Take a deep dive course on Intercom](https://academy.intercom.com/)[Blog Customer service news and insights](https://www.intercom.com/blog)[Developer Hub Integrate with, or build on Intercom](https://developers.intercom.com/)
+    
+*   [Pricing](https://www.intercom.com/pricing)
+*   [Demo](https://www.intercom.com/watch-demo)
+
+[Contact sales](https://www.intercom.com/contact-sales)[Sign in](https://app.intercom.com/admins/sign_in)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+For customers
+
+Instant service, exceptional experiences
+========================================
+
+Meet your customers wherever they are, whenever they contact you, with omnichannel support and a fully integrated help center. Plus, forget everything you knew about AI chatbots—meet Fin AI Agent.
+
+[Fin AI Agent](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel & Multilingual](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center](https://www.intercom.com/support-for-customers#help-center)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View Demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+![Image 8](blob:https://www.intercom.com/071ee5bf3d6a5cfdb55d1c67a941a6da)![Image 9: background](https://images.ctfassets.net/xny2w179f4ki/6a3rMUYhdC7thgluXlLQ2j/4a04aa58922b390259174eebcee6ea13/customers-hero-bg.png?&q=90)
+
+Fin AI Agent
+
+Resolve 50% of customer questions. Instantly
+--------------------------------------------
+
+Fin AI Agent is more than an AI chatbot: using the most sophisticated AI language models, it instantly resolves customer issues across channels with accurate, conversational answers based solely on your support content.
+
+[Learn more](https://www.intercom.com/fin)
+
+Fin talks like an agentFin understands complex queries, and asks clarifying questions—unlocking 24/7 support, and delivering CSAT-boosting service.[Learn more](https://www.intercom.com/fin)
+
+![Image 10](blob:https://www.intercom.com/b4263d6bcac7e5e1e445e575576ab14a)![Image 11: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+The best answer, every timeFin pulls answers from multiple sources—like Intercom articles, public URLs, PDFs—and sends them to the right customers through content targeting.[Learn more](https://www.intercom.com/fin)
+
+![Image 12](blob:https://www.intercom.com/59c71cb4b89936066e450c1063020986)![Image 13: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 14: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+Custom answers, and total controlTake action in external systems with Fin’s Custom Answers. Include rich media and external data. Use Workflows to decide how and when Fin hands off conversations.[Learn more](https://www.intercom.com/fin)
+
+![Image 15](blob:https://www.intercom.com/9b9ed00f8ba74b550c7d9421d26d33a7)![Image 16: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 17: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 18](blob:https://www.intercom.com/b4263d6bcac7e5e1e445e575576ab14a)![Image 19: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+> The numbers speak for themselves. We’re seeing a 50% resolution rate with Fin, which is pretty amazing.
+> 
+> Ben PeakDirector of Technical Support, Robin
+
+Omnichannel & Multilingual
+
+Any language, any time, anywhere
+--------------------------------
+
+Conversations from every channel—including email, phone, and messenger—route directly to your inbox for easier prioritization and resolution.
+
+[Get started](https://app.intercom.com/admins/sign_up)
+
+![Image 20](https://www.intercom.com/support-for-customers)
+
+Every channel, one inboxMeet customers where they are. From live chat to email, SMS, Phone, WhatsApp, Facebook, and Instagram.[Learn more](https://www.intercom.com/help-desk/inbox)
+
+![Image 21](blob:https://www.intercom.com/f96155138f8b22fbd8fca80a5fe3ac68)![Image 22: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 23: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+Fluent in 45 languagesFrom Fin AI Agent to Help Center—easily resolve issues and serve your customers in up to 45 languages, right out of the box.[Learn more](https://www.intercom.com/help/en/articles/8322387-multilingual-fin)
+
+![Image 24](blob:https://www.intercom.com/a2e47168cd38a04fd7274ae01eea3c73)![Image 25: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 26: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+Live chat with a best-in-class messengerFast, flexible, and fully configurable to your brand. Deliver quicker answers, better onboarding, and a deeper connection with your content across web, mobile, or in-app.[Learn more](https://www.intercom.com/messenger)
+
+![Image 27](blob:https://www.intercom.com/41472fea60f1b76edab0adb2b3fb1cd1)![Image 28: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 29: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 30](blob:https://www.intercom.com/f96155138f8b22fbd8fca80a5fe3ac68)![Image 31: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 32: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+Help Center
+
+Customer support where and when they need it
+--------------------------------------------
+
+Deliver support content to your customers wherever they are with an on-brand and integrated help center that customers can access through any channel.
+
+[Get started](https://app.intercom.com/admins/sign_up)
+
+ConnectedDeliver in-context answers where they are needed, by making your help center content discoverable across your entire website or app.[Learn more](https://www.intercom.com/help/en/articles/56644-customize-your-help-center)
+
+![Image 33](blob:https://www.intercom.com/f291479f49dd2f1ff25cc2ec1706b96e)![Image 34: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 35: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+CustomCreate a customized help center that looks and feels like your brand, and implement it with ease.[Learn more](https://www.intercom.com/help/en/articles/56644-customize-your-help-center)
+
+![Image 36](blob:https://www.intercom.com/703758a26a393191a86ada766bc570a9)![Image 37: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 38: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+ScalableScale your help content to a global audience in 45 languages, across all your brands.[Learn more](https://www.intercom.com/help/en/articles/56644-customize-your-help-center)
+
+![Image 39](blob:https://www.intercom.com/b4999246c62e54c8f86b914b0e9215ff)![Image 40: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 41: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 42](blob:https://www.intercom.com/f291479f49dd2f1ff25cc2ec1706b96e)![Image 43: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+![Image 44: Missing Alt Text](https://www.intercom.com/support-for-customers)
+
+> Fin was so seamless to integrate, just a few clicks and you suddenly have a 24/7 new teammate!
+> 
+> Sam FordeMerchant Support Manager, Zapiet
+
+![Image 45](blob:https://www.intercom.com/954c2918f3736f0fddd33934c795551a)![Image 46: background](https://www.intercom.com/support-for-customers)
+
+The new age of AI-first customer service starts here
+----------------------------------------------------
+
+[Start free trial](https://app.intercom.com/admins/sign_up)
+
+The only complete AI-first customer service platform
+----------------------------------------------------
+
+[For support agents ![Image 47](blob:https://www.intercom.com/ad722d1c86fbe10e5d8f38cf53a4dd77)![Image 48](https://www.intercom.com/support-for-customers) AI-first tools, for more efficient agents](https://www.intercom.com/support-for-agents)[For support leaders ![Image 49](blob:https://www.intercom.com/a88596908aa312f8a08e55b5ebf75d8e)![Image 50](https://www.intercom.com/support-for-customers) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+
+Use cases
+
+*   [For customers](https://www.intercom.com/support-for-customers)
+*   [For support agents](https://www.intercom.com/support-for-agents)
+*   [For support leaders](https://www.intercom.com/support-for-leaders)
+
+Company size
+
+*   [Mid-market / enterprise](https://www.intercom.com/enterprise)
+*   [Small business](https://www.intercom.com/small-business)
+*   [Early stage](https://www.intercom.com/early-stage)
+
+Industries
+
+*   [Financial services](https://www.intercom.com/industry/financial-services)
+*   [E-commerce](https://www.intercom.com/industry/ecommerce)
+*   [Software and technology](https://www.intercom.com/customers/fresh-technology)
+*   [Healthcare](https://www.intercom.com/industry/healthcare)
+
+Features
+
+*   [Business messenger](https://www.intercom.com/messenger)
+*   [Customizable bots](https://www.intercom.com/customizable-bots)
+*   [Automated answers](https://www.intercom.com/automated-answers)
+*   [Product tours](https://www.intercom.com/product-tours)
+*   [Outbound messaging](https://www.intercom.com/proactive-support)
+*   [Inbox](https://www.intercom.com/help-desk/inbox)
+*   [Help center articles](https://www.intercom.com/articles)
+*   [Apps and integrations](https://www.intercom.com/apps-integrations)
+*   [Customer data](https://www.intercom.com/customer-data-platform)
+*   [Live chat](https://www.intercom.com/live-chat)
+*   [Mobile apps](https://www.intercom.com/mobile)
+*   [Mobile carousels](https://www.intercom.com/mobile-carousels)
+*   [Series](https://www.intercom.com/series)
+*   [Tickets](https://www.intercom.com/help-desk/tickets)
+*   [Transactional messaging](https://www.intercom.com/transactional-messaging)
+*   [Surveys](https://www.intercom.com/surveys)
+*   [Phone](https://www.intercom.com/support-for-agents/phone)
+*   [SMS](https://www.intercom.com/sms)
+
+Customers
+
+*   [Coda](https://www.intercom.com/customers/coda)
+*   [Atlassian](https://www.intercom.com/customers/atlassian)
+*   [Frame.io](https://www.intercom.com/customers/frame-io)
+*   [Spendesk](https://www.intercom.com/customers/spendesk)
+*   [Synthesia](https://www.intercom.com/customers/synthesia)
+*   [Bailey Nelson](https://www.intercom.com/customers/bailey-nelson)
+*   [Fresh Technology](https://www.intercom.com/customers/fresh-technology)
+*   [Hospitable](https://www.intercom.com/customers/hospitable)
+*   [Wolt](https://www.intercom.com/customers/wolt)
+*   [Fathom](https://www.intercom.com/customers/fathom)
+
+Company
+
+*   [About](https://www.intercom.com/about)
+*   [Customers](https://www.intercom.com/customers)
+*   [Community forum](https://community.intercom.com/)
+*   [Careers](https://www.intercom.com/careers)
+*   [Newsroom](https://www.intercom.com/newsroom)
+*   [App partner program](https://www.intercom.com/app-partner-program)
+*   [Service partner program](https://www.intercom.com/partner/services-program)
+*   [Contact us](mailto:team@intercom.com)
+*   [Status](https://www.intercomstatus.com/)
+
+Resources
+
+*   [Blog](https://www.intercom.com/blog)
+*   [Watch a demo](https://www.intercom.com/watch-demo)
+*   [Academy](https://academy.intercom.com/)
+*   [Events](https://www.intercom.com/webinars)
+*   [Product changes](https://www.intercom.com/changes)
+*   [App store](https://www.intercom.com/app-store)
+*   [Docs](https://www.intercom.com/help)
+*   [Developers](https://developers.intercom.com/)
+*   [Books and guides](https://www.intercom.com/resources)
+*   [Services](https://www.intercom.com/premier-services)
+
+[Terms](https://www.intercom.com/terms-and-policies)[Privacy](https://www.intercom.com/legal/privacy)[Security](https://www.intercom.com/security)
+
+![Image 51: privacy check icon](https://images.ctfassets.net/xny2w179f4ki/2goqOciQz7y5kKhux8W6kN/18f143c6dd113be35d7b7adc67e783a5/CCPA-Privacy-Options-icon.png?fm=webp&q=80&w=25&h=12)Your Privacy Choices
+
+ 
+
+This site employs cookies and other technologies that we and our third party vendors use to monitor and record personal information about you and your interactions with the site (including content viewed, cursor movements, screen recordings, and chat contents) for the purposes described in our Cookie Policy. By continuing to visit our site, you agree to our [Website Terms of Use](https://www.intercom.com/legal/website-terms-of-use), [Privacy Policy](https://www.intercom.com/legal/privacy) and [Cookie Policy](https://www.intercom.com/legal/cookie-policy).
+
+![Image 53](https://bat.bing.com/action/0?ti=25016221&tm=gtm002&Ver=2&mid=dba9eccc-61cd-4bb8-8d28-739d9ece2b84&sid=01964fa055f011ef98cd05e64a5ef736&vid=0196822055f011ef9ac61f7dbae9c81b&vids=1&msclkid=N&uach=pv%3D10.0&pi=918639831&lg=en-US&sw=800&sh=600&sc=24&tl=Offer%20an%20exceptional%20customer%20service%20experience%20%7C%20Intercom&p=https%3A%2F%2Fwww.intercom.com%2Fsupport-for-customers&r=&lt=2054&evt=pageLoad&sv=1&cdb=AQET&rn=453026)
+
+1
+
+[Source: https://www.intercom.com/support-for-agents]
+Empower customer support agents with AI first tools | Intercom
+===============
+ 
+
+blankblankblankblankblank
+
+[](https://www.intercom.com/)
+
+[](https://www.intercom.com/)
+
+*   Product
+    
+    [For customers ![Image 1: Instant service, exceptional experiences](https://www.intercom.com/support-for-agents) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)
+    
+    [Fin AI Agent More than a chatbot. Resolves 50% of support volume. Instantly.](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel Meet your customers where they already are.](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center Help customers find accurate answers themselves.](https://www.intercom.com/support-for-customers#help-center)
+    
+    [For support agents ![Image 2: AI-first tools for more efficient agents ](https://www.intercom.com/support-for-agents) AI-first tools for more efficient agents](https://www.intercom.com/support-for-agents)
+    
+    [Inbox Maximize productivity with an AI‑enhanced inbox.](https://www.intercom.com/support-for-agents#inbox)[Fin AI Copilot Make every agent an instant AI-powered expert.](https://www.intercom.com/support-for-agents/ai-copilot)[Tickets Optimized to resolve complex issues efficiently.](https://www.intercom.com/support-for-agents#tickets)
+    
+    [For support leaders ![Image 3: Tools and insights to empower your team](https://www.intercom.com/support-for-agents) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+    
+    [AI Insights & Reporting Performance-boosting AI optimization tools.](https://www.intercom.com/support-for-leaders#reporting)[Workflows Automate at scale with our visual builder.](https://www.intercom.com/support-for-leaders#workflows)[Outbound messaging Get ahead of known issues and reduce volume.](https://www.intercom.com/support-for-leaders#outbound-messaging)
+    
+*   Resources
+    
+    Featured
+    
+    [![Image 4](blob:https://www.intercom.com/33493406b817813d168aec66c7cc44b2)![Image 5: The Intercom Customer Service Trends Report 2024](https://images.ctfassets.net/xny2w179f4ki/6YkffnaBVtfA4kWlwZaVjP/a509120ca840f7664bc761f741f4691e/CSTrends-2024.webp?&q=90) The Intercom Customer Service Trends Report 2024Gripping insights from top companies…](https://www.intercom.com/campaign/customer-service-trends-2024)[![Image 6](blob:https://www.intercom.com/a06f207c7b5ee3b3f8bdbce8a9158289)![Image 7: How AI is transforming customer service tech stacks](https://images.ctfassets.net/xny2w179f4ki/2bnAm34T5p0GoHlWEDwzLK/5fdac80d66ea81978772d37aaa2a74ea/Ticket-hero.webp?&q=90) How AI is transforming customer service tech stacksTake your tech stack into a new age…](https://www.intercom.com/blog/videos/customer-service-tech-stack-platform-ai/)
+    
+    [Why Intercom? Six reasons to choose Intercom](https://www.intercom.com/why-choose-intercom)[Customers Browse real world CS case studies](https://www.intercom.com/customers)[Events Sign up to hear from industry experts](https://events.intercom.com/)[Help Center How to install, set up & use Intercom](https://www.intercom.com/help)[Intercom Community Find expert answers and inspiration](https://community.intercom.com/)[Academy Take a deep dive course on Intercom](https://academy.intercom.com/)[Blog Customer service news and insights](https://www.intercom.com/blog)[Developer Hub Integrate with, or build on Intercom](https://developers.intercom.com/)
+    
+*   [Pricing](https://www.intercom.com/pricing)
+*   [Demo](https://www.intercom.com/watch-demo)
+
+[Contact sales](https://www.intercom.com/contact-sales)[Sign in](https://app.intercom.com/admins/sign_in)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+For support agents
+
+AI-first tools for more  
+efficient agents
+==========================================
+
+Maximize agent productivity with a complete, easy-to-use inbox featuring Fin AI Copilot, tickets and built-in phone.
+
+[Fin AI Copilot](https://www.intercom.com/support-for-agents#ai-copilot)[Inbox](https://www.intercom.com/support-for-agents#inbox)[Tickets](https://www.intercom.com/support-for-agents#tickets)[Phone](https://www.intercom.com/support-for-agents#phone)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+![Image 8](blob:https://www.intercom.com/52341b40ce180b81094c3f67231d19be)![Image 9: background](https://images.ctfassets.net/xny2w179f4ki/3lemKkDcQFMcRnpxsokh2E/dc40729cd5a162fcea71d913100d3512/agents-hero-bg.webp?&q=90)
+
+Fin AI Copilot
+
+Increase agent efficiency by 31% with Fin AI Copilot
+----------------------------------------------------
+
+Fin AI Copilot gives every support agent a personal AI assistant. Fin provides instant answers, so your team can stop wasting time and focus on what really matters: forging deeper relationships with customers.
+
+[Learn more](https://www.intercom.com/support-for-agents/ai-copilot)
+
+![Image 10](blob:https://www.intercom.com/035b9efe97fc0489e36947585e09c0f8)![Image 11](https://www.intercom.com/support-for-agents)
+
+![Image 12](https://www.intercom.com/support-for-agents)
+
+### Expert training, troubleshooting and guidance
+
+Fin can help agents troubleshoot issues, or with onboarding and internal training materials.
+
+[Learn more](https://www.intercom.com/support-for-agents/ai-copilot)
+
+![Image 13](blob:https://www.intercom.com/7ecee06e35d48a8dc69bcbd6633bd1c9)![Image 14](https://www.intercom.com/support-for-agents)
+
+![Image 15](https://www.intercom.com/support-for-agents)
+
+### The best answers from conversation history
+
+Fin uses your conversation history to generate answers—and you choose exactly which conversation data is used.
+
+[Learn more](https://www.intercom.com/support-for-agents/ai-copilot)
+
+![Image 16](blob:https://www.intercom.com/7803dc1f5b683328cc7700c009918572)![Image 17](https://www.intercom.com/support-for-agents)
+
+![Image 18](https://www.intercom.com/support-for-agents)
+
+### Trusted information from any content source
+
+Fin uses the most relevant information from across internal and external content to create the best answer every time.
+
+[Learn more](https://www.intercom.com/support-for-agents/ai-copilot)
+
+![Image 19](blob:https://www.intercom.com/6dff394981b3094f6772395ee29f63c6)![Image 20](https://www.intercom.com/support-for-agents)
+
+![Image 21](https://www.intercom.com/support-for-agents)
+
+### Deep insights, complete oversight
+
+Keep an eye on how support teammates are using Fin, and set permissions for which content and conversations it can pull from.
+
+[Learn more](https://www.intercom.com/support-for-agents/ai-copilot)
+
+> Our Lightspeed customer service agents are dramatically more efficient when using Fin AI Copilot. In testing, agents using Fin AI Copilot were able to close 31% more customer conversations daily, compared to agents not using Fin AI Copilot
+> 
+> Angelo LivanosSenior Director of Global Support, Lightspeed
+
+Inbox
+
+Maximize productivity with an AI-enhanced inbox
+-----------------------------------------------
+
+Work smarter and collaborate faster with our configurable, shared inbox designed for speed and efficiency.
+
+[Learn more](https://www.intercom.com/help-desk/inbox)
+
+![Image 22](https://www.intercom.com/support-for-agents)
+
+Your central hub for easier collaborationShared inboxes connect your teams, tickets, and data into one single workspace.[Learn more](https://www.intercom.com/help-desk/inbox)
+
+![Image 23](blob:https://www.intercom.com/cbf7d1da77ea938d0f5a190bd7bc3320)![Image 24: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 25: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Fast, modern, and fully configurableOptimize how you work with powerful macros and an easy-to-use interface designed to be keyboard-first.[Learn more](https://www.intercom.com/help-desk/inbox)
+
+![Image 26](blob:https://www.intercom.com/f29448967d193208e4ca50546722ed56)![Image 27: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 28: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+All your channels togetherCustomer conversations from every channel route directly to your inbox for easier prioritization and faster resolutions.[Learn more](https://www.intercom.com/help-desk/inbox)
+
+![Image 29](blob:https://www.intercom.com/abfaaa5fdf6e57fcd1af270c9996aa5c)![Image 30: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 31: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 32](blob:https://www.intercom.com/cbf7d1da77ea938d0f5a190bd7bc3320)![Image 33: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 34: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Tickets
+
+Tickets that continue the conversation
+--------------------------------------
+
+Resolve complex issues more efficiently with tickets designed to streamline collaboration and keep the conversation going—no switching tools, no lost context, no missed updates.
+
+[Learn more](https://www.intercom.com/help-desk/tickets)
+
+Track conversations with Customer ticketsMove seamlessly from conversation to ticket to solve complex issues and keep customers up to date.[Learn more](https://www.intercom.com/help-desk/tickets)
+
+![Image 35](blob:https://www.intercom.com/9702b1bd7f1ec63dcdd4b0877ef64a03)![Image 36: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 37: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Streamline back-office collaborationEnsure all teams have the context they need to collaborate more efficiently with Back-office tickets.[Learn more](https://www.intercom.com/help-desk/tickets)
+
+![Image 38](blob:https://www.intercom.com/e77b01c307e20ad504223e0f958cf58c)![Image 39: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 40: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Track multiple customers with one ticketShare updates and resolve issues impacting many users with a single Tracker ticket.[Learn more](https://www.intercom.com/help-desk/tickets)
+
+![Image 41](blob:https://www.intercom.com/05f7a58c459dbb183f8dd4b9f0e182c6)![Image 42: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 43: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 44](blob:https://www.intercom.com/9702b1bd7f1ec63dcdd4b0877ef64a03)![Image 45: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 46: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Phone
+
+Calls and conversations all in one place
+----------------------------------------
+
+Use phone calls, video calls, and screen sharing to troubleshoot customer issues faster with modern, native phone support.
+
+[Learn more](https://www.intercom.com/support-for-agents/phone)
+
+![Image 47](https://www.intercom.com/support-for-agents)
+
+Get calls in your inboxMake and receive phone calls from the inbox so your team has all the context they need to solve important issues and follow-up efficiently.[Learn more](https://www.intercom.com/support-for-agents/phone)
+
+![Image 48](blob:https://www.intercom.com/352e03ea8fc58e287cc32970d7e79112)![Image 49: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 50: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Screen share with customersTroubleshoot issues by screen sharing with voice or video calls through the messenger to help customers get better, faster resolutions.[Learn more](https://www.intercom.com/support-for-agents/phone)
+
+![Image 51](blob:https://www.intercom.com/20360fcfcdc5c7dfcca2d7e7a665cdb0)![Image 52: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 53: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+Automate phone workflowsRoute, assign, or automate calls with fully customizable, no-code IVR trees that shorten wait times and increase team productivity.[Learn more](https://www.intercom.com/support-for-agents/phone)
+
+![Image 54](blob:https://www.intercom.com/7020bc89d44db2186c08185f7745bf68)![Image 55: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 56: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 57](blob:https://www.intercom.com/352e03ea8fc58e287cc32970d7e79112)![Image 58: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+![Image 59: Missing Alt Text](https://www.intercom.com/support-for-agents)
+
+> We love how easy it is to call a customer with just one click, directly from the inbox. It saves time and enables quicker, more personalized interactions.
+> 
+> Laura MoralesFounding Member Experience Manager, Maza
+
+![Image 60](blob:https://www.intercom.com/58c5e8915cf165afac2c2926ae870032)![Image 61: background](https://www.intercom.com/support-for-agents)
+
+The new age of AI-first customer service starts here
+----------------------------------------------------
+
+[Start free trial](https://app.intercom.com/admins/sign_up)
+
+The only complete AI-first customer service platform
+----------------------------------------------------
+
+[For customers ![Image 62](blob:https://www.intercom.com/94652cde3722ad949d471436fed45f29)![Image 63](https://www.intercom.com/support-for-agents) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)[For support leaders ![Image 64](blob:https://www.intercom.com/a88596908aa312f8a08e55b5ebf75d8e)![Image 65](https://www.intercom.com/support-for-agents) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+
+Use cases
+
+*   [For customers](https://www.intercom.com/support-for-customers)
+*   [For support agents](https://www.intercom.com/support-for-agents)
+*   [For support leaders](https://www.intercom.com/support-for-leaders)
+
+Company size
+
+*   [Mid-market / enterprise](https://www.intercom.com/enterprise)
+*   [Small business](https://www.intercom.com/small-business)
+*   [Early stage](https://www.intercom.com/early-stage)
+
+Industries
+
+*   [Financial services](https://www.intercom.com/industry/financial-services)
+*   [E-commerce](https://www.intercom.com/industry/ecommerce)
+*   [Software and technology](https://www.intercom.com/customers/fresh-technology)
+*   [Healthcare](https://www.intercom.com/industry/healthcare)
+
+Features
+
+*   [Business messenger](https://www.intercom.com/messenger)
+*   [Customizable bots](https://www.intercom.com/customizable-bots)
+*   [Automated answers](https://www.intercom.com/automated-answers)
+*   [Product tours](https://www.intercom.com/product-tours)
+*   [Outbound messaging](https://www.intercom.com/proactive-support)
+*   [Inbox](https://www.intercom.com/help-desk/inbox)
+*   [Help center articles](https://www.intercom.com/articles)
+*   [Apps and integrations](https://www.intercom.com/apps-integrations)
+*   [Customer data](https://www.intercom.com/customer-data-platform)
+*   [Live chat](https://www.intercom.com/live-chat)
+*   [Mobile apps](https://www.intercom.com/mobile)
+*   [Mobile carousels](https://www.intercom.com/mobile-carousels)
+*   [Series](https://www.intercom.com/series)
+*   [Tickets](https://www.intercom.com/help-desk/tickets)
+*   [Transactional messaging](https://www.intercom.com/transactional-messaging)
+*   [Surveys](https://www.intercom.com/surveys)
+*   [Phone](https://www.intercom.com/support-for-agents/phone)
+*   [SMS](https://www.intercom.com/sms)
+
+Customers
+
+*   [Coda](https://www.intercom.com/customers/coda)
+*   [Atlassian](https://www.intercom.com/customers/atlassian)
+*   [Frame.io](https://www.intercom.com/customers/frame-io)
+*   [Spendesk](https://www.intercom.com/customers/spendesk)
+*   [Synthesia](https://www.intercom.com/customers/synthesia)
+*   [Bailey Nelson](https://www.intercom.com/customers/bailey-nelson)
+*   [Fresh Technology](https://www.intercom.com/customers/fresh-technology)
+*   [Hospitable](https://www.intercom.com/customers/hospitable)
+*   [Wolt](https://www.intercom.com/customers/wolt)
+*   [Fathom](https://www.intercom.com/customers/fathom)
+
+Company
+
+*   [About](https://www.intercom.com/about)
+*   [Customers](https://www.intercom.com/customers)
+*   [Community forum](https://community.intercom.com/)
+*   [Careers](https://www.intercom.com/careers)
+*   [Newsroom](https://www.intercom.com/newsroom)
+*   [App partner program](https://www.intercom.com/app-partner-program)
+*   [Service partner program](https://www.intercom.com/partner/services-program)
+*   [Contact us](mailto:team@intercom.com)
+*   [Status](https://www.intercomstatus.com/)
+
+Resources
+
+*   [Blog](https://www.intercom.com/blog)
+*   [Watch a demo](https://www.intercom.com/watch-demo)
+*   [Academy](https://academy.intercom.com/)
+*   [Events](https://www.intercom.com/webinars)
+*   [Product changes](https://www.intercom.com/changes)
+*   [App store](https://www.intercom.com/app-store)
+*   [Docs](https://www.intercom.com/help)
+*   [Developers](https://developers.intercom.com/)
+*   [Books and guides](https://www.intercom.com/resources)
+*   [Services](https://www.intercom.com/premier-services)
+
+[Terms](https://www.intercom.com/terms-and-policies)[Privacy](https://www.intercom.com/legal/privacy)[Security](https://www.intercom.com/security)
+
+![Image 66: privacy check icon](https://images.ctfassets.net/xny2w179f4ki/2goqOciQz7y5kKhux8W6kN/18f143c6dd113be35d7b7adc67e783a5/CCPA-Privacy-Options-icon.png?fm=webp&q=80&w=25&h=12)Your Privacy Choices
+
+ 
+
+This site employs cookies and other technologies that we and our third party vendors use to monitor and record personal information about you and your interactions with the site (including content viewed, cursor movements, screen recordings, and chat contents) for the purposes described in our Cookie Policy. By continuing to visit our site, you agree to our [Website Terms of Use](https://www.intercom.com/legal/website-terms-of-use), [Privacy Policy](https://www.intercom.com/legal/privacy) and [Cookie Policy](https://www.intercom.com/legal/cookie-policy).
+
+![Image 68](https://bat.bing.com/action/0?ti=25016221&tm=gtm002&Ver=2&mid=128f88b9-975f-474e-8502-c022c753446e&sid=0f9da5f055f011efb7960532ebb00c01&vid=0f9e973055f011ef9e20df9dd3e37771&vids=1&msclkid=N&uach=pv%3D10.0&pi=918639831&lg=en-US&sw=800&sh=600&sc=24&tl=Empower%20customer%20support%20agents%20with%20AI%20first%20tools%20%7C%20Intercom&p=https%3A%2F%2Fwww.intercom.com%2Fsupport-for-agents&r=&lt=8610&evt=pageLoad&sv=1&cdb=AQET&rn=807791)
+
+[Source: https://www.intercom.com/support-for-leaders]
+Boost customer service team performance | Intercom
+===============
+ 
+
+blankblankblankblankblank
+
+[](https://www.intercom.com/)
+
+[](https://www.intercom.com/)
+
+*   Product
+    
+    [For customers ![Image 1: Instant service, exceptional experiences](https://www.intercom.com/support-for-leaders) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)
+    
+    [Fin AI Agent More than a chatbot. Resolves 50% of support volume. Instantly.](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel Meet your customers where they already are.](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center Help customers find accurate answers themselves.](https://www.intercom.com/support-for-customers#help-center)
+    
+    [For support agents ![Image 2: AI-first tools for more efficient agents ](https://www.intercom.com/support-for-leaders) AI-first tools for more efficient agents](https://www.intercom.com/support-for-agents)
+    
+    [Inbox Maximize productivity with an AI‑enhanced inbox.](https://www.intercom.com/support-for-agents#inbox)[Fin AI Copilot Make every agent an instant AI-powered expert.](https://www.intercom.com/support-for-agents/ai-copilot)[Tickets Optimized to resolve complex issues efficiently.](https://www.intercom.com/support-for-agents#tickets)
+    
+    [For support leaders ![Image 3: Tools and insights to empower your team](https://www.intercom.com/support-for-leaders) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+    
+    [AI Insights & Reporting Performance-boosting AI optimization tools.](https://www.intercom.com/support-for-leaders#reporting)[Workflows Automate at scale with our visual builder.](https://www.intercom.com/support-for-leaders#workflows)[Outbound messaging Get ahead of known issues and reduce volume.](https://www.intercom.com/support-for-leaders#outbound-messaging)
+    
+*   Resources
+    
+    Featured
+    
+    [![Image 4](blob:https://www.intercom.com/33493406b817813d168aec66c7cc44b2)![Image 5: The Intercom Customer Service Trends Report 2024](https://images.ctfassets.net/xny2w179f4ki/6YkffnaBVtfA4kWlwZaVjP/a509120ca840f7664bc761f741f4691e/CSTrends-2024.webp?&q=90) The Intercom Customer Service Trends Report 2024Gripping insights from top companies…](https://www.intercom.com/campaign/customer-service-trends-2024)[![Image 6](blob:https://www.intercom.com/a06f207c7b5ee3b3f8bdbce8a9158289)![Image 7: How AI is transforming customer service tech stacks](https://images.ctfassets.net/xny2w179f4ki/2bnAm34T5p0GoHlWEDwzLK/5fdac80d66ea81978772d37aaa2a74ea/Ticket-hero.webp?&q=90) How AI is transforming customer service tech stacksTake your tech stack into a new age…](https://www.intercom.com/blog/videos/customer-service-tech-stack-platform-ai/)
+    
+    [Why Intercom? Six reasons to choose Intercom](https://www.intercom.com/why-choose-intercom)[Customers Browse real world CS case studies](https://www.intercom.com/customers)[Events Sign up to hear from industry experts](https://events.intercom.com/)[Help Center How to install, set up & use Intercom](https://www.intercom.com/help)[Intercom Community Find expert answers and inspiration](https://community.intercom.com/)[Academy Take a deep dive course on Intercom](https://academy.intercom.com/)[Blog Customer service news and insights](https://www.intercom.com/blog)[Developer Hub Integrate with, or build on Intercom](https://developers.intercom.com/)
+    
+*   [Pricing](https://www.intercom.com/pricing)
+*   [Demo](https://www.intercom.com/watch-demo)
+
+[Contact sales](https://www.intercom.com/contact-sales)[Sign in](https://app.intercom.com/admins/sign_in)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+For support leaders
+
+Tools and insights to empower your support team
+===============================================
+
+Optimize team performance with AI reporting and insights, workflow automation, outbound messages, and robust integrations.
+
+[Reporting](https://www.intercom.com/support-for-leaders#reporting)[Workflows](https://www.intercom.com/support-for-leaders#workflows)[Knowledge Hub](https://www.intercom.com/support-for-leaders#knowledge-hub)[Outbound Messaging](https://www.intercom.com/support-for-leaders#outbound-messaging)[Apps & Integrations](https://www.intercom.com/support-for-leaders#apps-and-integrations)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View Demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+![Image 8](blob:https://www.intercom.com/7b7de0a04a3bdb914bbc141963e849e5)![Image 9: background](https://images.ctfassets.net/xny2w179f4ki/3lDcQnRGNTGhmXCKrSUvs3/1a5cc2d395119398ec36aa143f92e7af/leaders-hero-bg.webp?&q=90)
+
+Reporting
+
+Optimize your operation with AI reporting and instant insights
+--------------------------------------------------------------
+
+Monitor, analyze and optimize your support operation with instant AI insights, real-time performance data, customizable reports and actionable CSAT and customer feedback.
+
+[Get started](https://app.intercom.com/admins/sign_up)
+
+Clear customer insightsGenerate AI reports of the most common topics your customers are asking about, so your team can better address their needs.
+
+![Image 10](blob:https://www.intercom.com/b0afc659d3fcfac309eb106e12d9d159)![Image 11: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 12: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Ready-made reportsMake faster, data-driven decisions with pre-built reports, expertly curated to cover your major support use cases.
+
+![Image 13](blob:https://www.intercom.com/15a8531cb4410e44f7a7ff61a0d4f4f5)![Image 14: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 15: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Customizable and colorfulConfigure custom reports that go deeper into the data, with chart visualizations that help you spot trends to boost team performance and CSAT.
+
+![Image 16](blob:https://www.intercom.com/9d954a1a601babded916f5e643af7f86)![Image 17: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 18: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 19](blob:https://www.intercom.com/b0afc659d3fcfac309eb106e12d9d159)![Image 20: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 21: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Workflows
+
+Build automations in minutes that save you hours
+------------------------------------------------
+
+Automate repetitive tasks for customers and agents with our no-code visual builder—including triggers, conditions, rules, and Fin AI Agent.
+
+[Get started](https://app.intercom.com/admins/sign_up)
+
+![Image 22](https://www.intercom.com/support-for-leaders)
+
+Every task, automatedAutomate manual tasks like routing, snoozing, and closing out conversations with context and triggers from across Intercom.
+
+![Image 23](blob:https://www.intercom.com/379c2f7804b82994361a34ff95e55bf3)![Image 24: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 25: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Connected to apps and integrationsFrom Salesforce to GitHub, automate specific actions from the tools you use everyday—with over 450 apps in our app store.
+
+![Image 26](blob:https://www.intercom.com/b3c135a2c63793462b27f5534132e03e)![Image 27: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 28: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Get a head start with templatesLeverage dozens of pre-built templates for popular use cases—from support triage to customer onboarding and CSAT.
+
+![Image 29](blob:https://www.intercom.com/735173ab1f1fd2d6236cced4a6d0dd4c)![Image 30: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 31: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 32](blob:https://www.intercom.com/379c2f7804b82994361a34ff95e55bf3)![Image 33: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 34: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+> Game changing product for support ticket automation and proactive customer support.
+> 
+> John WisnieskiCustomer Operations Manager, ArcSite
+
+Knowledge Hub
+
+The right content for AI, agents and customers every time
+---------------------------------------------------------
+
+Knowledge Hub is a central knowledge management system to optimize and configure all of your content sources for AI, agents and self-serve support.
+
+[Get started](https://app.intercom.com/admins/sign_up)
+
+![Image 35](blob:https://www.intercom.com/8bff27ce3bc369b1551d9b9d97cbda2a)![Image 36: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 37: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+*   ### Manage all support content in one place
+    
+    Centralize, organize, manage and configure all of your internal and external content for agents, Fin AI Agent, Fin AI Copilot and your Help Center.
+    
+*   ### Optimize your content for every support interaction
+    
+    Ensure that content is always accurate and up-to-date so you deliver the best possible customer experience on every single channel.
+    
+*   ### Configure content at scale
+    
+    Curate exactly which content Fin can generate answers from, so only the most relevant content is used in every support interaction.
+    
+
+Outbound messaging
+
+Give customers the support they need, before they need it
+---------------------------------------------------------
+
+Onboard, educate, and notify your customers with in-context, automated messages—so you can reduce support volume and keep your customers happy.
+
+[Learn more](https://www.intercom.com/proactive-support)
+
+![Image 38](https://www.intercom.com/support-for-leaders)
+
+Right message, right timeInform customers when issues arise through the largest available selection of channels: from in-product, to push and SMS.[Learn more](https://www.intercom.com/proactive-support)
+
+![Image 39](blob:https://www.intercom.com/d6bca660f6ffb270a04a18dacc6a65f9)![Image 40: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 41: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Onboard & educateNew users need the most help. Guide them through your website or app with automated product education.[Learn more](https://www.intercom.com/proactive-support)
+
+![Image 42](blob:https://www.intercom.com/fcb7eb732c081ce5391f043cda45fbb8)![Image 43: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 44: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Automate your outreachEasily send targeted, sequential messages across product tours, in-app messages, email, bots and more with a no-code visual builder.[Learn more](https://www.intercom.com/proactive-support)
+
+![Image 45](blob:https://www.intercom.com/748d744d051a716bfadbf200abebb67e)![Image 46: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 47: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 48](blob:https://www.intercom.com/d6bca660f6ffb270a04a18dacc6a65f9)![Image 49: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 50: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Apps & Integrations
+
+All your apps, integrated
+-------------------------
+
+No more point solutions, or clunky integrations. Intercom has everything you need to maximize productivity and deliver personalized support.
+
+[Learn more](https://www.intercom.com/apps-integrations)
+
+Over 450 apps for every needFind apps that integrate with the messenger, in conversations, inside the inbox, or behind the scenes with the Intercom App Store.[Learn more](https://www.intercom.com/app-store)
+
+![Image 51](blob:https://www.intercom.com/fbe9ce46dbc0483e321e82aa5a3394f3)![Image 52: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 53: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Low-code and custom integrationsBuild flexible integrations on Workflows without engineers, or use the canvas kit for custom integrations that bring your own app into Intercom's UI.[Learn more](https://developers.intercom.com/docs)
+
+![Image 54](blob:https://www.intercom.com/fa48af8b67165135e671e099e92fb981)![Image 55: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 56: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+Build on IntercomGet exactly what you need with flexible APIs & Webhooks, plus comprehensive guides and documentation and a vibrant community in the developer hub.[Learn more](https://developers.intercom.com/)
+
+![Image 57](blob:https://www.intercom.com/717538a0017bb2cdb5537019ea850a9a)![Image 58: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 59: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 60](blob:https://www.intercom.com/fbe9ce46dbc0483e321e82aa5a3394f3)![Image 61: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+![Image 62: Missing Alt Text](https://www.intercom.com/support-for-leaders)
+
+> By proactively targeting specific customers … we’ve seen a reduction of almost 80% in the contact rate for temporary issues.
+> 
+> Christian ParkerDirector of Managed Services, TrueCommerce
+
+![Image 63](blob:https://www.intercom.com/366a898d49bf179e6a59506f97da90f7)![Image 64: background](https://www.intercom.com/support-for-leaders)
+
+The new age of AI-first customer service starts here
+----------------------------------------------------
+
+[Start free trial](https://app.intercom.com/admins/sign_up)
+
+The only complete AI-first customer service platform
+----------------------------------------------------
+
+[For customers ![Image 65](blob:https://www.intercom.com/94652cde3722ad949d471436fed45f29)![Image 66](https://www.intercom.com/support-for-leaders) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)[For support agents ![Image 67](blob:https://www.intercom.com/ad722d1c86fbe10e5d8f38cf53a4dd77)![Image 68](https://www.intercom.com/support-for-leaders) AI-first tools, for more efficient agents](https://www.intercom.com/support-for-agents)
+
+Use cases
+
+*   [For customers](https://www.intercom.com/support-for-customers)
+*   [For support agents](https://www.intercom.com/support-for-agents)
+*   [For support leaders](https://www.intercom.com/support-for-leaders)
+
+Company size
+
+*   [Mid-market / enterprise](https://www.intercom.com/enterprise)
+*   [Small business](https://www.intercom.com/small-business)
+*   [Early stage](https://www.intercom.com/early-stage)
+
+Industries
+
+*   [Financial services](https://www.intercom.com/industry/financial-services)
+*   [E-commerce](https://www.intercom.com/industry/ecommerce)
+*   [Software and technology](https://www.intercom.com/customers/fresh-technology)
+*   [Healthcare](https://www.intercom.com/industry/healthcare)
+
+Features
+
+*   [Business messenger](https://www.intercom.com/messenger)
+*   [Customizable bots](https://www.intercom.com/customizable-bots)
+*   [Automated answers](https://www.intercom.com/automated-answers)
+*   [Product tours](https://www.intercom.com/product-tours)
+*   [Outbound messaging](https://www.intercom.com/proactive-support)
+*   [Inbox](https://www.intercom.com/help-desk/inbox)
+*   [Help center articles](https://www.intercom.com/articles)
+*   [Apps and integrations](https://www.intercom.com/apps-integrations)
+*   [Customer data](https://www.intercom.com/customer-data-platform)
+*   [Live chat](https://www.intercom.com/live-chat)
+*   [Mobile apps](https://www.intercom.com/mobile)
+*   [Mobile carousels](https://www.intercom.com/mobile-carousels)
+*   [Series](https://www.intercom.com/series)
+*   [Tickets](https://www.intercom.com/help-desk/tickets)
+*   [Transactional messaging](https://www.intercom.com/transactional-messaging)
+*   [Surveys](https://www.intercom.com/surveys)
+*   [Phone](https://www.intercom.com/support-for-agents/phone)
+*   [SMS](https://www.intercom.com/sms)
+
+Customers
+
+*   [Coda](https://www.intercom.com/customers/coda)
+*   [Atlassian](https://www.intercom.com/customers/atlassian)
+*   [Frame.io](https://www.intercom.com/customers/frame-io)
+*   [Spendesk](https://www.intercom.com/customers/spendesk)
+*   [Synthesia](https://www.intercom.com/customers/synthesia)
+*   [Bailey Nelson](https://www.intercom.com/customers/bailey-nelson)
+*   [Fresh Technology](https://www.intercom.com/customers/fresh-technology)
+*   [Hospitable](https://www.intercom.com/customers/hospitable)
+*   [Wolt](https://www.intercom.com/customers/wolt)
+*   [Fathom](https://www.intercom.com/customers/fathom)
+
+Company
+
+*   [About](https://www.intercom.com/about)
+*   [Customers](https://www.intercom.com/customers)
+*   [Community forum](https://community.intercom.com/)
+*   [Careers](https://www.intercom.com/careers)
+*   [Newsroom](https://www.intercom.com/newsroom)
+*   [App partner program](https://www.intercom.com/app-partner-program)
+*   [Service partner program](https://www.intercom.com/partner/services-program)
+*   [Contact us](mailto:team@intercom.com)
+*   [Status](https://www.intercomstatus.com/)
+
+Resources
+
+*   [Blog](https://www.intercom.com/blog)
+*   [Watch a demo](https://www.intercom.com/watch-demo)
+*   [Academy](https://academy.intercom.com/)
+*   [Events](https://www.intercom.com/webinars)
+*   [Product changes](https://www.intercom.com/changes)
+*   [App store](https://www.intercom.com/app-store)
+*   [Docs](https://www.intercom.com/help)
+*   [Developers](https://developers.intercom.com/)
+*   [Books and guides](https://www.intercom.com/resources)
+*   [Services](https://www.intercom.com/premier-services)
+
+[Terms](https://www.intercom.com/terms-and-policies)[Privacy](https://www.intercom.com/legal/privacy)[Security](https://www.intercom.com/security)
+
+![Image 69: privacy check icon](https://images.ctfassets.net/xny2w179f4ki/2goqOciQz7y5kKhux8W6kN/18f143c6dd113be35d7b7adc67e783a5/CCPA-Privacy-Options-icon.png?fm=webp&q=80&w=25&h=12)Your Privacy Choices
+
+ 
+
+This site employs cookies and other technologies that we and our third party vendors use to monitor and record personal information about you and your interactions with the site (including content viewed, cursor movements, screen recordings, and chat contents) for the purposes described in our Cookie Policy. By continuing to visit our site, you agree to our [Website Terms of Use](https://www.intercom.com/legal/website-terms-of-use), [Privacy Policy](https://www.intercom.com/legal/privacy) and [Cookie Policy](https://www.intercom.com/legal/cookie-policy).
+
+![Image 71](https://bat.bing.com/action/0?ti=25016221&tm=gtm002&Ver=2&mid=530090c6-40e4-4e22-a17a-528279506ecf&sid=0429ae8055f011efb499595c15544cd7&vid=042a4f2055f011ef82308791ed4e8ef6&vids=1&msclkid=N&uach=pv%3D10.0&pi=918639831&lg=en-US&sw=800&sh=600&sc=24&tl=Boost%20customer%20service%20team%20performance%20%7C%20Intercom&p=https%3A%2F%2Fwww.intercom.com%2Fsupport-for-leaders&r=&lt=2164&evt=pageLoad&sv=1&cdb=AQET&rn=377818)
+
+1
+
+[Source: https://www.intercom.com/why-choose-intercom]
+Why Intercom is the best choice for customer service | Intercom
+===============
+ 
+
+blankblankblankblankblank
+
+[](https://www.intercom.com/)
+
+[](https://www.intercom.com/)
+
+*   Product
+    
+    [For customers ![Image 1: Instant service, exceptional experiences](https://www.intercom.com/why-choose-intercom) Instant service, exceptional experiences](https://www.intercom.com/support-for-customers)
+    
+    [Fin AI Agent More than a chatbot. Resolves 50% of support volume. Instantly.](https://www.intercom.com/support-for-customers#ai-agent)[Omnichannel Meet your customers where they already are.](https://www.intercom.com/support-for-customers#omnichannel-and-multilingual)[Help Center Help customers find accurate answers themselves.](https://www.intercom.com/support-for-customers#help-center)
+    
+    [For support agents ![Image 2: AI-first tools for more efficient agents ](https://www.intercom.com/why-choose-intercom) AI-first tools for more efficient agents](https://www.intercom.com/support-for-agents)
+    
+    [Inbox Maximize productivity with an AI‑enhanced inbox.](https://www.intercom.com/support-for-agents#inbox)[Fin AI Copilot Make every agent an instant AI-powered expert.](https://www.intercom.com/support-for-agents/ai-copilot)[Tickets Optimized to resolve complex issues efficiently.](https://www.intercom.com/support-for-agents#tickets)
+    
+    [For support leaders ![Image 3: Tools and insights to empower your team](https://www.intercom.com/why-choose-intercom) Tools and insights to empower your team](https://www.intercom.com/support-for-leaders)
+    
+    [AI Insights & Reporting Performance-boosting AI optimization tools.](https://www.intercom.com/support-for-leaders#reporting)[Workflows Automate at scale with our visual builder.](https://www.intercom.com/support-for-leaders#workflows)[Outbound messaging Get ahead of known issues and reduce volume.](https://www.intercom.com/support-for-leaders#outbound-messaging)
+    
+*   Resources
+    
+    Featured
+    
+    [![Image 4](blob:https://www.intercom.com/33493406b817813d168aec66c7cc44b2)![Image 5: The Intercom Customer Service Trends Report 2024](https://images.ctfassets.net/xny2w179f4ki/6YkffnaBVtfA4kWlwZaVjP/a509120ca840f7664bc761f741f4691e/CSTrends-2024.webp?&q=90) The Intercom Customer Service Trends Report 2024Gripping insights from top companies…](https://www.intercom.com/campaign/customer-service-trends-2024)[![Image 6](blob:https://www.intercom.com/a06f207c7b5ee3b3f8bdbce8a9158289)![Image 7: How AI is transforming customer service tech stacks](https://images.ctfassets.net/xny2w179f4ki/2bnAm34T5p0GoHlWEDwzLK/5fdac80d66ea81978772d37aaa2a74ea/Ticket-hero.webp?&q=90) How AI is transforming customer service tech stacksTake your tech stack into a new age…](https://www.intercom.com/blog/videos/customer-service-tech-stack-platform-ai/)
+    
+    [Why Intercom? Six reasons to choose Intercom](https://www.intercom.com/why-choose-intercom)[Customers Browse real world CS case studies](https://www.intercom.com/customers)[Events Sign up to hear from industry experts](https://events.intercom.com/)[Help Center How to install, set up & use Intercom](https://www.intercom.com/help)[Intercom Community Find expert answers and inspiration](https://community.intercom.com/)[Academy Take a deep dive course on Intercom](https://academy.intercom.com/)[Blog Customer service news and insights](https://www.intercom.com/blog)[Developer Hub Integrate with, or build on Intercom](https://developers.intercom.com/)
+    
+*   [Pricing](https://www.intercom.com/pricing)
+*   [Demo](https://www.intercom.com/watch-demo)
+
+[Contact sales](https://www.intercom.com/contact-sales)[Sign in](https://app.intercom.com/admins/sign_in)
+
+[Contact sales](https://www.intercom.com/contact-sales)[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+Why Intercom?
+-------------
+
+* * *
+
+* * *
+
+6 reasons why Intercom is the best choice for customer service
+==============================================================
+
+6 reasons why Intercom is the best choice for customer service
+==============================================================
+
+1.  1The best performing AI
+2.  2The best user experience
+3.  3A single seamless system
+4.  4We shape the industry
+5.  5Proactive support
+6.  6AI for everyone
+
+![Image 8: A group of people looking over a futuristic cityscape](https://images.ctfassets.net/xny2w179f4ki/e8L7z9zSnz2H1VZdcO5G2/acc9018b92d29fdbe5b4d44c8882bcfe/Why_Hero.webp?&q=80&w=1840)
+
+1
+
+The best performing AI
+----------------------
+
+In a head-to-head study of Intercom's Fin AI Agent and Zendesk's AI bot, Fin performed better across metrics like answer rate, answer accuracy and answer quality.
+
+Fin is able to maintain a conversational flow by asking clarifying questions and taking actions for customers across third party systems. Zendesk's bot lacks these abilities, giving a default reply when it can't answer.
+
+This means Fin will always answer more complex questions than Zendesk. And it's why Fin wins on answer quality metrics like completeness, helpfulness, clarity, and readability.
+
+#### Intercom's Fin vs Zendesk's Bot
+
+80%
+===
+
+of the time, Fin provides a better answer
+
+2X
+==
+
+the number of complex questions answered
+
+96%
+===
+
+answer rate for questions that require multiple sources (vs Zendesk's 78%)
+
+Synthesia
+
+Robin
+
+Linktree
+
+ 
+
+Within six months, Fin had resolved over 6,000 conversations, saved the team over 1,300 hours and pushed self-serve support rates as high as 87%.
+
+###### David Morgan
+
+Revenue Operations Manager, Synthesia
+
+ 
+
+The numbers speak for themselves. We’re seeing a 50% resolution rate with Fin, which is pretty amazing!
+
+###### Ben Peak
+
+Director of Technical Support, Robin
+
+ 
+
+Within six days, Fin is successfully resolving 42% of conversations. It’s truly surpassed my expectations.
+
+###### Dane Burgess
+
+Customer Support Director, Linktree
+
+ 
+
+Within six months, Fin had resolved over 6,000 conversations, saved the team over 1,300 hours and pushed self-serve support rates as high as 87%.
+
+###### David Morgan
+
+Revenue Operations Manager, Synthesia
+
+ 
+
+The numbers speak for themselves. We’re seeing a 50% resolution rate with Fin, which is pretty amazing!
+
+###### Ben Peak
+
+Director of Technical Support, Robin
+
+ 
+
+Within six days, Fin is successfully resolving 42% of conversations. It’s truly surpassed my expectations.
+
+###### Dane Burgess
+
+Customer Support Director, Linktree
+
+2
+
+Modern software with the best user experience
+---------------------------------------------
+
+Intercom is easy to learn and easy to use because it's designed to feel like the modern consumer apps and tools you're already using.
+
+You'll be proud to put our software in front of your customers, and they'll be delighted with the simple, intuitive experience.
+
+Messenger
+
+Inbox
+
+Workflows
+
+Our customizable Messenger is always on brand, and conversational by design—inviting customers to just start typing.
+
+Zendesk
+
+![Image 9: Zendesk UI](https://www.intercom.com/why-choose-intercom)
+
+Intercom
+
+![Image 10: Intercom UI](https://www.intercom.com/why-choose-intercom)
+
+![Image 11: Intercom UI](https://www.intercom.com/why-choose-intercom)
+
+Zendesk
+
+![Image 12: Zendesk UI](https://www.intercom.com/why-choose-intercom)
+
+Intercom
+
+![Image 13: Intercom UI](https://www.intercom.com/why-choose-intercom)
+
+![Image 14: Intercom UI](https://www.intercom.com/why-choose-intercom)
+
+Zendesk
+
+![Image 15: Zendesk UI](https://www.intercom.com/why-choose-intercom)
+
+Intercom
+
+![Image 16: Intercom UI](https://www.intercom.com/why-choose-intercom)
+
+![Image 17: Intercom UI](https://www.intercom.com/why-choose-intercom)
+
+Wolt
+
+Dovetail
+
+Fugo
+
+ 
+
+It’s really easy for us to onboard and train our teams from the get go, because they are used to Facebook, Twitter, Instagram etc. Intercom matches those modern-world chat systems.
+
+###### Pelle Blarke
+
+International Strategy and Operations Manager, Wolt
+
+ 
+
+I really wanted a tool that looked good and felt great to use. Intercom is nicely designed, with nice keyboard shortcuts — those are the little things that make life quicker and easier
+
+###### Pat Barlow
+
+Support Lead, Dovetail
+
+ 
+
+Intercom has a lovely interface, great UX and is very intuitive to use, too. I’m so glad we found it.
+
+###### Sarah Donahoo
+
+Customer Success Director, Fugo
+
+ 
+
+It’s really easy for us to onboard and train our teams from the get go, because they are used to Facebook, Twitter, Instagram etc. Intercom matches those modern-world chat systems.
+
+###### Pelle Blarke
+
+International Strategy and Operations Manager, Wolt
+
+ 
+
+I really wanted a tool that looked good and felt great to use. Intercom is nicely designed, with nice keyboard shortcuts — those are the little things that make life quicker and easier
+
+###### Pat Barlow
+
+Support Lead, Dovetail
+
+ 
+
+Intercom has a lovely interface, great UX and is very intuitive to use, too. I’m so glad we found it.
+
+###### Sarah Donahoo
+
+Customer Success Director, Fugo
+
+3
+
+A seamless, self-improving system
+---------------------------------
+
+Intercom's platform is powered by a single connected system. All your content and data can be managed in one place, and your AI agent can hand off to your human agents for a seamless customer experience.
+
+And because AI and humans work together, they learn from each other. So the more issues you resolve, the smarter the system gets—and the better service you provide.
+
+![Image 18: Intercom's self-improving AI System Model](https://images.ctfassets.net/xny2w179f4ki/3uqIxLgob5VtV7xVZfnkuM/1a197cdbafdfe408691a212dbaf53e0f/Group_17909.webp?&q=90&w=1412)
+
+ 
+
+The best thing about Intercom is its seamless blend of automation, AI, and conversational customer support. It allows us to respond faster, while empowering customers to self-serve.
+
+###### Jackson Rostagno
+
+Customer Service Manager, Bailey Nelson
+
+ 
+
+The best thing about Intercom is its seamless blend of automation, AI, and conversational customer support. It allows us to respond faster, while empowering customers to self-serve.
+
+###### Jackson Rostagno
+
+Customer Service Manager, Bailey Nelson
+
+4
+
+We shape the industry
+---------------------
+
+Intercom has always invented products that change the industry. And we ship faster than anyone.
+
+We invented the world's first messenger for customer service. We invented the world's first AI Agent. We invented the world's first AI Copilot for customer service agents.
+
+With Intercom, you—and your customers—will always get the latest innovations.
+
+### We ship new AI innovations every week
+
+FY23 Q1
+
+58 Features Shipped
+
+*   Improving the HC and Articles: Part II
+*   New re-designed Help Center Settings page
+*   HC Customization - Multi-level categories
+*   Article Version Restoring
+*   Article Version Comparison
+*   Articles Views/Lists and Management
+*   ‘After a customer sends any message’ trigger
+*   Workflows: ‘Apply rules’ step
+*   Workflows: Rename action steps in workflows
+*   Workflows: Rules in Custom Bots
+*   Custom Bots Reporting by Workflow trigger
+*   Workflow Builder full screen
+*   Workflows - Inactivity & Snooze
+*   Chart Builder improvements for Custom Reports
+*   Team Performance report metrics
+*   Omnichannel Bots
+*   Conversation Topics in Workflows
+*   Language detection in bots
+*   Resolution Bot to Custom Bot handover
+*   File uploads for Tickets in the inbox
+*   Allow replies to closed email conversations
+*   Centralised channels hub
+*   Email forwarding
+*   Manage participants without sending a reply
+*   Email end-user automatic detection
+*   Ticket titles and descriptions
+*   Side by side view of tickets & conversations
+*   Improve the inbox experience: rich text
+*   Differentiating tickets and conversations
+*   Linked Tickets refreshed UI
+*   Forward emails externally improvements
+*   Improve email appearance in Inbox
+*   Turning off inbox teammate presence
+*   File Uploads (Web)
+*   Developer documentation improvements
+*   Tickets CSV Export
+*   Tickets API (Retrieve & Update)
+*   Tickets in Custom Actions
+*   Custom Objects: Reference Attributes
+*   Checklists fast follows
+*   Link Branding
+*   Subpaths for Help Center’s custom domain
+*   HC Customisation - Collection card redesign
+*   HC Customization - Multi-level categories
+*   Column layout options in help center
+*   Add links to help center header
+*   Add contact details to help center footer
+*   Background & text colour for header & footer
+*   Article formatting improvements
+*   Search & filter messages improvements
+*   Email deliverability notification
+*   Table of Contents for Help Center
+*   Messenger Settings IA
+*   Potential Duplicates in the Inbox
+*   Phone number validation
+*   Response-time expectation customisation
+*   File Uploads (Mobile)
+*   Improved API search
+
+See All 58 Features
+
+FY23 Q2
+
+58 Features Shipped
+
+*   Fin metrics & filters in Custom Reports
+*   Fin reporting enhancements
+*   Fin, our new AI Agent
+*   Fin hard usage limits
+*   Improved Fin and Workflows preview
+*   New Fin setup journey
+*   Fin: viewing Fin conversations in the inbox
+*   Fin can answer from multiple sources
+*   Fin Content Page
+*   Fin: Snippets
+*   Fin: File Snippets (PDF uploads)
+*   Fin Content Fast Follows
+*   External Content Importer for Fin
+*   Agent Productivity & Responsiveness Metrics
+*   Time-zone setting in Custom Reports
+*   Ability to add Inbox Rules to Workflows
+*   Ticket & Slack capabilities in Workflows
+*   Notify Slack action in workflows
+*   Workflows audience preview
+*   Inbox reliability and full customer migration
+*   Metadata in email conversations improvements
+*   User facing ticket Id
+*   Conversational history improvements
+*   Search conversations by topic
+*   Redesigned inbox search V1
+*   Pinning/unpinning in inbox
+*   Custom folders for the left sidebar
+*   Filter by CvDA or ticket attribute in inbox
+*   Mark mentions unread in the Inbox
+*   Prevent re-opening conversations
+*   Email threading improvements
+*   Reply to a specific message on Emails
+*   Custom Actions in the Inbox
+*   Tickets Integrations (Jira for Tickets app)
+*   Export of Conversations data to Amazon S3
+*   Simplified Outbound experience
+*   Customise help center action colours
+*   Fade background on Help Center header
+*   Help Center: Show/hide collection description
+*   Multiple screen resolution in HC preview
+*   Change image for collections in Help Center
+*   Add featured articles on Help Center homepage
+*   Change header text for articles block
+*   Switch order of collections and articles
+*   Related Articles (in-Article)
+*   Help Center: Personal Welcome Messages
+*   Help Center: Font Selection
+*   Help Center: Change background color body
+*   Help Center: Upload custom SVG icons
+*   301 URL redirection for Zendesk migration
+*   Tickets API (Search) - Unstable
+*   Tickets API & Webhooks (Stable)
+*   Tickets API updates
+*   Stripe and Salesforce in Australia
+*   Language support for Hindi and Swahili
+*   Reverting “Ask our bot a question” language
+*   Increase limit for buttons in custom objects
+*   Multi Help Center
+
+See All 58 Features
+
+FY23 Q3
+
+49 Features Shipped
+
+*   Fin CSAT
+*   “Let Fin Answer” (Workflows Orchestration)
+*   Fin Metrics Panel
+*   Fin report chart drill-in
+*   Conversational snippets for Fin
+*   AI Assist commands in the Inbox
+*   Fin: Content Targeting
+*   Fin Content Resolution Rate Stats
+*   Fin Content Debugging
+*   Fin Content Library: Content Usage Stats
+*   Fin Content Page: Update content language
+*   Fin - Answer Streaming (web & mobile)
+*   Reporting navigation improvements
+*   Advanced filtering in Custom Reports
+*   Office Hours controls in reports
+*   Team Inbox metrics & team office hours report
+*   Improved Fin setup and preview experience
+*   Team Capacity Work Workflows rule
+*   “Customer opens a new conversation” trigger
+*   “Contains exact words” string predicate
+*   New Fin set up experience for customers
+*   Customer, Back-office, and Tracker tickets
+*   Include/exclude tickets-balanced assignments
+*   Customer reports for tracker tickets
+*   Side conversations
+*   New email signature attributes
+*   Tickets email notification improvements
+*   Ticket email notifications - grouping
+*   Company portal for Tickets (web)
+*   All Ticket Type Attributes in Custom Actions
+*   Tickets Space in the Messenger (web & mobile)
+*   Tickets notifications in the Messenger
+*   API for Multi-Help Center
+*   Mobile SDK multi-brand/Multi-HC
+*   Multi HC-aware inserters
+*   Multi-HC stats coverage (Reporting follow up)
+*   Multi-HC Link Affinity
+*   Help Center: customize collection cards
+*   Help Center: Homepage Layout configuration
+*   Help Center: Header and Search configuration
+*   More social media links in Help Center footer
+*   Help Center - Footer logo customisation
+*   Help Center: Complex footer (templates)
+*   Help Center Customization - Custom fonts
+*   Help Center - Custom Information Architecture
+*   Help Center Redirects Management
+*   Help Center Customization - Call-to-actions
+*   Customise the "Start Conversation"
+*   Ticket API Improvements
+
+See All 49 Features
+
+FY23 Q4
+
+37 Features Shipped
+
+*   Fin AI Answer trials in Workflows
+*   Fin set up page for starter customers
+*   AI autofill for ticket titles & descriptions
+*   AI compose: My tone
+*   AI compose: translate & fix spelling
+*   AI Summaries in Workflows
+*   Fin asking clarifying questions
+*   Fin - Expectation Setting in the Messenger
+*   Agent performance & team performance reports
+*   Chart drill-in
+*   Reporting Datasets
+*   Bulk delete Workflows
+*   Wait step in Workflows
+*   Path linking in workflows builder
+*   Prevent CSAT ratings until after certain time
+*   Remove Conversation Tags in Workflows
+*   Trigger workflows from the inbox
+*   Trigger workflows from the Inbox with Cmd+K
+*   Reusable Workflows improvements
+*   Standalone & outbound tickets report
+*   Improved ticket triggers for workflows
+*   Ticket SLAs
+*   Auto-convert conversations to tickets
+*   Bulk link conversations to tracker tickets
+*   “Created by you” inbox
+*   Intercom Phone-voice, video & screen sharing
+*   Intercom Phone - Outbound & Inbound Calls
+*   Create Tickets in Messenger (web & mobile)
+*   Mobile App Security Update
+*   SMS automated Toll-Free Verification
+*   Inline images for Articles
+*   Surveys permissions improvements
+*   DMARC support
+*   Dynamic Dropdowns in Jira for Tickets
+*   Lead to User merge inside the Inbox
+*   Phone number porting (Intercom Phone)
+*   "Conversation Assignment Changed" trigger
+
+See All 37 Features
+
+FY24 Q1
+
+37 Features Shipped
+
+*   Inline citations for AI answers
+*   Better clarifications in AI answers
+*   More follow-up AI answers
+*   Semantic search improvements
+*   Fin Home Experience
+*   Fin Answer Reporting: Unresolved Questions
+*   Fin Multilingual
+*   AI Agent metadata in the API
+*   AI speed improvements
+*   Fin Voice UI on Android
+*   Re-usable Custom Answers
+*   Edit conditional branch title in Workflows
+*   Workflows CSAT improvements
+*   New chart types & chart customization options
+*   Teammate performance reports fast follows
+*   Unresolved Questions: Related content sources
+*   Channel-based inbox views
+*   Improved inbox view for AI Agent
+*   Customise user inactivity settings
+*   Follow-up messages when a user goes inactive
+*   Auto-closing "finished" state conversations
+*   Chart drill-in in CSV export
+*   Custom Answers in unresolved questions report
+*   Attachment Safety Improvements
+*   Settings search capability
+*   Strip links in inbound emails (anti-phishing)
+*   Mobile Conversations app SAML support
+*   Sort by start time in chat layout
+*   Link tooltips in email conversations
+*   Manage link warnings & add trusted domains
+*   Link tooltips for all inbound conversations
+*   Improvements to previewing items
+*   Keyboard shortcut for cross-posting a note
+*   MultiBrand Push for mobile
+*   Phone - Call overflow
+*   Phone - CSAT (Call rating)
+*   Office Hours and Reply Times Settings
+
+See All 37 Features
+
+FY24 Q2
+
+27 Features Shipped
+
+*   Improving AI question summaries
+*   Better AI support for English & multilingual
+*   Fin Pre-handover answer attempt
+*   Fin over email open beta
+*   Fin over Email: New Email predicates
+*   Fin AI Copilot
+*   Fin AI Copilot with Internal Articles
+*   Fin AI Copilot multilingual
+*   More concise and readable AI Agent answers
+*   Improving precision of Custom Answers
+*   Conversation tag predicate in Workflows
+*   Remove person tag action in Workflows
+*   Fin Troubleshooting: Workflows template
+*   Language detection improvement
+*   Custom Answer handover improvement
+*   Bar Charts in Custom Reports
+*   Heatmaps in Custom Reports
+*   Improved Chatbot CSAT
+*   Filter tickets by ticket status
+*   Better Email Delivery Errors
+*   Knowledge Hub
+*   Internal Articles
+*   Internal Content Import
+*   Jira for Tickets App with Workflows & Actions
+*   Find & rate conversations in the Messenger
+*   Phone - Callbacks
+*   Phone - Outbound dialer
+
+See All 27 Features
+
+Lightspeed
+
+Birdie
+
+Culture Amp
+
+ 
+
+Having Intercom bring AI features to the market so quickly, and iterate on them so fast has been super valuable for us……every other day you’re like “hey, check out this new thing”
+
+###### Angelo Livanos
+
+Senior Director of Global Support, Lightspeed
+
+ 
+
+The product innovation and vision Intercom shows is creating a new category in support.
+
+###### Luke Cullimore
+
+Senior Revenue Operations Lead, Birdie
+
+ 
+
+We were using Zendesk but found the experience challenging and a bit dated. I wanted to create a different customer experience and Intercom was thinking about AI really early.
+
+###### Jared Ellis
+
+Global Director for Product Support & Technical Success, Culture Amp
+
+ 
+
+Having Intercom bring AI features to the market so quickly, and iterate on them so fast has been super valuable for us……every other day you’re like “hey, check out this new thing”
+
+###### Angelo Livanos
+
+Senior Director of Global Support, Lightspeed
+
+ 
+
+The product innovation and vision Intercom shows is creating a new category in support.
+
+###### Luke Cullimore
+
+Senior Revenue Operations Lead, Birdie
+
+ 
+
+We were using Zendesk but found the experience challenging and a bit dated. I wanted to create a different customer experience and Intercom was thinking about AI really early.
+
+###### Jared Ellis
+
+Global Director for Product Support & Technical Success, Culture Amp
+
+5
+
+The only CS platform with a proactive support solution
+------------------------------------------------------
+
+Intercom is the only customer service platform with a proactive support solution, so you can get ahead of support issues before they happen.
+
+You can onboard, educate, and notify your customers with outbound messages that include product tours, banners, tooltips, and more.
+
+![Image 19: A screenshot of the Intercom application UI](https://www.intercom.com/why-choose-intercom)
+
+TrueCommerce
+
+Webex
+
+Spendesk
+
+ 
+
+By proactively targeting specific customers, we’ve seen a reduction of almost 80% in the contact rate for temporary issues.
+
+###### Christian Parker
+
+Director of Managed Services at TrueCommerce
+
+ 
+
+We use Intercom for our self-service customers. They get product education through checklists, product tours, outbound messages, and help documentation throughout their journey.
+
+###### Kara Gladish
+
+Manager of Customer Experience at Webex Events
+
+ 
+
+A key value differentiator of Intercom compared with Zendesk was its ability to offer proactive and self-serve support capabilities.
+
+###### Vincent Terol
+
+Head of Customer Success at Spendesk
+
+ 
+
+By proactively targeting specific customers, we’ve seen a reduction of almost 80% in the contact rate for temporary issues.
+
+###### Christian Parker
+
+Director of Managed Services at TrueCommerce
+
+ 
+
+We use Intercom for our self-service customers. They get product education through checklists, product tours, outbound messages, and help documentation throughout their journey.
+
+###### Kara Gladish
+
+Manager of Customer Experience at Webex Events
+
+ 
+
+A key value differentiator of Intercom compared with Zendesk was its ability to offer proactive and self-serve support capabilities.
+
+###### Vincent Terol
+
+Head of Customer Success at Spendesk
+
+6
+
+AI on all plans
+---------------
+
+#### AI for all
+
+Our AI is for everyone, which is why our AI agent and AI copilot are available on all of our pricing plans—not gated like other platforms.
+
+#### Priced to value
+
+With Fin AI Agent, you only pay for the outcome you care about most—resolved conversations.
+
+Compared to Zendesk's AI bot, Fin AI Agent performs better and is always cheaper at $0.99 per resolution. With Zendesk you can pay as much as $2 for the same outcome.
+
+### AI for all
+
+#### From$29per month
+
+[View our pricing](https://www.intercom.com/pricing)
+
+![Image 20](blob:https://www.intercom.com/eae0a61bf558b7f19d1b2397b1fe7bbd)![Image 21: background](https://www.intercom.com/why-choose-intercom)
+
+Get the best customer service today
+-----------------------------------
+
+[View demo](https://www.intercom.com/view-demos)[Start free trial](https://app.intercom.com/admins/sign_up)
+
+### Use cases
+
+[For customers](https://www.intercom.com/support-for-customers)
+
+[For support agents](https://www.intercom.com/support-for-agents)
+
+[For support leaders](https://www.intercom.com/support-for-leaders)
+
+### Company size
+
+[Mid-market / enterprise](https://www.intercom.com/enterprise)
+
+[Small business](https://www.intercom.com/small-business)
+
+[Early stage](https://www.intercom.com/early-stage)
+
+### Industries
+
+[Financial services](https://www.intercom.com/industry/financial-services)
+
+[E-commerce](https://www.intercom.com/industry/ecommerce)
+
+[Software and technology](https://www.intercom.com/customers/fresh-technology)
+
+[Healthcare](https://www.intercom.com/industry/healthcare)
+
+### Features
+
+[Business messenger](https://www.intercom.com/messenger)
+
+[Customizable bots](https://www.intercom.com/customizable-bots)
+
+[Automated answers](https://www.intercom.com/automated-answers)
+
+[Product tours](https://www.intercom.com/product-tours)
+
+[Outbound messaging](https://www.intercom.com/proactive-support)
+
+[Inbox](https://www.intercom.com/help-desk/inbox)
+
+[Help center articles](https://www.intercom.com/articles)
+
+[Apps and integrations](https://www.intercom.com/apps-integrations)
+
+[Customer data](https://www.intercom.com/customer-data-platform)
+
+[Live chat](https://www.intercom.com/live-chat)
+
+[Mobile apps](https://www.intercom.com/mobile)
+
+[Mobile carousels](https://www.intercom.com/mobile-carousels)
+
+[Series](https://www.intercom.com/series)
+
+[Tickets](https://www.intercom.com/help-desk/tickets)
+
+[Transactional messaging](https://www.intercom.com/transactional-messaging)
+
+[Surveys](https://www.intercom.com/surveys)
+
+[Phone](https://www.intercom.com/support-for-agents/phone)
+
+[SMS](https://www.intercom.com/sms)
+
+### Customers
+
+[Coda](https://www.intercom.com/customers/coda)
+
+[Atlassian](https://www.intercom.com/customers/atlassian)
+
+[Frame.io](https://www.intercom.com/customers/frame-io)
+
+[Spendesk](https://www.intercom.com/customers/spendesk)
+
+[Synthesia](https://www.intercom.com/customers/synthesia)
+
+[Bailey Nelson](https://www.intercom.com/customers/bailey-nelson)
+
+[Fresh Technology](https://www.intercom.com/customers/fresh-technology)
+
+[Hospitable](https://www.intercom.com/customers/hospitable)
+
+[Wolt](https://www.intercom.com/customers/wolt)
+
+[Fathom](https://www.intercom.com/customers/fathom)
+
+### Company
+
+[About](https://www.intercom.com/about)
+
+[Customers](https://www.intercom.com/customers)
+
+[Community forum](https://community.intercom.com/)
+
+[Careers](https://www.intercom.com/careers)
+
+[Newsroom](https://www.intercom.com/newsroom)
+
+[App partner program](https://www.intercom.com/app-partner-program)
+
+[Service partner program](https://www.intercom.com/partner/services-program)
+
+[Contact us](mailto:team@intercom.com)
+
+[Status](https://www.intercomstatus.com/)
+
+### Resources
+
+[Blog](https://www.intercom.com/blog)
+
+[Watch a demo](https://www.intercom.com/watch-demo)
+
+[Academy](https://academy.intercom.com/)
+
+[Events](https://www.intercom.com/webinars)
+
+[Product changes](https://www.intercom.com/changes)
+
+[App store](https://www.intercom.com/app-store)
+
+[Docs](https://www.intercom.com/help)
+
+[Developers](https://developers.intercom.com/)
+
+[Books and guides](https://www.intercom.com/resources)
+
+[Services](https://www.intercom.com/premier-services)
+
+[Terms](https://www.intercom.com/terms-and-policies)[Privacy](https://www.intercom.com/legal/privacy)[Security](https://www.intercom.com/security)
+
+![Image 22: privacy check icon](https://images.ctfassets.net/xny2w179f4ki/2goqOciQz7y5kKhux8W6kN/18f143c6dd113be35d7b7adc67e783a5/CCPA-Privacy-Options-icon.png?fm=webp&q=80&w=25&h=12)Your Privacy Choices
+
+Return the result as a JSON object with the following structure:
+{
+  "features": [{"quote": "...", "source": "..."}],
+  "pricing": [{"quote": "...", "source": "..."}],
+  "pros": [{"quote": "...", "source": "..."}],
+  "cons": [{"quote": "...", "source": "..."}]
+}
+
+Response:
+{
+  "features": [
+    {
+      "quote": "Fin AI Agent provides instant, accurate answers for customers 24/7.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Fin AI Copilot provides instant, always-on assistance for support agents.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "AI Insights & Reporting Performance-boosting AI optimization tools.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Automate at scale with our visual builder.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Deliver exceptional experiences wherever your customers are.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Help customers find accurate answers themselves.",
+      "source": "https://www.intercom.com/"
+    }
+  ],
+  "pricing": [
+    {
+      "quote": "From $29 per month.",
+      "source": "https://www.intercom.com/pricing"
+    },
+    {
+      "quote": "Essential $29 per seat/mo.",
+      "source": "https://www.intercom.com/pricing"
+    },
+    {
+      "quote": "Advanced $85 per seat/mo.",
+      "source": "https://www.intercom.com/pricing"
+    },
+    {
+      "quote": "Expert $132 per seat/mo.",
+      "source": "https://www.intercom.com/pricing"
+    },
+    {
+      "quote": "Proactive Support Plus from $99/mo.",
+      "source": "https://www.intercom.com/pricing"
+    }
+  ],
+  "pros": [
+    {
+      "quote": "The results we have seen with Fin are groundbreaking, double-digit gains in engagement and resolution rates.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Meeting customer demand has never been smoother, leading to an impressive 98% CSAT.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Fin was so seamless to integrate, just a few clicks and you suddenly have a 24/7 new teammate!",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "Our Lightspeed customer service agents are dramatically more efficient when using Fin AI Copilot.",
+      "source": "https://www.intercom.com/"
+    },
+    {
+      "quote": "By proactively targeting specific customers, we’ve seen a reduction of almost 80% in the contact rate for temporary issues.",
+      "source": "https://www.intercom.com/"
+    }
+  ],
+  "cons": [
+    {
+      "quote": "Intercom is billed in United States Dollars (USD) only.",
+      "source": "https://www.intercom.com/pricing"
+    },
+    {
+      "quote": "Fin AI Agent usage is measured in ‘resolutions.’",
+      "source": "https://www.intercom.com/pricing"
+    }
+  ]
+}

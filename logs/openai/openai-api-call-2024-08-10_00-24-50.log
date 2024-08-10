@@ -1,0 +1,1010 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-10T04:24:50.658Z
+Model: gpt-4o-mini
+
+Request:
+[user]: Given the following scraped website content from multiple pages, extract all relevant information needed to write features, pricing, pros, and cons sections about the product. Use direct quotes from the provided content and do not summarize or paraphrase. Include the source URL for each piece of information.
+
+Content:
+[Source: https://ticktick.com/home]
+TickTick:Todo list, checklist and task manager app for Android, iPhone and Web
+===============
+
+[](https://ticktick.com/home)
+
+*   [Features](https://ticktick.com/features)
+*   [Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+*   [Features](https://ticktick.com/features)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+[](https://ticktick.com/home)
+
+Stay Organized
+--------------
+
+Stay Creative
+-------------
+
+Stay Organized
+--------------
+
+Stay Creative
+-------------
+
+Join millions of people to capture ideas, organize life, and do something creative everyday.
+
+[Get Started - It's Free](https://ticktick.com/signup)[Download](https://ticktick.com/download)
+
+![Image 1](blob:https://ticktick.com/fec9bcb6354c4866d971b6569f32ee61)
+
+![Image 2](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Organize everything in life
+
+Whether there is a work-related task or a personal goal, TickTick is here to help you manage all your to-dos.
+
+![Image 4](blob:https://ticktick.com/7163f74510849bf682132bcbff13ae86)
+
+![Image 5](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Get reminded anytime, anywhere
+
+Set a reminder to ease your mind off worrying about missing deadlines from now on.
+
+![Image 7](blob:https://ticktick.com/9dc2040fa304487f77be2e139e963fe6)
+
+![Image 8](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Flexible calendar views
+
+With five different calendar views, you can check and handle your schedules in a more convenient way.
+
+![Image 10](blob:https://ticktick.com/4cfad45360955c08f4f7e6191fee055b)
+
+![Image 11](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Collaborating with others
+
+From family weekend plan to teamwork, share lists and assign tasks on the go. Stay productive together!
+
+![Image 13](blob:https://ticktick.com/804739e971ad23e10601add39818cfc7)
+
+![Image 14](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+### Sync across multiple platforms
+
+30+ features work seamlessly across 10+ platforms. Getting things done has never been this easy.
+
+![Image 16](blob:https://ticktick.com/f84fd47d987ac49466ee51be91387708)
+
+![Image 17](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+[Download TickTick](https://ticktick.com/download)[View More](https://ticktick.com/features)
+
+### Recommended by
+
+*   [My favorite app of the entire year which is my to-do app. It's called TickTick.](https://www.youtube.com/watch?v=-pTGc7cIBIA&t=566s)
+*   [I finally started using a proper to-do list this year, and it's made keeping track of my work tasks (and home to-dos) so much easier.](https://www.theverge.com/2019/12/27/21025163/best-new-android-apps-dark-sky-pocket-outlook)
+*   [Great for group projects: multiple reminders when something is due; clarity on what to do next; white noises for focus; and the ability to share lists.](https://mashable.com/article/best-time-management-apps-students/)
+*   [Use it for agendas, memos, shopping lists, and team collaboration. Schedule multiple reminders, view flexible calendars, set recurring tasks, create checklists, add tasks via email, and even use Siri to create tasks.](https://www.digitaltrends.com/mobile/best-to-do-list-apps/)
+*   [TickTick’s main appeal is how comprehensive it is as a to-do list manager.](https://lifehacker.com/ticktick-adds-task-progress-indicators-smart-lists-an-1786003515)
+*   [Develop a work schedule and stick to it. Making super-detailed task lists at least a day in advance helps me recognize accomplishments and cut down on gratuitous guilt. (I like the TickTick app for its “checkoff” feature.)](https://www.washingtonpost.com/news/parenting/wp/2018/02/06/four-challenges-work-from-home-parents-will-recognize-and-how-to-keep-them-in-check/)
+*   [On-premise and web-based scheduling application that enables individuals and businesses of all sizes to manage tasks, deadlines, emails, collaboration, file sharing, & more across various platforms.](https://www.capterra.com/task-management-software/#shortlist)
+*   [TickTick combines an excellent calendar app and an excellent to-do list manager in one, which means you can use it to take a stand against all days that blur together.](https://gizmodo.com/days-blurring-together-add-structure-with-these-apps-1846151722)
+*   [TickTick is one of the many to-do list apps available for Android, but its feature-set and presentation make it one of the leading champs.](https://www.androidcentral.com/android-phone-starter-pack-top-15-apps-for-your-new-phone)
+*   [TickTick features a simple UI and most of the desirable features (like sharing and reminders) are on the free version.](https://www.androidauthority.com/best-couples-apps-android-792171/)
+*   [TickTick is the best to-do list app thanks to its simple and structured project organization, seamless calendar integration, and flexibility to fit into many different workflows rather than forcing you to organize your work a certain way.](https://www.nytimes.com/wirecutter/reviews/the-best-tech-and-apps-for-your-home-office/#productivity-and-finance-apps)
+*   [I’ve gone through dozens of such apps in many years, always migrating to the next because the previous was too basic, too bloated, too slow, too clunky, too ugly, too pricey, etc. But once I discovered TickTick about a year ago, I’ve never looked back.](https://www.makeuseof.com/tag/best-to-do-app-android/)
+
+*   [](https://www.youtube.com/watch?v=-pTGc7cIBIA&t=566s)
+*   [](https://www.theverge.com/2019/12/27/21025163/best-new-android-apps-dark-sky-pocket-outlook)
+*   [](https://mashable.com/article/best-time-management-apps-students/)
+*   [](https://www.digitaltrends.com/mobile/best-to-do-list-apps/)
+*   [](https://lifehacker.com/ticktick-adds-task-progress-indicators-smart-lists-an-1786003515)
+*   [](https://www.washingtonpost.com/news/parenting/wp/2018/02/06/four-challenges-work-from-home-parents-will-recognize-and-how-to-keep-them-in-check/)
+*   [](https://www.capterra.com/task-management-software/#shortlist)
+*   [](https://gizmodo.com/days-blurring-together-add-structure-with-these-apps-1846151722)
+*   [](https://www.androidcentral.com/android-phone-starter-pack-top-15-apps-for-your-new-phone)
+*   [](https://www.androidauthority.com/best-couples-apps-android-792171/)
+*   [](https://www.nytimes.com/wirecutter/reviews/the-best-tech-and-apps-for-your-home-office/#productivity-and-finance-apps)
+*   [](https://www.makeuseof.com/tag/best-to-do-app-android/)
+
+### They are all loving it
+
+*   ![Image 19](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    yuji.チャンネル
+    
+    Creating an environment for life
+    
+    近年で最高のタスク管理アプリだと思います^^無料版でも十分使えますよ！I think it's the best task management app in recent years ^^ Even the free version is great!
+    
+*   ![Image 21](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    MyEducationDiscount.com
+    
+    The home of EDU discounts for teachers & staff.
+    
+    TickTick, a task management app that helps users to stay organized, is recognizing educators and students with a 25% discount on TickTick Premium. With TickTick for Education, eligible teachers and students get reduced annual pricing and full access to TickTick's all-in-one time management solution.
+    
+*   ![Image 23](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Yuuk
+    
+    GOOD ONE ：“使っていてワクワクするモノ”を紹介
+    
+    UI全体はシンプルで直感的で、初めてでも使えると思う。チェックリストでは今日のやること、やるべき習慣を見ることができる。 こうやって一覧で見られるのは嬉しい。The UI is simple and intuitive, and very easy to get started with. Lists show all the things I need to do and habits I want to track. Everything is just at a glance.
+    
+*   ![Image 25](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    DatingAdvice.com
+    
+    "All things dating" daily
+    
+    TickTick can help singles and couples save time, so they get their work and errands done with enough time left over to spend with the people they love.
+    
+
+*   ![Image 27](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    平岡雄太 / DRESS CODE.
+    
+    Representative director of Drip Co., Ltd.
+    
+    To-Doリストも、習慣化管理も、スケジュール管理もできて、ポモドーロタイマーも使える。 タスク管理に必要な全ての機能を兼ね備えた、オールインワンな生産性アプリです！You can manage your to-do list, habits, schedules, and even use the Pomo Timer. An all-in-one productivity app that has all the features you need for task management!
+    
+*   ![Image 29](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    엔지니어쪼이
+    
+    Mechanical Engineering student
+    
+    이 앱의 진짜 최고 강점은 역시 호환성이다. 회사에서 업무하다가도 데스크탑으로 자유롭게 to-do를 작성하고,이동중 편하게 핸드폰으로 빠르게 메모하고, 아이패드로 확인하고!The real strength of this app is its compatibility. While working at the company, I can write to-dos freely on my desktop, make quick notes on my mobile phone, and check with my iPad!
+    
+*   ![Image 31](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Moe
+    
+    Humanist. Engineer. Tech Geek.
+    
+    Personally the reason I like TickTick is mainly the simplicity. It's minimal and clean. TickTick is packed with features but only the ones that are absolutely necessary.
+    
+*   ![Image 33](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    freeappsforme.com
+    
+    Free apps reviews
+    
+    TickTick is the most functional solution at the moment, which can be used at home and in business.
+    
+
+*   ![Image 35](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Карина Спивакова
+    
+    Author of Yandex Zen and YouTube
+    
+    Поэтому как по мне, то это - идеальный планировщик! От души рекомендую всем, кто хочет попробовать устаканить свои задачи и свою жизнь!So it seems to me that this is the perfect planner! From the bottom of my heart I recommend everyone who wants to try to tune in their tasks and your life!
+    
+*   ![Image 37](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Vitaly Salakhmir
+    
+    IT Project manager
+    
+    Версия TickTick есть для любого девайса — у меня он стоит на телефоне, планшете и рабочем макбуке. ТикТик офигенен.There is a version of TickTick for any device - I have it on my phone, tablet and work MacBook. TickTick is awesome.
+    
+*   ![Image 39](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Yohama Caraballo-Arias M.D.
+    
+    ICOH, IOMSC, professor, writer and researcher @ UNIBO-Italy
+    
+    The Eisenhower matrix to view priorities has been a brilliant innovation. I use Tick Tick every day, especially the habit tracker with reminders and the focus function. I highly recommend it to my colleagues and students
+    
+
+*   ![Image 41](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    yuji.チャンネル
+    
+    Creating an environment for life
+    
+    近年で最高のタスク管理アプリだと思います^^無料版でも十分使えますよ！I think it's the best task management app in recent years ^^ Even the free version is great!
+    
+*   ![Image 43](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    平岡雄太 / DRESS CODE.
+    
+    Representative director of Drip Co., Ltd.
+    
+    To-Doリストも、習慣化管理も、スケジュール管理もできて、ポモドーロタイマーも使える。 タスク管理に必要な全ての機能を兼ね備えた、オールインワンな生産性アプリです！You can manage your to-do list, habits, schedules, and even use the Pomo Timer. An all-in-one productivity app that has all the features you need for task management!
+    
+*   ![Image 45](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Карина Спивакова
+    
+    Author of Yandex Zen and YouTube
+    
+    Поэтому как по мне, то это - идеальный планировщик! От души рекомендую всем, кто хочет попробовать устаканить свои задачи и свою жизнь!So it seems to me that this is the perfect planner! From the bottom of my heart I recommend everyone who wants to try to tune in their tasks and your life!
+    
+*   ![Image 47](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    MyEducationDiscount.com
+    
+    The home of EDU discounts for teachers & staff.
+    
+    TickTick, a task management app that helps users to stay organized, is recognizing educators and students with a 25% discount on TickTick Premium. With TickTick for Education, eligible teachers and students get reduced annual pricing and full access to TickTick's all-in-one time management solution.
+    
+*   ![Image 49](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    엔지니어쪼이
+    
+    Mechanical Engineering student
+    
+    이 앱의 진짜 최고 강점은 역시 호환성이다. 회사에서 업무하다가도 데스크탑으로 자유롭게 to-do를 작성하고,이동중 편하게 핸드폰으로 빠르게 메모하고, 아이패드로 확인하고!The real strength of this app is its compatibility. While working at the company, I can write to-dos freely on my desktop, make quick notes on my mobile phone, and check with my iPad!
+    
+*   ![Image 51](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Vitaly Salakhmir
+    
+    IT Project manager
+    
+    Версия TickTick есть для любого девайса — у меня он стоит на телефоне, планшете и рабочем макбуке. ТикТик офигенен.There is a version of TickTick for any device - I have it on my phone, tablet and work MacBook. TickTick is awesome.
+    
+*   ![Image 53](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Yuuk
+    
+    GOOD ONE ：“使っていてワクワクするモノ”を紹介
+    
+    UI全体はシンプルで直感的で、初めてでも使えると思う。チェックリストでは今日のやること、やるべき習慣を見ることができる。 こうやって一覧で見られるのは嬉しい。The UI is simple and intuitive, and very easy to get started with. Lists show all the things I need to do and habits I want to track. Everything is just at a glance.
+    
+*   ![Image 55](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Moe
+    
+    Humanist. Engineer. Tech Geek.
+    
+    Personally the reason I like TickTick is mainly the simplicity. It's minimal and clean. TickTick is packed with features but only the ones that are absolutely necessary.
+    
+*   ![Image 57](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    Yohama Caraballo-Arias M.D.
+    
+    ICOH, IOMSC, professor, writer and researcher @ UNIBO-Italy
+    
+    The Eisenhower matrix to view priorities has been a brilliant innovation. I use Tick Tick every day, especially the habit tracker with reminders and the focus function. I highly recommend it to my colleagues and students
+    
+*   ![Image 59](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    DatingAdvice.com
+    
+    "All things dating" daily
+    
+    TickTick can help singles and couples save time, so they get their work and errands done with enough time left over to spend with the people they love.
+    
+*   ![Image 61](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    freeappsforme.com
+    
+    Free apps reviews
+    
+    TickTick is the most functional solution at the moment, which can be used at home and in business.
+    
+
+### Ready to be more productive?
+
+[Get Started - It's Free](https://ticktick.com/signup)
+
+##### Products
+
+*   [Get Started](https://ticktick.com/features)
+*   [Download Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Education Offer](https://ticktick.com/education)
+*   [Gift Cards](https://ticktick.com/card)
+
+##### Support
+
+*   [Help Center](https://help.ticktick.com/)
+*   [FAQ](https://help.ticktick.com/articles/7055792921664028672)
+*   [Translations](https://ticktick.com/language_support)
+
+##### Resources
+
+*   [URL Scheme](https://help.ticktick.com/articles/7055781515422072832)
+*   [Refer Friends & Earn](https://ticktick.com/refer)
+*   [Integrations](https://ticktick.com/integrations)
+
+##### About
+
+*   [About Us](https://ticktick.com/about)
+*   [Blog](https://blog.ticktick.com/)
+*   [Media](https://s3-us-west-1.amazonaws.com/appest-public/download/press.zip)
+
+##### Legal
+
+*   [Terms](https://ticktick.com/about/tos)
+*   [Privacy](https://ticktick.com/about/privacy)
+*   [License](https://ticktick.com/about/license/web)
+*   [Security](https://ticktick.com/about/security)
+
+*   简体中文
+*   日本語
+*   Français
+*   한국어
+*   Pусский
+*   繁体中文
+*   Português (Brasil)
+*   English
+
+English
+
+[![Image 63: twitter](blob:https://ticktick.com/48825d2a592967853e2219fbf87ed613)](https://twitter.com/intent/user?screen_name=ticktick)[![Image 64: reddit](blob:https://ticktick.com/3fda63f3b8b5e8ea8f11fca6071e81e5)](https://www.reddit.com/r/ticktick/)[![Image 65: facebook](blob:https://ticktick.com/e6d6146a2aebf02f6696daa9678eabba)](https://www.facebook.com/TickTickApp/)[![Image 66: instagram](blob:https://ticktick.com/c1f03ed55a702b6fb6304120c613002b)](https://www.instagram.com/ticktickapp)
+
+© 2024 TickTick Team
+
+[Source: https://ticktick.com/features]
+Features - TickTick
+===============
+
+[](https://ticktick.com/home)
+
+*   [Features](https://ticktick.com/features)
+*   [Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+*   [Features](https://ticktick.com/features)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+[](https://ticktick.com/home)
+
+Organize all aspects  
+of your life
+-----------------------------------
+
+Get to-dos out of your mind, and get them done in less time.
+
+![Image 1](https://d107mjio2rjf74.cloudfront.net/sites/res/features/common/images@2/intro.png)
+
+![Image 2](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/voice.png)![Image 3](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/mail.png)![Image 4](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/widget.png)
+
+#### Add tasks faster and easier
+
+*   Voice inputPress and hold the "+" button, release it when you're done speaking.
+    
+*   Turn emails into tasksEmail inbox is always full of to-dos? Turn them into tasks in a few clicks. [Know More](https://help.ticktick.com/articles/7055782422935240704#add-tasks-via-email)
+    
+*   Siri, widgets and Quick BallFor iPhone, enable "Add tasks via Siri"; for Android phone, enable "Quick Ball"; or add widgets for any phone. They can be of great help!\* Quick Ball is a premium feature.
+    
+
+![Image 5](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/nlp.png)![Image 6](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/duration.png)![Image 7](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/multi-reminders.png)![Image 8](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/location.png)![Image 9](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/repeat.png)
+
+#### Never miss a deadline
+
+*   Smart date parsingInclude due date & time information when creating a new task. TickTick will automatically parse it into a reminder.
+    
+*   Task durationSet up a duration for tasks that last longer.\* Duration is a premium feature.
+    
+*   Multiple reminders or "Annoying Alert"Create multiple reminders for one task, or enable "Annoying Alert" to avoid missing.
+    
+*   Location reminderGet reminded in particular places.\* iOS & Android app only.
+    
+*   Recurring tasksTickTick can help with tasks that occur every few days or every month - any regular schedule.
+    
+
+![Image 10](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/task.png)![Image 11](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/smart-list.png)![Image 12](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/tag.png)![Image 13](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/multi-priority.png)![Image 14](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/sort.png)![Image 15](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/search.png)
+
+#### Clarify what to do next
+
+*   Folders, lists, tasks and check itemsKeep your to-dos organized in four different levels.
+    
+*   Smart lists and filtersView your tasks in smart lists such as "Today" and "Tomorrow", or create your own filters.\* Filter is a premium feature.
+    
+*   TagsCreate and add tags on your tasks to manage them flexibly.
+    
+*   Multi-PriorityMark and sort tasks in four priority levels: High Priority, Medium Priority, Low Priority, No Priority.
+    
+*   SortingTickTick supports six different sorting order. You'll always find a way that meets your needs.
+    
+*   SearchFind the tasks you need in a second.
+    
+
+![Image 16](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/calendar.png)![Image 17](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/subscribe.png)
+
+#### All in one place
+
+*   Various calendar viewsFrom daily to monthly view, feel more in control of your life.
+    
+*   Calendar subscriptionsSubscribe to other calendar apps in TickTick, managing events and tasks in one place. \* Subscribe Calendar is a premium feature.
+    
+
+![Image 18](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/pomo.png)![Image 19](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/white-noise.png)
+
+#### Focus on your goals
+
+*   Pomo TimerPractice the Pomodoro Technique in TickTick. Stay focused, stay productive.
+    
+*   White noisesPlay a white noise in the background while using the Pomo Timer. It helps!
+    
+
+![Image 20](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/share.png)![Image 21](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/assign.png)![Image 22](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/task-activity.png)![Image 23](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/list-activity.png)
+
+#### Collaborate with anyone
+
+*   Sharing listsWhether a work project or a shopping list, it's easy to share with others and get things done together.
+    
+*   Assigning tasksAssign each task to a particular teammate.
+    
+*   Task activitiesView task activities, such as creation date and completion date.
+    
+*   List activitiesKeep track of the entire list as a true leader.\* Web & desktop app only.
+    
+
+![Image 24](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/score.png)![Image 25](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/statistics.png)![Image 26](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/feature@2/summary.png)
+
+#### Keep track of your time
+
+*   Achievement scoresThe more tasks you complete on time, the higher the Achievement Score you get. If a delay occurs, the Score could be decreased as well.
+    
+*   StatisticsLearn the variation of your work efficiency, and thus to improve it in the future.
+    
+*   SummaryReview your workflow in a specific time frame and list.
+    
+
+Add tasks faster and easier
+---------------------------
+
+### Voice input
+
+Press and hold the "+" button, release it when you're done speaking.
+
+![Image 27](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/voice.png)
+
+### Turn emails into tasks
+
+Email inbox is always full of to-dos? Turn them into tasks in a few clicks.
+
+[Know More](https://help.ticktick.com/articles/7055782422935240704#add-tasks-via-email)
+
+![Image 28](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/mail.png)
+
+### Siri, widgets and Quick Ball
+
+For iPhone, enable "Add tasks via Siri"; for Android phone, enable "Quick Ball"; or add widgets for any phone. They can be of great help!
+
+\* Quick Ball is a premium feature.
+
+![Image 29](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/widget.png)
+
+Never miss a deadline
+---------------------
+
+### Smart date parsing
+
+Include due date & time information when creating a new task. TickTick will automatically parse it into a reminder.
+
+![Image 30](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/nlp.png)
+
+### Task duration
+
+Set up a duration for tasks that last longer.
+
+\* Duration is a premium feature.
+
+![Image 31](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/duration.png)
+
+### Multiple reminders or "Annoying Alert"
+
+Create multiple reminders for one task, or enable "Annoying Alert" to avoid missing.
+
+![Image 32](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/multi-reminders.png)
+
+### Location reminder
+
+Get reminded in particular places.
+
+\* iOS & Android app only.
+
+![Image 33](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/location.png)
+
+### Recurring tasks
+
+TickTick can help with tasks that occur every few days or every month - any regular schedule.
+
+![Image 34](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/repeat.png)
+
+Clarify what to do next
+-----------------------
+
+### Folders, lists, tasks and check items
+
+Keep your to-dos organized in four different levels.
+
+![Image 35](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/task.png)
+
+### Smart lists and filters
+
+View your tasks in smart lists such as "Today" and "Tomorrow", or create your own filters.
+
+\* Filter is a premium feature.
+
+![Image 36](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/smart-list.png)
+
+### Tags
+
+Create and add tags on your tasks to manage them flexibly.
+
+![Image 37](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/tag.png)
+
+### Multi-Priority
+
+Mark and sort tasks in four priority levels: High Priority, Medium Priority, Low Priority, No Priority.
+
+![Image 38](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/multi-priority.png)
+
+### Sorting
+
+TickTick supports six different sorting order. You'll always find a way that meets your needs.
+
+![Image 39](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/sort.png)
+
+### Search
+
+Find the tasks you need in a second.
+
+![Image 40](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/search.png)
+
+All in one place
+----------------
+
+### Various calendar views
+
+From daily to monthly view, feel more in control of your life.
+
+![Image 41](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/calendar.png)
+
+### Calendar subscriptions
+
+Subscribe to other calendar apps in TickTick, managing events and tasks in one place.
+
+\* Subscribe Calendar is a premium feature.
+
+![Image 42](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/subscribe.png)
+
+Focus on your goals
+-------------------
+
+### Pomo Timer
+
+Practice the Pomodoro Technique in TickTick. Stay focused, stay productive.
+
+![Image 43](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/pomo.png)
+
+### White noises
+
+Play a white noise in the background while using the Pomo Timer. It helps!
+
+![Image 44](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/white-noise.png)
+
+Collaborate with anyone
+-----------------------
+
+### Sharing lists
+
+Whether a work project or a shopping list, it's easy to share with others and get things done together.
+
+![Image 45](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/share.png)
+
+### Assigning tasks
+
+Assign each task to a particular teammate.
+
+![Image 46](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/assign.png)
+
+### Task activities
+
+View task activities, such as creation date and completion date.
+
+![Image 47](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/task-activity.png)
+
+### List activities
+
+Keep track of the entire list as a true leader.
+
+\* Web & desktop app only.
+
+![Image 48](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/list-activity.png)
+
+Keep track of your time
+-----------------------
+
+### Achievement scores
+
+The more tasks you complete on time, the higher the Achievement Score you get. If a delay occurs, the Score could be decreased as well.
+
+![Image 49](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/score.png)
+
+### Statistics
+
+Learn the variation of your work efficiency, and thus to improve it in the future.
+
+![Image 50](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/statistics.png)
+
+### Summary
+
+Review your workflow in a specific time frame and list.
+
+![Image 51](https://d107mjio2rjf74.cloudfront.net/sites/res/features/tick/mobile/summary.png)
+
+Access TickTick from anywhere
+-----------------------------
+
+Smooth synchronization across 10+ platforms. Keep track of your tasks anytime, anywhere.
+
+[Download TickTick](https://ticktick.com/download)
+
+##### Products
+
+*   [Get Started](https://ticktick.com/features)
+*   [Download Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Education Offer](https://ticktick.com/education)
+*   [Gift Cards](https://ticktick.com/card)
+
+##### Support
+
+*   [Help Center](https://help.ticktick.com/)
+*   [FAQ](https://help.ticktick.com/articles/7055792921664028672)
+*   [Translations](https://ticktick.com/language_support)
+
+##### Resources
+
+*   [URL Scheme](https://help.ticktick.com/articles/7055781515422072832)
+*   [Refer Friends & Earn](https://ticktick.com/refer)
+*   [Integrations](https://ticktick.com/integrations)
+
+##### About
+
+*   [About Us](https://ticktick.com/about)
+*   [Blog](https://blog.ticktick.com/)
+*   [Media](https://s3-us-west-1.amazonaws.com/appest-public/download/press.zip)
+
+##### Legal
+
+*   [Terms](https://ticktick.com/about/tos)
+*   [Privacy](https://ticktick.com/about/privacy)
+*   [License](https://ticktick.com/about/license/web)
+*   [Security](https://ticktick.com/about/security)
+
+*   简体中文
+*   日本語
+*   Français
+*   한국어
+*   Pусский
+*   繁体中文
+*   Português (Brasil)
+*   English
+
+English
+
+[![Image 52: twitter](blob:https://ticktick.com/48825d2a592967853e2219fbf87ed613)](https://twitter.com/intent/user?screen_name=ticktick)[![Image 53: reddit](blob:https://ticktick.com/3fda63f3b8b5e8ea8f11fca6071e81e5)](https://www.reddit.com/r/ticktick/)[![Image 54: facebook](blob:https://ticktick.com/e6d6146a2aebf02f6696daa9678eabba)](https://www.facebook.com/TickTickApp/)[![Image 55: instagram](blob:https://ticktick.com/c1f03ed55a702b6fb6304120c613002b)](https://www.instagram.com/ticktickapp)
+
+© 2024 TickTick Team
+
+[Source: https://ticktick.com/education]
+Educational Discount - TickTick
+=============== 
+
+[](https://ticktick.com/home)
+
+*   [Features](https://ticktick.com/features)
+*   [Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+*   [Features](https://ticktick.com/features)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+[](https://ticktick.com/home)
+
+Power Through Education
+-----------------------
+
+##### TickTick education discount for eligible students and educators. Get 25% off a full year of TickTick Premium **($26.99 after discount)**.
+
+Apply Now
+
+![Image 1](https://ticktick.com/education)
+
+#### Complete the application in 5 minutes
+
+Here are the steps you will go through:
+
+*   Sign up or log in TickTick.
+*   Click Apply Now and submit the required documents.
+*   If qualified, you will get an email with the purchase link.
+*   Click the purchase link to enjoy the 25% discount on TickTick Premium.
+
+[Learn more about eligibility](https://help.ticktick.com/articles/7055781420970541056)
+
+![Image 2](https://ticktick.com/education)
+
+##### Products
+
+*   [Get Started](https://ticktick.com/features)
+*   [Download Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Education Offer](https://ticktick.com/education)
+*   [Gift Cards](https://ticktick.com/card)
+
+##### Support
+
+*   [Help Center](https://help.ticktick.com/)
+*   [FAQ](https://help.ticktick.com/articles/7055792921664028672)
+*   [Translations](https://ticktick.com/language_support)
+
+##### Resources
+
+*   [URL Scheme](https://help.ticktick.com/articles/7055781515422072832)
+*   [Refer Friends & Earn](https://ticktick.com/refer)
+*   [Integrations](https://ticktick.com/integrations)
+
+##### About
+
+*   [About Us](https://ticktick.com/about)
+*   [Blog](https://blog.ticktick.com/)
+*   [Media](https://s3-us-west-1.amazonaws.com/appest-public/download/press.zip)
+
+##### Legal
+
+*   [Terms](https://ticktick.com/about/tos)
+*   [Privacy](https://ticktick.com/about/privacy)
+*   [License](https://ticktick.com/about/license/web)
+*   [Security](https://ticktick.com/about/security)
+
+*   English
+*   简体中文
+*   日本語
+*   Français
+*   한국어
+*   Pусский
+*   繁体中文
+*   Português (Brasil)
+
+English
+
+[![Image 3: twitter](blob:https://ticktick.com/48825d2a592967853e2219fbf87ed613)](https://twitter.com/intent/user?screen_name=ticktick)[![Image 4: reddit](blob:https://ticktick.com/3fda63f3b8b5e8ea8f11fca6071e81e5)](https://www.reddit.com/r/ticktick/)[![Image 5: facebook](blob:https://ticktick.com/e6d6146a2aebf02f6696daa9678eabba)](https://www.facebook.com/TickTickApp/)[![Image 6: instagram](blob:https://ticktick.com/c1f03ed55a702b6fb6304120c613002b)](https://www.instagram.com/ticktickapp)
+
+© 2024 TickTick Team
+
+[Source: https://ticktick.com/upgrade]
+Upgrade - TickTick
+===============
+
+[](https://ticktick.com/home)
+
+*   [Features](https://ticktick.com/features)
+*   [Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+*   [Features](https://ticktick.com/features)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Help Center](https://help.ticktick.com/)
+*   [Sign In](https://ticktick.com/signin)
+*   [Sign Up for Free](https://ticktick.com/signup)
+
+[](https://ticktick.com/home)
+
+Boost your productivity with TickTick Premium
+---------------------------------------------
+
+##### Unlock all premium features on all platforms. Enjoy your organized life to the fullest.
+
+UPGRADE NOWAnnual plan for $35.99 (less than $3/month)
+
+#### Full calendar functionality
+
+Access more calendar views. Set both start and end dates to tasks. You can even subscribe to third-party calendars.
+
+![Image 1](blob:https://ticktick.com/06a46f450d0755c239f733a4c753cc85)
+
+![Image 2](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Customize filters
+
+Unlock the "Filter" feature, and be as flexible as you need with all the Lists.
+
+![Image 4](blob:https://ticktick.com/ebb290793ec2092d1e8280a10bd6a15f)
+
+![Image 5](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Create more, achieve more
+
+Folder, List, Task, Check item - complex projects are handled as a breeze
+
+Know More
+
+![Image 7](blob:https://ticktick.com/09143b26847debb4c6858ec970b31938)
+
+![Image 8](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Keep everything under control
+
+View previous changes for all tasks and lists. Keep track of your shared projects.
+
+![Image 10](blob:https://ticktick.com/5546892601ed8a451e7cc2fb4059da05)
+
+![Image 11](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Track your progress
+
+Check the progress of each task, or see what you've achieved with the "Historical Statistics" feature.
+
+![Image 13](blob:https://ticktick.com/66747a422bcfeaf9c1231a412569aaa9)
+
+![Image 14](blob:https://ticktick.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+### And so much more...
+
+*   ##### Reminders for check item
+    
+    Set up reminders for check item and get reminded separately.
+    
+*   ##### Calendar widgets
+    
+    Check your agenda on home screen.
+    
+*   ##### Estimated Pomo
+    
+    Set up estimated Pomo for tasks and calculate the time consumption for each task.
+    
+*   ##### Premium themes
+    
+    10+ amazing themes - pick whichever you like.
+    
+*   ##### Premium white noises
+    
+    More white noises options when using the Pomo Timer.
+    
+*   ##### Quick Ball for Android
+    
+    Quickly add new tasks from the lock screen.
+    
+
+Ready to accomplish more with Premium?
+--------------------------------------
+
+GO AHEADAnnual plan for $35.99 (less than $3/month)
+
+##### How I get a refund?
+
+Yes, you can apply for a refund within 14 days after purchase. Please submit a ticket via Feedback in the app. Meanwhile, to avoid getting charged again, you're suggested to cancel the subscription from the platform where you purchased TickTick Premium. Please note that if you purchased via App Store on iPhone, you should apply for the refund from Apple.
+
+##### If I forget to renew my subscription, will I lose all my data?
+
+You will not lose your data such as lists, tasks, images, etc.; however, you won't be able to add more or use any other premium features until you complete the renewal.
+
+##### How can I cancel the subscription?
+
+If you upgrade via PayPal on the web, please enter your PayPal and find "Manage automatic payments," then choose TickTick to cancel.  
+  
+If you upgrade via Play Store on your Android device, please open Play Store app, tap "Account" in sidebar and tap "Subscriptions," then find TickTick to cancel.  
+  
+If you upgrade via iTunes on your iOS device, please open TickTick app, tap Avatar, "My Premium," scroll down and tap "Manage" at the bottom, then find TickTick to cancel.
+
+##### What if I have other questions?
+
+Please look for more guides at the Help Center via [https://help.ticktick.com](https://help.ticktick.com/).
+
+##### Products
+
+*   [Get Started](https://ticktick.com/features)
+*   [Download Apps](https://ticktick.com/download)
+*   [Premium](https://ticktick.com/upgrade)
+*   [Education Offer](https://ticktick.com/education)
+*   [Gift Cards](https://ticktick.com/card)
+
+##### Support
+
+*   [Help Center](https://help.ticktick.com/)
+*   [FAQ](https://help.ticktick.com/articles/7055792921664028672)
+*   [Translations](https://ticktick.com/language_support)
+
+##### Resources
+
+*   [URL Scheme](https://help.ticktick.com/articles/7055781515422072832)
+*   [Refer Friends & Earn](https://ticktick.com/refer)
+*   [Integrations](https://ticktick.com/integrations)
+
+##### About
+
+*   [About Us](https://ticktick.com/about)
+*   [Blog](https://blog.ticktick.com/)
+*   [Media](https://s3-us-west-1.amazonaws.com/appest-public/download/press.zip)
+
+##### Legal
+
+*   [Terms](https://ticktick.com/about/tos)
+*   [Privacy](https://ticktick.com/about/privacy)
+*   [License](https://ticktick.com/about/license/web)
+*   [Security](https://ticktick.com/about/security)
+
+*   简体中文
+*   日本語
+*   Français
+*   한국어
+*   Pусский
+*   繁体中文
+*   Português (Brasil)
+*   English
+
+English
+
+[![Image 16: twitter](blob:https://ticktick.com/48825d2a592967853e2219fbf87ed613)](https://twitter.com/intent/user?screen_name=ticktick)[![Image 17: reddit](blob:https://ticktick.com/3fda63f3b8b5e8ea8f11fca6071e81e5)](https://www.reddit.com/r/ticktick/)[![Image 18: facebook](blob:https://ticktick.com/e6d6146a2aebf02f6696daa9678eabba)](https://www.facebook.com/TickTickApp/)[![Image 19: instagram](blob:https://ticktick.com/c1f03ed55a702b6fb6304120c613002b)](https://www.instagram.com/ticktickapp)
+
+© 2024 TickTick Team
+
+Return the result as a JSON object with the following structure:
+{
+  "features": [{"quote": "...", "source": "..."}],
+  "pricing": [{"quote": "...", "source": "..."}],
+  "pros": [{"quote": "...", "source": "..."}],
+  "cons": [{"quote": "...", "source": "..."}]
+}
+
+Response:
+{
+  "features": [
+    {"quote": "Get reminded anytime, anywhere", "source": "https://ticktick.com/home"},
+    {"quote": "Flexible calendar views", "source": "https://ticktick.com/home"},
+    {"quote": "Collaborating with others", "source": "https://ticktick.com/home"},
+    {"quote": "30+ features work seamlessly across 10+ platforms", "source": "https://ticktick.com/home"},
+    {"quote": "Voice input", "source": "https://ticktick.com/features"},
+    {"quote": "Turn emails into tasks", "source": "https://ticktick.com/features"},
+    {"quote": "Smart date parsing", "source": "https://ticktick.com/features"},
+    {"quote": "Multiple reminders or 'Annoying Alert'", "source": "https://ticktick.com/features"},
+    {"quote": "Recurring tasks", "source": "https://ticktick.com/features"},
+    {"quote": "Pomo Timer", "source": "https://ticktick.com/features"},
+    {"quote": "Sharing lists", "source": "https://ticktick.com/features"},
+    {"quote": "Achievement scores", "source": "https://ticktick.com/features"}
+  ],
+  "pricing": [
+    {"quote": "Annual plan for $35.99 (less than $3/month)", "source": "https://ticktick.com/upgrade"},
+    {"quote": "TickTick education discount for eligible students and educators. Get 25% off a full year of TickTick Premium ($26.99 after discount)", "source": "https://ticktick.com/education"}
+  ],
+  "pros": [
+    {"quote": "The UI is simple and intuitive, and very easy to get started with", "source": "https://ticktick.com/home"},
+    {"quote": "TickTick is the most functional solution at the moment, which can be used at home and in business", "source": "https://ticktick.com/home"},
+    {"quote": "You can manage your to-do list, habits, schedules, and even use the Pomo Timer", "source": "https://ticktick.com/home"},
+    {"quote": "TickTick combines an excellent calendar app and an excellent to-do list manager in one", "source": "https://gizmodo.com/days-blurring-together-add-structure-with-these-apps-1846151722"},
+    {"quote": "TickTick is packed with features but only the ones that are absolutely necessary", "source": "https://ticktick.com/home"}
+  ],
+  "cons": [
+    {"quote": "Quick Ball is a premium feature", "source": "https://ticktick.com/features"},
+    {"quote": "Duration is a premium feature", "source": "https://ticktick.com/features"},
+    {"quote": "Filter is a premium feature", "source": "https://ticktick.com/features"},
+    {"quote": "Subscribe Calendar is a premium feature", "source": "https://ticktick.com/features"}
+  ]
+}

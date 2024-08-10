@@ -15,6 +15,7 @@ model User {
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
   customerId   String?       @unique
+  articles     Article[]
   chats        Chat[]
   chatbots     Chatbot[]
   password     Password?
@@ -31,24 +32,24 @@ model Chatbot {
   id                   String      @id @default(uuid())
   createdAt            DateTime    @default(now())
   updatedAt            DateTime    @updatedAt
+  name                 String
   userId               String
   publicName           String      @default("Your Chatbot")
-  originalLogoFilepath String?
-  croppedLogoFilepath  String?
-  lastCrop             Json?
-  themeColor           String      @default("zinc")
   introMessages        String[]    @default(["Hello, how can I help you today?"])
-  openIcon             String      @default("plus")
-  starterQuestions     String[]    @default(["What are your features?"])
-  name                 String
-  systemPrompt         String?
   model                String?     @default("gpt-3.5-turbo-0125")
   responseLength       String?     @default("short")
+  systemPrompt         String?
+  openIcon             String      @default("plus")
+  themeColor           String      @default("zinc")
+  starterQuestions     String[]    @default(["What are your features?"])
+  croppedLogoFilepath  String?
+  lastCrop             Json?
+  originalLogoFilepath String?
   containerRadius      String?     @default("1.0")
   openButtonText       String?
   widgetRestrictedUrls String[]    @default([])
-  installed            Boolean     @default(false)
   embeddedOn           String?
+  installed            Boolean     @default(false)
   lastPingedAt         DateTime?
   chats                Chat[]
   user                 User        @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -86,9 +87,9 @@ model Chat {
   sessionId  String?
   deleted    Boolean        @default(false)
   seen       Boolean?       @default(false)
+  referrer   String?
   status     TicketStatus?  @default(OPEN)
   elapsedMs  Int            @default(0)
-  referrer   String?
   anonUser   AnonymousUser?
   chatbot    Chatbot        @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   user       User?          @relation(fields: [userId], references: [id])
@@ -112,12 +113,9 @@ model Label {
 model AnonymousUser {
   id                   String   @id @default(cuid())
   sessionId            String   @unique
-  chatId               String?  @unique
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
   ip                   String?
-  network              String?
-  version              String?
   city                 String?
   region               String?
   region_code          String?
@@ -156,6 +154,9 @@ model AnonymousUser {
   engine_version       String?
   os_name              String?
   os_version           String?
+  network              String?
+  version              String?
+  chatId               String?  @unique
   chat                 Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
   @@index([chatId])
@@ -167,11 +168,11 @@ model Document {
   updatedAt  DateTime     @updatedAt
   name       String
   content    String?
+  chatbotId  String
+  type       DocumentType @default(RAW)
+  isPending  Boolean      @default(true)
   url        String?
   filepath   String?
-  chatbotId  String
-  isPending  Boolean      @default(true)
-  type       DocumentType @default(RAW)
   chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   embeddings Embedding[]
 }
@@ -243,6 +244,48 @@ model Subscription {
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+// WIP - blog posts
+model Article {
+  id              String      @id @default(cuid())
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  userId          String
+  type            ArticleType @default(ALTERNATIVE)
+  instructions    String?
+  title           String
+  markdownContent String?
+  wordCount       Int?
+  readingTimeMs   Int?
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products        Product[]
+
+  @@index([userId])
+}
+
+model Product {
+  id                   String           @id @default(cuid())
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  position             Int
+  article              Article          @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleId            String
+  screenshot           String?
+  scrapedWebsites      ScrapedWebsite[]
+  relevantUrls         String[]
+  baseUrl              String
+  extractedProductInfo Json?
+}
+
+model ScrapedWebsite {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  url       String
+  content   String?
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
 enum DocumentType {
   WEBSITE
   FILE
@@ -252,4 +295,10 @@ enum DocumentType {
 enum TicketStatus {
   OPEN
   CLOSED
+}
+
+enum ArticleType {
+  ALTERNATIVE
+  COMPARE
+  LISTICLE
 }

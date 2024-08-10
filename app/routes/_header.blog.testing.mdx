@@ -1,0 +1,375 @@
+---
+title: Testing blog
+description: Demo of Markdown syntax and React components in MDX
+published: 2023-10-08
+featured: true
+image: https://images.ctfassets.net/19dvw6heztyg/75jh1Rlr1qUwhvOgByobDn/7489b088b8c0e6565a9371baa6a1c937/community-platforms.jpeg?w=1440&q=75
+---
+
+import { BlogPost } from "~/components/BlogPost";
+import { Link } from "@remix-run/react";
+import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
+
+export const handle = {
+  breadcrumb: () => <Link to="/blog/testing">{frontmatter.title}</Link>,
+};
+
+export const meta = ({ location }) => {
+  const canonicalUrl = generateCanonicalUrl(location.pathname);
+  return [
+    ...generateMetaTags({
+      title: frontmatter.title,
+      description: frontmatter.description,
+      image: frontmatter.image,
+      url: canonicalUrl,
+      type: "article",
+      publishedTime: frontmatter.published,
+    }),
+  ];
+};
+
+<BlogPost post={frontmatter} >
+# 10 Best LiveAgent Alternatives & Competitors in 2024
+
+![Sudarshan Somanathan ClickUp Blog Author Image](https://clickup.com/blog/wp-content/uploads/2024/03/Sudarshan-S.png)
+
+Sudarshan Somanathan  
+Head of Content
+
+August 6, 2024
+
+15min read
+
+Looking for the best LiveAgent alternatives?
+
+LiveAgent is a well-known help desk software solution that boasts over 180 features and more than 150 integrations. It’s designed to streamline customer support and enhance communication across various channels. With its live chat, ticketing system, and AI-powered assistance, LiveAgent aims to provide a comprehensive support experience.
+
+However, while LiveAgent offers a robust set of tools, it may not be the perfect fit for every business.
+
+**Pricing of LiveAgent:**
+
+- **Free Plan:** 7 days ticket history, 1 email address, 1 chat button, 1 contact form.
+- **Paid Plans:** Start at $9/agent/month (billed annually) or $15 monthly.
+
+Doesn’t sound too bad, right? But as your business grows, you might find that LiveAgent lacks certain features or flexibility that other platforms offer.
+
+### Why Do You Need a LiveAgent Alternative?
+
+While LiveAgent is a solid choice, there are several reasons you might want to explore alternatives:
+
+- Limited customization options for advanced workflows.
+- The user interface may feel outdated compared to newer solutions.
+- Some users report challenges with customer support response times.
+- Pricing can escalate quickly as you add more agents.
+
+No need to panic though—we come bearing good news! We’ve carefully curated a list of the top LiveAgent alternatives for any team! Let this list guide you on your search for the best and most productive customer support app for your business. 🙌🏼
+
+## Top 10 LiveAgent Alternatives & Competitors in 2024
+
+### 1. Zendesk
+
+![Optimize your workflow with Zendesk's customizable features](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243480/screenshots/miessve4f2vmgdkwg2y6.png)
+
+[Explore Zendesk](https://www.zendesk.com/)
+
+Zendesk is a leading customer service platform that provides a comprehensive suite of tools to manage customer interactions across various channels. With its user-friendly interface and powerful features, Zendesk helps businesses streamline their support processes and enhance customer satisfaction.
+
+#### Features
+
+- **Multi-channel support:** Manage customer interactions via email, chat, social media, and more.
+- **Customizable workflows:** Tailor your support processes to fit your business needs.
+- **AI-powered assistance:** Automate responses and improve efficiency with AI tools.
+
+#### Pros
+
+- Intuitive interface that is easy to navigate.
+- Extensive integration options with other business tools.
+- Strong reporting and analytics capabilities.
+
+#### Cons
+
+- Can become expensive as you scale.
+- Some users report a steep learning curve for advanced features.
+
+#### Pricing
+
+- **Essential:** $19 per agent/month (billed annually).
+- **Team:** $49 per agent/month (billed annually).
+- **Professional:** $99 per agent/month (billed annually).
+- **Enterprise:** Custom pricing available.
+
+---
+
+### 2. Help Scout
+
+![Help Scout product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243478/screenshots/s0bqdlhwi2sszemvit6e.png)
+
+[Explore Help Scout](https://www.helpscout.com/)
+
+Help Scout is a customer support platform designed to provide a seamless experience for both customers and support teams. With its focus on simplicity and efficiency, Help Scout allows teams to manage customer inquiries without the clutter of traditional help desk software.
+
+#### Features
+
+- **AI-powered email replies:** Draft a reply to any email in just one click using AI.
+- **24/7 self-service assistant:** AI answers customer questions instantly.
+- **Condense long email threads:** Quickly summarize conversations into bullet points.
+
+#### Pros
+
+- Customers’ CSAT scores are 25% higher than the industry average.
+- Respond to 56% more customer messages in the first year.
+- Exceptional experiences can turn your customers into lifelong fans.
+
+#### Cons
+
+- AI isn’t a magic wand for customer service.
+- Outsourcing moments to AI may save costs now, but it could be costly over time.
+
+#### Pricing
+
+- **Basic:** $25 per user/month (limit 25).
+- **Plus:** $50 per user/month.
+- **Pro:** $65 per user/month (10+ users).
+
+---
+
+### 3. Intercom
+
+![Intercom product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243476/screenshots/lmfwdv3dldavm0zstwcm.png)
+
+[Explore Intercom](https://www.intercom.com/)
+
+Intercom is a customer messaging platform that helps businesses engage with their customers through personalized communication. With its powerful AI tools and automation features, Intercom enables teams to provide timely support and enhance customer experiences.
+
+#### Features
+
+- **Fin AI Agent:** Provides instant, accurate answers for customers 24/7.
+- **AI Insights & Reporting:** Performance-boosting AI optimization tools.
+- **Maximize productivity:** AI-enabled inbox for support agents.
+
+#### Pros
+
+- Groundbreaking results with double-digit gains in engagement and resolution rates.
+- Seamless integration with existing systems.
+- High customer satisfaction rates.
+
+#### Cons
+
+- Fin AI Agent usage is measured in ‘resolutions.’
+- Intercom is billed in United States Dollars (USD) only.
+
+#### Pricing
+
+- **Essential:** $29 per seat/month.
+- **Advanced:** $85 per seat/month.
+- **Expert:** $132 per seat/month.
+
+---
+
+### 4. Freshdesk
+
+![Freshdesk product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243475/screenshots/bjmbkq7vspz711fjt3y5.png)
+
+[Explore Freshdesk](https://www.freshworks.com/freshdesk/)
+
+Freshdesk is a cloud-based customer support software that helps businesses manage customer inquiries efficiently. With its user-friendly interface and powerful automation features, Freshdesk enables teams to deliver exceptional customer service.
+
+#### Features
+
+- **Unified workspace:** Manage, prioritize, and resolve tickets at scale.
+- **AI-powered automations:** Eliminate redundancy and streamline support processes.
+- **Collaboration tools:** Empower agents to engage with the right experts.
+
+#### Pros
+
+- Scales with your business needs.
+- Ticket automation and screen-sharing capabilities.
+- Strong collaboration features.
+
+#### Cons
+
+- Some users report limitations in customization options.
+
+#### Pricing
+
+- **Free:** Up to 10 agents.
+- **Growth:** $15/agent/month (billed annually).
+- **Pro:** $49/agent/month (billed annually).
+- **Enterprise:** $79/agent/month (billed annually).
+
+---
+
+### 5. Crisp
+
+![Crisp product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243477/screenshots/kdp76io4d38ycaorzawm.png)
+
+[Explore Crisp](https://crisp.chat/en/)
+
+Crisp is a customer engagement platform that centralizes all your conversations in one place. With its shared inbox and automation features, Crisp helps businesses provide top-notch customer support while improving team collaboration.
+
+#### Features
+
+- **Shared Inbox:** Centralizes all conversations from various channels.
+- **Co-browsing software:** Provides real-time assistance with shared browsing.
+- **Chatbot builder:** Create workflows through a no-code chatbot builder.
+
+#### Pros
+
+- Designed for team collaboration and real-time communication.
+- Automates repetitive tasks effectively.
+- Used by over 500,000 brands to improve customer experience.
+
+#### Cons
+
+- Some features may incur additional costs.
+- VAT is not included in plan prices.
+
+#### Pricing
+
+- **Free:** Basic plan for personal websites.
+- **Pro:** $25/month per workspace.
+- **Unlimited:** $95/month per workspace.
+
+---
+
+### 6. Front
+
+![Front product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243482/screenshots/egedug7g0qdw6eh33ekx.png)
+
+[Explore Front](https://front.com/)
+
+Front is a collaborative inbox that helps teams manage customer conversations from various channels in one platform. With its powerful automation and analytics features, Front enables businesses to enhance their customer support operations.
+
+#### Features
+
+- **Centralized communication:** Consolidate messages from all channels.
+- **No-code workflows:** Automate processes easily.
+- **AI-enabled bot:** Answer live chats instantly.
+
+#### Pros
+
+- Significant productivity improvements reported by users.
+- Flexible and powerful platform for managing customer interactions.
+- High customer satisfaction rates.
+
+#### Cons
+
+- Losing Front could impact collaboration capabilities.
+
+#### Pricing
+
+- **Starter:** $19/seat/month (billed annually).
+- **Growth:** $59/seat/month (billed annually).
+- **Enterprise:** Custom pricing available.
+
+---
+
+### 7. Gorgias
+
+![Gorgias product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243488/screenshots/zf43rnpmnyxf6leukbpo.png)
+
+[Explore Gorgias](https://www.gorgias.com/)
+
+Gorgias is a customer support platform designed specifically for eCommerce businesses. With its AI-driven automation and integration capabilities, Gorgias helps teams streamline their support processes and enhance customer satisfaction.
+
+#### Features
+
+- **Automate 60% of support:** Focus on high-value conversations.
+- **Centralized communication:** Connect all channels for efficient support.
+- **AI-driven help center:** Create a unique help center for your brand.
+
+#### Pros
+
+- Helps 15,000 eCommerce brands automate customer experience.
+- Increases customer satisfaction and drives loyalty.
+- Fast response times with AI assistance.
+
+#### Cons
+
+- Support can be seen as costly.
+- Billing structure may be confusing for some users.
+
+#### Pricing
+
+- **Starting at:** $360/month.
+- **Free trial available.**
+
+---
+
+### 8. Tidio
+
+![Tidio product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243560/screenshots/wve1xg5hbe2rwmhrxcdq.png)
+
+[Explore Tidio](https://www.tidio.com/)
+
+Tidio is a live chat and chatbot platform that helps businesses engage with their customers in real-time. With its AI capabilities and user-friendly interface, Tidio enables teams to provide quick and effective support.
+
+#### Features
+
+- **AI-powered solutions:** Solve up to 70% of customer problems.
+- **Real-time support:** Assist website visitors instantly.
+- **No-code automation:** Boost lead generation with automated workflows.
+
+#### Pros
+
+- Fast response times with AI assistance.
+- Significant decrease in waiting times reported.
+- Evolving AI capabilities as your business grows.
+
+#### Cons
+
+- Limited availability for certain industries.
+- Initial free conversations are limited.
+
+#### Pricing
+
+- **Free forever:** No credit card required.
+- **Starter:** $29/month for 100 handled conversations.
+- **Growth:** Starts at $59/month for up to 250 handled conversations.
+
+---
+
+### 9. LiveAgent
+
+![LiveAgent product example](https://res.cloudinary.com/dklrem6cd/image/upload/v1723243477/screenshots/azqc8zc9avymx7vpqrow.png)
+
+[Explore LiveAgent](https://www.liveagent.com/)
+
+LiveAgent is a help desk software solution with over 180 features and more than 150 integrations available. It aims to delight customers with fast and error-free responses, utilizing AI to streamline support processes.
+
+#### Features
+
+- **AI Answer Assistant:** Generates polished email replies.
+- **Fastest chat widget:** Easy to implement and increases earnings.
+- **Smart email ticketing:** Ensures no emails get lost.
+
+#### Pros
+
+- 24/7 customer support year-round.
+- Fast implementation and user-friendly interface.
+- Supports 45 language translations.
+
+#### Cons
+
+- Service is charged according to the price list.
+- Outdated UI design.
+
+#### Pricing
+
+- **Free:** 7 days ticket history, 1 email address, 1 chat button.
+- **Paid Plans:** Start at $9/agent/month (billed annually).
+
+---
+
+### 10. Your Best Alternative
+
+Finding a decent LiveAgent alternative doesn’t have to be a chore. 🧹
+
+Any of these 10 LiveAgent alternatives will offer the support, features, and functionality your team has been dreaming of. Especially one in particular—[Zendesk](https://www.zendesk.com/). 🙂
+
+**Why?** Tons of powerful customer support features including multi-channel support, customizable workflows, and AI-powered assistance, all designed to enhance your customer interactions and streamline your support processes.
+
+[Sign up for Zendesk today](https://www.zendesk.com/) to take your customer support to the next level!
+
+</BlogPost>
+```

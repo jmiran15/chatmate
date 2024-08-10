@@ -1,0 +1,1488 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-09T22:45:07.885Z
+Model: gpt-4o-mini
+
+Request:
+[user]: Given the following scraped website content from multiple pages, extract all relevant information needed to write features, pricing, pros, and cons sections about the product. Use direct quotes from the provided content and do not summarize or paraphrase. Include the source URL for each piece of information.
+
+Content:
+[Source: https://www.gorgias.com/pricing]
+Gorgias Pricing – Build the customer support suite that fits your needs
+===============
+                
+
+[![Image 1](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6539f4e75f5768f222ef3a99_gorgias-new-logo-white.svg)](https://www.gorgias.com/)
+
+Product tour
+
+Product
+
+[Gorgias Helpdesk All-in-one support inbox to respond to shoppers](https://www.gorgias.com/products/helpdesk)[Gorgias Automate Instant resolutions for happier customers and a happier team](https://www.gorgias.com/products/automate)[Gorgias Convert Elevate your website conversion rate with powerful onsite campaigns](https://www.gorgias.com/products/convert)
+
+Capabilities
+
+[Omnichannel Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do](https://www.gorgias.com/pricing#)[Artificial Intelligence Lightspeed AI features to get more done in a fraction of the time](http://www.gorgias.com/powered-by-ai)[Statistics Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do](https://www.gorgias.com/pricing#)[App Store All your favorite apps, connected to Gorgias](http://www.gorgias.com/apps)
+
+Ecommerce platforms
+
+[Shopify](https://www.gorgias.com/ecommerce/shopify)[![Image 2](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/653776e161118c84d45e6584_shopify-plus.svg) Gorgias Automate](https://www.gorgias.com/pricing#)[BigCommerce](https://www.gorgias.com/ecommerce/bigcommerce)[Magento](https://www.gorgias.com/ecommerce/magento)[WooCommerce](https://www.gorgias.com/ecommerce/woocommerce)
+
+### See Gorgias in action
+
+[![Image 3](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6530c77cedc0cb58fe71055b_prodiucts-dropdown-screenshot.avif)](https://www.gorgias.com/product-tour)
+
+[Take the Tour ↗︎](https://www.gorgias.com/product-tour)
+
+Centralize 1:1 interactions
+
+[Email](https://www.gorgias.com/product/email)[Social media](https://www.gorgias.com/product/social-media)[Live chat](https://www.gorgias.com/product/live-chat)[Voice](https://www.gorgias.com/product/voice)[SMS (New!)](https://www.gorgias.com/product/sms)
+
+AUTOMATE YOUR WORK
+
+[Rules Automate with precision](https://www.gorgias.com/product/rules)[Self-service](https://www.gorgias.com/product/self-service)[Intents & sentiment detection](https://www.gorgias.com/product/intent-sentiment-detection)[Macros Respond faster](https://www.gorgias.com/product/macros)[Automation add-on Respond faster](https://www.gorgias.com/product/automation-add-on)[Flows Respond faster](https://www.gorgias.com/product/flows)
+
+EMPOWER SUPPORT TEAMS
+
+[Order management](https://www.gorgias.com/product/order-management)[Customer Sidebar](https://www.gorgias.com/product/customer-sidebar)[Multi-Stores](https://www.gorgias.com/product/multi-stores)[Views](https://www.gorgias.com/product/views)
+
+MEASURE & IMPROVE
+
+[Revenue Statistics Know your bottom line](https://www.gorgias.com/product/revenue-statistics)[Live Statistics Monitor performance in real time](https://www.gorgias.com/product/live-statistics)[Satisfaction survey Keep your customers happy](https://www.gorgias.com/product/satisfaction-survey)[Support performance Your control center](https://www.gorgias.com/product/support-performance)
+
+PLATFORMS
+
+[![Image 4](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a82c4ab44ae3d373b1c_Shopify.svg) Shopify](https://www.gorgias.com/pricing#)[![Image 5](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7fb999eeef77994397_Magento.svg) Magento](https://www.gorgias.com/pricing#)[![Image 6](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7c7b974d1807e27c8f_BigCommerce.svg) BigCommerce New](https://www.gorgias.com/pricing#)
+
+OVERVIEW
+
+[![Image 7](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7f54a73c1ca914e578_Product%20Overview.svg) Product overview](https://www.gorgias.com/product)[![Image 8](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7db282b861c2d39628_Machine%20Learning%20AI.svg) Machine learning & A.I.](https://www.gorgias.com/pricing#)[![Image 9](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7c29d8934b2c52d724_Customer%20Stories.svg) Customer stories](https://www.gorgias.com/customers)
+
+[Pricing](https://www.gorgias.com/pricing)
+
+Partners
+
+Tech Partners
+
+[Become a Tech Partner](https://www.gorgias.com/tech-partner)[Build an app](https://www.gorgias.com/app-partners)[Browse the App Store](https://www.gorgias.com/apps)[Refer a customer](https://www.gorgias.com/partner-referral)
+
+Agency Partners
+
+[Become an Agency Partner](https://www.gorgias.com/partner-program)[Find a partner](https://agencies.gorgias.com/)[Agency Partner Portal](https://dash.partnerstack.com/handshake)[Refer a client](https://www.gorgias.com/partner-referral)
+
+Tech Partners
+
+[Build an integration](https://www.gorgias.com/app-partners)[Browse the App Store](https://www.gorgias.com/apps)[Developer Portal](https://www.gorgias.com/pricing#)
+
+Agency partners
+
+[Become a Agency Partner](https://www.gorgias.com/partner-program)[Find a partner](https://agencies.gorgias.com/)[Agency Partner Portal](https://dash.partnerstack.com/handshake)
+
+Resources
+
+Growth
+
+[Blog](https://www.gorgias.com/blog)[CX Growth Playbook](https://www.gorgias.com/playbooks)[Ecommerce tools](https://www.gorgias.com/tools)[CS Benchmark report](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)
+
+Success
+
+[Customer stories](https://www.gorgias.com/customers)[Gorgias Academy](https://academy.gorgias.com/trainings?utm_source=main-website&utm_medium=meni&utm_campaign=resources-menu)[Webinars](https://app.getcontrast.io/gorgias?tab=upcoming)[Help center](https://docs.gorgias.com/)[Gorgias Community](https://community.gorgias.com/)
+
+Connection
+
+[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[App store](https://www.gorgias.com/apps)[Refer a friend](https://www.gorgias.com/referral-program)[Events](https://www.gorgias.com/events)
+
+Growth
+
+[Blog](https://www.gorgias.com/pricing#)[CX Growth Playbook](https://www.gorgias.com/pricing#)[Ecommerce tools](https://www.gorgias.com/tools)[CS Benchmark report](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)
+
+Success
+
+[Customer stories](https://www.gorgias.com/customers)[Gorgias Academy](https://academy.gorgias.com/?utm=main_website_resources_menu)[Webinars](https://www.gorgias.com/pricing#)[Help center](https://docs.gorgias.com/)[Gorgias Community](https://community.gorgias.com/)
+
+Connection
+
+[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[App store](https://www.gorgias.com/apps)[Refer a friend](https://www.gorgias.com/referral-program)[Refer a client](https://www.gorgias.com/partner-referral)
+
+[Log in](https://www.gorgias.com/login)
+
+[Sign up free](https://www.gorgias.com/signup)
+
+[Book a Demo](https://www.gorgias.com/pricing#)
+
+![Image 10](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6643765ff5c5ab4640f84714_BG.webp)
+
+Build the support suite that fits your needs
+============================================
+
+### Select the helpdesk plan and preferred automation level based on your support ticket volume. Then try Gorgias for free — no credit card required.
+
+1\. Helpdesk
+
+2. Automate
+
+3\. Add-ons
+
+My online store has more than
+
+1500
+
+monthly support tickets
+
+support tickets per month
+
+I don't know
+
+On average, brands receive one support ticket for every 15 orders. How many orders does your store generate every month?
+
+On average you will create X support tickets per month
+
+[Calculate](https://www.gorgias.com/pricing#)
+
+[![Image 11](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+0
+
+2,000
+
+4,000
+
+6,000
+
+8,000
+
+10,000
+
+All Helpdesk plans include:
+
+[![Image 12](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Helpdesk Helpdesk Centralize all communication and customer information to increase support efficiency. ![Image 13](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588bf79e9627e51289f_tooltip%20vis%20-%20helpdesk.avif) ![Image 14](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 15](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Multi-channel Multi-channel Connect all your channels to talk where they are, such as: email, chat, Facebook, Instagram, SMS, Voice, WhatsApp. ![Image 16](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c58891350fe6d1778af6_tooltip%20vis%20-%20multichannel.avif) ![Image 17](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 18](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) 100+ integrations 100+ integrations Connect your entire ecommerce tech stack to your helpdesk: Shopify, Magento, BigCommerce, WooCommerce, Klaviyo, Yotpo, Attentive, Loop Returns, Recharge, AfterShip, and many more. ![Image 19](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c780de8c0b0c5b6a7cd6_Capture%20d%E2%80%99e%CC%81cran%202024-05-07%20a%CC%80%2008.17.31.avif) ![Image 20](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 21](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Live Chat Live Chat Talk to your website visitors in real time to provide instant support. ![Image 22](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588ff8b23e08bc2b441_tooltip%20vis%20-%20live%20chat.avif) ![Image 23](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 24](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Macros Macros Use pre-defined templates including customer variables to speed up support to common customer inquiries ![Image 25](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6658a96565efaa96d260ab60_tooltip%20vis%20-%20macros%20(1).avif) ![Image 26](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 27](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6627ca9f9271f4f7047a4443_search-black%20(1).svg) See all features Multi-channel Support shoppers straight from your site and solve their questions before they become email tickets. ![Image 28](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661d3313efdebc847f39b146_placeholder-image.svg) ![Image 29](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)
+
+Your recommended plan
+
+Pro
+
+Pro
+
+Advanced
+
+Enterprise  
+‍
+
+2,000
+
+tickets/month
+
+$360/mo
+
+[Contact us](https://www.gorgias.com/pricing#)
+
+All Helpdesk plans include:
+
+[![Image 30](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Helpdesk Helpdesk Centralize all communication and customer information to increase support efficiency. ![Image 31](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588bf79e9627e51289f_tooltip%20vis%20-%20helpdesk.avif) ![Image 32](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 33](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Multi-channel Multi-channel Connect all your channels to talk where they are, such as: email, chat, Facebook, Instagram, SMS, Voice, WhatsApp. ![Image 34](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c58891350fe6d1778af6_tooltip%20vis%20-%20multichannel.avif) ![Image 35](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 36](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) 100+ integrations 100+ integrations Connect your entire ecommerce tech stack to your helpdesk: Shopify, Magento, BigCommerce, WooCommerce, Klaviyo, Yotpo, Attentive, Loop Returns, Recharge, AfterShip, and many more. ![Image 37](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c780de8c0b0c5b6a7cd6_Capture%20d%E2%80%99e%CC%81cran%202024-05-07%20a%CC%80%2008.17.31.avif) ![Image 38](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 39](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Live Chat Live Chat Talk to your website visitors in real time to provide instant support. ![Image 40](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588ff8b23e08bc2b441_tooltip%20vis%20-%20live%20chat.avif) ![Image 41](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 42](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Macros Macros Use pre-defined templates including customer variables to speed up support to common customer inquiries ![Image 43](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6658a96565efaa96d260ab60_tooltip%20vis%20-%20macros%20(1).avif) ![Image 44](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 45](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6627ca9f9271f4f7047a4443_search-black%20(1).svg) See all features Multi-channel Support shoppers straight from your site and solve their questions before they become email tickets. ![Image 46](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661d3313efdebc847f39b146_placeholder-image.svg) ![Image 47](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)
+
+[Next step](https://www.gorgias.com/pricing#)[Talk to sales](https://www.gorgias.com/demo)
+
+![Image 48](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662fd40536de801d0d577a57_release_alert.svg)
+
+To see the most value from Gorgias, brands typically try to automate at least 30% of support interactions.
+
+I want automation to answer
+
+30 %
+
+of my support tickets
+
+0%
+
+10%
+
+20%
+
+30%
+
+40%
+
+50%
+
+60%
+
+All Automate plans include:
+
+[![Image 49](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) AI Agent AI Agent Centralize all communication and customer information to increase support efficiency. ![Image 50](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c5889b0d32a0b5732f5e_tooltip%20vis%20-%20ai%20agent.avif) ![Image 51](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 52](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Quick Responses Quick responses Deflect your most common queries with one-click FAQs. ![Image 53](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6658aa41ecff9e27c5325cef_tooltip%20vis%20-%20quick%20responses%20(2).avif) ![Image 54](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 55](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Article Recommendations Article recommendations Leverage AI to instantly answer customer questions with knowledge from your Help Center. ![Image 56](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588313ad981b3657756_tooltip%20vis%20-%20article%20recommendations.avif) ![Image 57](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 58](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Autoresponder Auto-responder Answer the most common ecommerce support requests (order tracking, return requests, and common FAQs) ![Image 59](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639cd9b9f70a588e5722049_tooltip%20vis%20-%20quick%20responses%20(1).avif) ![Image 60](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 61](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Flows Flows Build branching workflows to give personalized answers to FAQ, product suggestions, and simple actions. ![Image 62](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588fa37610d177a2e8c_tooltip%20vis%20-%20flows.avif) ![Image 63](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 64](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Order Management Order management Let customers track orders with real-time Shopify data and easily request returns and cancellations or report order issues. ![Image 65](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588f00b50b2d32545cd_tooltip%20vis%20-%20order%20managment.avif) ![Image 66](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)
+
+Your monthly automations
+
+300
+
+Tier 1
+
+Tier 2
+
+Tier 3
+
+Tier 4
+
+Tier 5
+
+Tier 6
+
+Tier 7
+
+Tier 8
+
+$360
+
+/mo
+
+[Contact us](https://www.gorgias.com/pricing#)
+
+All Automate plans include
+
+[![Image 67](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) AI Agent AI Agent Centralize all communication and customer information to increase support efficiency. ![Image 68](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c5889b0d32a0b5732f5e_tooltip%20vis%20-%20ai%20agent.avif) ![Image 69](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 70](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Quick Responses Quick responses Use pre-defined templates including customer variables to speed up support to common customer inquiries. ![Image 71](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639cd9b9f70a588e5722049_tooltip%20vis%20-%20quick%20responses%20(1).avif) ![Image 72](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 73](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Article recommendations Article recommendations Support shoppers straight from your site and solve their questions before they become email tickets. ![Image 74](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588313ad981b3657756_tooltip%20vis%20-%20article%20recommendations.avif) ![Image 75](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 76](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Auto-Responder Auto-responder Support shoppers straight from your site and solve their questions before they become email tickets. ![Image 77](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639cd9b9f70a588e5722049_tooltip%20vis%20-%20quick%20responses%20(1).avif) ![Image 78](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 79](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Flows Flows Support shoppers straight from your site and solve their questions before they become email tickets. ![Image 80](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588fa37610d177a2e8c_tooltip%20vis%20-%20flows.avif) ![Image 81](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)[![Image 82](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/5eb16cfb7cd72d41e5be40dc_check-black.svg) Order Management Order management Support shoppers straight from your site and solve their questions before they become email tickets. ![Image 83](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6639c588f00b50b2d32545cd_tooltip%20vis%20-%20order%20managment.avif) ![Image 84](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662ba98e17392698f2c74a80_Polygon%201.svg)](https://www.gorgias.com/pricing#)
+
+[Next step](https://www.gorgias.com/pricing#)[I don't need Automate](https://www.gorgias.com/pricing#)
+
+Voice
+
+Custom Price
+
+$0
+
+/mo
+
+Receive inbound & make outbound calls
+
+Monthly Voice tickets
+
+No Voice tickets
+
+[Select link](https://www.gorgias.com/pricing#)
+
+SMS
+
+Custom Price
+
+$0
+
+/mo
+
+Send and receive SMS from Gorgias
+
+Monthly SMS tickets
+
+No SMS tickets
+
+[Select link](https://www.gorgias.com/pricing#)
+
+Plan Summary
+
+Select your product(s) to get your quote.
+
+[![Image 85](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6632174918264bd79dc7655f_gorgias-helpdesk_logo.svg) Pro](https://www.gorgias.com/pricing#)
+
+$360/mo
+
+[![Image 86](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6632174611ed170344f0bd2f_gorgias-automate_logo.svg) Tier 1](https://www.gorgias.com/pricing#)
+
+$0/mo
+
+[![Image 87](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+![Image 88](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/66321752c7f1e9e3130b0c1c_gorgias-voice_logo.svg)
+
+Tier 1
+
+[![Image 89](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+$0/mo
+
+[![Image 90](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+custom
+
+[![Image 91](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+![Image 92](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6632176a30823cbf32b1a764_gorgias-sms_logo.svg)
+
+Tier 1
+
+[![Image 93](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+$0/mo
+
+[![Image 94](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+custom
+
+[![Image 95](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac257e651e3209eea8461_close%20signup.svg)](https://www.gorgias.com/pricing#)
+
+Total
+
+$360/mo
+
+![Image 96](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662fd40536de801d0d577a57_release_alert.svg)
+
+Switch to annual and save 2 months
+
+ Monthly
+
+ Annual
+
+Monthly ROI
+
+Time saved
+
+48 hrs
+
+Money saved
+
+$300
+
+[How is ROI calculated?](https://www.gorgias.com/pricing#)
+
+[Start free trial](https://www.gorgias.com/signup-2?ref=pricing)
+
+[Start free trial](https://www.gorgias.com/signup-2?ref=pricing)[Book a demo](https://www.gorgias.com/demo?ref=pricing)
+
+[Start free trial](https://www.gorgias.com/signup-2?ref=pricing)[Book a demo](https://www.gorgias.com/demo?ref=pricing)
+
+[Book a demo](https://www.gorgias.com/demo?ref=pricing)[Start free trial](https://www.gorgias.com/signup-2?ref=pricing)
+
+[Talk to sales](https://www.gorgias.com/demo?ref=pricing)
+
+Thank you! Your submission has been received!
+
+Oops! Something went wrong while submitting the form.
+
+Helping 15,000 ecommerce brands automate CX with the power of AI
+
+![Image 97](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f0f1c844ddf7eff62ad9_wunderkeks.avif)
+
+![Image 98](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f147a292c35fabe5b8ea_dr-barbara%20sturm.webp)
+
+![Image 99](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f10d54d83e6af33f4a0c_wallys.webp)
+
+![Image 100](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/61efe73840cd6db96f532c76_olipop-logo%20(1).avif)
+
+![Image 101](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f04b8ee97b4139f0f5eec9c_bokksu-1.svg)
+
+![Image 102](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a6217d606ce53594885d_dark.svg)
+
+![Image 103](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a0705c64239df6a2be0f_dark.svg)
+
+![Image 104](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05bbc12593861174dd63e3_timbuk2-1.svg)
+
+![Image 105](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f0f1c844ddf7eff62ad9_wunderkeks.avif)
+
+![Image 106](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f147a292c35fabe5b8ea_dr-barbara%20sturm.webp)
+
+![Image 107](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f10d54d83e6af33f4a0c_wallys.webp)
+
+![Image 108](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/61efe73840cd6db96f532c76_olipop-logo%20(1).avif)
+
+![Image 109](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f04b8ee97b4139f0f5eec9c_bokksu-1.svg)
+
+![Image 110](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a6217d606ce53594885d_dark.svg)
+
+![Image 111](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a0705c64239df6a2be0f_dark.svg)
+
+![Image 112](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05bbc12593861174dd63e3_timbuk2-1.svg)
+
+Frequently Asked Questions
+--------------------------
+
+How many tickets a month will I use?
+
+As a general rule, most stores receive tickets at a rate of 2-10% of their overall order volume. Your volume of tickets will depend on your industry, product complexity, and level of customer self-service.
+
+Do I have to pay for all messages received?
+
+No. Think of each billable ticket as a two-way conversation. An incoming request only becomes a ticket when you respond from within Gorgias. If you close a ticket before responding (because it's spam or a no-reply message), you won't be charged.
+
+How many tickets a day can a rep handle?
+
+Top reps using built-in automations and Macros close out 100-200 tickets per day.
+
+Do I have to pay state sales tax on my Gorgias subscription?
+
+You may be required to pay state sales tax on your Gorgias subscription. We determine the applicable sales tax for your organization based on your billing address. More information here: gorgias.com/legal/master-subscription-agreement
+
+Where is pricing for Gorgias Convert?
+
+Gorgias Convert is a new product used to increase on-site conversion with proactive campaigns. You can find all pricing details here: gorgias.com/products/convert#pricing
+
+What is a billable ticket?
+
+A billable ticket is a conversation initiated through one of the integrated channels which includes a message from an agent or a rule using Gorgias. A ticket that receives a response by an agent or a rule will only be counted as one billable ticket regardless of how many messages are sent or received on the thread. Note for chat tickets: If a customer responds to a chat ticket after 3 days of inactivity, this will create a new ticket which will be billable.
+
+What is an automated interaction?
+
+An automated interaction is a customer request that is resolved without any agent involvement, by using one of the features of the Automation. If an agent gets involved, the interaction does not count as successfully automated. For example, if a shopper starts a Quick Response Flow in the Chat widget and messages an agent with a follow-up question within 24 hours, it will count as a billable ticket (and not an automated interaction).
+
+What is a Voice ticket?
+
+Tickets become Voice tickets when at least one phone call takes place between the customer and your team. Once a ticket becomes a Voice ticket, you can have multiple calls at no extra charge.
+
+What is an SMS ticket?
+
+Tickets become SMS tickets when at least one text message is sent from a customer to your team or vice versa. Once a ticket becomes an SMS ticket, you can continue texting at no extra charge.
+
+Do I have to pay per number of agents?
+
+No. Gorgias is billed on the number of support tickets you manage, not the size of your team. The means you have the freedom to staff up or down without it affecting your billing.
+
+Set up and start delighting customers in minutes
+------------------------------------------------
+
+Start managing your CX all in one place within minutes.
+
+[![Image 113](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac1096853962bcd5d449b_close_black_24dp.svg)](https://www.gorgias.com/pricing#)
+
+Compare our Helpdesk plans in details
+-------------------------------------
+
+Display only differences
+
+features
+
+### Starter
+
+[Select Plan](https://www.gorgias.com/pricing#)
+
+### Basic
+
+[Select Plan](https://www.gorgias.com/pricing#)
+
+### Pro
+
+[Select Plan](https://www.gorgias.com/pricing#)
+
+### Advanced
+
+[Select Plan](https://www.gorgias.com/pricing#)
+
+### Entreprise
+
+[Select Plan](https://www.gorgias.com/pricing#)
+
+### Basic
+
+Billable tickets included
+
+50 / month
+
+300 / month
+
+2,000 / month
+
+5,000 / month
+
+Custom
+
+Overflow ticket cost
+
++$0.40 / ticket
+
++$40 / 100 tickets
+
++$36 / 100 tickets
+
++$36 / 100 tickets
+
+Custom
+
+User seats
+
+3
+
+500
+
+500
+
+500
+
+500
+
+### Connect your ecommerce store
+
+Shopify / Shopify Plus
+
+![Image 114](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 115](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 116](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 117](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 118](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+Bigcommerce
+
+—
+
+![Image 119](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 120](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 121](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 122](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+Magento
+
+—
+
+—
+
+![Image 123](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 124](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 125](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+WooCommerce
+
+![Image 126](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 127](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 128](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 129](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 130](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+Multi-stores
+
+Unlimited
+
+Unlimited
+
+Unlimited
+
+Unlimited
+
+Unlimited
+
+Bigcommerce
+
+—
+
+![Image 131](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 132](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 133](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+![Image 134](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/655496759e7e9b3f9c1049f6_check_circle.svg)
+
+Features
+
+Starter
+
+Basic
+
+Pro
+
+Advanced
+
+Enterprise
+
+Billable tickets included
+
+50 / month
+
+300 / month
+
+2,000 / month
+
+5,000 / month
+
+Custom  
+
+Plan price
+
+$10
+
+$60
+
+$360
+
+$900
+
+Custom  
+
+Overage ticket cost
+
++$0.40 / ticket
+
++$40 / 100 tickets
+
++$36 / 100 tickets
+
++$36 / 100 tickets
+
+Custom  
+
+User seats
+
+3
+
+500
+
+500
+
+500
+
+500  
+
+**Connect your ecommerce store**  
+
+Shopify / Shopify Plus  
+
+BigCommerce  
+
+Magento  
+
+WooCommerce  
+
+Multi-stores
+
+Unlimited
+
+Unlimited
+
+Unlimited
+
+Unlimited
+
+Unlimited  
+
+**Centralize every interaction**  
+
+Email  
+
+Live chat  
+
+Facebook  
+
+Instagram  
+
+TikTok  
+
+Voice  
+
+w/ Voice add-on
+
+w/ Voice add-on
+
+w/ Voice add-on
+
+w/ Voice add-on
+
+SMS  
+
+w/ SMS add-on
+
+w/ SMS add-on
+
+w/ SMS add-on
+
+w/ SMS add-on
+
+WhatsApp  
+
+**Integrated with your entire stack**  
+
+Active integrations  
+
+Limited  
+
+up to 150  
+
+up to 150  
+
+up to150  
+
+Custom  
+
+Integration library  
+
+94 apps  
+
+94 apps  
+
+94 apps  
+
+94 apps  
+
+94 apps  
+
+Klaviyo  
+
+Yotpo  
+
+Recharge  
+
+Postscript  
+
+**Automate your work**  
+
+Macros  
+
+Rules  
+
+Intent & sentiment detection  
+
+Chat campaigns  
+
+Rule templates  
+
+Autoresponders  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Flows  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Quick Responses  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Order Management  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Article Recommendations  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Help Center / FAQ  
+
+Satisfaction survey  
+
+**Measure and improve**  
+
+Support performance statistics  
+
+Live statistics  
+
+Revenue statistics  
+
+Self-service statistics  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Automation statistics  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+w/ Gorgias Automate  
+
+Satisfaction survey  
+
+**Users management**  
+
+SSO  
+
+Team management  
+
+User permissions  
+
+**Customer success**  
+
+Onboarding  
+
+Self onboarding  
+
+In-product self onboarding  
+
+Lite onboarding  
+
+Full onboarding  
+
+Full onboarding  
+
+Support channels  
+
+Email only  
+
+Email + live chat  
+
+Email + live chat  
+
+Email + live chat  
+
+Email + live chat  
+
+Gorgias Academy  
+
+Dedicated Success Manager  
+
+Support office hours  
+
+Custom services  
+
+**Create onsite campaigns**  
+
+Basic triggers  
+
+Advanced behavioral triggers (e.g. exit intent)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+Products recommendations based on Shopify catalogue  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+Retarget shoppers based on past purchases  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+On-site campaigns Discount codes  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+Audience segmentation  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+Campaigns performance dashboard  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+w/ Gorgias Convert  
+(Shopify stores only)  
+
+[![Image 135](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/648ac1096853962bcd5d449b_close_black_24dp.svg)](https://www.gorgias.com/pricing#)
+
+How much will you save with Gorgias Helpdesk and Automate?
+----------------------------------------------------------
+
+Monthly savings
+
+Money saved
+
+$3,167
+
+Time saved
+
+83 hrs
+
+Cost saved
+
+31.2%
+
+Monthly Costs Without Gorgias
+
+Customer interactions:
+
+Automation rate
+
+0%
+
+Automated tickets
+
+0
+
+Agent tickets
+
+2000
+
+Human cost
+
+Avg time / ticket
+
+8.6 min
+
+Total support time
+
+140 hrs
+
+Avg Support salary (inc. taxes)
+
+$35/hr
+
+Total human cost
+
+$10,000/mo
+
++
+
+Add your current helpdesk cost
+
+Total monthly cost
+
+$10,000
+
+Monthly Costs With Gorgias
+
+Customer interactions:
+
+Automation rate
+
+![Image 136](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662bcc52a13f614710a7cb00_automate_icon.svg)
+
+30
+
+Automated tickets
+
+![Image 137](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/662bcc52a13f614710a7cb00_automate_icon.svg)
+
+600
+
+↓Agent tickets
+
+1400
+
+Human cost
+
+Avg time / ticket
+
+6 min
+
+Total support time
+
+116 hrs
+
+Avg Support salary (inc. taxes)
+
+$35/hr
+
+Total human cost
+
+$5,833/mo
+
+Gorgias
+
+Helpdesk PRO
+
+$300
+
+Automate TIER 3
+
+$750
+
+Total Gorgias cost
+
+$1,050/mo
+
+Total monthly cost
+
+$6,883
+
+Helping independent ecommerce brands provide an outstanding customer service experience.
+
+Get updates on Gorgias
+
+Thank you! Your submission has been received!
+
+Oops! Something went wrong while submitting the form.
+
+[Privacy](https://www.gorgias.com/legal/privacy)\-
+
+[Legal](https://www.gorgias.com/legal)\-
+
+[Security](https://www.gorgias.com/security)
+
+Product
+
+[\+ Shopify](https://www.gorgias.com/ecommerce/shopify)[\+ WooCommerce](https://www.gorgias.com/ecommerce/woocommerce)[\+ BigCommerce](https://www.gorgias.com/ecommerce/bigcommerce)[\+ Magento](https://www.gorgias.com/ecommerce/magento)[Support by Phone](https://www.gorgias.com/product/voice)[Latest Releases](https://updates.gorgias.com/)[Support Documentation](https://www.gorgias.com/legal/master-subscription-agreement)[Developers](https://developers.gorgias.com/)[Service Status](https://status.gorgias.com/)[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[Pricing](https://www.gorgias.com/pricing)
+
+Compare
+
+[Zendesk](https://www.gorgias.com/comparison/zendesk)[Kustomer](https://www.gorgias.com/comparison/kustomer)[Re:amaze](https://www.gorgias.com/comparison/reamaze)[Help Scout](https://www.gorgias.com/comparison/helpscout)[Freshdesk](https://www.gorgias.com/comparison/freshdesk)[Gladly](https://www.gorgias.com/comparison/gladly)[Front](https://www.gorgias.com/comparison/front)[Shopify Inbox](https://www.gorgias.com/comparison/shopify-inbox)
+
+Resources
+
+[Benchmark tool](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)[Blog](https://www.gorgias.com/blog)[Customer Stories](https://www.gorgias.com/customers)[App store](https://www.gorgias.com/apps)[Refer a Friend](https://www.gorgias.com/referral-program)[Refer a Client](https://www.gorgias.com/partner-referral)[Help center](https://docs.gorgias.com/)
+
+Company
+
+[About Gorgias](https://www.gorgias.com/about-us)[Careers](https://www.gorgias.com/about-us/jobs)[Events](https://www.gorgias.com/events)[Sustainability](https://www.gorgias.com/sustainability)[Meet the team](https://www.gorgias.com/about-us/meet-the-team)[People resources](https://www.gorgias.com/author/gorgias-people-team)[Gorgias Partners](https://agencies.gorgias.com/)[Become a Partner](https://www.gorgias.com/partner-program)[Partner Login](https://dash.partnerstack.com/handshake)[![Image 138](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/65429e2888818d29ed07ff5a_Vector.avif)](https://www.gorgias.com/sustainability)
+
+Product
+
+[\+ Shopify](https://www.gorgias.com/pricing#)[\+ Magento](https://www.gorgias.com/pricing#)[\+ BigCommerce](https://www.gorgias.com/pricing#)[Support by Phone](https://www.gorgias.com/products/voice)[Latest Releases](https://updates.gorgias.com/)[Support Documentation](https://docs.gorgias.com/)[Developers](https://developers.gorgias.com/)[Service Status](https://status.gorgias.com/)[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[Pricing](https://www.gorgias.com/pricing)
+
+Compare
+
+[Zendesk](https://www.gorgias.com/comparison/zendesk)[Kustomer](https://www.gorgias.com/comparison/kustomer)[Re:amaze](https://www.gorgias.com/comparison/reamaze)[Help Scout](https://www.gorgias.com/comparison/helpscout)[Freshdesk](https://www.gorgias.com/comparison/freshdesk)[Gladly](https://www.gorgias.com/comparison/gladly)[Front](https://www.gorgias.com/comparison/front)[Shopify Inbox](https://www.gorgias.com/comparison/shopify-inbox)
+
+Resources
+
+[Benchmark tool](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)[Blog](https://www.gorgias.com/blog)[Customer Stories](https://www.gorgias.com/customers)[App store](https://www.gorgias.com/apps)[Refer a Friend](https://www.gorgias.com/referral-program)[Refer a Client](https://www.gorgias.com/partner-referral)[Help center](https://docs.gorgias.com/)
+
+Company
+
+[About Gorgias](https://www.gorgias.com/about-us)[Careers](https://www.gorgias.com/about-us/jobs)[Sustainability](https://www.gorgias.com/sustainability)[Meet the team](https://www.gorgias.com/about-us/meet-the-team)[People resources](https://www.gorgias.com/author/gorgias-people-team)[Gorgias Partners](https://agencies.gorgias.com/)[Become a Partner](https://www.gorgias.com/partner-program)[Partner Login](https://dash.partnerstack.com/handshake)
+
+[Privacy](https://www.gorgias.com/legal/privacy)[Legal](https://www.gorgias.com/legal)[Security](https://www.gorgias.com/security)
+
+© gorgias.com
+
+![Image 139](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/65429e2888818d29ed07ff5a_Vector.avif)
+
+[Source: https://www.gorgias.com/products/helpdesk]
+The Leading Customer Support Helpdesk for Ecommerce | Gorgias
+===============
+               
+
+[![Image 1](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6539f4e75f5768f222ef3a99_gorgias-new-logo-white.svg)](https://www.gorgias.com/)
+
+Product tour
+
+Product
+
+[Gorgias Helpdesk All-in-one support inbox to respond to shoppers](https://www.gorgias.com/products/helpdesk)[Gorgias Automate Instant resolutions for happier customers and a happier team](https://www.gorgias.com/products/automate)[Gorgias Convert Elevate your website conversion rate with powerful onsite campaigns](https://www.gorgias.com/products/convert)
+
+Capabilities
+
+[Omnichannel Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do](https://www.gorgias.com/products/helpdesk#)[Artificial Intelligence Lightspeed AI features to get more done in a fraction of the time](http://www.gorgias.com/powered-by-ai)[Statistics Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do](https://www.gorgias.com/products/helpdesk#)[App Store All your favorite apps, connected to Gorgias](http://www.gorgias.com/apps)
+
+Ecommerce platforms
+
+[Shopify](https://www.gorgias.com/ecommerce/shopify)[![Image 2](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/653776e161118c84d45e6584_shopify-plus.svg) Gorgias Automate](https://www.gorgias.com/products/helpdesk#)[BigCommerce](https://www.gorgias.com/ecommerce/bigcommerce)[Magento](https://www.gorgias.com/ecommerce/magento)[WooCommerce](https://www.gorgias.com/ecommerce/woocommerce)
+
+### See Gorgias in action
+
+[![Image 3](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6530c77cedc0cb58fe71055b_prodiucts-dropdown-screenshot.avif)](https://www.gorgias.com/product-tour)
+
+[Take the Tour ↗︎](https://www.gorgias.com/product-tour)
+
+Centralize 1:1 interactions
+
+[Email](https://www.gorgias.com/product/email)[Social media](https://www.gorgias.com/product/social-media)[Live chat](https://www.gorgias.com/product/live-chat)[Voice](https://www.gorgias.com/product/voice)[SMS (New!)](https://www.gorgias.com/product/sms)
+
+AUTOMATE YOUR WORK
+
+[Rules Automate with precision](https://www.gorgias.com/product/rules)[Self-service](https://www.gorgias.com/product/self-service)[Intents & sentiment detection](https://www.gorgias.com/product/intent-sentiment-detection)[Macros Respond faster](https://www.gorgias.com/product/macros)[Automation add-on Respond faster](https://www.gorgias.com/product/automation-add-on)[Flows Respond faster](https://www.gorgias.com/product/flows)
+
+EMPOWER SUPPORT TEAMS
+
+[Order management](https://www.gorgias.com/product/order-management)[Customer Sidebar](https://www.gorgias.com/product/customer-sidebar)[Multi-Stores](https://www.gorgias.com/product/multi-stores)[Views](https://www.gorgias.com/product/views)
+
+MEASURE & IMPROVE
+
+[Revenue Statistics Know your bottom line](https://www.gorgias.com/product/revenue-statistics)[Live Statistics Monitor performance in real time](https://www.gorgias.com/product/live-statistics)[Satisfaction survey Keep your customers happy](https://www.gorgias.com/product/satisfaction-survey)[Support performance Your control center](https://www.gorgias.com/product/support-performance)
+
+PLATFORMS
+
+[![Image 4](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a82c4ab44ae3d373b1c_Shopify.svg) Shopify](https://www.gorgias.com/products/helpdesk#)[![Image 5](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7fb999eeef77994397_Magento.svg) Magento](https://www.gorgias.com/products/helpdesk#)[![Image 6](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7c7b974d1807e27c8f_BigCommerce.svg) BigCommerce New](https://www.gorgias.com/products/helpdesk#)
+
+OVERVIEW
+
+[![Image 7](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7f54a73c1ca914e578_Product%20Overview.svg) Product overview](https://www.gorgias.com/product)[![Image 8](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7db282b861c2d39628_Machine%20Learning%20AI.svg) Machine learning & A.I.](https://www.gorgias.com/products/helpdesk#)[![Image 9](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/61ba2a7c29d8934b2c52d724_Customer%20Stories.svg) Customer stories](https://www.gorgias.com/customers)
+
+[Pricing](https://www.gorgias.com/pricing)
+
+Partners
+
+Tech Partners
+
+[Become a Tech Partner](https://www.gorgias.com/tech-partner)[Build an app](https://www.gorgias.com/app-partners)[Browse the App Store](https://www.gorgias.com/apps)[Refer a customer](https://www.gorgias.com/partner-referral)
+
+Agency Partners
+
+[Become an Agency Partner](https://www.gorgias.com/partner-program)[Find a partner](https://agencies.gorgias.com/)[Agency Partner Portal](https://dash.partnerstack.com/handshake)[Refer a client](https://www.gorgias.com/partner-referral)
+
+Tech Partners
+
+[Build an integration](https://www.gorgias.com/app-partners)[Browse the App Store](https://www.gorgias.com/apps)[Developer Portal](https://www.gorgias.com/products/helpdesk#)
+
+Agency partners
+
+[Become a Agency Partner](https://www.gorgias.com/partner-program)[Find a partner](https://agencies.gorgias.com/)[Agency Partner Portal](https://dash.partnerstack.com/handshake)
+
+Resources
+
+Growth
+
+[Blog](https://www.gorgias.com/blog)[CX Growth Playbook](https://www.gorgias.com/playbooks)[Ecommerce tools](https://www.gorgias.com/tools)[CS Benchmark report](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)
+
+Success
+
+[Customer stories](https://www.gorgias.com/customers)[Gorgias Academy](https://academy.gorgias.com/trainings?utm_source=main-website&utm_medium=meni&utm_campaign=resources-menu)[Webinars](https://app.getcontrast.io/gorgias?tab=upcoming)[Help center](https://docs.gorgias.com/)[Gorgias Community](https://community.gorgias.com/)
+
+Connection
+
+[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[App store](https://www.gorgias.com/apps)[Refer a friend](https://www.gorgias.com/referral-program)[Events](https://www.gorgias.com/events)
+
+Growth
+
+[Blog](https://www.gorgias.com/products/helpdesk#)[CX Growth Playbook](https://www.gorgias.com/products/helpdesk#)[Ecommerce tools](https://www.gorgias.com/tools)[CS Benchmark report](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)
+
+Success
+
+[Customer stories](https://www.gorgias.com/customers)[Gorgias Academy](https://academy.gorgias.com/?utm=main_website_resources_menu)[Webinars](https://www.gorgias.com/products/helpdesk#)[Help center](https://docs.gorgias.com/)[Gorgias Community](https://community.gorgias.com/)
+
+Connection
+
+[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[App store](https://www.gorgias.com/apps)[Refer a friend](https://www.gorgias.com/referral-program)[Refer a client](https://www.gorgias.com/partner-referral)
+
+[Log in](https://www.gorgias.com/login)
+
+[Start free trial](https://www.gorgias.com/demo)
+
+[Book a Demo](https://www.gorgias.com/products/helpdesk#)
+
+![Image 10: Gorgias Convert logo](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661ce5f2a54ebdaaad0137f6_helpdesk-logo.svg)
+
+AI helpdesk for Ecommerce
+=========================
+
+All your customer support, all in one place
+-------------------------------------------
+
+### Provide best in class support to your customers to maximize conversion and retention – with the #1 helpdesk for ecommerce brands.
+
+[Start free trial](https://www.gorgias.com/signup)[Book a demo](https://www.gorgias.com/demo)
+
+![Image 11](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6543d488016bcb4bf32de4e7_heroimage-min.webp)
+
+Helping 15,000 ecommerce brands automate CX with the power of AI
+
+![Image 12](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f0f1c844ddf7eff62ad9_wunderkeks.avif)
+
+![Image 13](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f147a292c35fabe5b8ea_dr-barbara%20sturm.webp)
+
+![Image 14](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f10d54d83e6af33f4a0c_wallys.webp)
+
+![Image 15](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/61efe73840cd6db96f532c76_olipop-logo%20(1).avif)
+
+![Image 16](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f04b8ee97b4139f0f5eec9c_bokksu-1.svg)
+
+![Image 17](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a6217d606ce53594885d_dark.svg)
+
+![Image 18](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a0705c64239df6a2be0f_dark.svg)
+
+![Image 19](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05bbc12593861174dd63e3_timbuk2-1.svg)
+
+![Image 20](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f0f1c844ddf7eff62ad9_wunderkeks.avif)
+
+![Image 21](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f147a292c35fabe5b8ea_dr-barbara%20sturm.webp)
+
+![Image 22](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/6565f10d54d83e6af33f4a0c_wallys.webp)
+
+![Image 23](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/61efe73840cd6db96f532c76_olipop-logo%20(1).avif)
+
+![Image 24](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f04b8ee97b4139f0f5eec9c_bokksu-1.svg)
+
+![Image 25](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a6217d606ce53594885d_dark.svg)
+
+![Image 26](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a0705c64239df6a2be0f_dark.svg)
+
+![Image 27](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05bbc12593861174dd63e3_timbuk2-1.svg)
+
+![Image 28](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cf4b1ac04478f46f97d4c_Helpdesk%20Hero.svg)![Image 29](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cf4b14468f382f536d041_Helpdesk%20Logos.svg)
+
+Wow shoppers and do more with less, all in one place
+----------------------------------------------------
+
+[Support management](https://www.gorgias.com/products/helpdesk#section-support-management)[Customer information](https://www.gorgias.com/products/helpdesk#section-customer-information)[Channel integrations](https://www.gorgias.com/products/helpdesk#section-channel-integrations)[Workflows & variables](https://www.gorgias.com/products/helpdesk#section-workflows-variables)[Live chat](https://www.gorgias.com/products/helpdesk#section-live-chat)[Help center](https://www.gorgias.com/products/helpdesk#section-help-center)
+
+### Support management
+
+Every support channel, in one tab
+
+Email, chat, social, phone and more. Manage every customer interaction from one single place where you can refund, update, cancel, or approve return requests.
+
+![Image 30](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661ce7d890d4a43a8d12844a_Support%20management%20-%20Asset.avif)
+
+### Customer information
+
+Complete customer information, at your fingertips
+
+See information like previous conversations, orders, reviews, or subscription details for every customer as you’re responding to them to have better context.
+
+![Image 31](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661d49e913464b2efc7187b5_Customer%20Information%20Asset%20(2).avif)
+
+### Channel integrations
+
+Bring all your tools together
+
+Make better use of your tech stack and data by sharing customer data between tools, and make updates in other apps — all from within Gorgias
+
+![Image 32](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661ce7d8cb188572f7f41a7d_Channel%20integrations%20Asset.avif)
+
+### Workflows & variables
+
+Increase support team speed and efficiency
+
+Build powerful AI-workflows that manage your support workload. Set rules to automatically route tickets, and personalize responses with templates and custom ecommerce variables.
+
+![Image 33](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661ce7d833f7a2a70dc56fcc_Workflow%20%26%20Variables%20Asset.svg)
+
+### Live chat
+
+Customizable live chat that creates less work for your team, not more
+
+Add a fast-loading chat widget to talk to customers right from your site and automatically answer their questions with generative AI before they become tickets.
+
+![Image 34](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661ce93e92bd7a50db9fe647_Live%20Chat%20Asset.avif)
+
+### Help center
+
+Instantly create a help center to answer common questions
+
+Automatically create a unique help center for your brand with the power of AI trained your brand alone. Reduce tickets in your helpdesk by 50%
+
+![Image 35](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661ce7d84614c98307128993_Help%20Center%20Asset.svg)
+
+![Image 36](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cf4b154ef96d900e41a5f_Helpdesk%20Features.svg)
+
+Connect your entire ecommerce tech stack to your helpdesk
+---------------------------------------------------------
+
+Connect 100+ apps to empower your team, share customer data between tools, and make updates in other apps — all from within Gorgias.
+
+View customer data in the support ticket sidebar
+
+Streamline your work and boost cross-team collaboration
+
+Make updates in other tools without switching tabs
+
+![Image 37](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/654a0552f973a17ef544c8e1_integrations.png)![Image 38](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6618ee4a3e368a5c2d26bcb7_tech-stack_bg-gradient.svg)
+
+4.4
+
+683 reviews
+
+![Image 39](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/66191b91a7cc10c6a465e407_Shopify%20app%20store%20logo.svg)
+
+![Image 40](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/6618ee4a884cbd97db0d163f_tech-stack_bottom-gradient.svg)![Image 41](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cf4b19b2929f5f5238fcd_Helpdesk%20Tech%20Stack.svg)
+
+### Supporting brands as unique as yours
+
+[Automating low-stakes, high-volume tickets lets my team focus on meaningful, personalized conversations and boosted our CSAT to 4.77. Clara Zaoui Head of CRM and Customer Care at Joone ![Image 42: Joone](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/63fc7d97cad9a14af744e844_Joone.svg)![Image 43: Joone](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/645cf54b2120cee568384f63_joone-paris-fr.svg)![Image 44: Joone](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/65490ffd0dd334f68127ca66_joone.avif)](https://www.gorgias.com/customers/joone)
+
+[Thanks to Gorgias, my customer service team has been able to increase customer satisfaction and drive customer loyalty. Dave Szymaszek Head of Customer Experience at Marine Layer ![Image 45: Marine Layer](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a6217d606ce53594885d_dark.svg)![Image 46: Marine Layer](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/5f05a61bd0c1c32965e6b07d_color.svg)![Image 47: Marine Layer](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/65490b6fc94e6407149b81a5_marine-layer.svg)](https://www.gorgias.com/customers/marine-layer)
+
+[Our peak seasons are Father's Day, Black Friday, and Christmas. With Gorgias Automate, my team is on top for the 3 most important months of the year; Father's Day, Black Friday, and Christmas. Shauna Clearly Head of Ecommerce at Ekster ![Image 48: Ekster](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/608bc55e9d625be0c1c324e9_Shield_text%201.svg)![Image 49: Ekster](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/608bc55e9d625be0c1c324e9_Shield_text%201.svg)![Image 50: Ekster](https://cdn.prod.website-files.com/5e78f62c08f1bb8c2d788576/65490f84167f4afd51d390b3_ekster.avif)](https://www.gorgias.com/customers/ekster)
+
+  
+
+Meet (and support) your  
+customers wherever they’re at
+-------------------------------------------------------
+
+[![Image 51](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cebdde9d671804a034063_Email%20Asset.svg) ### Email Manage support email quickly and efficiently with a dedicated helpdesk and powerful AI workflow tools. Learn more ↗︎](https://www.gorgias.com/product/email)[![Image 52](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cebdd08e62c59e96e75fb_Chat%20Asset.avif) ### Chat Interact with your site visitors in real time to exceed customer expectations. Use AI to answer questions and update 60%+ of support. Learn more ↗︎](https://www.gorgias.com/product/live-chat)[![Image 53](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cebdd6735f7457a888a6c_Social%20Media%20Asset.avif) ### Social Media Monitor, react, and answer comments and DMs from Facebook, Instagram, TikTok, and WhatsApp Learn more ↗︎](https://www.gorgias.com/product/social-media)[![Image 54](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cebdd63939fbbd3ec91d2_Voice%20Asset.avif) ### Voice Give shoppers the option to call, while allowing your agents to effortlessly respond from a single platform. Learn more ↗︎](https://www.gorgias.com/product/voice)[![Image 55](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cebdd7b0d4dbeb43c494f_SMS%20Asset.avif) ### SMS Real time communication means real-time results. Offer on-the-go support and two-way conversations with text. Learn more ↗︎](https://www.gorgias.com/product/sms)[![Image 56](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/66214328409e6f752d77361a_Automate%20asset.svg) ### Automate Automate 60% of your CX so that your agents can focus on high value conversations and driving sales. Learn more ↗︎](https://www.gorgias.com/products/automate)
+
+### Get started for free or talk to a CX expert
+
+[Book a demo](https://www.gorgias.com/demo)
+
+![Image 57](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/661cf4b12ad7676af045174b_Helpdesk%20CTA.svg)
+
+Helping independent ecommerce brands provide an outstanding customer service experience.
+
+Get updates on Gorgias
+
+Thank you! Your submission has been received!
+
+Oops! Something went wrong while submitting the form.
+
+[Privacy](https://www.gorgias.com/legal/privacy)\-
+
+[Legal](https://www.gorgias.com/legal)\-
+
+[Security](https://www.gorgias.com/security)
+
+Product
+
+[\+ Shopify](https://www.gorgias.com/ecommerce/shopify)[\+ WooCommerce](https://www.gorgias.com/ecommerce/woocommerce)[\+ BigCommerce](https://www.gorgias.com/ecommerce/bigcommerce)[\+ Magento](https://www.gorgias.com/ecommerce/magento)[Support by Phone](https://www.gorgias.com/product/voice)[Latest Releases](https://updates.gorgias.com/)[Support Documentation](https://www.gorgias.com/legal/master-subscription-agreement)[Developers](https://developers.gorgias.com/)[Service Status](https://status.gorgias.com/)[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[Pricing](https://www.gorgias.com/pricing)
+
+Compare
+
+[Zendesk](https://www.gorgias.com/comparison/zendesk)[Kustomer](https://www.gorgias.com/comparison/kustomer)[Re:amaze](https://www.gorgias.com/comparison/reamaze)[Help Scout](https://www.gorgias.com/comparison/helpscout)[Freshdesk](https://www.gorgias.com/comparison/freshdesk)[Gladly](https://www.gorgias.com/comparison/gladly)[Front](https://www.gorgias.com/comparison/front)[Shopify Inbox](https://www.gorgias.com/comparison/shopify-inbox)
+
+Resources
+
+[Benchmark tool](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)[Blog](https://www.gorgias.com/blog)[Customer Stories](https://www.gorgias.com/customers)[App store](https://www.gorgias.com/apps)[Refer a Friend](https://www.gorgias.com/referral-program)[Refer a Client](https://www.gorgias.com/partner-referral)[Help center](https://docs.gorgias.com/)
+
+Company
+
+[About Gorgias](https://www.gorgias.com/about-us)[Careers](https://www.gorgias.com/about-us/jobs)[Events](https://www.gorgias.com/events)[Sustainability](https://www.gorgias.com/sustainability)[Meet the team](https://www.gorgias.com/about-us/meet-the-team)[People resources](https://www.gorgias.com/author/gorgias-people-team)[Gorgias Partners](https://agencies.gorgias.com/)[Become a Partner](https://www.gorgias.com/partner-program)[Partner Login](https://dash.partnerstack.com/handshake)[![Image 58](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/65429e2888818d29ed07ff5a_Vector.avif)](https://www.gorgias.com/sustainability)
+
+Product
+
+[\+ Shopify](https://www.gorgias.com/products/helpdesk#)[\+ Magento](https://www.gorgias.com/products/helpdesk#)[\+ BigCommerce](https://www.gorgias.com/products/helpdesk#)[Support by Phone](https://www.gorgias.com/products/voice)[Latest Releases](https://updates.gorgias.com/)[Support Documentation](https://docs.gorgias.com/)[Developers](https://developers.gorgias.com/)[Service Status](https://status.gorgias.com/)[Roadmap](https://portal.productboard.com/gorgias/1-gorgias-product-roadmap/tabs/3-planned)[Pricing](https://www.gorgias.com/pricing)
+
+Compare
+
+[Zendesk](https://www.gorgias.com/comparison/zendesk)[Kustomer](https://www.gorgias.com/comparison/kustomer)[Re:amaze](https://www.gorgias.com/comparison/reamaze)[Help Scout](https://www.gorgias.com/comparison/helpscout)[Freshdesk](https://www.gorgias.com/comparison/freshdesk)[Gladly](https://www.gorgias.com/comparison/gladly)[Front](https://www.gorgias.com/comparison/front)[Shopify Inbox](https://www.gorgias.com/comparison/shopify-inbox)
+
+Resources
+
+[Benchmark tool](https://www.gorgias.com/benchmark-customer-service)[ROI calculator](https://www.gorgias.com/tools/roi-support)[Blog](https://www.gorgias.com/blog)[Customer Stories](https://www.gorgias.com/customers)[App store](https://www.gorgias.com/apps)[Refer a Friend](https://www.gorgias.com/referral-program)[Refer a Client](https://www.gorgias.com/partner-referral)[Help center](https://docs.gorgias.com/)
+
+Company
+
+[About Gorgias](https://www.gorgias.com/about-us)[Careers](https://www.gorgias.com/about-us/jobs)[Sustainability](https://www.gorgias.com/sustainability)[Meet the team](https://www.gorgias.com/about-us/meet-the-team)[People resources](https://www.gorgias.com/author/gorgias-people-team)[Gorgias Partners](https://agencies.gorgias.com/)[Become a Partner](https://www.gorgias.com/partner-program)[Partner Login](https://dash.partnerstack.com/handshake)
+
+[Privacy](https://www.gorgias.com/legal/privacy)[Legal](https://www.gorgias.com/legal)[Security](https://www.gorgias.com/security)
+
+© gorgias.com
+
+![Image 59](https://cdn.prod.website-files.com/5e4ff204e7b6f80e402d407a/65429e2888818d29ed07ff5a_Vector.avif)
+
+[Start Free Trial](https://www.gorgias.com/signup)[Book a demo](https://www.gorgias.com/demo)
+
+Return the result as a JSON object with the following structure:
+{
+  "features": [{"quote": "...", "source": "..."}],
+  "pricing": [{"quote": "...", "source": "..."}],
+  "pros": [{"quote": "...", "source": "..."}],
+  "cons": [{"quote": "...", "source": "..."}]
+}
+
+Response:
+{
+  "features": [
+    {"quote": "Centralize all communication and customer information to increase support efficiency.", "source": "https://www.gorgias.com/pricing"},
+    {"quote": "Connect all your channels to talk where they are, such as: email, chat, Facebook, Instagram, SMS, Voice, WhatsApp.", "source": "https://www.gorgias.com/pricing"},
+    {"quote": "Use pre-defined templates including customer variables to speed up support to common customer inquiries.", "source": "https://www.gorgias.com/pricing"},
+    {"quote": "Automate 60% of your CX so that your agents can focus on high value conversations and driving sales.", "source": "https://www.gorgias.com/products/helpdesk"},
+    {"quote": "Automatically create a unique help center for your brand with the power of AI trained your brand alone.", "source": "https://www.gorgias.com/products/helpdesk"}
+  ],
+  "pricing": [
+    {"quote": "$360/mo", "source": "https://www.gorgias.com/pricing"},
+    {"quote": "All Helpdesk plans include: 2,000 tickets/month", "source": "https://www.gorgias.com/pricing"},
+    {"quote": "To see the most value from Gorgias, brands typically try to automate at least 30% of support interactions.", "source": "https://www.gorgias.com/pricing"}
+  ],
+  "pros": [
+    {"quote": "Helping 15,000 ecommerce brands automate CX with the power of AI.", "source": "https://www.gorgias.com/products/helpdesk"},
+    {"quote": "Automating low-stakes, high-volume tickets lets my team focus on meaningful, personalized conversations and boosted our CSAT to 4.77.", "source": "https://www.gorgias.com/products/helpdesk"},
+    {"quote": "Thanks to Gorgias, my customer service team has been able to increase customer satisfaction and drive customer loyalty.", "source": "https://www.gorgias.com/products/helpdesk"}
+  ],
+  "cons": [
+    {"quote": "Do I have to pay for all messages received? No. Think of each billable ticket as a two-way conversation.", "source": "https://www.gorgias.com/pricing"},
+    {"quote": "A ticket that receives a response by an agent or a rule will only be counted as one billable ticket regardless of how many messages are sent or received on the thread.", "source": "https://www.gorgias.com/pricing"}
+  ]
+}
