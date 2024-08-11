@@ -1,0 +1,1830 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T19:09:34.513Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://www.smartsheet.com/platform/features
+  ```
+  Discover cutting-edge Smartsheet features to maximize productivity
+===============   
+
+[Skip to main content](https://www.smartsheet.com/platform/features#main-content)
+
+*   [Smartsheet ![Image 1](https://www.smartsheet.com/sites/default/files/smartsheet-logo-blue-new.svg)](https://www.smartsheet.com/ "Smartsheet")
+*   Open navigation Close navigation
+    
+    *   Product
+        
+        *   *   [The Smartsheet Platform ![Image 2](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500-smartsheet-platform.svg) Manage projects, automate workflows, and build solutions at scale with the Smartsheet platform. Learn more](https://www.smartsheet.com/platform)
+        *   Features
+            *   [Automation ![Image 3](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_automate-workflow.svg)](https://www.smartsheet.com/platform/features#automation)
+            *   [Team collaboration ![Image 4](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_messaging.svg)](https://www.smartsheet.com/platform/features#team-collaboration)
+            *   [Dashboards and reporting ![Image 5](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_dashboard.svg)](https://www.smartsheet.com/platform/features#dashboards)
+            *   [Proofing ![Image 6](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_proofing.svg)](https://www.smartsheet.com/platform/features#proofing)
+            *   [Account administration ![Image 7](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_administration.svg)](https://www.smartsheet.com/platform/features#security-and-enterprise)
+            *   [Integrations ![Image 8](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_integrations_1.svg)](https://www.smartsheet.com/integrations)
+            *   [Digital asset management ![Image 9](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_brandfolder.svg)](https://www.smartsheet.com/solutions/digital-asset-management)
+            *   [Resource management ![Image 10](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_resource-management.svg)](https://www.smartsheet.com/platform/resource-management)
+            *   [Portfolio management ![Image 11](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_control-center.svg)](https://www.smartsheet.com/marketplace/premium-apps/control-center)
+            *   [Secure request management ![Image 12](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_conditional-formatting.svg)](https://www.smartsheet.com/marketplace/premium-apps/dynamic-view)
+            *   [Intelligent workflows ![Image 13](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_bridge.svg)](https://www.smartsheet.com/platform/bridge)
+            *   [No code work apps ![Image 14](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_workapps.svg)](https://www.smartsheet.com/platform/workapps)
+            *   [See all features](https://www.smartsheet.com/platform/features)
+        *   *   [Discover our latest product updates and enhancements ![Image 15: Quarterly Disclosure Global Nav Graphic](https://www.smartsheet.com/sites/default/files/2023-12/merchandising-quarterly-disclosures-small_0.png)](https://www.smartsheet.com/whats-up-next)  
+            *   [Smartsheet Advance Overview of our advanced automation, integration, and security offerings. Our Advance offering](https://www.smartsheet.com/advance)
+            *   [Professional services Information about Smartsheet consulting, training, and implementation support. Available services](https://www.smartsheet.com/services/professional-services)
+            *   [Trust and security A complete summary of Smartsheet platform's security and reliability. Trust Center](https://www.smartsheet.com/trust/security)
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-product)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-product)
+        
+    *   Solutions
+        
+        *   Featured
+            *   [Project and Portfolio Management ![Image 16: Modern Project and Portfolio Management](https://www.smartsheet.com/sites/default/files/2023-08/solution-category-project-portfolio-management.png) Explore](https://www.smartsheet.com/solutions/project-portfolio-management)
+            *   [Marketing and Creative Management ![Image 17: Marketing and Creative Management](https://www.smartsheet.com/sites/default/files/2023-08/solution-category-marketing-and-creative.png) Explore](https://www.smartsheet.com/solutions/marketing)
+        *   By use case
+            *   [Project management ![Image 18](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_project-management.svg)](https://www.smartsheet.com/solutions/project-management)
+            *   [IT Portfolio management ![Image 19](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_report-management.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/it-portfolio-management)
+            *   [Business PMO ![Image 20](https://www.smartsheet.com/sites/default/files/2024-07/icon-blue-500-franchise.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/business-pmo)
+            *   [Enterprise PMO ![Image 21](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_b2b.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/epmo)
+            *   [Marketing management ![Image 22](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_pm-methodologies.svg)](https://www.smartsheet.com/solutions/marketing/marketing-management)
+            *   [Creative operations ![Image 23](https://www.smartsheet.com/sites/default/files/2023-09/icon_blue-500-creative-operations.svg)](https://www.smartsheet.com/solutions/marketing/creative-operations)
+            *   [Services delivery ![Image 24](https://www.smartsheet.com/sites/default/files/2023-11/icon-blue-500_mobilizer_0.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/services-delivery)
+        *   By Industry
+            *   [Government ![Image 25](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_government.svg)](https://www.smartsheet.com/solutions/federal-government)
+            *   [Construction ![Image 26](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_construction.svg)](https://www.smartsheet.com/solutions/construction)
+            *   [Financial services ![Image 27](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_finance-accounting.svg)](https://www.smartsheet.com/solutions/finance)
+            *   [Higher education ![Image 28](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_education.svg)](https://www.smartsheet.com/solutions/education)
+            *   [Nonprofit ![Image 29](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_non-profit.svg)](https://www.smartsheet.com/solutions/nonprofit)
+            *   * * *
+                
+            *   [Enterprise ![Image 30](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_enterprise.svg)](https://www.smartsheet.com/solutions/enterprise)
+            *   [Small and medium business ![Image 31](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_retail_0.svg)](https://www.smartsheet.com/solutions/small-to-medium-business)
+        *   [View all solutions](https://www.smartsheet.com/solutions)
+        *   *   [Template gallery Streamline your work with the perfect template for your team. See all templates](https://www.smartsheet.com/marketplace/template-gallery)
+            *   [Customer stories Behind the scenes with organizations around the world using Smartsheet to do incredible things. See all stories](https://www.smartsheet.com/customers)
+            *   [Experience the future of productivity with Smartsheet AI ![Image 32: Smartsheet AI](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-ai.png)](https://www.smartsheet.com/ai)  
+            *   [Customers’ Choice in the 2024 Gartner® Peer Insights™ ![Image 33: Voice of the Customer](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-voice-of-the-customer.png)](https://www.smartsheet.com/content-center/inside-smartsheet/research/2024-gartner-voc-collaborative-work-management)  
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-solutions)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-solutions)
+        
+    *   Resources
+        
+        *   *   [Content Center Articles and guides about project management, collaboration, automation, and other topics to help you make the most of the Smartsheet platform. Explore the Content Center](https://www.smartsheet.com/content-center)
+            *   * * *
+                
+            *   [Managing work](https://www.smartsheet.com/content-center/managing-work)
+            *   [Product updates and insights](https://www.smartsheet.com/content-center/product-insights)
+            *   [Inside Smartsheet](https://www.smartsheet.com/content-center/inside-smartsheet)
+        *   *   [Help and Learning A comprehensive knowledge base, including articles, tutorials, videos, and other resources that cover a range of topics related to using Smartsheet. Get started](https://www.smartsheet.com/help-center)
+            *   * * *
+                
+            *   [Smartsheet University](https://www.smartsheet.com/smartsheet-university)
+            *   [Knowledge base](https://www.smartsheet.com/help-center?url=help)
+            *   [Training options](https://www.smartsheet.com/help-center?url=training_resources)
+            *   [Support](https://www.smartsheet.com/services/support)
+        *   *   [Community Explore user-generated content and stay updated on our latest product features. Join the Community](https://community.smartsheet.com/)
+            *   [Partners Learn about the Smartsheet partner program and access our partner directory. Learn more](https://www.smartsheet.com/channel-partners)
+            *   [Smartsheet events Your hub for Smartsheet events, webinars, Q&As, and user groups. See all events](https://www.smartsheet.com/events)
+        *   *   [ENGAGE ![Image 34: Engage Header Nav Graphic](https://www.smartsheet.com/sites/default/files/2024-06/ENGAGE_Seattle_2024_Header%20768x216.png) Smartsheet ENGAGE brings together our global customers, experts, and partners to share their experiences, ideas, and best practices. Learn more](https://www.smartsheet.com/engage)
+            *   [Project management templates ![Image 35: Project management templates](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-pm-templates.png)](https://www.smartsheet.com/content-center/best-practices/project-management-guide/templates-project-management)  
+            *   [Smartsheet dashboard gallery ![Image 36: Dashboard gallery](https://www.smartsheet.com/sites/default/files/2023-08/dashboard-gallery.png)](https://www.smartsheet.com/content-center/product-news/reports-dashboards/smartsheet-dashboard-gallery)  
+            *   [Getting started with the Smartsheet API ![Image 37: Smartsheet API](https://www.smartsheet.com/sites/default/files/2023-08/smartsheet-api.png)](https://www.smartsheet.com/content-center/best-practices/tips-tricks/api-getting-started)  
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-resources)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-resources)
+        
+    *   [Pricing](https://www.smartsheet.com/pricing)
+    *   [Contact](https://www.smartsheet.com/contact?fts=contact-header-nav)
+    *   Select language
+        
+        Select your language 
+        
+                
+        
+    *   [Log in](https://app.smartsheet.com/b/home)
+    *   *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav)
+        *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-mobile)
+    
+*   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo)
+    *   [Try Smartsheet for free](https://www.smartsheet.com/try-it?lpv=topnav)
+    *   Select language
+        
+        Select your language 
+        
+                
+        
+    *   Open search
+        
+    *   [Log in](https://app.smartsheet.com/b/home)
+
+Features
+========
+
+From our powerful core features to cutting-edge advanced tools, Smartsheet elevates your ability to operate at your highest potential.
+
+*   *   [Essential features](https://www.smartsheet.com/platform/features#p-id-728851)
+    *   [Automation](https://www.smartsheet.com/platform/features#p-id-728913)
+    *   [AI](https://www.smartsheet.com/platform/features#p-id-728927)
+    *   [Integrations](https://www.smartsheet.com/platform/features#p-id-728935)
+    *   [Team collaboration](https://www.smartsheet.com/platform/features#p-id-728953)
+    *   [Security and enterprise controls](https://www.smartsheet.com/platform/features#p-id-728968)
+    *   [Premium features](https://www.smartsheet.com/platform/features#p-id-729007)
+    *   [Full features list](https://www.smartsheet.com/platform/features#p-id-729090)
+    
+*   [Start a trial](https://www.smartsheet.com/try-it)
+
+Essential features
+------------------
+
+  ![Image 38](https://www.smartsheet.com/sites/default/files/2023-02/transparent-janet-48px.png)
+
+*   ### Views
+    
+    Flexible and user-friendly interface for organizing and visualizing data. These views allow for efficient management and tracking of projects, enabling users to customize their data display and collaboration approach, facilitating efficient collaboration and project tracking.
+    
+    [Learn more](https://www.smartsheet.com/platform/features/views)
+    
+*   ### Dashboards
+    
+    Build a branded, widget-based display that combines live data from sources like Google Docs, Tableau, and YouTube, ensuring you can share real-time information with stakeholders while maintaining the confidentiality of your data.
+    
+*   ### Formulas and functions
+    
+    Streamline decision-making processes, Enable users to perform complex computations, link data across multiple sheets, and automate calculations with real-time updates.
+    
+*   ### Reports
+    
+    Combine and filter sheet data to spotlight key details for clear insights and easy sharing, exporting, or dashboard integration to create comprehensive task lists.
+    
+*   ### Forms
+    
+    Capture consistent, high-quality data for various needs such as requests, fieldwork, events, and feedback using branded, customizable forms with conditional logic that are easily embedded or shared and accessible on mobile in areas with low connectivity.
+    
+*   ### Work insights
+    
+    Enhance decision-making with customizable, auto-generated data visualizations, including burndown and time series charts, to reveal clear key data trends.
+    
+*   ### Workload tracking
+    
+    Strengthen team performance and enhance project execution by tracking workloads to identify availability, monitor tasks, and resolve over-allocations.
+    
+
+  ![Image 39](https://www.smartsheet.com/sites/default/files/2023-02/transparent-janet-48px.png)
+
+### Templates to jumpstart your projects
+
+Ready-made, customizable templates for effortless project setup and efficient task management.
+
+[See all templates](https://www.smartsheet.com/marketplace/template-gallery)
+
+  [![Image 40: template thumbnail of project with work breakdown schedule](https://www.smartsheet.com/sites/default/files/2023-11/template-project-with-wbs-thumbnail.jpeg) ### Project with work breakdown schedule (WBS)](https://app.smartsheet.com/r/template-gallery/templates/dd318ca6-b1ec-4e1e-b31d-c8b0b3dc3a40/Project-with-Work-Breakdown-Schedule-/(WBS/))
+
+  [![Image 41: template thumbnail showing blue gantt sheet and automation cog](https://www.smartsheet.com/sites/default/files/2024-03/template-campaign-plan-thumbnail.jpeg) ### Campaign plan](https://app.smartsheet.com/r/template-gallery/templates/b70a7c6b-6c30-44a7-be38-2c3fce246f1f/Campaign-Plan)
+
+  [![Image 42](https://www.smartsheet.com/sites/default/files/2023-11/Template-Simple-project-portfolio-thumbnail.jpeg) ### Simple project portfolio](https://app.smartsheet.com/r/template-gallery/templates/82ad9c66-b101-4c2e-9130-747bbc7f0c2e/Simple-Project-Portfolio)
+
+Automation
+----------
+
+Streamline tasks with no-code workflows, customizable for your needs. Set up versatile workflows with multiple actions and conditions across devices and communication platforms, or apps like Teams and Slack. Stay informed with workflow updates and run dates.
+
+  [![Image 43: automated workflows thumbnail](https://www.smartsheet.com/sites/default/files/2023-12/features-automation-workflows-thumbnail-v3.jpg) ### Automated workflows Save time with our ready-to-use templates or design your own for tasks like reminders. Set recurring or one-off workflows, respond via apps, email, or platforms like Slack and Teams, and track workflow performance with ease.](https://help.smartsheet.com/topics/Automated%20Workflows)
+
+  [![Image 44: document generation thumbnail](https://www.smartsheet.com/sites/default/files/2024-01/features-automation-doc-generation-thumbnail-v2_0.jpg) ### Document generation Create custom PDFs, automate form processes, prepare contracts, and sign documents within Smartsheet. Generate PDFs using sheet data, integrate with DocuSign\*, monitor signing status, and store completed documents in your sheet rows. (\*Requires Smartsheet enterprise license and DocuSign account.)](https://help.smartsheet.com/learning-track/smartsheet-advanced/document-builder)
+
+AI
+--
+
+Leverage the power of AI to automate repetitive tasks, uncover valuable insights, and streamline your workflows.
+
+[![Image 45: generate formulas with artificial intelligence](https://www.smartsheet.com/sites/default/files/2024-02/icon-blue-500_ai-generate-formulas.svg) ### Generate with AI](https://www.smartsheet.com/ai#generate-formulas)
+
+[![Image 46](https://www.smartsheet.com/sites/default/files/2024-03/icon-blue-500_ai-text-and-summaries_0.svg) ### Text and summaries](https://www.smartsheet.com/ai#text-summaries)
+
+Connectors and integrations
+---------------------------
+
+Boost productivity by connecting Smartsheet to popular cloud tools such as Google G-Suite, Office 365, Slack, DocuSign, etc., without constant app-switching. Unlock data from any systems you already use with premium features such as Data Shuttle.
+
+[Learn more](https://www.smartsheet.com/integrations)
+
+[![Image 47: Microsoft Teams logo](https://www.smartsheet.com/sites/default/files/Microsoft-Office-Teams-Logo.svg) #### Microsoft Teams integration](https://www.smartsheet.com/marketplace/apps/microsoft-teams)
+
+[![Image 48](https://www.smartsheet.com/sites/default/files/2022-04/slack-icon-24px.svg) #### Slack integration](https://www.smartsheet.com/marketplace/apps/slack)
+
+  [![Image 49: Creative Cloud App logo](https://www.smartsheet.com/sites/default/files/cc_appicon_88x84.png) #### Adobe Creative Cloud integration](https://www.smartsheet.com/marketplace/apps/adobe-creative-cloud)
+
+[![Image 50: Salesforce logo](https://www.smartsheet.com/sites/default/files/2023-10/salesforce-logo.svg) #### Salesforce connector](https://www.smartsheet.com/marketplace/apps/salesforce)
+
+[![Image 51: PowerBi logo](https://www.smartsheet.com/sites/default/files/powerbi.svg) #### Power BI integration](https://www.smartsheet.com/marketplace/apps/microsoft-power-bi)
+
+[![Image 52: JIRA Atlassian logo](https://www.smartsheet.com/sites/default/files/2023-06/jirasoftware-logomark.svg) #### JIRA connector](https://www.smartsheet.com/marketplace/apps/jira-connector)
+
+Find the right plan for your business
+
+Ready to find an ideal plan tailored for your business? Let's dive in!
+
+[Compare plans](https://www.smartsheet.com/pricing)
+
+Team collaboration
+------------------
+
+Empower your teams to execute with speed, efficiency, and accountability.
+
+  ![Image 53](https://www.smartsheet.com/sites/default/files/2023-02/transparent-janet-48px.png)
+
+*   ### Proofing
+    
+    Optimize the review cycle and centralize feedback. Request, gather, and manage input from stakeholders through an intuitive interface, enabling reviewers to pin comments directly onto specific areas of content, such as images or documents. Maintain version control, and track changes and feedback history for audit purposes and transparency.
+    
+*   ### Sharing
+    
+    Ensure collaborators both within and outside your organization have access to the most current version of your work. Control access levels, from viewing to full ownership, regardless of whether collaborators have a Smartsheet account. Even without signing in, published items can be viewed by anyone you share them with, streamlining collaboration and communication.
+    
+*   ### Attachments
+    
+    Upload a variety of file types, such as .jpg, .png, .gif, .pdf, .docx, .pptx, .xlsx. Attach content from Brandfolder, Google Drive, Dropbox, OneDrive, and more. Add up to 100 files simultaneously. Attach files to individual rows to keep information in context, or attach them to the entire sheet.
+    
+*   ### Conversations
+    
+    Keep all stakeholders aligned, informed, and accountable, promoting efficient workflow and decision-making. Coordinate project tasks, clarify details, provide updates, and maintain a record of communications related to specific items in a sheet ensuring discussions are centralized and accessible.
+    
+*   ### Notifications
+    
+    Visualize your projects with customizable task management capabilities. Tailor your notification settings to prioritize key tasks and stay updated with in-app alerts so you can provide prompt responses to requests for updates or approvals. Enhance your awareness with mobile push notifications and emails, helping you focus on what's most important.
+    
+
+Security and enterprise controls
+--------------------------------
+
+Streamlined management of user access, security settings, and billing details for efficient collaboration and project control.
+
+### Security
+
+Automate administrative tasks, apply security controls, and ensure company data is protected.
+
+[Visit our Trust Center](https://www.smartsheet.com/trust/security)
+
+#### 
+
+Customer Managed Encryption Keys (CMEK)
+
+**Ensure administrators have the necessary tools to protect sensitive information.**
+
+Gain full control of access to your data with customer-managed encryption keys, stored and handled through Amazon Web Services Key Management System (AWS KMS). As a customer, you own and govern your encryption keys, giving you the power to configure, rotate, and completely revoke access to your company's data.
+
+[Learn more](https://help.smartsheet.com/articles/2482311-customer-managed-encryption-keys?_gl=1*cvq4h4*_ga*MTYyNDQ0MTIyMS4xNjkyMTM4NzY1*_ga_ZYH7XNXMZK*MTY5NzU3NTA5Mi40MS4xLjE2OTc1ODYwNjIuNjAuMC4w&_ga=2.116078464.747751241.1697475423-1624441221.1692138765)
+
+#### 
+
+E-signatures
+
+**Enhance document security and streamline the approval process.**
+
+Allow users to request and receive legally-binding signatures directly within their workflows. This secure method ensures authenticity and consent on documents, all while maintaining compliance and audit trails within the Smartsheet platform.
+
+[Learn more](https://help.smartsheet.com/learning-track/best-practice-webinars/document-builder)
+
+#### 
+
+Data retention controls
+
+**Ensure only current, relevant data is stored in your Smartsheet account.**
+
+Provide robust security options, enabling organizations to manage the lifecycle of their content with precision. These controls allow administrators to set policies for retaining, archiving, and deleting data according to company security guidelines and regulatory requirements, ensuring sensitive information is protected and disposed of responsibly.
+
+[Learn more](https://help.smartsheet.com/articles/2482311-customer-managed-encryption-keys)
+
+#### 
+
+Data egress
+
+**Prevent confidential data from leaving your Smartsheet account.**
+
+System administrators can enforce company egress policies to regulate how external collaborators handle data, with the ability to restrict actions such as saving new copies, saving as templates, sending attachments, publishing, printing, and exporting. Should an external collaborator try to perform any of these restricted actions, they will be notified that the action is blocked in adherence to the company’s egress policies.
+
+[Learn more](https://help.smartsheet.com/articles/2482620-data-egress-policy)
+
+#### 
+
+Smartsheet Regions
+
+**Choose specific geographic locations where your data is stored and managed.**
+
+By selecting a data region, customers can ensure information resides in their preferred location, enhancing control over data sovereignty, and meeting regional compliance and policy requirements. This feature is particularly important for organizations with compliance requirements to keep data within certain national boundaries due to privacy laws and regulations.
+
+[Learn more](https://help.smartsheet.com/articles/2482446-introducing-smartsheet-regions)
+
+#### 
+
+Activity log
+
+**See who made which changes and when, on sheets, reports, and dashboards.**
+
+Activity Log provides a detailed audit trail, capturing changes, access, and sharing activities related to sheets, reports, or dashboards, ensuring transparency and aiding in compliance and monitoring efforts.
+
+[Learn more](https://help.smartsheet.com/articles/2476206-track-sheet-changes-with-activity-log?_gl=1*1ryz162*_ga*MjM4MjUyMDAyLjE3MTA3ODg2NTQ.*_ga_ZYH7XNXMZK*MTcxMDgwMTY1MS4zLjEuMTcxMDgwNTIyMy40OS4wLjA.&_ga=2.139102195.158325621.1710788656-238252002.1710788654)
+
+### Administration
+
+Enable centralized control over users, access privileges, and settings, simplifying the management of your organization's account.
+
+#### 
+
+Admin tools
+
+**Manage and audit user access, ownership, and activity.**
+
+Configure global security settings, such as account discovery, resource management, and personalized welcome screens. Define user roles, detailing specific permissions within the Smartsheet account, utilize automated user provisioning for seamless enterprise account integration, and customize account settings to tailor features and set working days according to organizational needs.
+
+[Learn more](https://www.smartsheet.com/trust)
+
+#### 
+
+Admin Center
+
+**Configure and manage your Smartsheet Account with ease from one location.**
+
+Navigate through User and Group Management, Usage Reports, and Enterprise Configuration Options. Monitor licensed users, group memberships, and accessible integrations. Enhance the visibility of security and account settings, offering recommendations to refine your account setup in alignment with Smartsheet best practices for optimized configuration.
+
+[Learn more](https://help.smartsheet.com/articles/2481889-admin-center-overview)
+
+#### 
+
+Enterprise plan manager
+
+**Manage and govern multiple plans while maintaining individual teams’ granular control over their plan and billing.**
+
+Optimize your organization's billing structures for flexibility and allow teams to integrate essential premium applications for their tasks. System Admins can authenticate all company domains, consolidate visibility of all existing plans under IT control, and establish a uniform SAML SSO login for all plans, ensuring that access can be globally revoked when an employee departs, streamlining administrative functions and enhancing security.
+
+[Learn more](https://www.smartsheet.com/datasheets/datasheet-enterprise-plan-manager)
+
+#### 
+
+Event reporting
+
+**Passive monitoring for deep insights into Smartsheet users and usage.**
+
+Streamline your security monitoring by exporting a comprehensive feed of over 100 Smartsheet event types—including object creation and deletion, group edits, workspace creation, downloads, and attachments—directly into dedicated CASB services. This includes seamless integrations with leading solutions such as McAfee MVISION and Microsoft Cloud App Security (MCAS), enhancing your visibility and control over your Smartsheet environment. [Full list here](https://smartsheet-platform.github.io/event-reporting-docs/).
+
+[Learn more](https://www.smartsheet.com/datasheets/datasheet-event-reporting)
+
+#### 
+
+Plan insights
+
+**Gain valuable insights into the number and types of users engaged with your Smartsheet plan.**
+
+SysAdmins have effective oversight and account management with a clear, analytical view of how your organization utilizes Smartsheet. It provides metrics and trends on user engagement and feature adoption, helping you make informed decisions to optimize your plan's performance and maximize your return on investment.
+
+[Learn more](https://www.smartsheet.com/datasheets/datasheet-plan-insights)
+
+Plan, execute, and track work anywhere
+--------------------------------------
+
+[![Image 54](https://www.smartsheet.com/sites/default/files/2024-03/icon-blue-500_desktop-download_0.svg) ### Desktop app Work without distractions with the Smartsheet desktop app, available for download on Windows and Mac.](https://www.smartsheet.com/platform/desktop-app)
+
+[![Image 55: Mobil icon removed from Capabilities page](https://www.smartsheet.com/sites/default/files/mobile_2.svg) ### Mobile app Navigate your work easily on your phone or tablet to check real-time updates in sheets, reports, and dashboards on the go.](https://www.smartsheet.com/platform/mobile)
+
+Premium features
+----------------
+
+These advanced tools include powerful integrations, increased automation, in-depth analytics, and heightened security options, tailored to meet the specialized needs of businesses seeking to elevate their project management and operational efficiency.
+
+[![Image 56: control center app icon](https://www.smartsheet.com/sites/default/files/2023-10/control-center-app-icon.svg) Control Center ### Portfolio management Establish best practices to deliver consistency and visibility at scale for work execution and reporting. Monitor the status of your portfolio to make decisions about budgets, resources, and risk management.](https://www.smartsheet.com/marketplace/premium-apps/control-center)
+
+[![Image 57: resource management icon](https://www.smartsheet.com/sites/default/files/2023-10/resource-management-logo-icon.svg) Resource Management by Smartsheet ### Resource management Mobilize the best team for the job, keep project schedules and budgets on track, and forecast accurate hiring needs with ease and confidence.](https://www.smartsheet.com/platform/resource-management)
+
+[![Image 58: Brandfolder logo](https://www.smartsheet.com/sites/default/files/2023-10/brandfolder-logo-icon.svg) Brandfolder by Smartsheet ### Digital asset management Unlock the full potential of your teams to manage, distribute, and measure creative asset performance with Smartsheet and Brandfolder.](https://www.smartsheet.com/solutions/digital-asset-management)
+
+[![Image 59: dynamic view app icon](https://www.smartsheet.com/sites/default/files/2023-10/dynamic-view-app-icon.svg) Dynamic View ### Secure request management Manage multi-step processes by sharing only what is needed to the right people at the right time. Maintain control over who can read and edit rows or cells so you can collaborate without sharing your underlying sheet.](https://www.smartsheet.com/marketplace/premium-apps/dynamic-view)
+
+[![Image 60: bridge app icon](https://www.smartsheet.com/sites/default/files/2023-10/bridge-app-icon.svg) Bridge by Smartsheet ### Intelligent workflows Create advanced workflows across systems to process data and automate work for increased accuracy and efficiency.](https://www.smartsheet.com/platform/bridge)
+
+[![Image 61: workapps app icon](https://www.smartsheet.com/sites/default/files/2023-10/workapps-app-icon.svg) WorkApps ### No-code work apps Build intuitive web and mobile apps with no coding skills required.](https://www.smartsheet.com/platform/workapps)
+
+[![Image 62: data shuttle app icon](https://www.smartsheet.com/sites/default/files/2023-10/data-shuttle-app-icon.svg) Data Shuttle ### Data management Upload or offload your data between Smartsheet and your ERPs, CRMs, and databases. Centralize your data into one source of truth — giving you the ability to make confident, real-time decisions.](https://www.smartsheet.com/marketplace/premium-apps/data-shuttle)
+
+[![Image 63: datamesh app icon](https://www.smartsheet.com/sites/default/files/2023-10/datamesh-app-icon.svg) DataMesh ### Data management Eliminate typos, duplicative data entry and unnecessary work by mapping data between large sheets and reports.](https://www.smartsheet.com/marketplace/premium-apps/datamesh)
+
+[![Image 64: data table app icon](https://www.smartsheet.com/sites/default/files/2023-10/datatable-app-icon.svg) DataTable ### Data management Make data-driven decisions that improve the way you work -- all without specialized technical skills. Visualize and collaborate on large data sets in Smartsheet by unlocking and combining siloed data from ERPs, CRMs, and databases.](https://www.smartsheet.com/marketplace/premium-apps/datatable)
+
+[![Image 65: pivot app icon](https://www.smartsheet.com/sites/default/files/2023-10/pivot-app-icon.svg) Pivot App ### Data management Summarize and analyze large data stored in sheets or reports and create meaningful comparisons, patterns, and trends.](https://www.smartsheet.com/marketplace/premium-apps/pivot-app)
+
+[![Image 66: calendar app icon](https://www.smartsheet.com/sites/default/files/2023-10/calendar-app-icon.svg) Calendar App ### Time management Build shareable calendars with custom details using the interactive and flexible tool.](https://www.smartsheet.com/marketplace/premium-apps/calendar-app)
+
+Explore more, do more. Dive into our complete features list.
+------------------------------------------------------------
+
+Explore all features
+
+<table class="no-border" style="width:100%;"><tbody><tr><td rowspan="3"><h4>Essential features</h4><ul><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/level-1-get-started/create-sheet" target="_blank">Grid view</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/level-1-get-started/basic-gantt-view" target="_blank">Gantt view</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/get-started/card-view?_gl=1*5a4jnj*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQwNjU5LjYwLjAuMA..&amp;_ga=2.89383256.2105239901.1709571402-966021371.1706829778" target="_blank">Card view</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/get-started/calendar-view?_gl=1*5a4jnj*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQwNjU5LjYwLjAuMA..&amp;_ga=2.89383256.2105239901.1709571402-966021371.1706829778" target="_blank">Calendar view</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/smartsheet-intermediate/cell-linking?_gl=1*5a4jnj*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQwNjU5LjYwLjAuMA..&amp;_ga=2.89383256.2105239901.1709571402-966021371.1706829778" target="_blank">Cell linking</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/get-started/formula-basics?_gl=1*1bssio6*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQwNjU5LjYwLjAuMA..&amp;_ga=2.266521677.2105239901.1709571402-966021371.1706829778" target="_blank">Formulas</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2478846-filter-basics" target="_blank">Filters</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482093-baselines" target="_blank">Baselines</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/level-3-advanced-users/gantt-chart-dependencies" target="_blank">Dependencies</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/smartsheet-advanced/critical-summary-and-driving-paths?_gl=1*rk3paa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxMDU4LjM3LjAuMA..&amp;_ga=2.194158702.2105239901.1709571402-966021371.1706829778" target="_blank">Critical path</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482264-overview-smartsheet-dashboards" target="_blank">Dashboards</a></li><li><a class="text-underline" href="https://help.smartsheet.com/videos/smartsheet-reports?_gl=1*pvnn9b*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxMjM4LjE0LjAuMA..&amp;_ga=2.192012777.2105239901.1709571402-966021371.1706829778" target="_blank">Reports</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/smartsheet-intermediate/forms?_gl=1*1j2wes1*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQwNjU5LjYwLjAuMA..&amp;_ga=2.32178813.2105239901.1709571402-966021371.1706829778" target="_blank">Forms</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/advanced/work-insights" target="_blank">Work insights</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2483101-workload-tracking-in-smartsheet" target="_blank">Workload tracking</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/522123-creating-using-templates" target="_blank">Templates</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/system-admin/custom-branding?_gl=1*tzuoc6*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxNDM4LjI1LjAuMA..&amp;_ga=2.194169326.2105239901.1709571402-966021371.1706829778" target="_blank">Custom branding</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/522078-publishing-smartsheet-items?frame=&amp;nav=&amp;_gl=1*tzuoc6*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxNDM4LjI1LjAuMA..&amp;_ga=2.194169326.2105239901.1709571402-966021371.1706829778" target="_blank">Publish</a></li></ul></td><td><h4>Automation and integrations</h4><ul><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/level-2-intermediate-users/automation?_gl=1*1pssesj*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&amp;_ga=2.121998091.1048080695.1710173073-966021371.1706829778" target="_blank">Automated workflows</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482492-build-workflow-automate-document-generation" target="_blank">Document generation</a></li><li><a class="text-underline" href="/blog/api-getting-started">API</a></li><li><a class="text-underline" href="/smartsheet-connectors">Connectors</a></li><li><a class="text-underline" href="https://help.smartsheet.com/topics/apps-integrations?_gl=1*irme53*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxODM3LjU3LjAuMA..&amp;_ga=2.201056493.2105239901.1709571402-966021371.1706829778" target="_blank">Integrations</a></li></ul></td><td rowspan="3"><h4>Team collaboration</h4><ul><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/smartsheet-advanced/proofing?_gl=1*1kugnpx*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.101920066.2105239901.1709571402-966021371.1706829778" target="_blank">Proofing</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/level-1-get-started/sharing?_gl=1*qadl7b*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTI0LjQyLjAuMA..&amp;_ga=2.23850361.2105239901.1709571402-966021371.1706829778" target="_blank">Sharing</a></li><li><a class="text-underline" href="https://help.smartsheet.com/videos/attachments?_gl=1*1kugnpx*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.101920066.2105239901.1709571402-966021371.1706829778" target="_blank">Attachments</a></li><li><a class="text-underline" href="https://help.smartsheet.com/learning-track/get-started/conversations?_gl=1*qadl7b*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTI0LjQyLjAuMA..&amp;_ga=2.23850361.2105239901.1709571402-966021371.1706829778" target="_blank">Conversations</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2476506-using-notification-center?_gl=1*qadl7b*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTI0LjQyLjAuMA..&amp;_ga=2.23850361.2105239901.1709571402-966021371.1706829778" target="_blank">Notifications</a></li></ul></td><td rowspan="3"><h4>Security and enterprise controls</h4><ul><li><a class="text-underline" href="https://help.smartsheet.com/articles/2481889-admin-center-overview" target="_blank">Admin center</a></li><li><a class="text-underline" href="/trust" target="_blank">Admin tools</a></li><li><a class="text-underline" href="/datasheets/datasheet-plan-insights">Plan insights</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2476661-saml-sso-overview-enterprise" target="_blank">SAML-based SSO</a></li><li><a class="text-underline" href="/datasheets/datasheet-enterprise-plan-manager">Enterprise plan manager</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482116-set-up-a-custom-email-domain?_gl=1*w3hxbg*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.95022175.2105239901.1709571402-966021371.1706829778" target="_blank">Custom email domains</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482793-regions-capabilities?iOS=" target="_blank">E-signatures</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/855284-security-controls-enterprise-only" target="_blank">Safe sharing</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2483128-governance-policies-external-collaborators" target="_blank">External collaborator multi-factor authentication</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482386-configure-data-retention?_gl=1*f4w3mt*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.189853032.2105239901.1709571402-966021371.1706829778" target="_blank">Data retention controls</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482620-data-egress-policy?_gl=1*f4w3mt*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.189853032.2105239901.1709571402-966021371.1706829778" target="_blank">Data egress</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482311-customer-managed-encryption-keys?_gl=1*f4w3mt*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.189853032.2105239901.1709571402-966021371.1706829778" target="_blank">Customer managed encryption keys (CMEK)</a></li><li><a class="text-underline" href="/datasheets/datasheet-event-reporting">Event reporting</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2482446-introducing-smartsheet-regions" target="_blank">Smartsheet Regions</a></li><li><a class="text-underline" href="https://help.smartsheet.com/articles/2476206-track-sheet-changes-with-activity-log?_gl=1*7jk58l*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&amp;_ga=2.195682671.2105239901.1709571402-966021371.1706829778" target="_blank">Activity log</a></li></ul></td><td rowspan="3"><h4>Premium features</h4><ul><li><a class="text-underline" href="/marketplace/premium-apps/control-center">Portfolio management</a></li><li><a class="text-underline" href="/platform/resource-management">Resource management</a></li><li><a class="text-underline" href="/solutions/digital-asset-management">Digital asset management</a></li><li><a class="text-underline" href="/marketplace/premium-apps/dynamic-view">Secure request management</a></li><li><a class="text-underline" href="/platform/bridge">Intelligent workflows</a></li><li><a class="text-underline" href="/platform/workapps">No-code work apps</a></li><li><a class="text-underline" href="/marketplace/premium-apps/data-shuttle">Data Shuttle</a></li><li><a class="text-underline" href="/marketplace/premium-apps/datamesh">DataMesh</a></li><li><a class="text-underline" href="/marketplace/premium-apps/datatable">DataTable</a></li><li><a class="text-underline" href="/marketplace/premium-apps/pivot-app">Pivot App</a></li><li><a class="text-underline" href="/marketplace/premium-apps/calendar-app">Time management</a></li></ul></td></tr><tr><td><h4>AI</h4><ul><li><a class="text-underline" href="https://help.smartsheet.com/2483169/AI-tools" target="_blank">Generate formulas</a></li><li><a class="text-underline" href="https://help.smartsheet.com/2483096/AI-Formulas-text-generator" target="_blank">Text and summaries</a></li></ul></td></tr><tr><td><h4>Smartsheet across devices</h4><ul><li><a class="text-underline" href="/platform/desktop-app">Desktop app</a></li><li><a class="text-underline" href="/platform/mobile">Mobile app</a></li></ul></td></tr></tbody></table>
+
+#### 
+
+Essential features
+
+[Grid view](https://help.smartsheet.com/learning-track/level-1-get-started/create-sheet?_gl=1*jw4h8o*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.119835400.1048080695.1710173073-966021371.1706829778)
+
+[Gantt view](https://help.smartsheet.com/learning-track/level-1-get-started/basic-gantt-view?_gl=1*jw4h8o*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.119835400.1048080695.1710173073-966021371.1706829778)
+
+[Card view](https://help.smartsheet.com/learning-track/get-started/card-view?_gl=1*jw4h8o*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.119835400.1048080695.1710173073-966021371.1706829778)
+
+[Calendar view](https://help.smartsheet.com/learning-track/get-started/calendar-view?_gl=1*jw4h8o*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.119835400.1048080695.1710173073-966021371.1706829778)
+
+[Cell linking](https://help.smartsheet.com/learning-track/get-started/calendar-view?_gl=1*jw4h8o*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.119835400.1048080695.1710173073-966021371.1706829778)
+
+[Formulas](https://help.smartsheet.com/learning-track/get-started/formula-basics?_gl=1*sy6vfa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.232628895.1048080695.1710173073-966021371.1706829778)
+
+[Filters](https://help.smartsheet.com/articles/2478846-filter-basics)
+
+[Baselines](https://help.smartsheet.com/articles/2482093-baselines)
+
+[Dependencies](https://help.smartsheet.com/learning-track/level-3-advanced-users/gantt-chart-dependencies)
+
+[Critical path](https://help.smartsheet.com/learning-track/smartsheet-advanced/critical-summary-and-driving-paths?_gl=1*sy6vfa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.232628895.1048080695.1710173073-966021371.1706829778)
+
+[Dashboards](https://help.smartsheet.com/articles/2482264-overview-smartsheet-dashboards?_gl=1*sy6vfa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.232628895.1048080695.1710173073-966021371.1706829778)
+
+[Reports](https://help.smartsheet.com/videos/smartsheet-reports?_gl=1*sy6vfa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.232628895.1048080695.1710173073-966021371.1706829778)
+
+[Forms](https://help.smartsheet.com/learning-track/smartsheet-intermediate/forms?_gl=1*sy6vfa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.232628895.1048080695.1710173073-966021371.1706829778)
+
+[Work insights](https://help.smartsheet.com/learning-track/advanced/work-insights)
+
+[Workload tracking](https://help.smartsheet.com/articles/2483101-workload-tracking-in-smartsheet)
+
+[Templates](https://help.smartsheet.com/articles/522123-creating-using-templates)
+
+[Custom branding](https://help.smartsheet.com/learning-track/system-admin/custom-branding?_gl=1*sy6vfa*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.232628895.1048080695.1710173073-966021371.1706829778)
+
+[Publish](https://help.smartsheet.com/articles/522078-publishing-smartsheet-items?frame=&nav=&_gl=1*pqkld*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc1NTYxLjU1LjAuMA..&_ga=2.224715418.1048080695.1710173073-966021371.1706829778)
+
+#### 
+
+Automation and integrations
+
+[Automated workflows](https://help.smartsheet.com/learning-track/level-2-intermediate-users/automation?_gl=1*1pssesj*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.121998091.1048080695.1710173073-966021371.1706829778)
+
+[Document generation](https://help.smartsheet.com/articles/2482492-build-workflow-automate-document-generation)
+
+[API](https://www.smartsheet.com/blog/api-getting-started)
+
+[Connectors](https://www.smartsheet.com/smartsheet-connectors)
+
+[Integrations](https://help.smartsheet.com/topics/apps-integrations?_gl=1*1e2xzn8*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.152430265.1048080695.1710173073-966021371.1706829778)
+
+#### 
+
+AI
+
+[Generate formulas](https://www.smartsheet.com/help-center?url=/2483169/AI-tools)
+
+[Text and summaries](https://help.smartsheet.com/2483096/AI-Formulas-text-generator)
+
+#### 
+
+Team collaboration
+
+[Proofing](https://help.smartsheet.com/learning-track/smartsheet-advanced/proofing?_gl=1*1766ve2*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.124234506.1048080695.1710173073-966021371.1706829778)
+
+[Sharing](https://help.smartsheet.com/learning-track/level-1-get-started/sharing?_gl=1*1e2xzn8*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.152430265.1048080695.1710173073-966021371.1706829778)
+
+[Attachments](https://help.smartsheet.com/videos/attachments?_gl=1*1766ve2*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.124234506.1048080695.1710173073-966021371.1706829778)
+
+[Conversations](https://help.smartsheet.com/learning-track/get-started/conversations?_gl=1*1e2xzn8*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.152430265.1048080695.1710173073-966021371.1706829778)
+
+[Notifications](https://help.smartsheet.com/articles/2476506-using-notification-center?_gl=1*1e2xzn8*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcxMDE3MzA1MC4xMjkuMS4xNzEwMTc3MDY3LjYwLjAuMA..&_ga=2.152430265.1048080695.1710173073-966021371.1706829778)
+
+#### 
+
+Security and enterprise controls
+
+[Admin center](https://help.smartsheet.com/articles/2481889-admin-center-overview)
+
+[Admin tools](https://www.smartsheet.com/trust)
+
+[Plan insights](https://www.smartsheet.com/datasheets/datasheet-plan-insights)
+
+[SAML-based SSO](https://help.smartsheet.com/articles/2476661-saml-sso-overview-enterprise)
+
+[Enterprise plan manager](https://www.smartsheet.com/datasheets/datasheet-enterprise-plan-manager)
+
+[Custom email domains](https://help.smartsheet.com/articles/2482116-set-up-a-custom-email-domain?_gl=1*w3hxbg*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&_ga=2.95022175.2105239901.1709571402-966021371.1706829778)
+
+[E-signatures](https://help.smartsheet.com/articles/2482793-regions-capabilities?iOS=)
+
+[Safe sharing](https://help.smartsheet.com/articles/2483128-governance-policies-external-collaborators)
+
+[External collaborator multi-factor authentication](https://help.smartsheet.com/articles/2483128-governance-policies-external-collaborators)
+
+[Data retention controls](https://help.smartsheet.com/articles/2482386-configure-data-retention?_gl=1*f4w3mt*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&_ga=2.189853032.2105239901.1709571402-966021371.1706829778)
+
+[Data egress](https://help.smartsheet.com/articles/2482620-data-egress-policy?_gl=1*f4w3mt*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&_ga=2.189853032.2105239901.1709571402-966021371.1706829778)
+
+[Customer managed encryption keys (CMEK)](https://help.smartsheet.com/articles/2482311-customer-managed-encryption-keys?_gl=1*f4w3mt*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&_ga=2.189853032.2105239901.1709571402-966021371.1706829778)
+
+[Event reporting](https://www.smartsheet.com/datasheets/datasheet-event-reporting)
+
+[Smartsheet regions](https://help.smartsheet.com/articles/2482446-introducing-smartsheet-regions)
+
+[Activity log](https://help.smartsheet.com/articles/2476206-track-sheet-changes-with-activity-log?_gl=1*7jk58l*_ga*OTY2MDIxMzcxLjE3MDY4Mjk3Nzg.*_ga_ZYH7XNXMZK*MTcwOTkzOTgyMS4xMjcuMS4xNzA5OTQxOTg0LjU5LjAuMA..&_ga=2.195682671.2105239901.1709571402-966021371.1706829778)
+
+#### 
+
+Smartsheet across devices
+
+[Desktop app](https://www.smartsheet.com/platform/desktop-app)
+
+[Mobile app](https://www.smartsheet.com/platform/mobile)
+
+#### 
+
+Premium features
+
+[Portfolio management](https://www.smartsheet.com/marketplace/premium-apps/control-center)
+
+[Resource management](https://www.smartsheet.com/platform/resource-management)
+
+[Digital asset management](https://www.smartsheet.com/solutions/digital-asset-management)
+
+[Secure request management](https://www.smartsheet.com/marketplace/premium-apps/dynamic-view)
+
+[Intelligent workflows](https://www.smartsheet.com/platform/bridge)
+
+[No-code work apps](https://www.smartsheet.com/platform/workapps)
+
+[Data Shuttle](https://www.smartsheet.com/marketplace/premium-apps/data-shuttle)
+
+[DataMesh](https://www.smartsheet.com/marketplace/premium-apps/datamesh)
+
+[DataTable](https://www.smartsheet.com/marketplace/premium-apps/datatable)
+
+[Pivot App](https://www.smartsheet.com/marketplace/premium-apps/pivot-app)
+
+[Time management](https://www.smartsheet.com/marketplace/premium-apps/calendar-app)
+
+Ready to get started?
+
+[Try Smartsheet for free](https://www.smartsheet.com/try-it) [Contact our team](https://www.smartsheet.com/contact/sales)
+
+*   [Smartsheet ![Image 67: Smartsheet logo](https://www.smartsheet.com/sites/default/files/2022-10/smartsheet-logo-horizontal.svg)](https://www.smartsheet.com/ "Smartsheet")
+*   Product
+    
+    *   Product
+        *   [Platform](https://www.smartsheet.com/platform)
+        *   [Solutions](https://www.smartsheet.com/solutions)
+        *   [Features](https://www.smartsheet.com/platform/features)
+        *   [Integrations](https://www.smartsheet.com/integrations)
+        *   [Pricing & plans](https://www.smartsheet.com/pricing)
+        *   [Smartsheet Advance](https://www.smartsheet.com/pricing/smartsheet-advance)
+        *   [Professional services](https://www.smartsheet.com/services/professional-services)
+        *   [Trust Center](https://www.smartsheet.com/trust)
+        *   [Template Gallery](https://www.smartsheet.com/template-gallery)
+        *   [Why Smartsheet](https://www.smartsheet.com/why-smartsheet)
+        *   [Start a trial](https://www.smartsheet.com/try-it?lpv=footercta)
+        *   [View pricing and plans](https://www.smartsheet.com/pricing)
+    
+*   Resources
+    
+    *   Resources
+        *   [Content Center](https://www.smartsheet.com/content-center)
+        *   [Product updates & insights](https://www.smartsheet.com/content-center/product-insights)
+        *   [Help and Learning](https://www.smartsheet.com/help-center)
+        *   [Smartsheet University](https://www.smartsheet.com/smartsheet-university)
+        *   [Training options](https://www.smartsheet.com/help-center?url=training_resources)
+        *   [Support](https://www.smartsheet.com/services/support)
+        *   [Community](https://community.smartsheet.com/)
+        *   [Partner program](https://www.smartsheet.com/channel-partners)
+        *   [Developers & API](https://developers.smartsheet.com/)
+        *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=footer-demo)
+    
+*   Company
+    
+    *   Company
+        *   [About us](https://www.smartsheet.com/about)
+        *   [Leadership](https://www.smartsheet.com/about/leadership)
+        *   [Investors](https://investors.smartsheet.com/)
+        *   [Newsroom](https://www.smartsheet.com/content-center/news)
+        *   [Customer stories](https://www.smartsheet.com/customers)
+        *   [Careers We're hiring!](https://www.smartsheet.com/careers)
+        *   [Privacy](https://www.smartsheet.com/legal/privacy)
+        *   [Legal](https://www.smartsheet.com/legal)
+        *   [Contact us](https://www.smartsheet.com/contact?fts=contact-footer)
+    
+*   Learn
+    
+    *   Learn
+        *   [Project management templates](https://www.smartsheet.com/content-center/best-practices/project-management-guide/templates-project-management)
+        *   [Smartsheet dashboard gallery](https://www.smartsheet.com/content-center/product-news/reports-dashboards/smartsheet-dashboard-gallery)
+        *   [5 steps for getting started with the Smartsheet API](https://www.smartsheet.com/content-center/best-practices/tips-tricks/api-getting-started)
+        *   [3 formulas to look up data in Smartsheet](https://www.smartsheet.com/content-center/best-practices/tips-tricks/3-formulas-look-up-data-smartsheet)
+        *   * * *
+            
+        *   [Unlock the power of Smartsheet with AI ![Image 68: Smartsheet AI](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-ai-footer.png)](https://www.smartsheet.com/ai)  
+        *   [Learn more about ENGAGE ![Image 69: Engage Footer Nav Graphic](https://www.smartsheet.com/sites/default/files/2024-06/ENGAGE_Seattle_2024_Footer%20480x135.png)](https://www.smartsheet.com/engage)  
+    
+
+Select your language 
+
+        
+
+[Download desktop app](https://www.smartsheet.com/platform/desktop-app)
+
+*   [Facebook](https://www.facebook.com/smartsheet "Facebook")
+*   [X](https://twitter.com/smartsheet "X")
+*   [LinkedIn](https://www.linkedin.com/company/smartsheet-com "LinkedIn")
+*   [TikTok](https://www.tiktok.com/@smartsheet "TikTok")
+*   [YouTube](https://youtube.com/user/SmartSheet "YouTube")
+*   [Instagram](https://www.instagram.com/smartsheetplatform/ "Instagram")
+
+[©2024. All Rights Reserved Smartsheet Inc.](https://www.smartsheet.com/legal/site-terms)•[Cookie Preferences](https://www.smartsheet.com/platform/features#)•[](https://www.smartsheet.com/platform/features#)Your Privacy Choices
+
+ [![Image 70: Download on the Apple App Store](https://www.smartsheet.com/sites/default/files/Download_on_the_App_Store_Badge_US-UK_135x40_0_0.svg)](https://itunes.apple.com/app/smartsheet/id568421135)[![Image 71: Get it on Google Play](https://www.smartsheet.com/sites/default/files/google-play-badge-English.svg)](https://play.google.com/store/apps/details?id=com.smartsheet.android&hl=en)
+  ```
+
+Source URL: https://www.smartsheet.com/platform
+  ```
+  Work & Project Management Platform Features | Smartsheet
+===============   
+
+[Skip to main content](https://www.smartsheet.com/platform#main-content)
+
+*   [Smartsheet ![Image 1](https://www.smartsheet.com/sites/default/files/smartsheet-logo-blue-new.svg)](https://www.smartsheet.com/ "Smartsheet")
+*   Open navigation Close navigation
+    
+    *   Product
+        
+        *   *   [The Smartsheet Platform ![Image 2](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500-smartsheet-platform.svg) Manage projects, automate workflows, and build solutions at scale with the Smartsheet platform. Learn more](https://www.smartsheet.com/platform)
+        *   Features
+            *   [Automation ![Image 3](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_automate-workflow.svg)](https://www.smartsheet.com/platform/features#automation)
+            *   [Team collaboration ![Image 4](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_messaging.svg)](https://www.smartsheet.com/platform/features#team-collaboration)
+            *   [Dashboards and reporting ![Image 5](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_dashboard.svg)](https://www.smartsheet.com/platform/features#dashboards)
+            *   [Proofing ![Image 6](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_proofing.svg)](https://www.smartsheet.com/platform/features#proofing)
+            *   [Account administration ![Image 7](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_administration.svg)](https://www.smartsheet.com/platform/features#security-and-enterprise)
+            *   [Integrations ![Image 8](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_integrations_1.svg)](https://www.smartsheet.com/integrations)
+            *   [Digital asset management ![Image 9](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_brandfolder.svg)](https://www.smartsheet.com/solutions/digital-asset-management)
+            *   [Resource management ![Image 10](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_resource-management.svg)](https://www.smartsheet.com/platform/resource-management)
+            *   [Portfolio management ![Image 11](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_control-center.svg)](https://www.smartsheet.com/marketplace/premium-apps/control-center)
+            *   [Secure request management ![Image 12](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_conditional-formatting.svg)](https://www.smartsheet.com/marketplace/premium-apps/dynamic-view)
+            *   [Intelligent workflows ![Image 13](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_bridge.svg)](https://www.smartsheet.com/platform/bridge)
+            *   [No code work apps ![Image 14](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_workapps.svg)](https://www.smartsheet.com/platform/workapps)
+            *   [See all features](https://www.smartsheet.com/platform/features)
+        *   *   [Discover our latest product updates and enhancements ![Image 15: Quarterly Disclosure Global Nav Graphic](https://www.smartsheet.com/sites/default/files/2023-12/merchandising-quarterly-disclosures-small_0.png)](https://www.smartsheet.com/whats-up-next)  
+            *   [Smartsheet Advance Overview of our advanced automation, integration, and security offerings. Our Advance offering](https://www.smartsheet.com/advance)
+            *   [Professional services Information about Smartsheet consulting, training, and implementation support. Available services](https://www.smartsheet.com/services/professional-services)
+            *   [Trust and security A complete summary of Smartsheet platform's security and reliability. Trust Center](https://www.smartsheet.com/trust/security)
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-product)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-product)
+        
+    *   Solutions
+        
+        *   Featured
+            *   [Project and Portfolio Management ![Image 16: Modern Project and Portfolio Management](https://www.smartsheet.com/sites/default/files/2023-08/solution-category-project-portfolio-management.png) Explore](https://www.smartsheet.com/solutions/project-portfolio-management)
+            *   [Marketing and Creative Management ![Image 17: Marketing and Creative Management](https://www.smartsheet.com/sites/default/files/2023-08/solution-category-marketing-and-creative.png) Explore](https://www.smartsheet.com/solutions/marketing)
+        *   By use case
+            *   [Project management ![Image 18](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_project-management.svg)](https://www.smartsheet.com/solutions/project-management)
+            *   [IT Portfolio management ![Image 19](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_report-management.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/it-portfolio-management)
+            *   [Business PMO ![Image 20](https://www.smartsheet.com/sites/default/files/2024-07/icon-blue-500-franchise.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/business-pmo)
+            *   [Enterprise PMO ![Image 21](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_b2b.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/epmo)
+            *   [Marketing management ![Image 22](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_pm-methodologies.svg)](https://www.smartsheet.com/solutions/marketing/marketing-management)
+            *   [Creative operations ![Image 23](https://www.smartsheet.com/sites/default/files/2023-09/icon_blue-500-creative-operations.svg)](https://www.smartsheet.com/solutions/marketing/creative-operations)
+            *   [Services delivery ![Image 24](https://www.smartsheet.com/sites/default/files/2023-11/icon-blue-500_mobilizer_0.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/services-delivery)
+        *   By Industry
+            *   [Government ![Image 25](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_government.svg)](https://www.smartsheet.com/solutions/federal-government)
+            *   [Construction ![Image 26](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_construction.svg)](https://www.smartsheet.com/solutions/construction)
+            *   [Financial services ![Image 27](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_finance-accounting.svg)](https://www.smartsheet.com/solutions/finance)
+            *   [Higher education ![Image 28](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_education.svg)](https://www.smartsheet.com/solutions/education)
+            *   [Nonprofit ![Image 29](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_non-profit.svg)](https://www.smartsheet.com/solutions/nonprofit)
+            *   * * *
+                
+            *   [Enterprise ![Image 30](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_enterprise.svg)](https://www.smartsheet.com/solutions/enterprise)
+            *   [Small and medium business ![Image 31](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_retail_0.svg)](https://www.smartsheet.com/solutions/small-to-medium-business)
+        *   [View all solutions](https://www.smartsheet.com/solutions)
+        *   *   [Template gallery Streamline your work with the perfect template for your team. See all templates](https://www.smartsheet.com/marketplace/template-gallery)
+            *   [Customer stories Behind the scenes with organizations around the world using Smartsheet to do incredible things. See all stories](https://www.smartsheet.com/customers)
+            *   [Experience the future of productivity with Smartsheet AI ![Image 32: Smartsheet AI](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-ai.png)](https://www.smartsheet.com/ai)  
+            *   [Customers’ Choice in the 2024 Gartner® Peer Insights™ ![Image 33: Voice of the Customer](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-voice-of-the-customer.png)](https://www.smartsheet.com/content-center/inside-smartsheet/research/2024-gartner-voc-collaborative-work-management)  
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-solutions)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-solutions)
+        
+    *   Resources
+        
+        *   *   [Content Center Articles and guides about project management, collaboration, automation, and other topics to help you make the most of the Smartsheet platform. Explore the Content Center](https://www.smartsheet.com/content-center)
+            *   * * *
+                
+            *   [Managing work](https://www.smartsheet.com/content-center/managing-work)
+            *   [Product updates and insights](https://www.smartsheet.com/content-center/product-insights)
+            *   [Inside Smartsheet](https://www.smartsheet.com/content-center/inside-smartsheet)
+        *   *   [Help and Learning A comprehensive knowledge base, including articles, tutorials, videos, and other resources that cover a range of topics related to using Smartsheet. Get started](https://www.smartsheet.com/help-center)
+            *   * * *
+                
+            *   [Smartsheet University](https://www.smartsheet.com/smartsheet-university)
+            *   [Knowledge base](https://www.smartsheet.com/help-center?url=help)
+            *   [Training options](https://www.smartsheet.com/help-center?url=training_resources)
+            *   [Support](https://www.smartsheet.com/services/support)
+        *   *   [Community Explore user-generated content and stay updated on our latest product features. Join the Community](https://community.smartsheet.com/)
+            *   [Partners Learn about the Smartsheet partner program and access our partner directory. Learn more](https://www.smartsheet.com/channel-partners)
+            *   [Smartsheet events Your hub for Smartsheet events, webinars, Q&As, and user groups. See all events](https://www.smartsheet.com/events)
+        *   *   [ENGAGE ![Image 34: Engage Header Nav Graphic](https://www.smartsheet.com/sites/default/files/2024-06/ENGAGE_Seattle_2024_Header%20768x216.png) Smartsheet ENGAGE brings together our global customers, experts, and partners to share their experiences, ideas, and best practices. Learn more](https://www.smartsheet.com/engage)
+            *   [Project management templates ![Image 35: Project management templates](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-pm-templates.png)](https://www.smartsheet.com/content-center/best-practices/project-management-guide/templates-project-management)  
+            *   [Smartsheet dashboard gallery ![Image 36: Dashboard gallery](https://www.smartsheet.com/sites/default/files/2023-08/dashboard-gallery.png)](https://www.smartsheet.com/content-center/product-news/reports-dashboards/smartsheet-dashboard-gallery)  
+            *   [Getting started with the Smartsheet API ![Image 37: Smartsheet API](https://www.smartsheet.com/sites/default/files/2023-08/smartsheet-api.png)](https://www.smartsheet.com/content-center/best-practices/tips-tricks/api-getting-started)  
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-resources)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-resources)
+        
+    *   [Pricing](https://www.smartsheet.com/pricing)
+    *   [Contact](https://www.smartsheet.com/contact?fts=contact-header-nav)
+    *   Select language
+        
+        Select your language 
+        
+                
+        
+    *   [Log in](https://app.smartsheet.com/b/home)
+    *   *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav)
+        *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-mobile)
+    
+*   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo)
+    *   [Try Smartsheet for free](https://www.smartsheet.com/try-it?lpv=topnav)
+    *   Select language
+        
+        Select your language 
+        
+                
+        
+    *   Open search
+        
+    *   [Log in](https://app.smartsheet.com/b/home)
+
+THE SMARTSHEET PLATFORM
+
+Flexible modern work management
+===============================
+
+Work with flexibility and security—from small projects to large-scale processes and entire portfolios.
+
+[Try Smartsheet for free](https://www.smartsheet.com/try-it)[Contact our team](https://www.smartsheet.com/contact/sales?fts=platform)
+
+From Kanban-inspired board view to instant AI help, the latest innovations create value and time for the work that matters.
+
+[Learn more](https://www.smartsheet.com/content-center/product-news/product-releases/smartsheet-forward-july-30-2024)
+
+Power your work
+---------------
+
+
+
+### Collaborate on work
+
+### Scale your processes
+
+### Fuel your growth
+
+
+
+Empower every user to plan, track, automate, and report on work.
+----------------------------------------------------------------
+
+*   ### Project management
+    
+    Track and visualize your work however you prefer by switching with ease between various views: Timeline, Grid, Card, Gantt, or Calendar.
+    
+*   ### Team collaboration
+    
+    Empower your teams to execute with speed and accountability.
+    
+*   ### Forms and data collection
+    
+    Collect and act on error-free, consistent data from internal and external stakeholders with forms customized with your brand's colors, images, and logos.
+    
+*   ### Task automation
+    
+      ![Image 38: platform task automation](https://www.smartsheet.com/sites/default/files/2022-04/platform-task-automation.png)
+    
+    Implement simple and powerful automated workflows in a matter of minutes.
+    
+*   ### Content management
+    
+    Plan, manage, and review content production in Smartsheet to finalize assets faster. Publish to Brandfolder by Smartsheet, the #1 rated digital asset management tool.
+    
+*   ### Executive visibility
+    
+    Centralize the information and resources your team needs and give stakeholders a robust, real-time view into your project status with KPIs and visuals.
+    
+*   ### Easy-to-navigate apps
+    
+      ![Image 39: workapps dashboard app](https://www.smartsheet.com/sites/default/files/2021-02/workapps-dashboard-app-desktop-tablet-mobile-%402x_0.png)
+    
+    Build intuitive web and mobile apps with no coding skills required.
+    
+    [Learn more about WorkApps ›](https://www.smartsheet.com/platform/workapps)
+    
+
+Standardize your processes and integrate data across your systems.
+------------------------------------------------------------------
+
+*   ### Portfolio management
+    
+      ![Image 40: platform portfolio management control center](https://www.smartsheet.com/sites/default/files/2023-01/platform-portfolio-management-control-center-EN.png)
+    
+    Establish best practices to deliver consistency and visibility at scale for work execution and reporting. Monitor the status of your portfolio to make decisions about budgets, resources, and risk management.
+    
+    [Learn more about Control Center ›](https://www.smartsheet.com/marketplace/premium-apps/control-center)
+    
+*   ### Process management
+    
+      ![Image 41: platform process management dynamic view](https://www.smartsheet.com/sites/default/files/2022-04/platform-process-management-dynamic-view-1.png)
+    
+    Manage multi-step processes by sharing only what is needed to the right people at the right time. Maintain control over who can read and edit rows or cells so you can collaborate without sharing your underlying sheet.
+    
+    [Learn more about Dynamic View ›](https://www.smartsheet.com/marketplace/premium-apps/dynamic-view)
+    
+*   ### Data connections
+    
+      ![Image 42: platform data connections](https://www.smartsheet.com/sites/default/files/2024-02/platform-page-winifred.png)
+    
+    Enable data-driven decisions using easy-to-configure integrations with your systems of record.
+    
+    [Learn more about Data Shuttle, Connectors, and Integrations ›](https://www.smartsheet.com/integrations)
+    
+*   ### Security and administration
+    
+      ![Image 43: platform security and administration](https://www.smartsheet.com/sites/default/files/2022-04/platform-security-and-administration-2_1.png)
+    
+    Automate administration tasks, apply security controls, and ensure company data is protected.
+    
+    [Learn more in our Trust Center ›](https://www.smartsheet.com/trust)
+    
+*   ### Work insights
+    
+      ![Image 44: platform work insights](https://www.smartsheet.com/sites/default/files/2022-04/platform-work-insights.png)
+    
+    Automatically query, analyze, and visualize your business processes so you can make better decisions by understanding activity, trends, and bottlenecks.
+    
+*   ### Intelligent workflows
+    
+      ![Image 45: platform intelligent workflows](https://www.smartsheet.com/sites/default/files/2022-04/platform-intelligent-workflows-1.png)
+    
+    Create advanced workflows across systems to process data and automate work for increased accuracy and efficiency.
+    
+    [Learn more about Bridge ›](https://www.smartsheet.com/platform/bridge)
+    
+
+Accelerate the transformation that fuels your growth.
+-----------------------------------------------------
+
+*   ### Business-driven solutions
+    
+      ![Image 46: platform intelligent workflows](https://www.smartsheet.com/sites/default/files/2022-04/platform-business-driven-solutions-alt.png)
+    
+    Our professionals partner with you to understand your business needs, offer industry knowledge and strategic guidance, and build solutions that meet your needs.
+    
+    [Learn more ›](https://www.smartsheet.com/services/professional-services)
+    
+*   ### Accelerated outcomes
+    
+      ![Image 47: platform accelerated outcomes](https://www.smartsheet.com/sites/default/files/2022-04/platform-accelerated-outcomes-alt_1.png)
+    
+    Smartsheet packaged solutions and templates help you get up and running quickly by leveraging industry best practices for common business challenges and real-world experience.
+    
+    [Learn more ›](https://www.smartsheet.com/services/professional-services)
+    
+*   ### Smartsheet University
+    
+      ![Image 48: platform smartsheet university](https://www.smartsheet.com/sites/default/files/2022-04/platform-smartsheet-university-alt_1.png)
+    
+    Empower your work managers and teams with knowledge, skills, and certifications to help them improve their work management processes. Smartsheet training can help your leaders and teams deliver business impact faster and with lower cost and effort.
+    
+    [Learn more ›](https://smartu.smartsheet.com/)
+    
+*   ### Smartsheet Community
+    
+      ![Image 49: platform smartsheet community](https://www.smartsheet.com/sites/default/files/2022-04/platform-smartsheet-community-alt_0.png)
+    
+    Connect with your peers and join conversations with like-minded professionals to bolster modern work management at your company.
+    
+    [Learn more ›](https://community.smartsheet.com/)
+    
+*   ### World-class support
+    
+      ![Image 50: platform support](https://www.smartsheet.com/sites/default/files/2022-04/platform-support_0.png)
+    
+    Make technology work for you and get the most out of your Smartsheet investment with expert coaching and deep technical support and guidance.
+    
+    [Learn more ›](https://www.smartsheet.com/services/support)
+    
+
+[View all features](https://www.smartsheet.com/platform/features)
+
+Integrate and connect Smartsheet across your tech stack
+-------------------------------------------------------
+
+Smartsheet integrates and connects with many of the systems your team uses today. This allows for efficient information sharing, improved collaboration, and decision-making across your tech stack.
+
+[Learn more](https://www.smartsheet.com/integrations)
+
+  ![Image 51: Smartsheet pricing structure](https://www.smartsheet.com/sites/default/files/2024-06/platform-pricing-mobile-EN.png)
+
+Flexible plans that grow with your business
+-------------------------------------------
+
+Smartsheet offers a variety of plans that you can scale and customize for any business need. Whether you’re looking for a better way to manage projects, or standardize and scale best practices across your organization, we’re here for you.
+
+[Compare plans](https://www.smartsheet.com/pricing)
+
+  ![Image 52: Smartsheet pricing structure](https://www.smartsheet.com/sites/default/files/2024-06/platform-pricing-desktop-EN_0.png)
+
+  ![Image 53](https://www.smartsheet.com/sites/default/files/2022-03/transparent-janet-108px.png)
+
+  ![Image 54: platform page product section](https://www.smartsheet.com/sites/default/files/2022-05/platform-page-product-section-full.png)
+
+Do more with Smartsheet
+-----------------------
+
+#### Digital Asset Management
+
+Unlock the full potential of your teams to manage, distribute, and measure asset performance with Smartsheet and Brandfolder, the #1 Digital Asset Management Platform on G2.
+
+[Brandfolder by Smartsheet](https://www.smartsheet.com/solutions/digital-asset-management)
+
+#### Resource Management
+
+Resource Management by Smartsheet makes it easy to mobilize the best team for the job, keep project schedules and budgets on track, and forecast accurate hiring needs with confidence.
+
+[Resource Management by Smartsheet](https://www.smartsheet.com/platform/resource-management)
+
+Trusted by 90% of the Fortune 100
+---------------------------------
+
+From the remote home office to the global corporate complex, Smartsheet is transforming the way the world works
+
+[Browse customer stories](https://www.smartsheet.com/customers)
+
+Ready to get started?
+
+[Try Smartsheet for Free](https://www.smartsheet.com/try-it?fts=platform) [Contact our team](https://www.smartsheet.com/contact/sales?fts=platform)
+
+*   [Smartsheet ![Image 55: Smartsheet logo](https://www.smartsheet.com/sites/default/files/2022-10/smartsheet-logo-horizontal.svg)](https://www.smartsheet.com/ "Smartsheet")
+*   Product
+    
+    *   Product
+        *   [Platform](https://www.smartsheet.com/platform)
+        *   [Solutions](https://www.smartsheet.com/solutions)
+        *   [Features](https://www.smartsheet.com/platform/features)
+        *   [Integrations](https://www.smartsheet.com/integrations)
+        *   [Pricing & plans](https://www.smartsheet.com/pricing)
+        *   [Smartsheet Advance](https://www.smartsheet.com/pricing/smartsheet-advance)
+        *   [Professional services](https://www.smartsheet.com/services/professional-services)
+        *   [Trust Center](https://www.smartsheet.com/trust)
+        *   [Template Gallery](https://www.smartsheet.com/template-gallery)
+        *   [Why Smartsheet](https://www.smartsheet.com/why-smartsheet)
+        *   [Start a trial](https://www.smartsheet.com/try-it?lpv=footercta)
+        *   [View pricing and plans](https://www.smartsheet.com/pricing)
+    
+*   Resources
+    
+    *   Resources
+        *   [Content Center](https://www.smartsheet.com/content-center)
+        *   [Product updates & insights](https://www.smartsheet.com/content-center/product-insights)
+        *   [Help and Learning](https://www.smartsheet.com/help-center)
+        *   [Smartsheet University](https://www.smartsheet.com/smartsheet-university)
+        *   [Training options](https://www.smartsheet.com/help-center?url=training_resources)
+        *   [Support](https://www.smartsheet.com/services/support)
+        *   [Community](https://community.smartsheet.com/)
+        *   [Partner program](https://www.smartsheet.com/channel-partners)
+        *   [Developers & API](https://developers.smartsheet.com/)
+        *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=footer-demo)
+    
+*   Company
+    
+    *   Company
+        *   [About us](https://www.smartsheet.com/about)
+        *   [Leadership](https://www.smartsheet.com/about/leadership)
+        *   [Investors](https://investors.smartsheet.com/)
+        *   [Newsroom](https://www.smartsheet.com/content-center/news)
+        *   [Customer stories](https://www.smartsheet.com/customers)
+        *   [Careers We're hiring!](https://www.smartsheet.com/careers)
+        *   [Privacy](https://www.smartsheet.com/legal/privacy)
+        *   [Legal](https://www.smartsheet.com/legal)
+        *   [Contact us](https://www.smartsheet.com/contact?fts=contact-footer)
+    
+*   Learn
+    
+    *   Learn
+        *   [Project management templates](https://www.smartsheet.com/content-center/best-practices/project-management-guide/templates-project-management)
+        *   [Smartsheet dashboard gallery](https://www.smartsheet.com/content-center/product-news/reports-dashboards/smartsheet-dashboard-gallery)
+        *   [5 steps for getting started with the Smartsheet API](https://www.smartsheet.com/content-center/best-practices/tips-tricks/api-getting-started)
+        *   [3 formulas to look up data in Smartsheet](https://www.smartsheet.com/content-center/best-practices/tips-tricks/3-formulas-look-up-data-smartsheet)
+        *   * * *
+            
+        *   [Unlock the power of Smartsheet with AI ![Image 56: Smartsheet AI](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-ai-footer.png)](https://www.smartsheet.com/ai)  
+        *   [Learn more about ENGAGE ![Image 57: Engage Footer Nav Graphic](https://www.smartsheet.com/sites/default/files/2024-06/ENGAGE_Seattle_2024_Footer%20480x135.png)](https://www.smartsheet.com/engage)  
+    
+
+Select your language 
+
+        
+
+[Download desktop app](https://www.smartsheet.com/platform/desktop-app)
+
+*   [Facebook](https://www.facebook.com/smartsheet "Facebook")
+*   [X](https://twitter.com/smartsheet "X")
+*   [LinkedIn](https://www.linkedin.com/company/smartsheet-com "LinkedIn")
+*   [TikTok](https://www.tiktok.com/@smartsheet "TikTok")
+*   [YouTube](https://youtube.com/user/SmartSheet "YouTube")
+*   [Instagram](https://www.instagram.com/smartsheetplatform/ "Instagram")
+
+[©2024. All Rights Reserved Smartsheet Inc.](https://www.smartsheet.com/legal/site-terms)•[Cookie Preferences](https://www.smartsheet.com/platform#)•[](https://www.smartsheet.com/platform#)Your Privacy Choices
+
+ [![Image 58: Download on the Apple App Store](https://www.smartsheet.com/sites/default/files/Download_on_the_App_Store_Badge_US-UK_135x40_0_0.svg)](https://itunes.apple.com/app/smartsheet/id568421135)[![Image 59: Get it on Google Play](https://www.smartsheet.com/sites/default/files/google-play-badge-English.svg)](https://play.google.com/store/apps/details?id=com.smartsheet.android&hl=en)
+  ```
+
+Source URL: https://www.smartsheet.com/pricing
+  ```
+  Smartsheet Pricing | Smartsheet
+===============   
+
+[Skip to main content](https://www.smartsheet.com/pricing#main-content)
+
+*   [Smartsheet ![Image 1](https://www.smartsheet.com/sites/default/files/smartsheet-logo-blue-new.svg)](https://www.smartsheet.com/ "Smartsheet")
+*   Open navigation Close navigation
+    
+    *   Product
+        
+        *   *   [The Smartsheet Platform ![Image 2](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500-smartsheet-platform.svg) Manage projects, automate workflows, and build solutions at scale with the Smartsheet platform. Learn more](https://www.smartsheet.com/platform)
+        *   Features
+            *   [Automation ![Image 3](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_automate-workflow.svg)](https://www.smartsheet.com/platform/features#automation)
+            *   [Team collaboration ![Image 4](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_messaging.svg)](https://www.smartsheet.com/platform/features#team-collaboration)
+            *   [Dashboards and reporting ![Image 5](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_dashboard.svg)](https://www.smartsheet.com/platform/features#dashboards)
+            *   [Proofing ![Image 6](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_proofing.svg)](https://www.smartsheet.com/platform/features#proofing)
+            *   [Account administration ![Image 7](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_administration.svg)](https://www.smartsheet.com/platform/features#security-and-enterprise)
+            *   [Integrations ![Image 8](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_integrations_1.svg)](https://www.smartsheet.com/integrations)
+            *   [Digital asset management ![Image 9](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_brandfolder.svg)](https://www.smartsheet.com/solutions/digital-asset-management)
+            *   [Resource management ![Image 10](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_resource-management.svg)](https://www.smartsheet.com/platform/resource-management)
+            *   [Portfolio management ![Image 11](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_control-center.svg)](https://www.smartsheet.com/marketplace/premium-apps/control-center)
+            *   [Secure request management ![Image 12](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_conditional-formatting.svg)](https://www.smartsheet.com/marketplace/premium-apps/dynamic-view)
+            *   [Intelligent workflows ![Image 13](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_bridge.svg)](https://www.smartsheet.com/platform/bridge)
+            *   [No code work apps ![Image 14](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_workapps.svg)](https://www.smartsheet.com/platform/workapps)
+            *   [See all features](https://www.smartsheet.com/platform/features)
+        *   *   [Discover our latest product updates and enhancements ![Image 15: Quarterly Disclosure Global Nav Graphic](https://www.smartsheet.com/sites/default/files/2023-12/merchandising-quarterly-disclosures-small_0.png)](https://www.smartsheet.com/whats-up-next)  
+            *   [Smartsheet Advance Overview of our advanced automation, integration, and security offerings. Our Advance offering](https://www.smartsheet.com/advance)
+            *   [Professional services Information about Smartsheet consulting, training, and implementation support. Available services](https://www.smartsheet.com/services/professional-services)
+            *   [Trust and security A complete summary of Smartsheet platform's security and reliability. Trust Center](https://www.smartsheet.com/trust/security)
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-product)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-product)
+        
+    *   Solutions
+        
+        *   Featured
+            *   [Project and Portfolio Management ![Image 16: Modern Project and Portfolio Management](https://www.smartsheet.com/sites/default/files/2023-08/solution-category-project-portfolio-management.png) Explore](https://www.smartsheet.com/solutions/project-portfolio-management)
+            *   [Marketing and Creative Management ![Image 17: Marketing and Creative Management](https://www.smartsheet.com/sites/default/files/2023-08/solution-category-marketing-and-creative.png) Explore](https://www.smartsheet.com/solutions/marketing)
+        *   By use case
+            *   [Project management ![Image 18](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_project-management.svg)](https://www.smartsheet.com/solutions/project-management)
+            *   [IT Portfolio management ![Image 19](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_report-management.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/it-portfolio-management)
+            *   [Business PMO ![Image 20](https://www.smartsheet.com/sites/default/files/2024-07/icon-blue-500-franchise.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/business-pmo)
+            *   [Enterprise PMO ![Image 21](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_b2b.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/epmo)
+            *   [Marketing management ![Image 22](https://www.smartsheet.com/sites/default/files/2023-10/icon-blue-500_pm-methodologies.svg)](https://www.smartsheet.com/solutions/marketing/marketing-management)
+            *   [Creative operations ![Image 23](https://www.smartsheet.com/sites/default/files/2023-09/icon_blue-500-creative-operations.svg)](https://www.smartsheet.com/solutions/marketing/creative-operations)
+            *   [Services delivery ![Image 24](https://www.smartsheet.com/sites/default/files/2023-11/icon-blue-500_mobilizer_0.svg)](https://www.smartsheet.com/solutions/project-portfolio-management/services-delivery)
+        *   By Industry
+            *   [Government ![Image 25](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_government.svg)](https://www.smartsheet.com/solutions/federal-government)
+            *   [Construction ![Image 26](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_construction.svg)](https://www.smartsheet.com/solutions/construction)
+            *   [Financial services ![Image 27](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_finance-accounting.svg)](https://www.smartsheet.com/solutions/finance)
+            *   [Higher education ![Image 28](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_education.svg)](https://www.smartsheet.com/solutions/education)
+            *   [Nonprofit ![Image 29](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_non-profit.svg)](https://www.smartsheet.com/solutions/nonprofit)
+            *   * * *
+                
+            *   [Enterprise ![Image 30](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_enterprise.svg)](https://www.smartsheet.com/solutions/enterprise)
+            *   [Small and medium business ![Image 31](https://www.smartsheet.com/sites/default/files/2024-01/icon-blue-500_retail_0.svg)](https://www.smartsheet.com/solutions/small-to-medium-business)
+        *   [View all solutions](https://www.smartsheet.com/solutions)
+        *   *   [Template gallery Streamline your work with the perfect template for your team. See all templates](https://www.smartsheet.com/marketplace/template-gallery)
+            *   [Customer stories Behind the scenes with organizations around the world using Smartsheet to do incredible things. See all stories](https://www.smartsheet.com/customers)
+            *   [Experience the future of productivity with Smartsheet AI ![Image 32: Smartsheet AI](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-ai.png)](https://www.smartsheet.com/ai)  
+            *   [Customers’ Choice in the 2024 Gartner® Peer Insights™ ![Image 33: Voice of the Customer](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-voice-of-the-customer.png)](https://www.smartsheet.com/content-center/inside-smartsheet/research/2024-gartner-voc-collaborative-work-management)  
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-solutions)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-solutions)
+        
+    *   Resources
+        
+        *   *   [Content Center Articles and guides about project management, collaboration, automation, and other topics to help you make the most of the Smartsheet platform. Explore the Content Center](https://www.smartsheet.com/content-center)
+            *   * * *
+                
+            *   [Managing work](https://www.smartsheet.com/content-center/managing-work)
+            *   [Product updates and insights](https://www.smartsheet.com/content-center/product-insights)
+            *   [Inside Smartsheet](https://www.smartsheet.com/content-center/inside-smartsheet)
+        *   *   [Help and Learning A comprehensive knowledge base, including articles, tutorials, videos, and other resources that cover a range of topics related to using Smartsheet. Get started](https://www.smartsheet.com/help-center)
+            *   * * *
+                
+            *   [Smartsheet University](https://www.smartsheet.com/smartsheet-university)
+            *   [Knowledge base](https://www.smartsheet.com/help-center?url=help)
+            *   [Training options](https://www.smartsheet.com/help-center?url=training_resources)
+            *   [Support](https://www.smartsheet.com/services/support)
+        *   *   [Community Explore user-generated content and stay updated on our latest product features. Join the Community](https://community.smartsheet.com/)
+            *   [Partners Learn about the Smartsheet partner program and access our partner directory. Learn more](https://www.smartsheet.com/channel-partners)
+            *   [Smartsheet events Your hub for Smartsheet events, webinars, Q&As, and user groups. See all events](https://www.smartsheet.com/events)
+        *   *   [ENGAGE ![Image 34: Engage Header Nav Graphic](https://www.smartsheet.com/sites/default/files/2024-06/ENGAGE_Seattle_2024_Header%20768x216.png) Smartsheet ENGAGE brings together our global customers, experts, and partners to share their experiences, ideas, and best practices. Learn more](https://www.smartsheet.com/engage)
+            *   [Project management templates ![Image 35: Project management templates](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-pm-templates.png)](https://www.smartsheet.com/content-center/best-practices/project-management-guide/templates-project-management)  
+            *   [Smartsheet dashboard gallery ![Image 36: Dashboard gallery](https://www.smartsheet.com/sites/default/files/2023-08/dashboard-gallery.png)](https://www.smartsheet.com/content-center/product-news/reports-dashboards/smartsheet-dashboard-gallery)  
+            *   [Getting started with the Smartsheet API ![Image 37: Smartsheet API](https://www.smartsheet.com/sites/default/files/2023-08/smartsheet-api.png)](https://www.smartsheet.com/content-center/best-practices/tips-tricks/api-getting-started)  
+        *   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-resources)
+            *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav-resources)
+        
+    *   [Pricing](https://www.smartsheet.com/pricing)
+    *   [Contact](https://www.smartsheet.com/contact?fts=contact-header-nav)
+    *   Select language
+        
+        Select your language 
+        
+                
+        
+    *   [Log in](https://app.smartsheet.com/b/home)
+    *   *   [Start a trial](https://www.smartsheet.com/try-it?lpv=topnav)
+        *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo-mobile)
+    
+*   *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=nav-demo)
+    *   [Try Smartsheet for free](https://www.smartsheet.com/try-it?lpv=topnav)
+    *   Select language
+        
+        Select your language 
+        
+                
+        
+    *   Open search
+        
+    *   [Log in](https://app.smartsheet.com/b/home)
+
+Pricing
+=======
+
+Find the plan that allows you to manage your projects, programs, and processes - all in one place.
+
+[Try for free](https://www.smartsheet.com/try-it?trp=500&lpv=pricing-top)
+
+Pricing by plan type
+--------------------
+
+Currency 
+
+Payment Monthly pricing Yearly pricing
+
+### Pro
+
+$912per Member/​month
+
+$1418AUDper Member/​month
+
+$1216CADper Member/​month
+
+811CHFper Member/​month
+
+6283DKKper Member/​month
+
+811€per Member/​month
+
+£710per Member/​month
+
+¥1,4001,800per Member/​month
+
+98130NOKper Member/​month
+
+$1520NZDper Member/​month
+
+97130SEKper Member/​month
+
+$1216SGDper Member/​month
+
+170230ZARper Member/​month
+
+Total /month
+
+Billed monthly  
+1-10 Members, unlimited Viewers
+
+Billed yearly  
+1-10 Members, unlimited Viewers
+
+[Purchase now](https://app.smartsheet.com/b/home?lx=P8ZEpVmtK_nYoyf3IaoUdg&plantype=pro&trp=500&lpv=pro-card-purchase)
+
+For people and teams that want to track, share, and manage projects.
+
+* * *
+
+**Includes:**
+
+*   [Unlimited free Viewers](https://www.smartsheet.com/pricing# "Free users, internal or external to the organization’s domains, who only need view access on items.")
+*   [Gantt, grid, board, and calendar view](https://www.smartsheet.com/pricing# "View your projects, programs, tasks and work in the format that works best for you.")
+*   [Rich formulas](https://www.smartsheet.com/pricing# "Enable users to perform complex computations, link data across multiple sheets, and automate calculations with real-time updates.")
+*   [Unlimited sheets, forms, and reports](https://www.smartsheet.com/pricing# "Data management and visualization features that allow easy collaboration, instant insights, and effective project tracking.")
+*   250 automations per month
+
+Recommended
+
+### Business
+
+$1924per Member/​month
+
+$2937AUDper Member/​month
+
+$2633CADper Member/​month
+
+1722CHFper Member/​month
+
+132170DKKper Member/​month
+
+1722€per Member/​month
+
+£1519per Member/​month
+
+¥3,0003,700per Member/​month
+
+207260NOKper Member/​month
+
+$3240NZDper Member/​month
+
+205260SEKper Member/​month
+
+$2533SGDper Member/​month
+
+359450ZARper Member/​month
+
+Total /month
+
+Billed monthly  
+3+ Members, unlimited Guests and Viewers
+
+Billed yearly  
+3+ Members, unlimited Guests and Viewers
+
+[Purchase now](https://app.smartsheet.com/b/home?lx=P8ZEpVmtK_nYoyf3IaoUdg&plantype=business&trp=500&lpv=business-card-purchase)
+
+For businesses that need to align people, projects, and programs.
+
+* * *
+
+**Includes Pro plan, plus:**
+
+*   [Unlimited free Guests](https://www.smartsheet.com/pricing# "Free users, external to the organization’s domains, who can edit and comment.")
+*   [Timeline view](https://www.smartsheet.com/pricing# "Visualize, plan, manage, and share date-based work.") New
+*   [Team workload tracking](https://www.smartsheet.com/pricing# "Essential features to see who's available, what they're working on, and to resolve overallocations.") New
+*   [Admin capabilities](https://www.smartsheet.com/pricing# "Admins can efficiently manage users, groups, and licenses through the Admin Center.")
+*   [Unlimited automations](https://www.smartsheet.com/pricing# "Replace repetitive tasks across your organization with customizable, automated workflows.")
+*   [1 TB attachment storage](https://www.smartsheet.com/pricing# "Even more storage to save all of your important files, docs, proofs, images, videos, and more.")
+
+### Enterprise
+
+![Image 38](https://www.smartsheet.com/sites/default/files/2024-01/pricing-enterprise.svg)
+
+Total /month
+
+Custom pricing  
+Solutions for your needs
+
+Custom pricing  
+Solutions for your needs
+
+[Contact us](https://www.smartsheet.com/contact/sales?fts=pricing-enterprise)
+
+For organizations that run processes at scale with enterprise-grade security and controls.
+
+* * *
+
+**Includes Business plan, plus:**
+
+*   [AI formulas, texts, and charts](https://www.smartsheet.com/pricing# "Unlock actionable insight with AI: write formulas, summarize and categorize text, and visualize sheet data as charts.") New
+*   [SAML-based SSO](https://www.smartsheet.com/pricing# "Enforce consistent login methods by restricting access options and providing users with the ability to log in through the organization's custom authentication service.")
+*   [WorkApps](https://www.smartsheet.com/pricing# "Build intuitive web and mobile apps to streamline your business and simplify collaboration.")
+*   [Work Insights](https://www.smartsheet.com/pricing# "Make better decisions about the work you’re doing in Smartsheet by uncovering and visualizing key trends, activities, and bottlenecks.")
+*   [Enterprise Plan Manager](https://www.smartsheet.com/pricing# "Manage multiple Smartsheet Enterprise accounts in a seamless, centralized and secure way.")
+*   [Unlimited attachment storage](https://www.smartsheet.com/pricing# "Unlimited storage so that you can have a source of truth for everything you do.")
+*   [Directory integrations](https://www.smartsheet.com/pricing# "Synchronize existing enterprise directory services with Smartsheet to provision and deprovision users.")
+
+Compare plans
+
+Features by plan type
+---------------------
+
+Comparison table detailing features across the three Smartsheet plan types: Pro, Business, and Enterprise.
+| Essential features | Pro
+[Try for free](https://www.smartsheet.com/try-it?trp=500&lpv=pro-grid)  
+Or [purchase now](https://app.smartsheet.com/b/home?lx=P8ZEpVmtK_nYoyf3IaoUdg&plantype=pro&trp=500&lpv=pro-grid-purchase)
+
+[Contact us](https://www.smartsheet.com/contact/sales?fts=pricing-pro-grid)
+
+
+
+ | Business
+
+[Try for free](https://www.smartsheet.com/try-it?trp=500&lpv=business-grid)  
+Or [purchase now](https://app.smartsheet.com/b/home?lx=P8ZEpVmtK_nYoyf3IaoUdg&plantype=business&trp=500&lpv=business-grid-purchase)
+
+[Try for free](https://www.smartsheet.com/contact/sales?fts=pricing-business-grid)
+
+
+
+ | Enterprise
+
+[Contact us](https://www.smartsheet.com/contact/sales?fts=pricing-enterprise-grid)
+
+
+
+ |
+| --- | --- | --- | --- |
+| 
+
+### Essential features
+
+ |
+| [Sheets](https://www.smartsheet.com/pricing# "A sheet is where your data lives, and it can be customized with Smartsheet features.") | Unlimited | Unlimited | Unlimited |
+| [Grid view](https://www.smartsheet.com/pricing# "A tabular view of tasks, items, or project elements organized in rows and columns.") | x | x | x |
+| [Gantt view](https://www.smartsheet.com/pricing# "A horizontal view that displays tasks, items, or project elements over time.") | x | x | x |
+| [Calendar view](https://www.smartsheet.com/pricing# "A calendar view that displays tasks, items, or project elements by date.") | x | x | x |
+| [Board view](https://www.smartsheet.com/pricing# "Display tasks, items, or project elements on a digital Kanban board.") NEW | x | x | x |
+| [Timeline view](https://www.smartsheet.com/pricing# "Visualize, plan, manage, and share date-based work with timeline view") New | \- | x | x |
+| [Dashboards](https://www.smartsheet.com/pricing# "A dashboard of real-time charts, images, and metrics.") | Unlimited | Unlimited | Unlimited |
+| [Reports](https://www.smartsheet.com/pricing# "Consolidate data from multiple sheets in a singular report.") | Unlimited | Unlimited | Unlimited |
+| [Forms](https://www.smartsheet.com/pricing# "Collect and automatically assign work requests.") | Unlimited | Unlimited | Unlimited |
+| [Conditional form logic](https://www.smartsheet.com/pricing# "Show a form question when a specific condition or criteria is met.") | \- | x | x |
+| [Templates](https://www.smartsheet.com/pricing# "Out-of-the-box solutions to help you find inspiration, learn from best practices, and address a wide range of business needs quickly.") | x | x | x |
+| [Widgets per dashboard](https://www.smartsheet.com/pricing# "Charts, images, and metrics that are displayed on a dashboard.") | 10 | Unlimited | Unlimited |
+| [Sheets per report](https://www.smartsheet.com/pricing# "The number of sheets that can populate a report.") | 1 | Unlimited | Unlimited |
+| [Mobile app (Android & iOS)](https://www.smartsheet.com/pricing# "Get real-time notifications, view dashboards, capture images and barcodes, and make quick updates to sheets and reports on the go.") | x | x | x |
+| [Private sheets and reports](https://www.smartsheet.com/pricing# "Protect your data by choosing who you share to your sheets and reports.") | x | x | x |
+| [Export sheet](https://www.smartsheet.com/pricing# "Export any sheet or report to Microsoft Excel, Google Sheets, Microsoft Project (Gantt chart only), PDF or Image (Gantt chart only).") | x | x | x |
+| [Team workload tracking](https://www.smartsheet.com/pricing# "Essential features to see who's available, what they're working on and to resolve overallocations.") New | \- | x | x |
+| 
+
+### Formulas and functions
+
+ |
+| [Column types](https://www.smartsheet.com/pricing# "Column types include text/number, contact list, date, dropdown, multi-select dropdown, checkbox, symbols, and auto-number/system.") | x | x | x |
+| [Cell formulas](https://www.smartsheet.com/pricing# "Calculate numeric values or automate aspects of your sheet.") | x | x | x |
+| [Column formulas](https://www.smartsheet.com/pricing# "Quickly and easily convert cell formulas to be applied across columns within your sheet.") | x | x | x |
+| [Cross-sheet formulas](https://www.smartsheet.com/pricing# "Perform calculations on data in one sheet that is stored in another sheet.") | x | x | x |
+| [Dependencies](https://www.smartsheet.com/pricing# "Automatically adjust dates for Duration (how long) and Predecessors (what must happen first) as values change.") | x | x | x |
+| [Filters](https://www.smartsheet.com/pricing# "Find information fast with filters that can be named, saved, and shared (Sharing filters is only available to Business and Enterprise plans).") | x | x | x |
+| [Conditional formatting](https://www.smartsheet.com/pricing# "The formatting of individual cells or entire rows updates when certain criteria are met.") | x | x | x |
+| [Cell history](https://www.smartsheet.com/pricing# "View a cell-level change log with user and timestamp details.") | x | x | x |
+| [Cell linking](https://www.smartsheet.com/pricing# "Extract specific read-only values from source sheets into a summary sheet.") | x | x | x |
+| [Lock or unlock rows and columns](https://www.smartsheet.com/pricing# "Lock columns and rows to safeguard data from unwanted changes by shared users.") | x | x | x |
+| [Baselines](https://www.smartsheet.com/pricing# "Easily capture and compare variances between your planned and actual work schedule.") | \- | x | x |
+| [Report grouping and summary](https://www.smartsheet.com/pricing# "Combine data into groups so that rows can be organized into logical categories or classifications.") | \- | x | x |
+| [Activity log](https://www.smartsheet.com/pricing# "Track and view all of the activities and changes made to a sheet, dashboard or report.") | \- | x | x |
+| [Document builder](https://www.smartsheet.com/pricing# "Generate custom PDFs with sheet data and save mapping for future use.") | \- | x | x |
+| [API calls](https://www.smartsheet.com/pricing# "A request to retrieve or send your organization's Smartsheet data.") | \- | x | x |
+| [Custom colors & logos](https://www.smartsheet.com/pricing# "Brand your Smartsheet account and forms with custom colors and logos.") | \- | x | x |
+| [Work Insights: Instantly analyze your data](https://www.smartsheet.com/pricing# "Visualize key trends, activities, and bottlenecks.") | \- | \- | x |
+| [Custom welcome and help screens](https://www.smartsheet.com/pricing# "Create custom content to help your team get up to speed on using Smartsheet.") | \- | \- | x |
+| 
+
+### Sharing
+
+ |
+| Members | Max 10 | Min 3 | Custom |
+| [Provisional Members](https://www.smartsheet.com/pricing# "New users can create, edit, comment on, and view sheets, workspaces, and other items during a \"try before you buy\" period.") New | x | x | x |
+| [Viewers](https://www.smartsheet.com/pricing# "Free users, internal or external to the organization’s domains, who only need view access on items.") | x | x | x |
+| [Guests](https://www.smartsheet.com/pricing# "Free users, external to the organization’s domains, who can edit and comment.") | \- | x | x |
+| [File/Attachment storage](https://www.smartsheet.com/pricing# "The total file and attachment storage on a given plan.") | 20 GB | 1 TB | Unlimited |
+| [Maximum attachment size](https://www.smartsheet.com/pricing# "The allowable size of an individual file that is uploaded to Smartsheet.") | 30 MB | 250 MB | 250 MB |
+| [Assign people](https://www.smartsheet.com/pricing# "Easily assign team members to tasks within your sheet.") | x | x | x |
+| [Conversations](https://www.smartsheet.com/pricing# "Create conversations that are specific to a row, card, or sheet.") | x | x | x |
+| [Comments](https://www.smartsheet.com/pricing# "Add comments to a workspace, sheet, or row for discussions with stakeholders.") | x | x | x |
+| [Proofing (image and video)](https://www.smartsheet.com/pricing# "Upload files, gather feedback, and manage versions to save time and effort, streamlining your review process.") | \- | x | x |
+| [Publish sheets, reports, and dashboards](https://www.smartsheet.com/pricing# "Create a unique URL for anyone to access your sheets, reports, or dashboards without logging in.") | \- | x | x |
+| 
+
+### AI tools
+
+ |
+| [Generate formulas](https://www.smartsheet.com/pricing# "Write powerful formulas with plain language prompts.") | \- | \- | x |
+| [Text and summaries](https://www.smartsheet.com/pricing# "Translate, summarize, categorize, and create new sheet data.") | \- | \- | x |
+| [Analyze data](https://www.smartsheet.com/pricing# "Create ad hoc charts — just ask.") New | \- | \- | x |
+| 
+
+### Automated workflows
+
+ |
+| [Automated triggers](https://www.smartsheet.com/pricing# "Build simple, automated solutions to save time and effort on repetitive, manual tasks. Automatically request updates, manage multi-step approval processes, edit cell values, archive rows, and more.") | 250/month | Unlimited | Unlimited |
+| [Alerts and notifications](https://www.smartsheet.com/pricing# "Automatically send alerts about changes in your sheet and reminders about upcoming deadlines.") | x | x | x |
+| [Reminders](https://www.smartsheet.com/pricing# "Stay informed and act on alerts, requests, and messages across devices.") | x | x | x |
+| [Assign people action](https://www.smartsheet.com/pricing# "Easily assign team members to tasks within your sheet.") | x | x | x |
+| [Update requests](https://www.smartsheet.com/pricing# "Use actions to trigger an automatic ask for someone to update a portion of a sheet with the latest information.") | x | x | x |
+| [Approval requests](https://www.smartsheet.com/pricing# "Keep processes moving with automated stakeholder approval and feedback recording.") | x | x | x |
+| [Record a date](https://www.smartsheet.com/pricing# "Set the current date into the chosen field when a workflow is triggered.") | x | x | x |
+| [Move or copy row](https://www.smartsheet.com/pricing# "Automatically move or copy a row to another sheet when conditions are met.") | x | x | x |
+| [Clear cell](https://www.smartsheet.com/pricing# "Delete the contents of the chosen field when a workflow is triggered.") | x | x | x |
+| [Send alert to Slack](https://www.smartsheet.com/pricing# "Forward Smartsheet notifications to Slack channels or direct messages for easy responses.") | x | x | x |
+| [Send alert to Microsoft Teams](https://www.smartsheet.com/pricing# "Send alerts to a Teams channel on key dates or when changes to work items occur.") | x | x | x |
+| 
+
+### Integrations
+
+ |
+| [Microsoft Office 365 (Teams, Outlook, OneDrive, etc.)](https://www.smartsheet.com/pricing# "Enhance collaboration and productivity by seamlessly integrating with Microsoft Office 365 tools your teams rely on.")  | x | x | x |
+| [Google Workspace (Gmail, Hangouts, Drive, etc.)](https://www.smartsheet.com/pricing# "Boost your team's productivity with hassle-free single sign-on and seamless integration with Google Docs, Gmail, and Calendar, noting that Pro Plan users cannot access Google Calendar functionality.") | x | x | x |
+| [Slack](https://www.smartsheet.com/pricing# "Utilize notifications and automated requests that are actionable directly from Slack.") | x | x | x |
+| [Adobe Creative Cloud Extension](https://www.smartsheet.com/pricing# "Review assignment details, create proofs, and request feedback without leaving your Adobe Creative Cloud tool of choice.") | \- | x | x |
+| [Power BI](https://www.smartsheet.com/pricing# "Export and visualize Smartsheet data in Microsoft Power BI.") | \- | x | x |
+| [Tableau](https://www.smartsheet.com/pricing# "Import Smartsheet data into Tableau and combine data from other business-critical systems to help your whole team gain valuable analytics insights.") | \- | x | x |
+| [E-signature with DocuSign](https://www.smartsheet.com/pricing# "Streamline how your team creates and executes business-critical documents.") | \- | \- | x |
+| [Nearly 100 more](https://www.smartsheet.com/pricing# "Improve collaboration and decision-making across your tech stack.") | x | x | x |
+| 
+
+### Security
+
+ |
+| [Single sign-on (SSO)](https://www.smartsheet.com/pricing# "Securely sign into Smartsheet with your Google, Microsoft, or Apple account.") | x | x | x |
+| [Admin Center](https://www.smartsheet.com/pricing# "Manage users, groups, and license requests, and easily review account settings.") | x | x | x |
+| [User Management](https://www.smartsheet.com/pricing# "System Administrators can add, edit, and remove Smartsheet account users, and manage sheet ownership.") | x | x | x |
+| [Plan Insights](https://www.smartsheet.com/pricing# "A dashboard that presents essential metrics and trends, information on licenses and connected users, user growth statistics, asset creation details, and evaluations of Advance Capabilities.") | \- | x | x |
+| [Group management](https://www.smartsheet.com/pricing# "Group Administrators can create user groups for sharing and collaborating.") | \- | x | x |
+| [Account discovery](https://www.smartsheet.com/pricing# "Allow people who share a domain with you to discover your account and request to be added to it.") | \- | x | x |
+| [Schedule backups](https://www.smartsheet.com/pricing# "Enables workspace owners to schedule a routine back up copy of their data via zip file.") | \- | x | x |
+| [SAML-based SSO](https://www.smartsheet.com/pricing# "Allow employees to securely sign into Smartsheet with the organization's SAML-based SSO service.") | \- | \- | x |
+| [Directory integrations](https://www.smartsheet.com/pricing# "Synchronize existing enterprise directory services with Smartsheet to provision and deprovision users, and share user metadata.") | \- | \- | x |
+| [User merge](https://www.smartsheet.com/pricing# "System Admins can manage business changes by merging accounts in bulk for mergers, acquisitions, consolidations, and divestitures.") | \- | \- | x |
+| [Enterprise Plan Manager](https://www.smartsheet.com/pricing# "Maintain centralized control over purchasing, security, governance, and compliance.") | \- | \- | x |
+| [Enterprise access controls](https://www.smartsheet.com/pricing# "Enables Enterprise System Admins to control user sharing domains, sheet publication, file types, welcome screens, and licensed user additions.") | \- | \- | x |
+| [Custom email domains](https://www.smartsheet.com/pricing# "Configure Smartsheet-generated collaboration emails to be sent from your organization’s domain.") | \- | \- | x |
+| [Domain validation](https://www.smartsheet.com/pricing# "Verify domains for auto provisioning, bringing users into your account when they sign up or log in with their company email.") | \- | \- | x |
+| [User account provisioning](https://www.smartsheet.com/pricing# "Automate the process of adding users to your Smartsheet account.") | \- | \- | x |
+| [Safe Sharing](https://www.smartsheet.com/pricing# "Admins choose shareable domains to protect data.") | \- | \- | x |
+| [Chargeback reports](https://www.smartsheet.com/pricing# "Build an internal Chargeback Report by division, department, and cost center based on data synchronized with Directory integrations.") | \- | \- | x |
+| [System admin fallback](https://www.smartsheet.com/pricing# "If an authentication service can't be accessed, System Admins can still log in with their Smartsheet credentials to adjust authentication options for their organization.") | \- | \- | x |
+| [Data retention policies](https://www.smartsheet.com/pricing# "Data Retention Controls (DRC) protect your data and data relevancy by removing outdated and unused Sheets.") | \- | \- | Add-on |
+| [Data egress](https://www.smartsheet.com/pricing# "Prevent confidential data from leaving your Smartsheet account with control over export options.") | \- | \- | Add-on |
+| [Customer Managed Encryption Key (CMEK)](https://www.smartsheet.com/pricing# "With CMEK, you can monitor, grant, and revoke access to your data using your own key, stored outside of Smartsheet.") | \- | \- | Add-on |
+| [Event reporting](https://www.smartsheet.com/pricing# "Access detailed logs of the past six months of actions that have taken place across your organization.") | \- | \- | Add-on |
+| 
+
+### Premium features
+
+ |
+| [WorkApps: No-code workapps\*](https://www.smartsheet.com/pricing# "WorkApps is a no-code platform for building intuitive web and mobile apps to streamline your business and simplify collaboration. *Included for licensed users, additional fee for collaborators.") | \- | \- | x |
+| [Dynamic View: Secure request management](https://www.smartsheet.com/pricing# "Granular sharing controls enable business owners to share information to the right people, at the right time for viewing or editing.") | \- | Add-on | Add-on |
+| [Control Center: Portfolio management](https://www.smartsheet.com/pricing# "Deliver consistent, visible projects, processes and programs at scale.") | \- | Add-on | Add-on |
+| [Brandfolder by Smartsheet](https://www.smartsheet.com/pricing# "Manage and distribute assets, and see how they perform.") | Add-on | Add-on | Add-on |
+| [Resource Management by Smartsheet](https://www.smartsheet.com/pricing# "Balance workloads, build the right team, track time, and forecast hiring needs, boosting success across your project portfolio.") | \- | Add-on | Add-on |
+| [Calendar App](https://www.smartsheet.com/pricing# "An interactive and flexible calendar view that allows you to build shareable calendars with custom details.") | \- | Add-on | Add-on |
+| [Pivot App](https://www.smartsheet.com/pricing# "Summarize and analyze large data stored in sheets or reports and create meaningful comparisons, patterns, and trends.") | \- | Add-on | Add-on |
+| [Connectors: Data connections](https://www.smartsheet.com/pricing# "Synchronize data across critical business systems.") | \- | Add-on | Add-on |
+| [DataMesh](https://www.smartsheet.com/pricing# "Eliminate typos, duplicative data entry, and unnecessary work by mapping data between large sheets and reports.") | \- | Add-on | Add-on |
+| [Data Shuttle](https://www.smartsheet.com/pricing# "Automate your data movement across platforms.") | \- | Add-on | Add-on |
+| [DataTable](https://www.smartsheet.com/pricing# "Visualize and collaborate on large data sets.") | \- | \- | Add-on |
+| [Bridge](https://www.smartsheet.com/pricing# "Create flexible workflows that fit your business processes in a low-code interface for simple, powerful process automation.") | \- | \- | Add-on |
+| 
+
+### Support and services
+
+ |
+| [Help & Learning content](https://www.smartsheet.com/pricing# "Self-service help and learning resources. ") | x | x | x |
+| [Smartsheet Community](https://www.smartsheet.com/pricing# "Join the online community to share best practices, tips, and tricks.") | x | x | x |
+| [Global web ticketing support](https://www.smartsheet.com/pricing# "File a support ticket and track your support cases until closed. ") | x | x | x |
+| [Standard Support Package](https://www.smartsheet.com/pricing# "24x7 global phone support and Smartsheet University self-paced eLearning. ") | \- | Add-on | x |
+| [Premium Support Package](https://www.smartsheet.com/pricing# "Includes the Standard Support Package, plus 24x7 live chat agent, 1:1 coaching sessions, and first response (in less than 2 hrs regardless of case origin).") | \- | Add-on | Add-on |
+| [Smartsheet University](https://www.smartsheet.com/pricing# "Self-paced eLearning, instructor-led training, certifications, and custom training (available to purchase a la carte).") | Add-on | Add-on | Add-on |
+| [Smartsheet Professional Services](https://www.smartsheet.com/pricing# "Implementation services, strategic planning workshops, custom development services & training, and adoption services. ") | \- | Add-on | Add-on |
+| [Technical Account Managers](https://www.smartsheet.com/pricing# "Dedicated technical resource for escalations, incident management, and technical guidance.") | \- | Add-on | Add-on |
+
+__+__Feature availability varies: For details see [Capabilities available in Smartsheet | Regions](https://www.smartsheet.com/help-center?url=articles/2482793-regions-capabilities) and [Capabilities in Smartsheet | Gov](https://www.smartsheet.com/help-center?url=articles/2480681-gov-capabilities)
+
+The Pro plan is only available to new customers.
+
+Smartsheet User Subscription
+----------------------------
+
+Improve transparency and governance, with an enterprise-grade subscription built for adoption at any scale
+
+[Five pain points solved with a Smartsheet User Subscription](https://www.smartsheet.com/5-pain-points-solved-smartsheet-user-subscription)  |  [Subscription brief](https://www.smartsheet.com/smartsheet-subscription-brief)
+
+![Image 39](https://www.smartsheet.com/sites/default/files/2024-06/Smartsheet%20user%20subscription%200-1%20screenshot.png)
+
+#### 
+
+Transparent, predictable pricing
+
+Everyone who needs to collaborate can do so easily, regardless of the project, program, or process, enhancing the cross-functional impact of your teams. You can choose from three plans: Pro, Business, or Enterprise. A subscription provides seamless collaboration with transparent pricing, allowing you to see the value users gain from the platform and better forecast your budgeting needs.
+
+#### 
+
+Faster value realization
+
+Your business is constantly evolving, and your teams are always changing. Our flexible subscription and pricing allow teams to fully explore Smartsheet before making additional purchases. This helps you justify costs and make confident purchasing decisions.
+
+#### 
+
+Ease of management
+
+Comprehensive account management ensures data security and IT governance adherence. Increased transparency and user management enhance cost predictability, tackling rising costs and boosting organizational efficiency.
+
+Smartsheet Advance
+------------------
+
+### Confidently scale, connect, and protect your business for what’s next
+
+Smartsheet premium capabilities, available individually or bundled with Smartsheet Advance, unlock the platform's full potential. They support project, program, and process management at scale, offering secure request management, data and application integrations, intelligent workflows, and enterprise-grade governance. Smartsheet Advance delivers the full power of the collaborative work management platform, empowering you to build solutions that meet your needs and confidently grow your business.
+
+[Learn more](https://www.smartsheet.com/advance) [Contact us](https://www.smartsheet.com/contact/sales?fts=pricing-advance)
+
+![Image 40: Checkmark in circle](https://www.smartsheet.com/sites/default/files/acceptable.svg)
+
+### Control Center
+
+Monitor the status of your project portfolio, make strategic decisions, and automate changes across the project life cycle with Control Center.
+
+![Image 41: Checkmark in circle](https://www.smartsheet.com/sites/default/files/acceptable.svg)
+
+### WorkApps
+
+Execute on your entire portfolio of projects with tailored experiences for each team member- all in a single WorkApp.
+
+![Image 42: Checkmark in circle](https://www.smartsheet.com/sites/default/files/acceptable.svg)
+
+### Dynamic View
+
+Manage multi-step processes by sharing only what is needed to the right people at the right time with Dynamic View.
+
+![Image 43: Checkmark in circle](https://www.smartsheet.com/sites/default/files/acceptable.svg)
+
+### Data Shuttle
+
+Visualize and act on all your data across platforms with automated data uploads and offloads using Data Shuttle.
+
+### Additional offerings
+
+[![Image 44: brandfolder by smartsheet logo](https://www.smartsheet.com/sites/default/files/2022-03/brandfolder-by-smartsheet-logo-dark-text.svg) ### Digital asset management Brandfolder helps marketers and creatives manage and distribute all of their assets, and understand how they’re performing.](https://brandfolder.com/pricing/)
+
+[![Image 45](https://www.smartsheet.com/sites/default/files/2021-09/resource-management-logo-lock-up.svg) ### Unlock your team’s full potential Advanced Resource Management by Smartsheet makes it easy to balance workloads, build the right team, track time, and forecast hiring needs, boosting success across your project portfolio.](https://www.smartsheet.com/platform/resource-management)
+
+  ![Image 46](https://www.smartsheet.com/sites/default/files/2022-08/transparent-janet-40px.png)
+
+  ![Image 47](https://www.smartsheet.com/sites/default/files/2022-08/transparent-janet-40px.png)
+
+The biggest brands in the world trust Smartsheet
+------------------------------------------------
+
+The Smartsheet work execution platform powers the growth engine of the world’s leading organizations.
+
+8080%+of Fortune 500 companies trust Smartsheet
+
+9090%+of Fortune 100 companies trust Smartsheet
+
+![Image 48](https://www.smartsheet.com/sites/default/files/cisco_5.svg)
+
+![Image 49: Nasa JPL logo](https://www.smartsheet.com/sites/default/files/2021-05/Nasa-JPL-Logo.svg)
+
+![Image 50: Uber logo](https://www.smartsheet.com/sites/default/files/styles/large/public/2022-01/uber.png?itok=uhaVDx0_)
+
+![Image 51: Alaska Airlines Logo](https://www.smartsheet.com/sites/default/files/2021-05/alaska-airlines-logo.svg)
+
+![Image 52: Lego Logo](https://www.smartsheet.com/sites/default/files/2021-05/LEGO_logo.svg)
+
+![Image 53: Dominos Logo](https://www.smartsheet.com/sites/default/files/2021-05/Dominos-logo.svg)
+
+  ![Image 54](https://www.smartsheet.com/sites/default/files/2022-05/janet-80px.png)
+
+![Image 55: Trusted and secure](https://www.smartsheet.com/sites/default/files/2024-02/icon-blue-500_trusted-secure.svg)
+
+Trusted and secure
+
+We’re committed to delivering a secure and extensible platform that meets the needs of today’s largest organizations
+
+[Explore the Smartsheet Trust Center](https://www.smartsheet.com/trust)
+
+  ![Image 56](https://www.smartsheet.com/sites/default/files/2022-06/transparent-janet-20px.png)
+
+Frequently Asked Questions
+--------------------------
+
+#### 
+
+What is the Smartsheet user subscription model?
+
+The new Smartsheet user subscription model helps customers realize more value by simplifying pricing, budgeting, and administration. No matter the challenge, you and your teams are able to collaborate in the ways that work for you, evolve your programs and processes, and effectively manage all of your users. [Learn more about the Smartsheet user subscription model.](https://www.smartsheet.com/help-center?url=/articles/2483245-User-Subscription-Model-overview)
+
+#### 
+
+Why is the model changing?
+
+Smartsheet is changing its subscription model based on customer feedback and industry standards. The new model aims to make it easier for new users to try the platform, simplify subscription management, and provide quicker visibility into user activity and productivity.
+
+#### 
+
+When will this model go into effect?
+
+The new Smartsheet user subscription model is effective June 24, 2024. For new plans, these changes apply immediately. For existing customers, the new model will take effect at the first renewal in 2025. If you have a multi-year plan, the changes will apply when your plan is up for renewal. Smartsheet Advance is not impacted by the new model at this time.
+
+#### 
+
+What if I want to move to the new model?
+
+Smartsheet will be allowing a small segment of customers to move to the new subscription model in 2024. If you are interested in seeing if you qualify, please talk to your account representative to discuss your eligibility.
+
+#### 
+
+Can I opt out of the new model?
+
+Customers are unable to opt out of any aspect of our new user subscription model. This is a change that will be occurring across the entire Smartsheet customer base.
+
+#### 
+
+Can I change my plan?
+
+You always have the option to upgrade your plan to unlock additional capabilities for project, program, or portfolio management. You can also add or remove users, purchase more licenses, or cancel your subscription at anytime. These actions are subject to terms at [Smartsheet User Agreement](https://www.smartsheet.com/legal/user-agreement).
+
+#### 
+
+Do you have a service availability guarantee?
+
+Yes, for customers with Enterprise plans. These plans are covered by our [Service Level Agreement](https://www.smartsheet.com/legal/sla).
+
+#### 
+
+What forms of payment do you accept?
+
+We accept payment via the following major credit cards, excluding debit cards: Visa, Mastercard, Discover, and American Express. You can also purchase your Smartsheet subscription via PayPal. For Enterprise subscriptions that meet a minimum fee, we can invoice you for payment by credit card, check, wire or ACH. Please note this may be subject to change depending on the country in which your billing address is located.
+
+#### 
+
+In which currencies do you accept payment?
+
+AUD (Australian Dollar)
+
+CAD (Canadian Dollar)
+
+CHF (Swiss Franc)
+
+DKK (Danish Krone)
+
+EUR (Euro)
+
+GBP (British Pound)
+
+JPY (Japanese Yen)
+
+NOK (Norwegian Krone)
+
+NZD (New Zealand Dollar)
+
+SEK (Swedish Krona)
+
+SGD (Singapore Dollar)
+
+USD (US Dollar)
+
+ZAR (South African Rand)
+
+#### 
+
+Can someone help customize a proposal for my team?
+
+Yes! We take into account your business, along with factors like compliance, license management, Integrations, and support needs to customize a solution for you.
+
+[Contact Sales](https://www.smartsheet.com/contact/sales?fts=pricing-faq)
+
+#### 
+
+Do you have special discounts if we're a non-profit?
+
+Smartsheet supports eligible nonprofit organizations with discounts on annual plans.
+
+Eligible organizations have current, valid 501c(3) status in the United States or equivalent status in other countries.
+
+An organization will _**NOT**_ be eligible if any of the following conditions apply: 1) it is an educational institution; 2) it is a governmental office or department; 3) it is a hospital or other healthcare provider or an organization involved with health insurance; 4) it engages in political or legislative activity; 5) it is a private grant-making, independent, or operating foundation with an endowment greater than $10M; 6) it is a financial institution;  7) it is an advocacy group or a group that otherwise attempts to influence public opinion; or 8) it discriminates on the basis of race, ethnicity, national origin, religion, political affiliation or beliefs, sexual orientation, or gender identity or expression. Smartsheet reserves the right to decide who is eligible for this discount program.
+
+During your purchase process, indicate that you are a nonprofit and tell us a little about your organization. Smartsheet reserves the right to reset pricing for customers who mistakenly receive nonprofit pricing to standard commercial price points.
+
+#### 
+
+Is there a version of Smartsheet for Government agencies?
+
+Yes! We have Smartsheet Gov. Learn more about the capabilities of [Smartsheet Gov](https://www.smartsheet.com/help-center?url=articles/2480681-gov-capabilities). For more information, [contact Sales](https://www.smartsheet.com/contact/sales?fts=pricing-faq).
+
+Please note: Smartsheet Gov customers who purchase through an authorized sales representative will remain on the legacy collaborator model. However, if they purchase online and agree to our terms and conditions, they will transition to the new user subscription model.
+
+#### 
+
+Is Smartsheet available in the EU?
+
+Yes! We have Smartsheet Regions. Learn more about the capabilities of [Smartsheet Regions](https://www.smartsheet.com/help-center?url=articles/2482793-regions-capabilities). For more information, [contact Sales](https://www.smartsheet.com/contact/sales?fts=pricing-faq).
+
+#### 
+
+If I have a .edu domain, how can I purchase Smartsheet?
+
+Educational institutions who purchase through an authorized sales representative will be on the legacy collaborator model. However, if they purchase online and agree to our terms and conditions, they will transition to the new user subscription model. For more information, please [contact Sales](https://www.smartsheet.com/contact/sales?fts=pricing-faq).
+
+Still have questions?
+
+[Contact Us](https://www.smartsheet.com/contact/sales?fts=pricing-bottom)
+
+*   [Smartsheet ![Image 57: Smartsheet logo](https://www.smartsheet.com/sites/default/files/2022-10/smartsheet-logo-horizontal.svg)](https://www.smartsheet.com/ "Smartsheet")
+*   Product
+    
+    *   Product
+        *   [Platform](https://www.smartsheet.com/platform)
+        *   [Solutions](https://www.smartsheet.com/solutions)
+        *   [Features](https://www.smartsheet.com/platform/features)
+        *   [Integrations](https://www.smartsheet.com/integrations)
+        *   [Pricing & plans](https://www.smartsheet.com/pricing)
+        *   [Smartsheet Advance](https://www.smartsheet.com/pricing/smartsheet-advance)
+        *   [Professional services](https://www.smartsheet.com/services/professional-services)
+        *   [Trust Center](https://www.smartsheet.com/trust)
+        *   [Template Gallery](https://www.smartsheet.com/template-gallery)
+        *   [Why Smartsheet](https://www.smartsheet.com/why-smartsheet)
+        *   [Start a trial](https://www.smartsheet.com/try-it?lpv=footercta)
+        *   [View pricing and plans](https://www.smartsheet.com/pricing)
+    
+*   Resources
+    
+    *   Resources
+        *   [Content Center](https://www.smartsheet.com/content-center)
+        *   [Product updates & insights](https://www.smartsheet.com/content-center/product-insights)
+        *   [Help and Learning](https://www.smartsheet.com/help-center)
+        *   [Smartsheet University](https://www.smartsheet.com/smartsheet-university)
+        *   [Training options](https://www.smartsheet.com/help-center?url=training_resources)
+        *   [Support](https://www.smartsheet.com/services/support)
+        *   [Community](https://community.smartsheet.com/)
+        *   [Partner program](https://www.smartsheet.com/channel-partners)
+        *   [Developers & API](https://developers.smartsheet.com/)
+        *   [Watch a demo](https://www.smartsheet.com/contact/watch-demo?fts=footer-demo)
+    
+*   Company
+    
+    *   Company
+        *   [About us](https://www.smartsheet.com/about)
+        *   [Leadership](https://www.smartsheet.com/about/leadership)
+        *   [Investors](https://investors.smartsheet.com/)
+        *   [Newsroom](https://www.smartsheet.com/content-center/news)
+        *   [Customer stories](https://www.smartsheet.com/customers)
+        *   [Careers We're hiring!](https://www.smartsheet.com/careers)
+        *   [Privacy](https://www.smartsheet.com/legal/privacy)
+        *   [Legal](https://www.smartsheet.com/legal)
+        *   [Contact us](https://www.smartsheet.com/contact?fts=contact-footer)
+    
+*   Learn
+    
+    *   Learn
+        *   [Project management templates](https://www.smartsheet.com/content-center/best-practices/project-management-guide/templates-project-management)
+        *   [Smartsheet dashboard gallery](https://www.smartsheet.com/content-center/product-news/reports-dashboards/smartsheet-dashboard-gallery)
+        *   [5 steps for getting started with the Smartsheet API](https://www.smartsheet.com/content-center/best-practices/tips-tricks/api-getting-started)
+        *   [3 formulas to look up data in Smartsheet](https://www.smartsheet.com/content-center/best-practices/tips-tricks/3-formulas-look-up-data-smartsheet)
+        *   * * *
+            
+        *   [Unlock the power of Smartsheet with AI ![Image 58: Smartsheet AI](https://www.smartsheet.com/sites/default/files/2023-08/merchandising-ai-footer.png)](https://www.smartsheet.com/ai)  
+        *   [Learn more about ENGAGE ![Image 59: Engage Footer Nav Graphic](https://www.smartsheet.com/sites/default/files/2024-06/ENGAGE_Seattle_2024_Footer%20480x135.png)](https://www.smartsheet.com/engage)  
+    
+
+Select your language 
+
+        
+
+[Download desktop app](https://www.smartsheet.com/platform/desktop-app)
+
+*   [Facebook](https://www.facebook.com/smartsheet "Facebook")
+*   [X](https://twitter.com/smartsheet "X")
+*   [LinkedIn](https://www.linkedin.com/company/smartsheet-com "LinkedIn")
+*   [TikTok](https://www.tiktok.com/@smartsheet "TikTok")
+*   [YouTube](https://youtube.com/user/SmartSheet "YouTube")
+*   [Instagram](https://www.instagram.com/smartsheetplatform/ "Instagram")
+
+[©2024. All Rights Reserved Smartsheet Inc.](https://www.smartsheet.com/legal/site-terms)•[Cookie Preferences](https://www.smartsheet.com/pricing#)•[](https://www.smartsheet.com/pricing#)Your Privacy Choices
+
+ [![Image 60: Download on the Apple App Store](https://www.smartsheet.com/sites/default/files/Download_on_the_App_Store_Badge_US-UK_135x40_0_0.svg)](https://itunes.apple.com/app/smartsheet/id568421135)[![Image 61: Get it on Google Play](https://www.smartsheet.com/sites/default/files/google-play-badge-English.svg)](https://play.google.com/store/apps/details?id=com.smartsheet.android&hl=en)
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

@@ -1,0 +1,630 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T19:09:36.382Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://basecamp.com/pricing
+  ```
+  Basecamp: Pricing
+===============
+                                  
+
+[](https://basecamp.com/)
+
+*   [What’s New?](https://basecamp.com/new)
+*   [Features](https://basecamp.com/features)
+*   [Sign in](https://launchpad.37signals.com/signin)
+*   [Pricing + Sign up](https://basecamp.com/pricing)
+
+**Another organizations  
+signed up last week.**
+================================================
+
+Two simple plans, each with a **30-day free trial**. No credit card required.
+
+Basecamp Per User
+-----------------
+
+Ideal for freelancers,  
+startups, and small teams.
+
+*   Every feature you need
+*   500 GB storage for files & documents
+*   Month-to-month, pay as you go
+
+### $15/user per month
+
+**We only bill you for employees.**  
+Invite guests for free.
+
+[Try it for free](https://3.basecamp.com/signup/account/new?plan=per_user_v3)
+
+Basecamp Pro Unlimited
+----------------------
+
+Perfect for growing businesses, larger groups,  
+and companies that want the best.
+
+*   Every feature we offer, plus…
+*   1:1 onboarding tour with our team
+*   10x file & document storage (5 TB)
+*   Option to pay annually by check
+*   First-in-line 24/7/365 priority support
+*   Annual billing for simplified accounting
+*   **PLUS the [Timesheet](https://3.basecamp-help.com/article/897-timesheet) add-on** to track time spent on projects
+*   **PLUS the [Admin Pro Pack](https://3.basecamp-help.com/article/687-admin-pro-pack) add-on** for greater control over access and permissions
+
+### **Unlimited users** just $299/month, billed annually
+
+**No per-user charges. Your whole organization for one fixed price.**  
+If you prefer to pay month-to-month, it’s $349/month.
+
+[Try it for free](https://3.basecamp.com/signup/account/new?plan=pro_unlimited_yearly_v1)
+
+Best value for  
+your whole team
+
+### What’s included? Absolutely everything.
+
+*   Unlimited projects
+*   Loads of storage space
+*   Invite guests for free
+*   [Every feature you need](https://basecamp.com/features)
+*   Innovative [client access](https://basecamp.com/clients)
+*   [Rock-solid uptime reliability](https://www.37status.com/)
+*   24/7/365 [top-notch support](https://basecamp.com/support)
+*   Complimentary [classes](https://basecamp.com/learn)
+
+### Save big with Basecamp.
+
+Basecamp replaces a bunch of apps. **See how our pricing compares**  
+to bundling Slack, Asana, & Google Workspace together:
+
+![Image 1](https://basecamp.com/assets/general/logo-349bf403c234be9d67457f2825054e138f6d54affe467717f3da909cab741cba.svg)
+
+Basecamp Pro Unlimited
+
+$299/month for unlimited users
+
+*   Messages
+*   Realtime chat
+*   To-do lists
+*   Card table
+*   Schedules
+*   Loads of storage
+*   Documents
+*   Check-ins
+
+$299/month for unlimited users
+
+vs
+
+![Image 2](https://basecamp.com/assets/pricing/app-icon-slack-f200f4eaa77918845ca1535dc44791c2a69f0536c5f3ab368bb8e62558a426c3.png)
+
+Slack: realtime chat
+
+$8.75/month per user
+
+![Image 3](https://basecamp.com/assets/pricing/app-icon-asana-94cdc448069ccbd30d3819a3e17a5057aab7e9cbe7da9908c432569c44500a7b.png)
+
+Asana: projects and workflows
+
+$10.99/month per user
+
+![Image 4](https://basecamp.com/assets/pricing/app-icon-google-192d4d26351feb68711b7ad2412d5e26ffe509b35c721b0f59923c3f434b6db3.png)
+
+Google Workspace: storage and docs
+
+$12.00/month per user
+
+$634.80/month for just 20 users
+
+$952.20/month for 30, $1,269.60/month for 40…
+
+**Basecamp also eliminates the Hassle Tax.** There’s no more paying separate bills, onboarding people in multiple places, training people how to use different tools, managing expenses across vendors, etc… **The benefits of Basecamp go beyond price.**
+
+### A big boost for bootstrappers & small businesses.
+
+We started our business without outside funding, and you probably did too. We know your money’s precious, and we want to help. That’s why Basecamp is intentionally affordable for start-ups, freelancers, and small businesses just getting started.
+
+### Non-profit or educational discounts?
+
+Yes, we offer discounts for non-profits, and entirely free accounts for teachers and students (including homeschoolers and alternate education programs). Please review the [discounts page](https://basecamp.com/discounts) for details and directions.
+
+### Risk-free, cancel anytime, no long-term lock-in.
+
+With Basecamp, cancellation is entirely self-serve, no questions asked, no retention specialists trying to talk you out of it. Cancel any time, no long-term contracts to lock you in. Simple, straightforward, and fair, just as it should be.
+
+### How do customers feel after buying Basecamp?
+
+We asked our customers **“What changed for the better since you switched to Basecamp?”** Thousands responded, here’s some of what they said…
+
+> Much easier to track progress.
+
+> Better at supporting our clients.
+
+> Fewer meetings.
+
+> Basecamp made me a hero.
+
+> Reduced miscommunication.
+
+> Managed my chaos.
+
+> Stopped looking in multiple places for our work.
+
+> Accountability has improved.
+
+> Never seen productivity at this level.
+
+> Better alignment across teams.
+
+> Able to get projects done in record time.
+
+> Ability to make better decisions.
+
+> Everyone is always on the same page.
+
+> Projects are smoother.
+
+> We never forget.
+
+> Easier to track conversations.
+
+> No more messy email threads.
+
+> I feel much more organized.
+
+> In sync in one place.
+
+> Way more accountability.
+
+> A lot more transparency.
+
+> It elevated our project management.
+
+> Information flows like water.
+
+> It’s been a lifesaver.
+
+> We are better coordinated.
+
+> More clarity on progress.
+
+> Nothing slips through the cracks.
+
+> We got peace of mind.
+
+> Things don’t get left undone.
+
+> No need for daily standup meetings.
+
+> A clear path to each goal.
+
+> More effective with much less effort.
+
+> Quicker turnaround.
+
+> Balls don’t drop.
+
+> More in control.
+
+> [Show more…](https://basecamp.com/customers)
+
+ ![Image 5: Apple App Store](https://basecamp.com/assets/recognition/badge-app-store-cd332f16eb98af7f5f1539e3a849e38aac7bfc26e6fb76f6be7d4fd125de6e25.png)
+
+ ![Image 6: Google Play](https://basecamp.com/assets/recognition/badge-google-play-c6d31e65d71b6ff06e27a6d9cb9e4877d6f935d30e9c6905e1d7fe2b8778298b.png)
+
+  ![Image 7: G2 Easiest Setup](https://basecamp.com/assets/recognition/badge-g2-easiest-setup-6e1fbac33f611762eaae55c5c1a912580d3c1fca4348769d8dd41bd2be254934.png) ![Image 8: G2 Top 50 Collaboration Products](https://basecamp.com/assets/recognition/badge-g2-collaboration-products-554a78701561e2d80b967d905fd32c9e76acecdce1fe81c47a8d5ca6bc436342.png)  ![Image 9: Capterra Shortlist 2024](https://basecamp.com/assets/recognition/badge-capterra-shortlist-958bbf21b623e9244307fce01681d193e3845d53c21fa7d1f51181a916a0b22a.png)  ![Image 10: G2 Top 50 Project Management Products](https://basecamp.com/assets/recognition/badge-g2-project-management-products-d53668db835be9ad85f417b04f5bbb9f85a26b7fba24079ac764f0174dd37bfa.png)  ![Image 11: G2 Best Estimated ROI](https://basecamp.com/assets/recognition/badge-g2-best-roi-62aecc478718a89033bd5b8ed7e89d4064037190c571c870106190e1708d46f7.png)
+
+**Join more than 150,000 people who get our email newsletter.** We’ll share product updates, thoughts, new releases, and other tidbits we think you’ll find interesting.
+
+  Subscribe
+
+**Thanks! You’re in.** Look out for our latest newsletter in the next few weeks.
+
+We’re here to help.
+
+**There are no stupid questions.** For pre-sales questions, existing customers who need a hand, or other inquiries, [contact us](https://basecamp.com/support) and **we’ll get back to you within an hour.**
+
+[If you love Basecamp, you’ll love HEY — our take on email](https://www.hey.com/)
+
+Product
+
+[Pricing](https://basecamp.com/pricing)
+
+[Features](https://basecamp.com/features)
+
+[Apps + Desktop](https://basecamp.com/via)
+
+[Integrations](https://basecamp.com/extras)
+
+[New in Basecamp](https://basecamp.com/new-in-basecamp)
+
+[Updates](https://updates.37signals.com/post/category/Basecamp)
+
+[Status](https://www.37status.com/)
+
+Company
+
+[About](https://basecamp.com/about)
+
+[Customers](https://basecamp.com/customers)
+
+[Newsletter](https://basecamp.com/newsletter)
+
+[Handbook](https://basecamp.com/handbook)
+
+[Podcast](https://37signals.com/podcast)
+
+[Books](https://basecamp.com/books)
+
+[Jobs](https://37signals.com/jobs)
+
+Resources
+
+[Support](https://basecamp.com/support)
+
+[Learn](https://basecamp.com/learn)
+
+[Articles](https://basecamp.com/articles)
+
+[Community](https://basecamp.com/community)
+
+[Remote Resources](https://basecamp.com/remote-resources)
+
+[Customer Rights](https://basecamp.com/rights)
+
+[Privacy Policy](https://37signals.com/policies/privacy/)
+
+[Policies & Terms](https://37signals.com/policies/)
+
+[California Privacy Notice](https://37signals.com/policies/privacy/regulations/ccpa/)
+
+And more…
+
+[We ❤️ small business](https://basecamp.com/small)
+
+[New Features](https://basecamp.com/new)
+
+[Before & After](https://basecamp.com/before-and-after)
+
+[Yes, Yes, and Yes](https://basecamp.com/yes)
+
+[Dazzle your clients](https://basecamp.com/clients)
+
+[Underdogs](https://basecamp.com/underdogs)
+
+[Long Thoughts](https://37signals.com/thoughts)
+
+[Basecamp](https://basecamp.com/) is designed, built, and backed by [37signals](https://37signals.com/).  
+Enjoy the rest of your day!
+
+[](https://37signals.com/)
+
+We’d like to use a cookie to help us understand if our ads are working or not.
+
+No Yes, that’s fine
+  ```
+
+Source URL: https://basecamp.com/features
+  ```
+  Basecamp: Features
+===============
+                                  
+
+[](https://basecamp.com/)
+
+*   [What’s New?](https://basecamp.com/new)
+*   [Features](https://basecamp.com/features)
+*   [Sign in](https://launchpad.37signals.com/signin)
+*   [Pricing + Sign up](https://basecamp.com/pricing)
+
+Not everything under the sun, just the stuff to get it done.
+============================================================
+
+Basecamp is essentially project management’s greatest hits — all simplified, refined, and integrated into an organized, easy-to-use platform. Click around below to see what it looks like, how it works, and how it can help you.
+
+ [![Image 1: Organization begins at Home](https://basecamp.com/assets/screenshots/home-thumbnail-4041a9d905cd61f5c84f032f49807860b8f745fc60225cd802e1bd00764daa40.png) Organization begins at Home A straightforward, one-page dashboard for your projects, assignments, and schedule.](https://basecamp.com/features/home) [![Image 2: Stay on topic with Messages](https://basecamp.com/assets/screenshots/message-board-thumbnail-53c250094fe69b29c729d409d52e28678ade40ba3b0771ec8091313bbf405882.png) Stay on topic with Messages The centralized place for big discussions about big topics. Completely replaces project emails.](https://basecamp.com/features/message-board) [![Image 3: Track work with To-dos](https://basecamp.com/assets/screenshots/to-dos-thumbnail-98f193b50e065287599a62060575dc307f9072666c8510226c903a0b9d2e4605.png) Track work with To-dos The powerful place to track work, deadlines, responsibilities, progress, and details.](https://basecamp.com/features/to-dos) [![Image 4: Store, share, and discuss files](https://basecamp.com/assets/screenshots/docs-and-files-thumbnail-fb1648915f9f4d5d5574dfe8ca0611c95bfa3729fdf9e25dc8fbad156ef4fc92.png) Store, share, and discuss files An organized space to create, share, and discuss docs, files (physical and cloud), and images.](https://basecamp.com/features/docs-and-files) [![Image 5: Chat around the campfire](https://basecamp.com/assets/screenshots/chat-thumbnail-c9db6db619a9184f12938923d5e5573297054cb7b061241ee119265cd48a8d4d.png) Chat around the campfire Basecamp’s real-time group chat lets you ask quick questions and get equally quick answers.](https://basecamp.com/features/chat) [![Image 6: Schedule so you don’t forget](https://basecamp.com/assets/screenshots/schedule-thumbnail-a58630ec5355891f4f02947e069016a58cadf0a7aaf9a59f1b2e3b85a0efa84a.png) Schedule so you don’t forget The project schedule displays dated to-dos, deadlines, milestones, and relevant events.](https://basecamp.com/features/schedule)
+
+> Since we’ve been using Basecamp, our communication is drastically better and deadlines are met without drama. –Shannon Kropf, Full Sail University
+
+ [![Image 7: It’s about time!](https://basecamp.com/assets/screenshots/timesheet-thumbnail-4e78b0973febeb3de2ed4da4613ac1632316664c577749675ca1f36463d64088.png) It’s about time! With the “Timesheet” add-on, you can track time directly in Basecamp — no spreadsheets required.](https://basecamp.com/features/timesheet) [![Image 8: Move the needle](https://basecamp.com/assets/screenshots/move-the-needle-thumbnail-b14827a0bec458f4dd1fad83f4e218ca5507465be425ee3b72850e77e30b04a5.png) Move the needle Show how a project is progressing and if it’s on track — right from the top of the page.](https://basecamp.com/features/move-the-needle) [![Image 9: Get the big picture view](https://basecamp.com/assets/screenshots/mission-control-thumbnail-7a5bbaac8e2052600146056362780007fd15dfc5d34f8ecc70d43bb20d9a241b.png) Get the big picture view Mission Control shows you which projects are on track and which ones need a helping hand.](https://basecamp.com/features/mission-control) [![Image 10: It’s like kanban, only better](https://basecamp.com/assets/screenshots/card-table-thumbnail-abcff73170194b38a09f5f6d1027632979539fad5f1d024cb9ecae43a1068ee4.png) It’s like kanban, only better Our unique take on Kanban improves on the concept in surprising, practical ways.](https://basecamp.com/features/card-table) [![Image 11: Automatically check-in on the regular](https://basecamp.com/assets/screenshots/automatic-check-ins-thumbnail-cd4ac4e079f5ba7c1d85024743bea74d1861399863f0c25474bf68a35e3a0377.png) Automatically check-in on the regular Get answers on a regular basis by automatically polling your team daily, weekly, etc.](https://basecamp.com/features/automatic-check-ins) [![Image 12: Get a clear bird’s eye view](https://basecamp.com/assets/screenshots/lineup-thumbnail-85508cd4ee6482b001eb0e45884c665583cf8868287dfc36c7f630c53b8f8d94.png) Get a clear bird’s eye view “The Lineup” gives you a big picture view of projects in play, from start date to end date.](https://basecamp.com/features/lineup)
+
+> As the business owner, I feel more connected and aware of what is going on in the office when I’m away. It’s easy to see what needs to be done with deadlines and who is responsible for the task. –Cynthia White, Law Offices of Cynthia L. White
+
+ [![Image 13: Open a door to the world](https://basecamp.com/assets/screenshots/doors-thumbnail-37c523d6836926dfd9c25e1b26285907e0cec35e8af77e74894dde19bc8f50fc.png) Open a door to the world “Doors” let you link up other services you use right alongside Basecamp’s built-in tools.](https://basecamp.com/features/doors) [![Image 14: Collaborate seamlessly](https://basecamp.com/assets/screenshots/all-access-thumbnail-a603d88e3995ee0f052f19433ab7fb9470609da69fb23e67396a6216e1bfb4c7.png) Collaborate seamlessly With “All-access” anyone in your Basecamp account can see and join projects.](https://basecamp.com/features/all-access) [![Image 15: Be a likeable know-it-all](https://basecamp.com/assets/screenshots/activity-reports-thumbnail-69a0b05594bbc5646c5170993bd3cebcfb34a6720d4fd909b614c8904ead4577.png) Be a likeable know-it-all Reports cut across every project so you can gain quick insight into a whole host of important details.](https://basecamp.com/features/activity-reports) [![Image 16: Just ping ’em](https://basecamp.com/assets/screenshots/pings-thumbnail-71120ce26d772eb83b5b978473681d4fd5cef4ad928dd9765912bb60228aede4.png) Just ping ’em Our version of Direct Messages, “Pings” let you kick off ad hoc chats 1:1 or in small groups.](https://basecamp.com/features/pings) [![Image 17: See reality with Hill Charts](https://basecamp.com/assets/screenshots/hill-charts-thumbnail-66c002f1f70801ef6130dd35e8c1e228347bd3d1fe5bb8d0dc86c4f2b54d8193.png) See reality with Hill Charts Invented here, Hill Charts give you a visual, intuitive sense of where projects really stand.](https://basecamp.com/features/hill-charts) [![Image 18: Hook up all the clouds](https://basecamp.com/assets/screenshots/cloud-files-thumbnail-258b8a81d6b3e7404276ca1f7e5da45f79e3863099563b8c7078f39cb50cf344.png) Hook up all the clouds We’ve added cloud file support for Figma, Airtable, Dropbox, Adobe, Notion, and loads more.](https://basecamp.com/features/cloud-files)
+
+> For the first time in a long time our team is truly collaborating, and everyone is moving in the same direction, with the same goals. It’s truly remarkable how quickly things have changed in just a week. –Ryan Sullivan, WP Site Care
+
+ [![Image 19: One click to everything yours](https://basecamp.com/assets/screenshots/my-stuff-thumbnail-267cf01fc9c34e245e3c035844769f7523e4a5ec747bd1e659582b0638a0bd7f.png) One click to everything yours Get instant access to your schedule, assignments, drafts, bookmarks, activity, etc.](https://basecamp.com/features/my-stuff) [![Image 20: Play-by-play, minute-by-minute](https://basecamp.com/assets/screenshots/latest-activity-thumbnail-ba972ca952bed024117924093d93d0f841708774126e2a95c6d2fa7d4bd54c28.png) Play-by-play, minute-by-minute Take in everything that happens across every project in real-time — on a single page.](https://basecamp.com/features/latest-activity) [![Image 21: Control how people can reach you](https://basecamp.com/assets/screenshots/notification-settings-thumbnail-eae3d3cee311ce5c6313ce2574d3901d846a2253f17124cee469ac2ff0b80b1c.png) Control how people can reach you Email or in app? All notifications or just important ones? 24/7 or on a schedule? Your call.](https://basecamp.com/features/notification-settings) [![Image 22: Be notified in one place](https://basecamp.com/assets/screenshots/hey-menu-thumbnail-aac53e187bb96b26afacd4b7245b8504fe76fe19f20b3ce52cfee12217410fb2.png) Be notified in one place The Hey! menu aggregates all your notifications in a single menu. No more bouncing around.](https://basecamp.com/features/hey-menu)
+
+> We are consistently meeting deadlines because all the facts, files and comments are in one place. And everyone is accountable for their contribution to the project. Very user friendly. –Kim Curry, Kim Curry Design
+
+ ![Image 23: Apple App Store](https://basecamp.com/assets/recognition/badge-app-store-cd332f16eb98af7f5f1539e3a849e38aac7bfc26e6fb76f6be7d4fd125de6e25.png)
+
+ ![Image 24: Google Play](https://basecamp.com/assets/recognition/badge-google-play-c6d31e65d71b6ff06e27a6d9cb9e4877d6f935d30e9c6905e1d7fe2b8778298b.png)
+
+  ![Image 25: G2 Easiest Setup](https://basecamp.com/assets/recognition/badge-g2-easiest-setup-6e1fbac33f611762eaae55c5c1a912580d3c1fca4348769d8dd41bd2be254934.png) ![Image 26: G2 Top 50 Collaboration Products](https://basecamp.com/assets/recognition/badge-g2-collaboration-products-554a78701561e2d80b967d905fd32c9e76acecdce1fe81c47a8d5ca6bc436342.png)  ![Image 27: Capterra Shortlist 2024](https://basecamp.com/assets/recognition/badge-capterra-shortlist-958bbf21b623e9244307fce01681d193e3845d53c21fa7d1f51181a916a0b22a.png)  ![Image 28: G2 Top 50 Project Management Products](https://basecamp.com/assets/recognition/badge-g2-project-management-products-d53668db835be9ad85f417b04f5bbb9f85a26b7fba24079ac764f0174dd37bfa.png)  ![Image 29: G2 Best Estimated ROI](https://basecamp.com/assets/recognition/badge-g2-best-roi-62aecc478718a89033bd5b8ed7e89d4064037190c571c870106190e1708d46f7.png)
+
+**Join more than 150,000 people who get our email newsletter.** We’ll share product updates, thoughts, new releases, and other tidbits we think you’ll find interesting.
+
+  Subscribe
+
+**Thanks! You’re in.** Look out for our latest newsletter in the next few weeks.
+
+We’re here to help.
+
+**There are no stupid questions.** For pre-sales questions, existing customers who need a hand, or other inquiries, [contact us](https://basecamp.com/support) and **we’ll get back to you within an hour.**
+
+[If you love Basecamp, you’ll love HEY — our take on email](https://www.hey.com/)
+
+Product
+
+[Pricing](https://basecamp.com/pricing)
+
+[Features](https://basecamp.com/features)
+
+[Apps + Desktop](https://basecamp.com/via)
+
+[Integrations](https://basecamp.com/extras)
+
+[New in Basecamp](https://basecamp.com/new-in-basecamp)
+
+[Updates](https://updates.37signals.com/post/category/Basecamp)
+
+[Status](https://www.37status.com/)
+
+Company
+
+[About](https://basecamp.com/about)
+
+[Customers](https://basecamp.com/customers)
+
+[Newsletter](https://basecamp.com/newsletter)
+
+[Handbook](https://basecamp.com/handbook)
+
+[Podcast](https://37signals.com/podcast)
+
+[Books](https://basecamp.com/books)
+
+[Jobs](https://37signals.com/jobs)
+
+Resources
+
+[Support](https://basecamp.com/support)
+
+[Learn](https://basecamp.com/learn)
+
+[Articles](https://basecamp.com/articles)
+
+[Community](https://basecamp.com/community)
+
+[Remote Resources](https://basecamp.com/remote-resources)
+
+[Customer Rights](https://basecamp.com/rights)
+
+[Privacy Policy](https://37signals.com/policies/privacy/)
+
+[Policies & Terms](https://37signals.com/policies/)
+
+[California Privacy Notice](https://37signals.com/policies/privacy/regulations/ccpa/)
+
+And more…
+
+[We ❤️ small business](https://basecamp.com/small)
+
+[New Features](https://basecamp.com/new)
+
+[Before & After](https://basecamp.com/before-and-after)
+
+[Yes, Yes, and Yes](https://basecamp.com/yes)
+
+[Dazzle your clients](https://basecamp.com/clients)
+
+[Underdogs](https://basecamp.com/underdogs)
+
+[Long Thoughts](https://37signals.com/thoughts)
+
+[Try it for free](https://basecamp.com/pricing)
+
+[Basecamp](https://basecamp.com/) is designed, built, and backed by [37signals](https://37signals.com/).  
+Enjoy the rest of your day!
+
+[](https://37signals.com/)
+
+We’d like to use a cookie to help us understand if our ads are working or not.
+
+No Yes, that’s fine
+  ```
+
+Source URL: https://basecamp.com/about
+  ```
+  Basecamp: Where we came from
+===============
+                                  
+
+[](https://basecamp.com/)
+
+*   [What’s New?](https://basecamp.com/new)
+*   [Features](https://basecamp.com/features)
+*   [Sign in](https://launchpad.37signals.com/signin)
+*   [Pricing + Sign up](https://basecamp.com/pricing)
+
+Where we came from.
+===================
+
+Born out of desperate necessity to stop embarrassing ourselves in front of our clients, the story of how Basecamp was born is likely your story, too.
+
+Hey there—
+
+I’m Jason Fried, one of the co-founders here. I’ve been running 37signals — the business that makes Basecamp — for 23 years.
+
+People often ask me why we built Basecamp. They’ve never seen anything like it before, so they’re curious where the idea came from.
+
+I wish I could credit a spark of genius, or some deep insight. But I can’t. Truth is, we built Basecamp out of _desperate necessity_. We needed it bad. Without it, we were embarrassing ourselves.
+
+Way back when, we used to be a design firm. As we grew, we kept taking on more and more projects. We thought we could handle it, while still providing the same level of service, but we couldn’t. We were fooling ourselves. Sound familiar?
+
+It wasn’t that we didn’t have the skills — we just didn’t have the right tools, nor the method, to juggle the additional workload. We were disorganized, we were dropping balls, and stuff was slipping.
+
+Quality was suffering, and, as is often the case in situations like this, our clients noticed before we noticed. That was the especially painful and uncomfortable part.
+
+We needed a better way to manage projects, track feedback, and make progress. Email, chat, spreadsheets, calls, scattered documents, information here, there, and everywhere just wasn’t cutting it. Systems like that work for a minute, and then they fall apart fast — especially as you grow and add more people to the mix.
+
+We looked around and tried a few things, but the popular tools we tried simply didn’t cut it. So we had to build our own project management system from scratch.
+
+We focused on building a simple, straightforward collection of tools that could track work so everyone knew who was doing what, keep feedback and revisions on the record, centralize communication so no one missed anything, and schedule important milestones.
+
+We started using the system with our clients. They kept asking “What is this? We could totally use this for our own projects!” And that’s when the lightbulb went on — maybe this is a product for others, and not just for us? If we need it, surely others need it.
+
+So we tweaked it, tightened it up, polished the rough edges, and put it on the market. It was an instant hit.
+
+Turns out, tens of thousands of other companies had similar struggles managing their projects, and needed what we needed.
+
+And about a year or so after we first released it, it was generating more revenue for us than our web design business. So we stopped doing web design and have been focused on building Basecamp ever since.
+
+Based on feedback, and our own ideas, we’ve made thousands of improvements over the years, with so much more to come. Basecamp defined a category, and continues to constantly push that category forward in innovative ways.
+
+It’s been an incredible ride so far, and we have so many people to thank. But most of all, we feel a deep sense of responsibility to continue to make the best product we can for companies who desperately seek a better way to work. We’re here for them, 23 years and running.
+
+Thanks for reading, and for [giving Basecamp a try](https://basecamp.com/pricing). You can always contact me directly if you have any questions at [jason@basecamp.com](mailto:jason@basecamp.com). I look forward to hearing from you.
+
+Jason Fried
+
+Co-founder & CEO
+
+ ![Image 1: Apple App Store](https://basecamp.com/assets/recognition/badge-app-store-cd332f16eb98af7f5f1539e3a849e38aac7bfc26e6fb76f6be7d4fd125de6e25.png)
+
+ ![Image 2: Google Play](https://basecamp.com/assets/recognition/badge-google-play-c6d31e65d71b6ff06e27a6d9cb9e4877d6f935d30e9c6905e1d7fe2b8778298b.png)
+
+  ![Image 3: G2 Easiest Setup](https://basecamp.com/assets/recognition/badge-g2-easiest-setup-6e1fbac33f611762eaae55c5c1a912580d3c1fca4348769d8dd41bd2be254934.png) ![Image 4: G2 Top 50 Collaboration Products](https://basecamp.com/assets/recognition/badge-g2-collaboration-products-554a78701561e2d80b967d905fd32c9e76acecdce1fe81c47a8d5ca6bc436342.png)  ![Image 5: Capterra Shortlist 2024](https://basecamp.com/assets/recognition/badge-capterra-shortlist-958bbf21b623e9244307fce01681d193e3845d53c21fa7d1f51181a916a0b22a.png)  ![Image 6: G2 Top 50 Project Management Products](https://basecamp.com/assets/recognition/badge-g2-project-management-products-d53668db835be9ad85f417b04f5bbb9f85a26b7fba24079ac764f0174dd37bfa.png)  ![Image 7: G2 Best Estimated ROI](https://basecamp.com/assets/recognition/badge-g2-best-roi-62aecc478718a89033bd5b8ed7e89d4064037190c571c870106190e1708d46f7.png)
+
+**Join more than 150,000 people who get our email newsletter.** We’ll share product updates, thoughts, new releases, and other tidbits we think you’ll find interesting.
+
+  Subscribe
+
+**Thanks! You’re in.** Look out for our latest newsletter in the next few weeks.
+
+We’re here to help.
+
+**There are no stupid questions.** For pre-sales questions, existing customers who need a hand, or other inquiries, [contact us](https://basecamp.com/support) and **we’ll get back to you within an hour.**
+
+[If you love Basecamp, you’ll love HEY — our take on email](https://www.hey.com/)
+
+Product
+
+[Pricing](https://basecamp.com/pricing)
+
+[Features](https://basecamp.com/features)
+
+[Apps + Desktop](https://basecamp.com/via)
+
+[Integrations](https://basecamp.com/extras)
+
+[New in Basecamp](https://basecamp.com/new-in-basecamp)
+
+[Updates](https://updates.37signals.com/post/category/Basecamp)
+
+[Status](https://www.37status.com/)
+
+Company
+
+[About](https://basecamp.com/about)
+
+[Customers](https://basecamp.com/customers)
+
+[Newsletter](https://basecamp.com/newsletter)
+
+[Handbook](https://basecamp.com/handbook)
+
+[Podcast](https://37signals.com/podcast)
+
+[Books](https://basecamp.com/books)
+
+[Jobs](https://37signals.com/jobs)
+
+Resources
+
+[Support](https://basecamp.com/support)
+
+[Learn](https://basecamp.com/learn)
+
+[Articles](https://basecamp.com/articles)
+
+[Community](https://basecamp.com/community)
+
+[Remote Resources](https://basecamp.com/remote-resources)
+
+[Customer Rights](https://basecamp.com/rights)
+
+[Privacy Policy](https://37signals.com/policies/privacy/)
+
+[Policies & Terms](https://37signals.com/policies/)
+
+[California Privacy Notice](https://37signals.com/policies/privacy/regulations/ccpa/)
+
+And more…
+
+[We ❤️ small business](https://basecamp.com/small)
+
+[New Features](https://basecamp.com/new)
+
+[Before & After](https://basecamp.com/before-and-after)
+
+[Yes, Yes, and Yes](https://basecamp.com/yes)
+
+[Dazzle your clients](https://basecamp.com/clients)
+
+[Underdogs](https://basecamp.com/underdogs)
+
+[Long Thoughts](https://37signals.com/thoughts)
+
+[Try it for free](https://basecamp.com/pricing)
+
+[Basecamp](https://basecamp.com/) is designed, built, and backed by [37signals](https://37signals.com/).  
+Enjoy the rest of your day!
+
+[](https://37signals.com/)
+
+We’d like to use a cookie to help us understand if our ads are working or not.
+
+No Yes, that’s fine
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

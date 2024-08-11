@@ -1,0 +1,2790 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T07:05:15.430Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://www.hubspot.com/products/service/
+  ```
+  Customer Service Software for Small to Enterprise Businesses
+===============
+
+[Skip to content](https://www.hubspot.com/products/service/#global-nav-main-content)
+
+*   English Select a language
+    
+    *   [日本語](https://www.hubspot.com/products/service/#)
+    *   [Deutsch](https://www.hubspot.com/products/service/#)
+    *   [English](https://www.hubspot.com/products/service/#)
+    *   [Español](https://www.hubspot.com/products/service/#)
+    *   [Português](https://www.hubspot.com/products/service/#)
+    *   [Français](https://www.hubspot.com/products/service/#)
+*   High Contrast
+*   [Customer Support](https://help.hubspot.com/)
+    
+*   [Contact Sales](https://offers.hubspot.com/contact-sales)
+    
+
+*    Close Search
+*   [Log in](https://app.hubspot.com/login)
+    
+*   About About
+    
+    *   [About Us](https://www.hubspot.com/our-story)
+    *   [Careers](https://www.hubspot.com/careers)
+    *   [Contact Us](https://www.hubspot.com/company/contact)
+    *   [Investor Relations](https://ir.hubspot.com/)
+    *   [Management Team](https://www.hubspot.com/company/management)
+
+Back [![Image 1](blob:https://www.hubspot.com/78d8411cbf039d1922395d4a7fdf5535) ![Image 2](blob:https://www.hubspot.com/a4fabb5cdffcc7955c8de2cb57f9d8f3)](https://www.hubspot.com/)
+
+Menu
+
+*    Close Search
+
+*   Products Products
+    
+    *   The HubSpot Customer Platform
+        -----------------------------
+        
+        All of HubSpot's marketing, sales, and customer service software on one AI-powered platform.
+        
+        [Free HubSpot CRM](https://www.hubspot.com/products/crm)[Overview of all products](https://www.hubspot.com/products/get-started)
+        
+    
+    *   ### Marketing Hub
+        
+        Marketing automation software
+        
+        [Free and premium plans](https://www.hubspot.com/products/marketing)
+        
+    *   ### Sales Hub
+        
+        Sales software
+        
+        [Free and premium plans](https://www.hubspot.com/products/sales)
+        
+    *   ### Service Hub
+        
+        Customer service software
+        
+        [Free and premium plans](https://www.hubspot.com/products/service)
+        
+    *   ### Content Hub
+        
+        Content marketing software
+        
+        [Free and premium plans](https://www.hubspot.com/products/content)
+        
+    *   ### Operations Hub
+        
+        Operations software
+        
+        [Free and premium plans](https://www.hubspot.com/products/operations)
+        
+    *   ### Commerce Hub
+        
+        B2B commerce software
+        
+        [Free and premium plans](https://www.hubspot.com/products/commerce)
+        
+    *   ### Small Business Bundle
+        
+        The Starter edition of each product, built for startups and small businesses
+        
+        [Learn more](https://www.hubspot.com/products/crm/starter)
+        
+    
+    *   ### HubSpot AI
+        
+        Powerful AI tools throughout the platform
+        
+        [Learn more](https://www.hubspot.com/products/artificial-intelligence)
+        
+    *   ### App Marketplace
+        
+        Connect your favorite apps to HubSpot
+        
+        [See all integrations](https://ecosystem.hubspot.com/marketplace/apps)
+        
+    
+*   Solutions Solutions
+    
+    *   By Use Case
+    *   By Team Size
+    *   Why HubSpot?
+    
+    *   Marketing
+        ---------
+        
+        *   ### [Generate leads](https://www.hubspot.com/use-case/drive-revenue-high-quality-leads)
+            
+            Convert visitors into contacts for your database.
+            
+        *   ### [Automate marketing](https://www.hubspot.com/use-case/maximize-efficiency-ai-automation)
+            
+            Create campaigns with automation and AI.
+            
+        
+    *   Sales
+        -----
+        
+        *   ### [Build pipeline](https://www.hubspot.com/use-case/reach-engage-sales-prospects)
+            
+            Generate a pipeline of high-quality prospects.
+            
+        *   ### [Close deals](https://www.hubspot.com/use-case/close-more-deals)
+            
+            Streamline your process and close more deals faster.
+            
+        
+    *   Customer Service
+        ----------------
+        
+        *   ### [Scale support](https://www.hubspot.com/use-case/scale-customer-service-support)
+            
+            Support customers at scale with AI and a help desk.
+            
+        *   ### [Drive retention](https://www.hubspot.com/use-case/drive-customer-satisfaction)
+            
+            Identify opportunities to improve customer health.
+            
+        
+    
+    *   Content
+        -------
+        
+        *   ### [Create content](https://www.hubspot.com/use-case/create-content-for-customer-journey)
+            
+            Easily craft content for your audience, with help from AI.
+            
+        *   ### [Manage content](https://www.hubspot.com/use-case/manage-content)
+            
+            Organize, update, and distribute content in one place.
+            
+        
+    *   Startups & Small Businesses
+        ---------------------------
+        
+        *   ### [Find and reach customers](https://www.hubspot.com/use-case/find-and-reach-customers)
+            
+            Generate leads through content, AI, and automation.
+            
+        *   ### [Grow sales and get paid](https://www.hubspot.com/use-case/grow-sales-and-get-paid-faster)
+            
+            Prospect smarter and automate payments.
+            
+        *   ### [Organize customer data](https://www.hubspot.com/use-case/understand-and-organize-customer-data)
+            
+            Unify your team and data on one platform.
+            
+        
+    
+    By Team Size
+    ------------
+    
+    *   ![Image 3](https://www.hubspot.com/products/service/)
+        
+        ### HubSpot for Startups & Small Businesses
+        
+        HubSpot’s all-in-one Starter Customer Platform helps your growing startup or small business find and win customers from day one.
+        
+        [Learn more](https://www.hubspot.com/products/crm/starter)
+        
+    *   ![Image 4](https://www.hubspot.com/products/service/)
+        
+        ### HubSpot for Enterprises
+        
+        With HubSpot’s integrated Enterprise Customer Platform, you don’t have to sacrifice power for ease of use.
+        
+        [Learn more](https://www.hubspot.com/products/crm/enterprise)
+        
+    
+    Why HubSpot?
+    ------------
+    
+    *   ![Image 5](https://www.hubspot.com/products/service/)
+        
+        ### Why Choose HubSpot?
+        
+        After just one year, HubSpot customers acquire 129% more leads, close 36% more deals, and see a 37% improvement in ticket closure rates.
+        
+        [Learn more](https://www.hubspot.com/why-choose-hubspot)
+        
+    *   ![Image 6](https://www.hubspot.com/products/service/)
+        
+        ### Case Studies
+        
+        Explore examples of companies like yours from all over the globe that use HubSpot to unite their teams, empower their businesses, and grow better.
+        
+        [See all case studies](https://www.hubspot.com/case-studies)
+        
+    *   ![Image 7](https://www.hubspot.com/products/service/)
+        
+        ### Spotlight: Product Updates
+        
+        Learn about HubSpot’s featured product releases and announcements in this semi-annual product showcase.
+        
+        [Explore product updates](https://www.hubspot.com/spotlight)
+        
+    
+*   [Pricing](https://www.hubspot.com/pricing/marketing)
+    
+*   Resources Resources
+    
+    *   Featured Links
+        --------------
+        
+        *   [Spotlight: Product Updates](https://www.hubspot.com/spotlight)
+        *   [What's New in HubSpot](https://www.hubspot.com/new)
+        *   [Annual Diversity Report](https://www.hubspot.com/diversity/report)
+        
+    *   Community & Events
+        ------------------
+        
+        *   [INBOUND Event](https://www.inbound.com/)
+        *   [HubSpot Community](https://community.hubspot.com/)
+        *   [HubSpot User Groups](https://www.hubspot.com/hubspot-user-groups)
+        
+    *   Partners
+        --------
+        
+        *   [Solutions Partner Program](https://www.hubspot.com/partners/solutions)
+        *   [App Partner Program](https://www.hubspot.com/partners/app)
+        *   [Affiliate Partner Program](https://www.hubspot.com/partners/affiliates)
+        *   [Education Partner Program](https://academy.hubspot.com/education-partner-program)
+        *   [Startup Partner Program](https://www.hubspot.com/startups/partners)
+        
+    *   Education
+        ---------
+        
+        *   [HubSpot Blogs](https://blog.hubspot.com/)
+        *   [Free Courses & Certifications](https://academy.hubspot.com/)
+        *   [Ebooks, Guides & More](https://www.hubspot.com/resources)
+        *   [What Is Inbound Marketing?](https://www.hubspot.com/inbound-marketing)
+        *   [HubSpot Knowledge Base](https://knowledge.hubspot.com/)
+        
+    *   Tools
+        -----
+        
+        *   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/templates)
+        *   [Developer Tools](https://developers.hubspot.com/)
+        
+    *   Services
+        --------
+        
+        *   [Onboarding](https://www.hubspot.com/services/onboarding)
+        *   [Customer Training](https://www.hubspot.com/services/professional/classroom-training)
+        *   [Migration](https://www.hubspot.com/services/professional/migrations)
+        *   [Strategic Consulting](https://www.hubspot.com/services/professional/inbound-consulting)
+        *   [Technical Consulting](https://www.hubspot.com/services/professional/technical-consulting)
+        *   [Hire a Solutions Partner](https://ecosystem.hubspot.com/marketplace/solutions)
+        
+    
+
+*   Products Products
+    *   The HubSpot Customer Platform
+        -----------------------------
+        
+        All of HubSpot's marketing, sales, and customer service software on one AI-powered platform.
+        
+    
+    *   [### Free HubSpot CRM](https://www.hubspot.com/products/crm)
+    *   [### Overview of all products](https://www.hubspot.com/products/get-started)
+    
+    *   [![Image 8](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/marketing-hub-icon.svg) ### Marketing Hub Marketing automation software](https://www.hubspot.com/products/marketing)
+    *   [![Image 9](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/sales-hub-icon.svg) ### Sales Hub Sales software](https://www.hubspot.com/products/sales)
+    *   [![Image 10](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/service-hub-icon.svg) ### Service Hub Customer service software](https://www.hubspot.com/products/service)
+    *   [![Image 11](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/content-hub-icon.svg) ### Content Hub Content marketing software](https://www.hubspot.com/products/content)
+    *   [![Image 12](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/operations-hub-icon.svg) ### Operations Hub Operations software](https://www.hubspot.com/products/operations)
+    *   [![Image 13](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/commerce-hub-icon.svg) ### Commerce Hub B2B commerce software](https://www.hubspot.com/products/commerce)
+    *   [![Image 14](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/hubspot-sprocket.svg) ### Small Business Bundle The Starter edition of each product, built for startups and small businesses](https://www.hubspot.com/products/crm/starter)
+    
+    *   [### HubSpot AI Powerful AI tools throughout the platform](https://www.hubspot.com/products/artificial-intelligence)
+    *   [### App Marketplace Connect your favorite apps to HubSpot](https://ecosystem.hubspot.com/marketplace/apps)
+*   Solutions Solutions
+    *   By Use Case
+        
+        *   Marketing
+            ---------
+            
+            *   [Generate leads](https://www.hubspot.com/use-case/drive-revenue-high-quality-leads)
+            *   [Automate marketing](https://www.hubspot.com/use-case/maximize-efficiency-ai-automation)
+        
+        *   Sales
+            -----
+            
+            *   [Build pipeline](https://www.hubspot.com/use-case/reach-engage-sales-prospects)
+            *   [Close deals](https://www.hubspot.com/use-case/close-more-deals)
+        
+        *   Customer Service
+            ----------------
+            
+            *   [Scale support](https://www.hubspot.com/use-case/scale-customer-service-support)
+            *   [Drive retention](https://www.hubspot.com/use-case/drive-customer-satisfaction)
+        
+        *   Content
+            -------
+            
+            *   [Create content](https://www.hubspot.com/use-case/create-content-for-customer-journey)
+            *   [Manage content](https://www.hubspot.com/use-case/manage-content)
+        
+        *   Startups & Small Businesses
+            ---------------------------
+            
+            *   [Find and reach customers](https://www.hubspot.com/use-case/find-and-reach-customers)
+            *   [Grow sales and get paid](https://www.hubspot.com/use-case/grow-sales-and-get-paid-faster)
+            *   [Organize customer data](https://www.hubspot.com/use-case/understand-and-organize-customer-data)
+    *   By Team Size
+        
+        *   By Team Size
+            ------------
+            
+            ![Image 15](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/hubspot-for-small-business.png?width=345&height=150&name=hubspot-for-small-business.png)
+            
+            ### HubSpot for Startups & Small Businesses
+            
+            HubSpot’s all-in-one Starter Customer Platform helps your growing startup or small business find and win customers from day one.
+            
+            [Learn more](https://www.hubspot.com/products/crm/starter)
+            
+            ![Image 16](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/hubspot-for-enterprise.png?width=344&height=150&name=hubspot-for-enterprise.png)
+            
+            ### HubSpot for Enterprises
+            
+            With HubSpot’s integrated Enterprise Customer Platform, you don’t have to sacrifice power for ease of use.
+            
+            [Learn more](https://www.hubspot.com/products/crm/enterprise)
+            
+    *   Why HubSpot?
+        
+        *   Why HubSpot?
+            ------------
+            
+            ![Image 17](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/why-choose-hubspot.png?width=345&height=150&name=why-choose-hubspot.png)
+            
+            ### Why Choose HubSpot?
+            
+            After just one year, HubSpot customers acquire 129% more leads, close 36% more deals, and see a 37% improvement in ticket closure rates.
+            
+            [Learn more](https://www.hubspot.com/why-choose-hubspot)
+            
+            ![Image 18](https://www.hubspot.com/hs-fs/hubfs/case-studies-2.jpg?width=345&height=150&name=case-studies-2.jpg)
+            
+            ### Case Studies
+            
+            Explore examples of companies like yours from all over the globe that use HubSpot to unite their teams, empower their businesses, and grow better.
+            
+            [See all case studies](https://www.hubspot.com/case-studies)
+            
+            ![Image 19](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/Spotlight.png?width=345&height=150&name=Spotlight.png)
+            
+            ### Spotlight: Product Updates
+            
+            Learn about HubSpot’s featured product releases and announcements in this semi-annual product showcase.
+            
+            [Explore product updates](https://www.hubspot.com/spotlight)
+            
+[Pricing](https://www.hubspot.com/pricing/marketing)*   Resources Resources
+    *   Featured Links
+        --------------
+        
+        *   [Spotlight: Product Updates](https://www.hubspot.com/spotlight)
+        *   [What's New in HubSpot](https://www.hubspot.com/new)
+        *   [Annual Diversity Report](https://www.hubspot.com/diversity/report)
+    
+    *   Community & Events
+        ------------------
+        
+        *   [INBOUND Event](https://www.inbound.com/)
+        *   [HubSpot Community](https://community.hubspot.com/)
+        *   [HubSpot User Groups](https://www.hubspot.com/hubspot-user-groups)
+    
+    *   Partners
+        --------
+        
+        *   [Solutions Partner Program](https://www.hubspot.com/partners/solutions)
+        *   [App Partner Program](https://www.hubspot.com/partners/app)
+        *   [Affiliate Partner Program](https://www.hubspot.com/partners/affiliates)
+        *   [Education Partner Program](https://academy.hubspot.com/education-partner-program)
+        *   [Startup Partner Program](https://www.hubspot.com/startups/partners)
+    
+    *   Education
+        ---------
+        
+        *   [HubSpot Blogs](https://blog.hubspot.com/)
+        *   [Free Courses & Certifications](https://academy.hubspot.com/)
+        *   [Ebooks, Guides & More](https://www.hubspot.com/resources)
+        *   [What Is Inbound Marketing?](https://www.hubspot.com/inbound-marketing)
+        *   [HubSpot Knowledge Base](https://knowledge.hubspot.com/)
+    
+    *   Tools
+        -----
+        
+        *   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/templates)
+        *   [Developer Tools](https://developers.hubspot.com/)
+    
+    *   Services
+        --------
+        
+        *   [Onboarding](https://www.hubspot.com/services/onboarding)
+        *   [Customer Training](https://www.hubspot.com/services/professional/classroom-training)
+        *   [Migration](https://www.hubspot.com/services/professional/migrations)
+        *   [Strategic Consulting](https://www.hubspot.com/services/professional/inbound-consulting)
+        *   [Technical Consulting](https://www.hubspot.com/services/professional/technical-consulting)
+        *   [Hire a Solutions Partner](https://ecosystem.hubspot.com/marketplace/solutions)
+*   About About
+    *   [About Us](https://www.hubspot.com/our-story)
+    *   [Careers](https://www.hubspot.com/careers)
+    *   [Contact Us](https://www.hubspot.com/company/contact)
+    *   [Investor Relations](https://ir.hubspot.com/)
+    *   [Management Team](https://www.hubspot.com/company/management)
+
+[Get a demo of HubSpot's customer service software](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-nav) [Get started free with HubSpot's free customer service tools](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-nav2)
+
+[Log in](https://app.hubspot.com/login)
+
+*   English Select a language
+    *   [日本語](https://www.hubspot.com/products/service/#)
+    *   [Deutsch](https://www.hubspot.com/products/service/#)
+    *   [English](https://www.hubspot.com/products/service/#)
+    *   [Español](https://www.hubspot.com/products/service/#)
+    *   [Português](https://www.hubspot.com/products/service/#)
+    *   [Français](https://www.hubspot.com/products/service/#)
+*   High Contrast
+[Customer Support](https://help.hubspot.com/) [Contact Sales](https://offers.hubspot.com/contact-sales)
+
+*   [Home](https://www.hubspot.com/)
+*   Service Hub
+
+![Image 20: Shows a simplified Service Hub user interface where a user has filtered the shared inbox to see customer support tickets assigned to them](https://www.hubspot.com/hs-fs/hubfs/service-hub-hero-en@3x.webp?width=425&height=438&name=service-hub-hero-en@3x.webp)
+
+**Service Hub®**
+
+Customer Service Software
+=========================
+
+[Get a demo of HubSpot's customer service software](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-hero) [Get started free with HubSpot's free customer service tools](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-hero2)
+
+*   ### Product Description+\_
+    
+    Customer service software powered by AI to scale support and drive retention.
+    
+*   ### Pricing Overview+\_
+    
+    Free and premium plans that grow with you. Editions starting at:
+    
+    \- Free: $0/month  
+    \- Starter: $20/month per seat  
+    \- Professional: $100/month per seat  
+    \- Enterprise: $150/month per seat
+    
+*   ### Features+\_
+    
+    Provide personalized, AI-powered support and self-service with tools like help desk and knowledge base. Increase CSAT and retention through proactive tools like customer health scores and product usage, which drive adoption. It’s all powered by HubSpot’s Smart CRM to deliver more complete insights out of the box and unify your customer-facing teams.
+    
+
+1,600+ app integrations to grow your business with HubSpot
+----------------------------------------------------------
+
+*   ![Image 21: JIRA logo](https://www.hubspot.com/hs-fs/hubfs/%5B%20Connect%20Team%20%5D/Integrators%20Logos/JIRA%20logo.png?width=976&height=241&name=JIRA%20logo.png)
+    
+*   ![Image 22: Segment and Twilio logo](https://www.hubspot.com/hs-fs/hubfs/App%20Partners/App%20Partners%20Logo/segment_twilio_logo_2024.png?width=240&height=65&name=segment_twilio_logo_2024.png)
+    
+*   ![Image 23: Aircall Logo](https://www.hubspot.com/hs-fs/hubfs/App%20Partners/App%20Partners%20Logo/aircall_logo_2024.png?width=240&height=68&name=aircall_logo_2024.png)
+    
+*   ![Image 24: Zuper logo](https://www.hubspot.com/hs-fs/hubfs/zuper.jpg?width=516&height=220&name=zuper.jpg)
+    
+*   ![Image 25: Pendo logo](https://www.hubspot.com/hs-fs/hubfs/6683-pendo.jpg?width=866&height=650&name=6683-pendo.jpg)
+    
+
+Previous Next
+
+![Image 26: HubSpot Video](https://api-na1.hubapi.com/video/v1/public/165206811780/poster?portalId=53)
+
+Deliver exceptional customer value and drive long-term retention.
+-----------------------------------------------------------------
+
+To increase customer retention, you need to focus on customer value. The best way to grow is through your customers, and they expect more than ever.
+
+Service Hub turns your customer experience from a cost center to a revenue driver. It’s AI-first, omni-channel, and connected to marketing and sales data on a unified customer platform. The result? Scalable customer support and proactive customer retention that fuels your business growth.
+
+Solutions to Your Biggest Customer Service Obstacles
+----------------------------------------------------
+
+![Image 27: Simplified user interface in HubSpot showing the help desk in Service Hub featuring various customer service conversations with customers](https://knowledge.hubspot.com/hs-fs/hubfs/SH-Help-Desk-EN@3x%20(1).webp?width=567&height=410&name=SH-Help-Desk-EN@3x%20(1).webp)
+
+Scale Support
+-------------
+
+Deliver support at scale with AI-powered self-service, an omni-channel help desk, and 24/7 availability.
+
+Service Hub helps you gather important insights about your customers, track their interactions, and deliver personalized service experiences that keep them coming back for more. Deepen your customer relationships and build a loyal customer base that will drive your business forward.
+
+[Learn more](https://www.hubspot.com/use-case/scale-customer-service-support)
+
+### Popular Features
+
+*   [### Help Desk & Ticketing](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+    
+    Empower your reps to manage and resolve tickets in an AI-first workspace. 360-degree intelligence is built right into every interaction.
+    
+*   [### Knowledge Base](https://www.hubspot.com/products/service/knowledge-base?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature2)
+    
+    Help customers help themselves, and reduce your number of support requests.
+    
+*   [### Omni-Channel Messaging](https://www.hubspot.com/products/service/omnichannel-customer-service?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature3)
+    
+    Meet your customers wherever they are by accessing multiple channels in the inbox and seamlessly switching between them.
+    
+*   [### Call Tracking](https://www.hubspot.com/products/sales/click-to-call?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature4)
+    
+    Receive inbound calls from your customers and track them in HubSpot.
+    
+*   [### AI-Powered Chat (Beta)](https://www.hubspot.com/products/crm/chatbot-builder?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature5)
+    
+    Automatically route users to the right people on your support team, or set up your own GPT-powered chatbot to help your customers instantly.
+    
+*   [### SLA Management](https://www.hubspot.com/products/service/sla-management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature6)
+    
+    Manage your support team at scale with advanced SLAs that increase rep efficiency and customer transparency.
+    
+
+See more features
+
+![Image 28: Simplified user interface in HubSpot displaying a line chart that shows customer health score trends over time](https://knowledge.hubspot.com/hs-fs/hubfs/SH-Health-Scores-EN@3x%20(1).webp?width=567&height=410&name=SH-Health-Scores-EN@3x%20(1).webp)
+
+Drive Retention
+---------------
+
+Using a patchwork of tools to manage customer success can cause a disjointed experience, resulting in lost revenue. Grow customers smarter with proactive tools that uncover new opportunities to improve customer health and expand your revenue.
+
+With Service Hub, you can identify opportunities to upsell or cross-sell, track customer satisfaction trends, and drive proactive customer retention.
+
+[Learn more](https://www.hubspot.com/use-case/drive-customer-satisfaction)
+
+### Popular Features
+
+*   [### Customer Success Workspace (Beta)](https://www.hubspot.com/products/service/customer-success-management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature7)
+    
+    Manage your book of business and drive proactive customer retention with customer health scores and product usage insights. 
+    
+*   [### Feedback Management](https://www.hubspot.com/products/service/customer-feedback?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature8)
+    
+    Create NPS, CSAT, CES, and custom surveys to gather critical customer feedback.
+    
+*   [### Conversation Intelligence](https://www.hubspot.com/products/conversation-intelligence?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature9)
+    
+    Capture details from calls and unlock coaching opportunities with AI-powered insights.
+    
+*   [### Customer Portal](https://www.hubspot.com/products/service/customer-portal?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature10)
+    
+    Empower customers to get the help they need through a secure customer portal that keeps track of their support tickets and helps reduce time to resolution.
+    
+
+![Image 29: Simplified user interface in HubSpot showing various customer service reports in the dashboard, like a percentage breakdown of various services and their ratings from customers](https://knowledge.hubspot.com/hs-fs/hubfs/Imported%20sitepage%20images/srh-multi-row-2-en@3x.webp?width=567&height=407&name=srh-multi-row-2-en@3x.webp)
+
+Leverage 360-Degree Insights
+----------------------------
+
+Service Hub is connected to marketing and sales, and powered by HubSpot’s Smart CRM to deliver more complete insights out-of-the-box and unify your customer-facing teams.
+
+Drive powerful collaboration and alignment between your customer experience, marketing, and sales teams, providing confidence, context, and credibility in your customer conversations.
+
+### Popular Features
+
+*   [### Fully Integrated Smart CRM](https://www.hubspot.com/products/crm?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature13)
+    
+    Automatically track customer details and interactions with your business in one source of truth that’s accessible to your whole team.
+    
+*   [### Service Analytics](https://www.hubspot.com/products/service/service-analytics?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature14)
+    
+    Uncover key insights with out-of-the-box reports that help you deliver efficient, authentic service.
+    
+*   [### Team Management](https://www.hubspot.com/products/user-permissions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature15)
+    
+    Keep your team organized and nimble by ensuring every rep can access the right tools.
+    
+*   [### Mobile Inbox](https://www.hubspot.com/products/service/mobile-inbox)
+    
+    Stay productive on the go with the tools you need to collaborate and deliver agile support.
+    
+*   [### Automated Customer Service](https://www.hubspot.com/products/service/automated-customer-service)
+    
+    Eliminate unnecessary manual processes so your team can focus on solving customer problems.
+    
+
+See more features
+
+Service Software That Grows With You
+------------------------------------
+
+Start with free tools and pay as you grow, or hit the ground running with one of our premium editions.
+
+### Free
+
+No credit card required
+
+$0/month
+
+Popular features
+
+*   Contact management
+*   Ticketing
+*   AI chatbot (Beta)
+*   Team email
+*   Tickets closed reports
+
+![Image 30](https://www.hubspot.com/hubfs/ServiceHub_Starter.svg)
+
+### Starter
+
+Starts at
+
+$20/month per seat
+
+Popular features
+
+*   Everything in Free
+*   Simple ticket automation
+*   Multiple ticket pipelines
+*   Multiple currencies
+*   Calling SDK
+
+![Image 31](https://www.hubspot.com/hubfs/ServiceHub_Pro.svg)
+
+### Professional
+
+Starts at
+
+$100/month per seat
+
+Popular features
+
+*   Everything in Starter
+*   Help desk workspace
+*   Knowledge base
+*   Customer success workspace (Beta)
+*   Customer portal
+
+![Image 32](https://www.hubspot.com/hubfs/ServiceHub_Ent.svg)
+
+### Enterprise
+
+Starts at
+
+$150/month per seat
+
+Popular features
+
+*   Everything in Professional
+*   Playbooks
+*   Advanced SLAs & routing
+*   Single sign-on
+*   Multiple knowledge bases
+
+[Get a demo of premium editions](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-middle) [Get started with free tools](https://app.hubspot.com/signup-hubspot/service/?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-middle2)
+
+For more detailed information on product packaging and the limits that apply, please see our [pricing page](https://www.hubspot.com/pricing/service/enterprise?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-pricing-disclaimer).  
+Price shown in USD and subject to applicable tax.
+
+It’s already easy to use. But we’re still here for you.
+-------------------------------------------------------
+
+We’re here to help your whole team stay ahead of the curve as you grow.
+
+*   ![Image 33](https://www.hubspot.com/hs-fs/hubfs/Book%20Bulb.png?width=160&height=161&name=Book%20Bulb.png)
+    
+    [### Free Courses & Certifications](https://academy.hubspot.com/courses?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-academy)
+    
+    Grow your skills with free HubSpot Academy courses and certifications.
+    
+*   ![Image 34](https://www.hubspot.com/hs-fs/hubfs/Three%20Blue%20People.png?width=160&height=161&name=Three%20Blue%20People.png)
+    
+    [### 24/7 Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-support)
+    
+    Get help by calling, chatting with, or emailing our customer support team.
+    
+*   ![Image 35](https://www.hubspot.com/hs-fs/hubfs/Integration3.png?width=160&height=161&name=Integration3.png)
+    
+    [### Apps](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-integrations)
+    
+    Integrate with over 1,600 third-party apps  
+    and tools.
+    
+
+Have a question for our sales team? Give us a call and we'll walk you through it.  
+[+1 888-482-7768](tel:+1888-482-7768)
+
+Service Hub customers experience:
+---------------------------------
+
+*   ![Image 36](https://knowledge.hubspot.com/hs-fs/hubfs/2023_ServiceHub_Customer_First3-1.png?width=128&height=128&name=2023_ServiceHub_Customer_First3-1.png)
+    
+    ### 13x
+    
+    faster resolution times
+    
+*   ![Image 37](https://knowledge.hubspot.com/hs-fs/hubfs/2023_ServiceHub_Help_Desk_Ticket1-3.png?width=128&height=129&name=2023_ServiceHub_Help_Desk_Ticket1-3.png)
+    
+    ### 42%
+    
+    more tickets closed per agent
+    
+*   ![Image 38](https://knowledge.hubspot.com/hs-fs/hubfs/2023_ServiceHub_Customer_Surveys2.png?width=128&height=128&name=2023_ServiceHub_Customer_Surveys2.png)
+    
+    ### 84%
+    
+    experience increased CSAT
+    
+
+See How Customers Use Service Hub to Grow Better
+------------------------------------------------
+
+*   Santa Cruz
+*   Stella
+*   HungryHungry
+*   Swapfiets
+
+![Image 39: Santa Cruz](https://www.hubspot.com/hubfs/santa-cruz-logo.svg)
+
+### Santa Cruz Bicycles Uses Service Hub to Scale Customer Happiness
+
+**The Challenge**  
+Santa Cruz Bicycles is known for putting the customer first, but accelerated growth challenged the company’s customer focus.
+
+**The Solution**  
+Service Hub enabled a more organized support system, resulting in fast customer response times and streamlined efficiency, without sacrificing quality service.
+
+“The customer experience is everything ... The way HubSpot approaches automation, it really is about enabling the human touch and not removing it.” - Christie Pearson, CRM Administrator, Santa Cruz Bicycles
+
+[Read the full case study](https://www.hubspot.com/case-studies/how-santa-cruz-bicycles-service-hub?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-case-santa)
+
+![Image 40: Stella](https://www.hubspot.com/hubfs/stella-logo-1.svg)
+
+### Stella Builds Stronger Customer Relationships Using Service Hub
+
+**The Challenge**  
+As Stella expanded, its founders realized they had outgrown their software setup.
+
+**The Solution**  
+Service Hub’s help desk software allows Stella’s team to prioritize tasks and organize every customer inquiry in a single, universally accessible dashboard, ensuring nothing slips through the cracks.
+
+“Our customer service reps can see all the information about the customer … We've been able to build stronger relationships with our customers,” - Aarne Töllinen, CCO and CMO, Stella
+
+[Read the full case study](https://www.hubspot.com/case-studies/stella?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-case-stella)
+
+![Image 41: ''](https://knowledge.hubspot.com/hs-fs/hubfs/HungryHungry.jpg?width=509&height=236&name=HungryHungry.jpg)
+
+![Image 42: HungryHungry logo](https://knowledge.hubspot.com/hs-fs/hubfs/Pink_HH_Logo-2.webp?width=180&height=47&name=Pink_HH_Logo-2.webp)
+
+### HungryHungry Cuts Customer Onboarding Time in Half With Apps From HubSpot's App Marketplace
+
+**The Challenge**  
+HungryHungry customers were struggling to activate, and the onboarding process took too long. The business needed to engage customers earlier and improve speed to value for new customers.
+
+**The Solution**  
+Since HungryHungry implemented customer service apps from HubSpot's App Marketplace, their average customer completes onboarding twice as fast and nearly all customers are ‌onboarded successfully, getting rid of early churn.
+
+“Anywhere you can simplify, you should. HubSpot brings together every customer interaction, from sales and marketing to onboarding and customer care. Having that single view, all in one place really helps.” -  Scott Fox, Head of Operations, HungryHungry
+
+[Read the full case study](https://www.hubspot.com/case-studies/hungryhungry)
+
+![Image 43](https://knowledge.hubspot.com/hs-fs/hubfs/swapfiets.jpg?width=509&height=236&name=swapfiets.jpg)
+
+![Image 44: Swapfiets logo](https://knowledge.hubspot.com/hs-fs/hubfs/1-May-14-2024-05-47-58-7315-PM.png?width=200&height=85&name=1-May-14-2024-05-47-58-7315-PM.png)
+
+### Swapfiets Uses Service Hub to Drastically Shorten Ticket Response Time 
+
+**The Challenge**  
+The global Swapfiets team struggled to manage their large-scale support team that handled more than 40,000 tickets per month. They didn’t have a single source of truth for data and some tickets stayed unaddressed for months.
+
+**The Solution**  
+With HubSpot, Swapfiets ​​optimized the customer service experience. They began resolving more tickets faster to build member trust and proactively handling customer issues to improve customer retention and satisfaction.
+
+“Service Hub is helping to provide our staff with the right tools to be more proactive and efficient so that our members can enjoy worry-free biking.” - Marc De Vries, CEO, Swapfiets
+
+[Read the full case study](https://www.hubspot.com/case-studies/swapfiets)
+
+![Image 45: G2 Badge: Leader, Mid-Market, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-mid-market.png?width=770&height=1000&name=badge-leader-mid-market.png)
+
+![Image 46: G2 Badge: Momentum Leader, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/bagde-momentum-leader.png?width=770&height=1000&name=bagde-momentum-leader.png)
+
+![Image 47: G2 Badge: Leader, Small Business, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-small-business.png?width=770&height=1000&name=badge-leader-small-business.png)
+
+![Image 48: G2 Badge: Leader, Europe, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-europe.png?width=895&height=1000&name=badge-leader-europe.png)
+
+![Image 49: G2 Badge: Leader, Enterprise, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-enterprise.png?width=770&height=1000&name=badge-leader-enterprise.png)
+
+![Image 50: G2 Badge: Leader, ANZ, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/international/badge-leader-anz.png?width=895&height=1000&name=badge-leader-anz.png)
+
+![Image 51: Best_Usability-MidMarket-Fall_2020](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/web-team/WBZ/G2%20Awards%20Badges/CMS/Best_Usability-MidMarket-Fall_2020.svg)
+
+![Image 52: Best_Relationship-Enterprise-Fall_2020](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/web-team/WBZ/G2%20Awards%20Badges/MHE/Best_Relationship-Enterprise-Fall_2020.svg)
+
+![Image 53: WebOpsPlatforms_Leader_Europe_Leader](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/web-team/WBZ/G2%20Awards%20Badges/Spring%202022/WebOpsPlatforms_Leader_Europe_Leader.png?width=895&height=1000&name=WebOpsPlatforms_Leader_Europe_Leader.png)
+
+### Voted #1 in 571 Reports
+
+[Read case studies](https://www.hubspot.com/case-studies?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-case-studies)
+
+Start growing your business through happier, more successful customers.
+-----------------------------------------------------------------------
+
+[Get a demo of HubSpot's customer service software](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-bottom)
+
+[Get started free with HubSpot's free customer service tools](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-bottom2)
+
+![Image 54](https://www.hubspot.com/hs-fs/hubfs/cta-content-block-sh-en@2x.webp?width=340&height=370&name=cta-content-block-sh-en@2x.webp)
+
+Frequently Asked Questions
+--------------------------
+
+### What is customer service software?
+
+Customer service software is the consolidation point for managing the customer journey. It allows you to manage the onboarding of new customers; collect, organize, and respond to customer support requests; and ensure the growth and satisfaction of your customers.
+
+While most customer service software solutions solve for a specific use case, Service Hub is unique in that it's part of the HubSpot customer platform. With features that make it easy to deliver authentic, personalized service, Service Hub empowers you to prioritize the customer experience.
+
+### Can I implement HubSpot’s software without dedicated programmers/developers?
+
+Yes. With automation and contextual guidance built right in, you can get started with Service Hub without involving developers. And if you’re looking for more customization and expertise, our [solutions partners](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-partners1) offer a wide range of specialized support to help you get the most out of your HubSpot implementation.
+
+### Will HubSpot help me and my team get started with the software?
+
+Of course! We’ll help all Starter, Professional, and Enterprise users get up and running quickly with a personalized onboarding plan, and our implementation specialists are available to provide guidance on technical setup.
+
+Your whole team of free or paid users will also have access to our active community forums, training lessons from HubSpot Academy, and a comprehensive knowledge base of user guides and help documents. For especially complex configurations, businesses also leverage HubSpot’s [expansive ecosystem of over 6,000 partners](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-partners2) for additional support.
+
+### What makes HubSpot’s customer service software popular?
+
+While Service Hub stands out for the power and ease of use of its support and help desk features, it's also popular for the way it helps you put the customer first. With channels to meet customers where they are and when they need it, Service Hub lets you have contextualized and personalized interactions with customers at any point in the customer journey.
+
+Plus, Service Hub includes HubSpot’s CRM functionality and seamlessly integrates with Marketing Hub, Sales Hub, Content Hub, and Operations Hub, so your entire front office team can unite around a complete view of the customer.
+
+Last but not least, you can easily sync Service Hub with more than 1,600 custom integrations — from Jira to SurveyMonkey to Facebook Messenger — so your services team has all its favorite tools on one powerful, easy-to-use platform.
+
+### My company already uses a CRM system. Can we integrate it with Service Hub?
+
+Absolutely. HubSpot offers a fully supported, native Salesforce integration that’s easy to set up and use — and available to Service Hub Professional and Enterprise customers. We also offer integrations to many other CRM systems through the [HubSpot App Marketplace](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-integrations).
+
+### How does Service Hub work with Marketing Hub, Sales Hub, Content Hub, and Operations Hub?
+
+Service Hub, Marketing Hub, Sales Hub, Content Hub, and Operations Hub are each part of HubSpot’s customer platform to help you grow better. When you use two or more hubs together, your data is automatically connected on the platform, enabling you to easily (and powerfully) track your entire customer journey from first website visit to closed deal to loyal customer.
+
+### My business already uses Marketing Hub and/or Sales Hub, and I’d love to get my customer service team using Service Hub. What’s the pitch?
+
+Sales and marketing are how we begin our customer relationships — but not necessarily where they grow. Through customer service, savvy teams can turn help issues into opportunities, and grow beyond resolution to relationship.
+
+Service Hub helps you identify opportunities to deepen customer relationships, connect to the front office, and drive efficiency so customers have a superior experience throughout their journey.
+
+And when all your front office teams’ tools and data are united on the same platform, your customer service team will have the full context of each customer's previous interactions with Marketing and Sales, making it easier to connect with customers in a much more personalized and powerful way.
+
+### How much time does it take to implement customer service software?
+
+You can get started with Service Hub in minutes, not months. The in-app onboarding process has automation and contextual guidance built right in. With our Starter, Professional, and Enterprise editions, you can partner with an [onboarding specialist](https://www.hubspot.com/services/onboarding/service-hub?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-onboarding) to guide you through the journey.
+
+### What kind of ROI can I expect from Service Hub?
+
+Calculate the ROI you could see with Service Hub based on your industry, region, and current sales metrics using our [ROI calculator](https://www.hubspot.com/roi-calculator/service). The calculator harnesses data from over 216,000 HubSpot customers globally. Enhance your analysis by coupling this with our [TCO calculator](https://www.hubspot.com/tco-calculator) to understand your total cost of owning HubSpot and get a more precise view of your potential ROI.
+
+![Image 55](https://f.hubspotusercontent20.net/hubfs/2406023/assets/component-library/icons/icons.svg)
+
+Powerful alone, even better together.
+-------------------------------------
+
+Each product in HubSpot’s platform is connected to the same underlying CRM database. Although our products are powerful on their own, the real magic happens when you use them together.
+
+*   ![Image 56: Marketing Hub](https://www.hubspot.com/hubfs/MarketingHub_Icon.svg)
+    
+    ### Marketing Hub
+    
+    AI-powered marketing software that helps you generate leads and automate marketing.
+    
+    [Learn about Marketing Hub](https://www.hubspot.com/products/marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-marketing)
+    
+*   ![Image 57: Sales Hub](https://www.hubspot.com/hubfs/SalesHub_Icon.svg)
+    
+    ### Sales Hub
+    
+    Easy-to-adopt sales software that leverages AI to build pipelines and close deals.
+    
+    [Learn about Sales Hub](https://www.hubspot.com/products/sales?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-sales)
+    
+*   ![Image 58: Content Hub](https://www.hubspot.com/hubfs/Imported%20sitepage%20images/ContentHub_Icon_Gradient_RGB_24px-1.svg)
+    
+    ### Content Hub
+    
+    All-in-one, AI-powered content marketing software that helps marketers create and manage content.
+    
+    [Learn about Content Hub](https://www.hubspot.com/products/content?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-content)
+    
+*   ![Image 59: Operations Hub](https://www.hubspot.com/hubfs/OperationsHub_Icon.svg)
+    
+    ### Operations Hub
+    
+    Operations software that leverages AI to help you activate and manage your data.
+    
+    [Learn about Operations Hub](https://www.hubspot.com/products/operations?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-operations)
+    
+*   ![Image 60: Commerce Hub](https://www.hubspot.com/hubfs/Imported%20sitepage%20images/Product_Icon_Tiered_CommerceHub_Starter.png)
+    
+    ### Commerce Hub
+    
+    B2B commerce software designed to help you collect payments and automate billing.
+    
+    [Learn about Commerce Hub](https://www.hubspot.com/products/commerce?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-commerce)
+    
+
+BACK
+
+Popular Features
+----------------
+
+*   [All Products and Features](https://www.hubspot.com/products)
+*   [Free Meeting Scheduler App](https://www.hubspot.com/products/sales/schedule-meeting)
+*   [HubSpot AI Tools](https://www.hubspot.com/products/artificial-intelligence)
+*   [Email Tracking Software](https://www.hubspot.com/products/sales/email-tracking)
+*   [AI Content Writer](https://www.hubspot.com/products/cms/ai-content-writer)
+*   [AI Website Generator](https://www.hubspot.com/products/cms/ai-website-generator)
+*   [Email Marketing Software](https://www.hubspot.com/products/marketing/email)
+*   [Lead Management Software](https://www.hubspot.com/products/crm/lead-management)
+*   [AI Email Writer](https://www.hubspot.com/products/marketing/ai-email-writer)
+*   [Free Website Builder](https://www.hubspot.com/products/cms/drag-and-drop-website-builder)
+*   [Sales Email Templates](https://www.hubspot.com/products/sales/email-templates-sales)
+*   [Free Online Form Builder](https://www.hubspot.com/products/marketing/forms)
+*   [Free Chatbot Builder](https://www.hubspot.com/products/crm/chatbot-builder)
+*   [Free Live Chat Software](https://www.hubspot.com/products/crm/live-chat)
+*   [Marketing Analytics](https://www.hubspot.com/products/marketing/analytics)
+*   [Free Landing Page Builder](https://www.hubspot.com/products/marketing/landing-pages)
+*   [Free Web Hosting](https://www.hubspot.com/products/cms/web-hosting)
+
+Free Tools
+----------
+
+*   [See All Free Business Tools](https://www.hubspot.com/free-business-tools)
+*   [Clip Creator](https://www.hubspot.com/clip-creator)
+*   [Website Grader](https://website.grader.com/?__hstc=20629287.e4e046660731447bf82affe18aa75831.1482962870986.1487962165415.1487964870240.141&__hssc=20629287.1.1487964870240&__hsfp=3218882972)
+*   [Make My Persona](https://www.hubspot.com/make-my-persona)
+*   [Email Signature Generator](https://www.hubspot.com/email-signature-generator)
+*   [Brand Kit Generator](https://www.hubspot.com/brand-kit-generator)
+*   [Blog Ideas Generator](https://www.hubspot.com/blog-topic-generator)
+*   [Invoice Template Generator](https://www.hubspot.com/invoice-template-generator)
+*   [Marketing Plan Generator](https://www.hubspot.com/marketing-plan-template-generator)
+*   [Free Business Templates](https://www.hubspot.com/business-templates)
+*   [Guide Creator](https://www.hubspot.com/guide-creator)
+*   [Software Comparisons Library](https://www.hubspot.com/comparisons)
+*   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/website)
+*   [Campaign Assistant](https://www.hubspot.com/campaign-assistant)
+
+Company
+-------
+
+*   [About Us](https://www.hubspot.com/our-story)
+*   [Careers](https://www.hubspot.com/careers)
+*   [Management Team](https://www.hubspot.com/company/management)
+*   [Board of Directors](https://www.hubspot.com/company/board-of-directors)
+*   [Investor Relations](https://ir.hubspot.com/?_ga=2.262843276.12874469.1592422655-430007000.1592422655)
+*   [Blog](https://blog.hubspot.com/)
+*   [Contact Us](https://www.hubspot.com/company/contact)
+
+Customers
+---------
+
+*   [Customer Support](https://help.hubspot.com/)
+*   [Join a Local User Group](https://www.hubspot.com/hubspot-user-groups)
+
+Partners
+--------
+
+*   [All Partner Programs](https://www.hubspot.com/partners)
+*   [Solutions Partner Program](https://www.hubspot.com/partners/solutions)
+*   [App Partner Program](https://www.hubspot.com/partners/app)
+*   [HubSpot for Startups](https://www.hubspot.com/startups/partners)
+*   [Affiliate Program](https://www.hubspot.com/partners/affiliates)
+
+*   [Facebook](https://www.facebook.com/hubspot)
+*   [Instagram](https://www.instagram.com/hubspot/)
+*   [Youtube](https://youtube.com/user/HubSpot)
+*   [Twitter](https://x.com/HubSpot)
+*   [Linkedin](https://www.linkedin.com/company/hubspot)
+*   [Medium](https://medium.com/@HubSpot)
+*   [Tiktok](https://www.tiktok.com/@hubspot)
+
+ [![Image 61: Download on the App Store](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/app%20store%20high%20res.png?width=136&height=45&name=app%20store%20high%20res.png)](https://apps.apple.com/us/app/hubspot/id1107711722)[![Image 62: Get it on Google Play](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/google%20play%20high%20res.png?width=136&height=45&name=google%20play%20high%20res.png)](https://play.google.com/store/apps/details?id=com.hubspot.android&hl=en_US)
+
+[![Image 63: HubSpot](https://www.hubspot.com/hubfs/WBZ-1165%20Global%20Nav%20Redesign/Wordmark-White.svg)](https://www.hubspot.com/)Copyright © 2024 HubSpot, Inc.
+
+*   [Legal Stuff](https://legal.hubspot.com/legal-stuff)
+*   [Privacy Policy](https://legal.hubspot.com/privacy-policy)
+*   [Security](https://legal.hubspot.com/security)
+*   [Website Accessibility](https://legal.hubspot.com/website-accessibility)
+*
+  ```
+
+Source URL: https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1
+  ```
+  Assist Customers Faster With Help Desk Software | HubSpot
+===============
+
+![Image 1](https://www.hubspot.com/hubfs/assets/hs-components/v3/icons/icons.svg) 
+
+[Skip to content](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1#global-nav-main-content)
+
+*   English Select a language
+    
+    *   [日本語](https://www.hubspot.jp/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Deutsch](https://www.hubspot.de/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [English](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Español](https://www.hubspot.es/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Português](https://br.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Français](https://www.hubspot.fr/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   High Contrast
+*   [Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-support)
+    
+*   [Contact Sales](https://offers.hubspot.com/contact-sales?hubs_signup-url=www.hubspot.com/products/service/help-desk&hubs_signup-cta=nav-utility-contactsales&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-contactsales)
+    
+
+*    Close Search
+*   [Log in](https://app.hubspot.com/login?hubs_signup-url=www.hubspot.com/products/service/help-desk&hubs_signup-cta=nav-utility-login&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-login)
+    
+*   About About
+    
+    *   [About Us](https://www.hubspot.com/our-story?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-about)
+    *   [Careers](https://www.hubspot.com/careers?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-careers)
+    *   [Contact Us](https://www.hubspot.com/company/contact?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-contact)
+    *   [Investor Relations](https://ir.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-investors)
+    *   [Management Team](https://www.hubspot.com/company/management?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-management)
+
+Back [![Image 2](blob:https://www.hubspot.com/78d8411cbf039d1922395d4a7fdf5535) ![Image 3](blob:https://www.hubspot.com/a4fabb5cdffcc7955c8de2cb57f9d8f3)](https://www.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=global-nav-logo-wrapper)
+
+Menu
+
+*    Close Search
+
+*   Products Products
+    
+    *   The HubSpot Customer Platform
+        -----------------------------
+        
+        All of HubSpot's marketing, sales, and customer service software on one AI-powered platform.
+        
+        [Free HubSpot CRM](https://www.hubspot.com/products/crm?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-freecrm)[Overview of all products](https://www.hubspot.com/products/get-started?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-platform)
+        
+    
+    *   ### Marketing Hub
+        
+        Marketing automation software
+        
+        [Free and premium plans](https://www.hubspot.com/products/marketing?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-marketing)
+        
+    *   ### Sales Hub
+        
+        Sales software
+        
+        [Free and premium plans](https://www.hubspot.com/products/sales?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-sales)
+        
+    *   ### Service Hub
+        
+        Customer service software
+        
+        [Free and premium plans](https://www.hubspot.com/products/service?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-service)
+        
+    *   ### Content Hub
+        
+        Content marketing software
+        
+        [Free and premium plans](https://www.hubspot.com/products/content?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-content)
+        
+    *   ### Operations Hub
+        
+        Operations software
+        
+        [Free and premium plans](https://www.hubspot.com/products/operations?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-operations)
+        
+    *   ### Commerce Hub
+        
+        B2B commerce software
+        
+        [Free and premium plans](https://www.hubspot.com/products/commerce?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-commerce)
+        
+    *   ### Small Business Bundle
+        
+        The Starter edition of each product, built for startups and small businesses
+        
+        [Learn more](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-starter)
+        
+    
+    *   ### HubSpot AI
+        
+        Powerful AI tools throughout the platform
+        
+        [Learn more](https://www.hubspot.com/products/artificial-intelligence?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-ai)
+        
+    *   ### App Marketplace
+        
+        Connect your favorite apps to HubSpot
+        
+        [See all integrations](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-marketplace)
+        
+    
+*   Solutions Solutions
+    
+    *   By Use Case
+    *   By Team Size
+    *   Why HubSpot?
+    
+    *   Marketing
+        ---------
+        
+        *   ### [Generate leads](https://www.hubspot.com/use-case/drive-revenue-high-quality-leads?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-leads)
+            
+            Convert visitors into contacts for your database.
+            
+        *   ### [Automate marketing](https://www.hubspot.com/use-case/maximize-efficiency-ai-automation?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-automate)
+            
+            Create campaigns with automation and AI.
+            
+        
+    *   Sales
+        -----
+        
+        *   ### [Build pipeline](https://www.hubspot.com/use-case/reach-engage-sales-prospects?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-pipeline)
+            
+            Generate a pipeline of high-quality prospects.
+            
+        *   ### [Close deals](https://www.hubspot.com/use-case/close-more-deals?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-deals)
+            
+            Streamline your process and close more deals faster.
+            
+        
+    *   Customer Service
+        ----------------
+        
+        *   ### [Scale support](https://www.hubspot.com/use-case/scale-customer-service-support?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-support)
+            
+            Support customers at scale with AI and a help desk.
+            
+        *   ### [Drive retention](https://www.hubspot.com/use-case/drive-customer-satisfaction?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-retention)
+            
+            Identify opportunities to improve customer health.
+            
+        
+    
+    *   Content
+        -------
+        
+        *   ### [Create content](https://www.hubspot.com/use-case/create-content-for-customer-journey?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-create)
+            
+            Easily craft content for your audience, with help from AI.
+            
+        *   ### [Manage content](https://www.hubspot.com/use-case/manage-content?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-manage)
+            
+            Organize, update, and distribute content in one place.
+            
+        
+    *   Startups & Small Businesses
+        ---------------------------
+        
+        *   ### [Find and reach customers](https://www.hubspot.com/use-case/find-and-reach-customers?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-find)
+            
+            Generate leads through content, AI, and automation.
+            
+        *   ### [Grow sales and get paid](https://www.hubspot.com/use-case/grow-sales-and-get-paid-faster?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-grow)
+            
+            Prospect smarter and automate payments.
+            
+        *   ### [Organize customer data](https://www.hubspot.com/use-case/understand-and-organize-customer-data?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-data)
+            
+            Unify your team and data on one platform.
+            
+        
+    
+    By Team Size
+    ------------
+    
+    *   ![Image 4](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+        
+        ### HubSpot for Startups & Small Businesses
+        
+        HubSpot’s all-in-one Starter Customer Platform helps your growing startup or small business find and win customers from day one.
+        
+        [Learn more](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-smallbiz)
+        
+    *   ![Image 5](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+        
+        ### HubSpot for Enterprises
+        
+        With HubSpot’s integrated Enterprise Customer Platform, you don’t have to sacrifice power for ease of use.
+        
+        [Learn more](https://www.hubspot.com/products/crm/enterprise?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-enterprise)
+        
+    
+    Why HubSpot?
+    ------------
+    
+    *   ![Image 6](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+        
+        ### Why Choose HubSpot?
+        
+        After just one year, HubSpot customers acquire 129% more leads, close 36% more deals, and see a 37% improvement in ticket closure rates.
+        
+        [Learn more](https://www.hubspot.com/why-choose-hubspot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-wch)
+        
+    *   ![Image 7](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+        
+        ### Case Studies
+        
+        Explore examples of companies like yours from all over the globe that use HubSpot to unite their teams, empower their businesses, and grow better.
+        
+        [See all case studies](https://www.hubspot.com/case-studies?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-casestudies)
+        
+    *   ![Image 8](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+        
+        ### Spotlight: Product Updates
+        
+        Learn about HubSpot’s featured product releases and announcements in this semi-annual product showcase.
+        
+        [Explore product updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-spotlight)
+        
+    
+*   [Pricing](https://www.hubspot.com/pricing/marketing?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-pricing)
+    
+*   Resources Resources
+    
+    *   Featured Links
+        --------------
+        
+        *   [Spotlight: Product Updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-spotlight)
+        *   [What's New in HubSpot](https://www.hubspot.com/new?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-new)
+        *   [Annual Diversity Report](https://www.hubspot.com/diversity/report?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-diversity)
+        
+    *   Community & Events
+        ------------------
+        
+        *   [INBOUND Event](https://www.inbound.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-inbound)
+        *   [HubSpot Community](https://community.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-community)
+        *   [HubSpot User Groups](https://www.hubspot.com/hubspot-user-groups?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-usergroups)
+        
+    *   Partners
+        --------
+        
+        *   [Solutions Partner Program](https://www.hubspot.com/partners/solutions?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-solutions)
+        *   [App Partner Program](https://www.hubspot.com/partners/app?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-app)
+        *   [Affiliate Partner Program](https://www.hubspot.com/partners/affiliates?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-affiliate)
+        *   [Education Partner Program](https://academy.hubspot.com/education-partner-program?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-education)
+        *   [Startup Partner Program](https://www.hubspot.com/startups/partners?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-startup)
+        
+    *   Education
+        ---------
+        
+        *   [HubSpot Blogs](https://blog.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-blogs)
+        *   [Free Courses & Certifications](https://academy.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-academy)
+        *   [Ebooks, Guides & More](https://www.hubspot.com/resources?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-resources)
+        *   [What Is Inbound Marketing?](https://www.hubspot.com/inbound-marketing?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-inboundmarketing)
+        *   [HubSpot Knowledge Base](https://knowledge.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-knowledge)
+        
+    *   Tools
+        -----
+        
+        *   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/templates?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-templates)
+        *   [Developer Tools](https://developers.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-devtools)
+        
+    *   Services
+        --------
+        
+        *   [Onboarding](https://www.hubspot.com/services/onboarding?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-onboarding)
+        *   [Customer Training](https://www.hubspot.com/services/professional/classroom-training?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-training)
+        *   [Migration](https://www.hubspot.com/services/professional/migrations?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-migration)
+        *   [Strategic Consulting](https://www.hubspot.com/services/professional/inbound-consulting?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-consulting)
+        *   [Technical Consulting](https://www.hubspot.com/services/professional/technical-consulting?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-techconsulting)
+        *   [Hire a Solutions Partner](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-hirepartner)
+        
+    
+
+*   Products Products
+    *   The HubSpot Customer Platform
+        -----------------------------
+        
+        All of HubSpot's marketing, sales, and customer service software on one AI-powered platform.
+        
+    
+    *   [### Free HubSpot CRM](https://www.hubspot.com/products/crm?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-freecrm)
+    *   [### Overview of all products](https://www.hubspot.com/products/get-started?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-platform)
+    
+    *   [![Image 9](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/marketing-hub-icon.svg) ### Marketing Hub Marketing automation software](https://www.hubspot.com/products/marketing?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-marketing)
+    *   [![Image 10](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/sales-hub-icon.svg) ### Sales Hub Sales software](https://www.hubspot.com/products/sales?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-sales)
+    *   [![Image 11](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/service-hub-icon.svg) ### Service Hub Customer service software](https://www.hubspot.com/products/service?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-service)
+    *   [![Image 12](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/content-hub-icon.svg) ### Content Hub Content marketing software](https://www.hubspot.com/products/content?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-content)
+    *   [![Image 13](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/operations-hub-icon.svg) ### Operations Hub Operations software](https://www.hubspot.com/products/operations?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-operations)
+    *   [![Image 14](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/commerce-hub-icon.svg) ### Commerce Hub B2B commerce software](https://www.hubspot.com/products/commerce?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-commerce)
+    *   [![Image 15](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/hubspot-sprocket.svg) ### Small Business Bundle The Starter edition of each product, built for startups and small businesses](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-starter)
+    
+    *   [### HubSpot AI Powerful AI tools throughout the platform](https://www.hubspot.com/products/artificial-intelligence?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-ai)
+    *   [### App Marketplace Connect your favorite apps to HubSpot](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-software-marketplace)
+*   Solutions Solutions
+    *   By Use Case
+        
+        *   Marketing
+            ---------
+            
+            *   [Generate leads](https://www.hubspot.com/use-case/drive-revenue-high-quality-leads?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-leads)
+            *   [Automate marketing](https://www.hubspot.com/use-case/maximize-efficiency-ai-automation?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-automate)
+        
+        *   Sales
+            -----
+            
+            *   [Build pipeline](https://www.hubspot.com/use-case/reach-engage-sales-prospects?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-pipeline)
+            *   [Close deals](https://www.hubspot.com/use-case/close-more-deals?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-deals)
+        
+        *   Customer Service
+            ----------------
+            
+            *   [Scale support](https://www.hubspot.com/use-case/scale-customer-service-support?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-support)
+            *   [Drive retention](https://www.hubspot.com/use-case/drive-customer-satisfaction?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-retention)
+        
+        *   Content
+            -------
+            
+            *   [Create content](https://www.hubspot.com/use-case/create-content-for-customer-journey?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-create)
+            *   [Manage content](https://www.hubspot.com/use-case/manage-content?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-manage)
+        
+        *   Startups & Small Businesses
+            ---------------------------
+            
+            *   [Find and reach customers](https://www.hubspot.com/use-case/find-and-reach-customers?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-find)
+            *   [Grow sales and get paid](https://www.hubspot.com/use-case/grow-sales-and-get-paid-faster?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-grow)
+            *   [Organize customer data](https://www.hubspot.com/use-case/understand-and-organize-customer-data?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-data)
+    *   By Team Size
+        
+        *   By Team Size
+            ------------
+            
+            ![Image 16](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/hubspot-for-small-business.png?width=345&height=150&name=hubspot-for-small-business.png)
+            
+            ### HubSpot for Startups & Small Businesses
+            
+            HubSpot’s all-in-one Starter Customer Platform helps your growing startup or small business find and win customers from day one.
+            
+            [Learn more](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-smallbiz)
+            
+            ![Image 17](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/hubspot-for-enterprise.png?width=344&height=150&name=hubspot-for-enterprise.png)
+            
+            ### HubSpot for Enterprises
+            
+            With HubSpot’s integrated Enterprise Customer Platform, you don’t have to sacrifice power for ease of use.
+            
+            [Learn more](https://www.hubspot.com/products/crm/enterprise?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-enterprise)
+            
+    *   Why HubSpot?
+        
+        *   Why HubSpot?
+            ------------
+            
+            ![Image 18](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/why-choose-hubspot.png?width=345&height=150&name=why-choose-hubspot.png)
+            
+            ### Why Choose HubSpot?
+            
+            After just one year, HubSpot customers acquire 129% more leads, close 36% more deals, and see a 37% improvement in ticket closure rates.
+            
+            [Learn more](https://www.hubspot.com/why-choose-hubspot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-wch)
+            
+            ![Image 19](https://www.hubspot.com/hs-fs/hubfs/case-studies-2.jpg?width=345&height=150&name=case-studies-2.jpg)
+            
+            ### Case Studies
+            
+            Explore examples of companies like yours from all over the globe that use HubSpot to unite their teams, empower their businesses, and grow better.
+            
+            [See all case studies](https://www.hubspot.com/case-studies?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-casestudies)
+            
+            ![Image 20](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/Spotlight.png?width=345&height=150&name=Spotlight.png)
+            
+            ### Spotlight: Product Updates
+            
+            Learn about HubSpot’s featured product releases and announcements in this semi-annual product showcase.
+            
+            [Explore product updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-solutions-spotlight)
+            
+[Pricing](https://www.hubspot.com/pricing/marketing?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-pricing)*   Resources Resources
+    *   Featured Links
+        --------------
+        
+        *   [Spotlight: Product Updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-spotlight)
+        *   [What's New in HubSpot](https://www.hubspot.com/new?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-new)
+        *   [Annual Diversity Report](https://www.hubspot.com/diversity/report?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-diversity)
+    
+    *   Community & Events
+        ------------------
+        
+        *   [INBOUND Event](https://www.inbound.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-inbound)
+        *   [HubSpot Community](https://community.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-community)
+        *   [HubSpot User Groups](https://www.hubspot.com/hubspot-user-groups?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-usergroups)
+    
+    *   Partners
+        --------
+        
+        *   [Solutions Partner Program](https://www.hubspot.com/partners/solutions?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-solutions)
+        *   [App Partner Program](https://www.hubspot.com/partners/app?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-app)
+        *   [Affiliate Partner Program](https://www.hubspot.com/partners/affiliates?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-affiliate)
+        *   [Education Partner Program](https://academy.hubspot.com/education-partner-program?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-education)
+        *   [Startup Partner Program](https://www.hubspot.com/startups/partners?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-startup)
+    
+    *   Education
+        ---------
+        
+        *   [HubSpot Blogs](https://blog.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-blogs)
+        *   [Free Courses & Certifications](https://academy.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-academy)
+        *   [Ebooks, Guides & More](https://www.hubspot.com/resources?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-resources)
+        *   [What Is Inbound Marketing?](https://www.hubspot.com/inbound-marketing?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-inboundmarketing)
+        *   [HubSpot Knowledge Base](https://knowledge.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-knowledge)
+    
+    *   Tools
+        -----
+        
+        *   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/templates?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-templates)
+        *   [Developer Tools](https://developers.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-devtools)
+    
+    *   Services
+        --------
+        
+        *   [Onboarding](https://www.hubspot.com/services/onboarding?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-onboarding)
+        *   [Customer Training](https://www.hubspot.com/services/professional/classroom-training?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-training)
+        *   [Migration](https://www.hubspot.com/services/professional/migrations?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-migration)
+        *   [Strategic Consulting](https://www.hubspot.com/services/professional/inbound-consulting?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-consulting)
+        *   [Technical Consulting](https://www.hubspot.com/services/professional/technical-consulting?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-techconsulting)
+        *   [Hire a Solutions Partner](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-resources-hirepartner)
+*   About About
+    *   [About Us](https://www.hubspot.com/our-story?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-about)
+    *   [Careers](https://www.hubspot.com/careers?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-careers)
+    *   [Contact Us](https://www.hubspot.com/company/contact?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-contact)
+    *   [Investor Relations](https://ir.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-investors)
+    *   [Management Team](https://www.hubspot.com/company/management?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-management)
+
+[Get started free Start using HubSpot's help desk software for free](https://app.hubspot.com/signup-hubspot/service/?hubs_signup-url=www.hubspot.com%2Fproducts%2Fservice%2Fhelp-desk&hubs_signup-cta=help-desk-nav&hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+
+[Log in](https://app.hubspot.com/login?hubs_signup-url=www.hubspot.com/products/service/help-desk&hubs_signup-cta=nav-utility-login&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-login)
+
+*   English Select a language
+    *   [日本語](https://www.hubspot.jp/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Deutsch](https://www.hubspot.de/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [English](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Español](https://www.hubspot.es/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Português](https://br.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+    *   [Français](https://www.hubspot.fr/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   High Contrast
+[Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-support) [Contact Sales](https://offers.hubspot.com/contact-sales?hubs_signup-url=www.hubspot.com/products/service/help-desk&hubs_signup-cta=nav-utility-contactsales&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=nav-utility-contactsales)
+
+*   [Service Hub](https://www.hubspot.com/products/service?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   Help Desk & Free Ticketing Software
+
+![Image 21: Simplified user interface in HubSpot showing the help desk interface with various views of customer conversations and tickets](https://knowledge.hubspot.com/hs-fs/hubfs/Help-Desk-EN@3x%20(1).webp?width=540&name=Help-Desk-EN@3x%20(1).webp)
+
+![Image 22: Simplified user interface in HubSpot showing the help desk interface with various views of customer conversations and tickets](https://knowledge.hubspot.com/hs-fs/hubfs/Help-Desk-EN@3x%20(1).webp?width=1030&name=Help-Desk-EN@3x%20(1).webp)
+
+Help Desk & Free Ticketing Software
+===================================
+
+Keep track of customer requests in one unified help desk that connects to your CRM database.
+
+[Get started free](https://app.hubspot.com/signup-hubspot/service/?hubs_signup-url=www.hubspot.com%2Fproducts%2Fservice%2Fhelp-desk&hubs_signup-cta=help-desk-hero&hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)No credit card required.
+
+*   Provide personalized, AI-powered support to your customers
+    
+*   Save time, reduce errors, and streamline service processes
+    
+*   Improve rep efficiency and time to resolution
+    
+
+1.  Scale customer support and satisfaction.
+    ----------------------------------------
+    
+    As your customer base grows, it becomes easier to let customer issues slip through the cracks. Emails get lost, spreadsheets become unmanageable, and customers suffer.
+    
+    Deliver personalized, AI-powered support on a unified source of truth with HubSpot’s help desk tools. Empower your reps and customers with AI, and scale your support team with ease. Leverage 360-degree insights to empower your support reps with context, and feed valuable information back to your marketing and sales teams.
+    
+     ![Image 23: HubSpot software showing sending an email from a contact record](https://www.hubspot.com/hubfs/SalesHub_Send-payment-through-email.png) Click to enlarge
+    
+    ![Image 24: HubSpot software showing sending an email from a contact record](https://www.hubspot.com/hubfs/SalesHub_Send-payment-through-email.png)
+    
+
+205,000+ customers in over 135 countries grow their businesses with HubSpot
+
+![Image 25: Reddit logo for HS website (new sizing)](https://www.hubspot.com/hubfs/Reddit%20logo%20for%20HS%20website%20(new%20sizing).svg)
+
+![Image 26: eventbrite logo for HS website (new sizing)](https://www.hubspot.com/hubfs/eventbrite%20logo%20for%20HS%20website%20(new%20sizing).svg)
+
+![Image 27: cms-hub-customer-wwf-logo-2](https://www.hubspot.com/hubfs/Imported%20sitepage%20images/cms-hub-customer-wwf-logo-2.png)
+
+![Image 28: DoorDash logo for HS website (new sizing)](https://www.hubspot.com/hubfs/DoorDash%20logo%20for%20HS%20website%20(new%20sizing).svg)
+
+![Image 29: The Motley Fool Logo for HS Website-1](https://www.hubspot.com/hubfs/The%20Motley%20Fool%20Logo%20for%20HS%20Website-1.png)
+
+1.  ### Create a help desk that's digital by design.
+    
+    Scaling your support team without scaling headcount can be a challenge. With HubSpot’s help desk, you’ll have a purpose-built workspace to empower your reps to deliver omni-channel support and increase customer satisfaction. With advanced SLAs and routing features, it’s easier than ever to manage your growing support team and exceed customer expectations. And because you're delivering support through HubSpot’s customer platform, your team will have access to the entire customer journey in a single view.
+    
+    ![Image 30: Simplified user interface in HubSpot showing customer tickets inside the help desk](https://knowledge.hubspot.com/hubfs/SalesHub_Conversations%20(2)%20(1).png)Click to enlarge
+    
+    ![Image 31: Simplified user interface in HubSpot showing customer tickets inside the help desk](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+    
+2.  ### Improve rep efficiency with HubSpot AI.
+    
+    Increase the effectiveness of your support team with AI already built into your help desk. With reply recommendations, and AI assistants at every click, your support team will close more tickets faster, all while increasing customer satisfaction. And with skills-based routing, your customers will get routed to the right support rep every time.
+    
+    ![Image 32: HubSpot UI shoing HubSpot's AI assistant](https://knowledge.hubspot.com/hubfs/AI%20Assistant%20(1).png)Click to enlarge
+    
+    ![Image 33: HubSpot UI shoing HubSpot's AI assistant](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+    
+3.  ### Provide more helpful, personalized support.
+    
+    Every post-sale interaction is a vital component of retention. But utilizing a support tool that is disconnected from your marketing and sales data only drives friction and scatters the insights you need to grow. Help desk brings the best of HubSpot’s Smart CRM and AI-first customer platform together. Do more with less, and provide more helpful, personalized support with unified customer insights built into every interaction.
+    
+    ![Image 34: HubSpot's help desk workspace showing a view of customer tickets assigned to a specific user](https://knowledge.hubspot.com/hubfs/ServiceHub_Shared-inbox%20(1).png)Click to enlarge
+    
+    ![Image 35: HubSpot's help desk workspace showing a view of customer tickets assigned to a specific user](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+    
+
+Have questions? Give us a call and we'll walk you through it.
+
+[+1 888-482-7768](tel:+18884827768?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+
+Streamline your service processes in one place
+----------------------------------------------
+
+Keep track of customer requests in one unified help desk and ticketing system.
+
+[Get started free](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com%2Fproducts%2Fservice%2Fhelp-desk&hubs_signup-cta=help-desk-bottom&hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+
+![Image 36](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/CSOL/module-assets/_cta_contentblock_headshots_headshot_2.png?width=340&name=_cta_contentblock_headshots_headshot_2.png)
+
+Related Resources
+-----------------
+
+If you’re interested in help desk software, these related resources may help.
+
+*   [![Image 37: Understanding the Help Desk Tool](https://www.hubspot.com/hs-fs/hubfs/assets/hubspot.com/web-team/WBZ/Feature%20Pages/Related%20Resources/asian-male-using-hubspot-free.png?width=350&name=asian-male-using-hubspot-free.png) Understanding the Help Desk Tool In this HubSpot Academy lesson, learn how to set up and create a frictionless customer experience using the help desk tool. Watch the lesson](https://academy.hubspot.com/lessons/setting-up-help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   [![Image 38: How to Get Started With Help Desk](https://www.hubspot.com/hs-fs/hubfs/assets/hubspot.com/web-team/WBZ/Feature%20Pages/Related%20Resources/woman-holding-circles-orange.png?width=350&name=woman-holding-circles-orange.png) How to Get Started With Help Desk Learn more about the powerful ways help desk can scale your customer service and create more efficiencies for your reps. Read the article](https://knowledge.hubspot.com/help-desk/manage-and-respond-to-customer-tickets-in-help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   [![Image 39: Keys to Help Desk Success](https://www.hubspot.com/hs-fs/hubfs/assets/hubspot.com/web-team/WBZ/Feature%20Pages/Related%20Resources/young-male-using-tablet.png?width=350&name=young-male-using-tablet.png) Keys to Help Desk Success Follow these 13 key steps for successful help desk management. Read the blog post](https://blog.hubspot.com/service/help-desk-management?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+
+Frequently Asked Questions
+--------------------------
+
+*   ### What is a help desk?
+    
+    A help desk is a centralized tool for managing incoming customer issues. Help desks let you organize and record ongoing customer issues and provide a reference point for your customer-facing teams. Help desk ticketing systems also let you track efficiency metrics to manage the performance of your customer-facing team—things like response time, ticket volume, first resolution time, and how many tickets are in which stage of resolution.  
+      
+    Many larger companies have multiple teams working in a single help desk. In this case, a help desk with built-in automation, folders, and escalation systems can be beneficial.  
+      
+    HubSpot’s help desk software offers all of this and more. Use automation to send your tickets directly to the best user on your team. Escalate effectively and efficiently so your customers never have to wait too long. Use HubSpot’s built-in knowledge base to document all of your existing knowledge, and make it easy for customers to find answers on their own.
+    
+*   ### How much do HubSpot’s help desk tools cost?
+    
+    HubSpot’s help desk tools are part of Service Hub, and you can get started with select functionality for free. If you're looking for more advanced features to help automate and scale your customer support operations, HubSpot also offers premium features with the Starter, Professional, and Enterprise editions of Service Hub. [See pricing details](https://www.hubspot.com/pricing/service/enterprise?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1).
+    
+*   ### How does AI integrate with help desk software?
+    
+    HubSpot’s Smart CRM enables you to seamlessly combine existing customer data and leverage AI to empower your customer service reps to resolve issues quicker and offer personalized service at scale.
+    
+
+*   ### What makes HubSpot’s help desk popular?
+    
+    Popular features of HubSpot’s help desk include:
+    
+    *   Ticket automation and routing
+    *   Customer support performance metrics and reporting
+    *   Triage and SLA levels to meet all your customer needs
+    *   AI customer service features like bots and ticket summarization
+    *   Built-in knowledge base to quickly create and reference documentation
+    *   Integrated feedback surveys to track customer sentiment and happiness
+    *   360-degree customer view, powered by HubSpot Smart CRM
+    *   Integrations with key tools like Jira and Slack
+    
+*   ### How much time does it take to implement a help desk?
+    
+    If you’re already using a help desk, implementation time may vary based on factors like data migration and the complexity or amount of data you have to move over. For companies that have never used a help desk, the implementation time is much shorter—the only thing you need to set up is access for your team and their specific role.
+    
+*   ### What is ticketing software?
+    
+    Ticketing software, also known as a ticketing system, is part of help desk software that helps businesses track and prioritize incoming service requests in a centralized place.
+    
+
+Popular Features in Service Hub
+-------------------------------
+
+Premium help desk features are available in [Service Hub](https://www.hubspot.com/products/service?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1). Explore additional Service Hub features below.
+
+*   [Free Help Desk & Ticketing Software Automate repetitive emails and other tasks. Reducing manual workload and freeing up more time for your team to spend helping customers.](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   [Knowledge Base Software Turn your most frequently asked support questions into a knowledge base of help articles so customers can help themselves.](https://www.hubspot.com/products/service/knowledge-base?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+*   [Customer Feedback Software Survey your customers to find out what they think about you, your service, and your customer experience.](https://www.hubspot.com/products/service/customer-feedback?hubs_content=www.hubspot.com%2Fproducts%2Fservice&hubs_content-cta=service-feature1)
+
+BACK
+
+Popular Features
+----------------
+
+*   [All Products and Features](https://www.hubspot.com/products?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=All%20Products%20and%20Features)
+*   [Free Meeting Scheduler App](https://www.hubspot.com/products/sales/schedule-meeting?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Meeting%20Scheduler%20App)
+*   [HubSpot AI Tools](https://www.hubspot.com/products/artificial-intelligence?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=HubSpot%20AI%20Tools)
+*   [Email Tracking Software](https://www.hubspot.com/products/sales/email-tracking?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Email%20Tracking%20Software)
+*   [AI Content Writer](https://www.hubspot.com/products/cms/ai-content-writer?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=AI%20Content%20Writer)
+*   [AI Website Generator](https://www.hubspot.com/products/cms/ai-website-generator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=AI%20Website%20Generator)
+*   [Email Marketing Software](https://www.hubspot.com/products/marketing/email?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Email%20Marketing%20Software)
+*   [Lead Management Software](https://www.hubspot.com/products/crm/lead-management?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Lead%20Management%20Software)
+*   [AI Email Writer](https://www.hubspot.com/products/marketing/ai-email-writer?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=AI%20Email%20Writer)
+*   [Free Website Builder](https://www.hubspot.com/products/cms/drag-and-drop-website-builder?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Website%20Builder)
+*   [Sales Email Templates](https://www.hubspot.com/products/sales/email-templates-sales?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Sales%20Email%20Templates)
+*   [Free Online Form Builder](https://www.hubspot.com/products/marketing/forms?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Online%20Form%20Builder)
+*   [Free Chatbot Builder](https://www.hubspot.com/products/crm/chatbot-builder?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Chatbot%20Builder)
+*   [Free Live Chat Software](https://www.hubspot.com/products/crm/live-chat?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Live%20Chat%20Software)
+*   [Marketing Analytics](https://www.hubspot.com/products/marketing/analytics?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Marketing%20Analytics)
+*   [Free Landing Page Builder](https://www.hubspot.com/products/marketing/landing-pages?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Landing%20Page%20Builder)
+*   [Free Web Hosting](https://www.hubspot.com/products/cms/web-hosting?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Web%20Hosting)
+
+Free Tools
+----------
+
+*   [See All Free Business Tools](https://www.hubspot.com/free-business-tools?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=See%20All%20Free%20Business%20Tools)
+*   [Clip Creator](https://www.hubspot.com/clip-creator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Clip%20Creator)
+*   [Website Grader](https://website.grader.com/?__hstc=20629287.e4e046660731447bf82affe18aa75831.1482962870986.1487962165415.1487964870240.141&__hssc=20629287.1.1487964870240&__hsfp=3218882972&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Website%20Grader)
+*   [Make My Persona](https://www.hubspot.com/make-my-persona?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Make%20My%20Persona)
+*   [Email Signature Generator](https://www.hubspot.com/email-signature-generator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Email%20Signature%20Generator)
+*   [Brand Kit Generator](https://www.hubspot.com/brand-kit-generator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Brand%20Kit%20Generator)
+*   [Blog Ideas Generator](https://www.hubspot.com/blog-topic-generator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Blog%20Ideas%20Generator)
+*   [Invoice Template Generator](https://www.hubspot.com/invoice-template-generator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Invoice%20Template%20Generator)
+*   [Marketing Plan Generator](https://www.hubspot.com/marketing-plan-template-generator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Marketing%20Plan%20Generator)
+*   [Free Business Templates](https://www.hubspot.com/business-templates?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Free%20Business%20Templates)
+*   [Guide Creator](https://www.hubspot.com/guide-creator?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Guide%20Creator)
+*   [Software Comparisons Library](https://www.hubspot.com/comparisons?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Software%20Comparisons%20Library)
+*   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/website?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Template%20Marketplace)
+*   [Campaign Assistant](https://www.hubspot.com/campaign-assistant?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Campaign%20Assistant)
+
+Company
+-------
+
+*   [About Us](https://www.hubspot.com/our-story?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=About%20Us)
+*   [Careers](https://www.hubspot.com/careers?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Careers)
+*   [Management Team](https://www.hubspot.com/company/management?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Management%20Team)
+*   [Board of Directors](https://www.hubspot.com/company/board-of-directors?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Board%20of%20Directors)
+*   [Investor Relations](https://ir.hubspot.com/?_ga=2.262843276.12874469.1592422655-430007000.1592422655&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Investor%20Relations)
+*   [Blog](https://blog.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Blog)
+*   [Contact Us](https://www.hubspot.com/company/contact?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Contact%20Us)
+
+Customers
+---------
+
+*   [Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Customer%20Support)
+*   [Join a Local User Group](https://www.hubspot.com/hubspot-user-groups?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Join%20a%20Local%20User%20Group)
+
+Partners
+--------
+
+*   [All Partner Programs](https://www.hubspot.com/partners?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=All%20Partner%20Programs)
+*   [Solutions Partner Program](https://www.hubspot.com/partners/solutions?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Solutions%20Partner%20Program)
+*   [App Partner Program](https://www.hubspot.com/partners/app?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=App%20Partner%20Program)
+*   [HubSpot for Startups](https://www.hubspot.com/startups/partners?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=HubSpot%20for%20Startups)
+*   [Affiliate Program](https://www.hubspot.com/partners/affiliates?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Affiliate%20Program)
+
+*   [Facebook](https://www.facebook.com/hubspot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_facebook)
+*   [Instagram](https://www.instagram.com/hubspot/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_instagram)
+*   [Youtube](https://youtube.com/user/HubSpot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_youtube)
+*   [Twitter](https://x.com/HubSpot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_twitter)
+*   [Linkedin](https://www.linkedin.com/company/hubspot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_linkedin)
+*   [Medium](https://medium.com/@HubSpot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_medium)
+*   [Tiktok](https://www.tiktok.com/@hubspot?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hstc_medium)
+
+ [![Image 40: Download on the App Store](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/app%20store%20high%20res.png?width=136&height=45&name=app%20store%20high%20res.png)](https://apps.apple.com/us/app/hubspot/id1107711722?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hsg-footer__app)[![Image 41: Get it on Google Play](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/google%20play%20high%20res.png?width=136&height=45&name=google%20play%20high%20res.png)](https://play.google.com/store/apps/details?id=com.hubspot.android&hl=en_US&hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=hsg-footer__app)
+
+[![Image 42: HubSpot](https://www.hubspot.com/hubfs/WBZ-1165%20Global%20Nav%20Redesign/Wordmark-White.svg)](https://www.hubspot.com/?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=null)Copyright © 2024 HubSpot, Inc.
+
+*   [Legal Stuff](https://legal.hubspot.com/legal-stuff?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Legal%20Stuff)
+*   [Privacy Policy](https://legal.hubspot.com/privacy-policy?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Privacy%20Policy)
+*   [Security](https://legal.hubspot.com/security?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Security)
+*   [Website Accessibility](https://legal.hubspot.com/website-accessibility?hubs_content=www.hubspot.com/products/service/help-desk&hubs_content-cta=Website%20Accessibility)
+*   [](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+  ```
+
+Source URL: https://www.hubspot.com/products/service
+  ```
+  Customer Service Software for Small to Enterprise Businesses
+===============
+
+[Skip to content](https://www.hubspot.com/products/service#global-nav-main-content)
+
+*   English Select a language
+    
+    *   [日本語](https://www.hubspot.com/products/service#)
+    *   [Deutsch](https://www.hubspot.com/products/service#)
+    *   [English](https://www.hubspot.com/products/service#)
+    *   [Español](https://www.hubspot.com/products/service#)
+    *   [Português](https://www.hubspot.com/products/service#)
+    *   [Français](https://www.hubspot.com/products/service#)
+*   High Contrast
+*   [Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-support)
+    
+*   [Contact Sales](https://offers.hubspot.com/contact-sales?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=nav-utility-contactsales&hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-contactsales)
+    
+
+*    Close Search
+*   [Log in](https://app.hubspot.com/login?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=nav-utility-login&hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-login)
+    
+*   About About
+    
+    *   [About Us](https://www.hubspot.com/our-story?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-about)
+    *   [Careers](https://www.hubspot.com/careers?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-careers)
+    *   [Contact Us](https://www.hubspot.com/company/contact?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-contact)
+    *   [Investor Relations](https://ir.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-investors)
+    *   [Management Team](https://www.hubspot.com/company/management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-management)
+
+Back [![Image 1](blob:https://www.hubspot.com/78d8411cbf039d1922395d4a7fdf5535) ![Image 2](blob:https://www.hubspot.com/a4fabb5cdffcc7955c8de2cb57f9d8f3)](https://www.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=global-nav-logo-wrapper)
+
+Menu
+
+*    Close Search
+
+*   Products Products
+    
+    *   The HubSpot Customer Platform
+        -----------------------------
+        
+        All of HubSpot's marketing, sales, and customer service software on one AI-powered platform.
+        
+        [Free HubSpot CRM](https://www.hubspot.com/products/crm?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-freecrm)[Overview of all products](https://www.hubspot.com/products/get-started?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-platform)
+        
+    
+    *   ### Marketing Hub
+        
+        Marketing automation software
+        
+        [Free and premium plans](https://www.hubspot.com/products/marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-marketing)
+        
+    *   ### Sales Hub
+        
+        Sales software
+        
+        [Free and premium plans](https://www.hubspot.com/products/sales?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-sales)
+        
+    *   ### Service Hub
+        
+        Customer service software
+        
+        [Free and premium plans](https://www.hubspot.com/products/service)
+        
+    *   ### Content Hub
+        
+        Content marketing software
+        
+        [Free and premium plans](https://www.hubspot.com/products/content?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-content)
+        
+    *   ### Operations Hub
+        
+        Operations software
+        
+        [Free and premium plans](https://www.hubspot.com/products/operations?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-operations)
+        
+    *   ### Commerce Hub
+        
+        B2B commerce software
+        
+        [Free and premium plans](https://www.hubspot.com/products/commerce?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-commerce)
+        
+    *   ### Small Business Bundle
+        
+        The Starter edition of each product, built for startups and small businesses
+        
+        [Learn more](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-starter)
+        
+    
+    *   ### HubSpot AI
+        
+        Powerful AI tools throughout the platform
+        
+        [Learn more](https://www.hubspot.com/products/artificial-intelligence?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-ai)
+        
+    *   ### App Marketplace
+        
+        Connect your favorite apps to HubSpot
+        
+        [See all integrations](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-marketplace)
+        
+    
+*   Solutions Solutions
+    
+    *   By Use Case
+    *   By Team Size
+    *   Why HubSpot?
+    
+    *   Marketing
+        ---------
+        
+        *   ### [Generate leads](https://www.hubspot.com/use-case/drive-revenue-high-quality-leads?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-leads)
+            
+            Convert visitors into contacts for your database.
+            
+        *   ### [Automate marketing](https://www.hubspot.com/use-case/maximize-efficiency-ai-automation?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-automate)
+            
+            Create campaigns with automation and AI.
+            
+        
+    *   Sales
+        -----
+        
+        *   ### [Build pipeline](https://www.hubspot.com/use-case/reach-engage-sales-prospects?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-pipeline)
+            
+            Generate a pipeline of high-quality prospects.
+            
+        *   ### [Close deals](https://www.hubspot.com/use-case/close-more-deals?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-deals)
+            
+            Streamline your process and close more deals faster.
+            
+        
+    *   Customer Service
+        ----------------
+        
+        *   ### [Scale support](https://www.hubspot.com/use-case/scale-customer-service-support?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-support)
+            
+            Support customers at scale with AI and a help desk.
+            
+        *   ### [Drive retention](https://www.hubspot.com/use-case/drive-customer-satisfaction?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-retention)
+            
+            Identify opportunities to improve customer health.
+            
+        
+    
+    *   Content
+        -------
+        
+        *   ### [Create content](https://www.hubspot.com/use-case/create-content-for-customer-journey?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-create)
+            
+            Easily craft content for your audience, with help from AI.
+            
+        *   ### [Manage content](https://www.hubspot.com/use-case/manage-content?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-manage)
+            
+            Organize, update, and distribute content in one place.
+            
+        
+    *   Startups & Small Businesses
+        ---------------------------
+        
+        *   ### [Find and reach customers](https://www.hubspot.com/use-case/find-and-reach-customers?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-find)
+            
+            Generate leads through content, AI, and automation.
+            
+        *   ### [Grow sales and get paid](https://www.hubspot.com/use-case/grow-sales-and-get-paid-faster?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-grow)
+            
+            Prospect smarter and automate payments.
+            
+        *   ### [Organize customer data](https://www.hubspot.com/use-case/understand-and-organize-customer-data?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-data)
+            
+            Unify your team and data on one platform.
+            
+        
+    
+    By Team Size
+    ------------
+    
+    *   ![Image 3](https://www.hubspot.com/products/service)
+        
+        ### HubSpot for Startups & Small Businesses
+        
+        HubSpot’s all-in-one Starter Customer Platform helps your growing startup or small business find and win customers from day one.
+        
+        [Learn more](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-smallbiz)
+        
+    *   ![Image 4](https://www.hubspot.com/products/service)
+        
+        ### HubSpot for Enterprises
+        
+        With HubSpot’s integrated Enterprise Customer Platform, you don’t have to sacrifice power for ease of use.
+        
+        [Learn more](https://www.hubspot.com/products/crm/enterprise?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-enterprise)
+        
+    
+    Why HubSpot?
+    ------------
+    
+    *   ![Image 5](https://www.hubspot.com/products/service)
+        
+        ### Why Choose HubSpot?
+        
+        After just one year, HubSpot customers acquire 129% more leads, close 36% more deals, and see a 37% improvement in ticket closure rates.
+        
+        [Learn more](https://www.hubspot.com/why-choose-hubspot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-wch)
+        
+    *   ![Image 6](https://www.hubspot.com/products/service)
+        
+        ### Case Studies
+        
+        Explore examples of companies like yours from all over the globe that use HubSpot to unite their teams, empower their businesses, and grow better.
+        
+        [See all case studies](https://www.hubspot.com/case-studies?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-casestudies)
+        
+    *   ![Image 7](https://www.hubspot.com/products/service)
+        
+        ### Spotlight: Product Updates
+        
+        Learn about HubSpot’s featured product releases and announcements in this semi-annual product showcase.
+        
+        [Explore product updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-spotlight)
+        
+    
+*   [Pricing](https://www.hubspot.com/pricing/marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-pricing)
+    
+*   Resources Resources
+    
+    *   Featured Links
+        --------------
+        
+        *   [Spotlight: Product Updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-spotlight)
+        *   [What's New in HubSpot](https://www.hubspot.com/new?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-new)
+        *   [Annual Diversity Report](https://www.hubspot.com/diversity/report?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-diversity)
+        
+    *   Community & Events
+        ------------------
+        
+        *   [INBOUND Event](https://www.inbound.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-inbound)
+        *   [HubSpot Community](https://community.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-community)
+        *   [HubSpot User Groups](https://www.hubspot.com/hubspot-user-groups?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-usergroups)
+        
+    *   Partners
+        --------
+        
+        *   [Solutions Partner Program](https://www.hubspot.com/partners/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-solutions)
+        *   [App Partner Program](https://www.hubspot.com/partners/app?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-app)
+        *   [Affiliate Partner Program](https://www.hubspot.com/partners/affiliates?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-affiliate)
+        *   [Education Partner Program](https://academy.hubspot.com/education-partner-program?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-education)
+        *   [Startup Partner Program](https://www.hubspot.com/startups/partners?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-startup)
+        
+    *   Education
+        ---------
+        
+        *   [HubSpot Blogs](https://blog.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-blogs)
+        *   [Free Courses & Certifications](https://academy.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-academy)
+        *   [Ebooks, Guides & More](https://www.hubspot.com/resources?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-resources)
+        *   [What Is Inbound Marketing?](https://www.hubspot.com/inbound-marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-inboundmarketing)
+        *   [HubSpot Knowledge Base](https://knowledge.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-knowledge)
+        
+    *   Tools
+        -----
+        
+        *   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/templates?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-templates)
+        *   [Developer Tools](https://developers.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-devtools)
+        
+    *   Services
+        --------
+        
+        *   [Onboarding](https://www.hubspot.com/services/onboarding?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-onboarding)
+        *   [Customer Training](https://www.hubspot.com/services/professional/classroom-training?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-training)
+        *   [Migration](https://www.hubspot.com/services/professional/migrations?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-migration)
+        *   [Strategic Consulting](https://www.hubspot.com/services/professional/inbound-consulting?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-consulting)
+        *   [Technical Consulting](https://www.hubspot.com/services/professional/technical-consulting?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-techconsulting)
+        *   [Hire a Solutions Partner](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-hirepartner)
+        
+    
+
+*   Products Products
+    *   The HubSpot Customer Platform
+        -----------------------------
+        
+        All of HubSpot's marketing, sales, and customer service software on one AI-powered platform.
+        
+    
+    *   [### Free HubSpot CRM](https://www.hubspot.com/products/crm?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-freecrm)
+    *   [### Overview of all products](https://www.hubspot.com/products/get-started?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-platform)
+    
+    *   [![Image 8](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/marketing-hub-icon.svg) ### Marketing Hub Marketing automation software](https://www.hubspot.com/products/marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-marketing)
+    *   [![Image 9](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/sales-hub-icon.svg) ### Sales Hub Sales software](https://www.hubspot.com/products/sales?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-sales)
+    *   [![Image 10](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/service-hub-icon.svg) ### Service Hub Customer service software](https://www.hubspot.com/products/service)
+    *   [![Image 11](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/content-hub-icon.svg) ### Content Hub Content marketing software](https://www.hubspot.com/products/content?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-content)
+    *   [![Image 12](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/operations-hub-icon.svg) ### Operations Hub Operations software](https://www.hubspot.com/products/operations?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-operations)
+    *   [![Image 13](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/commerce-hub-icon.svg) ### Commerce Hub B2B commerce software](https://www.hubspot.com/products/commerce?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-commerce)
+    *   [![Image 14](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/global-navigation/hubspot-sprocket.svg) ### Small Business Bundle The Starter edition of each product, built for startups and small businesses](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-starter)
+    
+    *   [### HubSpot AI Powerful AI tools throughout the platform](https://www.hubspot.com/products/artificial-intelligence?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-ai)
+    *   [### App Marketplace Connect your favorite apps to HubSpot](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-software-marketplace)
+*   Solutions Solutions
+    *   By Use Case
+        
+        *   Marketing
+            ---------
+            
+            *   [Generate leads](https://www.hubspot.com/use-case/drive-revenue-high-quality-leads?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-leads)
+            *   [Automate marketing](https://www.hubspot.com/use-case/maximize-efficiency-ai-automation?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-automate)
+        
+        *   Sales
+            -----
+            
+            *   [Build pipeline](https://www.hubspot.com/use-case/reach-engage-sales-prospects?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-pipeline)
+            *   [Close deals](https://www.hubspot.com/use-case/close-more-deals?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-deals)
+        
+        *   Customer Service
+            ----------------
+            
+            *   [Scale support](https://www.hubspot.com/use-case/scale-customer-service-support?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-support)
+            *   [Drive retention](https://www.hubspot.com/use-case/drive-customer-satisfaction?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-retention)
+        
+        *   Content
+            -------
+            
+            *   [Create content](https://www.hubspot.com/use-case/create-content-for-customer-journey?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-create)
+            *   [Manage content](https://www.hubspot.com/use-case/manage-content?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-manage)
+        
+        *   Startups & Small Businesses
+            ---------------------------
+            
+            *   [Find and reach customers](https://www.hubspot.com/use-case/find-and-reach-customers?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-find)
+            *   [Grow sales and get paid](https://www.hubspot.com/use-case/grow-sales-and-get-paid-faster?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-grow)
+            *   [Organize customer data](https://www.hubspot.com/use-case/understand-and-organize-customer-data?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-data)
+    *   By Team Size
+        
+        *   By Team Size
+            ------------
+            
+            ![Image 15](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/hubspot-for-small-business.png?width=345&height=150&name=hubspot-for-small-business.png)
+            
+            ### HubSpot for Startups & Small Businesses
+            
+            HubSpot’s all-in-one Starter Customer Platform helps your growing startup or small business find and win customers from day one.
+            
+            [Learn more](https://www.hubspot.com/products/crm/starter?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-smallbiz)
+            
+            ![Image 16](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/hubspot-for-enterprise.png?width=344&height=150&name=hubspot-for-enterprise.png)
+            
+            ### HubSpot for Enterprises
+            
+            With HubSpot’s integrated Enterprise Customer Platform, you don’t have to sacrifice power for ease of use.
+            
+            [Learn more](https://www.hubspot.com/products/crm/enterprise?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-enterprise)
+            
+    *   Why HubSpot?
+        
+        *   Why HubSpot?
+            ------------
+            
+            ![Image 17](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/why-choose-hubspot.png?width=345&height=150&name=why-choose-hubspot.png)
+            
+            ### Why Choose HubSpot?
+            
+            After just one year, HubSpot customers acquire 129% more leads, close 36% more deals, and see a 37% improvement in ticket closure rates.
+            
+            [Learn more](https://www.hubspot.com/why-choose-hubspot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-wch)
+            
+            ![Image 18](https://www.hubspot.com/hs-fs/hubfs/case-studies-2.jpg?width=345&height=150&name=case-studies-2.jpg)
+            
+            ### Case Studies
+            
+            Explore examples of companies like yours from all over the globe that use HubSpot to unite their teams, empower their businesses, and grow better.
+            
+            [See all case studies](https://www.hubspot.com/case-studies?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-casestudies)
+            
+            ![Image 19](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/global-navigation/Spotlight.png?width=345&height=150&name=Spotlight.png)
+            
+            ### Spotlight: Product Updates
+            
+            Learn about HubSpot’s featured product releases and announcements in this semi-annual product showcase.
+            
+            [Explore product updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-solutions-spotlight)
+            
+[Pricing](https://www.hubspot.com/pricing/marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-pricing)*   Resources Resources
+    *   Featured Links
+        --------------
+        
+        *   [Spotlight: Product Updates](https://www.hubspot.com/spotlight?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-spotlight)
+        *   [What's New in HubSpot](https://www.hubspot.com/new?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-new)
+        *   [Annual Diversity Report](https://www.hubspot.com/diversity/report?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-diversity)
+    
+    *   Community & Events
+        ------------------
+        
+        *   [INBOUND Event](https://www.inbound.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-inbound)
+        *   [HubSpot Community](https://community.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-community)
+        *   [HubSpot User Groups](https://www.hubspot.com/hubspot-user-groups?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-usergroups)
+    
+    *   Partners
+        --------
+        
+        *   [Solutions Partner Program](https://www.hubspot.com/partners/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-solutions)
+        *   [App Partner Program](https://www.hubspot.com/partners/app?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-app)
+        *   [Affiliate Partner Program](https://www.hubspot.com/partners/affiliates?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-affiliate)
+        *   [Education Partner Program](https://academy.hubspot.com/education-partner-program?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-education)
+        *   [Startup Partner Program](https://www.hubspot.com/startups/partners?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-startup)
+    
+    *   Education
+        ---------
+        
+        *   [HubSpot Blogs](https://blog.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-blogs)
+        *   [Free Courses & Certifications](https://academy.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-academy)
+        *   [Ebooks, Guides & More](https://www.hubspot.com/resources?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-resources)
+        *   [What Is Inbound Marketing?](https://www.hubspot.com/inbound-marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-inboundmarketing)
+        *   [HubSpot Knowledge Base](https://knowledge.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-knowledge)
+    
+    *   Tools
+        -----
+        
+        *   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/templates?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-templates)
+        *   [Developer Tools](https://developers.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-devtools)
+    
+    *   Services
+        --------
+        
+        *   [Onboarding](https://www.hubspot.com/services/onboarding?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-onboarding)
+        *   [Customer Training](https://www.hubspot.com/services/professional/classroom-training?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-training)
+        *   [Migration](https://www.hubspot.com/services/professional/migrations?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-migration)
+        *   [Strategic Consulting](https://www.hubspot.com/services/professional/inbound-consulting?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-consulting)
+        *   [Technical Consulting](https://www.hubspot.com/services/professional/technical-consulting?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-techconsulting)
+        *   [Hire a Solutions Partner](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-resources-hirepartner)
+*   About About
+    *   [About Us](https://www.hubspot.com/our-story?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-about)
+    *   [Careers](https://www.hubspot.com/careers?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-careers)
+    *   [Contact Us](https://www.hubspot.com/company/contact?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-contact)
+    *   [Investor Relations](https://ir.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-investors)
+    *   [Management Team](https://www.hubspot.com/company/management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-management)
+
+[Get a demo of HubSpot's customer service software](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-nav) [Get started free with HubSpot's free customer service tools](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-nav2)
+
+[Log in](https://app.hubspot.com/login?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=nav-utility-login&hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-login)
+
+*   English Select a language
+    *   [日本語](https://www.hubspot.com/products/service#)
+    *   [Deutsch](https://www.hubspot.com/products/service#)
+    *   [English](https://www.hubspot.com/products/service#)
+    *   [Español](https://www.hubspot.com/products/service#)
+    *   [Português](https://www.hubspot.com/products/service#)
+    *   [Français](https://www.hubspot.com/products/service#)
+*   High Contrast
+[Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-support) [Contact Sales](https://offers.hubspot.com/contact-sales?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=nav-utility-contactsales&hubs_content=www.hubspot.com/products/service&hubs_content-cta=nav-utility-contactsales)
+
+*   [Home](https://www.hubspot.com/)
+*   Service Hub
+
+![Image 20: Shows a simplified Service Hub user interface where a user has filtered the shared inbox to see customer support tickets assigned to them](https://www.hubspot.com/hs-fs/hubfs/service-hub-hero-en@3x.webp?width=425&height=438&name=service-hub-hero-en@3x.webp)
+
+**Service Hub®**
+
+Customer Service Software
+=========================
+
+[Get a demo of HubSpot's customer service software](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-hero) [Get started free with HubSpot's free customer service tools](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-hero2)
+
+*   ### Product Description+\_
+    
+    Customer service software powered by AI to scale support and drive retention.
+    
+*   ### Pricing Overview+\_
+    
+    Free and premium plans that grow with you. Editions starting at:
+    
+    \- Free: $0/month  
+    \- Starter: $20/month per seat  
+    \- Professional: $100/month per seat  
+    \- Enterprise: $150/month per seat
+    
+*   ### Features+\_
+    
+    Provide personalized, AI-powered support and self-service with tools like help desk and knowledge base. Increase CSAT and retention through proactive tools like customer health scores and product usage, which drive adoption. It’s all powered by HubSpot’s Smart CRM to deliver more complete insights out of the box and unify your customer-facing teams.
+    
+
+1,600+ app integrations to grow your business with HubSpot
+----------------------------------------------------------
+
+*   ![Image 21: JIRA logo](https://www.hubspot.com/hs-fs/hubfs/%5B%20Connect%20Team%20%5D/Integrators%20Logos/JIRA%20logo.png?width=976&height=241&name=JIRA%20logo.png)
+    
+*   ![Image 22: Segment and Twilio logo](https://www.hubspot.com/hs-fs/hubfs/App%20Partners/App%20Partners%20Logo/segment_twilio_logo_2024.png?width=240&height=65&name=segment_twilio_logo_2024.png)
+    
+*   ![Image 23: Aircall Logo](https://www.hubspot.com/hs-fs/hubfs/App%20Partners/App%20Partners%20Logo/aircall_logo_2024.png?width=240&height=68&name=aircall_logo_2024.png)
+    
+*   ![Image 24: Zuper logo](https://www.hubspot.com/hs-fs/hubfs/zuper.jpg?width=516&height=220&name=zuper.jpg)
+    
+*   ![Image 25: Pendo logo](https://www.hubspot.com/hs-fs/hubfs/6683-pendo.jpg?width=866&height=650&name=6683-pendo.jpg)
+    
+
+Previous Next
+
+![Image 26: HubSpot Video](https://api-na1.hubapi.com/video/v1/public/165206811780/poster?portalId=53)
+
+Deliver exceptional customer value and drive long-term retention.
+-----------------------------------------------------------------
+
+To increase customer retention, you need to focus on customer value. The best way to grow is through your customers, and they expect more than ever.
+
+Service Hub turns your customer experience from a cost center to a revenue driver. It’s AI-first, omni-channel, and connected to marketing and sales data on a unified customer platform. The result? Scalable customer support and proactive customer retention that fuels your business growth.
+
+Solutions to Your Biggest Customer Service Obstacles
+----------------------------------------------------
+
+![Image 27: Simplified user interface in HubSpot showing the help desk in Service Hub featuring various customer service conversations with customers](https://knowledge.hubspot.com/hs-fs/hubfs/SH-Help-Desk-EN@3x%20(1).webp?width=567&height=410&name=SH-Help-Desk-EN@3x%20(1).webp)
+
+Scale Support
+-------------
+
+Deliver support at scale with AI-powered self-service, an omni-channel help desk, and 24/7 availability.
+
+Service Hub helps you gather important insights about your customers, track their interactions, and deliver personalized service experiences that keep them coming back for more. Deepen your customer relationships and build a loyal customer base that will drive your business forward.
+
+[Learn more](https://www.hubspot.com/use-case/scale-customer-service-support?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Learn%20more)
+
+### Popular Features
+
+*   [### Help Desk & Ticketing](https://www.hubspot.com/products/service/help-desk?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature1)
+    
+    Empower your reps to manage and resolve tickets in an AI-first workspace. 360-degree intelligence is built right into every interaction.
+    
+*   [### Knowledge Base](https://www.hubspot.com/products/service/knowledge-base?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature2)
+    
+    Help customers help themselves, and reduce your number of support requests.
+    
+*   [### Omni-Channel Messaging](https://www.hubspot.com/products/service/omnichannel-customer-service?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature3)
+    
+    Meet your customers wherever they are by accessing multiple channels in the inbox and seamlessly switching between them.
+    
+*   [### Call Tracking](https://www.hubspot.com/products/sales/click-to-call?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature4)
+    
+    Receive inbound calls from your customers and track them in HubSpot.
+    
+*   [### AI-Powered Chat (Beta)](https://www.hubspot.com/products/crm/chatbot-builder?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature5)
+    
+    Automatically route users to the right people on your support team, or set up your own GPT-powered chatbot to help your customers instantly.
+    
+*   [### SLA Management](https://www.hubspot.com/products/service/sla-management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature6)
+    
+    Manage your support team at scale with advanced SLAs that increase rep efficiency and customer transparency.
+    
+
+See more features
+
+![Image 28: Simplified user interface in HubSpot displaying a line chart that shows customer health score trends over time](https://knowledge.hubspot.com/hs-fs/hubfs/SH-Health-Scores-EN@3x%20(1).webp?width=567&height=410&name=SH-Health-Scores-EN@3x%20(1).webp)
+
+Drive Retention
+---------------
+
+Using a patchwork of tools to manage customer success can cause a disjointed experience, resulting in lost revenue. Grow customers smarter with proactive tools that uncover new opportunities to improve customer health and expand your revenue.
+
+With Service Hub, you can identify opportunities to upsell or cross-sell, track customer satisfaction trends, and drive proactive customer retention.
+
+[Learn more](https://www.hubspot.com/use-case/drive-customer-satisfaction?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Learn%20more)
+
+### Popular Features
+
+*   [### Customer Success Workspace (Beta)](https://www.hubspot.com/products/service/customer-success-management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature7)
+    
+    Manage your book of business and drive proactive customer retention with customer health scores and product usage insights. 
+    
+*   [### Feedback Management](https://www.hubspot.com/products/service/customer-feedback?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature8)
+    
+    Create NPS, CSAT, CES, and custom surveys to gather critical customer feedback.
+    
+*   [### Conversation Intelligence](https://www.hubspot.com/products/conversation-intelligence?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature9)
+    
+    Capture details from calls and unlock coaching opportunities with AI-powered insights.
+    
+*   [### Customer Portal](https://www.hubspot.com/products/service/customer-portal?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature10)
+    
+    Empower customers to get the help they need through a secure customer portal that keeps track of their support tickets and helps reduce time to resolution.
+    
+
+![Image 29: Simplified user interface in HubSpot showing various customer service reports in the dashboard, like a percentage breakdown of various services and their ratings from customers](https://knowledge.hubspot.com/hs-fs/hubfs/Imported%20sitepage%20images/srh-multi-row-2-en@3x.webp?width=567&height=407&name=srh-multi-row-2-en@3x.webp)
+
+Leverage 360-Degree Insights
+----------------------------
+
+Service Hub is connected to marketing and sales, and powered by HubSpot’s Smart CRM to deliver more complete insights out-of-the-box and unify your customer-facing teams.
+
+Drive powerful collaboration and alignment between your customer experience, marketing, and sales teams, providing confidence, context, and credibility in your customer conversations.
+
+### Popular Features
+
+*   [### Fully Integrated Smart CRM](https://www.hubspot.com/products/crm?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature13)
+    
+    Automatically track customer details and interactions with your business in one source of truth that’s accessible to your whole team.
+    
+*   [### Service Analytics](https://www.hubspot.com/products/service/service-analytics?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature14)
+    
+    Uncover key insights with out-of-the-box reports that help you deliver efficient, authentic service.
+    
+*   [### Team Management](https://www.hubspot.com/products/user-permissions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-feature15)
+    
+    Keep your team organized and nimble by ensuring every rep can access the right tools.
+    
+*   [### Mobile Inbox](https://www.hubspot.com/products/service/mobile-inbox?hubs_content=www.hubspot.com/products/service&hubs_content-cta=wf-link-to-content-card-text-link)
+    
+    Stay productive on the go with the tools you need to collaborate and deliver agile support.
+    
+*   [### Automated Customer Service](https://www.hubspot.com/products/service/automated-customer-service?hubs_content=www.hubspot.com/products/service&hubs_content-cta=wf-link-to-content-card-text-link)
+    
+    Eliminate unnecessary manual processes so your team can focus on solving customer problems.
+    
+
+See more features
+
+Service Software That Grows With You
+------------------------------------
+
+Start with free tools and pay as you grow, or hit the ground running with one of our premium editions.
+
+### Free
+
+No credit card required
+
+$0/month
+
+Popular features
+
+*   Contact management
+*   Ticketing
+*   AI chatbot (Beta)
+*   Team email
+*   Tickets closed reports
+
+![Image 30](https://www.hubspot.com/hubfs/ServiceHub_Starter.svg)
+
+### Starter
+
+Starts at
+
+$20/month per seat
+
+Popular features
+
+*   Everything in Free
+*   Simple ticket automation
+*   Multiple ticket pipelines
+*   Multiple currencies
+*   Calling SDK
+
+![Image 31](https://www.hubspot.com/hubfs/ServiceHub_Pro.svg)
+
+### Professional
+
+Starts at
+
+$100/month per seat
+
+Popular features
+
+*   Everything in Starter
+*   Help desk workspace
+*   Knowledge base
+*   Customer success workspace (Beta)
+*   Customer portal
+
+![Image 32](https://www.hubspot.com/hubfs/ServiceHub_Ent.svg)
+
+### Enterprise
+
+Starts at
+
+$150/month per seat
+
+Popular features
+
+*   Everything in Professional
+*   Playbooks
+*   Advanced SLAs & routing
+*   Single sign-on
+*   Multiple knowledge bases
+
+[Get a demo of premium editions](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-middle) [Get started with free tools](https://app.hubspot.com/signup-hubspot/service/?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-middle2)
+
+For more detailed information on product packaging and the limits that apply, please see our [pricing page](https://www.hubspot.com/pricing/service/enterprise?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-pricing-disclaimer).  
+Price shown in USD and subject to applicable tax.
+
+It’s already easy to use. But we’re still here for you.
+-------------------------------------------------------
+
+We’re here to help your whole team stay ahead of the curve as you grow.
+
+*   ![Image 33](https://www.hubspot.com/hs-fs/hubfs/Book%20Bulb.png?width=160&height=161&name=Book%20Bulb.png)
+    
+    [### Free Courses & Certifications](https://academy.hubspot.com/courses?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-academy)
+    
+    Grow your skills with free HubSpot Academy courses and certifications.
+    
+*   ![Image 34](https://www.hubspot.com/hs-fs/hubfs/Three%20Blue%20People.png?width=160&height=161&name=Three%20Blue%20People.png)
+    
+    [### 24/7 Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-support)
+    
+    Get help by calling, chatting with, or emailing our customer support team.
+    
+*   ![Image 35](https://www.hubspot.com/hs-fs/hubfs/Integration3.png?width=160&height=161&name=Integration3.png)
+    
+    [### Apps](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-integrations)
+    
+    Integrate with over 1,600 third-party apps  
+    and tools.
+    
+
+Have a question for our sales team? Give us a call and we'll walk you through it.  
+[+1 888-482-7768](tel:+1888-482-7768)
+
+Service Hub customers experience:
+---------------------------------
+
+*   ![Image 36](https://knowledge.hubspot.com/hs-fs/hubfs/2023_ServiceHub_Customer_First3-1.png?width=128&height=128&name=2023_ServiceHub_Customer_First3-1.png)
+    
+    ### 13x
+    
+    faster resolution times
+    
+*   ![Image 37](https://knowledge.hubspot.com/hs-fs/hubfs/2023_ServiceHub_Help_Desk_Ticket1-3.png?width=128&height=129&name=2023_ServiceHub_Help_Desk_Ticket1-3.png)
+    
+    ### 42%
+    
+    more tickets closed per agent
+    
+*   ![Image 38](https://knowledge.hubspot.com/hs-fs/hubfs/2023_ServiceHub_Customer_Surveys2.png?width=128&height=128&name=2023_ServiceHub_Customer_Surveys2.png)
+    
+    ### 84%
+    
+    experience increased CSAT
+    
+
+See How Customers Use Service Hub to Grow Better
+------------------------------------------------
+
+*   Santa Cruz
+*   Stella
+*   HungryHungry
+*   Swapfiets
+
+![Image 39: Santa Cruz](https://www.hubspot.com/hubfs/santa-cruz-logo.svg)
+
+### Santa Cruz Bicycles Uses Service Hub to Scale Customer Happiness
+
+**The Challenge**  
+Santa Cruz Bicycles is known for putting the customer first, but accelerated growth challenged the company’s customer focus.
+
+**The Solution**  
+Service Hub enabled a more organized support system, resulting in fast customer response times and streamlined efficiency, without sacrificing quality service.
+
+“The customer experience is everything ... The way HubSpot approaches automation, it really is about enabling the human touch and not removing it.” - Christie Pearson, CRM Administrator, Santa Cruz Bicycles
+
+[Read the full case study](https://www.hubspot.com/case-studies/how-santa-cruz-bicycles-service-hub?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-case-santa)
+
+![Image 40: Stella](https://www.hubspot.com/hubfs/stella-logo-1.svg)
+
+### Stella Builds Stronger Customer Relationships Using Service Hub
+
+**The Challenge**  
+As Stella expanded, its founders realized they had outgrown their software setup.
+
+**The Solution**  
+Service Hub’s help desk software allows Stella’s team to prioritize tasks and organize every customer inquiry in a single, universally accessible dashboard, ensuring nothing slips through the cracks.
+
+“Our customer service reps can see all the information about the customer … We've been able to build stronger relationships with our customers,” - Aarne Töllinen, CCO and CMO, Stella
+
+[Read the full case study](https://www.hubspot.com/case-studies/stella?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-case-stella)
+
+![Image 41: ''](https://knowledge.hubspot.com/hs-fs/hubfs/HungryHungry.jpg?width=509&height=236&name=HungryHungry.jpg)
+
+![Image 42: HungryHungry logo](https://knowledge.hubspot.com/hs-fs/hubfs/Pink_HH_Logo-2.webp?width=180&height=47&name=Pink_HH_Logo-2.webp)
+
+### HungryHungry Cuts Customer Onboarding Time in Half With Apps From HubSpot's App Marketplace
+
+**The Challenge**  
+HungryHungry customers were struggling to activate, and the onboarding process took too long. The business needed to engage customers earlier and improve speed to value for new customers.
+
+**The Solution**  
+Since HungryHungry implemented customer service apps from HubSpot's App Marketplace, their average customer completes onboarding twice as fast and nearly all customers are ‌onboarded successfully, getting rid of early churn.
+
+“Anywhere you can simplify, you should. HubSpot brings together every customer interaction, from sales and marketing to onboarding and customer care. Having that single view, all in one place really helps.” -  Scott Fox, Head of Operations, HungryHungry
+
+[Read the full case study](https://www.hubspot.com/case-studies/hungryhungry?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Read%20the%20full%20case%20study)
+
+![Image 43](https://knowledge.hubspot.com/hs-fs/hubfs/swapfiets.jpg?width=509&height=236&name=swapfiets.jpg)
+
+![Image 44: Swapfiets logo](https://knowledge.hubspot.com/hs-fs/hubfs/1-May-14-2024-05-47-58-7315-PM.png?width=200&height=85&name=1-May-14-2024-05-47-58-7315-PM.png)
+
+### Swapfiets Uses Service Hub to Drastically Shorten Ticket Response Time 
+
+**The Challenge**  
+The global Swapfiets team struggled to manage their large-scale support team that handled more than 40,000 tickets per month. They didn’t have a single source of truth for data and some tickets stayed unaddressed for months.
+
+**The Solution**  
+With HubSpot, Swapfiets ​​optimized the customer service experience. They began resolving more tickets faster to build member trust and proactively handling customer issues to improve customer retention and satisfaction.
+
+“Service Hub is helping to provide our staff with the right tools to be more proactive and efficient so that our members can enjoy worry-free biking.” - Marc De Vries, CEO, Swapfiets
+
+[Read the full case study](https://www.hubspot.com/case-studies/swapfiets?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Read%20the%20full%20case%20study)
+
+![Image 45: G2 Badge: Leader, Mid-Market, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-mid-market.png?width=770&height=1000&name=badge-leader-mid-market.png)
+
+![Image 46: G2 Badge: Momentum Leader, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/bagde-momentum-leader.png?width=770&height=1000&name=bagde-momentum-leader.png)
+
+![Image 47: G2 Badge: Leader, Small Business, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-small-business.png?width=770&height=1000&name=badge-leader-small-business.png)
+
+![Image 48: G2 Badge: Leader, Europe, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-europe.png?width=895&height=1000&name=badge-leader-europe.png)
+
+![Image 49: G2 Badge: Leader, Enterprise, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/G2%20badges%20Winter%202023/badge-leader-enterprise.png?width=770&height=1000&name=badge-leader-enterprise.png)
+
+![Image 50: G2 Badge: Leader, ANZ, Summer 2023](https://www.hubspot.com/hs-fs/hubfs/G2%20badges%20all/international/badge-leader-anz.png?width=895&height=1000&name=badge-leader-anz.png)
+
+![Image 51: Best_Usability-MidMarket-Fall_2020](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/web-team/WBZ/G2%20Awards%20Badges/CMS/Best_Usability-MidMarket-Fall_2020.svg)
+
+![Image 52: Best_Relationship-Enterprise-Fall_2020](https://knowledge.hubspot.com/hubfs/assets/hubspot.com/web-team/WBZ/G2%20Awards%20Badges/MHE/Best_Relationship-Enterprise-Fall_2020.svg)
+
+![Image 53: WebOpsPlatforms_Leader_Europe_Leader](https://knowledge.hubspot.com/hs-fs/hubfs/assets/hubspot.com/web-team/WBZ/G2%20Awards%20Badges/Spring%202022/WebOpsPlatforms_Leader_Europe_Leader.png?width=895&height=1000&name=WebOpsPlatforms_Leader_Europe_Leader.png)
+
+### Voted #1 in 571 Reports
+
+[Read case studies](https://www.hubspot.com/case-studies?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-case-studies)
+
+Start growing your business through happier, more successful customers.
+-----------------------------------------------------------------------
+
+[Get a demo of HubSpot's customer service software](https://offers.hubspot.com/service-demo?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-bottom)
+
+[Get started free with HubSpot's free customer service tools](https://app.hubspot.com/signup-hubspot/service?hubs_signup-url=www.hubspot.com/products/service&hubs_signup-cta=service-bottom2)
+
+![Image 54](https://www.hubspot.com/hs-fs/hubfs/cta-content-block-sh-en@2x.webp?width=340&height=370&name=cta-content-block-sh-en@2x.webp)
+
+Frequently Asked Questions
+--------------------------
+
+### What is customer service software?
+
+Customer service software is the consolidation point for managing the customer journey. It allows you to manage the onboarding of new customers; collect, organize, and respond to customer support requests; and ensure the growth and satisfaction of your customers.
+
+While most customer service software solutions solve for a specific use case, Service Hub is unique in that it's part of the HubSpot customer platform. With features that make it easy to deliver authentic, personalized service, Service Hub empowers you to prioritize the customer experience.
+
+### Can I implement HubSpot’s software without dedicated programmers/developers?
+
+Yes. With automation and contextual guidance built right in, you can get started with Service Hub without involving developers. And if you’re looking for more customization and expertise, our [solutions partners](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-partners1) offer a wide range of specialized support to help you get the most out of your HubSpot implementation.
+
+### Will HubSpot help me and my team get started with the software?
+
+Of course! We’ll help all Starter, Professional, and Enterprise users get up and running quickly with a personalized onboarding plan, and our implementation specialists are available to provide guidance on technical setup.
+
+Your whole team of free or paid users will also have access to our active community forums, training lessons from HubSpot Academy, and a comprehensive knowledge base of user guides and help documents. For especially complex configurations, businesses also leverage HubSpot’s [expansive ecosystem of over 6,000 partners](https://ecosystem.hubspot.com/marketplace/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-partners2) for additional support.
+
+### What makes HubSpot’s customer service software popular?
+
+While Service Hub stands out for the power and ease of use of its support and help desk features, it's also popular for the way it helps you put the customer first. With channels to meet customers where they are and when they need it, Service Hub lets you have contextualized and personalized interactions with customers at any point in the customer journey.
+
+Plus, Service Hub includes HubSpot’s CRM functionality and seamlessly integrates with Marketing Hub, Sales Hub, Content Hub, and Operations Hub, so your entire front office team can unite around a complete view of the customer.
+
+Last but not least, you can easily sync Service Hub with more than 1,600 custom integrations — from Jira to SurveyMonkey to Facebook Messenger — so your services team has all its favorite tools on one powerful, easy-to-use platform.
+
+### My company already uses a CRM system. Can we integrate it with Service Hub?
+
+Absolutely. HubSpot offers a fully supported, native Salesforce integration that’s easy to set up and use — and available to Service Hub Professional and Enterprise customers. We also offer integrations to many other CRM systems through the [HubSpot App Marketplace](https://ecosystem.hubspot.com/marketplace/apps?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-integrations).
+
+### How does Service Hub work with Marketing Hub, Sales Hub, Content Hub, and Operations Hub?
+
+Service Hub, Marketing Hub, Sales Hub, Content Hub, and Operations Hub are each part of HubSpot’s customer platform to help you grow better. When you use two or more hubs together, your data is automatically connected on the platform, enabling you to easily (and powerfully) track your entire customer journey from first website visit to closed deal to loyal customer.
+
+### My business already uses Marketing Hub and/or Sales Hub, and I’d love to get my customer service team using Service Hub. What’s the pitch?
+
+Sales and marketing are how we begin our customer relationships — but not necessarily where they grow. Through customer service, savvy teams can turn help issues into opportunities, and grow beyond resolution to relationship.
+
+Service Hub helps you identify opportunities to deepen customer relationships, connect to the front office, and drive efficiency so customers have a superior experience throughout their journey.
+
+And when all your front office teams’ tools and data are united on the same platform, your customer service team will have the full context of each customer's previous interactions with Marketing and Sales, making it easier to connect with customers in a much more personalized and powerful way.
+
+### How much time does it take to implement customer service software?
+
+You can get started with Service Hub in minutes, not months. The in-app onboarding process has automation and contextual guidance built right in. With our Starter, Professional, and Enterprise editions, you can partner with an [onboarding specialist](https://www.hubspot.com/services/onboarding/service-hub?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-faq-onboarding) to guide you through the journey.
+
+### What kind of ROI can I expect from Service Hub?
+
+Calculate the ROI you could see with Service Hub based on your industry, region, and current sales metrics using our [ROI calculator](https://www.hubspot.com/roi-calculator/service?hubs_content=www.hubspot.com/products/service&hubs_content-cta=ROI%20calculator). The calculator harnesses data from over 216,000 HubSpot customers globally. Enhance your analysis by coupling this with our [TCO calculator](https://www.hubspot.com/tco-calculator) to understand your total cost of owning HubSpot and get a more precise view of your potential ROI.
+
+![Image 55](https://f.hubspotusercontent20.net/hubfs/2406023/assets/component-library/icons/icons.svg)
+
+Powerful alone, even better together.
+-------------------------------------
+
+Each product in HubSpot’s platform is connected to the same underlying CRM database. Although our products are powerful on their own, the real magic happens when you use them together.
+
+*   ![Image 56: Marketing Hub](https://www.hubspot.com/hubfs/MarketingHub_Icon.svg)
+    
+    ### Marketing Hub
+    
+    AI-powered marketing software that helps you generate leads and automate marketing.
+    
+    [Learn about Marketing Hub](https://www.hubspot.com/products/marketing?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-marketing)
+    
+*   ![Image 57: Sales Hub](https://www.hubspot.com/hubfs/SalesHub_Icon.svg)
+    
+    ### Sales Hub
+    
+    Easy-to-adopt sales software that leverages AI to build pipelines and close deals.
+    
+    [Learn about Sales Hub](https://www.hubspot.com/products/sales?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-sales)
+    
+*   ![Image 58: Content Hub](https://www.hubspot.com/hubfs/Imported%20sitepage%20images/ContentHub_Icon_Gradient_RGB_24px-1.svg)
+    
+    ### Content Hub
+    
+    All-in-one, AI-powered content marketing software that helps marketers create and manage content.
+    
+    [Learn about Content Hub](https://www.hubspot.com/products/content?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-content)
+    
+*   ![Image 59: Operations Hub](https://www.hubspot.com/hubfs/OperationsHub_Icon.svg)
+    
+    ### Operations Hub
+    
+    Operations software that leverages AI to help you activate and manage your data.
+    
+    [Learn about Operations Hub](https://www.hubspot.com/products/operations?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-operations)
+    
+*   ![Image 60: Commerce Hub](https://www.hubspot.com/hubfs/Imported%20sitepage%20images/Product_Icon_Tiered_CommerceHub_Starter.png)
+    
+    ### Commerce Hub
+    
+    B2B commerce software designed to help you collect payments and automate billing.
+    
+    [Learn about Commerce Hub](https://www.hubspot.com/products/commerce?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-bottom-commerce)
+    
+
+BACK
+
+Popular Features
+----------------
+
+*   [All Products and Features](https://www.hubspot.com/products?hubs_content=www.hubspot.com/products/service&hubs_content-cta=All%20Products%20and%20Features)
+*   [Free Meeting Scheduler App](https://www.hubspot.com/products/sales/schedule-meeting?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Meeting%20Scheduler%20App)
+*   [HubSpot AI Tools](https://www.hubspot.com/products/artificial-intelligence?hubs_content=www.hubspot.com/products/service&hubs_content-cta=HubSpot%20AI%20Tools)
+*   [Email Tracking Software](https://www.hubspot.com/products/sales/email-tracking?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Email%20Tracking%20Software)
+*   [AI Content Writer](https://www.hubspot.com/products/cms/ai-content-writer?hubs_content=www.hubspot.com/products/service&hubs_content-cta=AI%20Content%20Writer)
+*   [AI Website Generator](https://www.hubspot.com/products/cms/ai-website-generator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=AI%20Website%20Generator)
+*   [Email Marketing Software](https://www.hubspot.com/products/marketing/email?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Email%20Marketing%20Software)
+*   [Lead Management Software](https://www.hubspot.com/products/crm/lead-management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Lead%20Management%20Software)
+*   [AI Email Writer](https://www.hubspot.com/products/marketing/ai-email-writer?hubs_content=www.hubspot.com/products/service&hubs_content-cta=AI%20Email%20Writer)
+*   [Free Website Builder](https://www.hubspot.com/products/cms/drag-and-drop-website-builder?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Website%20Builder)
+*   [Sales Email Templates](https://www.hubspot.com/products/sales/email-templates-sales?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Sales%20Email%20Templates)
+*   [Free Online Form Builder](https://www.hubspot.com/products/marketing/forms?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Online%20Form%20Builder)
+*   [Free Chatbot Builder](https://www.hubspot.com/products/crm/chatbot-builder?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Chatbot%20Builder)
+*   [Free Live Chat Software](https://www.hubspot.com/products/crm/live-chat?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Live%20Chat%20Software)
+*   [Marketing Analytics](https://www.hubspot.com/products/marketing/analytics?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Marketing%20Analytics)
+*   [Free Landing Page Builder](https://www.hubspot.com/products/marketing/landing-pages?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Landing%20Page%20Builder)
+*   [Free Web Hosting](https://www.hubspot.com/products/cms/web-hosting?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Web%20Hosting)
+
+Free Tools
+----------
+
+*   [See All Free Business Tools](https://www.hubspot.com/free-business-tools?hubs_content=www.hubspot.com/products/service&hubs_content-cta=See%20All%20Free%20Business%20Tools)
+*   [Clip Creator](https://www.hubspot.com/clip-creator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Clip%20Creator)
+*   [Website Grader](https://website.grader.com/?__hstc=20629287.e4e046660731447bf82affe18aa75831.1482962870986.1487962165415.1487964870240.141&__hssc=20629287.1.1487964870240&__hsfp=3218882972&hubs_content=www.hubspot.com/products/service&hubs_content-cta=Website%20Grader)
+*   [Make My Persona](https://www.hubspot.com/make-my-persona?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Make%20My%20Persona)
+*   [Email Signature Generator](https://www.hubspot.com/email-signature-generator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Email%20Signature%20Generator)
+*   [Brand Kit Generator](https://www.hubspot.com/brand-kit-generator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Brand%20Kit%20Generator)
+*   [Blog Ideas Generator](https://www.hubspot.com/blog-topic-generator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Blog%20Ideas%20Generator)
+*   [Invoice Template Generator](https://www.hubspot.com/invoice-template-generator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Invoice%20Template%20Generator)
+*   [Marketing Plan Generator](https://www.hubspot.com/marketing-plan-template-generator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Marketing%20Plan%20Generator)
+*   [Free Business Templates](https://www.hubspot.com/business-templates?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Free%20Business%20Templates)
+*   [Guide Creator](https://www.hubspot.com/guide-creator?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Guide%20Creator)
+*   [Software Comparisons Library](https://www.hubspot.com/comparisons?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Software%20Comparisons%20Library)
+*   [Template Marketplace](https://ecosystem.hubspot.com/marketplace/website?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Template%20Marketplace)
+*   [Campaign Assistant](https://www.hubspot.com/campaign-assistant?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Campaign%20Assistant)
+
+Company
+-------
+
+*   [About Us](https://www.hubspot.com/our-story?hubs_content=www.hubspot.com/products/service&hubs_content-cta=About%20Us)
+*   [Careers](https://www.hubspot.com/careers?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Careers)
+*   [Management Team](https://www.hubspot.com/company/management?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Management%20Team)
+*   [Board of Directors](https://www.hubspot.com/company/board-of-directors?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Board%20of%20Directors)
+*   [Investor Relations](https://ir.hubspot.com/?_ga=2.262843276.12874469.1592422655-430007000.1592422655&hubs_content=www.hubspot.com/products/service&hubs_content-cta=Investor%20Relations)
+*   [Blog](https://blog.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Blog)
+*   [Contact Us](https://www.hubspot.com/company/contact?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Contact%20Us)
+
+Customers
+---------
+
+*   [Customer Support](https://help.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Customer%20Support)
+*   [Join a Local User Group](https://www.hubspot.com/hubspot-user-groups?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Join%20a%20Local%20User%20Group)
+
+Partners
+--------
+
+*   [All Partner Programs](https://www.hubspot.com/partners?hubs_content=www.hubspot.com/products/service&hubs_content-cta=All%20Partner%20Programs)
+*   [Solutions Partner Program](https://www.hubspot.com/partners/solutions?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Solutions%20Partner%20Program)
+*   [App Partner Program](https://www.hubspot.com/partners/app?hubs_content=www.hubspot.com/products/service&hubs_content-cta=App%20Partner%20Program)
+*   [HubSpot for Startups](https://www.hubspot.com/startups/partners?hubs_content=www.hubspot.com/products/service&hubs_content-cta=HubSpot%20for%20Startups)
+*   [Affiliate Program](https://www.hubspot.com/partners/affiliates?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Affiliate%20Program)
+
+*   [Facebook](https://www.facebook.com/hubspot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_facebook)
+*   [Instagram](https://www.instagram.com/hubspot/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_instagram)
+*   [Youtube](https://youtube.com/user/HubSpot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_youtube)
+*   [Twitter](https://x.com/HubSpot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_twitter)
+*   [Linkedin](https://www.linkedin.com/company/hubspot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_linkedin)
+*   [Medium](https://medium.com/@HubSpot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_medium)
+*   [Tiktok](https://www.tiktok.com/@hubspot?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hstc_medium)
+
+ [![Image 61: Download on the App Store](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/app%20store%20high%20res.png?width=136&height=45&name=app%20store%20high%20res.png)](https://apps.apple.com/us/app/hubspot/id1107711722?hubs_content=www.hubspot.com/products/service&hubs_content-cta=hsg-footer__app)[![Image 62: Get it on Google Play](https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/google%20play%20high%20res.png?width=136&height=45&name=google%20play%20high%20res.png)](https://play.google.com/store/apps/details?id=com.hubspot.android&hl=en_US&hubs_content=www.hubspot.com/products/service&hubs_content-cta=hsg-footer__app)
+
+[![Image 63: HubSpot](https://www.hubspot.com/hubfs/WBZ-1165%20Global%20Nav%20Redesign/Wordmark-White.svg)](https://www.hubspot.com/?hubs_content=www.hubspot.com/products/service&hubs_content-cta=null)Copyright © 2024 HubSpot, Inc.
+
+*   [Legal Stuff](https://legal.hubspot.com/legal-stuff?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Legal%20Stuff)
+*   [Privacy Policy](https://legal.hubspot.com/privacy-policy?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Privacy%20Policy)
+*   [Security](https://legal.hubspot.com/security?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Security)
+*   [Website Accessibility](https://legal.hubspot.com/website-accessibility?hubs_content=www.hubspot.com/products/service&hubs_content-cta=Website%20Accessibility)
+*
+  ```
+
+Source URL: https://www.hubspot.com/pricing/service/enterprise?hubs_content=www.hubspot.com/products/service&hubs_content-cta=service-pricing-disclaimer
+  ```
+  Service Software Pricing | HubSpot
+===============
+       
+
+Loading
+
+BESbswy
+
+BESbswy
+
+BESbswy
+
+BESbswy
+
+BESbswy
+
+BESbswy
+
+BESbswy
+
+BESbswy
+
+add
+
+add
+
+add
+
+add
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

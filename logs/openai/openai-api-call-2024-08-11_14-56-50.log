@@ -1,0 +1,2768 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T18:56:50.908Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://www.pipefy.com
+  ```
+  Pipefy: AI-Powered Business Process Automation Software
+===============
+
+\[Webinar\] Experience a new era of efficiency with Pipefy AI. [Save your seat now!](https://www.pipefy.com/webinar/pipefy-ai-efficiency/)
+
+[](https://www.pipefy.com/ "Pipefy")
+
+[Pipefy AI](https://www.pipefy.com/ai/)
+
+Products
+
+[HR Service Delivery Craft exceptional employee experiences](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay Streamline the procurement lifecycle](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows Bridge processes, teams and tools](https://www.pipefy.com/custom-workflows-software/)
+
+[![Image 1: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-products-mega-menu-cta-en.png)](https://www.pipefy.com/templates/)
+
+Platform
+
+[What is Pipefy AI business process automation](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise Workflow Platform For enterprises across all segments](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Integrations Integrate your tech stack](https://www.pipefy.com/integrations/)
+
+[Pipefy for SMBs Automation that scales with your business](https://www.pipefy.com/pipefy-for-smb/)
+
+[Platform Overview Fast-track digital transformation](https://www.pipefy.com/platform/)
+
+[No-code Build powerful workflows without any code](https://www.pipefy.com/blog/no-code-platform/)
+
+[Automation Extend your workflow efficiency](https://www.pipefy.com/business-process-automation-software/)
+
+[![Image 2: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-platform-mega-menu-cta-en.png)](https://www.pipefy.com/artificial-intelligence/)
+
+Resources
+
+[Success Stories Why companies around the world trust Pipefy](https://www.pipefy.com/customers/)
+
+[Events and Webinars Live events, Q&A sessions, and webinars](https://www.pipefy.com/events/)
+
+[Blog Expert-written content and best practices](https://www.pipefy.com/blog/)
+
+[Guides and E-books Industry trends, guidelines, and helpful how-to's](https://www.pipefy.com/guides/)
+
+*   [Pipefy Academy](https://www.pipefy.com/academy/)
+*   [Pipefy Community](https://community.pipefy.com/)
+*   [Developer Hub](https://developers.pipefy.com/)
+*   [Help Center](https://help.pipefy.com/en/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[Log in](https://app-auth.pipefy.com/login) [Start for free](https://www.pipefy.com/signup/?cta=Header+New+Website+UNUN01n001)
+
+AI-Powered
+
+Business Process Automation
+
+
+===========================================
+
+Seamlessly build, manage, and optimize processes with intuitive AI & no-code BPM
+
+[Build your first workflow in 5 min](https://www.pipefy.com/signup/)[Book a demo](https://www.pipefy.com/book-a-demo/)
+
+[DeployCreate a process for coordinating shipments: scheduling, tracking, delivery confirmation](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average processing time for insurance claims?](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common billing discrepancies?](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for underwriting policies: risk assessment, approval, documentation](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average approval time for loan applications?](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking network maintenance: scheduling, assignment, completion verification](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze compliance rates and suggest risk mitigation measures](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for tracking expenses: submission, approval, reimbursement](https://www.pipefy.com/signup/)
+
+[OptimizeExamine legal dispute resolutions and suggest efficiency improvements](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for handling leave requests: submission, approval, and balance updates](https://www.pipefy.com/signup/)
+
+[AutomateExtract information from claims reports and classify issues](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common IT issues reported?](https://www.pipefy.com/signup/)
+
+[DeployCreate a workflow for managing contract approvals: submission, review, final approval](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average time to onboard a new employee?](https://www.pipefy.com/signup/)
+
+[AutomateCategorize billing queries from support tickets and assign to teams](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common compliance issues?](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze bank reconciliation statements and identify discrepancies](https://www.pipefy.com/signup/)
+
+[AutomateExtract invoice data and compare with payment records](https://www.pipefy.com/signup/)
+
+[AutomateCategorize employee feedback from surveys and assign to relevant departments](https://www.pipefy.com/signup/)
+
+[AutomateExtract key skills from resume files and match with job requirements](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for managing promotional campaigns: planning, execution, performance analysis](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for product testing: planning, execution, results analysis](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in product defects and suggest quality improvements](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main factors affecting client satisfaction?](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze maintenance request data to identify bottlenecks](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking tax deductions: documentation, approval, filing](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for tracking customer feedback: collecting, analyzing, generating reports](https://www.pipefy.com/signup/)
+
+[DeployCreate a workflow for managing maintenance requests: submission, assignment, tracking](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main reasons for product launch delays?](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average processing time for invoices?](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main reasons for delayed payments?](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for coordinating shipments: scheduling, tracking, delivery confirmation](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average processing time for insurance claims?](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common billing discrepancies?](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for underwriting policies: risk assessment, approval, documentation](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average approval time for loan applications?](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking network maintenance: scheduling, assignment, completion verification](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze compliance rates and suggest risk mitigation measures](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for tracking expenses: submission, approval, reimbursement](https://www.pipefy.com/signup/)
+
+[OptimizeExamine legal dispute resolutions and suggest efficiency improvements](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for handling leave requests: submission, approval, and balance updates](https://www.pipefy.com/signup/)
+
+[AutomateExtract information from claims reports and classify issues](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common IT issues reported?](https://www.pipefy.com/signup/)
+
+[DeployCreate a workflow for managing contract approvals: submission, review, final approval](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average time to onboard a new employee?](https://www.pipefy.com/signup/)
+
+[AutomateCategorize billing queries from support tickets and assign to teams](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common compliance issues?](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze bank reconciliation statements and identify discrepancies](https://www.pipefy.com/signup/)
+
+[AutomateExtract invoice data and compare with payment records](https://www.pipefy.com/signup/)
+
+[AutomateCategorize employee feedback from surveys and assign to relevant departments](https://www.pipefy.com/signup/)
+
+[AutomateExtract key skills from resume files and match with job requirements](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for managing promotional campaigns: planning, execution, performance analysis](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for product testing: planning, execution, results analysis](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in product defects and suggest quality improvements](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main factors affecting client satisfaction?](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze maintenance request data to identify bottlenecks](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking tax deductions: documentation, approval, filing](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for tracking customer feedback: collecting, analyzing, generating reports](https://www.pipefy.com/signup/)
+
+[DeployCreate a workflow for managing maintenance requests: submission, assignment, tracking](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main reasons for product launch delays?](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average processing time for invoices?](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main reasons for delayed payments?](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking investment portfolios: performance monitoring, rebalancing, reporting](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for software asset management: tracking licenses, renewal notifications, compliance checks](https://www.pipefy.com/signup/)
+
+[AutomateCategorize billing discrepancies and calculate adjustments](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average sales per product category?](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze equipment photos and identify maintenance needs](https://www.pipefy.com/signup/)
+
+[AutomateRead invoices & POs files and perform 2-way matching](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in employee leave requests and suggest improvements](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify the bottlenecks in support ticket handling processes](https://www.pipefy.com/signup/)
+
+[AutomateCategorize financial transactions and identify potential frauds](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common reasons for customer returns?](https://www.pipefy.com/signup/)
+
+[AutomateAnswer inquiries about travel reimbursement policy and the process for submitting requests](https://www.pipefy.com/signup/)
+
+[AutomateRead reicept, sum values and exclude alcoholic items](https://www.pipefy.com/signup/)
+
+[AutomateCategorize legal documents from emails and assign them to respective cases](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for new service installations: order processing, technician dispatch, service activation](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most frequent expense categories?](https://www.pipefy.com/signup/)
+
+[AutomateExtract issue descriptions from support tickets and suggest solutions](https://www.pipefy.com/signup/)
+
+[AutomateAnswer questions about IT security policy and best practices for data protection](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in new service installations and suggest optimizations](https://www.pipefy.com/signup/)
+
+[AutomateAnswer questions about PTO policy](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for onboarding employees: setting up accounts, issuing equipment, training](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify the bottlenecks in contract approval processes](https://www.pipefy.com/signup/)
+
+[AutomateExtract data from montly energy usage reports and fill out fields](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze billing data to identify discrepancies and suggest measures](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for client onboarding: contract signing, project kickoff, resource allocation](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze the most common customer issues and suggest proactive measures](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze loan application data to identify trends and suggest improvements](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main reasons for claim rejections?](https://www.pipefy.com/signup/)
+
+[AutomateReview contract files and highlight critical clauses & potential compliance risks](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze supplier performance to identify the best vendors](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for managing accounts payable: invoice verification, approval, scheduling transfers](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in patient feedback and suggest service enhancements](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking investment portfolios: performance monitoring, rebalancing, reporting](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for software asset management: tracking licenses, renewal notifications, compliance checks](https://www.pipefy.com/signup/)
+
+[AutomateCategorize billing discrepancies and calculate adjustments](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average sales per product category?](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze equipment photos and identify maintenance needs](https://www.pipefy.com/signup/)
+
+[AutomateRead invoices & POs files and perform 2-way matching](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in employee leave requests and suggest improvements](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify the bottlenecks in support ticket handling processes](https://www.pipefy.com/signup/)
+
+[AutomateCategorize financial transactions and identify potential frauds](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common reasons for customer returns?](https://www.pipefy.com/signup/)
+
+[AutomateAnswer inquiries about travel reimbursement policy and the process for submitting requests](https://www.pipefy.com/signup/)
+
+[AutomateRead reicept, sum values and exclude alcoholic items](https://www.pipefy.com/signup/)
+
+[AutomateCategorize legal documents from emails and assign them to respective cases](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for new service installations: order processing, technician dispatch, service activation](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most frequent expense categories?](https://www.pipefy.com/signup/)
+
+[AutomateExtract issue descriptions from support tickets and suggest solutions](https://www.pipefy.com/signup/)
+
+[AutomateAnswer questions about IT security policy and best practices for data protection](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in new service installations and suggest optimizations](https://www.pipefy.com/signup/)
+
+[AutomateAnswer questions about PTO policy](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for onboarding employees: setting up accounts, issuing equipment, training](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify the bottlenecks in contract approval processes](https://www.pipefy.com/signup/)
+
+[AutomateExtract data from montly energy usage reports and fill out fields](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze billing data to identify discrepancies and suggest measures](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for client onboarding: contract signing, project kickoff, resource allocation](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze the most common customer issues and suggest proactive measures](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze loan application data to identify trends and suggest improvements](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the main reasons for claim rejections?](https://www.pipefy.com/signup/)
+
+[AutomateReview contract files and highlight critical clauses & potential compliance risks](https://www.pipefy.com/signup/)
+
+[OptimizeAnalyze supplier performance to identify the best vendors](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for managing accounts payable: invoice verification, approval, scheduling transfers](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in patient feedback and suggest service enhancements](https://www.pipefy.com/signup/)
+
+[AutomateRead ID and bank statements, extract loan application data and verify eligibility](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for handling insurance claims: submission, assessment, resolution](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common tax deduction errors?](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze loan application documents and classify by approval status](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are my top SLA offenders?](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in customer returns and suggest process improvements](https://www.pipefy.com/signup/)
+
+[OptimizeEvaluate claims processing times and identify bottlenecks](https://www.pipefy.com/signup/)
+
+[AutomateExtract key terms from NDAs and classify clauses](https://www.pipefy.com/signup/)
+
+[AutomateAnswer questions about the code of conduct and provide examples of acceptable behavior](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for handling legal disputes: documentation, assigning counsel, tracking progress](https://www.pipefy.com/signup/)
+
+[AutomateVerify regulatory documents PDFs and identify necessary actions](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the compliance rate of suppliers with contracts?](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking billable hours: time entry, approval, invoicing](https://www.pipefy.com/signup/)
+
+[OptimizeEvaluate billable hours data and suggest optimizations](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for handling returns: authorization, processing, restocking](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze access requests and analyze required permission levels](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average response time for maintenance requests?](https://www.pipefy.com/signup/)
+
+[AutomateExtract and classify customer feedback from e-mails](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking accounts receivable, following best practices](https://www.pipefy.com/signup/)
+
+[OptimizeExamine expense reports and suggest cost-saving opportunities](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for tax compliance audits: scheduling, preparation, reporting](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for managing loan applications, following best practices](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for medical billing: claim submission, insurance verification, payment processing](https://www.pipefy.com/signup/)
+
+[AutomateAnswer inquiries about facility access procedures](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in accounts receivable and suggest collection improvements](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for content creation: planning, production, approval](https://www.pipefy.com/signup/)
+
+[AutomateCategorize maintenance requests from emails and schedule repairs](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for onboarding employees, following best practices](https://www.pipefy.com/signup/)
+
+[AutomateCategorize customer feedback and calculate satisfaction scores](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for patient onboarding: document collection, consultations, medical history recording](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze support tickets and assign agents based on region and severity](https://www.pipefy.com/signup/)
+
+[AutomateRead ID and bank statements, extract loan application data and verify eligibility](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for handling insurance claims: submission, assessment, resolution](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are the most common tax deduction errors?](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze loan application documents and classify by approval status](https://www.pipefy.com/signup/)
+
+[OptimizeWhat are my top SLA offenders?](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in customer returns and suggest process improvements](https://www.pipefy.com/signup/)
+
+[OptimizeEvaluate claims processing times and identify bottlenecks](https://www.pipefy.com/signup/)
+
+[AutomateExtract key terms from NDAs and classify clauses](https://www.pipefy.com/signup/)
+
+[AutomateAnswer questions about the code of conduct and provide examples of acceptable behavior](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for handling legal disputes: documentation, assigning counsel, tracking progress](https://www.pipefy.com/signup/)
+
+[AutomateVerify regulatory documents PDFs and identify necessary actions](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the compliance rate of suppliers with contracts?](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking billable hours: time entry, approval, invoicing](https://www.pipefy.com/signup/)
+
+[OptimizeEvaluate billable hours data and suggest optimizations](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for handling returns: authorization, processing, restocking](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze access requests and analyze required permission levels](https://www.pipefy.com/signup/)
+
+[OptimizeWhat is the average response time for maintenance requests?](https://www.pipefy.com/signup/)
+
+[AutomateExtract and classify customer feedback from e-mails](https://www.pipefy.com/signup/)
+
+[DeployDeploy a workflow for tracking accounts receivable, following best practices](https://www.pipefy.com/signup/)
+
+[OptimizeExamine expense reports and suggest cost-saving opportunities](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for tax compliance audits: scheduling, preparation, reporting](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for managing loan applications, following best practices](https://www.pipefy.com/signup/)
+
+[DeployDeploy a process for medical billing: claim submission, insurance verification, payment processing](https://www.pipefy.com/signup/)
+
+[AutomateAnswer inquiries about facility access procedures](https://www.pipefy.com/signup/)
+
+[OptimizeIdentify trends in accounts receivable and suggest collection improvements](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for content creation: planning, production, approval](https://www.pipefy.com/signup/)
+
+[AutomateCategorize maintenance requests from emails and schedule repairs](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for onboarding employees, following best practices](https://www.pipefy.com/signup/)
+
+[AutomateCategorize customer feedback and calculate satisfaction scores](https://www.pipefy.com/signup/)
+
+[DeployCreate a process for patient onboarding: document collection, consultations, medical history recording](https://www.pipefy.com/signup/)
+
+[AutomateAnalyze support tickets and assign agents based on region and severity](https://www.pipefy.com/signup/)
+
+The award-winning platform trusted by more than 4,000 companies
+
+![Image 3: Logotipo Ingram Light](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/ingram.png)![Image 4: Logotipo Lumen Light](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/lumen.png)![Image 5: Logotipo Wellhub Light](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/wellhub.png)![Image 6: Logotipo Henry Light](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/henry.png)![Image 7: Logotipo BD Light](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/bd.png)![Image 8: Logotipo Gallagher Light](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/gallagher.png)![Image 9: Logotipo Zeiss Dark](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/zeiss.png)
+
+Everything IT teams need. Everything business teams want.  
+**Just a prompt away.**
+-----------------------------------------------------------------------------------
+
+Build any workflow in minutes with AI
+-------------------------------------
+
+Build, automate, and manage every workflow with a single tool built for business teams.
+
+Coding → Low/No-code → Typing
+
+It doesn’t get any easier than this. AI creates workflows using natural language, prompts, and an intuitive user interface.
+
+![Image 10: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/video1Mobile.png)
+
+![Image 11](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgDeploy.png)
+
+Expedited customization
+
+Business teams and non-technical users can quickly edit and customize workflows with an IT-approved solution that’s secure and easy-to-use.
+
+![Image 12: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/video2Mobile.png)
+
+![Image 13](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgDeploy.png)
+
+2X faster implementation
+
+Pipefy implements in days and weeks, not months. That means teams can start building workflows – and seeing results – faster.
+
+![Image 14](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/video2Mobile.png)
+
+![Image 15: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/video1Mobile.png)
+
+![Image 16](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgDeploy.png)
+
+![Image 17: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/video2Mobile.png)
+
+![Image 18](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgDeploy.png)
+
+![Image 19](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/video2Mobile.png)
+
+Automate and deliver more, faster than ever
+-------------------------------------------
+
+Avoid errors, cut lead times, and reduce manual work by 40% with process automation and AI.
+
+Automate away
+
+AI automates repetitive manual tasks including data extraction, image recognition, emails, status updates, invoice matching, approvals, and more.
+
+![Image 20: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab4.png)
+
+![Image 21](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgAutomate.png)
+
+Deliver exceptional service
+
+From intake to approval, AI improves user experiences by answering common questions, centralizing documents and information, and helping users submit and track their requests.
+
+![Image 22: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/automate2.png)
+
+![Image 23: Placeholder image](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/default-placeholder.png)
+
+Conserve resources
+
+Automation enables business teams to make better use of their time. And when business teams build more of their own workflows – up to 85% of them – IT has more time for strategy, security, and innovation.
+
+![Image 24: Deliver exceptional service](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/automate2.png)
+
+![Image 25: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab4.png)
+
+![Image 26](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgAutomate.png)
+
+![Image 27: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/automate2.png)
+
+![Image 28: Placeholder image](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/default-placeholder.png)
+
+![Image 29: Deliver exceptional service](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/automate2.png)
+
+Evolve at the speed your business demands
+-----------------------------------------
+
+Stay agile with tools that make it easy to measure performance – and even easier to pivot.
+
+Continuous optimization
+
+Use AI to monitor workflows, analyze performance, and track KPIs. Real-time data and deeper insights enable better (and faster) decision-making.
+
+![Image 30: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab7.png)
+
+![Image 31](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgOptimize.png)
+
+Data-driven decisions
+
+Instantly identify root causes, spot trends, and discover new ways to improve any workflow or process.
+
+![Image 32](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab7.png)
+
+Rapid prototyping
+
+Stay agile and keep pace with evolving business needs. With AI, go from concept to deployment in a fraction of the time vs. hand coding.
+
+![Image 33](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab7.png)
+
+![Image 34: video cover](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab7.png)
+
+![Image 35](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/bgOptimize.png)
+
+![Image 36](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab7.png)
+
+![Image 37](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/tab7.png)
+
+### Pipefy is recognized as the industry leader
+
+![Image 38: Badge Get App](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/badge-getapp.png)![Image 39: Badge Capterra](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/badge-capterra.png)![Image 40: Badge Future of Work](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/badge-future-of-work.png)![Image 41: Badge Source Fourge](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/badge-source-fourge.png)
+
+###### Used and loved by citizen developers and admins.
+
+###### 2X faster to deploy, for 1/2 the cost vs.  incumbent solutions.
+
+###### Go from concept to production in 1 week. We promise.
+
+### Discover the next frontier of process automation – deploy faster, automate even more, and deliver exceptional experiences.
+
+![Image 42: Pipefy Product Demo Background](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/ai-demo-product-cover.png)
+
+Easily build any workflow with Pipefy AI
+----------------------------------------
+
+[### Finance Operations Centralize all procure-to-pay workflows – purchasing, payment, approvals, and more – and connect all stakeholders in a single, unified process ecosystem. ![Image 43](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/portal-p2p-sm-EN.png)](https://www.pipefy.com/procure-to-pay-software/) 
+
+[### HR Operations Automate and orchestrate HR processes. Centralize employee requests, performance management, leave and attendance tracking and more. ![Image 44](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/service-delivery-hr-sm-EN.png)](https://www.pipefy.com/hr-service-delivery/)
+
+[### Custom Workflows Simply define the starting point, phases, and necessary integrations to create the most efficient version of any process you can imagine. ![Image 45](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/07/custom-workflows-sm-EN.png)](https://www.pipefy.com/custom-workflows-software/)
+
+### See how companies
+
+### succeed with Pipefy
+
+[Explore all success stories](https://www.pipefy.com/customers/)
+
+![Image 46: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/logo-zeiss.png)How ZEISS used automation to boost productivity and process visibility
+
+[How ZEISS increased productivity and process visibility through automation](https://www.pipefy.com/zeiss-case-study/)
+
+![Image 47: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/imageZeiss.png)
+
+![Image 48: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/logo-globalfy.png)How Globalfy Delivered 172,000 Services Without Increasing IT Dependence
+
+[Globalfy simplifies the entrepreneurial journey for international business owners](https://www.pipefy.com/case-study-globalfy/)
+
+![Image 49: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/imageGlobalfy.png)
+
+![Image 50: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/logo-capgemini.png)How Capgemini automated order-to-cash processes for a multinational beverage corporation with Pipefy
+
+[How Pipefy is making a difference for Capgemini](https://www.pipefy.com/case-study-capgemini-order-to-cash/)
+
+![Image 51: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/imageCapgemini.png)
+
+![Image 52: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/logo-one.png)How ONE Ocean Network Express standardized accounts payable across 4 continents with Pipefy
+
+[How Pipefy is making a difference for ONE](https://www.pipefy.com/case-study-one/)
+
+![Image 53: One Columba Cargo Ship](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/customer-stories/imageOne.png)
+
+Build a unified ecosystem
+
+Seamlessly integrate with your tech stack
+-----------------------------------------
+
+Out-of-the-box connectors, open API and HTTP requests make it easy to build a cohesive ecosystem
+
+[Explore all integrations](https://www.pipefy.com/integrations/)
+
+![Image 54](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/adp.png)![Image 55](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/docusign.png)![Image 56](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/google-drive.png)![Image 57](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/microsoft-sharepoint.png)![Image 58](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/oracle.png)![Image 59](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/custom-workflows/microsof-teams.png)![Image 60](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/sap.png)![Image 61](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/slack.png)![Image 62](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/integrations/hr/workday.png)
+
+300+ ready-to-use connectors
+
+Pipefy integrates with ERPs, databases, and vertical solutions stored in private cloud or on-premise systems.
+
+No-code framework
+
+IT teams can quickly establish and manage integrations without intricate coding or development work, reducing technical requirements.
+
+Real-time data visibility
+
+Access comprehensive, up-to-date data when you need it. Pipefy integrations dissolve silos and unify data sources.
+
+Welcome to the next no-code frontier
+------------------------------------
+
+[Get started](https://www.pipefy.com/signup/)[Book a demo](https://www.pipefy.com/book-a-demo)
+
+ [![Image 63: Play Media Icon](https://assets-site.staticpipefy.com/production/wp-content/uploads/2024/08/iconPLayMedia.svg)Book a demo](https://www.pipefy.com/book-a-demo/)
+
+Embrace AI-driven efficiency
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+Company
+
+[About us](https://www.pipefy.com/about-us/)
+
+[Careers](https://www.pipefy.com/careers/)
+
+[Partners](https://www.pipefy.com/partners/)
+
+[Newsroom](https://www.pipefy.com/newsroom/)
+
+[Success stories](https://www.pipefy.com/customers/)
+
+[Ethics and Compliance](https://www.pipefy.com/compliance/)
+
+Products
+
+[HR Service Delivery](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows](https://www.pipefy.com/custom-workflows-software/)
+
+Platform
+
+[What is Pipefy](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Pipefy for SMBs](https://www.pipefy.com/pipefy-for-smb/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[What's new](https://www.pipefy.com/whats-new/)
+
+[Pipefy AI](https://www.pipefy.com/artificial-intelligence/)
+
+[Security](https://www.pipefy.com/security/)
+
+Business Solutions
+
+[Process Management](https://www.pipefy.com/process-management-software/)
+
+[Service Management](https://www.pipefy.com/service-management-software/)
+
+[ITSM](https://www.pipefy.com/itsm/)
+
+Help & Support
+
+[Help Center](https://help.pipefy.com/en/)
+
+[Pipefy Academy](https://www.pipefy.com/academy/)
+
+[Pipefy Community](https://community.pipefy.com/)
+
+[Get Started](https://www.pipefy.com/getting-started-pipefy/)
+
+[Developer Hub](https://developers.pipefy.com/)
+
+Resources
+
+[Blog](https://www.pipefy.com/blog/)
+
+[Templates](https://www.pipefy.com/templates/)
+
+[Guides and E-books](https://www.pipefy.com/guides/)
+
+[Events and Webinars](https://www.pipefy.com/events/)
+
+[BPM Guide](https://www.pipefy.com/blog/business-process-management-bpm/)
+
+[BPA Guide](https://www.pipefy.com/blog/business-process-automation-bpa/)
+
+[Process Improvement 101](https://www.pipefy.com/blog/process-improvement-definition/)
+
+[Português](https://www.pipefy.com/pt-br/)
+
+English
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Português](https://www.pipefy.com/pt-br/) [Español](https://www.pipefy.com/es/)
+
+English
+  ```
+
+Source URL: https://www.pipefy.com/integrations/
+  ```
+  Integrations Feature - Pipefy
+===============
+
+\[Webinar\] Experience a new era of efficiency with Pipefy AI. [Save your seat now!](https://www.pipefy.com/webinar/pipefy-ai-efficiency/)
+
+[](https://www.pipefy.com/ "Pipefy")
+
+[Pipefy AI](https://www.pipefy.com/ai/)
+
+Products
+
+[HR Service Delivery Craft exceptional employee experiences](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay Streamline the procurement lifecycle](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows Bridge processes, teams and tools](https://www.pipefy.com/custom-workflows-software/)
+
+[![Image 1: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-products-mega-menu-cta-en.png)](https://www.pipefy.com/templates/)
+
+Platform
+
+[What is Pipefy AI business process automation](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise Workflow Platform For enterprises across all segments](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Integrations Integrate your tech stack](https://www.pipefy.com/integrations/)
+
+[Pipefy for SMBs Automation that scales with your business](https://www.pipefy.com/pipefy-for-smb/)
+
+[Platform Overview Fast-track digital transformation](https://www.pipefy.com/platform/)
+
+[No-code Build powerful workflows without any code](https://www.pipefy.com/blog/no-code-platform/)
+
+[Automation Extend your workflow efficiency](https://www.pipefy.com/business-process-automation-software/)
+
+[![Image 2: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-platform-mega-menu-cta-en.png)](https://www.pipefy.com/artificial-intelligence/)
+
+Resources
+
+[Success Stories Why companies around the world trust Pipefy](https://www.pipefy.com/customers/)
+
+[Events and Webinars Live events, Q&A sessions, and webinars](https://www.pipefy.com/events/)
+
+[Blog Expert-written content and best practices](https://www.pipefy.com/blog/)
+
+[Guides and E-books Industry trends, guidelines, and helpful how-to's](https://www.pipefy.com/guides/)
+
+*   [Pipefy Academy](https://www.pipefy.com/academy/)
+*   [Pipefy Community](https://community.pipefy.com/)
+*   [Developer Hub](https://developers.pipefy.com/)
+*   [Help Center](https://help.pipefy.com/en/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[Log in](https://app-auth.pipefy.com/login) [Start for free](https://www.pipefy.com/signup/?cta=Header+New+Website+UNUN01n001)
+
+ 
+
+Integrations
+============
+
+Connect Pipefy to your favorite software
+========================================
+
+Orchestrate all of your work from a single platform. Create limitless integrations to unlock a seamless and reliable operation.
+
+[See all integrations](https://www.pipefy.com/integrations/#all-integrations) [Talk to a specialist](https://www.pipefy.com/integrations/#)
+
+[](https://www.pipefy.com/integrations/#)
+
+![Image 3: IBM Logo](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/08/logo-ibm.svg)![Image 4: Kraft Heinz Logo](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/08/logo-kraft-heinz.svg)![Image 5: Toyota Logo](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/08/logo-toyota.svg)![Image 6](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/08/logo-wb.svg)![Image 7](https://assets-site.staticpipefy.com/production/wp-content/uploads/2022/02/logo-client-doers-capgemini-reupload-1.svg)
+
+Increase efficiency and reduce errors
+
+Save time and avoid rework by integrating Pipefy with your existing tool stack. Connect virtually any application with Pipefy so your data runs smoothly, end-to-end.
+
+![Image 8](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/08/features-integrations-automation-time-saving.png)
+
+Enhance visibility for better decision-making
+---------------------------------------------
+
+Use Pipefy to orchestrate your business workflows. Integrate with other tools and applications for better data visibility and valuable insights.
+
+![Image 9](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/10/features-dashboards-en-SVG.svg)
+
+Get value fast with quick and easy implementation
+-------------------------------------------------
+
+Forget about long development and implementation cycles. Leverage our no/low-code platform and configure your integrations in no time.
+
+![Image 10: Representation of how to create automation rules without code (no code) in Pipefy](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/10/automation-rules-SVG.svg)
+
+Find apps you can connect to Pipefy
+-----------------------------------
+
+Categories
+----------
+
+*   [All Integrations](https://www.pipefy.com/integrations/#)
+*   [Marketing](https://www.pipefy.com/integrations/#)
+*   [CRM](https://www.pipefy.com/integrations/#)
+*   [Finance](https://www.pipefy.com/integrations/#)
+*   [Procurement](https://www.pipefy.com/integrations/#)
+*   [Human Resources](https://www.pipefy.com/integrations/#)
+*   [Customer Service](https://www.pipefy.com/integrations/#)
+*   [Productivity](https://www.pipefy.com/integrations/#)
+*   [Collaboration](https://www.pipefy.com/integrations/#)
+*   [Product/Project Mgmt](https://www.pipefy.com/integrations/#)
+*   [Operations](https://www.pipefy.com/integrations/#)
+*   [Other](https://www.pipefy.com/integrations/#)
+
+All Integrations
+
+Most popular integrations
+
+Marketing
+
+Most popular Marketing integrations
+
+CRM
+
+Most popular CRM integrations
+
+Finance
+
+Most popular Finance integrations
+
+Procurement
+
+Most popular Procurement integrations
+
+Human Resources
+
+Most popular Human Resources integrations
+
+Customer Service
+
+Most popular Customer Service integrations
+
+Productivity
+
+Most popular Productivity integrations
+
+Collaboration
+
+Most popular Collaboration integrations
+
+Product/Project Mgmt
+
+Most popular Product/Project Mgmt integrations
+
+Operations
+
+Most popular Operations integrations
+
+Other
+
+Most popular Other integrations
+
+SAP On-premise
+
+When a card is created in the Accounts Payable pipe, send IDoc to SAP
+
+DocuSign
+
+When an employee card is moved to the hiring phase, send a signature request to the new employee via DocuSign
+
+Zendesk
+
+When a new support ticket is opened in Zendesk, create a task for Customer Support within Pipefy
+
+Salesforce
+
+When a new prospect is added in Pipefy, create a record in Salesforce
+
+SAP On-premise
+
+When a card is created in the Accounts Payable pipe, send IDoc to SAP
+
+NetSuite
+
+When a purchase request is approved in Pipefy, send all details to Netsuite
+
+QuickBooks Online
+
+When a purchase request is approved within Pipefy, send the PO to the vendor
+
+Sage Intacct
+
+When a new payment is received in Sage Intacct, move the card to done in the receivables pipe
+
+SAP On-premise
+
+When a card is created in the Purchase Process pipe, send IDoc to SAP
+
+NetSuite
+
+When a purchase request is approved in Pipefy, send all details to Netsuite
+
+QuickBooks Online
+
+When a purchase request is approved within Pipefy, send the PO to the vendor
+
+Sage Intacct
+
+When a new payment is received in Sage Intacct, move the card to done in the receivables pipe
+
+LinkedIn
+
+When a new position is ready to publish in Pipefy, publish the job position on the company page on LinkedIn
+
+DocuSign
+
+When an employee card is moved to the hiring phase, send a signature request to the new employee via DocuSign
+
+ADP Workforce Now
+
+When a new employee goes through the onboarding process in Pipefy, add employee payment and benefits information to ADP
+
+Zenefits
+
+When an internal transition is approved in Pipefy, update employment information in Zenefits
+
+Zendesk
+
+When a new support ticket is opened in Zendesk, create a task for Customer Support within Pipefy
+
+DocuSign
+
+When a new deal signs the contract in DocuSign, start customer onboarding in Pipefy
+
+Take Blip
+
+When a card is moved in Pipefy, send a WhatsApp template message to customer
+
+Intercom
+
+When a customer makes a complaint using Intercom, create a card in the Customer Helpdesk within Pipefy
+
+Salesforce
+
+When a new prospect is added in Pipefy, create a record in Salesforce
+
+MailChimp
+
+When a new campaign is approved in Pipefy, send emails through Mailchimp
+
+Shopify
+
+When a purchase is made on Shopify, create a card within Pipefy to make the delivery
+
+HubSpot
+
+When a new lead signs up within HubSpot, create a card in Pipefy to monitor the sales funnel
+
+Salesforce
+
+When a new prospect is added in Pipefy, create a record in Salesforce
+
+MailChimp
+
+When a new campaign is approved in Pipefy, send emails through Mailchimp
+
+Shopify
+
+When a purchase is made on Shopify, create a card within Pipefy to make the delivery
+
+HubSpot
+
+When a new lead signs up within HubSpot, create a card in Pipefy to monitor the sales funnel
+
+DocuSign
+
+When an employee card is moved to the hiring phase, send a signature request to the new employee via DocuSign
+
+Google Drive
+
+When a card is created with documents attached within Pipefy, upload the documents in a Google Drive folder
+
+DocParser
+
+When attaching documents within Pipefy, automatically read them using DocParser's OCR and register information in a Pipefy card
+
+Google Calendar
+
+When a meeting is scheduled on Google Calendar, create a new card on the to-do list within Pipefy
+
+Google Drive
+
+When a card is created with documents attached within Pipefy, upload the documents in a Google Drive folder
+
+Twilio SMS & amp | Phone calls
+
+When a new request is pending approval on Pipefy, the approver is notified via SMS
+
+Slack
+
+When a request is received or delivered in Pipefy, send a direct or channel message to stakeholders
+
+Google Calendar
+
+When meeting details are filled in a card within Pipefy, create an event on Google Calendar
+
+Dropbox
+
+When a new deal is closed in Pipefy, store all documents and contracts in Dropbox
+
+Google Drive
+
+When a card is created with documents attached within Pipefy, upload the documents in a Google Drive folder
+
+Zendesk
+
+When a new support ticket is opened in Zendesk, create a task for Customer Support within Pipefy
+
+Google Calendar
+
+When meeting details are filled in a card within Pipefy, create an event on Google Calendar
+
+Dropbox
+
+When a new deal is closed in Pipefy, store all documents and contracts in Dropbox
+
+SAP On-premise
+
+When a card is created in the Accounts Payable pipe, send IDoc to SAP
+
+Google Drive
+
+When a card is created with documents attached within Pipefy, upload the documents in a Google Drive folder
+
+DocuSign
+
+When a sale is approved within Pipefy, send a contract to the buyer via DocuSign
+
+Twilio SMS & amp | Phone calls
+
+When a new request is pending approval on Pipefy, the approver is notified via SMS
+
+Google Calendar
+
+When meeting details are filled in a card within Pipefy, create an event on Google Calendar
+
+Dropbox
+
+When a new deal is closed in Pipefy, store all documents and contracts in Dropbox
+
+Slack
+
+When a request is received or delivered in Pipefy, send a direct or channel message to stakeholders
+
+All Integrations
+
+All Marketing integrations
+
+All CRM integrations
+
+All Finance integrations
+
+All Procurement integrations
+
+All Human Resources integrations
+
+All Customer Service integrations
+
+All Productivity integrations
+
+All Collaboration integrations
+
+All Product/Project Mgmt integrations
+
+All Operations integrations
+
+All Other integrations
+
+2Checkout
+
+Active Directory
+
+ADP 2
+
+ADP Workforce Now
+
+Airbrake
+
+Airtable
+
+AM Cards
+
+Amazon Cognito
+
+Amazon S3
+
+Amazon SNS
+
+Anaplan
+
+Apache Kafka
+
+Apttus
+
+Apttus Intelligent Cloud
+
+Asana
+
+AscentERP
+
+AWS Lambda
+
+Azure Blob Storage
+
+BambooHR
+
+Basecamp 2
+
+Bigtincan
+
+Bill.com
+
+BIM 360
+
+Bitbucket
+
+Box
+
+BrickFTP
+
+Callable recipes by Workato
+
+Capsule CRM
+
+Celonis
+
+Chargify
+
+Charts by Workato
+
+Cisco Webex Teams
+
+Clearbit
+
+Cloud Watch
+
+Codeship
+
+Collection by Workato
+
+Concur
+
+Confluence
+
+Confluent Cloud
+
+Coupa
+
+CSV by Workato
+
+Deputy
+
+DocParser
+
+DocuSign
+
+Dropbox
+
+Egnyte
+
+Eloqua
+
+Email by Workato
+
+eTapestry
+
+Eventbrite
+
+Evernote
+
+Expensify
+
+Facebook
+
+Fairsail
+
+Feedly
+
+Files by Workato
+
+FinancialForce
+
+Force.com
+
+FreshBooks
+
+Freshdesk
+
+FTP/FTPS
+
+FullContact
+
+G2
+
+GitHub
+
+Gmail
+
+Google BigQuery
+
+Google Calendar
+
+Google Contacts
+
+Google Drive
+
+Google Sheets
+
+Google Speech to Text
+
+Google Text to Speech
+
+Google Translate
+
+Google Vision
+
+Google Workspace
+
+Goombal
+
+GotoWebinar
+
+Greenhouse
+
+Gusto
+
+HipChat
+
+HubSpot
+
+ibexa
+
+IBM Watson Workspace
+
+Infusionsoft
+
+Insightly
+
+Integromat
+
+Intercom
+
+JavaScript
+
+JDBC
+
+Jenkins
+
+Jira
+
+JIRA Service Desk
+
+JMS
+
+JobScience
+
+Jobvite
+
+JSON parser by Workato
+
+JSON Web Token(JWT)
+
+JumpCloud
+
+Kenandy
+
+Kizen
+
+Knack
+
+Librato
+
+Linked objects by Workato
+
+LinkedIn
+
+Lists by Workato
+
+Logger by Workato
+
+Lookup tables by Workato
+
+Magento 2
+
+MailChimp
+
+Mapper by Workato
+
+Marketo
+
+Message template by Workato
+
+Microsoft Dynamics CRM
+
+Microsoft Sharepoint
+
+Miro
+
+Mixpanel
+
+MySQL
+
+Namely
+
+NationBuilder
+
+NetSuite
+
+New Relic
+
+Okta
+
+On-prem command-line scripts
+
+On-prem files
+
+OneDrive
+
+Oracle
+
+Oracle E-Business Suite
+
+Outlook
+
+Outreach
+
+OutSystems
+
+Pagerduty
+
+ParseHub
+
+People Task by Workato
+
+Percolate
+
+PGP
+
+Pingdom
+
+Pipedrive
+
+Pivotal Tracker
+
+PlanGrid
+
+Podio
+
+PostgreSQL
+
+Product Hunt
+
+Prontoforms
+
+Propel
+
+PubSub by Workato
+
+Quick Base
+
+QuickBooks Online
+
+Quip
+
+Raiser's Edge NXT
+
+Redshift
+
+RegOnline® by Lanyon
+
+Replicon
+
+Revel Systems
+
+RingCentral
+
+Rollbar
+
+Ruby
+
+Sage Intacct
+
+Sage Live
+
+Salesforce
+
+Salesforce CPQ
+
+Salesforce Marketing Cloud
+
+SAP OData
+
+SAP On-premise
+
+Scheduler by Workato
+
+SendGrid
+
+ServiceM8
+
+ServiceMax
+
+ServiceNow
+
+SFTP
+
+Shopify
+
+Showpad
+
+Slack
+
+Smartsheet
+
+SMS by Workato
+
+Snowflake
+
+SOAP tools by Workato
+
+Splunk
+
+SQL Server
+
+Stripe
+
+SuccessFactors
+
+SurveyMonkey
+
+Take Blip
+
+Tango Card
+
+TaskRay
+
+TrackVia
+
+Tradeshift
+
+Trello
+
+TSheets
+
+Twilio SMS & amp | Phone calls
+
+Twitter
+
+Twitter Ads
+
+Unbounce
+
+Utilities
+
+Variables by Workato
+
+Veeva CRM
+
+Vend
+
+Vlocity
+
+Watson Tone Analyzer
+
+Webhooks
+
+WebMerge
+
+WooCommerce
+
+WordPress.com
+
+Workbot for Microsoft Teams
+
+Workbot for Slack
+
+Workbot for Workplace
+
+Workday
+
+Workday REST
+
+Workfront
+
+Wrike
+
+Wrike secondary
+
+Wufoo
+
+Xactly
+
+Xero
+
+Xero Practice Manager
+
+XML parser by Workato
+
+YAML parser by Workato
+
+Zendesk
+
+Zendesk Sunshine
+
+Zenefits
+
+Zoho CRM
+
+Zoho Invoice
+
+Zoom
+
+Zuora
+
+Zuora for Salesforce
+
+We don’t support the application you are searching for yet.
+
+But we can help you build a custom integration.
+
+[Click here](https://www.pipefy.com/chat-contact/) to start a conversation with one of our specialists.
+
+ 
+
+Get started today
+
+Build seamless end-to-end operations
+
+[Try Pipefy free](https://www.pipefy.com/signup/) [Request a demo](https://www.pipefy.com/integrations/#)
+
+Embrace AI-driven efficiency
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+Company
+
+[About us](https://www.pipefy.com/about-us/)
+
+[Careers](https://www.pipefy.com/careers/)
+
+[Partners](https://www.pipefy.com/partners/)
+
+[Newsroom](https://www.pipefy.com/newsroom/)
+
+[Success stories](https://www.pipefy.com/customers/)
+
+[Ethics and Compliance](https://www.pipefy.com/compliance/)
+
+Products
+
+[HR Service Delivery](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows](https://www.pipefy.com/custom-workflows-software/)
+
+Platform
+
+[What is Pipefy](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Pipefy for SMBs](https://www.pipefy.com/pipefy-for-smb/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[What's new](https://www.pipefy.com/whats-new/)
+
+[Pipefy AI](https://www.pipefy.com/artificial-intelligence/)
+
+[Security](https://www.pipefy.com/security/)
+
+Business Solutions
+
+[Process Management](https://www.pipefy.com/process-management-software/)
+
+[Service Management](https://www.pipefy.com/service-management-software/)
+
+[ITSM](https://www.pipefy.com/itsm/)
+
+Help & Support
+
+[Help Center](https://help.pipefy.com/en/)
+
+[Pipefy Academy](https://www.pipefy.com/academy/)
+
+[Pipefy Community](https://community.pipefy.com/)
+
+[Get Started](https://www.pipefy.com/getting-started-pipefy/)
+
+[Developer Hub](https://developers.pipefy.com/)
+
+Resources
+
+[Blog](https://www.pipefy.com/blog/)
+
+[Templates](https://www.pipefy.com/templates/)
+
+[Guides and E-books](https://www.pipefy.com/guides/)
+
+[Events and Webinars](https://www.pipefy.com/events/)
+
+[BPM Guide](https://www.pipefy.com/blog/business-process-management-bpm/)
+
+[BPA Guide](https://www.pipefy.com/blog/business-process-automation-bpa/)
+
+[Process Improvement 101](https://www.pipefy.com/blog/process-improvement-definition/)
+
+[Português](https://www.pipefy.com/pt-br/integracoes/)
+
+English
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Português](https://www.pipefy.com/pt-br/) [Español](https://www.pipefy.com/es/)
+
+English
+  ```
+
+Source URL: https://www.pipefy.com/pricing/
+  ```
+  Pricing - Pipefy
+===============
+
+\[Webinar\] Experience a new era of efficiency with Pipefy AI. [Save your seat now!](https://www.pipefy.com/webinar/pipefy-ai-efficiency/)
+
+[](https://www.pipefy.com/ "Pipefy")
+
+[Pipefy AI](https://www.pipefy.com/ai/)
+
+Products
+
+[HR Service Delivery Craft exceptional employee experiences](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay Streamline the procurement lifecycle](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows Bridge processes, teams and tools](https://www.pipefy.com/custom-workflows-software/)
+
+[![Image 1: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-products-mega-menu-cta-en.png)](https://www.pipefy.com/templates/)
+
+Platform
+
+[What is Pipefy AI business process automation](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise Workflow Platform For enterprises across all segments](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Integrations Integrate your tech stack](https://www.pipefy.com/integrations/)
+
+[Pipefy for SMBs Automation that scales with your business](https://www.pipefy.com/pipefy-for-smb/)
+
+[Platform Overview Fast-track digital transformation](https://www.pipefy.com/platform/)
+
+[No-code Build powerful workflows without any code](https://www.pipefy.com/blog/no-code-platform/)
+
+[Automation Extend your workflow efficiency](https://www.pipefy.com/business-process-automation-software/)
+
+[![Image 2: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-platform-mega-menu-cta-en.png)](https://www.pipefy.com/artificial-intelligence/)
+
+Resources
+
+[Success Stories Why companies around the world trust Pipefy](https://www.pipefy.com/customers/)
+
+[Events and Webinars Live events, Q&A sessions, and webinars](https://www.pipefy.com/events/)
+
+[Blog Expert-written content and best practices](https://www.pipefy.com/blog/)
+
+[Guides and E-books Industry trends, guidelines, and helpful how-to's](https://www.pipefy.com/guides/)
+
+*   [Pipefy Academy](https://www.pipefy.com/academy/)
+*   [Pipefy Community](https://community.pipefy.com/)
+*   [Developer Hub](https://developers.pipefy.com/)
+*   [Help Center](https://help.pipefy.com/en/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[Log in](https://app-auth.pipefy.com/login) [Start for free](https://www.pipefy.com/signup/?cta=Header+New+Website+UNUN01n001)
+
+Business process automation software for every budget
+=====================================================
+
+Save up to 16%
+
+Billed MonthlyBilled Annually
+
+Starter
+-------
+
+For small teams, startups, freelancers, and students who need to organize their tasks
+
+Free
+
+No credit card required
+
+[Get started](https://www.pipefy.com/signup)
+
+* * *
+
+Free plan includes:
+
+Pipefy AI
+
+Up to 5 processes
+
+Up to 10 users
+
+Basic automations
+
+Plug-n-play process templates
+
+Request tracker
+
+Visual Customization
+
+Business
+--------
+
+For mid-market teams needing to centralize and scale business processes
+
+$
+
+per user/month billed annually
+
+![Image 3: Pipefy Business Plan](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/pricing-unlimited-plan-background-flow.png)
+
+[Contact Sales](https://www.pipefy.com/book-a-demo)
+
+* * *
+
+All features in Free, plus:
+
+Pipefy AI
+
+Unlimited processes
+
+Unlimited users (per-user billing)
+
+Access to Pipefy’s API
+
+Role-based access
+
+Private processes
+
+Conditional logic
+
+Data recovery
+
+MOST POPULAR
+
+Enterprise
+----------
+
+For companies that need enterprise-level security, control, and support to manage complex processes
+
+$
+
+per user/month billed annually
+
+![Image 4: Pipefy Unlimited Plan](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/pricing-unlimited-plan-background-flow.png)
+
+[Contact Sales](https://www.pipefy.com/book-a-demo)
+
+* * *
+
+All features in Business, plus:
+
+Pipefy AI
+
+Multiple automations
+
+Integrations
+
+Two-factor authentication
+
+Single Sign-On
+
+Custom email domain
+
+Support from Pipefy’s team
+
+Higher database and storage limits
+
+White label
+
+Unlimited
+---------
+
+For organizations that need unlimited power to error-proof their Enterprise processes
+
+![Image 5: Pipefy Unlimited Plan](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/general/pricing-unlimited-plan-background-flow.png)
+
+[Contact Sales](https://www.pipefy.com/book-a-demo)
+
+* * *
+
+All features in Enterprise, plus:
+
+Pipefy AI
+
+Unlimited automation possibilities
+
+No limits for database records
+
+No data storage limits
+
+Expert support for modeling and implementing customized processes
+
+See all features and compare plans
+
+| General Features | 
+Starter
+
+[Get started](https://www.pipefy.com/signup/)
+
+ | 
+
+Business
+
+[Book a demo](https://www.pipefy.com/pricing/#)
+
+ | 
+
+Enterprise
+
+[Contact Sales](https://www.pipefy.com/pricing/#)
+
+ | 
+
+Unlimited
+
+[Contact Sales](https://www.pipefy.com/pricing/#)
+
+ |
+| --- | --- | --- | --- | --- |
+| Process templates | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Public shareable forms | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Email templates | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Standard productivity and lead time metrics | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Complete activity log inside cards | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Mobile App | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Request tracker (for non users) | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Customizable service portals | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Dashboards | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Ability to combine and export multiple processes data | Single process & up to 10 records | 
+
+ | 
+
+ | 
+
+ |
+| Field conditional logic | 3 | 
+
+ | 
+
+ | 
+
+ |
+| SLA alerts and notifications |  | 
+
+ | 
+
+ | 
+
+ |
+| Add-ons to power up workflows |  |  | 
+
+ | 
+
+ |
+| Possibility of hiring professional services |  |  | 
+
+ | 
+
+ |
+| Workflows | Up to 5 | Unlimited | Unlimited | Unlimited |
+| Users (per-user billing) | Up to 10 | Unlimited | Unlimited | Unlimited |
+| Cards created | Up to 50/month | Unlimited | Unlimited | Unlimited |
+| Guest users | None | Up to 100 | Unlimited | Unlimited |
+| Interfaces | 2 | 20 | 100 | 300 |
+| Database records | Up to 500 | Up to 10,000 | Custom | Unlimited |
+| Storage | Up to 2GB | Up to 20GB | Custom | Unlimited |
+| Pipefy AI |
+| AI Credits (per month) | 10 credits | 50 credits | 500 credits | 2000 credits |
+| Automation and Integration |
+| Native integrations | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Zapier integration | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Mass card creation with spreadsheet imports | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Automation jobs (per month) | 15 | 300 | 2,000 | 
+
+ |
+| API call (per month) | 20 | 500 | 10,000 | 
+
+ |
+| Custom integrations |  |  | Add-ons | 
+
+ |
+| Connections between workflows | Up to 1 | Unlimited | Unlimited | Unlimited |
+| Visual Customization |
+| Personalized branding | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| White label |  |  | 
+
+ | 
+
+ |
+| Privacy and Security |
+| Encryption in transit | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Encryption at rest | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Private workflows |  | 
+
+ | 
+
+ | 
+
+ |
+| Role-based access and permissions |  | 
+
+ | 
+
+ | 
+
+ |
+| User restrictions to view/edit only their own cards |  | 
+
+ | 
+
+ | 
+
+ |
+| Data recovery of the last 90 days |  | 
+
+ | 
+
+ | 
+
+ |
+| Single Sign-On |  |  | 
+
+ | 
+
+ |
+| Two-factor authentication |  |  | 
+
+ | 
+
+ |
+| Training & Support |
+| Access to Pipefy University | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Access to help articles | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| Community support | 
+
+ | 
+
+ | 
+
+ | 
+
+ |
+| In-app chat during business hours |  | 
+
+ | 
+
+ | 
+
+ |
+
+Special plan for Small Businesses
+---------------------------------
+
+Achieve more with less by automating processes across the entire company. Hassle-free. No-code.
+
+Up to 90% discount for SMB packages
+
+Access to all features
+
+Integration with over 500 other tools
+
+Personalized knowledge base
+
+Expert support
+
+Platform training for your team
+
+Exclusive fixed-price offer!
+
+This offer is valid for companies with 11 to 200 employees, subject to certain conditions.
+
+Learn more
+
+Globally trusted by some of the most prestigious enterprises
+
+![Image 6: Logotipo Capgemini Dark](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/capgemini.png)![Image 7: Logotipo GE Healthcare](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/gehealthcare.png)![Image 8: Logotipo IBM Dark](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/ibm.png)![Image 9: Logotipo Kraft Heinz Dark](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/kraft.png)![Image 10: Logotipo Toyota Dark](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/toyota.png)![Image 11: Logotipo Volvo Dark](https://www.pipefy.com/wp-content/mu-plugins/pipefy-blocks/assets/images/logos/dark/volvo.png)
+
+Questions & Answers
+-------------------
+
+If you need help, we are ready to provide guidance and support.
+
+Do I need any advanced technical skills or professional support services to implement Pipefy?
+
+Pipefy is designed to be simple and easy, allowing anyone to configure their own processes and workflows. However, in large and complex operations some companies like to have the support of our professional consultants – in this case we can recommend companies that offer those services.
+
+Will my data be private and safe?
+
+Keeping your data secure is a top priority at Pipefy. Review our security protocols and how your business and customer data will be protected in our security whitepaper.
+
+What if I need to add someone new to my team?
+
+If you need to add new members, you can do that. The amount charged per new user will be the same for the other members included in your plan. [See our article for more information](https://help.pipefy.com/en/articles/619504-pipefy-pricing-policies).
+
+Can I change plans anytime I want? How long are the contracts?
+
+The contracts can be monthly or yearly. You can start/stop or make changes to your plan any time you want – however, we won’t give refunds for cancellation or plan downgrades. [See our article for more information](https://help.pipefy.com/en/articles/614618-how-to-cancel-a-pipefy-subscription).
+
+Does Pipefy integrate with other systems?
+
+Yes. There are 5 ways to integrate Pipefy with your favorite tools: Custom Integrations with any software you need. [Request a quote here](https://app.pipefy.com/public/form/WIb8ff63). Native integrations with Slack, GitHub, BitBucket, and Google Hangouts. Via API. Via [HTTP requests](https://help.pipefy.com/en/articles/8392669-how-to-create-integrations-with-http-requests-and-further-customize-your-processes-using-automations). Via Zapier.
+
+Discover the future of business automation with Pipefy
+------------------------------------------------------
+
+[Get started](https://www.pipefy.com/signup/)[Book a demo](https://www.pipefy.com/book-a-demo)
+
+Embrace AI-driven efficiency
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+Company
+
+[About us](https://www.pipefy.com/about-us/)
+
+[Careers](https://www.pipefy.com/careers/)
+
+[Partners](https://www.pipefy.com/partners/)
+
+[Newsroom](https://www.pipefy.com/newsroom/)
+
+[Success stories](https://www.pipefy.com/customers/)
+
+[Ethics and Compliance](https://www.pipefy.com/compliance/)
+
+Products
+
+[HR Service Delivery](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows](https://www.pipefy.com/custom-workflows-software/)
+
+Platform
+
+[What is Pipefy](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Pipefy for SMBs](https://www.pipefy.com/pipefy-for-smb/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[What's new](https://www.pipefy.com/whats-new/)
+
+[Pipefy AI](https://www.pipefy.com/artificial-intelligence/)
+
+[Security](https://www.pipefy.com/security/)
+
+Business Solutions
+
+[Process Management](https://www.pipefy.com/process-management-software/)
+
+[Service Management](https://www.pipefy.com/service-management-software/)
+
+[ITSM](https://www.pipefy.com/itsm/)
+
+Help & Support
+
+[Help Center](https://help.pipefy.com/en/)
+
+[Pipefy Academy](https://www.pipefy.com/academy/)
+
+[Pipefy Community](https://community.pipefy.com/)
+
+[Get Started](https://www.pipefy.com/getting-started-pipefy/)
+
+[Developer Hub](https://developers.pipefy.com/)
+
+Resources
+
+[Blog](https://www.pipefy.com/blog/)
+
+[Templates](https://www.pipefy.com/templates/)
+
+[Guides and E-books](https://www.pipefy.com/guides/)
+
+[Events and Webinars](https://www.pipefy.com/events/)
+
+[BPM Guide](https://www.pipefy.com/blog/business-process-management-bpm/)
+
+[BPA Guide](https://www.pipefy.com/blog/business-process-automation-bpa/)
+
+[Process Improvement 101](https://www.pipefy.com/blog/process-improvement-definition/)
+
+[Português](https://www.pipefy.com/pt-br/precos/)
+
+English
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Português](https://www.pipefy.com/pt-br/) [Español](https://www.pipefy.com/es/)
+
+English
+  ```
+
+Source URL: https://www.pipefy.com/how-pipefy-works/
+  ```
+  How Pipefy Works - Pipefy
+===============
+
+\[Webinar\] Experience a new era of efficiency with Pipefy AI. [Save your seat now!](https://www.pipefy.com/webinar/pipefy-ai-efficiency/)
+
+[](https://www.pipefy.com/ "Pipefy")
+
+[Pipefy AI](https://www.pipefy.com/ai/)
+
+Products
+
+[HR Service Delivery Craft exceptional employee experiences](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay Streamline the procurement lifecycle](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows Bridge processes, teams and tools](https://www.pipefy.com/custom-workflows-software/)
+
+[![Image 1: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-products-mega-menu-cta-en.png)](https://www.pipefy.com/templates/)
+
+Platform
+
+[What is Pipefy AI business process automation](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise Workflow Platform For enterprises across all segments](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Integrations Integrate your tech stack](https://www.pipefy.com/integrations/)
+
+[Pipefy for SMBs Automation that scales with your business](https://www.pipefy.com/pipefy-for-smb/)
+
+[Platform Overview Fast-track digital transformation](https://www.pipefy.com/platform/)
+
+[No-code Build powerful workflows without any code](https://www.pipefy.com/blog/no-code-platform/)
+
+[Automation Extend your workflow efficiency](https://www.pipefy.com/business-process-automation-software/)
+
+[![Image 2: lumen-header__mega-menu-cta](https://www.pipefy.com/wp-content/themes/pipefy-2020/assets/img/lumen-platform-mega-menu-cta-en.png)](https://www.pipefy.com/artificial-intelligence/)
+
+Resources
+
+[Success Stories Why companies around the world trust Pipefy](https://www.pipefy.com/customers/)
+
+[Events and Webinars Live events, Q&A sessions, and webinars](https://www.pipefy.com/events/)
+
+[Blog Expert-written content and best practices](https://www.pipefy.com/blog/)
+
+[Guides and E-books Industry trends, guidelines, and helpful how-to's](https://www.pipefy.com/guides/)
+
+*   [Pipefy Academy](https://www.pipefy.com/academy/)
+*   [Pipefy Community](https://community.pipefy.com/)
+*   [Developer Hub](https://developers.pipefy.com/)
+*   [Help Center](https://help.pipefy.com/en/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[Log in](https://app-auth.pipefy.com/login) [Start for free](https://www.pipefy.com/signup/?cta=Header+New+Website+UNUN01n001)
+
+Discover pipefy
+
+How Pipefy Works
+================
+
+Pipefy empowers you to quickly deploy workflows for excellent service delivery. From request creation to execution and reporting, gain efficiency in processes like HR case management, purchasing and customer onboarding.
+
+[Get started](https://www.pipefy.com/signup/) [Request a demo](https://www.pipefy.com/how-pipefy-works/#)
+
+[](https://www.pipefy.com/how-pipefy-works/#)
+
+[Watch how Pipefy works](https://player.vimeo.com/video/447658892/)
+
+Receive requests through multiple channels
+------------------------------------------
+
+Pipefy makes it easy for customers, employees, and vendors to ask for what they need and ensures you'll always receive all the necessary information to process demands throughout your entire process. **These requests can be created both manually and automatically through:**
+
+Create workflows in minutes, insights in seconds
+------------------------------------------------
+
+Pipefy AI creates custom processes instantly; all you have to do is ask! Increase your decision-making power by requesting data and information to reveal trends and strategic insights.
+
+[Meet Pipefy AI](https://www.pipefy.com/artificial-intelligence/)
+
+ ![Image 3: Pipe AI Chat Image](https://assets-site.staticpipefy.com/production/wp-content/uploads/2023/07/Platform-AI-EN.png)
+
+Shareable fields, forms, and portals
+------------------------------------
+
+![Image 4](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-portals-2021-en.svg)
+
+Internal forms for Pipefy users
+-------------------------------
+
+![Image 5](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-forms-2021-en.svg)
+
+Emails to specific addresses
+----------------------------
+
+![Image 6](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-emails-2021-en.svg)
+
+Connection between processes
+----------------------------
+
+![Image 7](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-connections-2021-en.svg)
+
+Integration with other tools
+----------------------------
+
+![Image 8](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-integrations-2021-en.svg)
+
+Customized solutions through our public API
+-------------------------------------------
+
+![Image 9](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-apis-2021-en.svg)
+
+Streamline your execution with smart workflows
+----------------------------------------------
+
+**Design the entire experience and achieve error-proof execution** with no-code automation, efficient approval flows, precise communication and integrated apps and software. Leverage a user-friendly interface to navigate through the steps of your workflows.
+
+![Image 10](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-required-fields-2021-en.svg)
+
+### Customize each step with your own conditions
+
+Design your process to address the uniqueness of each phase and **ensure the quality of execution every time.** Require additional information, delegate tasks, set deadlines and configure mandatory actions to build an efficient and error-proof operation.
+
+[](https://www.pipefy.com/signup/)
+
+![Image 11](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-automate-2021-en.svg)
+
+### Automate tasks and integrate tools
+
+Automate activities like sending emails and updating database records without writing a single line of code. Integrate Pipefy with tools like ERPs, accounting software, payroll systems and SMS to **orchestrate the entire operation in a single screen**.
+
+[](https://www.pipefy.com/signup/)
+
+![Image 12](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/10/request-tracker-how-pipefy-works-en.svg)
+
+### Easily update stakeholders about their requests
+
+Build an efficient communication flow to deliver a high-quality service experience and increase your team productivity. **Allow your customers, vendors and employees to follow the status of their requests even without a Pipefy account.**
+
+[](https://www.pipefy.com/signup/)
+
+![Image 13](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-approval-2021-en.svg)
+
+### Build your own approval flows
+
+Gain full control over your processes and never deal with forgotten demands, unapproved requests and unauthorized actions again. **Automatically enforce business policies, get approvers in the loop and keep stakeholders up to date at all times.**
+
+[](https://www.pipefy.com/signup/)
+
+![Image 14](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/01/hpw-communicate-2021-en.svg)
+
+### Communicate effectively and secure information
+
+Interact with colleagues, requesters and internal and external customers **without leaving the platform**. Exchange emails manually or automatically and integrate with SMS services to keep stakeholders in the loop. Additionally, attach files and add comments for quicker feedback and approvals.
+
+[](https://www.pipefy.com/signup/)
+
+![Image 15](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/06/shared-inbox-how-pipefy-works-en.svg)
+
+Centralize demands and never miss a beat
+----------------------------------------
+
+Use Pipefy’s Shared Inbox to **manage all of your team’s emails from a single place**, delegating tasks and tracking progress. And with Phase Forms, you can request information from clients or stakeholders **at any step of the process** — even if they don’t have a Pipefy account.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[](https://www.pipefy.com/signup/)
+
+Measure, optimize and report your results
+-----------------------------------------
+
+Leverage **customizable analytics** to deeply understand your team's performance, find bottlenecks and get **actionable insights** to continuously **optimize your processes** and gain even more efficiency.
+
+ ![Image 16](https://assets-site.staticpipefy.com/production/wp-content/uploads/2021/02/hpw-dashboards-2021-en.svg)
+
+**Customize your dashboards to keep track of your team's KPIs**
+
+Easily choose what data you want to pull from your workflows and translate it into different chart formats. Never overlook metrics like time to hire, NPS, dollars spent and billable hours again.
+
+**Use data visualization to spot improvement opportunities**
+
+Leverage Dashboards to stay on top of the operation, spot bottlenecks and continuously improve your processes. Gain efficiency, save costs and show better results.
+
+Now think of what Pipefy can do for you
+---------------------------------------
+
+The possibilities are endless. **With a highly customizable, no/low-code platform, you can easily streamline your workflows.** We’ll help you get started with these flexible, pre-built workflows:
+
+[![Image 17](https://assets-site.staticpipefy.com/production/wp-content/uploads/2019/12/Recruitment.jpg) Recruitment & Hiring Process ---------------------------- Keep track of your candidates and make sure no talent goes unnoticed.](https://www.pipefy.com/templates/recruitment-process/)
+
+[Use template](https://app.pipefy.com/pipes/912/clone?cta=HRSM07+EN) [Preview](https://www.pipefy.com/templates/recruitment-process/)
+
+[![Image 18: Make a better Employee Onboarding with Pipefy](https://assets-site.staticpipefy.com/production/wp-content/uploads/2019/05/Employee_Onboarding_Thumbnail.png) Employee Onboarding ------------------- Standardize your onboarding process to offer the best employee experience.](https://www.pipefy.com/templates/employee-onboarding/)
+
+[Use template](https://app.pipefy.com/pipes/67457/clone?cta=HRSM05+EN) [Preview](https://www.pipefy.com/templates/employee-onboarding/)
+
+[![Image 19: Finance team member processes accounts payable documents for business](https://assets-site.staticpipefy.com/production/wp-content/uploads/2020/03/images_blog04-1-300x150.png) Purchase Process ---------------- Standardize requests, prioritize approvals and communicate faster than ever.](https://www.pipefy.com/templates/purchasing-process/)
+
+[Use template](https://app.pipefy.com/pipes/831/clone?cta=FLSM04+EN) [Preview](https://www.pipefy.com/templates/purchasing-process/)
+
+[![Image 20: The greatest Customer Onboarding](https://assets-site.staticpipefy.com/production/wp-content/uploads/2019/12/Customer_Onboarding_thumbnail-1.png) Customer Onboarding ------------------- Ensure the best onboarding experience for your new customers with this free template.](https://www.pipefy.com/templates/customer-onboarding/)
+
+[Use template](https://app.pipefy.com/pipes/65133/clone?cta=CSSM06+EN) [Preview](https://www.pipefy.com/templates/customer-onboarding/)
+
+We use the portal feature to support a big pilar of our business. With portals and forms, **we can capture information without errors, and the database helps us organize and centralize information.**
+
+Rubens Eric Godoi
+
+Reviewer at G2
+
+Pipefy gives us the control we need to ensure everyone abides by our rules and policies. **We no longer have to follow up with people to get all the information we need** to process a purchase request.
+
+Mauricio Rizzi
+
+Customer Service and Procurement Manager, at Samsonite
+
+**Pipefy is easy to use and flexible** . It has a database included, reporting, automation. A complete solution. The main problem I solve is to comply by always getting the same results out of the process. Quality is assured.
+
+Luis Fernando Salazar Canas
+
+Regional Manager at Infina Financial Services
+
+We were communicating with our clients by email and manually tracking the progress of each marketing request. Nowadays, **100% of the requests that are captured on Pipefy correctly, are executed correctly.**
+
+Devon Meerholz
+
+Chief Creative and Operations Officer at IMImobile South Africa
+
+Now, when hiring managers submit recruitment requests, **they have to answer a series of questions, such as salary and job requirements.** So when we get the requests, we don’t have to track down missing information.
+
+Renan Souza Lima
+
+Strategic Analyst, HR at Carglass
+
+  
+
+Get started today
+
+Transform the way your team works
+
+[Try Pipefy free](https://www.pipefy.com/signup/) [Request a demo](https://www.pipefy.com/how-pipefy-works/#)
+
+Embrace AI-driven efficiency
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+Company
+
+[About us](https://www.pipefy.com/about-us/)
+
+[Careers](https://www.pipefy.com/careers/)
+
+[Partners](https://www.pipefy.com/partners/)
+
+[Newsroom](https://www.pipefy.com/newsroom/)
+
+[Success stories](https://www.pipefy.com/customers/)
+
+[Ethics and Compliance](https://www.pipefy.com/compliance/)
+
+Products
+
+[HR Service Delivery](https://www.pipefy.com/hr-service-delivery/)
+
+[Procure-to-Pay](https://www.pipefy.com/procure-to-pay-software/)
+
+[Custom Workflows](https://www.pipefy.com/custom-workflows-software/)
+
+Platform
+
+[What is Pipefy](https://www.pipefy.com/how-pipefy-works/)
+
+[Enterprise](https://www.pipefy.com/enterprise-process-management-software/)
+
+[Pipefy for SMBs](https://www.pipefy.com/pipefy-for-smb/)
+
+[Pricing](https://www.pipefy.com/pricing/)
+
+[What's new](https://www.pipefy.com/whats-new/)
+
+[Pipefy AI](https://www.pipefy.com/artificial-intelligence/)
+
+[Security](https://www.pipefy.com/security/)
+
+Business Solutions
+
+[Process Management](https://www.pipefy.com/process-management-software/)
+
+[Service Management](https://www.pipefy.com/service-management-software/)
+
+[ITSM](https://www.pipefy.com/itsm/)
+
+Help & Support
+
+[Help Center](https://help.pipefy.com/en/)
+
+[Pipefy Academy](https://www.pipefy.com/academy/)
+
+[Pipefy Community](https://community.pipefy.com/)
+
+[Get Started](https://www.pipefy.com/getting-started-pipefy/)
+
+[Developer Hub](https://developers.pipefy.com/)
+
+Resources
+
+[Blog](https://www.pipefy.com/blog/)
+
+[Templates](https://www.pipefy.com/templates/)
+
+[Guides and E-books](https://www.pipefy.com/guides/)
+
+[Events and Webinars](https://www.pipefy.com/events/)
+
+[BPM Guide](https://www.pipefy.com/blog/business-process-management-bpm/)
+
+[BPA Guide](https://www.pipefy.com/blog/business-process-automation-bpa/)
+
+[Process Improvement 101](https://www.pipefy.com/blog/process-improvement-definition/)
+
+[Português](https://www.pipefy.com/pt-br/como-pipefy-funciona/)
+
+English
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+[](https://www.linkedin.com/company/pipefy/)
+
+[](https://www.facebook.com/pipefy/)
+
+[](https://twitter.com/pipefy)
+
+[](https://www.youtube.com/channel/UC5dkX3nQTc-s3-ogpRPENXQ)
+
+[](https://www.instagram.com/pipefy/?hl=en)
+
+[Privacy Policy](https://www.pipefy.com/privacy-policy/)
+
+[Terms & Conditions](https://www.pipefy.com/terms-and-conditions/)
+
+2024 - Pipefy Inc. All rights reserved.
+
+[Português](https://www.pipefy.com/pt-br/) [Español](https://www.pipefy.com/es/)
+
+English
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

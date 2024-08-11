@@ -1,0 +1,407 @@
+LLM: EXTRACT_RELEVANT_LINKS
+Timestamp: 2024-08-11T19:09:08.654Z
+Model: gpt-4o-mini
+
+Request:
+[user]: 
+Base URL: https://www.notion.so/
+
+Website content delimited by triple backticks:
+```
+Your connected workspace for wiki, docs & projects | Notion
+===============
+
+ 
+
+[](https://www.notion.so/product)
+
+*   Product
+    
+    *   [AIIntegrated AI assistant](https://www.notion.so/product/ai)
+    *   [DocsSimple & powerful](https://www.notion.so/product/docs)
+    *   [WikisCentralize your knowledge](https://www.notion.so/product/wikis)
+    *   [ProjectsConnected, flexible workflows](https://www.notion.so/product/projects)
+    *   [CalendarTime and work, together](https://www.notion.so/product/calendar)
+    *   [SitesNewPublish anything, fast](https://www.notion.so/product/sites)
+    
+    *   [Template gallerySetups to get you started](https://www.notion.so/templates)
+    *   [Customer storiesSee how teams use Notion](https://www.notion.so/customers)
+    *   [ConnectionsConnect your tools to Notion](https://www.notion.so/integrations)
+    
+*   Download
+    
+    *   [Notion](https://www.notion.so/download)
+    *   [Calendar](https://www.notion.so/product/calendar/download)
+    *   [Web Clipper](https://www.notion.so/web-clipper)
+    
+    Notion is always at home right [in your browser](https://www.notion.so/signup)
+    
+*   Solutions
+    
+    By team size
+    
+    *   [![Image 1](https://www.notion.so/cdn-cgi/image/format=webp,width=96/front-static/shared/icons/team-size-enterprise.png) EnterpriseAdvanced features for your org](https://www.notion.so/enterprise)
+    *   [![Image 2](https://www.notion.so/cdn-cgi/image/format=webp,width=96/front-static/shared/icons/team-size-small-business.png) Small businessRun your team on one tool](https://www.notion.so/teams)
+    *   [![Image 3](https://www.notion.so/cdn-cgi/image/format=webp,width=96/front-static/shared/icons/team-size-personal.png) PersonalFree for individuals](https://www.notion.so/personal)
+    
+    By team function
+    
+    *   [Design](https://www.notion.so/product/notion-for-design)
+    *   [Engineering](https://www.notion.so/product/notion-for-engineering)
+    *   [Product](https://www.notion.so/product/notion-for-product)
+    *   [Managers](https://www.notion.so/product/notion-for-managers)
+    
+    Notion for
+    
+    *   [Startups](https://www.notion.so/startups)
+    *   [Remote work](https://www.notion.so/remote)
+    *   [Education](https://www.notion.so/product/notion-for-education)
+    *   [Nonprofits](https://www.notion.so/nonprofits)
+    
+*   Resources
+    
+    *   [Blog](https://www.notion.so/blog)
+    *   [Notion Academy](https://www.notion.so/help/notion-academy)
+    *   [Guides & tutorials](https://www.notion.so/help/guides)
+    *   [Webinars](https://www.notion.so/webinars)
+    *   [Help center](https://www.notion.so/help)
+    *   [API docs](https://developers.notion.com/)
+    *   [Community](https://www.notion.so/notion/04f306fbf59a413fae15f42e2a1ab029)
+    *   [Hire a consultant](https://www.notion.so/consulting-partners)
+    *   [Become a partner](https://www.notion.so/become-a-partner)
+    
+*   [Pricing](https://www.notion.so/pricing)
+
+*   [Request a demo](https://www.notion.so/contact-sales)
+
+*   [Log in](https://www.notion.so/login)
+*   [Get Notion free](https://www.notion.so/signup)
+
+[Get Notion free](https://www.notion.so/signup)
+
+Product
+
+*   [AI](https://www.notion.so/product/ai)
+*   [Docs](https://www.notion.so/product/docs)
+*   [Wikis](https://www.notion.so/product/wikis)
+*   [Projects](https://www.notion.so/product/projects)
+*   [Calendar](https://www.notion.so/product/calendar)
+*   [SitesNew](https://www.notion.so/product/sites)
+
+*   [Template gallery](https://www.notion.so/templates)
+*   [Customer stories](https://www.notion.so/customers)
+*   [Connections](https://www.notion.so/integrations)
+
+Solutions
+
+Resources
+
+Download
+
+[Pricing](https://www.notion.so/pricing)
+
+[Request a demo](https://www.notion.so/contact-sales)
+
+[Get Notion free](https://www.notion.so/signup)[Log in](https://www.notion.so/login)
+
+Write. Plan. Organize.
+======================
+
+With a little help from AI.
+---------------------------
+
+[Get Notion free](https://www.notion.so/signup)[Request a demo](https://www.notion.so/contact-sales)
+
+![Image 4](https://www.notion.so/cdn-cgi/image/format=webp,width=1920/front-static/pages/product/super-duper/hero-illo.png)![Image 5: A screenshot of Notion's interface](https://www.notion.so/cdn-cgi/image/format=webp,width=1920,quality=90/front-static/pages/product/super-duper/mobile/notion-hero-v2.png)
+
+![Image 6](https://images.ctfassets.net/spoqsaf9291f/6T4QxYfpIzIbZgWUSa5Rb1/c88459cc628f176493f115900cfbe5c0/figma.svg)
+
+![Image 7](https://images.ctfassets.net/spoqsaf9291f/GcGQkjJATOyaJRTvul2nK/3ad21f3637815fde848c61e6e7cfb1cc/substack.png)
+
+![Image 8](https://images.ctfassets.net/spoqsaf9291f/27ImnwWYAZNrl4pE44azZJ/ad710b3b96e67d3b19eb4012c0aeaed2/discord.svg)
+
+![Image 9](https://images.ctfassets.net/spoqsaf9291f/1MsSLQFZEc53mD2sFhdz44/78d002d81f91e7aab5322eb582f30190/arc.svg)
+
+![Image 10](https://images.ctfassets.net/spoqsaf9291f/6YyxUI0AtkIHmgiB8gRVJb/4cb6836b5db29aae9a514738bfc17a4c/spotify_3x.png)
+
+![Image 11](https://images.ctfassets.net/spoqsaf9291f/1fJCIIjK31CRPMPj7Bp9Mu/c094fa31125ad5f8a01bb8169847e227/toyota.svg)
+
+Write
+
+### Find the right words.
+
+Capture ideas, gather feedback from teammates, and ask AI to add the finishing touches.
+
+[Explore docs & notes→](https://www.notion.so/product/docs)
+
+*   ![Image 12](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/photoOnRectangle.png)
+    
+    #### Building blocks
+    
+    100+ content types to communicate any idea.
+    
+*   ![Image 13](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/at2.png)
+    
+    #### Collaborative tools
+    
+    Built for teams to share, suggest, and comment.
+    
+*   ![Image 14](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/sparklePencil.png)
+    
+    #### AI-assisted
+    
+    Edit, draft, translate. Ask, and AI will answer.
+    
+
+![Image 15: A screenshot of multiple Notion windows showcasing writing features](https://www.notion.so/cdn-cgi/image/format=webp,width=3840/front-static/pages/product/super-duper/write-v5.png)
+
+#### Replaces
+
+*   ![Image 16: #Evernote logo](https://www.notion.so/front-static/pages/product/super-duper/tools/evernote.svg)Evernote
+*   ![Image 17: #Google Docs logo](https://www.notion.so/front-static/pages/product/super-duper/tools/gdocs.svg)Google Docs
+*   ![Image 18: #Coda logo](https://www.notion.so/front-static/pages/product/super-duper/tools/coda.svg)Coda
+
+Plan
+
+### Your workflow. Your way.
+
+There’s a lot to keep track of. Notion’s flexible pages allow you to design your ideal workflow and view it by timeline, task, team, or level of doneness.
+
+[Explore projects→](https://www.notion.so/product/projects)
+
+*   ![Image 19](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/checklist.png)
+    
+    #### Tasks and to-dos
+    
+    Tackle any project, big or small.
+    
+*   ![Image 20](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/calendarSheet.png)
+    
+    #### Custom views
+    
+    Visualize work in any format, from calendars to kanban boards.
+    
+*   ![Image 21](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/bolt.png)
+    
+    #### Automations
+    
+    Put tedious tasks on autopilot.
+    
+
+![Image 22: A screenshot of Notion's planning features including roadmap and projects](https://www.notion.so/cdn-cgi/image/format=webp,width=3840/front-static/pages/product/super-duper/plan-v5.png)
+
+#### Replaces
+
+*   ![Image 23: #Trello logo](https://www.notion.so/front-static/pages/product/super-duper/tools/trello.svg)Trello
+*   ![Image 24: #Asana logo](https://www.notion.so/front-static/pages/product/super-duper/tools/asana.svg)Asana
+*   ![Image 25: #Monday logo](https://www.notion.so/front-static/pages/product/super-duper/tools/monday.svg)Monday
+
+Organize
+
+### Remember everything.
+
+No more endless searching for the info you need. Everything you and your team store in Notion is accessible in an instant.
+
+[Explore knowledge management→](https://www.notion.so/product/wikis)
+
+*   ![Image 26](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/bookClosed1.png)
+    
+    #### Teamspaces
+    
+    Dedicated space for every team and project.
+    
+*   ![Image 27](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/connections.png)
+    
+    #### Integrations
+    
+    Connected to all your favorite tools.
+    
+*   ![Image 28](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/sparkleBubble.png)
+    
+    #### Just ask AI
+    
+    Instant answers when you need them.
+    
+
+![Image 29: A screenshot showing Notion's AI chatting with a user about project status](https://www.notion.so/cdn-cgi/image/format=webp,width=3840/front-static/pages/product/super-duper/organize-v6.png)
+
+#### Replaces
+
+*   ![Image 30: #Confluence logo](https://www.notion.so/cdn-cgi/image/format=webp,width=48/front-static/pages/product/super-duper/tools/confluence.png)Confluence
+*   ![Image 31: #SharePoint logo](https://www.notion.so/cdn-cgi/image/format=webp,width=48/front-static/pages/product/super-duper/tools/sharepoint.png)SharePoint
+*   ![Image 32: #Google Drive logo](https://www.notion.so/front-static/pages/product/super-duper/tools/google-drive.svg)Google Drive
+
+> Your AI everything app.
+
+![Image 33](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/shared/logos/black/forbes.png)
+
+Notion AI
+
+### Get a brain boost.
+
+Built right into your workspace, Notion AI is at the ready to brainstorm ideas, summarize, help you write, and find what you’re looking for.
+
+[Try Notion AI→](https://www.notion.so/product/ai)
+
+*   ![Image 34](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/exclaimationBubble.png)
+    
+    #### Instant answers
+    
+    Ask any question about your team’s docs and projects.
+    
+*   ![Image 35](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/pencilTwist.png)
+    
+    #### Personalized editor
+    
+    Generate content that’s always relevant.
+    
+*   ![Image 36](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/puzzle.png)
+    
+    #### AI connectors
+    
+    Access info from all your tools, right inside Notion.
+    
+
+![Image 37: A screenshot showing Notion AI generate a campaign brainstorm](https://www.notion.so/cdn-cgi/image/format=webp,width=3840/front-static/pages/product/super-duper/ai-v6.png)
+
+Everything you need to do your best work.
+-----------------------------------------
+
+![Image 38](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/docsStacked.png)
+
+### [Docs→](https://www.notion.so/product/docs)
+
+Build any page, communicate any idea.
+
+![Image 39](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/bookFlat.png)
+
+### [Wiki→](https://www.notion.so/product/wikis)
+
+Store all your knowledge in one home base.
+
+![Image 40](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/target.png)
+
+### [Projects→](https://www.notion.so/product/projects)
+
+Manage any endeavor from beginning to end.
+
+![Image 41](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/sparkle.png)
+
+### [Notion AI→](https://www.notion.so/product/ai)
+
+Instant answers and writing help within your workspace.
+
+![Image 42](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/notionCalendarLogo.png)
+
+### [Calendar→](https://www.notion.so/product/calendar)
+
+See all your commitments in one place.
+
+![Image 43](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/trophy.png)
+
+### [Goals→](https://www.notion.so/templates/category/planning-goals)
+
+Set objectives, get organized, and track progress.
+
+![Image 44](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/globe.png)
+
+### [Sites→](https://www.notion.so/product/sites)
+
+Make any page a website in minutes.
+
+![Image 45](https://www.notion.so/cdn-cgi/image/format=webp,width=256/front-static/illustrated-icons/shapes1.png)
+
+### [Templates→](https://www.notion.so/templates)
+
+Jump in with one of 10,000+ templates.
+
+Get started for free.
+---------------------
+
+Play around with it first. Pay and add your team later.
+
+[Get Notion free](https://www.notion.so/signup)[Request a demo](https://www.notion.so/contact-sales)
+
+[](https://www.notion.so/product)
+
+*   [](https://www.instagram.com/notionhq/)
+*   [](https://twitter.com/NotionHQ)
+*   [](https://www.linkedin.com/company/notionhq/)
+*   [](https://www.facebook.com/NotionHQ/)
+*   [](https://www.youtube.com/channel/UCoSvlWS5XcwaSzIcbuJ-Ysg)
+
+English
+
+*   [English English (US)](https://www.notion.so/)
+*   [Français (France) French](https://www.notion.so/fr-fr)
+*   [Deutsch German](https://www.notion.so/de-de)
+*   [日本語 Japanese](https://www.notion.so/ja-jp)
+*   [한국어 Korean](https://www.notion.so/ko-kr)
+*   [Português (Brasil) Portuguese (Brazil)](https://www.notion.so/pt-br)
+*   [Español (Latinoamérica) Spanish (Latin America)](https://www.notion.so/es-la)
+*   [Español (España) Spanish (Spain)](https://www.notion.so/es-es)
+
+Do Not Sell or Share My InfoCookie settings
+
+© 2024 Notion Labs, Inc.
+
+*   Company
+    
+*   [About us](https://www.notion.so/about)
+*   [Careers](https://www.notion.so/careers)
+*   [Security](https://www.notion.so/security)
+*   [Status](https://status.notion.so/)
+*   [Terms & privacy](https://www.notion.so/28ffdd083dc3473e9c2da6ec011b58ac)
+
+*   Download
+    
+*   [iOS & Android](https://www.notion.so/mobile)
+*   [Mac & Windows](https://www.notion.so/desktop)
+*   [Calendar](https://www.notion.so/product/calendar/download)
+*   [Web Clipper](https://www.notion.so/web-clipper)
+
+*   Resources
+    
+*   [Help center](https://www.notion.so/help)
+*   [Pricing](https://www.notion.so/pricing)
+*   [Blog](https://www.notion.so/blog)
+*   [Community](https://www.notion.so/community)
+*   [Integrations](https://www.notion.so/integrations)
+*   [Templates](https://www.notion.so/templates)
+*   [Affiliates](https://www.notion.so/affiliates)
+
+*   Notion for
+    
+*   [Enterprise](https://www.notion.so/enterprise)
+*   [Small business](https://www.notion.so/teams)
+*   [Personal](https://www.notion.so/personal)
+*   [Explore more→](https://www.notion.so/explore)
+
+ ![Image 46](https://t.co/1/i/adsct?bci=4&eci=3&event=%7B%7D&event_id=98ea9915-01f2-4cfd-888b-a6504d350fdf&integration=gtm&p_id=Twitter&p_user_id=0&pl_id=b100659c-98a8-43a4-984a-b575ebbee132&tw_document_href=https%3A%2F%2Fwww.notion.so%2F&tw_iframe_status=0&txn_id=ofilm&type=javascript&version=2.3.30)![Image 47](https://analytics.twitter.com/1/i/adsct?bci=4&eci=3&event=%7B%7D&event_id=98ea9915-01f2-4cfd-888b-a6504d350fdf&integration=gtm&p_id=Twitter&p_user_id=0&pl_id=b100659c-98a8-43a4-984a-b575ebbee132&tw_document_href=https%3A%2F%2Fwww.notion.so%2F&tw_iframe_status=0&txn_id=ofilm&type=javascript&version=2.3.30)
+```
+
+Based on the above content, extract all relevant links that may contain information about the product as specified in the system prompt. Remember to follow the rules and output format specified there.
+
+Example output format:
+{
+  "extracted_links": [
+    {
+      "url": "https://example.com/pricing",
+      "relevance": ["pricing", "features"],
+      "confidence": 0.9
+    },
+    {
+      "url": "https://example.com/features",
+      "relevance": ["features", "pros", "primary_use_case"],
+      "confidence": 0.8
+    }
+  ]
+}
+
+If no relevant links are found, return an object with an empty array: { "extracted_links": [] }
+
+Ensure that you've thoroughly searched for links that might contain ANY of the information types listed in the system prompt. Don't overlook less obvious pages that might contain valuable information.
+
+
+Response:
+{"extracted_links":[{"url":"https://www.notion.so/product","relevance":["description","unique_selling_proposition","features"],"confidence":0.9},{"url":"https://www.notion.so/product/ai","relevance":["description","unique_selling_proposition","features","primary_use_case"],"confidence":0.8},{"url":"https://www.notion.so/product/docs","relevance":["description","features","primary_use_case"],"confidence":0.8},{"url":"https://www.notion.so/product/wikis","relevance":["description","features","primary_use_case"],"confidence":0.8},{"url":"https://www.notion.so/product/projects","relevance":["description","features","primary_use_case"],"confidence":0.8},{"url":"https://www.notion.so/product/calendar","relevance":["description","features","primary_use_case"],"confidence":0.8},{"url":"https://www.notion.so/product/sites","relevance":["description","features","primary_use_case"],"confidence":0.8},{"url":"https://www.notion.so/pricing","relevance":["pricing"],"confidence":0.9},{"url":"https://www.notion.so/integrations","relevance":["integrations"],"confidence":0.8},{"url":"https://www.notion.so/help","relevance":["support"],"confidence":0.7}]}

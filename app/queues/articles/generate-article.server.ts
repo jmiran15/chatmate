@@ -1,10 +1,7 @@
 import { Queue } from "~/utils/queue.server";
 import { openai } from "~/utils/providers.server";
 import { prisma } from "~/db.server";
-import {
-  generateBlogSystemPrompt,
-  generateBlogUserPrompt,
-} from "~/routes/articles.new/prompts.server";
+import { generateBlogSystemPrompt } from "~/routes/articles.new/prompts.server";
 import { logAPICall } from "~/routes/articles.new/logging.server";
 import { LLMS } from "~/routes/articles.new/actions.server";
 
@@ -24,7 +21,13 @@ export const generateArticleQueue = Queue<GenerateArticleJob>(
       console.log(`🔍 [generateArticle] Fetching article from database...`);
       const article = await prisma.article.findUnique({
         where: { id: articleId },
-        include: { products: { include: { scrapedWebsites: true } } },
+        include: {
+          products: {
+            orderBy: {
+              position: "asc",
+            },
+          },
+        },
       });
 
       if (!article) {
@@ -73,7 +76,20 @@ export const generateArticleQueue = Queue<GenerateArticleJob>(
 
       console.log(`🧠 [generateArticle] Generating prompts...`);
       const systemPrompt = generateBlogSystemPrompt();
-      const userPrompt = generateBlogUserPrompt({ extractedSections });
+      const userPrompt = article.products
+        ?.map(
+          (product) =>
+            `Product url: ${product.baseUrl}\nProduct position: ${
+              product.position
+            }\nProduct screenshot: ${
+              product.screenshot
+            }\Product information: ${JSON.stringify(
+              JSON.parse(product.extractedProductInfo),
+              null,
+              2,
+            )}`,
+        )
+        .join("\n\n");
       console.log(`✅ [generateArticle] Prompts generated`);
 
       console.log(
@@ -98,14 +114,11 @@ export const generateArticleQueue = Queue<GenerateArticleJob>(
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
         ],
-        temperature: 0,
+        temperature: 0.7,
         max_tokens: 16383,
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0,
-        // response_format: {
-        //   type: "json_object",
-        // },
       });
       console.log(`✅ [generateArticle] OpenAI request completed`);
 

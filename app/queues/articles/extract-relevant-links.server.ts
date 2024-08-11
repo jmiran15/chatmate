@@ -1,9 +1,15 @@
 import { Queue } from "~/utils/queue.server";
 import { openai } from "~/utils/providers.server";
-import { extractLinksUserPrompt } from "~/routes/articles.new/prompts.server";
 import { logAPICall } from "~/routes/articles.new/logging.server";
 import { LLMS } from "~/routes/articles.new/actions.server";
 import { prisma } from "~/db.server";
+import { zodResponseFormat } from "openai/helpers/zod";
+import {
+  extractLinksSystemPrompt,
+  extractLinksUserPrompt,
+  OutputSchema,
+  validateExtractedLinks,
+} from "~/routes/articles.new/link-extraction-prompts.server";
 
 interface ExtractLinksJob {
   productId: string;
@@ -25,41 +31,48 @@ async function extractRelevantLinks(
 
   try {
     console.log(`🤖 [extractRelevantLinks] Calling OpenAI API...`);
-    const completion = await openai.chat.completions.create({
+
+    const completion = await openai.beta.chat.completions.parse({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        { role: "system", content: extractLinksSystemPrompt },
+        { role: "user", content: prompt },
+      ],
       temperature: 0,
       max_tokens: 16383,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,
-      response_format: {
-        type: "json_object",
-      },
+      response_format: zodResponseFormat(OutputSchema, "extracted_links"),
     });
+
     console.log(`✅ [extractRelevantLinks] OpenAI API call successful`);
 
-    const response = completion.choices[0].message?.content || "[]";
-    console.log(
-      `📊 [extractRelevantLinks] Raw response length: ${response.length} characters`,
-    );
+    if (completion.choices[0].message.refusal) {
+      console.log(
+        `⚠️ [extractRelevantLinks] Model refused to respond:`,
+        completion.choices[0].message.refusal,
+      );
+      return { links: [], productId };
+    }
 
+    const extractedLinks = completion.choices[0].message.parsed;
+    const validatedLinks = validateExtractedLinks(extractedLinks);
+
+    console.log(
+      `🔍 [extractRelevantLinks] RELEVANT LINKS EXTRACTED: ${validatedLinks.extracted_links.length} links found`,
+    );
     console.log(`📝 [extractRelevantLinks] Logging API call...`);
     await logAPICall({
       llm: LLMS.EXTRACT_RELEVANT_LINKS,
       timestamp: new Date().toISOString(),
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: prompt }],
-      response,
+      response: JSON.stringify(validatedLinks),
     });
     console.log(`✅ [extractRelevantLinks] API call logged successfully`);
 
-    const data = JSON.parse(response);
-    const links = data.links;
-    console.log(
-      `🔍 [extractRelevantLinks] RELEVANT LINKS EXTRACTED: ${links.length} links found`,
-    );
-    return { links, productId };
+    return { links: validatedLinks.extracted_links, productId };
   } catch (error) {
     console.error(
       `❌ [extractRelevantLinks] ERROR EXTRACTING RELEVANT LINKS:`,
@@ -113,6 +126,7 @@ export const extractRelevantLinksQueue = Queue<ExtractLinksJob>(
     );
 
     console.log(`🏁 [extractRelevantLinksQueue] Job completed successfully!`);
-    return { relevantUrls: links.slice(0, 3) };
+    // TODO - change Prisma schema so that relevantUrls is an array LinkSchema
+    return { relevantUrls: links.map((link) => link.url).slice(0, 3) };
   },
 );

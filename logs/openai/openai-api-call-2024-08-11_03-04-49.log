@@ -1,0 +1,819 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T07:04:49.620Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://www.zendesk.com/
+  ```
+  Zendesk: The Complete Customer Service Solution
+===============
+    
+
+[Skip to main content](https://www.zendesk.com/#main-content)
+
+**AI and the future of CX in 2027 webinar:** Join CCW & Zendesk as we discuss new AI insights and how to navigate towards AI automation.
+
+[Register now](https://event.zendesk.com/future-of-cx/2024_q3_foaipcx_eyebrowpromo)
+
+[](https://www.zendesk.com/)
+
+[Start free trialStart free trial](https://www.zendesk.com/register/)
+
+##### Products
+
+[Zendesk for serviceThe complete service solution](https://www.zendesk.com/service/)
+
+Features
+
+*   [Messaging and live chat](https://www.zendesk.com/service/messaging/)
+*   [AI and automation](https://www.zendesk.com/service/ai/)
+*   [Data privacy and protection](https://www.zendesk.com/customer-data-privacy-protection/)
+*   [Help center](https://www.zendesk.com/service/help-center/)
+*   [Agent workspace](https://www.zendesk.com/service/agent-workspace/)
+*   [Voice](https://www.zendesk.com/service/voice/)
+*   [Workforce engagement](https://www.zendesk.com/service/workforce-engagement-management/)
+
+* * *
+
+Enhance your workflows
+
+*   [Zendesk Sunshine](https://www.zendesk.com/platform/)
+*   [Employee service](https://www.zendesk.com/employee-service/)
+*   [Zendesk for sales](https://www.zendesk.com/sell/)
+*   [Marketplace](https://www.zendesk.com/marketplace/)
+
+##### Pricing
+
+[Zendesk for serviceThe complete service solution](https://www.zendesk.com/pricing/)[Zendesk for salesThe modern sales solution](https://www.zendesk.com/pricing/sales/)
+
+##### Solutions
+
+Business
+
+*   [Enterprise](https://www.zendesk.com/enterprise/)
+*   [Small and medium businesses](https://www.zendesk.com/smb/)
+*   [Startups](https://www.zendesk.com/startups/)
+*   [Conversational CRM](https://www.zendesk.com/conversational-crm/)
+
+Industries
+
+*   [Retail](https://www.zendesk.com/retail/)
+*   [Financial Services](https://www.zendesk.com/financial-services/)
+*   [Education](https://www.zendesk.com/education/)
+*   [Government](https://www.zendesk.com/government/)
+*   [Transportation](https://www.zendesk.com/transportation/)
+*   [Manufacturing](https://www.zendesk.com/manufacturing/)
+*   [Software](https://www.zendesk.com/software/)
+*   [Healthcare](https://www.zendesk.com/healthcare/)
+*   [Telecommunications](https://www.zendesk.com/telecommunications/)
+*   [Media](https://www.zendesk.com/media/)
+
+* * *
+
+*   [Contact Professional Services](https://www.zendesk.com/customer-experience/professional-services/)
+
+[##### Demo](https://www.zendesk.com/demo/)
+
+##### Resources
+
+*   [Blog](https://www.zendesk.com/blog/)
+*   [Events and webinars](https://www.zendesk.com/company/events/)
+*   [Training and certification](https://training.zendesk.com/)
+*   [Community](https://www.zendesk.com/zendesk-community/)
+*   [Professional services](https://www.zendesk.com/customer-experience/professional-services/#professional-services/)
+*   [What’s New with Zendesk](https://support.zendesk.com/hc/en-us/sections/4405298877338-What-s-New-in-Zendesk/)
+*   [API and developers](https://www.zendesk.com/developers/)
+*   [CX Trends](https://cxtrends.zendesk.com/)
+*   [Partners](https://www.zendesk.com/partner/)
+*   [Customer stories](https://www.zendesk.com/why-zendesk/customers/)
+*   [Newsroom](https://www.zendesk.com/newsroom/)
+*   [Trust and security](https://www.zendesk.com/trust-center/)
+
+##### Company
+
+[About us](https://www.zendesk.com/about/)[Newsroom](https://www.zendesk.com/newsroom/)[Events](https://www.zendesk.com/company/events/)[Careers](https://jobs.zendesk.com/)[Diversity & Inclusion](https://www.zendesk.com/diversity-inclusion/)[Accessibility Plan](https://www.zendesk.com/company/policies-and-guidelines/accessibility-plan/)[Sustainability](https://www.zendesk.com/sustainability/)[Zendesk Foundation](https://www.zendesk.org/)[Legal](https://www.zendesk.com/company/legal/)
+
+##### Language
+
+[English (US)](https://www.zendesk.com/)[English (UK)](https://www.zendesk.co.uk/)[Español](https://www.zendesk.es/)[Español (LATAM)](https://www.zendesk.com.mx/)[Português](https://www.zendesk.com.br/)[Français](https://www.zendesk.fr/)[Deutsch](https://www.zendesk.de/)[Italiano](https://www.zendesk.com/it/)[Nederlands](https://www.zendesk.nl/)[Dansk](https://www.zendesk.com/dk/)[Svenska](https://www.zendesk.com/se/)[English (Australia)](https://www.zendesk.com/au/)[English (India)](https://www.zendesk.com/in/)[English (Singapore)](https://www.zendesk.com/sg/)[日本語](https://www.zendesk.co.jp/)[한국어](https://www.zendesk.kr/)[繁體中文 (台灣)](https://www.zendesk.tw/)[繁體中文 (香港特區)](https://www.zendesk.hk/)[ไทย](https://www.zendesk.com/th/)
+
+##### Contact
+
+[Contact Sales](https://www.zendesk.com/contact/)[Product support](https://support.zendesk.com/hc/en-us/?_ga=2.87833242.389796813.1713143946-1911925190.1713145373&_gl=1*iyltmf*_ga*MTkxMTkyNTE5MC4xNzEzMTQ1Mzcz*_ga_FBP7C61M6Z*MTcxMzUwODI0Ny4zMy4xLjE3MTM1MDgyNzAuMzcuMC4w/)
+
+[Free trialFree trial](https://www.zendesk.com/register/)[Sign in](https://www.zendesk.com/login/)
+
+[Sign in](https://www.zendesk.com/login/)
+
+[Product support](https://support.zendesk.com/hc/en-us/)
+
+Company
+
+[About us](https://www.zendesk.com/about/)[Newsroom](https://www.zendesk.com/newsroom/)[Events](https://www.zendesk.com/company/events/)[Careers](https://jobs.zendesk.com/)[Diversity & Inclusion](https://www.zendesk.com/diversity-inclusion/)[Accessibility Plan](https://www.zendesk.com/company/policies-and-guidelines/accessibility-plan/)[Sustainability](https://www.zendesk.com/sustainability/)[Zendesk Foundation](https://www.zendesk.org/)[Legal](https://www.zendesk.com/company/legal/)
+
+[Contact us](https://www.zendesk.com/contact/)
+
+Language
+
+[English (US)](https://www.zendesk.com/)[English (UK)](https://www.zendesk.co.uk/)[Español](https://www.zendesk.es/)[Español (LATAM)](https://www.zendesk.com.mx/)[Português](https://www.zendesk.com.br/)[Français](https://www.zendesk.fr/)[Deutsch](https://www.zendesk.de/)[Italiano](https://www.zendesk.com/it/)[Nederlands](https://www.zendesk.nl/)[Dansk](https://www.zendesk.com/dk/)[Svenska](https://www.zendesk.com/se/)[English (Australia)](https://www.zendesk.com/au/)[English (India)](https://www.zendesk.com/in/)[English (Singapore)](https://www.zendesk.com/sg/)[日本語](https://www.zendesk.co.jp/)[한국어](https://www.zendesk.kr/)[繁體中文 (台灣)](https://www.zendesk.tw/)[繁體中文 (香港特區)](https://www.zendesk.hk/)[ไทย](https://www.zendesk.com/th/)
+
+[](https://www.zendesk.com/)
+
+Products
+
+[Zendesk for serviceThe complete service solution![Image 1](blob:https://www.zendesk.com/d5f7c975b715f272ee01615c5f727923)![Image 2](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)](https://www.zendesk.com/service/)
+
+Features
+
+*   [Messaging and live chat](https://www.zendesk.com/service/messaging/)
+*   [AI and automation](https://www.zendesk.com/service/ai/)
+*   [Data privacy and protection](https://www.zendesk.com/customer-data-privacy-protection/)
+*   [Help center](https://www.zendesk.com/service/help-center/)
+*   [Agent workspace](https://www.zendesk.com/service/agent-workspace/)
+*   [Voice](https://www.zendesk.com/service/voice/)
+*   [Workforce engagement](https://www.zendesk.com/service/workforce-engagement-management/)
+
+Enhance your workflows
+
+* * *
+
+[Zendesk Sunshine](https://www.zendesk.com/platform/)[Employee service](https://www.zendesk.com/employee-service/)[Zendesk for sales](https://www.zendesk.com/sell/)[Marketplace](https://www.zendesk.com/marketplace/)
+
+![Image 4](blob:https://www.zendesk.com/d286dd3933c1379bbc2fb631db359c57)![Image 5](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+[Take a quick tour](https://www.zendesk.com/demo/)
+
+Pricing
+
+[Zendesk for serviceThe complete service solution](https://www.zendesk.com/pricing/)[Zendesk for salesThe modern sales solution](https://www.zendesk.com/pricing/sales/)
+
+Solutions
+
+Business
+
+*   [Enterprise](https://www.zendesk.com/enterprise/)
+*   [Small and medium businesses](https://www.zendesk.com/smb/)
+*   [Startups](https://www.zendesk.com/startups/)
+*   [Conversational CRM](https://www.zendesk.com/conversational-crm/)
+
+Industries
+
+*   [Retail](https://www.zendesk.com/retail/)
+*   [Financial Services](https://www.zendesk.com/financial-services/)
+*   [Education](https://www.zendesk.com/education/)
+*   [Government](https://www.zendesk.com/government/)
+*   [Transportation](https://www.zendesk.com/transportation/)
+*   [Manufacturing](https://www.zendesk.com/manufacturing/)
+*   [Software](https://www.zendesk.com/software/)
+*   [Healthcare](https://www.zendesk.com/healthcare/)
+*   [Telecommunications](https://www.zendesk.com/telecommunications/)
+*   [Media](https://www.zendesk.com/media/)
+
+* * *
+
+Need more help?  [Contact Professional Services](https://www.zendesk.com/customer-experience/professional-services/)
+
+![Image 7](blob:https://www.zendesk.com/0e4a7cd1eb3cb4776a91ad3f861001a8)![Image 8](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+#### Zendesk customers
+
+Find out how major companies worldwide use Zendesk to power their businesses.
+
+[Explore case studies](https://www.zendesk.com/why-zendesk/customers/)
+
+[Demo](https://www.zendesk.com/demo/)
+
+Resources
+
+*   [Blog](https://www.zendesk.com/blog/)
+*   [Events and webinars](https://www.zendesk.com/company/events/)
+*   [Training and certification](https://training.zendesk.com/)
+*   [Community](https://www.zendesk.com/zendesk-community/)
+*   [Professional services](https://www.zendesk.com/customer-experience/professional-services/#professional-services/)
+*   [What’s New with Zendesk](https://support.zendesk.com/hc/en-us/sections/4405298877338-What-s-New-in-Zendesk/)
+*   [API and developers](https://www.zendesk.com/developers/)
+*   [CX Trends](https://cxtrends.zendesk.com/)
+*   [Partners](https://www.zendesk.com/partner/)
+*   [Customer stories](https://www.zendesk.com/why-zendesk/customers/)
+*   [Newsroom](https://www.zendesk.com/newsroom/)
+*   [Trust and security](https://www.zendesk.com/trust-center/)
+
+[Free trialFree trial](https://www.zendesk.com/register/)
+
+AI-first service. Catered to humans.
+====================================
+
+Customers and employees are more than interactions, they're human. Give them faster, more personalized experiences using AI trained in the art of customer service.
+
+[Start your free trialStart your free trial](https://www.zendesk.com/register/)[View demoView demo](https://www.zendesk.com/demo/)
+
+![Image 10](blob:https://www.zendesk.com/3e31b82d35c1d0b55447e5419c3e1f97)![Image 11: A man smiles and makes heart shapes with his fingers. Behind him is a large cabinet filled with colorful sneakers. A screenshot placed on top of the image shows a customer service interaction where an AI-powered bot is automatically processing a sneaker return.](https://web-assets.zendesk.com/images/p-home/relate24-hero.webp)
+
+Zendesk for Service
+-------------------
+
+Perfect the customer experience
+-------------------------------
+
+![Image 12: Thrasio logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 14](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 15](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Make good decisions with data
+-----------------------------
+
+> “Most businesses are sitting on a data gold mine within their customer profiles. We use Zendesk...to get data on customer interactions that no one else is collecting.”
+
+Gershwin Exeter
+
+Vice President of Global Services
+
+[Read customer story](https://www.zendesk.com/customer/thrasio/)
+
+![Image 17: Wine.com logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 19](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 20](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Personalize all conversations
+-----------------------------
+
+> “We love Zendesk because their API allows us to explore ways to get customer data in front of agents in ways that create a smoother, more personalized experience.”
+
+Addie Wallace
+
+Senior Director of Brand Marketing
+
+[Read customer story](https://www.zendesk.com/customer/wine-com/)
+
+![Image 22: Khan Academy logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 24](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 25](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Anticipate requests with AI
+---------------------------
+
+> “Zendesk’s integration capabilities, flexibility, and feature depth allow me to be creative with how we’re using it. And they let us scale in really interesting and powerful ways.”
+
+Laurie Leduc
+
+Head of Community Support
+
+[Read customer story](https://www.zendesk.com/customer/wine-com/)
+
+![Image 27: ZeroFox logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 29](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 30](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Adapt to changing needs
+-----------------------
+
+> “The workflows we built in Zendesk Suite allowed us to achieve or exceed customer expectations in handling urgent issues.”
+
+Caitlin Wood
+
+Vice President of Customer Operations
+
+[Read customer story](https://www.zendesk.com/customer/zerofox/)
+
+![Image 32: Thrasio logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 34](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 35](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Make good decisions with data
+-----------------------------
+
+> “Most businesses are sitting on a data gold mine within their customer profiles. We use Zendesk...to get data on customer interactions that no one else is collecting.”
+
+Gershwin Exeter
+
+Vice President of Global Services
+
+[Read customer story](https://www.zendesk.com/customer/thrasio/)
+
+![Image 37: Wine.com logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 39](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 40](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Personalize all conversations
+-----------------------------
+
+> “We love Zendesk because their API allows us to explore ways to get customer data in front of agents in ways that create a smoother, more personalized experience.”
+
+Addie Wallace
+
+Senior Director of Brand Marketing
+
+[Read customer story](https://www.zendesk.com/customer/wine-com/)
+
+![Image 42: Khan Academy logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 44](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 45](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Anticipate requests with AI
+---------------------------
+
+> “Zendesk’s integration capabilities, flexibility, and feature depth allow me to be creative with how we’re using it. And they let us scale in really interesting and powerful ways.”
+
+Laurie Leduc
+
+Head of Community Support
+
+[Read customer story](https://www.zendesk.com/customer/wine-com/)
+
+![Image 47: ZeroFox logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 49](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 50](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Adapt to changing needs
+-----------------------
+
+> “The workflows we built in Zendesk Suite allowed us to achieve or exceed customer expectations in handling urgent issues.”
+
+Caitlin Wood
+
+Vice President of Customer Operations
+
+[Read customer story](https://www.zendesk.com/customer/zerofox/)
+
+![Image 52: Thrasio logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 54](blob:https://www.zendesk.com/06773dcba87586c4079b7afec9ca537b)![Image 55](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Make good decisions with data
+-----------------------------
+
+> “Most businesses are sitting on a data gold mine within their customer profiles. We use Zendesk...to get data on customer interactions that no one else is collecting.”
+
+Gershwin Exeter
+
+Vice President of Global Services
+
+[Read customer story](https://www.zendesk.com/customer/thrasio/)
+
+![Image 57: Wine.com logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)![Image 59: Khan Academy logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)![Image 61: ZeroFox logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)![Image 63: Thrasio logo](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 65](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+[Start your free trialStart your free trial](https://www.zendesk.com/register/)
+
+Take your support personally
+----------------------------
+
+For long-term loyalty, every customer should feel like your only one. Zendesk for Service offers the support features you need to keep customers coming back.
+
+[Explore all featuresExplore all features](https://www.zendesk.com/service/)
+
+Resources
+---------
+
+* * *
+
+[![Image 67](blob:https://www.zendesk.com/90fbc00ab571d4b5cd2d421aed98d16c)![Image 68](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)Featured Product ### A powerful, flexible platform](https://www.zendesk.com/platform/)
+
+[![Image 70](blob:https://www.zendesk.com/df0c6ee6db1c3a2a5a0ce89e55fd71c2)![Image 71](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3) Report ### CX Trends 2024](https://cxtrends.zendesk.com/)[![Image 73](blob:https://www.zendesk.com/df0c6ee6db1c3a2a5a0ce89e55fd71c2)![Image 74](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3) Guide • 1 min read ### Zendesk AI: the service superpower](https://www.zendesk.com/blog/zendesk-ai/)[![Image 76](blob:https://www.zendesk.com/df0c6ee6db1c3a2a5a0ce89e55fd71c2)![Image 77](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3) Article • 16 min read ### What is customer support?](https://www.zendesk.com/blog/customer-support-vs-customer-service/)
+
+![Image 79](blob:https://www.zendesk.com/5f81ef7d7e382f751cbe8baf88433f04)![Image 80](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+### Exceed every customer expectation
+
+[Free trialFree trial](https://www.zendesk.com/register/)[Get a demoGet a demo](https://www.zendesk.com/demo/)
+
+Return on investment
+--------------------
+
+* * *
+
+Maximize your ROI
+-----------------
+
+You’ll save time and money with Zendesk. Don’t take it from us; take it from Forrester. Their Total Economic Impact™ (TEI) study showed 286% return on investment over three years.
+
+[Read the full report](https://www.zendesk.com/blog/total-economic-impact-of-zendesk/)
+
+*   ![Image 82](blob:https://www.zendesk.com/dceb82b42a2b8fcbfc530f398ea72ef9)![Image 83](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    ### Improve time to value
+    
+    Zendesk works out of the box. Solve customer problems right away, rather than configuring complex software.
+    
+*   ![Image 85](blob:https://www.zendesk.com/dceb82b42a2b8fcbfc530f398ea72ef9)![Image 86](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    ### Reduce effort per ticket
+    
+    Self-service and automation deflect up to 15% of agent contacts. Resolve remaining tickets faster with rich customer insights.
+    
+*   ![Image 88](blob:https://www.zendesk.com/dceb82b42a2b8fcbfc530f398ea72ef9)![Image 89](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+    ### Keep costs low
+    
+    You don’t need a developer army to start using Zendesk, or an influx of agents to keep using it. Efficiency and automation are baked in.
+    
+
+### 286%
+
+Average ROI
+
+Customers achieved over three years
+
+### $20
+
+Million
+
+Net present value customers reached over three years
+
+### 2
+
+Months
+
+Time it took for customers to receive payback
+
+Our awards
+----------
+
+Recognized by industry leaders
+------------------------------
+
+![Image 91](blob:https://www.zendesk.com/2db9d57f1660e4ec1e95e477cbc82e48)![Image 92: Award: G2 Leader Winter 2024](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)![Image 94](blob:https://www.zendesk.com/7a27e8abc535e3220273ef6055516a80)![Image 95: Award: G2 Top 50 Customer Service Products Best Software Awards 2024](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)![Image 97](blob:https://www.zendesk.com/7a27e8abc535e3220273ef6055516a80)![Image 98: Award: G2 Top 50 AI Products Best Software Awards 2024](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)![Image 100](blob:https://www.zendesk.com/7a27e8abc535e3220273ef6055516a80)![Image 101: Award: G2 Top 100 Software Products Best Software Awards 2024](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Join the best
+-------------
+
+Powering 100,000+ of the best customer experiences
+--------------------------------------------------
+
+![Image 103: Liberty London](https://zen-marketing-emea.s3.eu-west-1.amazonaws.com/emea/images/home/uk/liberty.png)![Image 104: Shopify](https://web-assets.zendesk.com/images/p-service/shopify.svg)![Image 105: SquareSpace](https://web-assets.zendesk.com/images/p-service/squarespace.svg)![Image 106: Uber](https://web-assets.zendesk.com/images/p-service/uber.svg)![Image 107: Stanley Black & Decker](https://web-assets.zendesk.com/images/p-service/stanley-black-decker.svg)![Image 108: Tesco](https://web-assets.zendesk.com/images/p-service/tesco.svg)![Image 109: Lush](https://web-assets.zendesk.com/images/p-service/lush.svg)![Image 110: Ingram](https://web-assets.zendesk.com/images/p-service/ingram.svg)![Image 111: GrubHub](https://web-assets.zendesk.com/images/p-service/grubhub.svg)
+
+![Image 112: Liberty London](https://zen-marketing-emea.s3.eu-west-1.amazonaws.com/emea/images/home/uk/liberty.png)![Image 113: Shopify](https://web-assets.zendesk.com/images/p-service/shopify.svg)![Image 114: SquareSpace](https://web-assets.zendesk.com/images/p-service/squarespace.svg)![Image 115: Uber](https://web-assets.zendesk.com/images/p-service/uber.svg)![Image 116: Stanley Black & Decker](https://web-assets.zendesk.com/images/p-service/stanley-black-decker.svg)![Image 117: Tesco](https://web-assets.zendesk.com/images/p-service/tesco.svg)![Image 118: Lush](https://web-assets.zendesk.com/images/p-service/lush.svg)![Image 119: Ingram](https://web-assets.zendesk.com/images/p-service/ingram.svg)![Image 120: GrubHub](https://web-assets.zendesk.com/images/p-service/grubhub.svg)
+
+###### How can we help? [Contact us.](https://www.zendesk.com/contact/)
+
+*   [](https://www.twitter.com/zendesk)
+*   [](https://www.facebook.com/zendesk)
+*   [](https://www.linkedin.com/company/zendesk)
+*   [](https://www.youtube.com/zendesk)
+*   [](https://www.instagram.com/zendesk)
+*   [](https://www.tiktok.com/@zendesk)
+
+[](https://www.zendesk.com/)
+
+[Terms of Use](https://www.zendesk.com/company/agreements-and-terms/terms-of-use/)[Privacy Notice](https://www.zendesk.com/company/agreements-and-terms/privacy-notice/)[Cookie Notice](https://www.zendesk.com/company/agreements-and-terms/cookie-notice/)[Cookie settings](https://www.zendesk.com/#onetrust-show-cookie-settings)[Trust Center](https://www.zendesk.com/trust-center/)[©Zendesk 2024](https://www.zendesk.com/company/legal/)
+  ```
+
+Source URL: https://www.zendesk.com/service/messaging/
+  ```
+  Best customer messaging platform | Zendesk live chat & messaging
+===============
+    
+
+[Skip to main content](https://www.zendesk.com/service/messaging/#main-content)
+
+[Sign in](https://www.zendesk.com/login/)
+
+[Product support](https://support.zendesk.com/hc/en-us/)
+
+[Company](https://www.zendesk.com/service/messaging/#)
+
+*   [Contact us](https://www.zendesk.com/contact/)
+*   [About us](https://www.zendesk.com/about/)
+*   [Newsroom](https://www.zendesk.com/newsroom/)
+*   [Events](https://www.zendesk.com/company/events/)
+*   [Careers](https://jobs.zendesk.com/)
+*   [Diversity & Inclusion](https://www.zendesk.com/diversity-inclusion/)
+*   [Accessibility Plan](https://www.zendesk.com/company/policies-and-guidelines/accessibility-plan/)
+*   [Sustainability](https://www.zendesk.com/sustainability/)
+*   [Zendesk Foundation](https://www.zendesk.org/)
+*   [Legal](https://www.zendesk.com/company/legal/)
+
+[Contact us](https://www.zendesk.com/contact/)
+
+[English (US)](https://www.zendesk.com/service/messaging/#)
+
+*   [English (US)](https://www.zendesk.com/service/messaging/)
+*   [English (UK)](https://www.zendesk.co.uk/service/messaging/)
+*   [Español](https://www.zendesk.es/service/messaging/)
+*   [Español (LATAM)](https://www.zendesk.com.mx/service/messaging/)
+*   [Português](https://www.zendesk.com.br/service/messaging/)
+*   [Français](https://www.zendesk.fr/service/messaging/)
+*   [Deutsch](https://www.zendesk.de/service/messaging/)
+*   [Italiano](https://www.zendesk.com/it/service/messaging/)
+*   [Nederlands](https://www.zendesk.nl/service/messaging/)
+*   [Dansk](https://www.zendesk.com/dk/service/messaging/)
+*   [Svenska](https://www.zendesk.com/se/service/messaging/)
+*   [English (Australia)](https://www.zendesk.com/au/service/messaging/)
+*   [English (India)](https://www.zendesk.com/in/service/messaging/)
+*   [English (Singapore)](https://www.zendesk.com/sg/service/messaging/)
+*   [日本語](https://www.zendesk.co.jp/service/messaging/)
+*   [한국어](https://www.zendesk.kr/service/messaging/)
+*   [繁體中文 (台灣)](https://www.zendesk.tw/service/messaging/)
+*   [繁體中文 (香港特區)](https://www.zendesk.hk/service/messaging/)
+*   [ไทย](https://www.zendesk.com/th/service/messaging/)
+
+[](https://www.zendesk.com/)
+
+Products
+
+*   [Zendesk for customer service The complete service solution](https://www.zendesk.com/service/)
+*   [Zendesk for employee service Treat employees like customers](https://www.zendesk.com/employee-service/)
+*   [Zendesk for sales The modern sales solution](https://www.zendesk.com/sell/)
+*   [Sunshine Platform Fast, open, and flexible](https://www.zendesk.com/platform/)
+*   [Marketplace Apps, integrations, and partners](https://www.zendesk.com/marketplace/)
+
+Pricing
+
+*   [Zendesk for service The complete service solution](https://www.zendesk.com/pricing/)
+*   [Zendesk for sales The modern sales solution](https://www.zendesk.com/pricing/sales/)
+
+Solutions
+
+*   [Enterprise Have conversations at scale](https://www.zendesk.com/enterprise/)
+*   [Small & medium businesses Grow without growing pains](https://www.zendesk.com/smb/)
+*   [Startups Get off on the right foot](https://www.zendesk.com/startups/)
+*   [Industries Meet your market’s needs](https://www.zendesk.com/industries/)
+*   [Conversational CRM Create lasting customer relationships](https://www.zendesk.com/conversational-crm/)
+
+[Demo](https://www.zendesk.com/demo/)
+
+Resources
+
+*   [Blog Guides, reports, and best practices](https://www.zendesk.com/blog/)
+*   [Events and webinars Learn from wherever you are](https://www.zendesk.com/company/events/)
+*   [Training and certification Learn how to use Zendesk and prove your expertise](https://training.zendesk.com/)
+*   [Community Connect, learn, and engage with Zendesk users](https://www.zendesk.com/zendesk-community/)
+*   [Professional services Get hands-on help, dedicated support or expert guidance](https://www.zendesk.com/customer-experience/professional-services/#professional-services/)
+*   [What’s New with Zendesk Check out recent product updates](https://support.zendesk.com/hc/en-us/sections/4405298877338-What-s-New-in-Zendesk/)
+*   [API & Developers Info for building things with Zendesk](https://www.zendesk.com/developers/)
+*   [Partners How to locate or become a Zendesk partner](https://www.zendesk.com/partner/)
+*   [Customer stories See what success with Zendesk looks like](https://www.zendesk.com/why-zendesk/customers/)
+*   [Newsroom Company news and announcements](https://www.zendesk.com/newsroom/)
+*   [Trust and security Your business is protected with Zendesk](https://www.zendesk.com/trust-center/)
+
+[Free trial](https://www.zendesk.com/register/)
+
+[](https://www.zendesk.com/)
+
+[Start free trial](https://www.zendesk.com/register/)
+
+1.  [Zendesk for service](https://www.zendesk.com/service/)
+2.  Messaging and live chat
+
+Messaging software
+------------------
+
+Deliver rich conversational experiences
+=======================================
+
+Provide instant help on your website, mobile apps, social and business channels
+
+[Start your free trial](https://www.zendesk.com/register/)[View demo](https://www.zendesk.com/demo/)
+
+![Image 1](https://web-assets.zendesk.com/images/p-capabilities/messaging/hero-2x.jpg)
+
+![Image 2](blob:https://www.zendesk.com/5b06f7ebbea83f03d658cc72fbbdcca4)![Image 3: Messaging screenshot](https://web-assets.zendesk.com/images/p-capabilities/messaging/hero-product-2x.png)
+
+Complete messaging solution
+---------------------------
+
+Meet customers where they are
+-----------------------------
+
+Customers expect great service across all channels. Messaging makes it easy to deliver personalized and engaging interactions—without the heavy lift. It comes with built-in automation and AI so you can serve more customers, and can be completely customized to meet your needs.
+
+![Image 4](https://web-assets.zendesk.com/images/p-capabilities/messaging/video.jpg)
+
+*   ### Loyalty
+    
+    Build and grow customer relationships by reaching out with contextual, timely interactions.
+    
+*   ### Speed
+    
+    Help customers do more themselves using bots and integrations, letting agents jump in only when necessary.
+    
+*   ### Personalization
+    
+    Use customer data to initiate rich, interactive conversations that are tailored to their needs.
+    
+
+Bots
+----
+
+Enable 24/7 support
+-------------------
+
+Enhance your agents by deflecting common questions with Zendesk bots. They deliver instant answers 24/7 across all of your service channels so customers never have to wait.
+
+![Image 5](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 7](blob:https://www.zendesk.com/48f297ea92d93427dcc2f9f52420f358)![Image 8](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Web, mobile, social, and business channels
+------------------------------------------
+
+Stay connected on any channel
+-----------------------------
+
+Add messaging to your website or mobile app, popular social channels like [WhatsApp or Facebook](https://www.zendesk.com/service/messaging/whatsapp-facebook/), and business productivity tools like [Slack](https://www.zendesk.com/slack/) to deliver instant support for customers, business partners and employees.
+
+Agent workspace
+---------------
+
+All interactions in one place
+-----------------------------
+
+Customer conversations and information live in a [centralized workspace](https://www.zendesk.com/service/agent-workspace/) so agents get all the tools and customer context they need to provide personalized service across any channel.
+
+![Image 10](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 12](blob:https://www.zendesk.com/4d32ad96791181cda74104f0bb8af9ad)![Image 13](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Customization tools
+-------------------
+
+Make messaging your own
+-----------------------
+
+![Image 15](blob:https://www.zendesk.com/93e3bbeca60c5fbf15de2e51182042c0)![Image 16: Stylized screenshot: tickets created by month](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 18](blob:https://www.zendesk.com/044686ea186aafe05ba451436e22925b)![Image 19: Stylized screenshot: dashboard charts](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 21](blob:https://www.zendesk.com/8d1d839a9e86feb5fd9b91a3e8a7ddf8)![Image 22: Stylized screenshot: dashboard customization](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 24](blob:https://www.zendesk.com/93e3bbeca60c5fbf15de2e51182042c0)![Image 25: Stylized screenshot: tickets created by month](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+### Proactive messaging
+
+Get ahead of your customers with outbound notifications on WhatsApp and SMS to drive customer engagement and prevent escalations.
+
+![Image 27](blob:https://www.zendesk.com/044686ea186aafe05ba451436e22925b)![Image 28: Stylized screenshot: dashboard charts](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+### Third-party integrations
+
+Enable customers to self-serve from within the conversation with rich messaging integrations such as live location maps or custom bots.
+
+![Image 30](blob:https://www.zendesk.com/8d1d839a9e86feb5fd9b91a3e8a7ddf8)![Image 31: Stylized screenshot: dashboard customization](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+### Group messaging
+
+Connect all parties to make interactions run more efficiently.
+
+[See customizations](https://www.zendesk.com/platform/conversations/)
+
+![Image 33: Spartan Race logo](https://d1eipm3vz40hy0.cloudfront.net/images/Customer+Stories+/Spartan+Race/spartan_race_logo.png)
+
+> "Messaging made a huge difference by providing asynchronous communication that’s always available. Now it’s possible to meet the customer wherever they are across our website and channels."
+
+Aja Varney
+
+Director of Global Customer Engagement at [Spartan Race](https://www.zendesk.com/customer/spartan-race-2/)
+
+78%
+
+One-touch resolution rate
+
+90%+
+
+CSAT
+
++46%
+
+Increase in self-service
+
++40%
+
+Increase in help center views
+
+![Image 34](blob:https://www.zendesk.com/3352237534741565508556a31587b8af)![Image 35](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Customer service is hard. Zendesk makes it easier.
+--------------------------------------------------
+
+[Start your free trial](https://www.zendesk.com/register/)[View demo](https://www.zendesk.com/demo/)
+
+![Image 37](blob:https://www.zendesk.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+[](https://www.zendesk.com/)
+
+#### Champions of customer service
+
+Our Products
+------------
+
+*   [Zendesk for customer service](https://www.zendesk.com/service/)
+*   [Zendesk for employee service](https://www.zendesk.com/employee-service/)
+*   [Zendesk for sales](https://www.zendesk.com/sell/)
+*   [Sunshine Platform](https://www.zendesk.com/platform/)
+*   [Marketplace](https://www.zendesk.com/marketplace/)
+*   [Product updates](https://support.zendesk.com/hc/en-us/sections/4405298877338-What-s-New-in-Zendesk/)
+
+Top Features
+------------
+
+*   [Ticketing system](https://www.zendesk.com/service/ticketing-system/)
+*   [Messaging & live chat](https://www.zendesk.com/service/messaging/)
+*   [Help center](https://www.zendesk.com/service/help-center/)
+*   [Voice](https://www.zendesk.com/service/voice/)
+*   [Community forums](https://www.zendesk.com/service/community-forum/)
+*   [Reporting & analytics](https://www.zendesk.com/service/analytics/)
+*   [Answer Bot](https://www.zendesk.com/service/ai/)
+*   [Customer service software](https://www.zendesk.com/service/ticketing-system/customer-service-management-software/)
+*   [Ticketing system software](https://www.zendesk.com/service/help-desk-software/ticketing-system/)
+*   [Live chat software](https://www.zendesk.com/service/messaging/live-chat/)
+*   [Knowledge base](https://www.zendesk.com/service/help-center/knowledge-base-software/)
+*   [Forum software](https://www.zendesk.com/service/help-center/community-software/)
+*   [Help desk software](https://www.zendesk.com/service/help-desk-software/)
+*   [Workforce management](https://www.zendesk.com/service/workforce-management/)
+*   [Advanced Data Privacy and Protection](https://www.zendesk.com/customer-data-privacy-protection/)
+
+Resources
+---------
+
+*   [Security](https://www.zendesk.com/trust-center/)
+*   [Product support](https://support.zendesk.com/hc/en-us/)
+*   [Request a demo](https://www.zendesk.com/demo/)
+*   [Blog](https://www.zendesk.com/blog/)
+*   [Training](https://training.zendesk.com/)
+*   [Partners](https://www.zendesk.com/partner/)
+*   [Webinars](https://www.zendesk.com/company/events/#webinars)
+*   [Customer Stories](https://www.zendesk.com/why-zendesk/customers/)
+*   [Services](https://www.zendesk.com/customer-experience/)
+
+Company
+-------
+
+*   [About us](https://www.zendesk.com/about/)
+*   [Newsroom](https://www.zendesk.com/newsroom/)
+*   [Events](https://www.zendesk.com/company/events/)
+*   [Careers](https://jobs.zendesk.com/)
+*   [Diversity & Inclusion](https://www.zendesk.com/diversity-inclusion/)
+*   [Accessibility Plan](https://www.zendesk.com/company/policies-and-guidelines/accessibility-plan/)
+*   [Sustainability](https://www.zendesk.com/sustainability/)
+*   [Contact us](https://www.zendesk.com/contact/)
+*   [Sitemap](https://www.zendesk.com/sitemap/)
+*   [System status](https://status.zendesk.com/)
+*   [Zendesk Foundation](https://www.zendesk.org/)
+*   [Zendesk Ventures](https://www.zendesk.com/ventures/)
+*   [Legal](https://www.zendesk.com/company/legal/)
+
+Favorite Things
+---------------
+
+*   [What is Zendesk](https://www.zendesk.com/what-is-zendesk/)
+*   [Zendesk for Enterprise](https://www.zendesk.com/enterprise/)
+*   [Zendesk for Small Business](https://www.zendesk.com/smb/)
+*   [Zendesk for Startups](https://www.zendesk.com/startups/)
+*   [Zendesk Benchmark](https://www.zendesk.com/benchmark/)
+*   [Customer Experience Trends](https://www.zendesk.com/customer-experience-trends/)
+*   [What is CRM?](https://www.zendesk.com/sell/crm/what-is-crm/)
+*   [CRM software guide](https://www.zendesk.com/sell/crm/)
+*   [Join our research panel](https://www.zendesk.com/experience-research-panel/)
+
+* * *
+
+Subscribe to receive news and updates from Zendesk.
+---------------------------------------------------
+
+Subscribe
+
+*   [](https://www.twitter.com/zendesk)
+*   [](https://www.facebook.com/zendesk)
+*   [](https://www.linkedin.com/company/zendesk)
+*   [](https://www.youtube.com/zendesk)
+*   [](https://www.instagram.com/zendesk)
+
+[Terms of Use](https://www.zendesk.com/company/agreements-and-terms/terms-of-use/)[Privacy Notice](https://www.zendesk.com/company/agreements-and-terms/privacy-notice/)[Cookie Notice](https://www.zendesk.com/company/agreements-and-terms/cookie-notice/)[Cookie settings](https://www.zendesk.com/service/messaging/#onetrust-show-cookie-settings)[Trust Center](https://www.zendesk.com/trust-center/)[©Zendesk 2024](https://www.zendesk.com/company/legal/)
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

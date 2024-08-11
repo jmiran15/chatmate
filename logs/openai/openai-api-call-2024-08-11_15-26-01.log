@@ -1,0 +1,761 @@
+LLM: EXTRACT_RELEVANT_LINKS
+Timestamp: 2024-08-11T19:26:01.627Z
+Model: gpt-4o-mini
+
+Request:
+[user]: 
+Base URL: https://www.google.com/sheets/about/
+
+Website content delimited by triple backticks:
+```
+Google Sheets: Online Spreadsheets & Templates | Google Workspace
+===============
+
+[Skip to main content](https://www.google.com/sheets/about/#main) Solutions
+
+[For Individuals](https://www.google.com/individual/)
+
+For Business
+
+[Overview](https://www.google.com/business/)[Small Business](https://www.google.com/business/small-business/)[New Business](https://www.google.com/business/new-business/)[Startups](https://www.google.com/business/startups/)
+
+For Enterprise
+
+[Overview](https://www.google.com/enterprise/)[Frontline Workers](https://www.google.com/enterprise/frontline-workers/)[Work Safer](https://www.google.com/security/)
+
+[Developers](https://www.google.com/integrations/) [Education](https://edu.google.com/products/workspace-for-education/education-fundamentals?hl=[locale]) [Nonprofits](https://www.google.com/nonprofits?hl=[locale])
+
+Products
+
+[![Image 1](https://fonts.gstatic.com/s/i/productlogos/gmail_2020q4/v10/192px.svg) Gmail](https://www.google.com/sheets/gmail/)[![Image 2](https://fonts.gstatic.com/s/i/productlogos/calendar_2020q4/v13/192px.svg) Calendar](https://www.google.com/sheets/calendar/)[![Image 3](https://fonts.gstatic.com/s/i/productlogos/drive_2020q4/v10/192px.svg) Drive](https://www.google.com/sheets/drive/)[![Image 4](https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v8/192px.svg) Meet](https://www.google.com/sheets/meet/)
+
+[![Image 5](https://fonts.gstatic.com/s/i/productlogos/docs_2020q4/v11/192px.svg) Docs](https://www.google.com/sheets/docs/)[![Image 6](https://fonts.gstatic.com/s/i/productlogos/sheets_2020q4/v10/192px.svg) Sheets](https://www.google.com/sheets/about/)[![Image 7](https://fonts.gstatic.com/s/i/productlogos/slides_2020q4/v11/192px.svg) Slides](https://www.google.com/sheets/slides/)[![Image 8](https://www.gstatic.com/images/branding/productlogos/chat_2023q4/v2/192px.svg) Chat](https://www.google.com/sheets/chat/)
+
+[Admin console](https://www.google.com/sheets/admin/) [Add-ons](https://workspace.google.com/pricing.html?source=gafb-%5Bbasename%5D-globalnav-en#add-ons-sold-separately)
+
+Industries
+
+Industries
+
+[Healthcare and Life Sciences](https://www.google.com/industries/healthcare/)[Retail](https://www.google.com/industries/retail/)[Manufacturing](https://www.google.com/industries/manufacturing/)[Government and Public Sector](https://www.google.com/industries/government/)[Professional Services](https://www.google.com/industries/professional-services/)[Technology](https://www.google.com/industries/technology/)
+
+Departments
+
+[Sales](https://www.google.com/departments/sales-collaboration-solutions/)[Marketing](https://www.google.com/departments/marketing-collaboration-solutions/)[Human Resources](https://www.google.com/departments/hr-collaboration-tools/)
+
+[Security](https://www.google.com/security/)
+
+[AI](https://www.google.com/solutions/ai/)
+
+[Pricing](https://workspace.google.com/pricing.html?source=gafb-%5Bbasename%5D-globalnav-en)
+
+Resources
+
+Discover
+
+[Security](https://www.google.com/security/)[Blog](https://workspace.google.com/blog)[Customer stories](https://www.google.com/customers/)
+
+Learn
+
+[Product demo](https://www.google.com/demo/)[FAQs](https://www.google.com/faq/)[Training and certification](https://www.google.com/training/)[Live and on-demand events](https://cloudonair.withgoogle.com/gws-events)[Video conferencing](https://www.google.com/resources/video-conferencing/)
+
+Connect
+
+[Partners](https://cloud.google.com/find-a-partner/?products=Google%20Workspace&hl=[locale])[Marketplace](https://workspace.google.com/marketplace?hl=[locale])[Integrations](https://www.google.com/integrations/)[Refer Google Workspace](https://www.google.com/landing/partners/referral/)
+
+[Support for admins](https://www.google.com/support/) [Support for users](https://support.google.com/a/users/?hl=[locale])
+
+[](https://workspace.google.com/)
+
+[Skip to main content](https://www.google.com/sheets/about/#main) Solutions
+
+Solutions
+
+For Individuals
+
+[Overview Google Workspace Individual](https://www.google.com/individual/)
+
+For Business
+
+[Overview Google Workspace Business](https://www.google.com/business/)[Small Business Small business productivity tools](https://www.google.com/business/small-business/)[New Business Tools for new businesses](https://www.google.com/business/new-business/)[Startups Startup productivity tools](https://www.google.com/business/startups/)
+
+For Enterprise
+
+[Overview Google Workspace Enterprise](https://www.google.com/enterprise/)[Frontline Workers Google Workspace for the frontline](https://www.google.com/enterprise/frontline-workers/)[Work Safer Protect organizations from cyberattacks](https://www.google.com/security/)
+
+[Developers](https://www.google.com/integrations/) [Education](https://edu.google.com/products/workspace-for-education/education-fundamentals?hl=[locale]) [Nonprofits](https://www.google.com/nonprofits?hl=[locale])
+
+_close_
+
+Products
+
+Products
+
+[See all apps](https://www.google.com/features/)
+
+[![Image 9](https://fonts.gstatic.com/s/i/productlogos/gmail_2020q4/v10/192px.svg) Gmail Custom business email](https://www.google.com/sheets/gmail/)[![Image 10](https://fonts.gstatic.com/s/i/productlogos/calendar_2020q4/v13/192px.svg) Calendar Shared calendars](https://www.google.com/sheets/calendar/)[![Image 11](https://fonts.gstatic.com/s/i/productlogos/drive_2020q4/v10/192px.svg) Drive Cloud storage](https://www.google.com/sheets/drive/)[![Image 12](https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v8/192px.svg) Meet Video and voice conferencing](https://www.google.com/sheets/meet/)
+
+[![Image 13](https://fonts.gstatic.com/s/i/productlogos/docs_2020q4/v11/192px.svg) Docs Word processing](https://www.google.com/sheets/docs/)[![Image 14](https://fonts.gstatic.com/s/i/productlogos/sheets_2020q4/v10/192px.svg) Sheets Spreadsheets](https://www.google.com/sheets/about/)[![Image 15](https://fonts.gstatic.com/s/i/productlogos/slides_2020q4/v11/192px.svg) Slides Presentation builder](https://www.google.com/sheets/slides/)[![Image 16](https://www.gstatic.com/images/branding/productlogos/chat_2023q4/v2/192px.svg) Chat Messaging for teams](https://www.google.com/sheets/chat/)
+
+[Admin console](https://www.google.com/sheets/admin/) [Add-ons](https://workspace.google.com/pricing.html?source=gafb-%5Bbasename%5D-globalnav-en#add-ons-sold-separately)
+
+_close_
+
+Industries
+
+Industries
+
+Industries
+
+[Healthcare and Life Sciences](https://www.google.com/industries/healthcare/)[Retail](https://www.google.com/industries/retail/)[Manufacturing](https://www.google.com/industries/manufacturing/)[Government and Public Sector](https://www.google.com/industries/government/)[Professional Services](https://www.google.com/industries/professional-services/)[Technology](https://www.google.com/industries/technology/)
+
+Departments
+
+[Sales](https://www.google.com/departments/sales-collaboration-solutions/)[Marketing](https://www.google.com/departments/marketing-collaboration-solutions/)[Human Resources](https://www.google.com/departments/hr-collaboration-tools/)
+
+[Security](https://www.google.com/security/)
+
+_close_
+
+[AI](https://www.google.com/solutions/ai/)
+
+[Pricing](https://workspace.google.com/pricing.html?source=gafb-%5Bbasename%5D-globalnav-en)
+
+Resources
+
+Resources
+
+[See more](https://www.google.com/resources/)
+
+Discover
+
+[Security Protecting your data](https://www.google.com/security/)[Blog Latest product news and stories](https://workspace.google.com/blog)[Customer stories Case studies and videos](https://www.google.com/customers/)
+
+Learn
+
+[Product demo See Google Workspace in action](https://www.google.com/demo/)[FAQs Answers to commonly asked questions](https://www.google.com/faq/)[Training and certification On-demand or classroom training](https://www.google.com/training/)[Live and on-demand events Explore events and webinars](https://cloudonair.withgoogle.com/gws-events)[Video conferencing Learn about Google Meet](https://www.google.com/resources/video-conferencing/)
+
+Connect
+
+[Partners Find the right partner](https://cloud.google.com/find-a-partner/?products=Google%20Workspace&hl=[locale])[Marketplace Browse and install apps](https://workspace.google.com/marketplace?hl=[locale])[Integrations Partner and custom integrations](https://www.google.com/integrations/)[Refer Google Workspace Earn rewards with our Referral Program](https://www.google.com/landing/partners/referral/)
+
+[Support for admins](https://www.google.com/support/) [Support for users](https://support.google.com/a/users/?hl=[locale])
+
+_close_
+
+Try Sheets for work
+
+[For small business](https://www.google.com/business/) [For enterprise](https://www.google.com/enterprise/) [Sign in](https://docs.google.com/spreadsheets/u/0/?ec=wgc-sheets-[module]-goto)
+
+Solutions
+
+Solutions
+
+For Individuals
+
+[Overview Google Workspace Individual](https://www.google.com/individual/)
+
+For Business
+
+[Overview Google Workspace Business](https://www.google.com/business/)[Small Business Small business productivity tools](https://www.google.com/business/small-business/)[New Business Tools for new businesses](https://www.google.com/business/new-business/)[Startups Startup productivity tools](https://www.google.com/business/startups/)
+
+For Enterprise
+
+[Overview Google Workspace Enterprise](https://www.google.com/enterprise/)[Frontline Workers Google Workspace for the frontline](https://www.google.com/enterprise/frontline-workers/)[Work Safer Protect organizations from cyberattacks](https://www.google.com/security/)
+
+[Developers](https://www.google.com/integrations/) [Education](https://edu.google.com/products/workspace-for-education/education-fundamentals?hl=[locale]) [Nonprofits](https://www.google.com/nonprofits?hl=[locale])
+
+_close_
+
+Products
+
+Products
+
+[See all apps](https://www.google.com/features/)
+
+[![Image 17](https://fonts.gstatic.com/s/i/productlogos/gmail_2020q4/v10/192px.svg) Gmail Custom business email](https://www.google.com/sheets/gmail/)[![Image 18](https://fonts.gstatic.com/s/i/productlogos/calendar_2020q4/v13/192px.svg) Calendar Shared calendars](https://www.google.com/sheets/calendar/)[![Image 19](https://fonts.gstatic.com/s/i/productlogos/drive_2020q4/v10/192px.svg) Drive Cloud storage](https://www.google.com/sheets/drive/)[![Image 20](https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v8/192px.svg) Meet Video and voice conferencing](https://www.google.com/sheets/meet/)
+
+[![Image 21](https://fonts.gstatic.com/s/i/productlogos/docs_2020q4/v11/192px.svg) Docs Word processing](https://www.google.com/sheets/docs/)[![Image 22](https://fonts.gstatic.com/s/i/productlogos/sheets_2020q4/v10/192px.svg) Sheets Spreadsheets](https://www.google.com/sheets/about/)[![Image 23](https://fonts.gstatic.com/s/i/productlogos/slides_2020q4/v11/192px.svg) Slides Presentation builder](https://www.google.com/sheets/slides/)[![Image 24](https://www.gstatic.com/images/branding/productlogos/chat_2023q4/v2/192px.svg) Chat Messaging for teams](https://www.google.com/sheets/chat/)
+
+[Admin console](https://www.google.com/sheets/admin/) [Add-ons](https://workspace.google.com/pricing.html?source=gafb-%5Bbasename%5D-globalnav-en#add-ons-sold-separately)
+
+_close_
+
+Industries
+
+Industries
+
+Industries
+
+[Healthcare and Life Sciences](https://www.google.com/industries/healthcare/)[Retail](https://www.google.com/industries/retail/)[Manufacturing](https://www.google.com/industries/manufacturing/)[Government and Public Sector](https://www.google.com/industries/government/)[Professional Services](https://www.google.com/industries/professional-services/)[Technology](https://www.google.com/industries/technology/)
+
+Departments
+
+[Sales](https://www.google.com/departments/sales-collaboration-solutions/)[Marketing](https://www.google.com/departments/marketing-collaboration-solutions/)[Human Resources](https://www.google.com/departments/hr-collaboration-tools/)
+
+[Security](https://www.google.com/security/)
+
+_close_
+
+[AI](https://www.google.com/solutions/ai/)
+
+[Pricing](https://workspace.google.com/pricing.html?source=gafb-%5Bbasename%5D-globalnav-en)
+
+Resources
+
+Resources
+
+[See more](https://www.google.com/resources/)
+
+Discover
+
+[Security Protecting your data](https://www.google.com/security/)[Blog Latest product news and stories](https://workspace.google.com/blog)[Customer stories Case studies and videos](https://www.google.com/customers/)
+
+Learn
+
+[Product demo See Google Workspace in action](https://www.google.com/demo/)[FAQs Answers to commonly asked questions](https://www.google.com/faq/)[Training and certification On-demand or classroom training](https://www.google.com/training/)[Live and on-demand events Explore events and webinars](https://cloudonair.withgoogle.com/gws-events)[Video conferencing Learn about Google Meet](https://www.google.com/resources/video-conferencing/)
+
+Connect
+
+[Partners Find the right partner](https://cloud.google.com/find-a-partner/?products=Google%20Workspace&hl=[locale])[Marketplace Browse and install apps](https://workspace.google.com/marketplace?hl=[locale])[Integrations Partner and custom integrations](https://www.google.com/integrations/)[Refer Google Workspace Earn rewards with our Referral Program](https://www.google.com/landing/partners/referral/)
+
+[Support for admins](https://www.google.com/support/) [Support for users](https://support.google.com/a/users/?hl=[locale])
+
+_close_
+
+[Sign in](https://docs.google.com/spreadsheets/u/0/?ec=wgc-sheets-[module]-goto) Try Sheets for work
+
+[For small business](https://www.google.com/business/) [For enterprise](https://www.google.com/enterprise/)
+
+![Image 25: Google Sheets product logo](https://storage.googleapis.com/googwebreview.appspot.com/grow-ext-cloud-images-uploads/7uffzv9dk4sn-2saPASNQaWzk3n5OvSnkAU-c912a0e13d9947bd5c831dd37283cea2-Sheets_Template5050Hero_Logo.svg)
+
+Online, collaborative spreadsheets
+==================================
+
+AI-powered spreadsheets help you and your team manage, visualize and analyze data.
+
+Sign in
+
+Try Sheets for work
+
+[For small business](https://www.google.com/business/)[For enterprise](https://www.google.com/enterprise/)
+
+ ![Image 26:  Gemini for Sheets can create a project tracker with ‘Help me organize’](https://lh3.googleusercontent.com/KwhiPst9yGVWR36mlwnUN7knUPVknE2G23EBaV57ymccfPtVw3iN48JqHToulFQv1leZAiGk-dZMgjyBWukzkWMsP-VQ3GQUxilavQ=e365-pa-nu-rw-w720)
+
+Explore features
+
+[Gemini in Sheets](https://www.google.com/sheets/about/#gemini-in-sheets)
+
+[Create](https://www.google.com/sheets/about/#create)
+
+[Refine](https://www.google.com/sheets/about/#refine)
+
+[Security](https://www.google.com/sheets/about/#security)
+
+[Customers](https://www.google.com/sheets/about/#customers)
+
+[FAQs](https://www.google.com/sheets/about/#faqs)
+
+![Image 27](https://storage.googleapis.com/googwebreview.appspot.com/grow-ext-cloud-images-uploads/7uffzv9dk4sn-7LhoZoRSU32Sn20yI8213k-92d83d07ba564bddac887d329c3589c2-Vector_80F9F86C.svg)Premium feature
+
+This feature is available on Gemini add-on to Workspace plans and Google One Premium plan.
+
+Get more done with Gemini in Sheets
+-----------------------------------
+
+See the latest summary of your data and build spreadsheets with a simple prompt. Ask for help generating formulas and become a data pro. Try Gemini for Google Workspace today.
+
+### Quickly build spreadsheets
+
+Input accurate, high quality data with ease and speed.
+
+![Image 28: Sheets automatically formatting a table with smart chips](https://lh3.googleusercontent.com/Mwtb65IHheGhpQ6OXGRYkoAG4__z3TlAIsetL_OTPM1PTYX1FA4gS6IqZG7PX6OMYcaWZHMYGCa6SeNH-hT8XgPuPRn5FlhJzSgKMYc=e365-pa-nu-s0)
+
+![Image 29: Stylized spreadsheet showing multiple types of smart chips ](https://lh3.googleusercontent.com/fltnvtjdgcu_mxF1MmOo67RlKvZqEjf2LjPFhD-cfIagaZeQKoUn9XKml_NP_sPxFPMYfGtM9qzkdcIwAldy317L6kUZIDAKF71rCQ=e365-pa-nu-s0)
+
+![Image 30: Version history UI in Sheets](https://lh3.googleusercontent.com/AaV2sASDC-2bVQX_cFb13EZnIjCasJryk98Fm--IbJwWOMGJYo3Mxb2WzhkbrBmEUp2dnUEtRKrCsVJ515BDTKu03H6EKdji3DOV9pr4=e365-pa-nu-s0)
+
+![Image 31: Assign a task to your teammate directly in Sheets](https://lh3.googleusercontent.com/MbS-hVgQeOJonEHV2WPDwVVlH5lSTBJgwO2jux250iTM7JZ5Fj005vMv3PNatd1LRr9Gdk9GThfavZ0EBOuYyJLnf8_xOsY9NtnzjWk=e365-pa-nu-s0)
+
+### Format and design your spreadsheet with tables and smart chips
+
+Instantly add structure and polish to data using tables. Use smart chips to input rich, accurate data like names, files, dates and dropdown menus when you type '@'.
+
+ ![Image 32: Sheets automatically formatting a table with smart chips](https://lh3.googleusercontent.com/-WfZx2DRaQA70UH9ZayFvQNV3TLQ09-pyiyOnXFwWTh8MQU8NILsZBpR6juR4f0F4IGebGHM1hFbrRAscfCp-xtvGDkIm8XqMcM1tMM=e365-pa-nu-s0) ### Get a running start on your spreadsheet
+
+Select pre-built tables for event planning, project management, inventory management and more - never build a spreadsheet from scratch.
+
+ ![Image 33: Stylized spreadsheet showing multiple types of smart chips ](https://lh3.googleusercontent.com/d-mNXEZxfC-cXGigSgvUPjhy29UoJVz_BgSjp2HjMlu0upzKanZWI4WEdFqeV1U0HqowwPjq0bARk2Q2vTKL0s_I4mOnSnUwdz8vm4s=e365-pa-nu-s0) ### Review data with flexibility
+
+You and your stakeholders can reference previous versions at any time and create filter views that are specific to each reviewer’s preferences.
+
+ ![Image 34: Version history UI in Sheets](https://lh3.googleusercontent.com/XmJMCvogrmUuJVpm_X3eJbH0nhg66IYV4ylX3e4_4B4B-1DMZP7KDxglILNkyliDqcje3yuTanLVXXkL-VlDDRkK3uzn3LyRDgE0Vqk=e365-pa-nu-s0) ### Collaborate and make decisions with your partners right from Sheets
+
+Use comments to give feedback to your teams and assign tasks to keep projects moving forward, without ever leaving your spreadsheet.
+
+ ![Image 35: Assign a task to your teammate directly in Sheets](https://lh3.googleusercontent.com/iSQln5ENnbb6Hd9njXv0-zcp99ScFwAbyQu1FjSUZB-6mF8w0dxXnWCLmk8Tag0D1Th8kgfigIDZNoLlO5gzTEo1g_BFETk8HIhySA=e365-pa-nu-s0) 
+
+### Collaborate on your spreadsheet, from anywhere
+
+Stay in sync with co-editing and comments from internal and external teams on your phone, tablet or web browser.
+
+### Meet directly in your documents
+
+![Image 36](https://storage.googleapis.com/googwebreview.appspot.com/grow-ext-cloud-images-uploads/7uffzv9dk4sn-7LhoZoRSU32Sn20yI8213k-92d83d07ba564bddac887d329c3589c2-Vector_80F9F86C.svg)Premium feature
+
+This feature is available on some Google Workspace Business and Google Workspace Enterprise plans.
+
+Collaborate in context by meeting in Google Slides, Docs or Sheets.
+
+ ![Image 37: Two team members on a Meet call within Sheets](https://lh3.googleusercontent.com/3s5Ls6Nwto6clWlDU81yN2skIDsyV8eQFpSa3s33hOT3ixqSsOXiueIQ8lzYxAr3Lu1QD0eEERv_WlL7dr9D3FUG1bWDPv79mxoVQA=e365-pa-nu-s0) ### Control access to your spreadsheets
+
+Easy-to-manage permissions gives you granular control over who can edit, comment, download, share or view your spreadsheets.
+
+ ![Image 38: Changing Sheets access via dropdown menu](https://lh3.googleusercontent.com/49kKA5vbcNxXz_QL5_HrZpI8yu_usvk-wEiOBkob2pEkP7CWAKm94OKbdcEMnzA6hOF8DLI_338P4ZFEO7uI0K-2xig57_HiY-5ezH0=e365-pa-nu-s0) ### Stay up to date on edits from your teams and external partners
+
+With conditional notifications, receive an email alert based on custom rules you configure like a new row is added.
+
+ ![Image 39: Receiving an email with the alert](https://lh3.googleusercontent.com/U3zpv25g3_Zms4ZnobYO8z-YpZEtzosgx3BzlSGYaNq8ZWZT-boRSCwcVZAFDiCJX8wvwGajEoy-XMLHlcpF8lcFvQAZHj9zYapfpYU=e365-pa-nu-s0) 
+
+![Image 40: Two team members on a Meet call within Sheets](https://lh3.googleusercontent.com/hbCNf-ynxSkrZtlEMiZl9XN9hR3LORpJyW4Ena0wYn8twCL8x0JUk2moPyrtRmxcNhQRTXF7ChW21GY_c5eWZ2b5la2F_8fO8GVEOucT=e365-pa-nu-s0)
+
+![Image 41: Changing Sheets access via dropdown menu](https://lh3.googleusercontent.com/IVhbnWBt19e1mGorUD7BZMMISLqjJLdVWfpAB_vgczZl_7wXZtw_hbMY1dPEh-CzBz8RTiBDTa9XDsUropDCKuvNog2EKhx55H3wWuo=e365-pa-nu-s0)
+
+![Image 42: Receiving an email with the alert](https://lh3.googleusercontent.com/Hi0FTR8nQy7zH1fV6IpCp-mOUS9hwRsqh6unJwKlDNVP1vPiumZUEWDFIMnSm9iDPtPvwOZoSPDPs6RP17zPXqewzMcmeEuLYKL0nLk=e365-pa-nu-s0) 
+
+### Do more with your data
+
+Derive insights from your data, take action and make decisions.
+
+![Image 43: Gemini suggests to fill 8 rows in Sheets](https://lh3.googleusercontent.com/AC_sTRq6oYXQFRkMdUy0c98PrlLxqV94rZIoMj2Osa1oG_s-b9wL1s29PA8Nkz90X0BEfV14n2iI-7EqFfHrBvW0ag1crQBeMSPojA=e365-pa-nu-rw-w738)
+
+![Image 44](https://storage.googleapis.com/googwebreview.appspot.com/grow-ext-cloud-images-uploads/7uffzv9dk4sn-7LhoZoRSU32Sn20yI8213k-92d83d07ba564bddac887d329c3589c2-Vector_80F9F86C.svg)Premium feature
+
+This feature is available with Gemini for Google Workspace add-on.
+
+### Analyze your data faster with built-in AI
+
+Gemini in Sheets can help you analyze data by detecting patterns and making suggestions, saving time and reducing errors.
+
+![Image 45: Linked BigQuery data in Sheets](https://lh3.googleusercontent.com/F3SbaIF3fjg3-g9gDfSagnZ5Un2f_e7I-HU-sVAs5oDHEnsfl4tu0_RuAtAeEIHQRtEMe3FE9oimcyZjobefCaFg1_uDfT2r-wxvofc=e365-pa-nu-rw-w738)
+
+### Work with BigQuery or Looker data in Sheets
+
+With Connected Sheets you can access, analyze, visualize and share billions of rows of BigQuery or Looker data right from your spreadsheet.
+
+![Image 46: Asana integration in Sheets enables a ticket tracker](https://lh3.googleusercontent.com/6VuU9osdRwqRn3gIdERhwdWSpLQPljgsbZW3SNTLRXf3p--yFAQSAp5VBNf8ImsDkfqLSWRfIOfb81wt14Cy3odyPiOx2EVtXvCj57fU=e365-pa-nu-rw-w738)
+
+### Work with data from third party tools right in Sheets
+
+View and analyze data from tools you use everyday like Salesforce, Intuit and Asana - install apps from the Workspace Marketplace.
+
+![Image 47: Gemini suggests to fill 8 rows in Sheets](https://lh3.googleusercontent.com/AC_sTRq6oYXQFRkMdUy0c98PrlLxqV94rZIoMj2Osa1oG_s-b9wL1s29PA8Nkz90X0BEfV14n2iI-7EqFfHrBvW0ag1crQBeMSPojA=e365-pa-nu-rw-w738)
+
+![Image 48](https://storage.googleapis.com/googwebreview.appspot.com/grow-ext-cloud-images-uploads/7uffzv9dk4sn-7LhoZoRSU32Sn20yI8213k-92d83d07ba564bddac887d329c3589c2-Vector_80F9F86C.svg)Premium feature
+
+This feature is available with Gemini for Google Workspace add-on.
+
+### Analyze your data faster with built-in AI
+
+Gemini in Sheets can help you analyze data by detecting patterns and making suggestions, saving time and reducing errors.
+
+![Image 49: Linked BigQuery data in Sheets](https://lh3.googleusercontent.com/F3SbaIF3fjg3-g9gDfSagnZ5Un2f_e7I-HU-sVAs5oDHEnsfl4tu0_RuAtAeEIHQRtEMe3FE9oimcyZjobefCaFg1_uDfT2r-wxvofc=e365-pa-nu-rw-w738)
+
+### Work with BigQuery or Looker data in Sheets
+
+With Connected Sheets you can access, analyze, visualize and share billions of rows of BigQuery or Looker data right from your spreadsheet.
+
+![Image 50: Asana integration in Sheets enables a ticket tracker](https://lh3.googleusercontent.com/6VuU9osdRwqRn3gIdERhwdWSpLQPljgsbZW3SNTLRXf3p--yFAQSAp5VBNf8ImsDkfqLSWRfIOfb81wt14Cy3odyPiOx2EVtXvCj57fU=e365-pa-nu-rw-w738)
+
+### Work with data from third party tools right in Sheets
+
+View and analyze data from tools you use everyday like Salesforce, Intuit and Asana - install apps from the Workspace Marketplace.
+
+### Stay safe
+
+Your data is encrypted by default, and an array of safety measures – like advanced client-side encryption, anti-abuse measures, and privacy controls – keep your data private.
+
+ ![Image 51: Pop up windows to report a Sheet as spam or add additional encryption
+](https://lh3.googleusercontent.com/XRbLk94kvFbh6MdHi8fteilTsIQDXw76ei8KJXhKYfK5Iujbx6JVdlDsdwcHBBZvQGzenCbDBjTWO590HdjCf4ge_8xcXq7tquKKia4=e365-pa-nu-rw-w608)
+
+ ![Image 52: Assigning a task to a team member directly from Sheets](https://lh3.googleusercontent.com/1zp5AkfzBN-xgqVyDL8RqlVlyJnGAQjUd8nVMhSVmSteWqYPFNIOf-IzlUrAuUPCrPTTRSLm5D_MaAatepwMcyj-9XP_y1LJ4VGo1n0=e365-pa-nu-rw-w608)
+
+### Enhance Microsoft Excel spreadsheets
+
+Edit Microsoft Excel spreadsheets in Sheets to unlock powerful collaborative and assistive features, including comments, action items and built-in intelligence.
+
+### Learn why organizations use Sheets
+
+![Image 53: Adore Me company logo](https://lh3.googleusercontent.com/99Y8GrkkmFxmpXpjSg5p0fdxacpapklPUJNaBK-q3hdFnMLRuHxNciDN3QfdKmJDyBZ6PavHtVrWzdnfOEQ990xHlwu0nfdts1ORZP91=e365-pa-nu-s0)
+
+> We've also been able to speed up the planning phase of our campaigns with Help me organize. By entering a simple prompt like, ‘Create a project plan for a full-funnel marketing campaign around a spring product launch’, we get a first draft of a plan in Sheets to kickstart the project.
+
+**Ranjan Roy**, VP of Strategy, Adore Me
+
+Learn more
+
+![Image 54: Robinhood company logo](https://lh3.googleusercontent.com/WKDrOTcMybYMADXxRhEgLwi96xjSUfwLasUv1DUgJjLEgCkHW1JX73JUPKa0i2am1Qfi-vZr6NzqOTAIwqjZaRfxBFsNHA5Ia3-stNtF=e365-pa-nu-s0)
+
+> Google Sheets is our preferred spreadsheet application, giving us a real-time solution for collaboration to activate data-driven decisions.
+
+**Chris Montfot**, Head of Strategic Operations for Corporate Engineering, Robinhood
+
+Learn more
+
+![Image 55: Attache Corporate Housing Logo](https://lh3.googleusercontent.com/TFCAa85dMFhHsG1XiGKwPuen7eWJDxTK2sQzJPVxvhZVwe7q9Z7KlgBWGiOdgmtcVo5Fyjl4M3zdtJfGeq7kiiJLWuB-QPvHv2QhMDY=e365-pa-nu-s0)
+
+> It used to be challenging to keep track of where we were in the process but the Help me organize feature in Google Sheets has become our secret weapon, allowing us to design step-driven processes with unparalleled flexibility. Now, we have a unified place to build and organize plans, trackers, and timelines, and keep them up to date in real time.
+
+**Tim Tochette**, Owner & President, Attache
+
+Learn more
+
+### Do more with Google Sheets
+
+![Image 56: Installation screen for Google Sheets](https://lh3.googleusercontent.com/2azTeYn0yqthG-rMqvONEUkgKfBosqGIyRvsJjuNr7NzsmhaIzaYTRQU5sEApVgofFKOvXmmnhHhrYz2WrDbKmHsrwAgQ_61SX4s0w=e365-pa-nu-rw-w738)
+
+### Work, wherever you are
+
+View, present or collaborate in Sheets on your mobile phone or tablet, available in the App Store and Play Store, or connect from your computer.
+
+![Image 57: Toggle option to work offline
+](https://lh3.googleusercontent.com/153sfWP6c62SAxsUJeGgyK9ix9Llbn5ONV66e0LPvyZhHa8glplG74WWmUZo9C0wXrGKC1c57YX_xi9rGmRRo1ZBLl7nECojqAWzVHB5=e365-pa-nu-rw-w738)
+
+### Stay productive, even offline
+
+Access, create, and edit Sheets without any internet connection, helping you stay productive anywhere.
+
+![Image 58: Stylized images of integrations that work with Sheets](https://lh3.googleusercontent.com/1p27LW8zZFc063IawkQRzuCVv6ZP3_m_0lIu5jazFr6MoARe-a9_0kGbykG-SFEJO2feCCcM2km-Qlxh_NJhvUiVKov-klCvzSO44ztg=e365-pa-nu-rw-w739)
+
+### Integrate your workflows
+
+Extend the power of Sheets to fit your workflows with Sheets add-ons, or build your own with a range of developer tools.
+
+![Image 59: Installation screen for Google Sheets](https://lh3.googleusercontent.com/2azTeYn0yqthG-rMqvONEUkgKfBosqGIyRvsJjuNr7NzsmhaIzaYTRQU5sEApVgofFKOvXmmnhHhrYz2WrDbKmHsrwAgQ_61SX4s0w=e365-pa-nu-rw-w738)
+
+### Work, wherever you are
+
+View, present or collaborate in Sheets on your mobile phone or tablet, available in the App Store and Play Store, or connect from your computer.
+
+![Image 60: Toggle option to work offline
+](https://lh3.googleusercontent.com/153sfWP6c62SAxsUJeGgyK9ix9Llbn5ONV66e0LPvyZhHa8glplG74WWmUZo9C0wXrGKC1c57YX_xi9rGmRRo1ZBLl7nECojqAWzVHB5=e365-pa-nu-rw-w738)
+
+### Stay productive, even offline
+
+Access, create, and edit Sheets without any internet connection, helping you stay productive anywhere.
+
+![Image 61: Stylized images of integrations that work with Sheets](https://lh3.googleusercontent.com/1p27LW8zZFc063IawkQRzuCVv6ZP3_m_0lIu5jazFr6MoARe-a9_0kGbykG-SFEJO2feCCcM2km-Qlxh_NJhvUiVKov-klCvzSO44ztg=e365-pa-nu-rw-w739)
+
+### Integrate your workflows
+
+Extend the power of Sheets to fit your workflows with Sheets add-ons, or build your own with a range of developer tools.
+
+Curious about Google Sheets?
+----------------------------
+
+Take a look at our FAQs to learn more.
+
+*   Anyone with a Google Account can create in Sheets.
+    
+    However, some features such as joining a Meet call from your documents are only available on Google Workspace plans, and Gemini for Workspace features like Help me organize are available as an add-on; see plans and pricing for organizations or Google Workspace Individual. 
+*   Yes. You can convert Microsoft Excel spreadsheets into Google Sheets format, or you can directly edit Excel spreadsheets, without having to make a copy. The original file will remain intact.
+    
+*   Co-editing means that multiple people can work on the same spreadsheet at the same time, without having to send versions back and forth. Sharing settings allows you to control who can view and edit a spreadsheet, and revision history enables you to revert to earlier versions. Also available in Google Docs and Slides.
+    
+
+![Image 62: Google Sheets logo](https://storage.googleapis.com/googwebreview.appspot.com/grow-ext-cloud-images-uploads/7uffzv9dk4sn-oKltkiyx7pJHtXJFSwmNs-77ef39278e12bebc75a572fef3e18a20-Sheets_TemplateTileSimple_Logo.svg)
+
+Manage, visualize and analyze data with Google Sheets
+-----------------------------------------------------
+
+Sign in
+
+Try Sheets for work
+
+[For small business](https://www.google.com/business/)[For enterprise](https://www.google.com/enterprise/)
+
+Sign up for the Google Workspace newsletter
+
+                       
+
+Email 
+
+Country 
+
+Also sign me up for Google Cloud emails with news, product updates, event information, special offers, and more. (Optional and you can unsubscribe at a later time).
+
+I understand my personal data will be processed in accordance with Google’s [Privacy Policy](https://policies.google.com/privacy?hl=[hreflang]).
+
+Sign up
+
+Follow our [Blog](https://workspace.google.com/blog/)
+
+*   [![Image 63: Twitter](https://www.google.com/lp/static/images/social-twitter.svg?fingerprint=4c7f996cf1e810b94a363773ddf455e0)](https://twitter.com/googleworkspace)
+*   [![Image 64: YouTube](https://www.google.com/lp/static/images/social-youtube.svg?fingerprint=42806c8dcb1016ef19ba1611c4026963)](https://www.youtube.com/channel/UCBmwzQnSoj9b6HzNmFrg_yw/)
+*   [![Image 65: LinkedIn](https://www.google.com/lp/static/images/social-linkedin.svg?fingerprint=9f1133fad02d71807cc9a0a692489f67)](https://www.linkedin.com/showcase/googleworkspace/)
+*   [![Image 66: Instagram](https://www.google.com/lp/static/images/social-instagram.svg?fingerprint=f407d1821e66b54e53cc965015f5567c)](https://www.instagram.com/googleworkspace/)
+*   [![Image 67: Facebook](https://www.google.com/lp/static/images/social-facebook.svg?fingerprint=1a93bed1c41d28731a800fdf53e52e78)](https://www.facebook.com/googleworkspace/)
+*   [![Image 68: TikTok](https://www.google.com/lp/static/images/social-tiktok.svg?fingerprint=d2318742401a12d0adf03cbf931f3855)](https://goo.gle/3xj0b2F)
+
+Included applications
+
+[Gmail](https://workspace.google.com/products/gmail/)
+
+[Meet](https://workspace.google.com/products/meet/)
+
+[Chat](https://workspace.google.com/products/chat/)
+
+[Calendar](https://workspace.google.com/products/calendar/)
+
+[Drive](https://workspace.google.com/products/drive/)
+
+[Docs](https://workspace.google.com/products/docs/)
+
+[Sheets](https://workspace.google.com/products/sheets/)
+
+[Slides](https://workspace.google.com/products/slides/)
+
+[Forms](https://workspace.google.com/products/forms/)
+
+[Sites](https://workspace.google.com/products/sites/)
+
+[Keep](https://workspace.google.com/products/keep/)
+
+[Apps Script](https://workspace.google.com/products/apps-script/)
+
+Security and management
+
+[Admin](https://workspace.google.com/products/admin/)
+
+[Endpoint](https://workspace.google.com/products/admin/endpoint/)
+
+[Vault](https://workspace.google.com/products/vault/)
+
+[Work Insights](https://workspace.google.com/products/workinsights/)
+
+Solutions
+
+[New Business](https://workspace.google.com/business/new-business/)
+
+[Small Business](https://workspace.google.com/business/small-business/)
+
+[Enterprise](https://workspace.google.com/solutions/enterprise/)
+
+[Retail](https://workspace.google.com/industries/retail/)
+
+[Manufacturing](https://workspace.google.com/industries/manufacturing/)
+
+[Professional Services](https://workspace.google.com/industries/professional-services/)
+
+[Technology](https://workspace.google.com/industries/technology/)
+
+[Healthcare](https://workspace.google.com/industries/healthcare/)
+
+[Government](https://workspace.google.com/industries/government/)
+
+[Education](https://edu.google.com/workspace-for-education/editions/education-fundamentals/?hl=en)
+
+[Nonprofits](https://www.google.com/intl/en/nonprofits)
+
+[Artificial Intelligence](https://workspace.google.com/solutions/ai/)
+
+Pricing
+
+[Compare pricing plans](https://workspace.google.com/pricing.html)
+
+Add-ons
+
+[Gemini for Workspace](https://workspace.google.com/solutions/ai/)
+
+[Meet hardware](https://workspace.google.com/products/meet-hardware/)
+
+[Google Voice](https://workspace.google.com/products/voice/)
+
+[AppSheet](https://about.appsheet.com/home/)
+
+Resources
+
+[Working remotely](https://workspace.google.com/working-remotely/)
+
+[Security](https://workspace.google.com/security/)
+
+[Customer Stories](https://workspace.google.com/customers/)
+
+[FAQs](https://workspace.google.com/faq/)
+
+[Partners](https://cloud.withgoogle.com/partners/?products=GOOGLE_WORKSPACE_PRODUCT)
+
+[Marketplace](https://workspace.google.com/marketplace/)
+
+[Integrations](https://workspace.google.com/integrations/)
+
+[Training & Certification](https://workspace.google.com/training/)
+
+[Refer Google Workspace](https://workspace.google.com/landing/partners/referral/)
+
+Learning and support
+
+[Admin Help](https://support.google.com/a/#topic=29157)
+
+[Setup and Deployment Center](https://workspace.google.com/setup/)
+
+[Learning Center for Users](https://workspace.google.com/learning-center/)
+
+[Forums for Admins](https://productforums.google.com/forum/#!forum/apps)
+
+[Google Workspace Dashboard](https://www.google.com/appsstatus?hl=en)
+
+[What's New in Google Workspace](https://workspace.google.com/whatsnew/)
+
+[Find a Google Workspace Partner](https://www.google.com/a/partnersearch/?hl=en)
+
+[Join the community of IT Admins](https://www.googlecloudcommunity.com/gc/Google-Workspace/ct-p/google-workspace)
+
+[Press](https://cloud.google.com/press/)
+
+More from Google
+
+[Google Cloud](https://cloud.google.com/?hl=en)
+
+[Google Domains](https://domains.google.com/about/)
+
+[Chrome Enterprise](https://chromeenterprise.google/)
+
+[Google Business Solutions](https://www.google.com/intl/en/services)
+
+[Google Ads](https://ads.google.com/home/?subid=[subid])
+
+[Business Messages](https://businessmessages.google/)
+
+[Join User Studies](https://userresearch.google.com/?reserved=0&utm_source=gsuite.google.com&Q_Language=[hreflang]&utm_medium=own_srch&utm_campaign=Global-GSuite&utm_term=0&utm_content=0&productTag=gafw&campaignDate=nov18&pType=bprof&referral_code=ug422768)
+
+*   [Included applications](https://workspace.google.com/features/)
+    *   [Gmail](https://workspace.google.com/products/gmail/)
+    *   [Meet](https://workspace.google.com/products/meet/)
+    *   [Chat](https://workspace.google.com/products/chat/)
+    *   [Calendar](https://workspace.google.com/products/calendar/)
+    *   [Drive](https://workspace.google.com/products/drive/)
+    *   [Docs](https://workspace.google.com/products/docs/)
+    *   [Sheets](https://workspace.google.com/products/sheets/)
+    *   [Slides](https://workspace.google.com/products/slides/)
+    *   [Forms](https://workspace.google.com/products/forms/)
+    *   [Sites](https://workspace.google.com/products/sites/)
+    *   [Keep](https://workspace.google.com/products/keep/)
+    *   [Apps Script](https://workspace.google.com/products/apps-script/)
+
+*   [Security and management](https://workspace.google.com/security/)
+    *   [Admin](https://workspace.google.com/products/admin/)
+    *   [Endpoint](https://workspace.google.com/products/admin/endpoint/)
+    *   [Vault](https://workspace.google.com/products/vault/)
+    *   [Work Insights](https://workspace.google.com/products/workinsights/)
+*   Solutions
+    ---------
+    
+    *   [New Business](https://workspace.google.com/business/new-business/)
+    *   [Small Business](https://workspace.google.com/business/small-business/)
+    *   [Enterprise](https://workspace.google.com/solutions/enterprise/)
+    *   [Retail](https://workspace.google.com/industries/retail/)
+    *   [Manufacturing](https://workspace.google.com/industries/manufacturing/)
+    *   [Professional Services](https://workspace.google.com/industries/professional-services/)
+    *   [Technology](https://workspace.google.com/industries/technology/)
+    *   [Healthcare](https://workspace.google.com/industries/healthcare/)
+    *   [Government](https://workspace.google.com/industries/government/)
+    *   [Education](https://edu.google.com/workspace-for-education/editions/education-fundamentals/?hl=en)
+    *   [Nonprofits](https://www.google.com/intl/en/nonprofits)
+    *   [Artificial Intelligence](https://workspace.google.com/solutions/ai/)
+
+*   [Pricing](https://workspace.google.com/pricing.html)
+    *   [Compare pricing plans](https://workspace.google.com/pricing.html)
+*   Add-ons
+    -------
+    
+    *   [Gemini for Workspace](https://workspace.google.com/solutions/ai/)
+    *   [Meet hardware](https://workspace.google.com/products/meet-hardware/)
+    *   [Google Voice](https://workspace.google.com/products/voice/)
+    *   [AppSheet](https://about.appsheet.com/home/)
+
+*   Resources
+    ---------
+    
+    *   [Working remotely](https://workspace.google.com/working-remotely/)
+    *   [Security](https://workspace.google.com/security/)
+    *   [Customer Stories](https://workspace.google.com/customers/)
+    *   [FAQs](https://workspace.google.com/faq/)
+    *   [Partners](https://cloud.withgoogle.com/partners/?products=GOOGLE_WORKSPACE_PRODUCT)
+    *   [Marketplace](https://workspace.google.com/marketplace/)
+    *   [Integrations](https://workspace.google.com/integrations/)
+    *   [Training & Certification](https://workspace.google.com/training/)
+    *   [Refer Google Workspace](https://workspace.google.com/landing/partners/referral/)
+
+*   [Learning and support](https://workspace.google.com/support/)
+    *   [Admin Help](https://support.google.com/a/#topic=29157)
+    *   [Setup and Deployment Center](https://workspace.google.com/setup/)
+    *   [Learning Center for Users](https://workspace.google.com/learning-center/)
+    *   [Forums for Admins](https://productforums.google.com/forum/#!forum/apps)
+    *   [Google Workspace Dashboard](https://www.google.com/appsstatus?hl=en)
+    *   [What's New in Google Workspace](https://workspace.google.com/whatsnew/)
+    *   [Find a Google Workspace Partner](https://www.google.com/a/partnersearch/?hl=en)
+    *   [Join the community of IT Admins](https://www.googlecloudcommunity.com/gc/Google-Workspace/ct-p/google-workspace)
+    *   [Press](https://cloud.google.com/press/)
+*   More from Google
+    ----------------
+    
+    *   [Google Cloud](https://cloud.google.com/?hl=en)
+    *   [Google Domains](https://domains.google.com/about/)
+    *   [Chrome Enterprise](https://chromeenterprise.google/)
+    *   [Google Business Solutions](https://www.google.com/intl/en/services)
+    *   [Google Ads](https://ads.google.com/home/?subid=[subid])
+    *   [Business Messages](https://businessmessages.google/)
+    *   [Join User Studies](https://userresearch.google.com/?reserved=0&utm_source=gsuite.google.com&Q_Language=[hreflang]&utm_medium=own_srch&utm_campaign=Global-GSuite&utm_term=0&utm_content=0&productTag=gafw&campaignDate=nov18&pType=bprof&referral_code=ug422768)
+
+[![Image 69: Google Workspace](https://www.google.com/lp/static/images/logo-google.svg?fingerprint=0faafdf5bbdecd4d8899f0fcce45dce1)](https://www.google.com/)
+
+*   [About Google](https://about.google/intl/[language]/?utm_source=workspace.google.com&utm_medium=referral&utm_campaign=gsuite-footer-[language])
+*   [Google Products](https://about.google/products/?tip=explore)
+*   [Privacy](https://policies.google.com/privacy?hl=[hreflang])
+*   [Terms](https://www.google.com/intl/[language]/policies/terms)
+*   Manage cookies
+
+![Image 70](https://www.google.com/lp/static/images/language.svg?fingerprint=fae9b8a2ab3f1dc92f08098c9a93a332)
+
+English
+
+Change Language
+
+[Bahasa Indonesia](https://www.google.com/intl/id/products/sheets/) [Čeština](https://www.google.com/intl/cs/products/sheets/) [Dansk](https://www.google.com/intl/da/products/sheets/) [Deutsch](https://www.google.com/intl/de/products/sheets/) [Deutsch – Schweiz](https://www.google.com/intl/de_ch/products/sheets/) English [English – Australia](https://www.google.com/intl/en_au/products/sheets/) [English – Canada](https://www.google.com/intl/en_ca/products/sheets/) [English – India](https://www.google.com/intl/en_in/products/sheets/) [English – Indonesia](https://www.google.com/intl/en_id/products/sheets/) [English – Ireland](https://www.google.com/intl/en_ie/products/sheets/) [English – Malaysia](https://www.google.com/intl/en_my/products/sheets/) [English – New Zealand](https://www.google.com/intl/en_nz/products/sheets/) [English – Philippines](https://www.google.com/intl/en_ph/products/sheets/) [English – Singapore](https://www.google.com/intl/en_sg/products/sheets/) [English – South Africa](https://www.google.com/intl/en_za/products/sheets/) [English – United Kingdom](https://www.google.com/intl/en_uk/products/sheets/) [Español](https://www.google.com/intl/es/products/sheets/) [Español (Latinoamérica)](https://www.google.com/intl/es-419/products/sheets/) [Español (Latinoamérica) – Argentina](https://www.google.com/intl/es-419_ar/products/sheets/) [Español (Latinoamérica) – Estados Unidos](https://www.google.com/intl/es-419_us/products/sheets/) [Español (Latinoamérica) – México](https://www.google.com/intl/es-419_mx/products/sheets/) [Français](https://www.google.com/intl/fr/products/sheets/) [Français – Canada](https://www.google.com/intl/fr_ca/products/sheets/) [Français – Suisse](https://www.google.com/intl/fr_ch/products/sheets/) [Italiano](https://www.google.com/intl/it/products/sheets/) [Magyar](https://www.google.com/intl/hu/products/sheets/) [Nederlands](https://www.google.com/intl/nl/products/sheets/) [Norsk](https://www.google.com/intl/no/products/sheets/) [Polski](https://www.google.com/intl/pl/products/sheets/) [Português (Brasil)](https://www.google.com/intl/pt-BR/products/sheets/) [Português (Portugal)](https://www.google.com/intl/pt-PT/products/sheets/) [Suomi](https://www.google.com/intl/fi/products/sheets/) [Svenska](https://www.google.com/intl/sv/products/sheets/) [Tiếng Việt](https://www.google.com/intl/vi/products/sheets/) [Türkçe](https://www.google.com/intl/tr/products/sheets/) [Русский](https://www.google.com/intl/ru/products/sheets/) [Українська](https://www.google.com/intl/uk/products/sheets/) [עברית](https://www.google.com/intl/iw/products/sheets/) [العربية](https://www.google.com/intl/ar/products/sheets/) [العربية – مصر](https://www.google.com/intl/ar_eg/products/sheets/) [ไทย](https://www.google.com/intl/th/products/sheets/) [한국어](https://www.google.com/intl/ko/products/sheets/) [中文 (香港)](https://www.google.com/intl/zh-HK/products/sheets/) [中文（简体中文）](https://www.google.com/intl/zh-CN/products/sheets/) [中文（繁體中文）](https://www.google.com/intl/zh-TW/products/sheets/) [日本語](https://www.google.com/intl/ja/products/sheets/)
+
+ 
+
+Hi there 👋 What brings you to Google Workspace today?
+
+Welcome to Google Cloud Guide
+-----------------------------
+
+powered by
+```
+
+Based on the above content, extract all relevant links that may contain information about the product as specified in the system prompt. Remember to follow the rules and output format specified there.
+
+Example output format:
+{
+  "extracted_links": [
+    {
+      "url": "https://example.com/pricing",
+      "relevance": ["pricing", "features"],
+      "confidence": 0.9
+    },
+    {
+      "url": "https://example.com/features",
+      "relevance": ["features", "pros", "primary_use_case"],
+      "confidence": 0.8
+    }
+  ]
+}
+
+If no relevant links are found, return an object with an empty array: { "extracted_links": [] }
+
+Ensure that you've thoroughly searched for links that might contain ANY of the information types listed in the system prompt. Don't overlook less obvious pages that might contain valuable information.
+
+
+Response:
+{"extracted_links":[{"url":"https://workspace.google.com/pricing.html","relevance":["pricing"],"confidence":0.9},{"url":"https://www.google.com/sheets/about/#gemini-in-sheets","relevance":["features","unique_selling_proposition"],"confidence":0.8},{"url":"https://www.google.com/sheets/about/#customers","relevance":["pros","primary_use_case"],"confidence":0.7},{"url":"https://www.google.com/sheets/about/#faqs","relevance":["support"],"confidence":0.6},{"url":"https://www.google.com/sheets/about/#create","relevance":["features","primary_use_case"],"confidence":0.7},{"url":"https://www.google.com/sheets/about/#refine","relevance":["features"],"confidence":0.7},{"url":"https://www.google.com/sheets/about/#security","relevance":["support"],"confidence":0.6},{"url":"https://www.google.com/sheets/about/#create","relevance":["features"],"confidence":0.7},{"url":"https://www.google.com/sheets/about/#integrations","relevance":["integrations"],"confidence":0.8}]}

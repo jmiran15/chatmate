@@ -55,6 +55,7 @@ async function handler(job: Job<AddChildScrapesJob>): Promise<void> {
               {
                 name: `scrape-url-${url}`,
                 queueName: scrapeJinaQueue.name,
+                opts: { ignoreDependencyOnFailure: true },
                 data: { url },
               },
             ],
@@ -63,6 +64,7 @@ async function handler(job: Job<AddChildScrapesJob>): Promise<void> {
                 id: job.id!,
                 queue: job.queueQualifiedName,
               },
+              ignoreDependencyOnFailure: true,
             },
           })),
         );

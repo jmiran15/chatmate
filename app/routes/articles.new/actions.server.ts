@@ -13,13 +13,7 @@ export const LLMS = {
   GENERATE_CONTENT: "GENERATE_CONTENT",
 };
 
-const urlSchema = z
-  .string()
-  .url()
-  .regex(
-    /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
-    "Invalid URL format",
-  );
+const urlSchema = z.string().url();
 
 const formSchema = z.object({
   title: z.string().min(10, "Title must be at least 10 characters long"),

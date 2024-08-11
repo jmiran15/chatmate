@@ -1,0 +1,890 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T07:04:58.626Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://crisp.chat/en/
+  ```
+  #1 Business Messaging Platform For Startups & SMBs - Crisp
+===============
+   
+
+[](https://crisp.chat/en/)
+
+*   [Features](https://crisp.chat/en/#)
+    
+    [Widget Craft meaningful interactions with a website chat widget](https://crisp.chat/en/livechat/)[Chatbot Build chatbots for automated conversations](https://crisp.chat/en/chatbot/)[CRM Improve your leads and customers' knowledge](https://crisp.chat/en/crm/)[Shared Inbox Get more work done, together](https://crisp.chat/en/shared-inbox/)[Ticketing System Optimize your customer support in an efficient way](https://crisp.chat/en/ticket/)[Campaigns Boost your engagement by sending email and in-app messages](https://crisp.chat/en/campaigns/)[Knowledge A knowledge base to give instant answers to your customers](https://crisp.chat/en/knowledge/)[Status Page Monitor your system and alert users when something goes wrong](https://crisp.chat/en/status/)
+    
+*   [Apps](https://crisp.chat/en/apps/)
+*   [Pricing](https://crisp.chat/en/pricing/)
+*   [Integrations](https://crisp.chat/en/integrations/)
+*   [Help](https://crisp.chat/en/#)
+    
+    [Help Center Learn how to use and configure Crisp](https://help.crisp.chat/)[Crisp Unleash Videos to learn best practices for using Crisp](https://crisp.chat/en/unleash/)[Developer Hub Use Crisp APIs to adapt Crisp to custom use cases](https://docs.crisp.chat/)
+    
+
+*   [Log In](https://app.crisp.chat/)
+*   [Get Started](https://app.crisp.chat/initiate/signup/?locale=en)
+*   [Go to Dashboard](https://app.crisp.chat/)
+
+*   [Contact us](https://crisp.chat/en/contact/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Jobs](https://crisp.chat/en/careers/)
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+
+*   [Status](https://status.crisp.chat/)
+*   [Blog](https://crisp.chat/en/blog/)
+*   [Facebook](https://www.facebook.com/crispchat)
+*   [Twitter](https://twitter.com/crisp_im)
+
+[NewThe new Crisp Chatbot, powered with AI is out!](https://crisp.chat/en/blog/november-2023-crisp-product-update/)
+
+[](https://crisp.chat/en/#crisp-chat-open)[](https://crisp.chat/en/#crisp-chat-open)[](https://crisp.chat/en/#crisp-chat-open)[](https://crisp.chat/en/#crisp-chat-open)
+
+Give your customer experience a human touch
+===========================================
+
+The all-in-one business messaging platform that gathers teams, conversations, data and knowledge, around one place.
+
+[Use Crisp for free](https://app.crisp.chat/initiate/signup/?locale=en)
+
+14-day free trial
+
+No engagement
+
+4.6/5 out of 761 reviews
+
+Meet the platform that brings companies closer to their customers
+-----------------------------------------------------------------
+
+*   Shared Inbox
+*   CRM
+*   Co-Browsing
+*   Campaigns
+*   Chatbot
+*   Widget
+*   Knowledge Base
+
+The Crisp Shared Inbox centralizes all your conversations. From live chat, emails or Messenger and Instagram DM to WhatsApp and phone calls... Collaborate effortlessly inside one inbox, to offer the best customer service to your customers.
+
+[Learn More](https://crisp.chat/en/shared-inbox/)
+
+Crisp comes with features that will help businesses to automate repetitive tasks and close more deals. Grow an unlimited database of contacts and organizations, see the full timeframe of contact activity, browsing history and much more...
+
+[Learn More](https://crisp.chat/en/crm/)
+
+Our cobrowsing software provides real-time assistance with shared browsing and live chat. Crisp lets you co-browse with your customers without any plugin other than our live chat solution.
+
+[Learn More](https://crisp.chat/en/livechat/co-browsing/)
+
+Our customer engagement software can be used to retarget your leads or customers manually or automatically. Our customer engagement software allows you to target people based on what they're doing and where inside your product.
+
+[Learn More](https://crisp.chat/en/campaigns/)
+
+Our chatbot builder comes with a visual editor so you can create workflows through our no-code chatbot builder. Simply hit "publish" and your scenario is live, ready to help your company to scale unlimited, personalized conversations 24/7.
+
+[Learn More](https://crisp.chat/en/chatbot/)
+
+Get closer to your leads and customers with a website chat widget. Adding a chat widget to your website will make your customer service experience even more exceptional.
+
+[Learn More](https://crisp.chat/en/livechat/)
+
+Make your customers more autonomous with a knowledge base. Forget about repetitive answers, hidden or unindexable help contents, slow answers or non-autonomous customers.
+
+[Learn More](https://crisp.chat/en/knowledge/)
+
+Built for customer support, marketing, and sales. All together.
+---------------------------------------------------------------
+
+### Customer Support
+
+Cross-channel customer support experiences using modern messaging
+
+### Sales
+
+Sell more by automating your sales pipeline using bots
+
+### Marketing
+
+Retarget customers by sending target emails and in-app messages
+
+500,000 brands are already using Crisp to improve their customer experience
+
+[See their testimonials](https://crisp.chat/en/testimonials/)
+
+Ready to improve your customer engagement?
+------------------------------------------
+
+[Try Crisp for free](https://app.crisp.chat/initiate/signup/)[Request a demo](https://crisp.chat/en/#crisp-demo)
+
+[](https://crisp.chat/en/)
+
+*   [Testimonials](https://crisp.chat/en/testimonials/)
+
+*   [Comparisons](https://crisp.chat/en/comparisons/)
+*   [Alternatives](https://crisp.chat/en/alternatives/)
+*   [Help Center](https://help.crisp.chat/)
+*   [Developer Hub](https://docs.crisp.chat/)
+
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+*   [Security](https://docs.crisp.chat/guides/others/security-practices/)
+*   [Ask a demo](https://crisp.chat/en/#crisp-demo)
+*   [Brand Assets](https://storage.crisp.chat/public/documents/Brand%20Assets.zip)
+
+*   [Read our blog](https://crisp.chat/en/blog/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Careers](https://crisp.chat/en/careers/)
+*   [Partnerships](https://crisp.chat/en/partnerships/)
+
+[English (United States)](https://crisp.chat/en/#language-toggle)[Français (France)](https://crisp.chat/fr/)[Deutsch (Deutschland)](https://crisp.chat/de/)[Español (España)](https://crisp.chat/es/)[Suomi (Suomi)](https://crisp.chat/fi/)[Dutch (Nederland)](https://crisp.chat/nl/)[Português (Brazil)](https://crisp.chat/pt/)[Türk (Türkiye)](https://crisp.chat/tr/)[Polskie (Polska)](https://crisp.chat/pl/)[Pу́сский (Russia)](https://crisp.chat/ru/)[中国人 (中国)](https://crisp.chat/zh/)
+
+[](https://www.facebook.com/crispchat)[](https://twitter.com/crisp_im)[](https://www.youtube.com/channel/UCBgCqEfwt_454jVG7qpi_KQ)
+
+[![Image 1](https://status.crisp.chat/badge/color/) System Status](https://status.crisp.chat/)© 2024 Crisp IM SAS[Made in France](https://crisp.chat/en/about/)
+  ```
+
+Source URL: https://crisp.chat/en/pricing/
+  ```
+  Pricing - Crisp
+===============
+   
+
+[](https://crisp.chat/en/)
+
+*   [Features](https://crisp.chat/en/pricing/#)
+    
+    [Widget Craft meaningful interactions with a website chat widget](https://crisp.chat/en/livechat/)[Chatbot Build chatbots for automated conversations](https://crisp.chat/en/chatbot/)[CRM Improve your leads and customers' knowledge](https://crisp.chat/en/crm/)[Shared Inbox Get more work done, together](https://crisp.chat/en/shared-inbox/)[Ticketing System Optimize your customer support in an efficient way](https://crisp.chat/en/ticket/)[Campaigns Boost your engagement by sending email and in-app messages](https://crisp.chat/en/campaigns/)[Knowledge A knowledge base to give instant answers to your customers](https://crisp.chat/en/knowledge/)[Status Page Monitor your system and alert users when something goes wrong](https://crisp.chat/en/status/)
+    
+*   [Apps](https://crisp.chat/en/apps/)
+*   [Pricing](https://crisp.chat/en/pricing/)
+*   [Integrations](https://crisp.chat/en/integrations/)
+*   [Help](https://crisp.chat/en/pricing/#)
+    
+    [Help Center Learn how to use and configure Crisp](https://help.crisp.chat/)[Crisp Unleash Videos to learn best practices for using Crisp](https://crisp.chat/en/unleash/)[Developer Hub Use Crisp APIs to adapt Crisp to custom use cases](https://docs.crisp.chat/)
+    
+
+*   [Log In](https://app.crisp.chat/)
+*   [Get Started](https://app.crisp.chat/initiate/signup/?locale=en)
+*   [Go to Dashboard](https://app.crisp.chat/)
+
+*   [Contact us](https://crisp.chat/en/contact/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Jobs](https://crisp.chat/en/careers/)
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+
+*   [Status](https://status.crisp.chat/)
+*   [Blog](https://crisp.chat/en/blog/)
+*   [Facebook](https://www.facebook.com/crispchat)
+*   [Twitter](https://twitter.com/crisp_im)
+
+Try any plan for free for 14 Days
+=================================
+
+Each and every new account gets access to the entire set of features Crisp provides so you can try and see if we fit with your requirements.
+
+Basic
+
+FreeForeverFreeForeverFor personal websites and anyone who wants a basic chat to communicate with visitors.
+
+[Use Crisp for free](https://app.crisp.chat/initiate/signup/?locale=en)
+
+*   2 seats included
+    
+    You + a colleague can chat with customers.
+    
+*   Website chat widget
+    
+    Engage with people that are browsing your website and get closer to your customers.
+    
+*   Shared inbox
+    
+    Destroy silos, centralize conversations, improve internal collaboration and enhance customer satisfaction.
+    
+*   Contact form
+    
+    Centralize answers from customizable contact forms within your Crisp Inbox.
+    
+*   Mobile applications
+    
+    Get everything related to your customer service right in your pocket.
+    
+*   Unlimited conversations
+    
+*   Shopify integration
+    
+    Sync e-commerce data with your Crisp Inbox to benefit from dedicated features.
+    
+*   WordPress integration
+    
+    Easily install the Crisp chat widget on your WordPress website
+    
+*   Unlimited history
+    
+    Get endless conversations storage for your business (until you delete them).
+    
+*   Chat triggers
+    
+    Engage chat conversations automatically based on specific behaviors.
+    
+*   Messenger integration
+    
+    Receive and reply to Facebook Messenger messages straight in your Crisp Inbox.
+    
+*   Email integration
+    
+    Receive and reply to your emails straight in your Crisp Inbox.
+    
+*   Shortcuts
+    
+    Create, manage and use a gallery of pre-existing messages that makes your team more efficient.
+    
+*   Slack integration
+    
+    Reply to any of your incoming messages straight from your Slack Workspace.
+    
+*   Knowledge base
+    
+    Write, manage and edit a dedicated help center that integrates deeply with Crisp.
+    
+*   Chatbots
+    
+    Build super-advanced automation flows on any channels connected to Crisp.
+    
+
+Pro
+
+25Month / Per Workspace300Year / Per WorkspaceFor early-stage startups who want to improve their customer relationship.
+
+[Start my trial](https://app.crisp.chat/initiate/signup/?plan=pro?locale=en)
+
+*   4 seats included
+    
+    You + 3 colleagues can chat with customers.
+    
+*   5,000 contacts included
+    
+    Add more contacts by increasing your limits
+    
+*   Everything in Basic
+    
+*   Unlimited history
+    
+    Get endless conversations storage for your business (until you delete them).
+    
+*   Chat triggers
+    
+    Engage chat conversations automatically based on specific behaviors.
+    
+*   Messenger integration
+    
+    Receive and reply to Facebook Messenger messages straight in your Crisp Inbox.
+    
+*   Email integration
+    
+    Receive and reply to your emails straight in your Crisp Inbox.
+    
+*   Shortcuts
+    
+    Create, manage and use a gallery of pre-existing messages that makes your team more efficient.
+    
+*   Slack integration
+    
+    Reply to any of your incoming messages straight from your Slack Workspace.
+    
+*   Custom domain
+    
+    Use a custom domain to send your email campaigns
+    
+*   Knowledge base
+    
+    Write, manage and edit a dedicated help center that integrates deeply with Crisp.
+    
+*   Chatbots
+    
+    Build super-advanced automation flows on any channels connected to Crisp.
+    
+*   WhatsApp integration
+    
+    Receive and Reply to Whatsapp messages in your Crisp inbox.
+    
+*   Instagram integration
+    
+    Reply to your Instagram Direct Messages and stories from Crisp dashboard.
+    
+*   Integrate with Zapier
+    
+    Connect Crisp with more than 2000+ other apps without writing a line of code.
+    
+*   Audio and Video Chat
+    
+    Engage with leads or customers through live audio or video message.
+    
+
+Best price for value
+
+Unlimited
+
+95Month / Per Workspace1140Year / Per WorkspaceMade for companies requiring a full-featured solution to communicate with customers.
+
+[Start my trial](https://app.crisp.chat/initiate/signup/?plan=unlimited?locale=en)
+
+*   20 seats included
+    
+    Add more agents for an additional 10$ / mo/agent.
+    
+*   50,000 contacts included
+    
+    Add more contacts by increasing your limits
+    
+*   Everything in Basic and Pro
+    
+*   Knowledge base
+    
+    Write, manage and edit a dedicated help center that integrates deeply with Crisp.
+    
+*   Chatbots
+    
+    Build super-advanced automation flows on any channels connected to Crisp.
+    
+*   WhatsApp integration
+    
+    Receive and Reply to Whatsapp messages in your Crisp inbox.
+    
+*   Instagram integration
+    
+    Reply to your Instagram Direct Messages and stories from Crisp dashboard.
+    
+*   Integrate with Zapier
+    
+    Connect Crisp with more than 2000+ other apps without writing a line of code.
+    
+*   Audio and Video Chat
+    
+    Engage with leads or customers through live audio or video message.
+    
+*   Aircall integration
+    
+    Inbound and outbound phone calls in your Crisp Inbox
+    
+*   MagicBrowse
+    
+    Start a co-browsing session with people browsing on your website.
+    
+*   LiveTranslate
+    
+    Translate instantly your messages in more than 50 different languages.
+    
+*   Automated campaigns
+    
+    Build multichannel workflows that make your customer journey effortless.
+    
+*   Analytics
+    
+    Measure conversational activity, customer satisfaction and operator's activity.
+    
+*   SMS integration
+    
+    Receive and reply to SMS messages straight in your Crisp Inbox.
+    
+*   Segment integration
+    
+    Connect Crisp as a source and clip customer data from 200 platforms, effortlessly.
+    
+
+[See all features](https://crisp.chat/en/pricing/#)
+
+Need something more custom?
+---------------------------
+
+Enterprise
+
+Created for large-scale companies willing to benefit from dedicated features, custom onboarding and personalized SLAs.
+
+*   Dedicated onboarding
+    
+*   Personalized SLA
+    
+*   Custom limits
+    
+
+*   Custom features
+    
+*   Unique pricing
+    
+*   Team training
+    
+
+[Ask for a demo](https://crisp.chat/en/pricing/#crisp-demo)
+
+All our features in a wink
+--------------------------
+
+*   [All](https://crisp.chat/en/pricing/#)
+*   [Basic](https://crisp.chat/en/pricing/#)
+*   [Pro](https://crisp.chat/en/pricing/#)
+*   [Unlimited](https://crisp.chat/en/pricing/#)
+*   [Extra features](https://crisp.chat/en/pricing/#)
+
+[### Website chat widget Most used Engage with people that are browsing your website and get closer to your customers.](https://crisp.chat/en/livechat/)[### Shared inbox Most used Destroy silos, centralize conversations, improve internal collaboration and enhance customer satisfaction.](https://crisp.chat/en/shared-inbox/)[### Mobile applications Most used Get everything related to your customer service right in your pocket.](https://crisp.chat/en/apps/)[### Chat triggers Most used Engage chat conversations automatically based on specific behaviors.](https://crisp.chat/en/livechat/targeted-message/)[### Messenger integration Most used Receive and reply to Facebook Messenger messages straight in your Crisp Inbox.](https://crisp.chat/en/integrations/messenger/)[### Email integration Most used Receive and reply to your emails straight in your Crisp Inbox.](https://crisp.chat/en/shared-inbox/email-management-software/)[### Shortcuts Most used Create, manage and use a gallery of pre-existing messages that makes your team more efficient.](https://crisp.chat/en/shared-inbox/canned-message/)[### Knowledge base Most used Write, manage and edit a dedicated help center that integrates deeply with Crisp.](https://crisp.chat/en/knowledge/)[### Chatbots Most used Build super-advanced automation flows on any channels connected to Crisp.](https://crisp.chat/en/chatbot/)[### WhatsApp integration Most used Receive and Reply to Whatsapp messages in your Crisp inbox.](https://crisp.chat/en/integrations/whatsapp/)[### Instagram integration Most used Reply to your Instagram Direct Messages and stories from Crisp dashboard.](https://crisp.chat/en/integrations/instagram/)[### Integrate with Zapier Most used Connect Crisp with more than 2000+ other apps without writing a line of code.](https://crisp.chat/en/integrations/zapier/)[### Aircall integration Most used Inbound and outbound phone calls in your Crisp Inbox](https://crisp.chat/en/integrations/aircall/)[### MagicBrowse Most used Start a co-browsing session with people browsing on your website.](https://crisp.chat/en/livechat/co-browsing/)[### LiveTranslate Most used Translate instantly your messages in more than 50 different languages.](https://crisp.chat/en/livechat/realtime-chat-translation/)[### Automated campaigns Most used Build multichannel workflows that make your customer journey effortless.](https://crisp.chat/en/campaigns/)[### Analytics Most used Measure conversational activity, customer satisfaction and operator's activity.](https://crisp.chat/en/pricing/#)[### SMS integration Most used Receive and reply to SMS messages straight in your Crisp Inbox.](https://crisp.chat/en/shared-inbox/social-messaging/)[### Jira integration Most used Create, link to and comment on Jira issues from your Crisp Inbox.](https://crisp.chat/en/integrations/jira/)[### Shopify integration Most used Sync e-commerce data with your Crisp Inbox to benefit from dedicated features.](https://crisp.chat/en/integrations/shopify/)[### WordPress integration Most used Easily install the Crisp chat widget on your WordPress website](https://crisp.chat/en/integrations/wordpress/)[### Contact form Centralize answers from customizable contact forms within your Crisp Inbox.](https://crisp.chat/en/integrations/contact-form/)[### Push notifications Manage your notifications to fit with your personalized requirements.](https://crisp.chat/en/pricing/#)[### Unlimited history Get endless conversations storage for your business (until you delete them).](https://crisp.chat/en/pricing/#)[Camille left a private note Follow-up next month @Antoine ### Private notes Make internal collaboration easy, centralized and personalized for each conversation.](https://crisp.chat/en/shared-inbox/email-collaboration/)[### Customization Adapt colors, text and live chat position so it fits with your brand identity.](https://crisp.chat/en/livechat/livechat-customization/)[### Audio messages Send audio messages to your leads or customers no matter the channel.](https://crisp.chat/en/shared-inbox/voice-messages/)[### Slack integration Reply to any of your incoming messages straight from your Slack Workspace.](https://crisp.chat/en/integrations/slack/)[### Internal search Search for messages, articles, contacts or plugins using advanced filters.](https://crisp.chat/en/pricing/#)[### Twitter integration Receive and reply to Twitter DMs straight in your Crisp Inbox.](https://crisp.chat/en/integrations/twitter/)[### Telegram integration Receive and reply to your Telegram Messages straight in your Crisp Inbox.](https://crisp.chat/en/shared-inbox/social-messaging/)[### MagicMap See all your active website visitors in real time and start conversations.](https://crisp.chat/en/pricing/#)[### Block users Block users having disrespectful behavior on any channel.](https://crisp.chat/en/shared-inbox/visitor-banning/)[### Contact Management Centralize all your company's data in one place.](https://crisp.chat/en/crm/)[### Audio and Video Chat Engage with leads or customers through live audio or video message.](https://crisp.chat/en/livechat/video-chat/)[### Ringover integration Inbound and outbound phone calls in your Crisp Inbox](https://crisp.chat/en/integrations/ringover/)[### Autoresponder Build simple automation flows on a limited number of channels connected to Crisp.](https://crisp.chat/en/shared-inbox/autoresponder/)[### Status page Get alerts, and send notifications to your end-users when something breaks.](https://crisp.chat/en/status/)[### Reminders Schedule pre-defined or custom reminders on each conversation with detailed attached.](https://crisp.chat/en/shared-inbox/notification-system/)[### Routing rules Assign conversations automatically based on pre-defined or custom rules.](https://crisp.chat/en/shared-inbox/routing-rules/)[### Line integration Receive and reply to Line messages straight in your Crisp Inbox.](https://crisp.chat/en/integrations/line/)[### Salesforce integration Synchronize Crisp with your Salesforce account.](https://crisp.chat/en/integrations/salesforce/)[### Pipedrive integration Synchronize Crisp with your Pipedrive account.](https://crisp.chat/en/integrations/pipedrive/)[### Zoho integration Synchronize Crisp with your Zoho account.](https://crisp.chat/en/integrations/zoho/)[### Hubspot integration Synchronize Crisp with your Hubspot account.](https://crisp.chat/en/integrations/hubspot/)[### Github integration Receive and reply to GitHub issues straight in your Crisp Inbox.](https://crisp.chat/en/integrations/github/)[### Trello integration Create, edit, search and manage Trello cards from your Crisp Inbox.](https://crisp.chat/en/integrations/trello/)[### Customer Satisfaction Survey Send automated surveys that measure customer satisfaction score.](https://crisp.chat/en/shared-inbox/customer-satisfaction/)[### Discord integration Reply to any of your incoming messages straight from your Discord Workspace.](https://crisp.chat/en/integrations/discord/)[### Viber integration Receive and reply to Viber messages straight in your Crisp Inbox.](https://crisp.chat/en/integrations/viber/)[### Segment integration Connect Crisp as a source and clip customer data from 200 platforms, effortlessly.](https://crisp.chat/en/integrations/segment/)[### Stripe integration Synchronize revenue details from Stripe straight in your Crisp inbox](https://crisp.chat/en/integrations/stripe/)[### Auto delete data Delete conversations automatically following a predefined interval.](https://crisp.chat/en/integrations/auto-delete/)[### Ticketing system Offer a dedicated view to your customers so they can open new tickets or follow existing ones.](https://crisp.chat/en/integrations/ticket-center/)[### Dedicated email IP Get a dedicated emailing outbound IP assigned to your Crisp workspace.](https://crisp.chat/en/pricing/#)
+
+500,000 brands are already using Crisp to improve their customer experience
+
+[See their testimonials](https://crisp.chat/en/testimonials/)
+
+Fair pricingAll Crisp plans have been designed to fit most business needs. Our prices are flat and transparent so you can easily plan your spending.
+
+Cancel anytimeCancel anytime, after you subscribe to a plan. You are only committed to paying the month you subscribed to, and no further.
+
+Consolidated billingCrisp bills you once per month, per payment method. We accept most credit cards, as well as PayPal. All bills are consolidated across workspaces.
+
+Frequently Asked Questions
+--------------------------
+
+### Will I pay more for some features?
+
+Yes. We may provide some additional features that are not included in your plan, which you can subscribe to, but that's your choice to opt-in for them (eg. paid integrations for specific systems, additional contacts or more than 20 agents in your inbox).
+
+  
+
+### Is VAT included in plan prices?
+
+VAT is not included in our plan prices. As most Crisp customers are businesses, they do not owe VAT and thus we charge the advertised flat price. VAT is still due for consumers and may be applied on all plan prices (ie. non-business entities).
+
+  
+
+  
+If you are an EU business, make sure you enter your EU VAT number to prove your business status and thus remove VAT from the price. If you are located outside the EU, we won't charge any VAT, regardless of your business or consumer status.
+
+  
+
+### Do you offer discounts on multiple Crisp Workspaces?
+
+Yes! We offer discounts if you are taking multiple paid Crisp Workspaces (Crisp Unlimited only) under the same account. We offer 20% off for 3 additional inboxes. This means if you have multiple workspaces (different teams) you can have separate inboxes for each team under one Crisp account. Come chat with us!
+
+  
+
+### What does a Crisp Workspace stand for?
+
+A Crisp Workspace is another name for a "team inbox", into which you can invite operators to collaborate and answer customer questions.
+
+  
+
+  
+A Crisp workspace is tied to a specific livechat identifier, which you can install on one or multiple domains (eg: website.com, sub.website.com, etc). It is not tied to a single domain. Plans are billed per-crisp workspace, so you only pay per livechat identifier, not per domain and sub-domains.
+
+  
+
+  
+As an example, you can have one Crisp workspace (team) and install the live chat on multiple domains (which would constitute one plan). If you operate multiple businesses and wish to have multiple separate Crisp workspaces then you can simply switch between workspaces seamlessly.
+
+  
+
+  
+One subscription equals one workspace and allows for integrations with many channels: Instagram, emails, Messenger, or Whatsapp can be centralized in one workspace.
+
+  
+
+### I’m running a nonprofit / I am a student. Do you offer discounts?
+
+We offer a 50% discount for nonprofits and students. Chat with us to get your promo code.
+
+  
+
+### Is it possible to pay yearly?
+
+Yes, it is possible! You can enable yearly payment mode on your Plans page in the Crisp app after you subscribed to a plan (click on the Monthly button, which then becomes Yearly once saved).
+
+  
+
+### Why are there no limits on the number of messages?
+
+At Crisp, we believe existing chat platforms are still locked in the past. Why would we bill based on consumption (as all others do), while we are used to unlimited plans everywhere else (mobile carriers, Internet access providers, etc.)? Unlimited is peace of mind at the end of the month; this allows you to allocate more energy to your core business rather than petty subscription policies.
+
+  
+
+Ready to improve your customer engagement?
+------------------------------------------
+
+[Try Crisp for free](https://app.crisp.chat/initiate/signup/)[Request a demo](https://crisp.chat/en/pricing/#crisp-demo)
+
+[](https://crisp.chat/en/)
+
+*   [Testimonials](https://crisp.chat/en/testimonials/)
+
+*   [Comparisons](https://crisp.chat/en/comparisons/)
+*   [Alternatives](https://crisp.chat/en/alternatives/)
+*   [Help Center](https://help.crisp.chat/)
+*   [Developer Hub](https://docs.crisp.chat/)
+
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+*   [Security](https://docs.crisp.chat/guides/others/security-practices/)
+*   [Ask a demo](https://crisp.chat/en/pricing/#crisp-demo)
+*   [Brand Assets](https://storage.crisp.chat/public/documents/Brand%20Assets.zip)
+
+*   [Read our blog](https://crisp.chat/en/blog/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Careers](https://crisp.chat/en/careers/)
+*   [Partnerships](https://crisp.chat/en/partnerships/)
+
+[English (United States)](https://crisp.chat/en/pricing/#language-toggle)[Français (France)](https://crisp.chat/fr/pricing/)[Deutsch (Deutschland)](https://crisp.chat/de/pricing/)[Español (España)](https://crisp.chat/es/pricing/)[Suomi (Suomi)](https://crisp.chat/fi/pricing/)[Dutch (Nederland)](https://crisp.chat/nl/pricing/)[Português (Brazil)](https://crisp.chat/pt/pricing/)[Türk (Türkiye)](https://crisp.chat/tr/pricing/)[Polskie (Polska)](https://crisp.chat/pl/pricing/)[Pу́сский (Russia)](https://crisp.chat/ru/pricing/)[中国人 (中国)](https://crisp.chat/zh/pricing/)
+
+[](https://www.facebook.com/crispchat)[](https://twitter.com/crisp_im)[](https://www.youtube.com/channel/UCBgCqEfwt_454jVG7qpi_KQ)
+
+[![Image 1](https://status.crisp.chat/badge/color/) System Status](https://status.crisp.chat/)© 2024 Crisp IM SAS[Made in France](https://crisp.chat/en/about/)
+  ```
+
+Source URL: https://crisp.chat/en/integrations/
+  ```
+  Integrate Crisp with your favorite tools - Crisp
+===============
+   
+
+[](https://crisp.chat/en/)
+
+*   [Features](https://crisp.chat/en/integrations/#)
+    
+    [Widget Engage your website visitors using Live Chat](https://crisp.chat/en/livechat/)[Chatbot Build automated conversations](https://crisp.chat/en/chatbot/)[CRM Improve your leads and customers' knowledge](https://crisp.chat/en/crm/)[Shared Inbox Get more work done, together](https://crisp.chat/en/shared-inbox/)[Ticketing System Optimize your customer support in an efficient way](https://crisp.chat/en/ticket/)[Campaigns Boost your engagement by sending email and in-app messages](https://crisp.chat/en/campaigns/)[Knowledge A knowledge base to give instant answers to your customers](https://crisp.chat/en/knowledge/)[Status Page Monitor your system and alert users when something goes wrong](https://crisp.chat/en/status/)
+    
+*   [Apps](https://crisp.chat/en/apps/)
+*   [Pricing](https://crisp.chat/en/pricing/)
+*   [Integrations](https://crisp.chat/en/integrations/)
+*   [Help](https://crisp.chat/en/integrations/#)
+    
+    [Help Center Learn how to use and configure Crisp](https://help.crisp.chat/)[Crisp Unleash Videos to learn best practices for using Crisp](https://crisp.chat/en/unleash/)[Developer Hub Use the Crisp API to adapt Crisp to custom usecases](https://docs.crisp.chat/)
+    
+
+*   [Log In](https://app.crisp.chat/)
+*   [Get Started](https://app.crisp.chat/initiate/signup/?locale=en)
+*   [Go to Dashboard](https://app.crisp.chat/)
+
+*   [Contact us](https://crisp.chat/en/contact/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Jobs](https://crisp.chat/en/careers/)
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+
+*   [Status](https://status.crisp.chat/)
+*   [Blog](https://crisp.chat/en/blog/)
+*   [Facebook](https://www.facebook.com/crispchat)
+*   [Twitter](https://twitter.com/crisp_im)
+
+Connect Crisp to third party apps
+=================================
+
+Deliver the best customer experience by integrating Crisp with your favorite apps.
+----------------------------------------------------------------------------------
+
+Explore
+
+*   [Popular](https://crisp.chat/en/integrations/category/popular/)
+*   [Recent](https://crisp.chat/en/integrations/category/recent/)
+
+Categories
+
+*   [Automation](https://crisp.chat/en/integrations/category/automation/)
+*   [CMS](https://crisp.chat/en/integrations/category/cms/)
+*   [CRM](https://crisp.chat/en/integrations/category/crm/)
+*   [Marketing](https://crisp.chat/en/integrations/category/marketing/)
+*   [Messaging](https://crisp.chat/en/integrations/category/messaging/)
+*   [Team Work](https://crisp.chat/en/integrations/category/teamwork/)
+*   [Others](https://crisp.chat/en/integrations/category/other/)
+
+[Wordpress Live Chat Plugin for WordPress](https://crisp.chat/en/integrations/wordpress/)[Shopify Answer your shoppers faster and deliver a delightful support experience](https://crisp.chat/en/integrations/shopify/)
+
+Automation
+==========
+
+[Videosupport Request users to share screen recordings & mobile video recordings.](https://crisp.chat/en/integrations/urn:videosupportio:videosupport:0/)[Briskport Export your data to your own warehouse.](https://crisp.chat/en/integrations/urn:lucas.jahier:briskport:0/)[Message Scheduler Schedule your customer support messages to be sent later and land in the inbox at the right time.](https://crisp.chat/en/integrations/urn:beta.limited:message-scheduler:0/)[Segment Connect Crisp as a source and clip customer data from 200 platforms, effortlessly](https://crisp.chat/en/integrations/segment/)[Zapier Easy automation for busy people](https://crisp.chat/en/integrations/zapier/)[Support AI ChatBot Smart, not annoying ChatGPT-powered chatbot that helps your users when you are out of the office.](https://crisp.chat/en/integrations/urn:enumtech:support-ai-chatbot:0/)[Rotic Chatbot Rotic chatbot plugin on crisp website messenger!](https://crisp.chat/en/integrations/urn:rotic.intelligent.solutions:rotic-chatbot:0/)[LunaGPT Build a ChatGPT bot, trained on your website and enhance your customer support.](https://crisp.chat/en/integrations/urn:andraz.polajzer:lunagpt:0/)[Quick Actions Tailor your Crisp inbox with customized actions for efficient operations.](https://crisp.chat/en/integrations/urn:joao.aguiam:quick-actions:0/)[Auto-Responder Send automated answers on multiple channels](https://crisp.chat/en/integrations/auto-responder/)
+
+CMS
+===
+
+[Cloudflare Add a live chat to your Cloudflare website](https://crisp.chat/en/integrations/cloudflare/)[WHMCS PRO Sync WHMCS data to Crisp CRM, verify customers, and get your clients information directly in Crisp.](https://crisp.chat/en/integrations/urn:lennmedia:whmcs-pro:0/)[WooCommerce WooCommerce Help Desk plugin for WordPress Merchants](https://crisp.chat/en/integrations/woocommerce/)[WHMCS Live chat for WHMCS](https://crisp.chat/en/integrations/wmcs/)[Wordpress Live Chat Plugin for WordPress](https://crisp.chat/en/integrations/wordpress/)[Shopify Answer your shoppers faster and deliver a delightful support experience](https://crisp.chat/en/integrations/shopify/)[Prestashop Live Chat and AI Chatbot Addon for Prestashop](https://crisp.chat/en/integrations/prestashop/)[Magento Magento Help Desk & Chat Extension for Adobe Commerce Merchants](https://crisp.chat/en/integrations/magento/)[Joomla Live chat addon for Joomla](https://crisp.chat/en/integrations/joomla/)[Webflow Add Crisp to your website on Webflow in a single click.](https://crisp.chat/en/integrations/webflow/)
+
+CRM
+===
+
+[Pipedrive Live Chat and Helpdesk for Pipedrive CRM](https://crisp.chat/en/integrations/pipedrive/)[Zoho Sync your contacts between Zoho and Crisp automatically](https://crisp.chat/en/integrations/zoho/)[Microsoft Dynamics 365 Microsoft Dynamics 365 CRM integration for customer service](https://crisp.chat/en/integrations/microsoft-dynamics-365/)[Mailchimp Build email lists from Crisp](https://crisp.chat/en/integrations/mailchimp/)[Hubspot Sync your contacts between Hubspot and Crisp automatically](https://crisp.chat/en/integrations/hubspot/)[Salesforce Sync your contacts between Salesforce and Crisp automatically](https://crisp.chat/en/integrations/salesforce/)[Rating Fish Collect NPS ratings & feedback from each customer. Multi-Language Support. #1 NPS tool on Crisp.](https://crisp.chat/en/integrations/urn:travis.rx:rating-fish:0/)
+
+Marketing
+=========
+
+[Tabular - Email Builder Create custom email campaign templates with Tabular and directly use them in Crisp.](https://crisp.chat/en/integrations/urn:tabular.marketing.bv:tabular-email-builder:0/)[HockeyStack HockeyStack's Crisp plugin combines your customers' website data with their support activity.](https://crisp.chat/en/integrations/urn:hockeystack.inc:hockeystack:0/)[Poptin - Pop Ups and Contact Forms Automatically send leads to your Crisp Chat account with high-converting pop ups and contact forms](https://crisp.chat/en/integrations/urn:poptin:poptin-pop-ups-and-contact-forms:0/)[Session Recordings Add session recordings to your website, and view them in Crisp.](https://crisp.chat/en/integrations/urn:james.futhey:session-recordings:0/)[ActiveDEMAND Trigger automation based on chat content. Full-text logging of prospect engagement.](https://crisp.chat/en/integrations/urn:jumpdemand:activedemand:0/)[SocialPrf This plugin allows you to send automated testimonial/review requests to your customers through Crisp](https://crisp.chat/en/integrations/urn:kamala.kannan.sankarraj:socialprf:0/)
+
+Messaging
+=========
+
+[Instagram Reply to your Instagram DMs from your Inbox](https://crisp.chat/en/integrations/instagram/)[Twitter DM Reply to Twitter DM from your team inbox](https://crisp.chat/en/integrations/twitter/)[Dropbox Integration Quickly and easily share Dropbox files](https://crisp.chat/en/integrations/urn:andraz.polajzer:dropbox-integration:0/)[Discord Engage with your Crisp customers from Discord](https://crisp.chat/en/integrations/discord/)[Messenger Reply to Facebook Messenger messages from your inbox](https://crisp.chat/en/integrations/messenger/)[Google Play Reviews Answer your google play reviews inside crisp for better user engagement.](https://crisp.chat/en/integrations/urn:alirayagamescom.nadalizadeh:google-play-reviews:0/)[Twilio SMS Business text messaging straight into Crisp](https://crisp.chat/en/integrations/twilio/)[Viber Shared inbox for Viber Business](https://crisp.chat/en/integrations/viber/)[WhatsApp Shared inbox for WhatsApp Business Platform](https://crisp.chat/en/integrations/whatsapp/)[Line Get Line app messages in your inbox](https://crisp.chat/en/integrations/line/)
+
+Team Work
+=========
+
+[GitHub Reply to your GitHub issues directly from your inbox.](https://crisp.chat/en/integrations/github/)[Olvy Convert user feedback into user love](https://crisp.chat/en/integrations/urn:olvy.inc:olvy:0/)[Jira Create, link and comment Jira issues from your inbox](https://crisp.chat/en/integrations/jira/)[Ringover Inbound and outbound phone calls, all in your shared inbox.](https://crisp.chat/en/integrations/ringover/)[Aircall Inbound and outbound phone calls in your shared inbox](https://crisp.chat/en/integrations/aircall/)[Trello Create, Search and attach cards from your Crisp Inbox](https://crisp.chat/en/integrations/trello/)[Slack Reply to incoming messages from Slack](https://crisp.chat/en/integrations/slack/)[KrispCall KrispCall is a Cloud Telephony for modern business for both small & large businesses.](https://crisp.chat/en/integrations/urn:krispcall:krispcall:0/)[Raycast Control Crisp inside Raycast, 10x your customer support productivity](https://crisp.chat/en/integrations/urn:tommaso.de.rossi:raycast:0/)
+
+Others
+======
+
+[Operators Analytics Introducing our data analysis plugin that revolutionizes conversation tracking. Effortlessly monitor](https://crisp.chat/en/integrations/urn:hossam.ayman:operators-analytics:0/)[Smiirl All your pending crisp conversations and website visitors on a physical device for your offices](https://crisp.chat/en/integrations/smiirl/)[Ply Add custom features to Crisp, and add Crisp to your other apps](https://crisp.chat/en/integrations/urn:ply.realfar.ltd:ply:0/)[Ask Rating The customer success team can ask for a rating from the customer at any moment with this plugin.](https://crisp.chat/en/integrations/urn:beta.limited:ask-rating:0/)[Onepilot Onepilot is building the next-generation of customer care outsourcing.](https://crisp.chat/en/integrations/urn:onepilot:onepilot:0/)[Contact Form Create a contact form linked to your Crisp, which you can include in your website.](https://crisp.chat/en/integrations/contact-form/)[IsDown Monitor the official status of all your dependencies (AWS, Azure, Stripe, GitHub, +2600) in Crisp.](https://crisp.chat/en/integrations/urn:nuno.tomas:isdown:0/)[ChargeDesk Manage PayPal, Braintree, Authorize.Net, WooCommerce, Shopify, Zuora, Square & more inside Crisp.](https://crisp.chat/en/integrations/urn:chargedesk:chargedesk:0/)[Ticket Center Create a Ticket Center dashboard linked to your Crisp, which you can include in your website.](https://crisp.chat/en/integrations/ticket-center/)[Stripe Subscription management for customer service](https://crisp.chat/en/integrations/stripe/)
+
+Build apps for 400k+ Crisp users, or just for your own private use.
+-------------------------------------------------------------------
+
+[Read our documentation](https://docs.crisp.chat/)
+
+[](https://crisp.chat/en/)
+
+*   [Testimonials](https://crisp.chat/en/testimonials/)
+
+*   [Comparisons](https://crisp.chat/en/comparisons/)
+*   [Alternatives](https://crisp.chat/en/alternatives/)
+*   [Help Center](https://help.crisp.chat/)
+*   [Developer Hub](https://docs.crisp.chat/)
+
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+*   [Security](https://docs.crisp.chat/guides/others/security-practices/)
+*   [Ask a demo](https://crisp.chat/en/integrations/#crisp-demo)
+*   [Brand Assets](https://storage.crisp.chat/public/documents/Brand%20Assets.zip)
+
+*   [Read our blog](https://crisp.chat/en/blog/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Careers](https://crisp.chat/en/careers/)
+*   [](https://crisp.chat/en/partnerships/)
+
+[English (United States)](https://crisp.chat/en/integrations/#language-toggle)
+
+[](https://www.facebook.com/crispchat)[](https://twitter.com/crisp_im)[](https://www.youtube.com/channel/UCBgCqEfwt_454jVG7qpi_KQ)
+
+[![Image 1](https://status.crisp.chat/badge/color/) System Status](https://status.crisp.chat/)© 2024 Crisp IM SAS[Made in France](https://crisp.chat/en/about/)
+  ```
+
+Source URL: https://crisp.chat/en/shared-inbox/
+  ```
+  The Shared Inbox for teams dedicated to SMBs - Crisp
+===============
+     
+
+[](https://crisp.chat/en/)
+
+*   [Features](https://crisp.chat/en/shared-inbox/#)
+    
+    [Widget Craft meaningful interactions with a website chat widget](https://crisp.chat/en/livechat/)[Chatbot Build chatbots for automated conversations](https://crisp.chat/en/chatbot/)[CRM Improve your leads and customers' knowledge](https://crisp.chat/en/crm/)[Shared Inbox Get more work done, together](https://crisp.chat/en/shared-inbox/)[Ticketing System Optimize your customer support in an efficient way](https://crisp.chat/en/ticket/)[Campaigns Boost your engagement by sending email and in-app messages](https://crisp.chat/en/campaigns/)[Knowledge A knowledge base to give instant answers to your customers](https://crisp.chat/en/knowledge/)[Status Page Monitor your system and alert users when something goes wrong](https://crisp.chat/en/status/)
+    
+*   [Apps](https://crisp.chat/en/apps/)
+*   [Pricing](https://crisp.chat/en/pricing/)
+*   [Integrations](https://crisp.chat/en/integrations/)
+*   [Help](https://crisp.chat/en/shared-inbox/#)
+    
+    [Help Center Learn how to use and configure Crisp](https://help.crisp.chat/)[Crisp Unleash Videos to learn best practices for using Crisp](https://crisp.chat/en/unleash/)[Developer Hub Use Crisp APIs to adapt Crisp to custom use cases](https://docs.crisp.chat/)
+    
+
+*   [Log In](https://app.crisp.chat/)
+*   [Get Started](https://app.crisp.chat/initiate/signup/?locale=en)
+*   [Go to Dashboard](https://app.crisp.chat/)
+
+*   [Contact us](https://crisp.chat/en/contact/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Jobs](https://crisp.chat/en/careers/)
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+
+*   [Status](https://status.crisp.chat/)
+*   [Blog](https://crisp.chat/en/blog/)
+*   [Facebook](https://www.facebook.com/crispchat)
+*   [Twitter](https://twitter.com/crisp_im)
+
+Shared Inbox
+
+A shared inbox to bring seamless collaboration in one place
+===========================================================
+
+[Use Crisp for free](https://app.crisp.chat/initiate/signup/?locale=en)
+
+14-day free trial
+
+No engagement
+
+4.6/5 out of 761 reviews
+
+Much more than your usual shared inbox software
+-----------------------------------------------
+
+Collaborative inbox is often perceived as an email inbox. Crisp is even more! Our shared inbox offers an incredible business messaging inbox that centralizes all your messages from external channels. Organize, collaborate and manage social inboxes. Build a shared sms inbox, WhatsApp Shared Inbox, or Messenger, Telegram, and Line shared inbox. Collaborate effortlessly inside one inbox, assign conversations and improve first response rate with dedicated features: Knowledge base, CRM, Chatbots and much more ...
+
+Get more work done, together.
+-----------------------------
+
+End-up the thrill of unfinishable email threads, Crisp inbox lets you write internal notes on each conversation. Simply mention teammates on targeted threads to collaborate. Our universal inbox offers the ability to bring your team around one tool to work together and answer customers effortlessly. Crisp is designed for team collaboration and real-time communication, making it the perfect alternative to your individual mailbox
+
+[Learn more](https://crisp.chat/en/shared-inbox/email-collaboration/)
+
+Automate time-consuming workflows
+---------------------------------
+
+Let your team focus on what really matters for your business and automate low-value action. Our shared inbox software comes with dedicated features that will let you automate repetitive tasks: Build routing rules to assign conversations automatically to a group of users, Create saved replies to automate answers for repetitive questions or simply create powerful chatbot scenarios to generate leads 24/7, even when you're sleeping.
+
+[Learn more](https://crisp.chat/en/shared-inbox/canned-message/)
+
+Build stronger customers' relationship
+--------------------------------------
+
+Creating delightful customers' relationships shouldn't be exclusive to big businesses
+
+https://app.crisp.chat
+
+https://app.crisp.chat
+
+https://app.crisp.chat
+
+### Access user ratings
+
+Discover how much your customers love your support
+
+[Learn more](https://crisp.chat/en/shared-inbox/customer-satisfaction/)
+
+### Deal with social messaging efficiently
+
+Support customers on social media channels right from your team inbox
+
+[Learn more](https://crisp.chat/en/shared-inbox/social-messaging/)
+
+### Set reminders
+
+Never miss a follow-up with your leads or customers
+
+[Learn more](https://crisp.chat/en/shared-inbox/notification-system/)
+
+Track your team inbox efficiency
+--------------------------------
+
+With our shared inbox software, teams can easily view their performance and efficiency. They can all drill down to dedicated metrics such as average first response time or detailed activity reports such as messages sent, chat triggers deliverability and the current customers' satisfaction.
+
+[Learn more](https://help.crisp.chat/en/article/how-do-crisp-analytics-work-fwul5i/)
+
+https://app.crisp.chat
+
+https://app.crisp.chat
+
+https://app.crisp.chat
+
+### Answer customers automatically
+
+Build powerful autoresponders to scale your customers' relationship
+
+[Learn more](https://crisp.chat/en/shared-inbox/autoresponder/)
+
+### Route conversations automatically
+
+Build routing rules that will fasten conversations' assignment
+
+[Learn more](https://crisp.chat/en/shared-inbox/routing-rules/)
+
+### Improve customer service email management
+
+Don't let customer support emails slip through the cracks
+
+[Learn more](https://crisp.chat/en/shared-inbox/email-management-software/)
+
+Centralize your customers' and lead data
+----------------------------------------
+
+Our all-in-one inbox offers the ability to access a dedicated customer data management platform. Connect Your Shared Inbox to a CRM. Get a complete picture of every customer or lead, including their location, activity, and more. Filter and target customers by the actions they do or don’t take in your app. Build a data-driven strategy thanks to our universal inbox.
+
+[Learn more](https://crisp.chat/en/crm/)
+
+500,000 brands are already using Crisp to improve their customer experience
+
+[See their testimonials](https://crisp.chat/en/testimonials/)
+
+Frequently Asked Questions
+--------------------------
+
+### 📬 What is a shared inbox?
+
+A shared inbox is a collaborative inbox that lets multiple users read and send email messages as well as chat messages, social media messages and different channels. For example, you can build a shared WhatsApp inbox from your team inbox. A Shared inbox software is a tool that lets companies get more work done through automation and collaboration. A shared inbox is different from a shared mailbox as a shared inbox offers the ability to centralize multiple channels such as emails, live chat messages, Messenger, WhatsApp or even phone calls. Benefits of a shared inbox are numerous ... Better collaboration, more transparency, Improved reactivity, Clear ownership ... Creating a shared inbox is everything you need to skyrocket your business.
+
+  
+
+### 🎯 How does a shared inbox work?
+
+A shared inbox for teams (also known as a team inbox) can be accessed and managed by multiple users inside the company. Everyone with access to a shared inbox tool can send and receive emails from a shared email address or a personal mailbox, view an archive of all sent and received emails, and save emails in shared folders. Modern shared inbox tools for teams also include the ability to receive and answer messages from social media such as Messenger, WhatsApp or Twitter, allowing you to create a shared sms inbox or a shared WhatsApp inbox. It makes the collaborative inbox a better collaborative place for teamwork and increases productivity for the whole company.
+
+  
+
+### 🙆‍♂️ What is a collaborative inbox?
+
+A collaborative inbox helps teams get more work done by sharing communications transparently across organizations, it's one of the best alternatives to a traditional mailbox. With better communication, teams can improve their customer support. A collaborative inbox is also known as a shared inbox and lets businesses run automated workflows like assignments and email notes to increase their first response time. For example, WhatsApp inbox isn't built for collaboration, that's why using Crisp, you can build a shared WhatsApp inbox and benefit from numerous features to improve collaboration and productivity.
+
+  
+
+Ready to improve your customer engagement?
+------------------------------------------
+
+[Try Crisp for free](https://app.crisp.chat/initiate/signup/)[Request a demo](https://crisp.chat/en/shared-inbox/#crisp-demo)
+
+[](https://crisp.chat/en/)
+
+*   [Testimonials](https://crisp.chat/en/testimonials/)
+
+*   [Comparisons](https://crisp.chat/en/comparisons/)
+*   [Alternatives](https://crisp.chat/en/alternatives/)
+*   [Help Center](https://help.crisp.chat/)
+*   [Developer Hub](https://docs.crisp.chat/)
+
+*   [Terms of use](https://crisp.chat/en/terms/)
+*   [Privacy](https://crisp.chat/en/privacy/)
+*   [Security](https://docs.crisp.chat/guides/others/security-practices/)
+*   [Ask a demo](https://crisp.chat/en/shared-inbox/#crisp-demo)
+*   [Brand Assets](https://storage.crisp.chat/public/documents/Brand%20Assets.zip)
+
+*   [Read our blog](https://crisp.chat/en/blog/)
+*   [About us](https://crisp.chat/en/about/)
+*   [Careers](https://crisp.chat/en/careers/)
+*   [Partnerships](https://crisp.chat/en/partnerships/)
+
+[English (United States)](https://crisp.chat/en/shared-inbox/#language-toggle)[Français (France)](https://crisp.chat/fr/shared-inbox/)[Deutsch (Deutschland)](https://crisp.chat/de/shared-inbox/)[Español (España)](https://crisp.chat/es/shared-inbox/)[Suomi (Suomi)](https://crisp.chat/fi/shared-inbox/)[Dutch (Nederland)](https://crisp.chat/nl/shared-inbox/)[Português (Brazil)](https://crisp.chat/pt/shared-inbox/)[Türk (Türkiye)](https://crisp.chat/tr/shared-inbox/)[Polskie (Polska)](https://crisp.chat/pl/shared-inbox/)[Pу́сский (Russia)](https://crisp.chat/ru/shared-inbox/)[中国人 (中国)](https://crisp.chat/zh/shared-inbox/)
+
+[](https://www.facebook.com/crispchat)[](https://twitter.com/crisp_im)[](https://www.youtube.com/channel/UCBgCqEfwt_454jVG7qpi_KQ)
+
+[![Image 1](https://status.crisp.chat/badge/color/) System Status](https://status.crisp.chat/)© 2024 Crisp IM SAS[Made in France](https://crisp.chat/en/about/)
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

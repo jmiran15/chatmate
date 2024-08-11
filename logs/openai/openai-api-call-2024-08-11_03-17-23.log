@@ -1,0 +1,330 @@
+LLM: EXTRACT_RELEVANT_LINKS
+Timestamp: 2024-08-11T07:17:23.923Z
+Model: gpt-4o-mini
+
+Request:
+[user]: 
+Base URL: https://www.freshworks.com/freshdesk/
+
+Website content delimited by triple backticks:
+```
+Freshdesk: Smart, Scalable Ticketing Solution | Freshworks
+===============
+
+[Skip to main content](https://www.freshworks.com/freshdesk/#main-content)
+
+[![Image 1](blob:https://www.freshworks.com/4bbd27d83f367d7363a6ce20f55353dc)![Image 2: freshworks-logo](https://dam.freshworks.com/m/201271b18ba1bfc1/original/headerLogoDark.webp)](https://www.freshworks.com/)
+
+*   Products
+    
+    Software
+    
+    *   [FreshdeskDelight customers and agents with effortless service and support](https://www.freshworks.com/freshdesk/)
+    *   [FreshserviceModern and intuitive IT service management](https://www.freshworks.com/freshservice/)
+    *   [Customer Service SuiteThe all-in-one solution, boosted with generative AI](https://www.freshworks.com/customer-service-suite/)
+    *   [FreshsalesDrive revenue and productivity with the easy-to-use AI-powered CRM](https://www.freshworks.com/crm/sales/)
+    *   [FreshchatAI-powered bots and live chat across every messaging channel](https://www.freshworks.com/live-chat-software/)
+    *   [FreshmarketerAI-powered multichannel marketing automation platform](https://www.freshworks.com/crm/marketing/)
+    
+    [All products and trials](https://www.freshworks.com/products/)
+    
+    Solutions
+    
+    *   [Customer Service & Support](https://www.freshworks.com/customer-service-solutions/)
+    *   [IT Service Management](https://www.freshworks.com/it-solutions/)
+    *   [Conversational Engagement](https://www.freshworks.com/conversational-engagement/)
+    *   [Marketing Automation](https://www.freshworks.com/crm/marketing/)
+    *   [Enterprise Service Management](https://www.freshworks.com/freshservice/enterprise-service-management/)
+    *   [Sales Automation](https://www.freshworks.com/crm/sales/)
+    *   [Customer Relationship Management](https://www.freshworks.com/crm-platform/)
+    
+*   Platform
+    
+    *   [Overview](https://www.freshworks.com/platform/)
+    *   [Integrations](https://www.freshworks.com/platform/integrations/)
+    *   [AI capabilities](https://www.freshworks.com/platform/freddy-ai/)
+    *   [Latest innovations](https://www.freshworks.com/freshservice/product-updates/)
+    
+    *   [App marketplace](https://www.freshworks.com/apps/)
+    *   [Developers](https://developers.freshworks.com/)
+    *   [Technical alliances](https://www.freshworks.com/platform/technology-alliances/)
+    
+    What's new
+    
+    *   [![Image 3](blob:https://www.freshworks.com/efb3d4ec2973260e1764e9be8eb80d5c)![Image 4](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3) Experience AI-powered customer supportOmnichannel, AI-powered support that's easy to implement, use, and scale. Learn more](https://www.freshworks.com/campaigns/ai-customer-service/?utm_source=HomepagePromoCard&utm_medium=website&utm_campaign=ThisIsRealAI&utm_content=landingpage#)
+    *   [![Image 6](blob:https://www.freshworks.com/43ee1166efc4b161a092b3aae514a46c)![Image 7](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3) We’ve opened a new data center in DubaiFreshworks’ new data center for the Middle East & Africa launches. Learn more](https://ir.freshworks.com/news-releases/news-release-details/freshworks-unveils-new-data-center-uae-serve-customers-across)
+    
+*   Resources
+    
+    Customers
+    
+    *   [Customer Stories](https://www.freshworks.com/customers/)
+    *   [Community](https://community.freshworks.com/)
+    *   [Training](https://www.freshworks.com/academy)
+    *   [Services](https://www.freshworks.com/professional-services/)
+    *   [Support](https://www.freshworks.com/support/)
+    
+    Company
+    
+    *   [About](https://www.freshworks.com/company/about/)
+    *   [Leadership](https://www.freshworks.com/company/leadership/)
+    *   [Careers](https://www.freshworks.com/company/careers/)
+    *   [Partners](https://www.freshworks.com/company/partners/)
+    *   [Insights & Trends](https://www.freshworks.com/theworks/)
+    
+    Trending
+    
+    *   [![Image 9](blob:https://www.freshworks.com/13ebf96f8ae9b93df55541541ea0feea)![Image 10](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3) Fresh insights for leadersOriginal research and analysis from leading industry experts Explore more](https://www.freshworks.com/theworks/)
+    *   More impact, less stressSee how IT, Customer Service, and CRM teams succeed with Freshworks
+        
+        Watch now
+        
+    
+
+*   [Demo](https://www.freshworks.com/freshdesk/demo-request/)[Pricing](https://www.freshworks.com/freshdesk/pricing/)[Login](https://login.freshworks.com/email-login/)
+    
+    [English](https://www.freshworks.com/freshdesk/)[Deutsch](https://www.freshworks.com/de/freshdesk/)[Nederlands](https://www.freshworks.com/nl/freshdesk/)[Français](https://www.freshworks.com/fr/freshdesk/)[Svenska](https://www.freshworks.com/se/freshdesk/)[Español (España)](https://www.freshworks.com/es/freshdesk/)[Español (América Latina)](https://www.freshworks.com/latam/freshdesk/)[Português](https://www.freshworks.com/br/freshdesk/)[Italiano](https://www.freshworks.com/it/)[简体中文](https://www.freshworks.com/cn/)[繁體中文](https://www.freshworks.com/hk/)[日本語](https://www.freshworks.com/jp/)[한국어](https://www.freshworks.com/ko/)[Polski](https://www.freshworks.com/pl/)[ภาษาไทย](https://www.freshworks.com/th/)[Türkçe](https://www.freshworks.com/tr/)[Tiếng Việt](https://www.freshworks.com/vi/)
+    
+    [Try it Free](https://www.freshworks.com/freshdesk/signup/)
+    
+
+*   Products
+    
+*   Platform
+    
+*   Resources
+    
+*   [Demo](https://www.freshworks.com/freshdesk/demo-request/)
+*   [Pricing](https://www.freshworks.com/freshdesk/pricing/)
+*   Languages
+    
+*   [Login](https://login.freshworks.com/email-login/)
+*   [Try it Free](https://www.freshworks.com/freshdesk/signup/)
+
+[![Image 12](blob:https://www.freshworks.com/6af6d7f07dd3ab3ad292ea57da24c450)![Image 13: Freshworks Logo](https://www.freshworks.com/_next/image/?url=%2Fimages%2FmobileLogo.webp&w=64&q=75)](https://www.freshworks.com/)
+
+*   [Freshdesk](https://www.freshworks.com/freshdesk/)
+
+*   [Features](https://www.freshworks.com/freshdesk/features/)
+*   [Integrations](https://www.freshworks.com/freshdesk/integrations/)
+*   [What's New](https://www.freshworks.com/freshdesk/new-features/)
+
+*   [Demo](https://www.freshworks.com/freshdesk/demo-request/)[Pricing](https://www.freshworks.com/freshdesk/pricing/)[Login](https://login.freshworks.com/email-login/)
+    
+    [English](https://www.freshworks.com/freshdesk/)[Deutsch](https://www.freshworks.com/de/freshdesk/)[Nederlands](https://www.freshworks.com/nl/freshdesk/)[Français](https://www.freshworks.com/fr/freshdesk/)[Svenska](https://www.freshworks.com/se/freshdesk/)[Español (España)](https://www.freshworks.com/es/freshdesk/)[Español (América Latina)](https://www.freshworks.com/latam/freshdesk/)[Português](https://www.freshworks.com/br/freshdesk/)[Italiano](https://www.freshworks.com/it/)[简体中文](https://www.freshworks.com/cn/)[繁體中文](https://www.freshworks.com/hk/)[日本語](https://www.freshworks.com/jp/)[한국어](https://www.freshworks.com/ko/)[Polski](https://www.freshworks.com/pl/)[ภาษาไทย](https://www.freshworks.com/th/)[Türkçe](https://www.freshworks.com/tr/)[Tiếng Việt](https://www.freshworks.com/vi/)
+    
+    [Try it Free](https://www.freshworks.com/freshdesk/signup/)
+    
+
+*   [Features](https://www.freshworks.com/freshdesk/features/)
+*   [Integrations](https://www.freshworks.com/freshdesk/integrations/)
+*   [What's New](https://www.freshworks.com/freshdesk/new-features/)
+*   Products
+    
+*   Platform
+    
+*   Resources
+    
+*   [Demo](https://www.freshworks.com/freshdesk/demo-request/)
+*   [Pricing](https://www.freshworks.com/freshdesk/pricing/)
+*   Languages
+    
+*   [Login](https://login.freshworks.com/email-login/)
+*   [Try it Free](https://www.freshworks.com/freshdesk/signup/)
+
+Smart. Streamlined. Scalable.
+=============================
+
+Elevate Your Customer Service with AI-driven Ticketing.
+
+[Try it Free](https://www.freshworks.com/freshdesk/signup/)[Get a Demo](https://www.freshworks.com/freshdesk/demo-request/)
+
+TRUSTED BY 60K+ CUSTOMERS BIG AND SMALL
+
+Intuitive and contextual support
+--------------------------------
+
+Empower your support teams to deliver timely and consistent support at any scale
+
+ADVANCED TICKETING
+
+### Deliver personalized support fast
+
+Manage, prioritize, and resolve tickets at scale with a unified workspace that helps agents move quickly, focus on the right issues, and deliver personalized support.
+
+[Check our complete list of features](https://www.freshworks.com/freshdesk/features/)
+
+![Image 15](blob:https://www.freshworks.com/c7302b1b5f52fe4e1157620b23d6a021)![Image 16](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+SELF-SERVICE
+
+### Deflect FAQs and optimize agent workload
+
+Automate self-service with a scalable knowledge base and custom widgets to help customers find answers faster. Integrate your portal with custom apps to solve specific business needs and deliver a tailored self-service experience.
+
+[Explore self-service](https://www.freshworks.com/freshdesk/self-service/)
+
+![Image 18](blob:https://www.freshworks.com/106853786bed57fa0985afcba1b928f2)![Image 19](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+AI-POWERED AUTOMATIONS
+
+### Optimize operations with AI-powered automations and workflows
+
+Eliminate redundancy and enable your teams to run on autopilot with AI-powered automations. Improve productivity and efficiency with generative AI that assists agents at every step, enabling them to deliver accurate resolutions.
+
+[Explore automations](https://www.freshworks.com/freshdesk/automations/)
+
+![Image 21](blob:https://www.freshworks.com/5199b07ad9285affc0eadf7e1ac9ee9d)![Image 22](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Collaboration
+
+### Bring teams together for the future of hybrid work
+
+Empower agents with collaboration tools to help them engage with the right experts from cross-functional teams and provide faster, more consistent service on complex inquiries.
+
+[Explore collaboration](https://www.freshworks.com/freshdesk/collaboration/)
+
+![Image 24](blob:https://www.freshworks.com/106853786bed57fa0985afcba1b928f2)![Image 25](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Analytics
+
+### Leverage proactive AI-driven insights to optimize support
+
+Surface potential issues and optimize support operations with proactive AI-driven insights. Unleash the power of generative AI to analyze interactions constantly, monitor quality, and realize a lower TCO.
+
+[Explore analytics](https://www.freshworks.com/freshdesk/reporting-analytics/)
+
+![Image 27](blob:https://www.freshworks.com/5199b07ad9285affc0eadf7e1ac9ee9d)![Image 28](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+CUSTOMER SERVICE SUITE
+
+### Get bots, ticketing, and conversations in one unified solution
+
+Deliver exceptional customer service with Freshworks Customer Service Suite. From AI-powered conversations and no-code bots to efficient ticket management, the Suite enables you to improve productivity and exceed expectations.
+
+[Explore Customer Service Suite](https://www.freshworks.com/customer-service-suite/)
+
+![Image 30](blob:https://www.freshworks.com/432b340a2b3edadd540a4ee6bf91ad38)![Image 31](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Why customers love Freshdesk
+----------------------------
+
+![Image 33](blob:https://www.freshworks.com/bb9c87f3c90a3a5d57e5dd5b0f0a99e8)![Image 34](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+I’m responsible for our chat platform and channel service strategy. The reason why we moved to Freshworks was for the APIs so that we can be our own chat client. I really enjoyed the collaboration.
+
+Eric BompasProduct Manager, Klarna
+
+[Watch video](https://www.youtube.com/watch?v=sWHw2SvmQ7g)
+
+![Image 36](blob:https://www.freshworks.com/bb9c87f3c90a3a5d57e5dd5b0f0a99e8)![Image 37](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Freshdesk has scaled with us. What I love most is that I don't need an administrator to maintain it. Ticket automation, screen-share through the chat, customized portals for different segments of our users—all those things are really helping us bring response times down.
+
+Kris SundbergVP of Customer Success, Restaurant365
+
+[Watch video](https://www.youtube.com/watch?v=1dVBwD2ypyA)
+
+Recommended by leading industry experts
+---------------------------------------
+
+![Image 39](blob:https://www.freshworks.com/7088e34e77e78ef2feaf05cc59496d3b)![Image 40](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 42](blob:https://www.freshworks.com/e80434b8b0e39a5cdf3ea508a360aaf7)![Image 43](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 45](blob:https://www.freshworks.com/502f2820ac8f9d7bcf5179efa7bed3e8)![Image 46](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 48](blob:https://www.freshworks.com/c4995cf6792addee3884018ce61e62ba)![Image 49](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Sign up for your free trial today
+---------------------------------
+
+14 days. Unlimited agents. No credit card required. No strings attached.
+
+[Try it Free](https://www.freshworks.com/freshdesk/signup)[Get a Demo](https://www.freshworks.com/freshdesk/demo-request/)
+
+![Image 51](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)
+
+Contact Freshworks[+1 (855) 747 6767](tel:+18557476767) or [sales@freshworks.com](mailto:sales@freshworks.com)
+
+Company
+
+*   [About](https://www.freshworks.com/company/about/)
+*   [Leadership](https://www.freshworks.com/company/leadership/)
+*   [Investors](https://ir.freshworks.com/)
+*   [Careers](https://www.freshworks.com/company/careers/)
+*   [Customers](https://www.freshworks.com/customers/)
+*   [Partners](https://www.freshworks.com/partners/)
+*   [Events](https://www.freshworks.com/events/)
+*   [Insights & Trends](https://www.freshworks.com/theworks/)
+*   [Newsroom](https://www.freshworks.com/newsroom/press-releases/)
+*   [Contact](https://www.freshworks.com/contact/)
+
+Support & Success
+
+*   [Support](https://www.freshworks.com/support/)
+*   [Training & Certification](https://www.freshworks.com/academy/)
+*   [Services](https://www.freshworks.com/services/)
+*   [Student Academy](https://www.freshworks.com/company/philanthropy/software-academy/)
+*   [Community](https://community.freshworks.com/)
+
+Products
+
+*   [What’s New](https://www.freshworks.com/freshservice/product-updates/)
+*   [Freshdesk](https://www.freshworks.com/freshdesk/)
+*   [Customer Service Suite](https://www.freshworks.com/customer-service-suite/)
+*   [Freshchat](https://www.freshworks.com/live-chat-software/)
+*   [Freshservice](https://www.freshworks.com/freshservice/)
+*   [Freshsales](https://www.freshworks.com/crm/sales/)
+*   [Freshsales Suite](https://www.freshworks.com/crm/suite/)
+*   [Freshmarketer](https://www.freshworks.com/crm/marketing/)
+*   [Freshworks Neo](https://www.freshworks.com/platform/)
+*   [Freddy AI](https://www.freshworks.com/freddy-ai/)
+
+[![Image 53](blob:https://www.freshworks.com/59bb37207c366e3ee90a4dd2cb92356e)![Image 54](blob:https://www.freshworks.com/b9a31d3949b1882a09ed2f8508d538f3)](https://www.freshworks.com/)
+
+*   [](https://twitter.com/FreshworksInc)
+*   [](https://linkedin.com/company/freshworks-inc)
+*   [](https://www.facebook.com/FreshworksInc)
+*   [](https://www.youtube.com/c/FreshworksInc)
+
+[](https://play.google.com/store/apps/developer?id=Freshworks+Inc)[](https://apps.apple.com/us/developer/freshworks-technologies-private-limited/id849713309)
+
+*   [Legal](https://www.freshworks.com/legal/)
+*   [Privacy Notice](https://www.freshworks.com/privacy/)
+*   [Site Terms](https://www.freshworks.com/site-terms/)
+*   [Cookie Policy](https://www.freshworks.com/list-of-cookies/)
+*   [Do Not Share My Personal Information](https://www.freshworks.com/privacy/ccpa-requests/)
+*   [Security](https://www.freshworks.com/security/)
+*   [Accessibility](https://www.freshworks.com/accessibility/)
+*   [Unsubscribe](https://www.freshworks.com/privacy/gdpr/unsubscribe/)
+*   [Sitemap](https://www.freshworks.com/sitemap/)
+
+© 2024 Freshworks Inc. All Rights Reserved
+```
+
+Based on the above content, extract all relevant links that may contain information about the product as specified in the system prompt. Remember to follow the rules and output format specified there.
+
+Example output format:
+{
+  "extracted_links": [
+    {
+      "url": "https://example.com/pricing",
+      "relevance": ["pricing", "features"],
+      "confidence": 0.9
+    },
+    {
+      "url": "https://example.com/features",
+      "relevance": ["features", "pros", "primary_use_case"],
+      "confidence": 0.8
+    }
+  ]
+}
+
+If no relevant links are found, return an object with an empty array: { "extracted_links": [] }
+
+Ensure that you've thoroughly searched for links that might contain ANY of the information types listed in the system prompt. Don't overlook less obvious pages that might contain valuable information.
+
+
+Response:
+{"extracted_links":[{"url":"https://www.freshworks.com/freshdesk/features/","relevance":["features","description","unique_selling_proposition"],"confidence":0.9},{"url":"https://www.freshworks.com/freshdesk/pricing/","relevance":["pricing"],"confidence":0.9},{"url":"https://www.freshworks.com/freshdesk/integrations/","relevance":["integrations"],"confidence":0.8},{"url":"https://www.freshworks.com/freshdesk/new-features/","relevance":["features","description"],"confidence":0.7},{"url":"https://www.freshworks.com/freshdesk/self-service/","relevance":["primary_use_case","features"],"confidence":0.7},{"url":"https://www.freshworks.com/freshdesk/automations/","relevance":["features","description"],"confidence":0.7},{"url":"https://www.freshworks.com/freshdesk/collaboration/","relevance":["features","description"],"confidence":0.6},{"url":"https://www.freshworks.com/freshdesk/reporting-analytics/","relevance":["features","description"],"confidence":0.6}]}

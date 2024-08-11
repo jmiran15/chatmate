@@ -1,4 +1,5 @@
-import { Link } from "@remix-run/react";
+import { json, type LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData, Link } from "@remix-run/react";
 import { DateTime } from "luxon";
 import { Button } from "~/components/ui/button";
 import {
@@ -8,29 +9,40 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { prisma } from "~/db.server";
+import { requireUserId } from "~/session.server";
 
-// Hardcoded articles for now
-const articles = [
-  {
-    id: "1",
-    title: "10 Tips for Effective Time Management",
-    createdAt: "2023-03-15T10:30:00Z",
-    wordCount: 1500,
-    readingTimeMs: 450000,
-  },
-  {
-    id: "2",
-    title: "The Future of Artificial Intelligence",
-    createdAt: "2023-03-20T14:45:00Z",
-    wordCount: 2000,
-    readingTimeMs: 600000,
-  },
-  // Add more hardcoded articles as needed
-];
+// Define the type for our article data
+type ArticleData = {
+  id: string;
+  title: string;
+  createdAt: string;
+  wordCount: number | null;
+  readingTimeMs: number | null;
+};
 
-const ArticleCard = ({ article }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const userId = await requireUserId(request);
+  const articles = await prisma.article.findMany({
+    where: { userId },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      wordCount: true,
+      readingTimeMs: true,
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return json({ articles });
+};
+
+const ArticleCard = ({ article }: { article: ArticleData }) => {
   const createdAt = DateTime.fromISO(article.createdAt);
-  const readingTime = DateTime.fromMillis(article.readingTimeMs);
+  const readingTime = article.readingTimeMs
+    ? DateTime.fromMillis(article.readingTimeMs)
+    : null;
 
   return (
     <Card className="h-full">
@@ -42,7 +54,10 @@ const ArticleCard = ({ article }) => {
           Created on {createdAt.toLocaleString(DateTime.DATE_MED)}
         </p>
         <p className="text-sm text-gray-500">
-          {article.wordCount} words • {readingTime.toFormat("m")} min read
+          {article.wordCount ?? "Unknown"} words •{" "}
+          {readingTime
+            ? `${readingTime.toFormat("m")} min read`
+            : "Unknown reading time"}
         </p>
       </CardContent>
       <CardFooter>
@@ -54,7 +69,7 @@ const ArticleCard = ({ article }) => {
   );
 };
 
-const ArticlesList = ({ articles }) => {
+const ArticlesList = ({ articles }: { articles: ArticleData[] }) => {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {articles.map((article) => (
@@ -64,7 +79,9 @@ const ArticlesList = ({ articles }) => {
   );
 };
 
-export default function ArticlesNew() {
+export default function ArticlesIndex() {
+  const { articles } = useLoaderData<typeof loader>();
+
   return (
     <div className="container mx-auto py-8">
       <div className="flex justify-between items-center mb-8">

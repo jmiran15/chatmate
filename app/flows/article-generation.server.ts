@@ -20,7 +20,13 @@ export async function startArticleGenerationFlow(articleId: string) {
 
   const article = await prisma.article.findUnique({
     where: { id: articleId },
-    include: { products: true },
+    include: {
+      products: {
+        orderBy: {
+          position: "asc",
+        },
+      },
+    },
   });
 
   if (!article) {
@@ -41,16 +47,19 @@ export async function startArticleGenerationFlow(articleId: string) {
         name: `generate-article-${articleId}`,
         queueName: generateArticleQueue.name,
         data: { articleId },
+        opts: { ignoreDependencyOnFailure: true },
         children: article.products
           .map((product) => ({
             name: `update-product-${product.id}`,
             queueName: updateProductFromChildrenQueue.name,
             data: { productId: product.id },
+            opts: { ignoreDependencyOnFailure: true },
             children: [
               {
                 name: `screenshot-${product.id}`,
                 queueName: screenshotQueue.name,
                 data: { productId: product.id },
+                opts: { ignoreDependencyOnFailure: true },
               },
             ],
           }))
@@ -59,32 +68,38 @@ export async function startArticleGenerationFlow(articleId: string) {
               name: `update-product-${product.id}-info`,
               queueName: updateProductFromChildrenQueue.name,
               data: { productId: product.id },
+              opts: { ignoreDependencyOnFailure: true },
               children: [
                 {
                   name: `extract-product-info-${product.id}`,
                   queueName: extractProductInfoQueue.name,
                   data: { productId: product.id },
+                  opts: { ignoreDependencyOnFailure: true },
                   children: [
                     {
                       name: `scrape-relevant-urls-${product.id}`,
                       queueName: addChildScrapesQueue.name,
                       data: { productId: product.id },
+                      opts: { ignoreDependencyOnFailure: true },
                       children: [
                         {
                           name: `update-product-${product.id}-relevant-urls-db`,
                           queueName: updateProductFromChildrenQueue.name,
                           data: { productId: product.id },
+                          opts: { ignoreDependencyOnFailure: true },
                           children: [
                             {
                               name: `extract-relevant-urls-${product.id}`,
                               queueName: extractRelevantLinksQueue.name,
                               data: { productId: product.id },
+                              opts: { ignoreDependencyOnFailure: true },
                               children: [
                                 {
                                   name: `append-scraped-website-to-product-${product.id}`,
                                   queueName:
                                     appendScrapedWebsiteToProductQueue.name,
                                   data: { productId: product.id },
+                                  opts: { ignoreDependencyOnFailure: true },
                                   children: [
                                     {
                                       name: `scrape-base-${product.id}`,
@@ -108,6 +123,7 @@ export async function startArticleGenerationFlow(articleId: string) {
     ],
     opts: {
       jobId: `update-article-${articleId}`,
+      ignoreDependencyOnFailure: true,
     },
   });
 

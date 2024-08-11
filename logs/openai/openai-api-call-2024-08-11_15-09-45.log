@@ -1,0 +1,2214 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T19:09:45.397Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://www.wrike.com/price/
+  ```
+  Plans and Pricing | Wrike
+===============
+         
+
+[![Image 1: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 2: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+*   Solutions
+
+*   For teams
+    
+    *   [Marketing Streamline proofing and reporting for seamless campaigns.](https://www.wrike.com/marketing/)
+    *   [Creative & Design Create high-quality assets and get them approved in record time.](https://www.wrike.com/teams/creative-project-management/)
+    *   [PMO Align strategy with execution and deliver results.](https://www.wrike.com/project-management-office/)
+    *   [IT Execute initiatives, optimize workflows, and automate requests.](https://www.wrike.com/teams/it-project-management/)
+    *   [See all teams](https://www.wrike.com/teams/)
+*   For industries
+    
+    *   [Manufacturing Enhance operations, accelerate production, and empower teams.](https://www.wrike.com/industries/manufacturing/)
+    *   [Professional Services Organize clients, streamline projects, and automate workflows.](https://www.wrike.com/professional-services-management/)
+    *   [Consumer Goods Move fast with unified planning, delivery, and reporting.](https://www.wrike.com/industries/consumer-goods/)
+    *   [Financial Services Make managing multiple projects, resources, and data easy.](https://www.wrike.com/industries/financial-services/)
+    *   [See all industries](https://www.wrike.com/industries/)
+*   Use cases
+    
+    *   [Resource Management View team workloads and reallocate tasks to avoid burnout.](https://www.wrike.com/use-cases/resource-management/)
+    *   [Project Management Plan Agile projects, track deadlines, and deliver results.](https://www.wrike.com/use-cases/project-management/)
+    *   [Workflow Management Use custom statuses and automate your team workflows.](https://www.wrike.com/use-cases/workflow-management-software/)
+    *   [Task Management Organize incoming requests and eliminate repetitive tasks.](https://www.wrike.com/use-cases/task-management/)
+    *   [See all use cases](https://www.wrike.com/use-cases/)
+*   Explore Wrike
+    
+    *   [Take a Product Tour](https://www.wrike.com/tour/)
+    *   [Book a Demo](https://www.wrike.com/demo/)
+    *   [ROI Calculator](https://www.wrike.com/savings/)
+    *   [Customer Stories](https://www.wrike.com/customer-stories/)
+    *   [Start with Templates](https://www.wrike.com/templates/)
+
+*   Product
+
+*   Features
+    
+    *   [Dashboards Fuel better, faster, data-driven decisions with powerful analytics.](https://www.wrike.com/features/dashboards/)
+    *   [AI Learn about powerful AI and automations with Work Intelligence®.](https://www.wrike.com/features/work-intelligence/)
+    *   [Automation Define and trigger automated workflows to eliminate manual efforts.](https://www.wrike.com/features/workflow-automation/)
+    *   [Gantt Charts Interactive project scheduling across teams.](https://www.wrike.com/features/gantt-chart/)
+    *   [Proofing Streamlined proofing and collaboration in one place.](https://www.wrike.com/features/online-proofing/)
+    *   [Custom Item Types Tailor work items to fit your specific workplace.](https://www.wrike.com/features/custom-item-types/)
+    *   [Project Resource Planning Plan and allocate resources for timely delivery.](https://www.wrike.com/use-cases/resource-management/)
+    *   [Project Views Get the full picture with customizable, intuitive project views.](https://www.wrike.com/features/custom-views/)
+    *   [Kanban Boards Instantly view project progress and create customized workflows.](https://www.wrike.com/features/kanban-boards/)
+    *   [Dynamic Request Forms Custom forms powered by conditional logic.](https://www.wrike.com/features/custom-request-forms/)
+    *   [Approvals Keep approvers in the loop from start to finish.](https://www.wrike.com/features/approvals/)
+    *   [Cross-Tagging Unparalleled visibility across multiple work streams.](https://www.wrike.com/features/cross-tagging/)
+    *   [See all features](https://www.wrike.com/features/)
+*   Platform
+    
+    *   [Book a Demo](https://www.wrike.com/demo/)
+    *   [Start with Templates](https://www.wrike.com/templates/)
+    *   [Wrike AI](https://www.wrike.com/features/work-intelligence/)
+    *   [Integrations](https://www.wrike.com/apps/)
+    *   [Security](https://www.wrike.com/security/)
+    *   [Mobile & Desktop Apps](https://www.wrike.com/apps/mobile-and-desktop/)
+
+*   Resources
+
+*   Go deeper
+    
+    *   [Resource Hub Top assets on productivity, collaboration, and more.](https://www.wrike.com/resources/)
+    *   [Wrike Blog Latest news and best practices on project management.](https://www.wrike.com/blog/)
+    *   [Educational Guides Guides and tools to unlock better work management.](https://www.wrike.com/guides/)
+    *   [Webinars Join our live or on-demand sessions to do your best work.](https://www.wrike.com/webinars/)
+    *   [Partners Power new possibilities with the Wrike Partner Program.](https://www.wrike.com/partners/)
+    *   [Developers Connect and build integrations with easy-to-use APIs.](https://developers.wrike.com/)
+*   Upskill and Connect
+    
+    *   [Training & Certifications](https://www.wrike.com/lp/discover/)
+    *   [Help Center](https://help.wrike.com/hc/en-us/)
+    *   [Wrike's Community](https://help.wrike.com/hc/en-us/community/topics/)
+    *   [Premium Support Packages](https://www.wrike.com/support-packages/)
+    *   [Wrike Professional Services](https://www.wrike.com/professional-services/)
+
+[](https://www.wrike.com/collaborate/conference/)
+
+[Join us for Collaborate 2024! Discover how to minimize repetitive tasks, and maximize team output — to do less and achieve more.](https://www.wrike.com/collaborate/conference/)Register now
+
+*   [Enterprise](https://www.wrike.com/enterprise/)
+
+*   [Pricing](https://www.wrike.com/price/)
+
+[Contact Sales](https://www.wrike.com/contact-sales/)
+
+EN
+
+![Image 3: language-selector](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/static/assets/img/header-v2/language-selector-2x.png)
+
+[English](https://www.wrike.com/price/)
+
+[Dansk](https://www.wrike.com/da/)
+
+[Deutsch](https://www.wrike.com/de/price/)
+
+[Español](https://www.wrike.com/es/price/)
+
+[Français](https://www.wrike.com/fr/price/)
+
+[Bahasa Indonesia](https://www.wrike.com/id/)
+
+[Italiano](https://www.wrike.com/it/price/)
+
+[Bahasa Melayu](https://www.wrike.com/ms/)
+
+[Nederlands](https://www.wrike.com/nl/)
+
+[Norsk](https://www.wrike.com/no/)
+
+[Polski](https://www.wrike.com/pl/)
+
+[Português (BR)](https://www.wrike.com/pt-br/price/)
+
+[Svenska](https://www.wrike.com/sv/)
+
+[Русский](https://www.wrike.com/ru/price/)
+
+[日本語](https://www.wrike.com/ja/price/)
+
+[한국어](https://www.wrike.com/ko/)
+
+[中文 (简体)](https://www.wrike.com/zh-cn/)
+
+[中文 (繁體)](https://www.wrike.com/zh-tw/)
+
+[Log in](https://login.wrike.com/login/)
+
+Try Wrike for free
+
+ Enter your business email
+
+Try Wrike for free
+
+[![Image 4: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 5: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+Try for free Try for free
+
+[![Image 6: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 7: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+Plans for Every Team
+====================
+
+Free 14-day trial • No credit card required • Cancel anytime
+
+Try Wrike for free
+
+#### Free
+
+For teams getting started
+
+Intelligent task management
+
+#### $0
+
+user/ month
+
+Get started
+
+No credit card required
+
+Key features:
+
+**Key features:**
+
+*   Web, desktop, and mobile apps
+    
+    Help your team collaborate no matter where they are with Wrike's apps for Windows, Mac, iPhone, and Android.
+    
+*   Project & task management
+    
+    Break large goals into actionable tasks, assign resources, attach files and view project schedules at a glance.
+    
+    ![Image 8](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/f421d6ec-1795-44f1-9eb4-577cf1af1828/product-screenshot-table-and-task-view-creative-development-website.png)![Image 9](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/f421d6ec-1795-44f1-9eb4-577cf1af1828/product-screenshot-table-and-task-view-creative-development-website.png)
+    
+*   Board view
+    
+    See your work in our easy-to-understand, drag-and-drop Kanban board view.
+    
+    ![Image 10](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/2b2d8b6c-f9e3-4207-8911-0e141bea8a45/product-screenshot-board-view-kanban-project-new-header.png)![Image 11](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/2b2d8b6c-f9e3-4207-8911-0e141bea8a45/product-screenshot-board-view-kanban-project-new-header.png)
+    
+*   Table view
+    
+    Love using a spreadsheet to track your work? No problem! Our table view offers the flexibility and collaboration you need in a format you’re familiar with.
+    
+    ![Image 12](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/7a3c2b0b-9768-4e09-8ea1-ec3b6e9e3bf4/product-screenshot-table-view-filters-2x.png)![Image 13](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/7a3c2b0b-9768-4e09-8ea1-ec3b6e9e3bf4/product-screenshot-table-view-filters-2x.png)
+    
+*   Active task limitations apply
+    
+[Compare all features](https://www.wrike.com/comparison-table/)
+
+Get started
+
+No credit card required
+
+quick start
+
+#### Team
+
+For growing teams
+
+Effective team management
+
+#### $9.80
+
+user/ month
+
+Try for free
+
+No credit card required
+
+Key features:
+
+**Key features:**
+
+*   2-25 users
+    
+*   Unlimited projects
+    
+    Create an unlimited number of projects for your team.
+    
+*   Unlimited tasks & subtasks
+    
+    Create unlimited tasks and sub-tasks with unlimited levels of nesting. Get deeper visibility into the execution process and see which assignee is responsible for each specific initiative.
+    
+*   Unlimited custom fields
+    
+    Create unlimited custom fields to capture specific attributes of your projects for more context and better structure.
+    
+*   Unlimited request forms
+    
+    Enable streamlined work intake from anywhere with dynamic forms that create tasks automatically with the right information included.
+    
+    ![Image 14](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/9315733a-e085-4079-a660-54c837aca080/product-screenshot-request-form-creative-brief-and-marketing-campaign.png)![Image 15](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/9315733a-e085-4079-a660-54c837aca080/product-screenshot-request-form-creative-brief-and-marketing-campaign.png)
+    
+*   20 free collaborators
+    
+    Easily add members outside of your project team with free collaborator licenses, allowing stakeholders and clients to contribute, review, and approve assets.
+    
+*   Interactive Gantt charts
+    
+    Set milestone dates and task dependencies so you never miss a deadline.
+    
+    ![Image 16](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0ab0b092-5aa8-43a1-80e7-dff43527f9a8/product-screenshot-gantt-chart-table-work-breakdown-structure.png)![Image 17](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0ab0b092-5aa8-43a1-80e7-dff43527f9a8/product-screenshot-gantt-chart-table-work-breakdown-structure.png)
+    
+*   Automations (50 actions/user/month)
+    
+    Define and trigger automated workflows to eliminate manual efforts, making repetitive work a thing of the past.
+    
+    ![Image 18](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)![Image 19](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)
+    
+*   Generative AI
+    
+    Use Wrike's Generative AI to create word-perfect descriptions, project plans, and full brainstorm documents in seconds.
+    
+    ![Image 20](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0470f3d9-1c65-4778-ba6a-d5d96a52a9f3/product-screenshot-generative-ai-task-description-website.png)![Image 21](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0470f3d9-1c65-4778-ba6a-d5d96a52a9f3/product-screenshot-generative-ai-task-description-website.png)
+    
+*   Custom workflows
+    
+    Standardize your team’s processes and track your projects’ exact status in a unified way.
+    
+    ![Image 22](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/9a22377d-7063-454e-bdb4-2eff990ecfad/product-screenshot-space-level-workflows-edit-2x.png)![Image 23](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/9a22377d-7063-454e-bdb4-2eff990ecfad/product-screenshot-space-level-workflows-edit-2x.png)
+    
+*   Chart view
+    
+    Get at a glance insights into project progress and team performance with interactive widgets based on real time data.
+    
+    ![Image 24](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8bb56a7c-a20a-43b3-8fc5-5508480d9e8f/product-screenshot-chart-view-donut.png)![Image 25](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8bb56a7c-a20a-43b3-8fc5-5508480d9e8f/product-screenshot-chart-view-donut.png)
+    
+*   Calendar view
+    
+    Visualize work on a timeline and build interactive roadmaps for products and campaigns for your customers.
+    
+    ![Image 26](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/f5af83ae-4028-4a6d-9ce2-0e86ff16c275/product-screenshot-calendar-quoter-okr-new-header.png)![Image 27](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/f5af83ae-4028-4a6d-9ce2-0e86ff16c275/product-screenshot-calendar-quoter-okr-new-header.png)
+    
+*   Dashboards
+    
+    Configure and tailor personalized dashboards to help track the work you need to see.
+    
+*   Use case templates
+    
+    Quickly setup workspace to manage projects and workflows relevant for your team.
+    
+    ![Image 28](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/fc243705-ee10-4d16-8f62-0eaa3e24592c/product-screenshot-space-templates-two-cards-website.png)![Image 29](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/fc243705-ee10-4d16-8f62-0eaa3e24592c/product-screenshot-space-templates-two-cards-website.png)
+    
+*   Google Sign-In
+    
+    Quick and easy access to Wrike using Google login credentials.
+    
+*   External requester collaboration
+    
+    Streamline collaboration with non-Wrike users on incoming requests from the moment a request is submitted to when it's completed.
+    
+*   Integrations & open API
+    
+    Connect the tools you’re already using in one workflow, including OneDrive, Box, Dropbox, Google Drive, Slack.
+    
+*   2 GB storage per user
+    
+    Store your work securely in the cloud.
+    
+[Compare all features](https://www.wrike.com/comparison-table/)
+
+Try for free
+
+No credit card required
+
+Most popular
+
+#### Business
+
+For all teams across an organization
+
+Customizable platform for any use case
+
+#### $24.80
+
+user/ month
+
+Try for free
+
+No credit card required
+
+Team plan features plus:
+
+**Team plan features plus:**
+
+*   5-200 users
+    
+*   Folder structure & nested projects
+    
+    Organize projects in folders to match how your team prefers to work.
+    
+*   Cross-tagging
+    
+    Tag work into multiple locations for effective cross team collaboration.
+    
+    ![Image 30](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8b1dbe15-60ae-4ffe-8943-245223a9e686/product-screenshot-cross-tagging-holiday-campaign-new-header.png)![Image 31](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8b1dbe15-60ae-4ffe-8943-245223a9e686/product-screenshot-cross-tagging-holiday-campaign-new-header.png)
+    
+*   Project Blueprints
+    
+    Templatize structure and content of projects to save time and drive consistency managing repetitive work.
+    
+    ![Image 32](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/4ec896f9-5269-4c3d-8fef-371b0bbc5624/product-screenshot-blueprint-project-plan-new-header.png)![Image 33](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/4ec896f9-5269-4c3d-8fef-371b0bbc5624/product-screenshot-blueprint-project-plan-new-header.png)
+    
+*   Custom item types
+    
+    Add, configure, and automate your work types any way you need it. Bring your team's unique work habits and language into the digital workspace.
+    
+    ![Image 34](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/b1e6a28e-9f53-41a9-942a-5176ed1335b7/product-screenshot-cit-new-header-2x.png)![Image 35](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/b1e6a28e-9f53-41a9-942a-5176ed1335b7/product-screenshot-cit-new-header-2x.png)
+    
+*   Automations (200 actions/user/month)
+    
+    Define and trigger automated workflows to eliminate manual efforts, making repetitive work a thing of the past.
+    
+    ![Image 36](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)![Image 37](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)
+    
+*   AI risk prediction & work creation
+    
+    Use Wrike’s game-changing Work Intelligence® solution to automatically detect action items, assess project risks, and prioritize to-dos.
+    
+*   Approvals & guest approvals
+    
+    Create a chain of approvals. Collaborate with external users and receive feedback securely.
+    
+*   File and video proofing (30+ file formats)
+    
+    Skip downloading. Review work and provide feedback on assets directly in Wrike with our best-in-class markup and editing tools.
+    
+    ![Image 38](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/4e163aaf-5c2f-4eaf-bf02-019ab9b54fd8/product-screenshot-proofing-toolbar-website.png)![Image 39](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/4e163aaf-5c2f-4eaf-bf02-019ab9b54fd8/product-screenshot-proofing-toolbar-website.png)
+    
+*   Resource management, workloads & time tracking
+    
+    Confirm the right resources are available for the project, track hours, and distribute work across your team.
+    
+*   Reports and Unlimited Dashboards
+    
+    Get a bird’s-eye view of all your team’s work. Make decisions in real time with data from our easy-to-use Dashboard and Report builder.
+    
+*   User groups & permissions
+    
+    Create user groups for team members who belong to one function, have the same set of workflows, or need visibility into the same information.
+    
+*   DAM Integrations and Cloud Content Connector
+    
+    Connect your favorite DAM to Wrike and streamline your digital asset production workflow.
+    
+*   Adobe Creative Cloud Extensions
+    
+    Allow your creative team to access Wrike directly from their tools.
+    
+*   5 GB storage per user
+    
+    Offset and redistribute your storage costs from other limiting applications to Wrike.
+    
+[Compare all features](https://www.wrike.com/comparison-table/)
+
+Try for free
+
+No credit card required
+
+#### Enterprise
+
+For large teams
+
+Enterprise-grade security and scalability
+
+Contact us
+
+Try for free
+
+No credit card required
+
+Business plan features plus:
+
+**Business plan features plus:**
+
+*   5 to unlimited users
+    
+*   SAML-based SSO
+    
+    Users can sign in just once to access both Wrike and other associated applications. SSO via corporate credentials is enabled by OneLogin, Google Apps, and Okta.
+    
+*   Two-Factor Authentication (2FA)
+    
+    Add an extra layer of security, requiring a time-sensitive verification code along with a username and password.
+    
+*   Password policies
+    
+    Implement password policies to ensure passwords meet minimum strength requirements and are regularly changed.
+    
+*   Custom access roles
+    
+    Create, customize, and delete access roles to control what users (or user groups) can do within a shared folder, project, or space.
+    
+*   Customizable user types
+    
+    Manage, create, or duplicate user types and relevant permissions based on license types and account roles.
+    
+    ![Image 40](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/73e19ee9-a7cb-4617-bdca-c36c3e07b27d/product-screenshot-user-types-new.png)![Image 41](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/73e19ee9-a7cb-4617-bdca-c36c3e07b27d/product-screenshot-user-types-new.png)
+    
+*   Admin permissions
+    
+    Granularly delegate Wrike account management functions to your administrators.
+    
+*   User audit reports
+    
+    Get on-demand reports to track activity of regular users and Wrike account admins.
+    
+*   Automations (1000 actions/user/month)
+    
+    Define and trigger automated workflows to eliminate manual efforts, making repetitive work a thing of the past.
+    
+    ![Image 42](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)![Image 43](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)
+    
+*   10 GB storage per user
+    
+    Offset and redistribute your storage costs from other limiting applications to Wrike.
+    
+[Compare all features](https://www.wrike.com/comparison-table/)
+
+Try for free
+
+No credit card required
+
+most enhanced
+
+#### Pinnacle
+
+For teams with complex work needs
+
+Advanced tools and analytics for complex work
+
+Contact us
+
+Try for free
+
+No credit card required
+
+Enterprise plan features plus:
+
+**Enterprise plan features plus:**
+
+*   5 to unlimited users
+    
+*   Locked Spaces
+    
+    Get highly restricted, secure spaces for confidential collaboration and eliminate risk of data leakage.
+    
+*   Advanced reporting & BI
+    
+    Leverage 360-degree, real-time visibility with secure and customizable reports, visual dashboards, and forecasting capabilities. Uncover actionable insights with Wrike and third-party platform data.
+    
+    ![Image 44](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8ab6923a-2f68-4c4c-8245-2b384ca60a38/product-screenshot-reports-select-data-2x.png)![Image 45](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8ab6923a-2f68-4c4c-8245-2b384ca60a38/product-screenshot-reports-select-data-2x.png)
+    
+*   Team utilization and performance dashboard
+    
+    Get powerful insights into planned vs. actual billable utilization of individuals or teams over time.
+    
+*   Job roles
+    
+    Assign team members’ job roles to streamline planning and work allocation based on their functional area.
+    
+*   Budgeting and billable hours
+    
+    Plan and monitor project, portfolio, and client budgets based on team member or job role bill and cost rates, with billable hours.
+    
+    ![Image 46](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/24616a11-a8e4-488e-856a-8d025b958371/product-screenshot-table-view-time-cost-new-header.png)![Image 47](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/24616a11-a8e4-488e-856a-8d025b958371/product-screenshot-table-view-time-cost-new-header.png)
+    
+*   Bookings (project-level effort & time planning)
+    
+    Estimate project effort by team member or job role without creating a detailed work breakdown structure.
+    
+    ![Image 48](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/573c12fd-4222-4ef3-9d5c-8830913f28f1/product-screenshot-workload-add-booking.png)![Image 49](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/573c12fd-4222-4ef3-9d5c-8830913f28f1/product-screenshot-workload-add-booking.png)
+    
+*   SharePoint and HTML5 proofing and approvals
+    
+    Get advanced proofing capabilities in native environments for easier web and asset reviews.
+    
+    ![Image 50](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/97a59f75-1051-4858-b3b0-0c8b5fed0646/product-screenshot-proofing-asset-for-website-2x.png)![Image 51](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/97a59f75-1051-4858-b3b0-0c8b5fed0646/product-screenshot-proofing-asset-for-website-2x.png)
+    
+*   Automations (1500 actions/user/month)
+    
+    Define and trigger automated workflows to eliminate manual efforts, making repetitive work a thing of the past.
+    
+    ![Image 52](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)![Image 53](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/40e2dae3-75b1-4091-9c89-075ac533d224/product-screenshot-automation-actions-website.png)
+    
+*   15 GB storage per user
+    
+    Offset and redistribute your storage costs from other limiting applications to Wrike.
+    
+[Compare all features](https://www.wrike.com/comparison-table/)
+
+Try for free
+
+No credit card required
+
+###### Compare features across our plans
+
+[Take a closer look](https://www.wrike.com/comparison-table/)
+
+The pricing outlined herein is valid only as to new purchases occurring on or after October 25, 2022, and is not offered and does not apply to any prior purchases. Wrike reserves the right to adjust its packaging and pricing at any time.
+
+Amount shown is price per month and billed on an annual per user basis.
+
+![Image 54](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8551b7de-b9f6-42e0-a4fe-b73a3c1a20ca/cta-image-left-ai-promo-mobile-lavender-link.png)
+
+Discover the future of work with Wrike AI
+
+
+-------------------------------------------
+
+Wrike’s powerful generative AI is available for all plans — at no extra cost.
+
+*   ![Image 55](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Generate project plans and campaign briefs
+    
+*   ![Image 56](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Check for mistakes and change the tone
+    
+*   ![Image 57](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Translate comments into different languages
+    
+*   ![Image 58](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Discover action items in your meeting notes
+    
+*   ![Image 59](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Summarize conversations to identify key tasks fast
+    
+
+Try Wrike for free
+
+[Learn more](https://www.wrike.com/ai/)
+
+![Image 60: <p>Discover the future of work with <span class="underlined underlined--color-purple">Wrike AI</span></p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/43aace52-1293-4581-aeeb-ed24d790a4db/cta-image-left-ai-promo-big.png)
+
+TRUSTED BY 20,000+ ORGANIZATIONS WORLDWIDE
+
+Add-on Features
+
+
+-----------------
+
+An add-on is a set of premium features that you can add to your Wrike account for an additional fee. Enhance your plan to unlock more value for your team.
+
+![Image 61: <h5>Wrike Integrate</h5>](https://web-static.wrike.com/tp/storage/uploads/0cd44218-4f0b-4617-a4f9-48180e5f6e61/brandevo-icon-intergrations.svg)
+
+##### Wrike Integrate
+
+Create custom integrations and automations with 400+ cloud and on-premises applications.
+
+Learn more
+
+[](https://www.wrike.com/add-on-wrike-integrate/)
+
+![Image 62: <h5>Wrike Two-Way Sync</h5>](https://web-static.wrike.com/tp/storage/uploads/0cd44218-4f0b-4617-a4f9-48180e5f6e61/brandevo-icon-change.svg)
+
+##### Wrike Two-Way Sync
+
+Enable technical teams with a two-way sync with their favorite tools including Jira and Github.
+
+Learn more
+
+[](https://www.wrike.com/features/wrike-sync/)
+
+![Image 63: <h5>Wrike Lock</h5>](https://web-static.wrike.com/tp/storage/uploads/23c45534-e230-42c8-99ba-2f53fc439762/brandevo-icon-lock.svg)
+
+##### Wrike Lock
+
+Own and manage keys to your encrypted data to get data access control and audit capabilities.
+
+Learn more
+
+[](https://www.wrike.com/add-on-wrike-lock/)
+
+Customer success stories
+
+
+--------------------------
+
+200+tasks issued in Wrike every day
+
+215,000tasks executed through Wrike
+
+“The moment our teams saw Wrike, we heard a resounding ‘yes’ – it was the one system that met each and every one of our team’s comprehensive and complex requirements.“
+
+Sherrie Besecker, Creative Technology Manager at Syneos Health
+
+![Image 64: logo](https://web-static.wrike.com/tp/storage/uploads/1b39c58e-9203-4994-98d0-962ce536fa95/rebrand-quote-logo-syneos-health.svg)
+
+Watch video [Read Syneos Health’s story](https://www.wrike.com/customer-stories/syneos-health/)
+
+![Image 65: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/dfa85fd9-8d4b-4b17-b24a-c2ae419f493a/quotes-image-syneos-2x.png)
+
+1.2M+square feet of space filled with Rangers branding with Wrike
+
+“I’m thankful for Wrike. It’s a fast-paced world, and we’re all trying to keep up. Wrike helps me do just that.”
+
+Kyle Bartlett, Director of Marketing and Advertising at the Texas Rangers
+
+![Image 66: logo](https://web-static.wrike.com/tp/storage/uploads/d3457b3a-a4bd-4d95-8610-a40f13b10d6a/rebrand-quote-logo-texas-rangers.svg)
+
+Watch video [Read Texas Rangers’ story](https://www.wrike.com/customer-stories/texas-rangers/)
+
+![Image 67: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/b52674a7-5426-42ad-9603-c5f5c9faa877/rebrand-quote-slider-image-texas-rangers.jpg)
+
+640+assets created in a single quarter by a team of four designers
+
+110,000+assets uploaded to MediaValet via Wrike’s integration
+
+“We save time knowing what the clients need from us and then can track the progress of each request, which is something we couldn’t do previously.”
+
+Lori Meyers, Manager of Digital Assets, Monumental Sports & Entertainment
+
+![Image 68: logo](https://web-static.wrike.com/tp/storage/uploads/044f5da5-8d56-43ee-a774-3dd74494fd98/rebrand-quote-slider-logo-monumental.svg)
+
+[Read Monumental Sports & Entertainment’s story](https://www.wrike.com/customer-stories/monumental/)
+
+![Image 69: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/b52674a7-5426-42ad-9603-c5f5c9faa877/rebrand-quote-slider-image-monumental.jpg)
+
+14,000users in 20+ countries
+
+10%improved productivity
+
+“Wrike helps us collaborate in the best possible way, and it gives our teams the support they need to work better. We could roll out a tool on a global scale, and we were also able to offer a secure and an integrated tool.”
+
+Hannes Leitner, Process Owner, Project Execution, Siemens Smart Infrastructure
+
+![Image 70: logo](https://web-static.wrike.com/tp/storage/uploads/rebrand-quote-logo-siemens.svg)
+
+Watch video [Read Siemens’ story](https://www.wrike.com/customer-stories/siemens/)
+
+![Image 71: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/2fd8f120-42dc-41e0-8188-e8b527393365/rebrand-quote-slider-image-siemens.jpg)
+
+![Image 72: <p>Try our powerful work management software today for free</p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/static/assets/img/cta/center/white/1.png)
+
+Try our powerful work management software today for free
+
+
+----------------------------------------------------------
+
+Sign up for a free two-week trial of Wrike today — no credit card required.
+
+ Enter your business email
+
+Get started![Image 73: <p>Try our powerful work management software today for free</p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/static/assets/img/cta/center/white/3.png)
+
+[![Image 74](https://web-static.wrike.com/tp/storage/uploads/4b9109b6-c32d-4f38-bc51-fadeb1a8b02b/g2-badge-winter-2024-small-business-leader1x.svg)](https://www.g2.com/products/wrike/reviews?utm_source=rewards-badge)[![Image 75](https://web-static.wrike.com/tp/storage/uploads/740ace86-159f-4a79-aad5-eed50ef894e5/g2-badge-winter-2024-mid-market-leader1x.svg)](https://www.g2.com/products/wrike/reviews?utm_source=rewards-badge)[![Image 76](https://web-static.wrike.com/tp/storage/uploads/399ee9ca-7648-4401-9381-86410b6b6f7b/g2-badge-winter-2024-enterprise-leader1x.svg)](https://www.g2.com/products/wrike/reviews?utm_source=rewards-badge)[![Image 77](https://web-static.wrike.com/tp/storage/uploads/9c60c68d-d9ed-4745-a965-9fc414adfdc9/badge-most-implementable-g2.svg)](https://www.g2.com/products/wrike/reviews?utm_source=rewards-badge)[![Image 78](https://web-static.wrike.com/tp/storage/uploads/033d3ce9-58af-4b86-a194-52f537908552/badge-best-relationship-g2.svg)](https://www.g2.com/products/wrike/reviews?utm_source=rewards-badge)[![Image 79](https://web-static.wrike.com/tp/storage/uploads/ea2160bd-a132-4b8b-ac69-95e79c91a085/badge-users-love-us-g2.svg)](https://www.g2.com/products/wrike/reviews?utm_source=rewards-badge)
+
+FAQ
+
+
+-----
+
+1\. What are the different types of licenses?
+
+Wrike has a variety of different options available to suit your team, including three types of user licenses – regular users, external users, and collaborators. For regular and external users, there is a charge per user. You’ll get 20 collaborator invites or 15% of your license count (whichever is greater) with no additional charge included with your subscription. If this is not enough, please speak with your Wrike representative to discuss other options.  
+  
+Within these, there are full and guest licenses. A full license (regular users and external users) gives you access to every feature within your plan but external users are limited to certain access rights. However, a guest license (collaborators) only gives you some basic functions.
+
+[Read more](https://help.wrike.com/hc/en-us/articles/209603989-Types-of-Licenses)
+
+2\. What happens when my trial has expired?
+
+Your account will be blocked until you choose what you’d like to do with it. From here, you can either downgrade it to the free version or reach out to your Wrike representative. They will be able to discuss the next steps for choosing a plan and whether a trial extension is possible. While your account is blocked, your data will remain intact.
+
+[Read more](https://help.wrike.com/hc/en-us/articles/360021181373-Expired-Trials)
+
+3\. How do I purchase a subscription?
+
+If you are a first-time user, enter your business email at the top of the page to get your 14-day free trial. You can give us a call to get set up or wait for one of our representatives to get in touch to find the right solution for your team.  
+  
+If you've completed a trial, you can purchase the Team plan for up to 25 users and the Business plan for up to 15 users with no add-ons in the Account section of your workspace. For a larger number of users, you'll need to contact your Wrike representative.  
+  
+Wrike is sold in groups of users. For accounts of up to 30 seats, subscriptions are sold in groups of five. For accounts of 30 to 100 seats, subscriptions are sold in groups of 10. For accounts above 100 seats, subscriptions are sold in groups of 25. Wrike Business and above are only available as an annual subscription.
+
+[Read more](https://help.wrike.com/hc/en-us/articles/209605689-Purchase-a-Subscription)
+
+4\. Are there any limitations when switching between different subscriptions?
+
+Yes, when you switch to the Team plan from any other subscription (including a trial), all your existing data will be permanently deleted due to architectural differences in feature packages.
+
+5\. Can I pay in my local currency and what kind of taxes apply?
+
+All our prices are listed in US dollars, but your bank will be able to convert this to your local currency upon purchase. You will also receive your invoice in US dollars. In regards to tax implications, all of our prices do not include applicable state/local taxes and you (the client) will be responsible for them. If you have any questions, please speak to your sales representative and we’ll be happy to help.
+
+6\. Where will my data be hosted?
+
+Your data will be automatically stored in our two data centers in San Jose, California. You may also request your data to be stored in our European data center in Amsterdam, the Netherlands. To request this, just contact your Wrike representative or our support team.
+
+[Learn more](https://www.wrike.com/security/)
+
+7\. Does Wrike have an on-premise solution or is it just cloud-based?
+
+Wrike is entirely cloud-based, meaning there is no need for site visits and our software can be used instantly by remote workers.
+
+8\. What does Wrike do to ensure GDPR compliance?
+
+Wrike takes data privacy/security very seriously. We have the following independent third-party certifications:
+
+*   SOC2 Type II, which shows our commitment to taking a robust and secure approach to products, processes, and security surrounding our customer data.
+*   ISO 27001:2013, which confirms that Wrike has an end-to-end security framework and a risk-based approach to managing information security.
+*   ISO 27018:2019, which shows Wrike has controls in place to protect Personally Identifiable Information (PII) in accordance with the privacy principles in ISO/IEC 29100 for the public cloud computing environment.
+*   CSA STAR, which demonstrates that Wrike has addressed issues critical to cloud security as outlined in the CSA Cloud Controls Matrix, and has been assessed against the STAR Capability Maturity Model for activities in cloud security control areas.
+
+In addition to the above certifications, we are [EU & US and Swiss & US Privacy Shield-certified](https://www.privacyshield.gov/participant?id=a2zt000000001F2AAI&status=Active), GDPR-compliant and CCPA-compliant. We also have an [EU Data Center](https://help.wrike.com/hc/en-us/articles/115004562769-European-Data-Center) that can be selected to use for our services.
+
+9\. What is a Professional Services deployment add-on?
+
+Professional Services refers to the consultancy service that we offer (see the question below). Wrike offers a selection of Professional Services packages designed to successfully onboard your team. Our consultancy team will make sure you get the most from the Wrike solution that you have selected. To learn more about Wrike’s consultancy options, please see our [Professional Services page](https://www.wrike.com/professional-services/).
+
+10\. From what team size do you recommend adding a Professional Services deployment to my solution?
+
+Wrike is an intuitive collaboration solution. However, aligning your entire team on a consistent way of working, configuring Wrike, and ensuring long-term adoption can be tricky. Our Professional Services team specializes in understanding and onboarding teams of all sizes, no matter their challenges. We recommend all new teams work with a consultant during onboarding, and insist that teams of 20+ utilize a guided deployment.
+
+*   Product
+    
+    Product
+    *   [Product tour](https://www.wrike.com/tour/ "Product tour")
+    *   [Pricing](https://www.wrike.com/price/ "Pricing")
+    *   [Templates](https://www.wrike.com/templates/ "Templates")
+    *   [Apps & Integrations](https://www.wrike.com/apps/ "Apps & Integrations")
+    *   [Task Management](https://www.wrike.com/use-cases/task-management/ "Task Management")
+    *   [Gantt Charts](https://www.wrike.com/features/gantt-chart/ "Gantt Charts")
+    *   [Wrike Status](https://status.wrike.com/ "Wrike Status")
+    *   [Security](https://www.wrike.com/security/ "Security")
+    *   [Wrike API](https://developers.wrike.com/ "Wrike API")
+    *   [Compare](https://www.wrike.com/compare/ "Compare")
+    *   [Features](https://www.wrike.com/features/ "Features")
+*   Solutions
+    
+    Solutions
+    *   [Enterprise](https://www.wrike.com/enterprise/ "Enterprise")
+    *   [Marketing](https://www.wrike.com/marketing/ "Marketing")
+    *   [Creative](https://www.wrike.com/teams/creative-project-management/ "Creative")
+    *   [Project Management](https://www.wrike.com/project-management-office/ "Project Management")
+    *   [Product Development](https://www.wrike.com/teams/product-management/ "Product Development")
+    *   [Business Operations](https://www.wrike.com/teams/business-operations/ "Business Operations")
+    *   [Professional Services](https://www.wrike.com/professional-services-management/ "Professional Services")
+    *   [IT Management](https://www.wrike.com/teams/it-project-management/ "IT Management")
+    *   [Students](https://www.wrike.com/use-cases/collaboration-tool-for-students/ "Students")
+    *   [All Teams](https://www.wrike.com/teams/ "All Teams")
+    *   [All Use Cases](https://www.wrike.com/use-cases/ "All Use Cases")
+*   Resources
+    
+    Resources
+    *   [Help Center](https://help.wrike.com/hc/en-us/ "Help Center")
+    *   [Community](https://help.wrike.com/hc/en-us/community/topics/ "Community")
+    *   [Blog](https://www.wrike.com/blog/ "Blog")
+    *   [Webinars](https://www.wrike.com/webinars/ "Webinars")
+    *   [Interactive Training](https://www.wrike.com/discover/ "Interactive Training")
+    *   [Support Packages](https://www.wrike.com/support-packages/ "Support Packages")
+    *   [Find a Reseller](https://www.wrike.com/partners/reseller-locator/ "Find a Reseller")
+    *   [Google Project Management Tools](https://www.wrike.com/google-apps/ "Google Project Management Tools")
+    *   [CA Notice at Collection](https://www.wrike.com/security/privacy/#details-for-california-residents "CA Notice at Collection")
+*   Company
+    
+    Company
+    *   [About Us](https://www.wrike.com/company/ "About Us")
+    *   [Careers](https://www.wrike.com/jobs/ "Careers")
+    *   [Our Customers](https://www.wrike.com/customer-stories/ "Our Customers")
+    *   [Events](https://www.wrike.com/events/ "Events")
+    *   [Newsroom](https://www.wrike.com/newsroom/ "Newsroom")
+    *   [Partner Program](https://www.wrike.com/partners/ "Partner Program")
+    *   [Collaborate - User Conference](https://www.wrike.com/collaborate/conference/ "Collaborate - User Conference")
+    *   [Wrike Engineering](https://www.wrike.com/wrike-engineering/ "Wrike Engineering")
+    *   [Contact Us](https://www.wrike.com/contactus/ "Contact Us")
+
+*   Guides
+    
+    Guides
+    *   [Project Management Guide](https://www.wrike.com/project-management-guide/ "Project Management Guide")
+    *   [Professional Services Guide](https://www.wrike.com/professional-services-guide/ "Professional Services Guide")
+    *   [Kanban Guide](https://www.wrike.com/kanban-guide/ "Kanban Guide")
+    *   [Agile Guide](https://www.wrike.com/agile-guide/ "Agile Guide")
+    *   [Remote Work Guide](https://www.wrike.com/remote-work-guide/ "Remote Work Guide")
+    *   [Scrum Guide](https://www.wrike.com/scrum-guide/ "Scrum Guide")
+    *   [Marketing Project Management Guide](https://www.wrike.com/marketing-guide/ "Marketing Project Management Guide")
+    *   [Collaborative Work Management Guide](https://www.wrike.com/collaborative-work-guide/ "Collaborative Work Management Guide")
+    *   [Digital Marketing Guide](https://www.wrike.com/digital-marketing-guide/ "Digital Marketing Guide")
+    *   [Return to Work Guide](https://www.wrike.com/return-to-work-guide/ "Return to Work Guide")
+    *   [Product Management Guide](https://www.wrike.com/product-management-guide/ "Product Management Guide")
+    *   [Go-to-Market Guide](https://www.wrike.com/go-to-market-guide/ "Go-to-Market Guide")
+    *   [Goal Setting Guide](https://www.wrike.com/goal-setting-guide/ "Goal Setting Guide")
+
+*   Latest in Wrike Blog
+    
+    Latest in Wrike Blog
+    
+    *   [Top benefits of project management software (for every role)](https://www.wrike.com/blog/benefits-project-management-software/ "Top benefits of project management software (for every role)")
+    *   [5-year plan template: How to create your own](https://www.wrike.com/blog/5-year-plan-template/ "5-year plan template: How to create your own")
+    *   [Project management software vs. Excel: What to consider](https://www.wrike.com/blog/project-management-software-vs-excel/ "Project management software vs. Excel: What to consider")
+    *   [What’s the best project plan template? 3 templates to try](https://www.wrike.com/blog/how-to-build-use-project-plan-templates/ "What’s the best project plan template? 3 templates to try")
+    *   [Meeting minutes: Guide with examples and action items](https://www.wrike.com/blog/action-items-with-meeting-notes-template/ "Meeting minutes: Guide with examples and action items")
+    *   [Do less, achieve more: Register for Wrike Collaborate 2024!](https://www.wrike.com/blog/collaborate-2024/ "Do less, achieve more: Register for Wrike Collaborate 2024!")
+    *   [Stakeholder management: 4 strategies proven to work](https://www.wrike.com/blog/4-strategies-dealing-difficult-stakeholders/ "Stakeholder management: 4 strategies proven to work")
+    
+    Show more
+    
+
+#### Subscribe to Wrike news and updates
+
+Stay informed with the latest news and updates by subscribing to our marketing emails.
+
+By completing and submitting the form, I acknowledge Wrike’s [Privacy Policy](https://www.wrike.com/security/privacy/)
+
+*   [![Image 80: App Store](https://web-static.wrike.com/tp/static/assets/img/footer/app-store_en.svg)](https://itunes.apple.com/us/app/wrike/id890048871?mt=8 "App Store")
+*   [![Image 81: Google Play](https://web-static.wrike.com/tp/static/assets/img/footer/google-play_en.svg)](https://play.google.com/store/apps/details?id=com.wrike "Google Play")
+
+*   [](https://x.com/wrike "Twitter")
+*   [](https://www.facebook.com/Wrike "Facebook")
+*   [](https://www.linkedin.com/company/wrike "LinkedIn")
+*   [](https://www.youtube.com/user/WrikeTeam "YouTube")
+*   [](https://www.instagram.com/wriketeam/ "Instagram")
+
+©2006-2024 Wrike, Inc. All rights reserved. Patented. [Privacy Policy](https://www.wrike.com/security/privacy/). [Terms of Service](https://www.wrike.com/security/terms/). [Cookie Preferences](javascript:void\(0\))
+  ```
+
+Source URL: https://www.wrike.com/
+  ```
+  Versatile & Robust Project Management Software | Wrike
+===============
+         
+
+Learn how to leverage new technologies and tactics to streamline business-critical workflows. [Register](https://www.wrike.com/collaborate/conference/) to join us at Collaborate 2024 this October!
+
+[![Image 1: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 2: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+Try for free Try for free
+
+[![Image 3: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 4: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+One platform to  
+streamline all workflows
+
+
+============================================
+
+I’ve never seen a platform as easy to use, as easy to onboard new users, as easy to scale, and as easy to customize to your own workflow, process, team, clientele, and changing environment.
+
+![Image 5](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8aecb84d-7453-440d-a5cd-73872fd1d49b/rebrand-customer-speaker_sony-pictures-entertainment_CherylVenable_2x.jpg)
+
+Cheryl Venable, Senior Manager of Operations, Creative Center,  
+Sony Pictures Television
+
+Try Wrike for free
+
+Discover Wrike in 3 minutes
+
+![Image 6: <p><span class="underlined underlined--color-yellow">One</span> platform to<br>streamline all workflows</p>](https://web-static.wrike.com/tp/storage/uploads/7a9fcd75-a4f3-49ab-a5db-77b24c136ea1/hero-animation-homepage-600-1.svg)
+
+TRUSTED BY 20,000+ ORGANIZATIONS WORLDWIDE
+
+![Image 7: 1440 Logoroll Logo Abb](https://web-static.wrike.com/tp/storage/uploads/873f994f-ebaa-47e4-a65a-8b81f5ee4e75/1440-logoroll-logo-abb.svg)![Image 8: 1440 Logoroll Logo Aveva](https://web-static.wrike.com/tp/storage/uploads/9b789a69-195c-4a58-8f8b-480a5658afb6/1440-logoroll-logo-aveva.svg)![Image 9: 1440 Logoroll Logo Lyft](https://web-static.wrike.com/tp/storage/uploads/3b19367a-9020-408b-8af7-5e89773b8d4b/1440-logoroll-logo-lyft.svg)![Image 10: 1440 Logoroll Logo Siemens](https://web-static.wrike.com/tp/storage/uploads/1440-logoroll-logo-siemens.svg)![Image 11: 1440 Logoroll Logo Schneider Electric](https://web-static.wrike.com/tp/storage/uploads/ebb2cc71-f804-44ab-8531-b051a4fda79c/1440-logoroll-logo-schneider-electric.svg)![Image 12: 1440 Logoroll Logo Oglivy](https://web-static.wrike.com/tp/storage/uploads/3b19367a-9020-408b-8af7-5e89773b8d4b/1440-logoroll-logo-oglivy.svg)![Image 13: 1440 Logoroll Logo Tmobile](https://web-static.wrike.com/tp/storage/uploads/bf3cc01d-2fc7-455a-beb7-29fe69dbd42f/1440-logoroll-logo-tmobile.svg)
+
+Drive efficiency across all departments
+---------------------------------------
+
+Wrike streamlines work processes for maximum efficiency, empowering teams across all departments to collaborate, manage projects, drive strategic initiatives, and achieve goals.
+
+#### Improve visibility and alignment
+
+Create a single source of truth by centralizing all work in one powerful platform. Tailor views and workspaces to reflect your teams’ needs with 360° visualization.
+
+It’s night and day. Wrike has improved our ability to plan with improved confidence and has changed how we do business.
+
+![Image 14](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/3e17efa1-f7e8-4a12-a54f-6b5560e7c244/rebrand-customer-speaker_chosen-food_2x.jpg)
+
+Jessica Wooding, Kaizen Manager, Chosen Foods
+
+Try Wrike for free
+
+#### Eliminate wasted efforts
+
+Slash time spent on routine tasks. Automate workflows, including approvals, request forms, and blueprints, so teams can focus on their most valuable work.
+
+With the implementation of Wrike, we've been able to bring on more projects with the same amount of people because we've been able to be more efficient.
+
+![Image 15](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/4bae8b07-ed72-4be4-aa41-aa3655f45459/jeff-hartlieb.jpeg)
+
+Jeff Hartlieb, Project Director for Nickelodeon
+
+Try Wrike for free
+
+#### Deliver on business outcomes faster
+
+Align strategy with execution to accelerate delivery. Access instant insights and real-time dashboards that support data-led decisions and Agile leadership.
+
+With Wrike, I am able to track and monitor all of my projects in one place. If asked about one of my projects, I can instantly go into Wrike and give them an update within 30 seconds.
+
+![Image 16](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0fd0e3ac-b290-4d0e-8c63-5eaeda91db22/rebrand-customer-speaker-hootsuite-lisa-matthews-2x.jpg)
+
+Lisa Matthews, Project Manager, Hootsuite
+
+Try Wrike for free
+
+#### Improve visibility and alignment
+
+Create a single source of truth by centralizing all work in one powerful platform. Tailor views and workspaces to reflect your teams’ needs with 360° visualization.
+
+It’s night and day. Wrike has improved our ability to plan with improved confidence and has changed how we do business.
+
+![Image 17](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/3e17efa1-f7e8-4a12-a54f-6b5560e7c244/rebrand-customer-speaker_chosen-food_2x.jpg)
+
+Jessica Wooding, Kaizen Manager, Chosen Foods
+
+Try Wrike for free
+
+#### Eliminate wasted efforts
+
+Slash time spent on routine tasks. Automate workflows, including approvals, request forms, and blueprints, so teams can focus on their most valuable work.
+
+With the implementation of Wrike, we've been able to bring on more projects with the same amount of people because we've been able to be more efficient.
+
+![Image 18](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/4bae8b07-ed72-4be4-aa41-aa3655f45459/jeff-hartlieb.jpeg)
+
+Jeff Hartlieb, Project Director for Nickelodeon
+
+Try Wrike for free
+
+#### Deliver on business outcomes faster
+
+Align strategy with execution to accelerate delivery. Access instant insights and real-time dashboards that support data-led decisions and Agile leadership.
+
+With Wrike, I am able to track and monitor all of my projects in one place. If asked about one of my projects, I can instantly go into Wrike and give them an update within 30 seconds.
+
+![Image 19](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0fd0e3ac-b290-4d0e-8c63-5eaeda91db22/rebrand-customer-speaker-hootsuite-lisa-matthews-2x.jpg)
+
+Lisa Matthews, Project Manager, Hootsuite
+
+Try Wrike for free
+
+The Most Versatile Work Management Platform™
+
+
+----------------------------------------------
+
+Maximize your team’s performance, accelerate growth, and improve customer experience with unique and extensive customization features that makes work seamless for any team or department.
+
+![Image 20: Views](https://www.wrike.com/tp/storage/uploads/1ee5913a-3378-4fa5-aeaf-a6ecf613e1d3/icon-monitor.svg)
+
+Views
+
+![Image 21: Automations  AI](https://www.wrike.com/tp/storage/uploads/99e4d5ed-eb77-467c-b631-bef942c6de44/icon-workflow.svg)
+
+Automations & AI
+
+![Image 22: Mobile apps](https://www.wrike.com/tp/storage/uploads/becc7bbc-e192-4bd2-b45c-539c7fe7390e/icon-mobile-electric-shadow.svg)
+
+Mobile apps
+
+![Image 23: Dashboards](https://www.wrike.com/tp/storage/uploads/caebc499-072e-430d-ba1d-8b804b3045f1/icon-dashboard.svg)
+
+Dashboards
+
+![Image 24: Proofing](https://www.wrike.com/tp/storage/uploads/3f1fe8e4-4fb5-46f1-b1c5-4fe9bad563d1/icon-check-circle.svg)
+
+Proofing
+
+![Image 25: Request forms](https://www.wrike.com/tp/storage/uploads/1f068754-a331-483e-9ca8-d83d629c58dc/icon-form.svg)
+
+Request forms
+
+Work views
+
+#### A range of views
+
+Visibility is mission critical for project management, but everyone digests information differently. That’s why we provide a range of views so you can visualize project progress, adjust resources quickly, and keep stakeholders informed. Try our industry-leading [Gantt charts](https://www.wrike.com/features/gantt-chart/) or easy-to-use [Kanban boards](https://www.wrike.com/features/kanban-boards/).
+
+[Learn more](https://www.wrike.com/features/custom-views/)
+
+![Image 26: Work views](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/a33ea4ba-cb3c-4e64-936c-6781b2e72af7/product-screenshot-board-gantt-views.png)
+
+Automations
+
+#### Intuitive automations
+
+We’re in the business of cutting out busywork so you can focus on the work that matters most. Turn repeatable workflows into automatic processes with just a few clicks. Check out Wrike’s full suite of [Work Intelligence®](https://www.wrike.com/features/work-intelligence/) features to take your team’s productivity to the next level.
+
+[Learn more](https://www.wrike.com/apps/automation-engine/)
+
+Android and Apple app
+
+#### Fully functional mobile apps
+
+Access the entire Wrike platform from the palm of your hand, online and offline. Packed with every powerful feature and functionality, the Wrike app helps you access real-time updates from anywhere. Work your way via a laptop, desktop, tablet, or cell phone — the choice is yours.
+
+[Learn more](https://www.wrike.com/try-mobile/)
+
+![Image 27: Android and Apple app](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/af9be031-d92a-40b3-9af3-cf2b825dbd1a/product-screenshot-mobile-all-devices-task.png)
+
+Analytics & Dashboards
+
+#### Real-time dashboards and analytics
+
+Our project dashboards help teams drive results. Understand plans, progress, analytics, and more — focus on minute details, or get the big picture fast. Create reports with a variety of metrics, calculations, and KPIs so you can quickly visualize key results.
+
+[Learn more](https://www.wrike.com/features/dashboards/)
+
+![Image 28: Analytics &amp; Dashboards](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/5a9f3fa0-d784-4ad0-8802-1c12039b517e/product-screenshot-dashboards-raid-log-apps-and-mobile-general.png)
+
+Proofing and approvals
+
+#### Streamlined proofing and approvals
+
+Proofing assets and seeking approvals sucks up time that could be better used to accelerate growth. Our proofing tools allow for side-by-side comparisons and real-time feedback on your document or video, so you can then [automate approvals](https://www.wrike.com/features/approvals/) to maximize your time.
+
+[Learn more](https://www.wrike.com/features/online-proofing/)
+
+Request forms
+
+#### Custom request forms
+
+Get the information your team needs to hit the ground running with our customizable request forms. Automatically generate projects, tasks, workflows, and more with dynamic request forms that are designed to save your team time and energy.
+
+[Learn more](https://www.wrike.com/features/custom-request-forms/)
+
+Try Wrike for free
+
+[See all features](https://www.wrike.com/features/)
+
+Powerful enterprise-ready solutions
+
+
+-------------------------------------
+
+Wrike is the all-in-one platform that allows teams to scale smoothly with global support, industry-leading security, and a wealth of resources to help teams tackle complex work.
+
+![Image 29: <h5>Enterprise-grade security<br /></h5>](https://web-static.wrike.com/tp/storage/uploads/a2f072fe-34bf-433e-a2c5-46971cf5d34f/icon-evo-security-key.svg)
+
+##### Enterprise-grade security  
+
+Every Wrike user can enjoy complete peace of mind with Wrike’s enterprise-class security — included in all plans.
+
+  
+Integrate Wrike with your existing security functions and choose your preferred level of protection including double encryption, role-based access control, user authentication, and multiple privacy verifications. Need extra comfort? Add Wrike Lock so you can own and manage your own encryption keys.
+
+Learn more
+
+[](https://www.wrike.com/security/)
+
+![Image 30: <h5>24/7 global support</h5>](https://web-static.wrike.com/tp/storage/uploads/a2f072fe-34bf-433e-a2c5-46971cf5d34f/icon-evo-worldwide-support.svg)
+
+##### 24/7 global support
+
+Wrike offers award-winning support to customers around the world in different time zones — up to 24 hours a day, seven days a week. Choose the perfect package that meets your needs, size, and budget.
+
+  
+Maximize Wrike’s benefits by accessing a wide range of in-depth guides, articles, webinars, and demonstrations on all the latest productivity-boosting features.
+
+Learn more
+
+[](https://www.wrike.com/support-packages/)
+
+![Image 31: <h5>Easy onboarding</h5>](https://web-static.wrike.com/tp/storage/uploads/c9c20ac1-023f-45ed-a0a4-f6f9f63fc70f/tasks.svg)
+
+##### Easy onboarding
+
+Get started with Wrike in a matter of minutes, with an intuitive interface that features natural navigation, attractive design, and effortlessly smooth adoption.
+
+  
+Our professional services team will ensure a smooth onboarding process including migrating from current work management tools, sharing best practices, and providing support as needed.
+
+Learn more
+
+[](https://www.wrike.com/professional-services/)
+
+Try Wrike for free
+
+[See Wrike for Enterprise](https://www.wrike.com/enterprise/)
+
+Your all-in-one solution for every team
+
+
+-----------------------------------------
+
+Every day, Wrike eliminates inefficiencies for 2.4 million people. Imagine what you could do with 360° visibility, seamless collaboration, and time-saving automation.
+
+![Image 32: Marketing amp Creative](https://www.wrike.com/)
+
+Marketing & Creative
+
+![Image 33: Professional Services](https://www.wrike.com/)
+
+Professional Services
+
+![Image 34: Project Management Office](https://www.wrike.com/)
+
+Project Management Office
+
+![Image 35: IT amp Engineering](https://www.wrike.com/)
+
+IT & Engineering
+
+![Image 36: Product Management](https://www.wrike.com/)
+
+Product Management
+
+![Image 37: Operations](https://www.wrike.com/)
+
+Operations
+
+#### Marketing and Creative
+
+Wrike supports marketing and creative teams as they create projects, campaigns, and assets of every kind — all from one place.
+
+*   ![Image 38](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Streamline incoming requests, customize briefs, and automatically assign ownership
+    
+*   ![Image 39](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Collaborate with internal colleagues and external clients to accelerate feedback and signoff
+    
+*   ![Image 40](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Visualize results, plans, and workloads through detailed dashboards and powerful analytics
+    
+
+[Learn more](https://www.wrike.com/marketing/)
+
+![Image 41](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/8079a6cd-fe59-4cd7-96a9-99017a9e8251/feature-image-home-icp-marketing-1.png)
+
+#### Professional Services
+
+Wrike helps professional services teams, consultants, and agencies organize multiple projects and clients in one single source of truth.
+
+*   ![Image 42](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Manage incoming requests and streamline workflows with automation
+    
+*   ![Image 43](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Track billable hours, monitor budgets, and issue internal and external reports
+    
+*   ![Image 44](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Visualize resources, manage allocations, and balance workloads with ease
+    
+
+[Learn more](https://www.wrike.com/professional-services-management/)
+
+![Image 45](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/ca0fbe36-ddc2-4875-8b3f-355e60c4d9cb/feature-image-home-icp-ps-1.png)
+
+#### Project Management Office
+
+Wrike equips project managers of all types with everything they need to align strategy and OKRs with the execution of projects and programs.
+
+*   ![Image 46](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Visualize progress using Gantt charts, Kanban boards, calendars, tables, charts, or reports
+    
+*   ![Image 47](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Reduce risk and avoid roadblocks with intelligent AI recommendations
+    
+*   ![Image 48](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Standardize processes with automation, blueprints, and customizable workflows
+    
+
+[Learn more](https://www.wrike.com/project-management-office/)
+
+![Image 49](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/0cdd6c41-402a-43c6-ac3f-ebb3a891c203/feature-image-home-icp-pmo.png)
+
+#### IT and Engineering
+
+Wrike helps IT ops, software engineers, and more streamline, manage, and automate service requests to deliver better work faster than ever.
+
+*   ![Image 50](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Automate routine IT processes to accelerate time-consuming manual tasks
+    
+*   ![Image 51](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Manage sprints, support tickets, and security approvals with custom fields and workflows
+    
+*   ![Image 52](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Execute sprints, maintain continuous momentum, and unify communication in one source of truth
+    
+
+[Learn more](https://www.wrike.com/teams/it-project-management/)
+
+![Image 53](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/5909a3dd-56f8-4a7d-827e-4e268fe6553e/feature-image-home-icp-it.png)
+
+#### Product Management
+
+Wrike provides end-to-end support to product management teams who need to centralize work and communications in a single source of truth.
+
+*   ![Image 54](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Design your own unique workspace with custom fields, statuses, and workflows
+    
+*   ![Image 55](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Manage sprints, backlogs, and user stories with custom fields and customized workflows
+    
+*   ![Image 56](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Optimize Agile workflows to assign tasks easily, hit targets consistently, and deliver quickly
+    
+
+[Learn more](https://www.wrike.com/teams/product-management/)
+
+![Image 57](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/853f9d44-da37-4d74-abfa-1f28f19503e7/feature-image-home-icp-product-mgmt.png)
+
+#### Operations
+
+Wrike enables marketing, business, and product operations teams to accelerate approvals and collaborate seamlessly with other teams.
+
+*   ![Image 58](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Create 360° project visibility with customizable dashboards, Gantt charts, and Kanban boards
+    
+*   ![Image 59](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Standardize teams’ processes using blueprints, templates, automation, and more
+    
+*   ![Image 60](https://web-static.wrike.com/tp/storage/uploads/c4b8db20-d404-4732-8d7f-b15e371306b3/icon-check.svg)
+    
+    Balance team workloads and keep burnout at bay with our easy-access Workload view
+    
+
+[Learn more](https://www.wrike.com/teams/business-operations/)
+
+![Image 61](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/9db589f0-15d1-41aa-ae40-baf2adb1e777/feature-image-home-icp-operations.png)
+
+Try Wrike for free
+
+[See all teams](https://www.wrike.com/teams/)
+
+CONFERENCE
+
+Join us at Collaborate 2024!
+
+
+------------------------------
+
+Sign up to attend our industry’s most exciting event this October, packed with exclusive insights, inspiring sessions, and hands-on workflow management demos — all to help you do less and achieve more.
+
+![Image 62: CONFERENCE](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/b52cf452-82ae-4152-ae15-920331776ab0/rebrand-logo-collaborate.png)
+
+0
+
+days
+
+0
+
+expert speakers
+
+0
+
+exclusive sessions
+
+0
+
+global registrants
+
+[Learn more](https://www.wrike.com/collaborate/conference/)
+
+[Register now](https://www.wrike.com/collaborate/2024-registration/)
+
+Jump-start projects  
+with customizable templates
+
+
+---------------------------------------------------
+
+Save time and launch projects or campaigns in seconds with Wrike’s range of pre-built templates — all fully adaptable to help you get to work faster than ever.
+
+[![Image 63](https://web-static.wrike.com/tp/storage/uploads/e1468185-cd6a-4550-9bf0-cb20e34902c4/evo-templates-icon-marketing.svg)Marketing](https://www.wrike.com/templates/marketing-teams)[![Image 64](https://web-static.wrike.com/tp/storage/uploads/5f536a73-bfaa-4d1d-a2c6-e66d7bae9dfa/evo-templates-icon-project-management.svg)Project Management](https://www.wrike.com/templates/project-management/)[![Image 65](https://web-static.wrike.com/tp/storage/uploads/5f536a73-bfaa-4d1d-a2c6-e66d7bae9dfa/evo-templates-icon-creative.svg)Creative](https://www.wrike.com/templates/creative-teams/)[![Image 66](https://web-static.wrike.com/tp/storage/uploads/5f536a73-bfaa-4d1d-a2c6-e66d7bae9dfa/evo-templates-icon-agile-teams.svg)Agile](https://www.wrike.com/templates/agile-teams/)[![Image 67](https://web-static.wrike.com/tp/storage/uploads/5f536a73-bfaa-4d1d-a2c6-e66d7bae9dfa/evo-templates-icon-operations.svg)Operations](https://www.wrike.com/templates/operations/)[![Image 68](https://web-static.wrike.com/tp/storage/uploads/5f536a73-bfaa-4d1d-a2c6-e66d7bae9dfa/evo-templates-icon-it.svg)IT & Engineering](https://www.wrike.com/templates/it-engineering-teams/)[![Image 69](https://web-static.wrike.com/tp/storage/uploads/4b9bd79b-a276-4e0e-8d98-3e0e970ea6d4/evo-templates-icon-professional-services.svg)Professional Services](https://www.wrike.com/templates/professional-services-teams/)
+
+[See all templates](https://www.wrike.com/templates/)
+
+![Image 70](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/97a442d1-78f8-4d7c-8171-7599a073a4bc/cta-image-ai-work-intelligence-release-mobile.png)
+
+Wrike’s AI features make work flow better
+
+
+-------------------------------------------
+
+Wrike’s award-winning Work Intelligence® engine is purpose-built for work, helping organizations manage complex cross-functional workflows, reduce manual tasks, and focus on their most important work.
+
+[Learn more](https://www.wrike.com/features/work-intelligence/)
+
+![Image 71: <p>Wrike’s AI features make work flow better<br></p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/c1371e9f-a119-4ff8-bcc2-ecee940de2a0/cta-image-ai-work-intelligence-release-2x.png)
+
+Integrate apps with just a few clicks
+
+
+---------------------------------------
+
+Connect your existing apps and workflows with pre-made integrations available for 400+ popular apps, plus custom integrations for more advanced users.
+
+[![Image 72](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-slack.svg)Slack](https://www.wrike.com/apps/chat-messaging/slack/)[![Image 73](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-microsoft-sso.svg)Microsoft](https://www.wrike.com/partners/microsoft/)[![Image 74](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-workspace.svg)Google](https://www.wrike.com/google-apps/)[![Image 75](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-adobe.svg)Adobe](https://learn.wrike.com/adobe-app-integrations/)[![Image 76](https://web-static.wrike.com/tp/storage/uploads/1ee32483-2dbc-4421-a9a2-3d85c249d483/bubble-saleforce.svg)Salesforce](https://www.wrike.com/apps/crm/salesforce-unito/)[![Image 77](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-zoom.svg)Zoom](https://www.wrike.com/partners/zoom/)[![Image 78](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tableau.svg)Tableau](https://www.wrike.com/apps/business-intelligence/tableau/)[![Image 79](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-teams.svg)MS Teams](https://www.wrike.com/apps/chat-messaging/microsoft-teams/)
+
+[![Image 80](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-slack.svg)Slack](https://www.wrike.com/apps/chat-messaging/slack/)[![Image 81](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-microsoft-sso.svg)Microsoft](https://www.wrike.com/partners/microsoft/)[![Image 82](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-workspace.svg)Google](https://www.wrike.com/google-apps/)[![Image 83](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-adobe.svg)Adobe](https://learn.wrike.com/adobe-app-integrations/)[![Image 84](https://web-static.wrike.com/tp/storage/uploads/1ee32483-2dbc-4421-a9a2-3d85c249d483/bubble-saleforce.svg)Salesforce](https://www.wrike.com/apps/crm/salesforce-unito/)[![Image 85](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-zoom.svg)Zoom](https://www.wrike.com/partners/zoom/)[![Image 86](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tableau.svg)Tableau](https://www.wrike.com/apps/business-intelligence/tableau/)[![Image 87](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-teams.svg)MS Teams](https://www.wrike.com/apps/chat-messaging/microsoft-teams/)
+
+[![Image 88](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-slack.svg)Slack](https://www.wrike.com/apps/chat-messaging/slack/)[![Image 89](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-microsoft-sso.svg)Microsoft](https://www.wrike.com/partners/microsoft/)[![Image 90](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-workspace.svg)Google](https://www.wrike.com/google-apps/)[![Image 91](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-adobe.svg)Adobe](https://learn.wrike.com/adobe-app-integrations/)[![Image 92](https://web-static.wrike.com/tp/storage/uploads/1ee32483-2dbc-4421-a9a2-3d85c249d483/bubble-saleforce.svg)Salesforce](https://www.wrike.com/apps/crm/salesforce-unito/)[![Image 93](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-zoom.svg)Zoom](https://www.wrike.com/partners/zoom/)[![Image 94](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tableau.svg)Tableau](https://www.wrike.com/apps/business-intelligence/tableau/)[![Image 95](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-teams.svg)MS Teams](https://www.wrike.com/apps/chat-messaging/microsoft-teams/)
+
+[![Image 96](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-slack.svg)Slack](https://www.wrike.com/apps/chat-messaging/slack/)[![Image 97](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-microsoft-sso.svg)Microsoft](https://www.wrike.com/partners/microsoft/)[![Image 98](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-workspace.svg)Google](https://www.wrike.com/google-apps/)[![Image 99](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-adobe.svg)Adobe](https://learn.wrike.com/adobe-app-integrations/)[![Image 100](https://web-static.wrike.com/tp/storage/uploads/1ee32483-2dbc-4421-a9a2-3d85c249d483/bubble-saleforce.svg)Salesforce](https://www.wrike.com/apps/crm/salesforce-unito/)[![Image 101](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-zoom.svg)Zoom](https://www.wrike.com/partners/zoom/)[![Image 102](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tableau.svg)Tableau](https://www.wrike.com/apps/business-intelligence/tableau/)[![Image 103](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-teams.svg)MS Teams](https://www.wrike.com/apps/chat-messaging/microsoft-teams/)
+
+[![Image 104](https://web-static.wrike.com/tp/storage/uploads/21dfdb73-d4b0-4b40-abd7-e9bf47be0681/bubble-mediavalet.svg)MediaValet](https://www.wrike.com/apps/file-storage/mediavalet/)[![Image 105](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-onedrive.svg)OneDrive](https://www.wrike.com/apps/file-storage/onedrive/)[![Image 106](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tenovos.svg)Tenovos](https://www.wrike.com/partners/tenovos/)[![Image 107](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-github.svg)GitHub](https://www.wrike.com/apps/software-it/github/)[![Image 108](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-gmail.svg)Gmail](https://www.wrike.com/apps/email-integration/wrike-for-gmail/)[![Image 109](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-calendar.svg)Google Calendar](https://www.wrike.com/apps/google-calendar/)[![Image 110](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-outlook.svg)Outlook](https://www.wrike.com/apps/email-integration/wrike-for-outlook/)[![Image 111](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-excel.svg)MS Excel](https://www.wrike.com/apps/export-import/ms-excel/)
+
+[![Image 112](https://web-static.wrike.com/tp/storage/uploads/21dfdb73-d4b0-4b40-abd7-e9bf47be0681/bubble-mediavalet.svg)MediaValet](https://www.wrike.com/apps/file-storage/mediavalet/)[![Image 113](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-onedrive.svg)OneDrive](https://www.wrike.com/apps/file-storage/onedrive/)[![Image 114](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tenovos.svg)Tenovos](https://www.wrike.com/partners/tenovos/)[![Image 115](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-github.svg)GitHub](https://www.wrike.com/apps/software-it/github/)[![Image 116](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-gmail.svg)Gmail](https://www.wrike.com/apps/email-integration/wrike-for-gmail/)[![Image 117](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-calendar.svg)Google Calendar](https://www.wrike.com/apps/google-calendar/)[![Image 118](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-outlook.svg)Outlook](https://www.wrike.com/apps/email-integration/wrike-for-outlook/)[![Image 119](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-excel.svg)MS Excel](https://www.wrike.com/apps/export-import/ms-excel/)
+
+[![Image 120](https://web-static.wrike.com/tp/storage/uploads/21dfdb73-d4b0-4b40-abd7-e9bf47be0681/bubble-mediavalet.svg)MediaValet](https://www.wrike.com/apps/file-storage/mediavalet/)[![Image 121](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-onedrive.svg)OneDrive](https://www.wrike.com/apps/file-storage/onedrive/)[![Image 122](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tenovos.svg)Tenovos](https://www.wrike.com/partners/tenovos/)[![Image 123](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-github.svg)GitHub](https://www.wrike.com/apps/software-it/github/)[![Image 124](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-gmail.svg)Gmail](https://www.wrike.com/apps/email-integration/wrike-for-gmail/)[![Image 125](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-calendar.svg)Google Calendar](https://www.wrike.com/apps/google-calendar/)[![Image 126](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-outlook.svg)Outlook](https://www.wrike.com/apps/email-integration/wrike-for-outlook/)[![Image 127](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-excel.svg)MS Excel](https://www.wrike.com/apps/export-import/ms-excel/)
+
+[![Image 128](https://web-static.wrike.com/tp/storage/uploads/21dfdb73-d4b0-4b40-abd7-e9bf47be0681/bubble-mediavalet.svg)MediaValet](https://www.wrike.com/apps/file-storage/mediavalet/)[![Image 129](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-onedrive.svg)OneDrive](https://www.wrike.com/apps/file-storage/onedrive/)[![Image 130](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-tenovos.svg)Tenovos](https://www.wrike.com/partners/tenovos/)[![Image 131](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-github.svg)GitHub](https://www.wrike.com/apps/software-it/github/)[![Image 132](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-gmail.svg)Gmail](https://www.wrike.com/apps/email-integration/wrike-for-gmail/)[![Image 133](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-google-calendar.svg)Google Calendar](https://www.wrike.com/apps/google-calendar/)[![Image 134](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-outlook.svg)Outlook](https://www.wrike.com/apps/email-integration/wrike-for-outlook/)[![Image 135](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-ms-excel.svg)MS Excel](https://www.wrike.com/apps/export-import/ms-excel/)
+
+[![Image 136](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-dropbox.svg)Dropbox](https://www.wrike.com/apps/file-storage/dropbox/)[![Image 137](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-okta.svg)Okta](https://www.wrike.com/apps/single-sign-on/okta/)[![Image 138](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-one-login.svg)OneLogin](https://www.wrike.com/apps/single-sign-on/one-login/)[![Image 139](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-hubspot.svg)HubSpot](https://www.wrike.com/apps/crm/hubspot-unito/)[![Image 140](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-jira.svg)Jira](https://www.wrike.com/apps/software-it/jira/)[![Image 141](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-netsuite.svg)NetSuite](https://www.wrike.com/add-on-wrike-integrate/)
+
+[![Image 142](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-dropbox.svg)Dropbox](https://www.wrike.com/apps/file-storage/dropbox/)[![Image 143](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-okta.svg)Okta](https://www.wrike.com/apps/single-sign-on/okta/)[![Image 144](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-one-login.svg)OneLogin](https://www.wrike.com/apps/single-sign-on/one-login/)[![Image 145](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-hubspot.svg)HubSpot](https://www.wrike.com/apps/crm/hubspot-unito/)[![Image 146](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-jira.svg)Jira](https://www.wrike.com/apps/software-it/jira/)[![Image 147](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-netsuite.svg)NetSuite](https://www.wrike.com/add-on-wrike-integrate/)
+
+[![Image 148](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-dropbox.svg)Dropbox](https://www.wrike.com/apps/file-storage/dropbox/)[![Image 149](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-okta.svg)Okta](https://www.wrike.com/apps/single-sign-on/okta/)[![Image 150](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-one-login.svg)OneLogin](https://www.wrike.com/apps/single-sign-on/one-login/)[![Image 151](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-hubspot.svg)HubSpot](https://www.wrike.com/apps/crm/hubspot-unito/)[![Image 152](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-jira.svg)Jira](https://www.wrike.com/apps/software-it/jira/)[![Image 153](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-netsuite.svg)NetSuite](https://www.wrike.com/add-on-wrike-integrate/)
+
+[![Image 154](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-dropbox.svg)Dropbox](https://www.wrike.com/apps/file-storage/dropbox/)[![Image 155](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-okta.svg)Okta](https://www.wrike.com/apps/single-sign-on/okta/)[![Image 156](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-one-login.svg)OneLogin](https://www.wrike.com/apps/single-sign-on/one-login/)[![Image 157](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-hubspot.svg)HubSpot](https://www.wrike.com/apps/crm/hubspot-unito/)[![Image 158](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-jira.svg)Jira](https://www.wrike.com/apps/software-it/jira/)[![Image 159](https://web-static.wrike.com/tp/storage/uploads/56b304eb-7e18-4c73-b024-734ae55a67bf/bubble-netsuite.svg)NetSuite](https://www.wrike.com/add-on-wrike-integrate/)
+
+Stories from our customers
+
+
+----------------------------
+
+“Everyone is in Wrike daily; we’ve built one story and one version of the truth. And that is a game changer for us. Now we do our project reviews in Wrike: no more need for presentations, word documents, or any of this additional work.“
+
+Francis Lalonde, Vice President of Transportation, Walmart Canada
+
+![Image 160: logo](https://web-static.wrike.com/tp/storage/uploads/ba1bb8b3-d386-4991-82e4-0130320cd9d6/rebrand-quote-logo-walmart-1.svg)
+
+Watch video [Read Walmart Canada’s story](https://www.wrike.com/customer-stories/walmart/)
+
+![Image 161: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/dfa85fd9-8d4b-4b17-b24a-c2ae419f493a/quotes-image-wallmart-canada-2x.png)
+
+0tasks issued in Wrike every day
+
+0tasks executed through Wrike
+
+“The moment our teams saw Wrike, we heard a resounding ‘yes’ – it was the one system that met each and every one of our team’s comprehensive and complex requirements.“
+
+Sherrie Besecker, Creative Technology Manager at Syneos Health
+
+![Image 162: logo](https://web-static.wrike.com/tp/storage/uploads/1b39c58e-9203-4994-98d0-962ce536fa95/rebrand-quote-logo-syneos-health.svg)
+
+Watch video [Read Syneos Health’s story](https://www.wrike.com/customer-stories/syneos-health/)
+
+![Image 163: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/dfa85fd9-8d4b-4b17-b24a-c2ae419f493a/quotes-image-syneos-2x.png)
+
+0square feet of space filled with Rangers branding with Wrike
+
+“I’m thankful for Wrike. It’s a fast-paced world, and we’re all trying to keep up. Wrike helps me do just that.”
+
+Kyle Bartlett, Director of Marketing and Advertising at the Texas Rangers
+
+![Image 164: logo](https://web-static.wrike.com/tp/storage/uploads/d3457b3a-a4bd-4d95-8610-a40f13b10d6a/rebrand-quote-logo-texas-rangers.svg)
+
+Watch video [Read Texas Rangers’ story](https://www.wrike.com/customer-stories/texas-rangers/)
+
+![Image 165: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/b52674a7-5426-42ad-9603-c5f5c9faa877/rebrand-quote-slider-image-texas-rangers.jpg)
+
+0users in 20+ countries
+
+0improved productivity
+
+“Wrike helps us collaborate in the best possible way, and it gives our teams the support they need to work better. We could roll out a tool on a global scale, and we were also able to offer a secure and an integrated tool.”
+
+Hannes Leitner, Process Owner, Project Execution, Siemens Smart Infrastructure
+
+![Image 166: logo](https://web-static.wrike.com/tp/storage/uploads/rebrand-quote-logo-siemens.svg)
+
+Watch video [Read Siemens’ story](https://www.wrike.com/customer-stories/siemens/)
+
+![Image 167: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/2fd8f120-42dc-41e0-8188-e8b527393365/rebrand-quote-slider-image-siemens.jpg)
+
+“Wrike makes our work and day-to-day life much easier. Our design team alone have been able to increase their productivity to a level that would have been impossible prior to streamlining our workflow.”
+
+Mikhail Naliuhin, Account Director, inDrive
+
+![Image 168: logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/7243be7e-c97c-43fb-bf42-b27309e52469/rebrand-quote-slider-logo-indriver-2x.png)
+
+[Read inDrive’s story](https://www.wrike.com/customer-stories/indrive/)
+
+![Image 169: image logo](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/f621cafa-65bc-43cd-966b-3a549d34593f/rebrand-quote-slider-image-indriver-2x.jpg)
+
+Try our powerful work management software for free
+
+
+----------------------------------------------------
+
+Sign up for a free two-week trial of Wrike today — no credit card required.
+
+ Enter your business email
+
+Try Wrike for free
+
+![Image 170](https://web-static.wrike.com/tp/storage/uploads/9ba09455-ff2a-425d-954a-5a14b9dbe8d8/stars.svg)
+
+based on 13,000+ reviews from
+
+![Image 171](https://web-static.wrike.com/tp/storage/uploads/740af830-7a52-402d-bfb2-629a6df4079c/rating-component-5-logos.svg)
+
+*   Product
+    
+    Product
+    *   [Product tour](https://www.wrike.com/tour/ "Product tour")
+    *   [Pricing](https://www.wrike.com/price/ "Pricing")
+    *   [Templates](https://www.wrike.com/templates/ "Templates")
+    *   [Apps & Integrations](https://www.wrike.com/apps/ "Apps & Integrations")
+    *   [Task Management](https://www.wrike.com/use-cases/task-management/ "Task Management")
+    *   [Gantt Charts](https://www.wrike.com/features/gantt-chart/ "Gantt Charts")
+    *   [Wrike Status](https://status.wrike.com/ "Wrike Status")
+    *   [Security](https://www.wrike.com/security/ "Security")
+    *   [Wrike API](https://developers.wrike.com/ "Wrike API")
+    *   [Compare](https://www.wrike.com/compare/ "Compare")
+    *   [Features](https://www.wrike.com/features/ "Features")
+*   Solutions
+    
+    Solutions
+    *   [Enterprise](https://www.wrike.com/enterprise/ "Enterprise")
+    *   [Marketing](https://www.wrike.com/marketing/ "Marketing")
+    *   [Creative](https://www.wrike.com/teams/creative-project-management/ "Creative")
+    *   [Project Management](https://www.wrike.com/project-management-office/ "Project Management")
+    *   [Product Development](https://www.wrike.com/teams/product-management/ "Product Development")
+    *   [Business Operations](https://www.wrike.com/teams/business-operations/ "Business Operations")
+    *   [Professional Services](https://www.wrike.com/professional-services-management/ "Professional Services")
+    *   [IT Management](https://www.wrike.com/teams/it-project-management/ "IT Management")
+    *   [Students](https://www.wrike.com/use-cases/collaboration-tool-for-students/ "Students")
+    *   [All Teams](https://www.wrike.com/teams/ "All Teams")
+    *   [All Use Cases](https://www.wrike.com/use-cases/ "All Use Cases")
+*   Resources
+    
+    Resources
+    *   [Help Center](https://help.wrike.com/hc/en-us/ "Help Center")
+    *   [Community](https://help.wrike.com/hc/en-us/community/topics/ "Community")
+    *   [Blog](https://www.wrike.com/blog/ "Blog")
+    *   [Webinars](https://www.wrike.com/webinars/ "Webinars")
+    *   [Interactive Training](https://www.wrike.com/discover/ "Interactive Training")
+    *   [Support Packages](https://www.wrike.com/support-packages/ "Support Packages")
+    *   [Find a Reseller](https://www.wrike.com/partners/reseller-locator/ "Find a Reseller")
+    *   [Google Project Management Tools](https://www.wrike.com/google-apps/ "Google Project Management Tools")
+    *   [CA Notice at Collection](https://www.wrike.com/security/privacy/#details-for-california-residents "CA Notice at Collection")
+*   Company
+    
+    Company
+    *   [About Us](https://www.wrike.com/company/ "About Us")
+    *   [Careers](https://www.wrike.com/jobs/ "Careers")
+    *   [Our Customers](https://www.wrike.com/customer-stories/ "Our Customers")
+    *   [Events](https://www.wrike.com/events/ "Events")
+    *   [Newsroom](https://www.wrike.com/newsroom/ "Newsroom")
+    *   [Partner Program](https://www.wrike.com/partners/ "Partner Program")
+    *   [Collaborate - User Conference](https://www.wrike.com/collaborate/conference/ "Collaborate - User Conference")
+    *   [Wrike Engineering](https://www.wrike.com/wrike-engineering/ "Wrike Engineering")
+    *   [Contact Us](https://www.wrike.com/contactus/ "Contact Us")
+
+*   Guides
+    
+    Guides
+    *   [Project Management Guide](https://www.wrike.com/project-management-guide/ "Project Management Guide")
+    *   [Professional Services Guide](https://www.wrike.com/professional-services-guide/ "Professional Services Guide")
+    *   [Kanban Guide](https://www.wrike.com/kanban-guide/ "Kanban Guide")
+    *   [Agile Guide](https://www.wrike.com/agile-guide/ "Agile Guide")
+    *   [Remote Work Guide](https://www.wrike.com/remote-work-guide/ "Remote Work Guide")
+    *   [Scrum Guide](https://www.wrike.com/scrum-guide/ "Scrum Guide")
+    *   [Marketing Project Management Guide](https://www.wrike.com/marketing-guide/ "Marketing Project Management Guide")
+    *   [Collaborative Work Management Guide](https://www.wrike.com/collaborative-work-guide/ "Collaborative Work Management Guide")
+    *   [Digital Marketing Guide](https://www.wrike.com/digital-marketing-guide/ "Digital Marketing Guide")
+    *   [Return to Work Guide](https://www.wrike.com/return-to-work-guide/ "Return to Work Guide")
+    *   [Product Management Guide](https://www.wrike.com/product-management-guide/ "Product Management Guide")
+    *   [Go-to-Market Guide](https://www.wrike.com/go-to-market-guide/ "Go-to-Market Guide")
+    *   [Goal Setting Guide](https://www.wrike.com/goal-setting-guide/ "Goal Setting Guide")
+
+*   Latest in Wrike Blog
+    
+    Latest in Wrike Blog
+    
+    *   [Top benefits of project management software (for every role)](https://www.wrike.com/blog/benefits-project-management-software/ "Top benefits of project management software (for every role)")
+    *   [5-year plan template: How to create your own](https://www.wrike.com/blog/5-year-plan-template/ "5-year plan template: How to create your own")
+    *   [Project management software vs. Excel: What to consider](https://www.wrike.com/blog/project-management-software-vs-excel/ "Project management software vs. Excel: What to consider")
+    *   [What’s the best project plan template? 3 templates to try](https://www.wrike.com/blog/how-to-build-use-project-plan-templates/ "What’s the best project plan template? 3 templates to try")
+    *   [Meeting minutes: Guide with examples and action items](https://www.wrike.com/blog/action-items-with-meeting-notes-template/ "Meeting minutes: Guide with examples and action items")
+    *   [Do less, achieve more: Register for Wrike Collaborate 2024!](https://www.wrike.com/blog/collaborate-2024/ "Do less, achieve more: Register for Wrike Collaborate 2024!")
+    *   [Stakeholder management: 4 strategies proven to work](https://www.wrike.com/blog/4-strategies-dealing-difficult-stakeholders/ "Stakeholder management: 4 strategies proven to work")
+    
+    Show more
+    
+
+#### Subscribe to Wrike news and updates
+
+Stay informed with the latest news and updates by subscribing to our marketing emails.
+
+By completing and submitting the form, I acknowledge Wrike’s [Privacy Policy](https://www.wrike.com/security/privacy/)
+
+*   [![Image 172: App Store](https://web-static.wrike.com/tp/static/assets/img/footer/app-store_en.svg)](https://itunes.apple.com/us/app/wrike/id890048871?mt=8 "App Store")
+*   [![Image 173: Google Play](https://web-static.wrike.com/tp/static/assets/img/footer/google-play_en.svg)](https://play.google.com/store/apps/details?id=com.wrike "Google Play")
+
+*   [](https://x.com/wrike "Twitter")
+*   [](https://www.facebook.com/Wrike "Facebook")
+*   [](https://www.linkedin.com/company/wrike "LinkedIn")
+*   [](https://www.youtube.com/user/WrikeTeam "YouTube")
+*   [](https://www.instagram.com/wriketeam/ "Instagram")
+
+©2006-2024 Wrike, Inc. All rights reserved. Patented. [Privacy Policy](https://www.wrike.com/security/privacy/). [Terms of Service](https://www.wrike.com/security/terms/). [Cookie Preferences](javascript:void\(0\))
+
+ 
+
+![Image 174](https://ad.doubleclick.net/ddm/activity/src=10163625;type=web_o0;cat=allsi0;u1=1118446394.1723402574;match_id=1118446394.1723402574;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=$%7BGDPR%7D;gdpr_consent=$%7BGDPR_CONSENT_755%7D;ord=8430743231695.689?)     ![Image 176](https://advertisecast-146-adswizz.attribution.adswizz.com/fire?pixelId=66b9e2ef-dac2-4d7a-bc88-fd514afa7b33&type=sitevisit&subtype=HomePage&aw_0_req.gdpr=true&redirectURL=aHR0cHM6Ly9waXhlbC50YXBhZC5jb20vaWRzeW5jL2V4L3JlY2VpdmU_cGFydG5lcl9pZD0yOTk0JjwjaWYgcmVxdWVzdC5saXN0ZW5lcklkP21hdGNoZXMoJ1swLTlhLWZdezh9LVswLTlhLWZdezR9LVswLTlhLWZdezR9LVswLTlhLWZdezR9LVswLTlhLWZdezEyfScpPnBhcnRuZXJfdHlwZWRfZGlkPSU3QiUyMkhBUkRXQVJFX0FORFJPSURfQURfSUQlMjIlM0ElMjIke3JlcXVlc3QubGlzdGVuZXJJZH0lMjIlN0Q8I2Vsc2VpZiByZXF1ZXN0Lmxpc3RlbmVySWQ_bWF0Y2hlcygnWzAtOUEtRl17OH0tWzAtOUEtRl17NH0tWzAtOUEtRl17NH0tWzAtOUEtRl17NH0tWzAtOUEtRl17MTJ9Jyk-cGFydG5lcl90eXBlZF9kaWQ9JTdCJTIySEFSRFdBUkVfSURGQSUyMiUzQSUyMiR7cmVxdWVzdC5saXN0ZW5lcklkfSUyMiU3RDwjZWxzZT5wYXJ0bmVyX2RldmljZV9pZD0ke3JlcXVlc3QubGlzdGVuZXJJZCF9PC8jaWY-Cg)   ![Image 177](https://t.co/i/adsct?bci=3&eci=2&event_id=83903fa8-4187-4bfc-b4a4-15303d2c1cfa&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=1f0a2eb4-456d-406c-844c-1f12778267d0&tw_document_href=https%3A%2F%2Fwww.wrike.com%2Fvaq%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nuvmx&type=javascript&version=2.3.30)![Image 178](https://analytics.twitter.com/i/adsct?bci=3&eci=2&event_id=83903fa8-4187-4bfc-b4a4-15303d2c1cfa&events=%5B%5B%22pageview%22%2C%7B%7D%5D%5D&integration=advertiser&p_id=Twitter&p_user_id=0&pl_id=1f0a2eb4-456d-406c-844c-1f12778267d0&tw_document_href=https%3A%2F%2Fwww.wrike.com%2Fvaq%2F&tw_iframe_status=0&tw_order_quantity=0&tw_sale_amount=0&txn_id=nuvmx&type=javascript&version=2.3.30)![Image 179](https://id.rlcdn.com/464526.gif)
+
+![Image 180](https://bat.bing.com/action/0?ti=4056416&Ver=2&mid=a948d8a1-325b-4678-9f85-0701150bfecf&sid=6a85f770581311ef9630979737d24ee2&vid=6a868aa0581311efaead0b9190366ed1&vids=1&msclkid=N&uach=pv%3D10.0&pi=918639831&lg=en-US&sw=800&sh=600&sc=24&tl=Versatile%20%26%20Robust%20Project%20Management%20Software%20%7C%20Wrike&p=https%3A%2F%2Fwww.wrike.com%2Fvaq%2F&r=&lt=3081&evt=pageLoad&sv=1&cdb=AQAQ&rn=805149)
+  ```
+
+Source URL: https://www.wrike.com/features/
+  ```
+  Project Management Software Features by Wrike
+===============
+         
+
+Join us as we highlight game-changing Wrike features that’ll help you work smarter, not harder. Register for [Collaborate 2024](https://www.wrike.com/collaborate/conference/) now.
+
+[![Image 1: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 2: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+*   Solutions
+
+*   For teams
+    
+    *   [Marketing Streamline proofing and reporting for seamless campaigns.](https://www.wrike.com/marketing/)
+    *   [Creative & Design Create high-quality assets and get them approved in record time.](https://www.wrike.com/teams/creative-project-management/)
+    *   [PMO Align strategy with execution and deliver results.](https://www.wrike.com/project-management-office/)
+    *   [IT Execute initiatives, optimize workflows, and automate requests.](https://www.wrike.com/teams/it-project-management/)
+    *   [See all teams](https://www.wrike.com/teams/)
+*   For industries
+    
+    *   [Manufacturing Enhance operations, accelerate production, and empower teams.](https://www.wrike.com/industries/manufacturing/)
+    *   [Professional Services Organize clients, streamline projects, and automate workflows.](https://www.wrike.com/professional-services-management/)
+    *   [Consumer Goods Move fast with unified planning, delivery, and reporting.](https://www.wrike.com/industries/consumer-goods/)
+    *   [Financial Services Make managing multiple projects, resources, and data easy.](https://www.wrike.com/industries/financial-services/)
+    *   [See all industries](https://www.wrike.com/industries/)
+*   Use cases
+    
+    *   [Resource Management View team workloads and reallocate tasks to avoid burnout.](https://www.wrike.com/use-cases/resource-management/)
+    *   [Project Management Plan Agile projects, track deadlines, and deliver results.](https://www.wrike.com/use-cases/project-management/)
+    *   [Workflow Management Use custom statuses and automate your team workflows.](https://www.wrike.com/use-cases/workflow-management-software/)
+    *   [Task Management Organize incoming requests and eliminate repetitive tasks.](https://www.wrike.com/use-cases/task-management/)
+    *   [See all use cases](https://www.wrike.com/use-cases/)
+*   Explore Wrike
+    
+    *   [Take a Product Tour](https://www.wrike.com/tour/)
+    *   [Book a Demo](https://www.wrike.com/demo/)
+    *   [ROI Calculator](https://www.wrike.com/savings/)
+    *   [Customer Stories](https://www.wrike.com/customer-stories/)
+    *   [Start with Templates](https://www.wrike.com/templates/)
+
+*   Product
+
+*   Features
+    
+    *   [Dashboards Fuel better, faster, data-driven decisions with powerful analytics.](https://www.wrike.com/features/dashboards/)
+    *   [AI Learn about powerful AI and automations with Work Intelligence®.](https://www.wrike.com/features/work-intelligence/)
+    *   [Automation Define and trigger automated workflows to eliminate manual efforts.](https://www.wrike.com/features/workflow-automation/)
+    *   [Gantt Charts Interactive project scheduling across teams.](https://www.wrike.com/features/gantt-chart/)
+    *   [Proofing Streamlined proofing and collaboration in one place.](https://www.wrike.com/features/online-proofing/)
+    *   [Custom Item Types Tailor work items to fit your specific workplace.](https://www.wrike.com/features/custom-item-types/)
+    *   [Project Resource Planning Plan and allocate resources for timely delivery.](https://www.wrike.com/use-cases/resource-management/)
+    *   [Project Views Get the full picture with customizable, intuitive project views.](https://www.wrike.com/features/custom-views/)
+    *   [Kanban Boards Instantly view project progress and create customized workflows.](https://www.wrike.com/features/kanban-boards/)
+    *   [Dynamic Request Forms Custom forms powered by conditional logic.](https://www.wrike.com/features/custom-request-forms/)
+    *   [Approvals Keep approvers in the loop from start to finish.](https://www.wrike.com/features/approvals/)
+    *   [Cross-Tagging Unparalleled visibility across multiple work streams.](https://www.wrike.com/features/cross-tagging/)
+    *   [See all features](https://www.wrike.com/features/)
+*   Platform
+    
+    *   [Book a Demo](https://www.wrike.com/demo/)
+    *   [Start with Templates](https://www.wrike.com/templates/)
+    *   [Wrike AI](https://www.wrike.com/features/work-intelligence/)
+    *   [Integrations](https://www.wrike.com/apps/)
+    *   [Security](https://www.wrike.com/security/)
+    *   [Mobile & Desktop Apps](https://www.wrike.com/apps/mobile-and-desktop/)
+
+*   Resources
+
+*   Go deeper
+    
+    *   [Resource Hub Top assets on productivity, collaboration, and more.](https://www.wrike.com/resources/)
+    *   [Wrike Blog Latest news and best practices on project management.](https://www.wrike.com/blog/)
+    *   [Educational Guides Guides and tools to unlock better work management.](https://www.wrike.com/guides/)
+    *   [Webinars Join our live or on-demand sessions to do your best work.](https://www.wrike.com/webinars/)
+    *   [Partners Power new possibilities with the Wrike Partner Program.](https://www.wrike.com/partners/)
+    *   [Developers Connect and build integrations with easy-to-use APIs.](https://developers.wrike.com/)
+*   Upskill and Connect
+    
+    *   [Training & Certifications](https://www.wrike.com/lp/discover/)
+    *   [Help Center](https://help.wrike.com/hc/en-us/)
+    *   [Wrike's Community](https://help.wrike.com/hc/en-us/community/topics/)
+    *   [Premium Support Packages](https://www.wrike.com/support-packages/)
+    *   [Wrike Professional Services](https://www.wrike.com/professional-services/)
+
+[](https://www.wrike.com/collaborate/conference/)
+
+[Join us for Collaborate 2024! Discover how to minimize repetitive tasks, and maximize team output — to do less and achieve more.](https://www.wrike.com/collaborate/conference/)Register now
+
+*   [Enterprise](https://www.wrike.com/enterprise/)
+
+*   [Pricing](https://www.wrike.com/price/)
+
+[Contact Sales](https://www.wrike.com/contact-sales/)
+
+EN
+
+![Image 3: language-selector](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/static/assets/img/header-v2/language-selector-2x.png)
+
+[English](https://www.wrike.com/features/)
+
+[Dansk](https://www.wrike.com/da/)
+
+[Deutsch](https://www.wrike.com/de/)
+
+[Español](https://www.wrike.com/es/)
+
+[Français](https://www.wrike.com/fr/)
+
+[Bahasa Indonesia](https://www.wrike.com/id/)
+
+[Italiano](https://www.wrike.com/it/)
+
+[Bahasa Melayu](https://www.wrike.com/ms/)
+
+[Nederlands](https://www.wrike.com/nl/)
+
+[Norsk](https://www.wrike.com/no/)
+
+[Polski](https://www.wrike.com/pl/)
+
+[Português (BR)](https://www.wrike.com/pt-br/)
+
+[Svenska](https://www.wrike.com/sv/)
+
+[Русский](https://www.wrike.com/ru/)
+
+[日本語](https://www.wrike.com/ja/)
+
+[한국어](https://www.wrike.com/ko/)
+
+[中文 (简体)](https://www.wrike.com/zh-cn/)
+
+[中文 (繁體)](https://www.wrike.com/zh-tw/)
+
+[Log in](https://login.wrike.com/login/)
+
+Try Wrike for free
+
+ Enter your business email
+
+Try Wrike for free
+
+[![Image 4: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 5: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+Try for free Try for free
+
+[![Image 6: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-light.svg)![Image 7: Wrike header logo](https://web-static.wrike.com/tp/static/assets/img/header-v2/wrike-logo-dark.svg)](https://www.wrike.com/ "Wrike")
+
+Faster Productivity With Powerful Work Management
+
+
+===================================================
+
+With a universal work management process that covers everything, wall to wall, Wrike Lightspeed has all the features you need.
+
+Book my demo
+
+See Wrike Lightspeed in action
+
+[Initiate work](https://www.wrike.com/features#featureStatic) [Structure work](https://www.wrike.com/features#featureStatic-1) [Collaborate](https://www.wrike.com/features#featureStatic-2) [Report & analyze](https://www.wrike.com/features#featureStatic-3) [Integrations & automations](https://www.wrike.com/features#featureStatic-4) [Manage your workspace](https://www.wrike.com/features#featureStatic-5)
+
+![Image 8](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/97a442d1-78f8-4d7c-8171-7599a073a4bc/cta-image-ai-work-intelligence-release-mobile.png)
+
+Wrike’s AI features make work flow better
+
+
+-------------------------------------------
+
+Wrike’s Work Intelligence® solution is taking leadership in AI and automation to new heights, helping organizations manage complex cross-functional workflows, reduce manual tasks, and focus on their most important work.
+
+[Learn more](https://www.wrike.com/features/work-intelligence/)
+
+![Image 9: <p>Wrike’s AI features make work flow better<br></p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/c1371e9f-a119-4ff8-bcc2-ecee940de2a0/cta-image-ai-work-intelligence-release-2x.png)
+
+Initiate work
+
+
+---------------
+
+#### Simplify your intake process
+
+Combine your process intake to create better efficiency and visibility. When you customize and prioritize your team’s processes, your new streamlined workflow becomes more productive than ever before.
+
+##### Spaces
+
+Create and configure your team’s workspace. Bring your work breakdown structure, team workflows, and favorite tools into one place. Control access and visibility with granular permissions setup.
+
+##### Folders, Projects, Tasks, Subtasks
+
+Create an unlimited number of items — folders, projects, tasks, and subtasks — for your team and easily view which assignee is responsible for each specific initiative.
+
+##### Custom Item Types
+
+Work your way with a fully configurable workspace. Tailor your layout with recognizable terms that match your team’s processes and hide any items that aren’t relevant.
+
+[Learn more](https://www.wrike.com/features/custom-item-types/)
+
+##### Dynamic Request Forms
+
+Automate your work intake, route all requests to one place from internal and external customers, and ensure requesters provide the information you need.
+
+[Learn more](https://www.wrike.com/features/custom-request-forms/)
+
+##### Templates
+
+Get your projects up and running in no time with pre-built templates. Browse templates tailored to your team or department, from marketing to professional services.
+
+[Learn more](https://www.wrike.com/templates/)
+
+##### Blueprints
+
+Free yourself from repetitive administration — save recurring tasks, projects, and folders as blueprints to quickly replicate them the next time. You can also create new blueprints from scratch.
+
+##### AI Work Creation
+
+Analyze your rough work notes and automatically turn them into sub-items you can execute with smart artificial intelligence.
+
+[Learn more](https://www.wrike.com/features/work-intelligence/)
+
+##### Productivity App Integration
+
+Consolidate all incoming work from various channels with powerful native integrations. Email, Zoom, Slack, MS Teams — all work items land in one place with Wrike.
+
+[Learn more](https://www.wrike.com/apps/chat-messaging/)
+
+Try Wrike for free
+
+Structure work
+
+
+----------------
+
+#### Set up your work your way
+
+Structure work in a way that makes sense for your team. Assign work based on performance and capacity. Automate assignments, measure effort and budget, and track how much work is done and when. Align work with other dependencies and important milestones.
+
+##### Calendar View
+
+Quickly display your work items in a calendar view. Keep track of what needs to be worked on and when. See what initiatives other teams are working on to stay aligned.
+
+[Learn more](https://www.wrike.com/features/team-project-calendar/)
+
+##### Improved! Board View
+
+Increase efficiency by up to 45% with our new Kanban-style board view. Easily move boards to change the status of your work. Track your project and identify overdue tasks.
+
+[Learn more](https://www.wrike.com/features/kanban-boards/)
+
+##### Improved! Table View
+
+See your work in a spreadsheet format without switching to Excel or Google Sheets. Add custom fields, expand or collapse items, and hide empty folders — adjust your display how you see fit.
+
+##### Gantt Charts
+
+Visualize all your work in an interactive timeline view. See dependencies, set milestones, drag and drop tasks, and adjust due dates instantly.
+
+[Learn more](https://www.wrike.com/features/gantt-chart/)
+
+##### Resource Bookings
+
+Create a new booking to reserve time from a team member or job role. Estimate how many hours a project will take and quickly determine if your chosen resource has the bandwidth to complete it.
+
+##### Workload Charts
+
+View individual capacity in your team’s workload chart. Spot uneven workloads and instantly reallocate tasks if required. Switch modes to assess how resources are distributed across projects.
+
+##### Effort Management
+
+When creating a Wrike task, you can evaluate how much effort is required to complete it. This makes it easier to choose an assignee and forecast when your entire project will be delivered.
+
+##### Job Roles
+
+Add custom titles to group your employees based on their specific role, e.g., Graphic Designer. This will help you allocate tasks and check if you have enough resources for a particular project.
+
+##### Budgeting
+
+Monitor your planned costs against your actual costs to ensure you don’t go over budget. Customize your account with preferred currency settings and default hourly rates.
+
+##### Time Tracking
+
+Track the exact hours your employees, contractors, and freelancers worked on a project. Sync this data with your finance system for seamless invoicing.
+
+[Learn more](https://www.wrike.com/features/time-tracking-software/)
+
+Try Wrike for free
+
+Collaborate
+
+
+-------------
+
+#### Work cross-functionally
+
+Collaborate with teams across the board and effectively manage stakeholders across the organization. Streamline the revision and approval process and easily route requests for approval to internal and external stakeholders.
+
+##### Cross-Tagging
+
+Add unlimited spaces, folders, projects, and tasks to track your workload. Cross-tag them so that each team gets full visibility without duplicating work in multiple places.
+
+[Learn more](https://www.wrike.com/features/cross-tagging/)
+
+##### Internal and Guest Approvals
+
+Create a chain of approvals for your projects. Send links securely to external approvers you collaborate with and accelerate the sign-off process.
+
+[Learn more](https://www.wrike.com/features/approvals/)
+
+##### Live Document Editor
+
+Attach files to corresponding tasks, folders, and projects. Use Wrike Document Editor to edit attachments seamlessly — no need to download files. Your new version will be automatically uploaded.
+
+##### Proofing
+
+Our best-in-class proofing software enables 100% clear, visual communication directly in assets. It also makes it easy to compare original files with updated versions.
+
+[Learn more](https://www.wrike.com/features/online-proofing/)
+
+##### Desktop and Mobile Apps
+
+Check your work on the go. You can review and approve assets, view project progress, and run reports right from your iOS or Android mobile device.
+
+[Learn more](https://www.wrike.com/apps/mobile-and-desktop/)
+
+##### External Requester Collaboration
+
+Streamline communication with requesters, even non-Wrike users. Use external request forms to work in one place instead of toggling between different applications.
+
+##### File Attachments and Storage
+
+Offset your storage costs with our built-in file storage. Attach files and upload new versions through integration with cloud platforms such as Box, Dropbox, and Google Drive.
+
+Try Wrike for free
+
+Report, analyze, and optimize
+
+
+-------------------------------
+
+#### Gain key insights into your project
+
+Measure the impact of every campaign, launch, and initiative. Provide strategic direction based on data and visibility into the amount of work delivered. Optimize and maximize your team’s impact and pride of ownership.
+
+##### New! Chart View
+
+Access powerful data analysis at your fingertips. Monitor all your work at a glance, measure success in seconds, and uncover valuable insights with ease — no special access or advanced skills required.
+
+##### Advanced Analytics and BI
+
+Track performance and compare against benchmarks in configurable analytics dashboards with sophisticated filtering. Customize productivity metrics, slice and dice data, and visualize results easily.
+
+[Learn more](https://www.wrike.com/features/advanced-analytics/)
+
+##### New Dashboards
+
+Build custom dashboards with easy-to-use widgets that allow you to visualize complex data and make decisions on the spot. In a rush? Get started with our prebuilt templates — no coding required.
+
+[Learn more](https://www.wrike.com/features/dashboards/)
+
+##### Real-Time Reports
+
+Communicate progress and make decisions in real time with Wrike’s easy-to-use report builder. Schedule reports to be delivered directly to your inbox.
+
+[Learn more](https://www.wrike.com/use-cases/project-reporting/)
+
+Try Wrike for free
+
+Integrations, automation, and Work Intelligence®
+
+
+--------------------------------------------------
+
+#### Automate and integrate your workflows
+
+Automate your workflows across multiple projects, teams, or the whole company. Tailor the rules to your unique processes with custom item types automation. Bring all your workflows into one place by integrating your favorite productivity tools. Take your work to the next level with the power of Automation AI.
+
+##### New! Generative AI
+
+Transform your teams’ productivity with Wrike’s industry-leading generative AI. Create powerful descriptions, full project plans, and detailed idea documents in seconds — all tailored to your style.
+
+[Learn more](https://www.wrike.com/features/work-intelligence/)
+
+##### Wrike Integrate
+
+Wrike Integrate allows you to connect with an unlimited number of applications. Create custom integrations, sync your data, and fully automate your workflows.
+
+[Learn more](https://www.wrike.com/add-on-wrike-integrate/)
+
+##### Two-Way Sync
+
+Work together seamlessly, even with teams that use different applications. Wrike enables you to create a two-way sync with Jira, GitHub, and other applications.
+
+##### Integrations
+
+Integrate Wrike with 400+ applications, including Salesforce, Hubspot, Bynder, Zoom, Slack, and more. Increase your productivity and efficiency with everything all in one place.
+
+[Learn more](https://www.wrike.com/apps/)
+
+##### Automation
+
+Automate recurring workflows, sync related tasks, and reduce manual errors and tedious activities by establishing an automated process.
+
+[Learn more](https://www.wrike.com/features/workflow-automation/)
+
+##### DAM Integration & Open API
+
+Streamline your creative process. Connect your favorite digital asset management platform or build your own integration with Cloud Content Connector to store, modify, and publish files with ease.
+
+[Learn more](https://www.wrike.com/features/digital-asset-management-software-integration/)
+
+##### Adobe Creative Cloud Extension
+
+Enable your design team to access Wrike from Adobe. Receive creative briefs, collaborate with stakeholders, and review and approve assets without ever leaving Adobe Creative Cloud.
+
+[Learn more](https://www.wrike.com/adobe-app-integrations/)
+
+##### ShareFile Integration
+
+Implement the highest level of security for data used by your Finance, Legal, and HR departments with the Wrike-Citrix integration.
+
+Try Wrike for free
+
+Manage your workspace
+
+
+-----------------------
+
+#### Streamline secure administration and permissions
+
+Add the necessary security measures and configurability applicable to your team and each user, based on your organization’s needs. Configure access and permissions to reflect your internal processes and what provides the most value to your business.
+
+![Image 10](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/storage/uploads/c2de11b5-c03b-4816-97d5-ca3782a2e1c8/rebrand-screenshot-user-types-new-2x.png)
+
+##### Customizable User Types
+
+Create, duplicate, and manage user types. Set relevant permissions based on license type and account role, simplifying the onboarding process.
+
+[Learn more](https://www.wrike.com/features/admin-security/)
+
+##### Locked Spaces
+
+Keep your most sensitive information in the most confidential workspace. Avoid any unwanted data leakage with secure spaces for collaboration at an executive level.
+
+[Learn more](https://www.wrike.com/features/admin-security/)
+
+##### Wrike Lock
+
+Add an additional layer of security by creating encrypted keys controlled by your organization. Only you can decide if your data is accessed.
+
+[Learn more](https://www.wrike.com/add-on-wrike-lock/)
+
+##### Access Roles
+
+Add your own access roles and customize them as you see fit. Gain full control over who has access to shared spaces, folders, and projects.
+
+##### User Groups
+
+Add selected members to user groups and subgroups to follow your organizational structure. Share folders and items with the groups that need the access.
+
+##### User Activity Reports
+
+Check on-demand audit reports to track activity of each user in your account. Get clarification on who to ask for information when items are modified.
+
+##### Two-Factor Authentication (2FA)
+
+Enable multifactor authentication and control user permissions to safeguard your company’s most confidential data.
+
+##### Single Sign-On (SSO)
+
+Access your work by signing into Wrike once with your corporate credentials, enabled by MS Azure, Google, Okta, OneLogin, and more.
+
+[Learn more](https://www.wrike.com/apps/single-sign-on/)
+
+Try Wrike for free
+
+![Image 11: <p><span>The most </span>powerful<span> work management platform</span></p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/static/assets/img/cta/center/white/1.png)
+
+The most powerful work management platform
+
+
+--------------------------------------------
+
+Easy to use, customize, and scale. Explore Work Intelligence® and other smart features — try Wrike free for two weeks.
+
+Try Wrike for free
+
+![Image 12: <p><span>The most </span>powerful<span> work management platform</span></p>](https://web-static.wrike.com/cdn-cgi/image/format=auto/tp/static/assets/img/cta/center/white/9.png)
+
+FAQ
+
+
+-----
+
+Where can I learn how to use these Wrike features?
+
+Wrike has a dedicated [help center](https://help.wrike.com/hc/en-us) with interactive training, feature-based videos, how-to guides, and a thriving community.
+
+How do I ensure teams know how to use these Wrike features?
+
+You can onboard or train up your teams as needed on Wrike features with [Wrike Discover](https://www.wrike.com/lp/discover/) — our interactive training platform.
+
+What can I gain from using these Wrike features?
+
+Wrike is built with the fundamentals of project management in mind, and our features support you no matter where you are in your journey. Learn how to increase your on-time delivery, avoid burnout, and streamline processes with our [Project Management Guide](https://www.wrike.com/project-management-guide/).
+
+How do I know which Wrike features are right for my team?
+
+We have subscription levels suited for any size organization with several team-specific packages and add-ons. Learn about each on our [pricing page](https://www.wrike.com/price/).
+
+*   Product
+    
+    Product
+    *   [Product tour](https://www.wrike.com/tour/ "Product tour")
+    *   [Pricing](https://www.wrike.com/price/ "Pricing")
+    *   [Templates](https://www.wrike.com/templates/ "Templates")
+    *   [Apps & Integrations](https://www.wrike.com/apps/ "Apps & Integrations")
+    *   [Task Management](https://www.wrike.com/use-cases/task-management/ "Task Management")
+    *   [Gantt Charts](https://www.wrike.com/features/gantt-chart/ "Gantt Charts")
+    *   [Wrike Status](https://status.wrike.com/ "Wrike Status")
+    *   [Security](https://www.wrike.com/security/ "Security")
+    *   [Wrike API](https://developers.wrike.com/ "Wrike API")
+    *   [Compare](https://www.wrike.com/compare/ "Compare")
+    *   [Features](https://www.wrike.com/features/ "Features")
+*   Solutions
+    
+    Solutions
+    *   [Enterprise](https://www.wrike.com/enterprise/ "Enterprise")
+    *   [Marketing](https://www.wrike.com/marketing/ "Marketing")
+    *   [Creative](https://www.wrike.com/teams/creative-project-management/ "Creative")
+    *   [Project Management](https://www.wrike.com/project-management-office/ "Project Management")
+    *   [Product Development](https://www.wrike.com/teams/product-management/ "Product Development")
+    *   [Business Operations](https://www.wrike.com/teams/business-operations/ "Business Operations")
+    *   [Professional Services](https://www.wrike.com/professional-services-management/ "Professional Services")
+    *   [IT Management](https://www.wrike.com/teams/it-project-management/ "IT Management")
+    *   [Students](https://www.wrike.com/use-cases/collaboration-tool-for-students/ "Students")
+    *   [All Teams](https://www.wrike.com/teams/ "All Teams")
+    *   [All Use Cases](https://www.wrike.com/use-cases/ "All Use Cases")
+*   Resources
+    
+    Resources
+    *   [Help Center](https://help.wrike.com/hc/en-us/ "Help Center")
+    *   [Community](https://help.wrike.com/hc/en-us/community/topics/ "Community")
+    *   [Blog](https://www.wrike.com/blog/ "Blog")
+    *   [Webinars](https://www.wrike.com/webinars/ "Webinars")
+    *   [Interactive Training](https://www.wrike.com/discover/ "Interactive Training")
+    *   [Support Packages](https://www.wrike.com/support-packages/ "Support Packages")
+    *   [Find a Reseller](https://www.wrike.com/partners/reseller-locator/ "Find a Reseller")
+    *   [Google Project Management Tools](https://www.wrike.com/google-apps/ "Google Project Management Tools")
+    *   [CA Notice at Collection](https://www.wrike.com/security/privacy/#details-for-california-residents "CA Notice at Collection")
+*   Company
+    
+    Company
+    *   [About Us](https://www.wrike.com/company/ "About Us")
+    *   [Careers](https://www.wrike.com/jobs/ "Careers")
+    *   [Our Customers](https://www.wrike.com/customer-stories/ "Our Customers")
+    *   [Events](https://www.wrike.com/events/ "Events")
+    *   [Newsroom](https://www.wrike.com/newsroom/ "Newsroom")
+    *   [Partner Program](https://www.wrike.com/partners/ "Partner Program")
+    *   [Collaborate - User Conference](https://www.wrike.com/collaborate/conference/ "Collaborate - User Conference")
+    *   [Wrike Engineering](https://www.wrike.com/wrike-engineering/ "Wrike Engineering")
+    *   [Contact Us](https://www.wrike.com/contactus/ "Contact Us")
+
+*   Guides
+    
+    Guides
+    *   [Project Management Guide](https://www.wrike.com/project-management-guide/ "Project Management Guide")
+    *   [Professional Services Guide](https://www.wrike.com/professional-services-guide/ "Professional Services Guide")
+    *   [Kanban Guide](https://www.wrike.com/kanban-guide/ "Kanban Guide")
+    *   [Agile Guide](https://www.wrike.com/agile-guide/ "Agile Guide")
+    *   [Remote Work Guide](https://www.wrike.com/remote-work-guide/ "Remote Work Guide")
+    *   [Scrum Guide](https://www.wrike.com/scrum-guide/ "Scrum Guide")
+    *   [Marketing Project Management Guide](https://www.wrike.com/marketing-guide/ "Marketing Project Management Guide")
+    *   [Collaborative Work Management Guide](https://www.wrike.com/collaborative-work-guide/ "Collaborative Work Management Guide")
+    *   [Digital Marketing Guide](https://www.wrike.com/digital-marketing-guide/ "Digital Marketing Guide")
+    *   [Return to Work Guide](https://www.wrike.com/return-to-work-guide/ "Return to Work Guide")
+    *   [Product Management Guide](https://www.wrike.com/product-management-guide/ "Product Management Guide")
+    *   [Go-to-Market Guide](https://www.wrike.com/go-to-market-guide/ "Go-to-Market Guide")
+    *   [Goal Setting Guide](https://www.wrike.com/goal-setting-guide/ "Goal Setting Guide")
+
+*   Latest in Wrike Blog
+    
+    Latest in Wrike Blog
+    
+    *   [Top benefits of project management software (for every role)](https://www.wrike.com/blog/benefits-project-management-software/ "Top benefits of project management software (for every role)")
+    *   [5-year plan template: How to create your own](https://www.wrike.com/blog/5-year-plan-template/ "5-year plan template: How to create your own")
+    *   [Project management software vs. Excel: What to consider](https://www.wrike.com/blog/project-management-software-vs-excel/ "Project management software vs. Excel: What to consider")
+    *   [What’s the best project plan template? 3 templates to try](https://www.wrike.com/blog/how-to-build-use-project-plan-templates/ "What’s the best project plan template? 3 templates to try")
+    *   [Meeting minutes: Guide with examples and action items](https://www.wrike.com/blog/action-items-with-meeting-notes-template/ "Meeting minutes: Guide with examples and action items")
+    *   [Do less, achieve more: Register for Wrike Collaborate 2024!](https://www.wrike.com/blog/collaborate-2024/ "Do less, achieve more: Register for Wrike Collaborate 2024!")
+    *   [Stakeholder management: 4 strategies proven to work](https://www.wrike.com/blog/4-strategies-dealing-difficult-stakeholders/ "Stakeholder management: 4 strategies proven to work")
+    
+    Show more
+    
+
+#### Subscribe to Wrike news and updates
+
+Stay informed with the latest news and updates by subscribing to our marketing emails.
+
+By completing and submitting the form, I acknowledge Wrike’s [Privacy Policy](https://www.wrike.com/security/privacy/)
+
+*   [![Image 13: App Store](https://web-static.wrike.com/tp/static/assets/img/footer/app-store_en.svg)](https://itunes.apple.com/us/app/wrike/id890048871?mt=8 "App Store")
+*   [![Image 14: Google Play](https://web-static.wrike.com/tp/static/assets/img/footer/google-play_en.svg)](https://play.google.com/store/apps/details?id=com.wrike "Google Play")
+
+*   [](https://x.com/wrike "Twitter")
+*   [](https://www.facebook.com/Wrike "Facebook")
+*   [](https://www.linkedin.com/company/wrike "LinkedIn")
+*   [](https://www.youtube.com/user/WrikeTeam "YouTube")
+*   [](https://www.instagram.com/wriketeam/ "Instagram")
+
+©2006-2024 Wrike, Inc. All rights reserved. Patented. [Privacy Policy](https://www.wrike.com/security/privacy/). [Terms of Service](https://www.wrike.com/security/terms/). [Cookie Preferences](javascript:void\(0\))
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

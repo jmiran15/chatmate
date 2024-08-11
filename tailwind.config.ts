@@ -161,6 +161,24 @@ const config = {
         "tremor-title": ["1.125rem", { lineHeight: "1.75rem" }],
         "tremor-metric": ["1.875rem", { lineHeight: "2.25rem" }],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            h1: {
+              fontSize: theme("fontSize.4xl"),
+              fontWeight: theme("fontWeight.bold"),
+              marginTop: theme("spacing.4"),
+              marginBottom: theme("spacing.4"),
+            },
+            h2: {
+              fontSize: theme("fontSize.3xl"),
+              fontWeight: theme("fontWeight.semibold"),
+              marginTop: theme("spacing.3"),
+              marginBottom: theme("spacing.3"),
+            },
+          },
+        },
+      }),
     },
   },
   safelist: [

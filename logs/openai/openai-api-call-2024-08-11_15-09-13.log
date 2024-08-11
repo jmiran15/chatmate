@@ -1,0 +1,583 @@
+LLM: EXTRACT_RELEVANT_LINKS
+Timestamp: 2024-08-11T19:09:13.843Z
+Model: gpt-4o-mini
+
+Request:
+[user]: 
+Base URL: https://www.airtable.com/
+
+Website content delimited by triple backticks:
+```
+The platform to build next‒gen apps | Airtable
+===============
+  
+
+[Airtable home or view your bases](https://www.airtable.com/)
+
+Platform
+
+*   Platform
+*   Platform
+    
+    * * *
+    
+    *   [Platform Overview Unlock the power of a next-gen app-building platform](https://www.airtable.com/platform)
+    *   [App Building Enable teams to build custom business apps—no code needed](https://www.airtable.com/platform/app-building)
+    *   [AInew Embed AI throughout end-to-end workflows](https://www.airtable.com/platform/ai)
+    *   [Connected Data Connect data from apps, workflows, and tools to create a source of truth](https://www.airtable.com/platform/connected-data)
+    *   [Governance and Scale Centrally manage security, permissions and data protection at scale](https://www.airtable.com/platform/governance)
+    *   Platform Features
+        
+        Learn about Airtable views, interfaces, automations, and more
+        
+        *   Back
+        *   Features
+            
+            * * *
+            
+            *   [Automations Achieve more in less time via automations](https://www.airtable.com/platform/automations)
+            *   [Interface Designer Create custom interfaces from your data](https://www.airtable.com/platform/interface-designer)
+            *   [Views Tailor data visualizations to your teams’ needs](https://www.airtable.com/platform/views)
+            *   [Reporting Measure, analyze, and share insights](https://www.airtable.com/platform/reporting)
+            *   [Apps by Airtable Get started faster with pre-configured apps](https://www.airtable.com/platform/apps-by-airtable)
+            *   [Explore the Platform](https://www.airtable.com/platform)
+            
+        
+    
+*   Tools
+    
+    * * *
+    
+    *   Integrations
+        
+        Integrate with tools like Slack, Google Drive, and Salesforce
+        
+        *   Back
+        *   Integrations
+            
+            * * *
+            
+            *   [Slack Add real-time messaging to your workflows](https://www.airtable.com/integrations/slack)
+            *   [Google Drive Sync information and build workflows](https://www.airtable.com/integrations/google-drive)
+            *   [Salesforce Leverage CRM data across teams and tools](https://www.airtable.com/integrations/salesforce)
+            *   [Jira Generate tickets and sync work from Airtable](https://www.airtable.com/integrations/jira)
+            *   [Zendesk Simplify and streamline workflows](https://www.airtable.com/integrations/zendesk)
+            *   [See all integrations](https://www.airtable.com/integrations)
+            
+        
+    *   [Extension Marketplace Explore 1000+ templates, scripts, and apps](https://airtable.com/marketplace)
+    *   [Download Get the Airtable app for desktop and mobile](https://www.airtable.com/downloads)
+    *   [What’s New See Airtable’s latest product updates and features](https://www.airtable.com/whatsnew)
+    
+*   The Airtable Platform
+    ---------------------
+    
+    Propel your business with a next-gen app-building platform. See data move in real-time and securely transform your work with AI.
+    
+    [Explore the platform](https://www.airtable.com/platform)
+    
+    ![Image 1](https://static.airtable.com/images/marketing-nav-platform-graphic.webp)
+    
+
+Solutions
+
+*   Solutions
+*   [Product Build roadmaps and alignment while creating products customers will love](https://www.airtable.com/solutions/product)[Marketing Create custom workflows to run campaigns and track successes](https://www.airtable.com/solutions/marketing)[Operations Bring your data and processes into a single, well-organized place](https://www.airtable.com/solutions/operations)[Project Management Keep track of projects and tasks across departments](https://www.airtable.com/solutions/project-management)[Human Resources Manage and streamline processes from hire to retire](https://www.airtable.com/solutions/hr)[Sales Win loyal customers with smarter workflows and connected data](https://www.airtable.com/solutions/sales)[Finance Streamline requests, manage budgets, and automate reporting](https://www.airtable.com/solutions/finance)
+    
+*   Customer Story
+    
+    More money, fewer problems
+    --------------------------
+    
+    How Code and Theory consolidated tooling and saved more than 10,000 hours with Airtable.
+    
+    [Learn more](https://www.airtable.com/customer-stories/code-and-theory)
+    
+    ![Image 2](https://static.airtable.com/images/marketing-nav-solution.webp)
+    
+
+Resources
+
+*   Resources
+*   Learn
+    
+    * * *
+    
+    *   By Topic
+        
+        *   Back
+        *   Airtable 101
+            
+            * * *
+            
+            *   [Learning Center Hands-on resources to expand your skills](https://www.airtable.com/learning)
+            *   [Getting Started Begin with Airtable basics and set-up](https://www.airtable.com/lp/resources?tags=cfairtable101GettingStarted)
+            *   [How-To: Tools & Tips Learn features, strategies, and flows](https://www.airtable.com/lp/resources?tags=cfairtable101HowtoToolsTips)
+            *   [Product Updates Airtable product news and feature releases](https://www.airtable.com/lp/resources?tags=cfairtable101ProductUpdates)
+            
+        *   Topic
+            
+            * * *
+            
+            *   [Strategy and Planning Discover the power of real-time data](https://www.airtable.com/lp/resources?tags=cftopicsStrategyPlanning)
+            *   [Increase Efficiency Streamline and automate any workflow](https://www.airtable.com/lp/resources?tags=cftopicsIncreaseEfficiency)
+            *   [Centralize Data Create a source of truth for your organization](https://www.airtable.com/lp/resources?tags=cftopicsCentralizeData)
+            *   [Teams and Collaboration Build best practices that unite teams and data](https://www.airtable.com/lp/resources?tags=cftopicsTeamsCollaboration)
+            *   [Industry Trends See how businesses stay competitive](https://www.airtable.com/lp/resources?tags=cftopicsIndustryTrends)
+            *   [See all resources](https://www.airtable.com/lp/resources)
+            
+        
+    *   By Team
+        
+        *   Back
+        *   Team
+            
+            * * *
+            
+            *   [Product Stay aligned while creating beloved products](https://www.airtable.com/lp/resources?tags=cfteamsProduct)
+            *   [Marketing Create custom workflows to run campaigns](https://www.airtable.com/lp/resources?tags=cfteamsMarketing)
+            *   [See all resources](https://www.airtable.com/lp/resources)
+            
+        
+    *   By Type
+        
+        *   Back
+        *   Type
+            
+            * * *
+            
+            *   [Webinars](https://www.airtable.com/lp/resources/webinars)
+            *   [Demos](https://www.airtable.com/lp/resources/demos)
+            *   [Videos](https://www.airtable.com/videos)
+            *   [eBooks](https://www.airtable.com/lp/resources/ebooks)
+            *   [Reports](https://www.airtable.com/lp/resources/reports)
+            *   [Quick Reads](https://www.airtable.com/lp/resources/quick-reads)
+            *   [Guides](https://www.airtable.com/guides)
+            *   [Articles](https://www.airtable.com/articles)
+            *   [See all resources](https://www.airtable.com/lp/resources)
+            
+        
+    
+*   Connect
+    
+    * * *
+    
+    *   [Events](https://www.airtable.com/lp/resources/events)
+    *   [Partners](https://www.airtable.com/partners)
+    *   [Services](https://www.airtable.com/enterprise/services)
+    *   Community
+        
+        *   Back
+        *   Community
+            
+            * * *
+            
+            *   [Airtable Community Welcome to our official community hub](https://community.airtable.com/)
+            *   [Airtable Universe User-created templates, bases, and flows](https://www.airtable.com/universe)
+            
+        
+    
+*   Explore
+    
+    * * *
+    
+    *   Templates
+        
+        *   Back
+        *   Templates
+            
+            * * *
+            
+            *   [Project ManagementNew](https://www.airtable.com/templates/project-management/expnPwND0WA2x7nhJ)
+            *   [Content Calendar](https://www.airtable.com/templates/content-calendar/exp3FNmOkdHZvprXB)
+            *   [Event Planning](https://www.airtable.com/templates/event-planning/exppdJtYjEgfmd6Sq)
+            *   [Product Roadmap](https://www.airtable.com/templates/product-roadmap/exphVKuL99S35ZsMi)
+            *   [Organizational Chart](https://www.airtable.com/templates/corporate-organizational-chart/expgMvC4WkxpKviHn)
+            *   [Resource AllocationNew](https://www.airtable.com/templates/resource-allocation/expMLg1OTd4pKVxCU)
+            *   [Social Media Calendar](https://www.airtable.com/templates/social-media-calendar/expgEkxMmWRqpa43k)
+            *   [Marketing Campaign Tracker](https://www.airtable.com/templates/marketing-campaign-tracking/expNoL0sYUbOogSCm)
+            *   [Product Launch](https://www.airtable.com/templates/product-launch/expbtFa3nsLpIQfgk)
+            *   [Content Strategy](https://www.airtable.com/templates/content-strategy/exp1nfqhaFgeAyk2f)
+            *   [Product Strategy](https://www.airtable.com/templates/product-strategy/expbov1cc8Qb05egC)
+            *   [Inventory Tracker](https://www.airtable.com/templates/inventory-tracker/expDrHGuyjSQlrKTq)
+            *   [Product Catalog](https://www.airtable.com/templates/product-catalog-and-orders/expZvMLT9L6c4yeBX)
+            *   [See all templates](https://www.airtable.com/templates)
+            
+        
+    *   [Customer Stories](https://www.airtable.com/customer-stories)
+    *   [Blog](https://blog.airtable.com/)
+    *   Developers
+        
+        *   Back
+        *   Developers
+            
+            * * *
+            
+            *   [Dev Community Share ideas and find solutions from peers](https://community.airtable.com/t5/development-apis/bd-p/development)
+            *   [API Docs Build with the Airtable API](https://airtable.com/developers/web/api/introduction)
+            *   [Custom Extensions Create real-time, interactive extensions](https://airtable.com/developers/apps)
+            *   [Scripting Build something custom with scripts](https://airtable.com/developers/scripting)
+            
+        
+    
+*   Support
+    
+    * * *
+    
+    *   [Contact Support](https://support.airtable.com/docs/contacting-airtable-support)
+    *   [Support Docs](https://support.airtable.com/)
+    
+*   Resource Center
+    
+    Stay one step ahead of the trends
+    ---------------------------------
+    
+    This content is packed with demos, best practices, industry trends, and more. See how to win in a fast-moving market.
+    
+    [Explore all resources](https://www.airtable.com/lp/resources)
+    
+    ![Image 3](https://static.airtable.com/images/marketing-nav-resource.webp)
+    
+
+[Pricing](https://airtable.com/pricing)
+
+[Contact Sales](https://www.airtable.com/contact-sales?ref=htcs.nb)[Sign in](https://airtable.com/login)
+
+[Contact Sales](https://www.airtable.com/contact-sales?ref=htcs.nb)[Sign up for freeSign up](https://airtable.com/signup)[Sign in](https://airtable.com/login)
+
+![Image 4: Homepage hero Blue BG](https://www.airtable.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl95ljfippl8%2F2k2FL3Ecr6tPs7aCoW50Yv%2F0a393e37646333a02e915b23e39a22f0%2FHomepage_Blue_BG.webp%3Ffm%3Dwebp&w=3840&q=75)
+
+Build apps instantly with AI
+
+SubmitEXIT
+
+[NEW Build apps instantly with AI](https://www.airtable.com/cobuilder)
+
+The fastest way to build apps
+=============================
+
+Empower your team to work faster and more confidently than ever before.
+
+[Sign up for free](https://airtable.com/signup)[Contact Sales](https://www.airtable.com/contact-sales?ref=htcs.gen)
+
+![Image 5: Homepage-Hero-Update-3000x970@1x.webp](https://www.airtable.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fwl95ljfippl8%2F2h1ff4rygp0ko4Z0pAJ1OT%2Fd8891233064807ed9900da8101a6d156%2FHomepage-Hero-Update-3000x970_1x.webp%3Ffm%3Dwebp&w=3840&q=75)
+
+*   ![Image 6](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   ![Image 8](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   ![Image 10](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   ![Image 12](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   ![Image 14](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   ![Image 16](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+
+![Image 18: Aura left](https://www.airtable.com/ellipse-red-yellow-cyan.png)
+
+![Image 19: Aura right](https://www.airtable.com/ellipse-purple-blue.png)
+
+Create apps instantly with Airtable Cobuilder
+---------------------------------------------
+
+Every person, on every team, can unlock great ideas when AI does the rest.
+
+*   I need to launch a women's skateboarding shoe in time for the Olympics
+    
+    Sorry, your browser doesn’t support embedded videos.
+    
+*   Help me with engineering management on our prototype engine for Bahrain
+    
+    ![Image 20: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   Help me track our investments in AI
+    
+    ![Image 22: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   Help me plan locations for Dune 3
+    
+    ![Image 24: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   Help me track parts and production for the Artemis mission SLS rocket system
+    
+    ![Image 26: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I need to manage localized video production for Girls Who Code classes
+    
+    ![Image 28: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I want a news coverage planner for the Olympic debut of “Breaking”
+    
+    ![Image 30: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I need to manage the supply chain for our new Cheesy Spam Supreme
+    
+    ![Image 32: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I need to manage shipments of fresh fruit from Malaysia to Denmark
+    
+    ![Image 34: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I want to collaborate on fresh ideas for my book "The Winds of Winter"
+    
+    ![Image 36: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I want to track celebrity endorsements of our "Adopt a Koala" program
+    
+    ![Image 38: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   Help me manage quest line content for the new Witcher game
+    
+    ![Image 40: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   We want to plan our new banking platform roadmap with a focus on Gen Z
+    
+    ![Image 42: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   Help me track athlete performance as we test a new "spray on" sneaker
+    
+    ![Image 44: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I need to manage intern placements at hospitals in Delaware
+    
+    ![Image 46: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I need to manage recruitment as we expand our hot dog chain into the UK
+    
+    ![Image 48: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+*   I want to manage beta programs for our IoT security business unit
+    
+    ![Image 50: Cobuilder generated bases](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3)
+    
+
+Sign up for free
+
+![Image 52: Aura left](https://www.airtable.com/ellipse-red-yellow-cyan.png)
+
+![Image 53: Aura right](https://www.airtable.com/ellipse-purple-blue.png)
+
+Create apps instantly with Airtable Cobuilder
+---------------------------------------------
+
+Every person, on every team, can unlock great ideas when AI does the rest.
+
+I need to manage recruitment as we expand our hot dog chain into the UK
+
+Help me with engineering management on our prototype engine for Bahrain
+
+I need to launch a women's skateboarding shoe in time for the Olympics
+
+I need to manage the supply chain for our new Cheesy Spam Supreme
+
+Help me track athlete performance as we test a new "spray on" sneaker
+
+I need to manage shipments of fresh fruit from Malaysia to Denmark
+
+I want a news coverage planner for the Olympic debut of “Breaking”
+
+Help me track parts and production for the Artemis mission SLS rocket system
+
+Help me plan locations for Dune 3
+
+I want to manage beta programs for our IoT security business unit
+
+We want to plan our new banking platform roadmap with a focus on Gen Z
+
+I want to track celebrity endorsements of our "Adopt a Koala" program
+
+I want to collaborate on fresh ideas for my book "The Winds of Winter"
+
+Help me track our investments in AI
+
+Try my own promptI need to manage localized video production for Girls Who Code classes
+
+I need to manage intern placements at hospitals in Delaware
+
+Help me manage quest line content for the new Witcher game
+
+Sorry, your browser doesn’t support embedded videos.
+
+Looking for inspiration?  Start with these resources.
+-----------------------------------------------------
+
+Stay one step ahead of the trends with the latest insights, research, and best practices for your teams.
+
+[Explore resources](https://www.airtable.com/lp/resources)
+
+*   [![Image 54](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Report ### Forrester Study: The Crisis of Fractured Organizations Read the full study to learn about how silos impact your business, and why it’s time to rebuild the connections between your teams.](https://www.airtable.com/lp/resources/reports/crisis-of-the-fractured-organization)
+    
+*   [![Image 56](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Blog ### How 6 world-class companies make an outsized impact Discover how leading global companies are using connected apps to dismantle silos.](https://blog.airtable.com/world-class-companies-use-connected-apps/)
+    
+*   [![Image 58](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Webinar ### Airtable Leaders Forum: Product Roadmap Get a sneak peek of the roadmap from Ilan Frank, VP of Product at Airtable, and see the future of Airtable as a connected apps platform.](https://www.airtable.com/lp/resources/webinars/airtable-product-roadmap)
+    
+*   [![Image 60](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Webinar ### Streamline product operations with Airtable Learn how teams connect data and workflows with a single source of truth and automate work to free up time.](https://www.airtable.com/lp/resources/demos/airtable-product-demos)
+    
+*   [![Image 62](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Keynote ### Airtable Leaders Forum: Keynote Hear how Howie Liu, CEO at Airtable, invites leaders to imagine a fundamentally different way of operating through the use of powerful apps.](https://www.airtable.com/videos/airtable-leadership-forum-ny2023)
+    
+*   [![Image 64](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Report ### Benchmarks for product teams Explore data-backed insights from 700+ product teams pros to learn how they structure their teams and make roadmap decisions.](https://www.airtable.com/lp/resources/reports/benchmarks-for-product-teams)
+    
+*   [![Image 66](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Demo ### Modern marketing teams run on Airtable Learn how Airtable's flexible platform allows marketing teams to build exactly what they need to deliver ambitious outcomes.](https://www.airtable.com/lp/resources/demos/marketing-solutions)
+    
+*   [![Image 68](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Report ### Forrester Study: The Crisis of Fractured Organizations Read the full study to learn about how silos impact your business, and why it’s time to rebuild the connections between your teams.](https://www.airtable.com/lp/resources/reports/crisis-of-the-fractured-organization)
+    
+*   [![Image 70](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Blog ### How 6 world-class companies make an outsized impact Discover how leading global companies are using connected apps to dismantle silos.](https://blog.airtable.com/world-class-companies-use-connected-apps/)
+    
+*   [![Image 72](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Webinar ### Airtable Leaders Forum: Product Roadmap Get a sneak peek of the roadmap from Ilan Frank, VP of Product at Airtable, and see the future of Airtable as a connected apps platform.](https://www.airtable.com/lp/resources/webinars/airtable-product-roadmap)
+    
+*   [![Image 74](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Webinar ### Streamline product operations with Airtable Learn how teams connect data and workflows with a single source of truth and automate work to free up time.](https://www.airtable.com/lp/resources/demos/airtable-product-demos)
+    
+*   [![Image 76](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Keynote ### Airtable Leaders Forum: Keynote Hear how Howie Liu, CEO at Airtable, invites leaders to imagine a fundamentally different way of operating through the use of powerful apps.](https://www.airtable.com/videos/airtable-leadership-forum-ny2023)
+    
+*   [![Image 78](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Report ### Benchmarks for product teams Explore data-backed insights from 700+ product teams pros to learn how they structure their teams and make roadmap decisions.](https://www.airtable.com/lp/resources/reports/benchmarks-for-product-teams)
+    
+*   [![Image 80](blob:https://www.airtable.com/b9a31d3949b1882a09ed2f8508d538f3) Demo ### Modern marketing teams run on Airtable Learn how Airtable's flexible platform allows marketing teams to build exactly what they need to deliver ambitious outcomes.](https://www.airtable.com/lp/resources/demos/marketing-solutions)
+    
+
+Teams at over 500,000 forward-thinking organizations use Airtable every day. Join them.
+---------------------------------------------------------------------------------------
+
+[Sign up for free](https://airtable.com/signup)[Contact Sales](https://www.airtable.com/contact-sales?ref=htcs.gen)
+
+[Airtable home](https://www.airtable.com/)
+
+*   [Platform](https://www.airtable.com/platform)
+*   [Solutions](https://www.airtable.com/solutions)
+*   [Resources](https://www.airtable.com/lp/resources)
+*   [Pricing](https://www.airtable.com/pricing)
+*   [Contact Sales](https://www.airtable.com/contact-sales?ref=htcs.sf)
+
+*   [Facebook](https://facebook.com/airtableapp)
+*   [Linkedin](https://linkedin.com/company/airtable)
+*   [Twitter](https://twitter.com/airtable)
+*   [Instagram](https://instagram.com/airtable)
+*   [Youtube](https://www.youtube.com/c/AirtableApp)
+
+*   Platform
+    
+    Platform
+    
+    *   [Platform Overview](https://www.airtable.com/platform)
+    *   [Integrations](https://www.airtable.com/integrations)
+    *   [Extensions](https://airtable.com/extensions)
+    *   [App Building](https://www.airtable.com/platform/app-building)
+    *   [AI](https://www.airtable.com/platform/ai)
+    *   [Connected Data](https://www.airtable.com/platform/connected-data)
+    *   [See more](https://www.airtable.com/#)
+    *   [Governance and Scale](https://www.airtable.com/platform/governance)
+    *   [Automations](https://www.airtable.com/platform/automations)
+    *   [Interface Designer](https://www.airtable.com/platform/interface-designer)
+    *   [Views](https://www.airtable.com/platform/views)
+    *   [Reporting](https://www.airtable.com/platform/reporting)
+    *   [Apps by Airtable](https://www.airtable.com/platform/apps-by-airtable)
+    *   [Connected Apps Platform](https://www.airtable.com/platform/connected-apps-platform)
+    *   [Show less](https://www.airtable.com/#)
+    
+    * * *
+    
+*   Solutions
+    
+    Solutions
+    
+    *   [Product](https://www.airtable.com/solutions/product)
+    *   [Marketing](https://www.airtable.com/solutions/marketing)
+    *   [Operations](https://www.airtable.com/solutions/operations)
+    *   [Human Resources](https://www.airtable.com/solutions/hr)
+    *   [Sales](https://www.airtable.com/solutions/sales)
+    *   [Finance](https://www.airtable.com/solutions/finance)
+    *   [See more](https://www.airtable.com/#)
+    *   [Content Operations](https://www.airtable.com/solutions/content-operations)
+    *   [See all Solutions](https://www.airtable.com/solutions)
+    *   [Show less](https://www.airtable.com/#)
+    
+    * * *
+    
+*   Learn
+    
+    Learn
+    
+    *   [Learning Center](https://www.airtable.com/learning)
+    *   [Events](https://www.airtable.com/lp/resources/events)
+    *   [Video Center](https://www.airtable.com/videos)
+    *   [Demos](https://www.airtable.com/lp/resources/demos)
+    *   [Customer Stories](https://www.airtable.com/customer-stories)
+    *   [Webinars](https://www.airtable.com/lp/resources/webinars)
+    *   [See more](https://www.airtable.com/#)
+    *   [eBooks](https://www.airtable.com/lp/resources/ebooks)
+    *   [Guides](https://www.airtable.com/guides)
+    *   [Articles](https://www.airtable.com/articles)
+    *   [Reports](https://www.airtable.com/lp/resources/reports)
+    *   [Quick Reads](https://www.airtable.com/lp/resources/quick-reads)
+    *   [Show less](https://www.airtable.com/#)
+    
+    * * *
+    
+*   Resources
+    
+    Resources
+    
+    *   [Partners](https://www.airtable.com/partners)
+    *   [Services](https://www.airtable.com/enterprise/services)
+    *   [Developers](https://airtable.com/developers)
+    *   [Community](https://community.airtable.com/)
+    *   [Templates](https://airtable.com/templates)
+    *   [Airtable Universe](https://airtable.com/universe)
+    *   [See more](https://www.airtable.com/#)
+    *   [Customer Support](https://support.airtable.com/docs/contacting-airtable-support)
+    *   [Support Docs](https://support.airtable.com/)
+    *   [Show less](https://www.airtable.com/#)
+    
+    * * *
+    
+*   Company
+    
+    Company
+    
+    *   [About](https://www.airtable.com/about)
+    *   [Careers popular](https://airtable.com/careers)
+    *   [Blog](https://blog.airtable.com/)
+    *   [Status](https://status.airtable.com/)
+    *   [Newsroom](https://www.airtable.com/newsroom)
+    *   [Try Airtable for free](https://airtable.com/signup)
+    
+    * * *
+    
+
+*   [Security](https://www.airtable.com/security)
+*   [API](https://airtable.com/api)
+*   [Sitemap](https://www.airtable.com/sitemap)
+*   [Privacy](https://www.airtable.com/privacy)
+*   [Terms](https://www.airtable.com/terms-and-policies)
+*   [Do Not Sell/Share My Info](https://www.airtable.com/privacy-choices)
+*   [Cookie Preferences](https://www.airtable.com/#)
+
+[Download on the App Store](https://itunes.apple.com/US/app/id914172636)[Get it on Google Play](https://play.google.com/store/apps/details?id=com.formagrid.airtable)
+```
+
+Based on the above content, extract all relevant links that may contain information about the product as specified in the system prompt. Remember to follow the rules and output format specified there.
+
+Example output format:
+{
+  "extracted_links": [
+    {
+      "url": "https://example.com/pricing",
+      "relevance": ["pricing", "features"],
+      "confidence": 0.9
+    },
+    {
+      "url": "https://example.com/features",
+      "relevance": ["features", "pros", "primary_use_case"],
+      "confidence": 0.8
+    }
+  ]
+}
+
+If no relevant links are found, return an object with an empty array: { "extracted_links": [] }
+
+Ensure that you've thoroughly searched for links that might contain ANY of the information types listed in the system prompt. Don't overlook less obvious pages that might contain valuable information.
+
+
+Response:
+{"extracted_links":[{"url":"https://www.airtable.com/platform","relevance":["description","unique_selling_proposition","features","pros","cons"],"confidence":0.9},{"url":"https://www.airtable.com/pricing","relevance":["pricing"],"confidence":0.95},{"url":"https://www.airtable.com/integrations","relevance":["integrations"],"confidence":0.85},{"url":"https://www.airtable.com/support","relevance":["support"],"confidence":0.8},{"url":"https://www.airtable.com/solutions/product","relevance":["primary_use_case","features","pros","cons"],"confidence":0.8},{"url":"https://www.airtable.com/platform/app-building","relevance":["description","primary_use_case","features"],"confidence":0.75},{"url":"https://www.airtable.com/whatsnew","relevance":["description","features"],"confidence":0.7}]}

@@ -1,0 +1,950 @@
+LLM: EXTRACT_RELEVANT_LINKS
+Timestamp: 2024-08-11T18:56:10.581Z
+Model: gpt-4o-mini
+
+Request:
+[user]: 
+Base URL: https://www.atlassian.com
+
+Website content delimited by triple backticks:
+```
+Collaboration software for software, IT and business teams
+=============== 
+
+![Image 1: Rovo product logo](https://wac-cdn.atlassian.com/misc-assets/webp-images/rovo-logo-light.svg)
+
+**Unlock enterprise knowledge with Generative AI.**
+
+[Meet Rovo](https://www.atlassian.com/software/rovo)
+
+![Image 2](https://wac-cdn.atlassian.com/misc-assets/webp-images/banner-alert-accent-left.svg)![Image 3](https://wac-cdn.atlassian.com/misc-assets/webp-images/banner-alert-accent-left-mobile.svg)
+
+![Image 4](https://wac-cdn.atlassian.com/misc-assets/webp-images/banner-alert-accent-right.svg)![Image 5](https://wac-cdn.atlassian.com/misc-assets/webp-images/banner-alert-accent-right-mobile.svg)
+
+[](https://www.atlassian.com/)
+
+*   [Products](https://www.atlassian.com/#)
+    
+    Featured
+    
+    Developers
+    
+    Product Managers
+    
+    IT professionals
+    
+    Business Teams
+    
+    Leadership Teams
+    
+    [See all products](https://www.atlassian.com/software)
+    
+    [#### Jira Flexible project management](https://www.atlassian.com/software/jira)
+    
+    [#### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)
+    
+    [#### Jira Service Management High-velocity service delivery](https://www.atlassian.com/software/jira/service-management)
+    
+    [#### Rovo New Unlock enterprise knowledge](https://www.atlassian.com/software/rovo)
+    
+    [#### Jira Product Discovery New Capture & prioritize ideas](https://www.atlassian.com/software/jira/product-discovery)
+    
+    [#### Compass New Optimize software health](https://www.atlassian.com/software/compass)
+    
+    [#### Guard New Enhanced cloud security](https://www.atlassian.com/software/access)
+    
+    [#### Loom New Quick, async video updates](https://loom.com/)
+    
+    [#### Jira Flexible project management](https://www.atlassian.com/software/jira)
+    
+    [#### Compass New Optimize software health](https://www.atlassian.com/software/compass)
+    
+    [#### Bitbucket Collaborative code repos](https://www.atlassian.com/software/bitbucket)
+    
+    [#### Jira Flexible project management](https://www.atlassian.com/software/jira)
+    
+    [#### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)
+    
+    [#### Jira Product Discovery New Capture & prioritize ideas](https://www.atlassian.com/software/jira/product-discovery)
+    
+    [#### Jira Service Management High-velocity service delivery](https://www.atlassian.com/software/jira/service-management)
+    
+    [#### Guard New Enhanced cloud security](https://www.atlassian.com/software/access)
+    
+    [#### Jira Flexible project management](https://www.atlassian.com/software/jira)
+    
+    [#### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)
+    
+    [#### Loom New Quick, async video updates](https://loom.com/)
+    
+    [#### Jira Flexible project management](https://www.atlassian.com/software/jira)
+    
+    [#### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)
+    
+    [#### Loom New Quick, async video updates](https://loom.com/)
+    
+    [#### Jira Align New Enterprise strategy alignment](https://www.atlassian.com/software/jira/align)
+    
+*   [Teams](https://www.atlassian.com/#)
+    
+    [![Image 6: software-icon](https://wac-cdn.atlassian.com/misc-assets/webp-images/GWP-2632-svg1.svg) ![Image 7: software-icon-hover](https://wac-cdn.atlassian.com/misc-assets/webp-images/GWP-2632-svg2.svg) ###### Software Ship high-quality, innovative software faster](https://www.atlassian.com/teams/software-development)
+    
+    [![Image 8: marketing-icon](https://wac-cdn.atlassian.com/misc-assets/webp-images/GWP-2632-svg5.svg) ![Image 9: marketing-icon-hover](https://wac-cdn.atlassian.com/misc-assets/webp-images/GWP-2632-svg2-1.svg) ###### Marketing Collaborative strategies for marketing success](https://www.atlassian.com/teams/marketing)
+    
+    [![Image 10: it-icon](https://wac-cdn.atlassian.com/misc-assets/webp-images/GWP-2632-svg7.svg) ![Image 11: it-icon-hover](https://wac-cdn.atlassian.com/misc-assets/webp-images/GWP-2632-svg8.svg) ###### IT Deliver exceptional operations and support services.](https://www.atlassian.com/teams/it)
+    
+    Solution
+    
+    [Work Management](https://www.atlassian.com/solutions/work-management)
+    
+    [IT Service Management](https://www.atlassian.com/solutions/itsm)
+    
+    [Agile & DevOps](https://www.atlassian.com/solutions/devops)
+    
+    By Team Size
+    
+    [Enterprise](https://www.atlassian.com/enterprise)
+    
+    [Small Business](https://www.atlassian.com/software/small-business)
+    
+    [Startup](https://www.atlassian.com/software/startups)
+    
+    [Non-profit](https://www.atlassian.com/teams/nonprofits)
+    
+    By Industry
+    
+    [Retail](https://www.atlassian.com/industries/retail)
+    
+    [Telecommunications](https://www.atlassian.com/industries/telecom)
+    
+    [Professional services](https://www.atlassian.com/industries/professional-services)
+    
+    [Government](https://www.atlassian.com/government)
+    
+*   [Why Atlassian?](https://www.atlassian.com/#)
+    
+    [###### Integrations Connect thousands of apps to your Atlassian products](https://marketplace.atlassian.com/)
+    
+    [###### Customers Case studies & stories powered by teamwork](https://www.atlassian.com/customers)
+    
+    [###### FedRAMP Compliant solutions for the public sector](https://www.atlassian.com/trust/compliance/resources/fedramp)
+    
+    [###### Resilience Enterprise-grade & highly performant infrastructure](https://www.atlassian.com/trust/resilience)
+    
+    [###### Platform Our deeply integrated, reliable & secure platform](https://www.atlassian.com/platform)
+    
+    [###### Trust center Ensure your data’s security, compliance & availability](https://www.atlassian.com/trust)
+    
+*   [Resources](https://www.atlassian.com/#)
+    
+    [###### Customer Support Ask questions, report bugs & give us feedback](https://support.atlassian.com/)
+    
+    [###### Find Partners Consulting, training & product customization support](https://partnerdirectory.atlassian.com/)
+    
+    [###### Migration Program Step-by-step guidance for your Atlassian cloud migration](https://www.atlassian.com/migration)
+    
+    [###### University Learn and expand your skill set for all things Atlassian](https://university.atlassian.com/)
+    
+    Support
+    
+    [General Inquiries](https://www.atlassian.com/company/contact/general-inquiries)
+    
+    [Technical Support](https://support.atlassian.com/contact/)
+    
+    [Product Advice](https://www.atlassian.com/company/contact/product-evaluator-advice)
+    
+    [Pricing and Billing](https://www.atlassian.com/company/contact/purchasing-licensing)
+    
+    [Partner Support](https://www.atlassian.com/partners)
+    
+    [Developer Support](https://developer.atlassian.com/)
+    
+    [Enterprise Support](https://www.atlassian.com/enterprise/services)
+    
+    [Purchasing and Licensing](https://www.atlassian.com/licensing/purchase-licensing)
+    
+    Learn
+    
+    [Project Management](https://www.atlassian.com/work-management/project-management)
+    
+    [Project Collaboration](https://www.atlassian.com/work-management/project-collaboration)
+    
+    [Agile](https://www.atlassian.com/agile)
+    
+    [Team Playbook](https://www.atlassian.com/team-playbook)
+    
+    [Community](https://www.atlassian.com/community)
+    
+    [Product Documentation](https://confluence.atlassian.com/display/ALLDOC/Atlassian+Documentation)
+    
+    [Get Started](https://www.atlassian.com/get-started)
+    
+*   [Enterprise](https://www.atlassian.com/enterprise)
+    
+*   More +
+
+*   
+
+[](https://www.atlassian.com/)
+
+[](https://www.atlassian.com/)
+
+*   
+
+Back
+
+*   Products
+    
+*   Featured
+    
+*   Developers
+    
+*   Product Managers
+    
+*   IT professionals
+    
+*   Business Teams
+    
+*   Leadership Teams
+    
+
+*   Teams
+    
+*   Why Atlassian?
+    
+*   Resources
+    
+*   [Enterprise](https://www.atlassian.com/enterprise)
+
+[Sign in](https://id.atlassian.com/login?continue=https%3A%2F%2Fwww.atlassian.com%2Fgateway%2Fapi%2Fstart%2Fauthredirect)
+
+Featured Products
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Jira Service Management High-velocity service delivery](https://www.atlassian.com/software/jira/service-management)[##### Rovo New Unlock enterprise knowledge](https://www.atlassian.com/software/rovo)[##### Jira Product Discovery New Capture & prioritize ideas](https://www.atlassian.com/software/jira/product-discovery)[##### Compass New Optimize software health](https://www.atlassian.com/software/compass)[##### Guard New Enhanced cloud security](https://www.atlassian.com/software/access)[##### Loom New Quick, async video updates](https://loom.com/)
+
+Products for Developers
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Bitbucket Collaborative code repos](https://www.atlassian.com/software/bitbucket)[##### Compass Optimize software health](https://www.atlassian.com/software/compass)
+
+Products for Product Managers
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Jira Product Discovery New Capture & prioritize ideas](https://www.atlassian.com/software/jira/product-discovery)
+
+Product for IT Professionals
+
+[##### Jira Service Management High-velocity service delivery](https://www.atlassian.com/software/jira/service-management)[##### Guard New Enhanced cloud security](https://www.atlassian.com/software/access)
+
+Products for Business Teams
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Trello Organized & visualized work](https://trello.com/home)[##### Loom New Quick, async video updates](https://loom.com/)
+
+Products for Leadership Teams
+
+[##### Jira Align Enterprise strategy alignment](https://www.atlassian.com/software/jira/align)[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Loom New Quick, async video updates](https://loom.com/)
+
+Teams
+
+[##### Software Ship high-quality, innovative software faster](https://www.atlassian.com/teams/software-development)[##### Marketing Collaborative strategies for marketing success](https://www.atlassian.com/teams/marketing)[##### IT Deliver exceptional operations and support services.](https://www.atlassian.com/teams/it)
+
+Solution
+
+[Work Management](https://www.atlassian.com/solutions/work-management)
+
+[IT Service Management](https://www.atlassian.com/solutions/itsm)
+
+[Agile & DevOps](https://www.atlassian.com/solutions/devops)
+
+By Team Size
+
+[Enterprise](https://www.atlassian.com/enterprise)
+
+[Small Business](https://www.atlassian.com/software/small-business)
+
+[Startup](https://www.atlassian.com/software/startups)
+
+[Non-profit](https://www.atlassian.com/teams/nonprofits)
+
+By Industry
+
+[Retail](https://www.atlassian.com/industries/retail)
+
+[Telecommunications](https://www.atlassian.com/industries/telecom)
+
+[Professional services](https://www.atlassian.com/industries/professional-services)
+
+[Government](https://www.atlassian.com/government)
+
+Why Atlassian
+
+[##### Integrations Connect thousands of apps to your Atlassian products](https://marketplace.atlassian.com/)[##### Customers Case studies & stories powered by teamwork](https://www.atlassian.com/customers)[##### FedRAMP Compliant solutions for the public sector](https://www.atlassian.com/trust/compliance/resources/fedramp)[##### Resilience Enterprise-grade & highly performant infrastructure](https://www.atlassian.com/trust/resilience)[##### Platform Our deeply integrated, reliable & secure platform](https://www.atlassian.com/platform)[##### Trust center Ensure your data’s security, compliance & availability](https://www.atlassian.com/trust)
+
+Resources
+
+[##### Customer Support Ask questions, report bugs & give us feedback](https://support.atlassian.com/)[##### Find Partners Consulting, training & product customization support](https://partnerdirectory.atlassian.com/)[##### Migration Program Step-by-step guidance for your Atlassian cloud migration](https://www.atlassian.com/migration)[##### University Learn and expand your skill set for all things Atlassian](https://university.atlassian.com/)
+
+Support
+
+[General Inquiries](https://www.atlassian.com/company/contact/general-inquiries)
+
+[Technical Support](https://support.atlassian.com/contact/)
+
+[Product Advice](https://www.atlassian.com/company/contact/product-evaluator-advice)
+
+[Pricing and Billing](https://www.atlassian.com/company/contact/purchasing-licensing)
+
+[Partner Support](https://www.atlassian.com/partners)
+
+[Developer Support](https://developer.atlassian.com/)
+
+[Enterprise Support](https://www.atlassian.com/enterprise/services)
+
+[Purchasing and Licensing](https://www.atlassian.com/licensing/purchase-licensing)
+
+Learn
+
+[Project Management](https://www.atlassian.com/work-management/project-management)
+
+[Project Collaboration](https://www.atlassian.com/work-management/project-collaboration)
+
+[Agile](https://www.atlassian.com/agile)
+
+[Team Playbook](https://www.atlassian.com/team-playbook)
+
+[Community](https://www.atlassian.com/community)
+
+[Product Documentation](https://confluence.atlassian.com/display/ALLDOC/Atlassian+Documentation)
+
+[Get Started](https://www.atlassian.com/get-started)
+
+*   Products
+    
+*   Featured
+    
+*   Developers
+    
+*   Product Managers
+    
+*   IT professionals
+    
+*   Business Teams
+    
+*   Leadership Teams
+    
+
+*   Teams
+    
+*   Why Atlassian?
+    
+*   Resources
+    
+*   [Enterprise](https://www.atlassian.com/enterprise)
+
+[Sign in](https://id.atlassian.com/login?continue=https%3A%2F%2Fwww.atlassian.com%2Fgateway%2Fapi%2Fstart%2Fauthredirect)
+
+Featured Products
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Jira Service Management High-velocity service delivery](https://www.atlassian.com/software/jira/service-management)[##### Rovo New Unlock enterprise knowledge](https://www.atlassian.com/software/rovo)[##### Jira Product Discovery New Capture & prioritize ideas](https://www.atlassian.com/software/jira/product-discovery)[##### Compass New Optimize software health](https://www.atlassian.com/software/compass)[##### Guard New Enhanced cloud security](https://www.atlassian.com/software/access)[##### Loom New Quick, async video updates](https://loom.com/)
+
+Products for Developers
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Bitbucket Collaborative code repos](https://www.atlassian.com/software/bitbucket)[##### Compass Optimize software health](https://www.atlassian.com/software/compass)
+
+Products for Product Managers
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Jira Product Discovery New Capture & prioritize ideas](https://www.atlassian.com/software/jira/product-discovery)
+
+Product for IT Professionals
+
+[##### Jira Service Management High-velocity service delivery](https://www.atlassian.com/software/jira/service-management)[##### Guard New Enhanced cloud security](https://www.atlassian.com/software/access)
+
+Products for Business Teams
+
+[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Trello Organized & visualized work](https://trello.com/home)[##### Loom New Quick, async video updates](https://loom.com/)
+
+Products for Leadership Teams
+
+[##### Jira Align Enterprise strategy alignment](https://www.atlassian.com/software/jira/align)[##### Jira Flexible project management](https://www.atlassian.com/software/jira)[##### Confluence Knowledge, all in one place](https://www.atlassian.com/software/confluence)[##### Loom New Quick, async video updates](https://loom.com/)
+
+Teams
+
+[##### Software Ship high-quality, innovative software faster](https://www.atlassian.com/teams/software-development)[##### Marketing Collaborative strategies for marketing success](https://www.atlassian.com/teams/marketing)[##### IT Deliver exceptional operations and support services.](https://www.atlassian.com/teams/it)
+
+Solution
+
+[Work Management](https://www.atlassian.com/solutions/work-management)
+
+[IT Service Management](https://www.atlassian.com/solutions/itsm)
+
+[Agile & DevOps](https://www.atlassian.com/solutions/devops)
+
+By Team Size
+
+[Enterprise](https://www.atlassian.com/enterprise)
+
+[Small Business](https://www.atlassian.com/software/small-business)
+
+[Startup](https://www.atlassian.com/software/startups)
+
+[Non-profit](https://www.atlassian.com/teams/nonprofits)
+
+By Industry
+
+[Retail](https://www.atlassian.com/industries/retail)
+
+[Telecommunications](https://www.atlassian.com/industries/telecom)
+
+[Professional services](https://www.atlassian.com/industries/professional-services)
+
+[Government](https://www.atlassian.com/government)
+
+Why Atlassian
+
+[##### Integrations Connect thousands of apps to your Atlassian products](https://marketplace.atlassian.com/)[##### Customers Case studies & stories powered by teamwork](https://www.atlassian.com/customers)[##### FedRAMP Compliant solutions for the public sector](https://www.atlassian.com/trust/compliance/resources/fedramp)[##### Resilience Enterprise-grade & highly performant infrastructure](https://www.atlassian.com/trust/resilience)[##### Platform Our deeply integrated, reliable & secure platform](https://www.atlassian.com/platform)[##### Trust center Ensure your data’s security, compliance & availability](https://www.atlassian.com/trust)
+
+Resources
+
+[##### Customer Support Ask questions, report bugs & give us feedback](https://support.atlassian.com/)[##### Find Partners Consulting, training & product customization support](https://partnerdirectory.atlassian.com/)[##### Migration Program Step-by-step guidance for your Atlassian cloud migration](https://www.atlassian.com/migration)[##### University Learn and expand your skill set for all things Atlassian](https://university.atlassian.com/)
+
+Support
+
+[General Inquiries](https://www.atlassian.com/company/contact/general-inquiries)
+
+[Technical Support](https://support.atlassian.com/contact/)
+
+[Product Advice](https://www.atlassian.com/company/contact/product-evaluator-advice)
+
+[Pricing and Billing](https://www.atlassian.com/company/contact/purchasing-licensing)
+
+[Partner Support](https://www.atlassian.com/partners)
+
+[Developer Support](https://developer.atlassian.com/)
+
+[Enterprise Support](https://www.atlassian.com/enterprise/services)
+
+[Purchasing and Licensing](https://www.atlassian.com/licensing/purchase-licensing)
+
+Learn
+
+[Project Management](https://www.atlassian.com/work-management/project-management)
+
+[Project Collaboration](https://www.atlassian.com/work-management/project-collaboration)
+
+[Agile](https://www.atlassian.com/agile)
+
+[Team Playbook](https://www.atlassian.com/team-playbook)
+
+[Community](https://www.atlassian.com/community)
+
+[Product Documentation](https://confluence.atlassian.com/display/ALLDOC/Atlassian+Documentation)
+
+[Get Started](https://www.atlassian.com/get-started)
+
+The new Jira:  
+from teamsteams
+
+to dreams
+------------------------------------------
+
+[Get started](https://www.atlassian.com/try/cloud/signup?bundle=jira-software)
+
+*   ![Image 12](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/j9r7crv6mz8g566kwqh9zv5/software.svg)
+    
+    ![Image 13](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/sx482fxgfmc3w4cwr3cn97z/software-hover.svg)
+    
+    Software
+    
+*   ![Image 14](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/tvm6cp9vpg8v9t8fkx4fjg7k/prod-management.svg)
+    
+    ![Image 15](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/krsq46nhtpqs69fzqpkrvn97/prod-management-hover.svg)
+    
+    Product management
+    
+*   ![Image 16](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/vx2wsv5v63s6q83q7kpq8m7g/marketing.svg)
+    
+    ![Image 17](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/sfcpmbjckgrpbwc4qjv6nm7/marketing-hover.svg)
+    
+    Marketing
+    
+*   ![Image 18](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/pcj85zfcgbmqmjknc8s753hn/proj-management.svg)
+    
+    ![Image 19](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/k34vvccq4jr79sn4vrt6x9b/proj-management-hover.svg)
+    
+    Project management
+    
+*   ![Image 20](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/q98jrzxzgsgk7n4q33v23c3/design.svg)
+    
+    ![Image 21](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/vsk3xn63rrsfk7f3xbzxhfk/design-hover.svg)
+    
+    Design
+    
+*   ![Image 22](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/2whn29rt5pf356jzcs5nbz/it.svg)
+    
+    ![Image 23](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/jsnmh8rms7rmbfb44qrrcmbj/it-hover.svg)
+    
+    IT
+    
+
+https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/7m6czqqkjbq8rztkbgntgh/CSD-10721\_WAC\_Hero\_A\_HD.webp
+
+![Image 24](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/7hhmjs66t33f8n3snssrzrr/sparkle-sm.svg)![Image 25](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/2knh43qwmst9b7tffmz5b9/sparkle-md.svg)![Image 26](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/w7xksbqzqj4b8jrz3z6vbtt4/sparkle-lg.svg)
+
+Teamwork solutions for high-performing teams
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[Get started with Jira](https://www.atlassian.com/software/jira)
+
+![Image 27: Jira](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/hmv84b686k38wqh7tpwrfkcv/jira-logo.svg)
+
+#### Jira
+
+### Dream it, plan it, launch it
+
+The #1 tool for agile teams is now for all teams. Plan, track, and deliver your biggest ideas together.
+
+“We've been able to reduce our cycle time and increase throughput by 200%, which means we're delivering capabilities to customers faster and increasing customer satisfaction.”
+
+![Image 28: Mai Lian Scarlett](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/2m3fqtj6srn34bwgw3fj75q/People-profile.webp?auto=webp)
+
+![Image 29: Former Senior Director, Agile Transformation Office, Lumen](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/c4ntnv2v3ckxg8bfbhvfgpv/lumen.webp?auto=webp)
+
+Mai Lian Scarlett
+
+Former Senior Director, Agile Transformation Office, Lumen
+
+[Learn more](https://www.atlassian.com/customers/lumen)
+
+![Image 30](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/mg2q8gm7kfktk93s7rh7pb/squiggle-1.svg)
+
+![Image 31](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/7nt7xmh5h5bcf7mchcssjvxk/CSD-10721_WAC_Jira-4003614779.webp?auto=webp)
+
+[Get started with Jira](https://www.atlassian.com/software/jira)
+
+[Learn more](https://www.atlassian.com/customers/lumen)
+
+![Image 32: Confluence](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/wfr836ffrrh5b7qs43qhgkv/confluence-logo.svg)
+
+#### Confluence
+
+### Scale your knowledge
+
+Connect and consolidate scattered docs and disconnected teammates in one, central source of truth.
+
+“The big win that we've seen through the implementation of Confluence Cloud is definitely collaboration. It's a very open way of working.”
+
+![Image 33: Damian Davis](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/c4bf274b83sgwf6pw4qgtq/damien-davis.webp?auto=webp)
+
+![Image 34: Lead Atlassian Administrator, Dropbox](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/8gttjnmcqbrhcb4z7hbbptj6/dropbox.webp?auto=webp)
+
+Damian Davis
+
+Lead Atlassian Administrator, Dropbox
+
+[Learn more](https://www.atlassian.com/customers/dropbox)
+
+![Image 35](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/tvvpns7h3cn3xhr44xh4kkkr/arrow-grp.svg)
+
+![Image 36](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/hmf9ccjfg8n2mvsjv2p5cvh/CSD-10721_WAC__Confluence-2040505915.webp?auto=webp)
+
+[Get started with Confluence](https://www.atlassian.com/software/confluence)
+
+[Learn more](https://www.atlassian.com/customers/dropbox)
+
+![Image 37: Jira Service Management](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/bmhr7pgg287r7759g89974/jsm-logo.svg)
+
+#### Jira Service Management
+
+### Deliver service faster
+
+Connect Dev and Ops teams on a single platform with customizable features and AI-powered agents.
+
+“Atlassian Intelligence acts as a virtual teammate summarizing 5-page PIR reports into 5-sentence recaps for me. It’s already proven its worth by improving productivity across our product teams.”
+
+![Image 38: Matthias Hansen](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/wb97jh3n8ks9km8vwsm4q4n/matthias-hansen.webp?auto=webp)
+
+![Image 39: Group CTO, Domino's Pizza Enterprises](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/gfccvh83783m2n4n4n4pxxtx/dominos.webp?auto=webp)
+
+Matthias Hansen
+
+Group CTO, Domino's Pizza Enterprises
+
+[Learn more](https://www.atlassian.com/customers/dominos)
+
+![Image 40](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/vwbgqp77qkwpjqzrbrg4rx/lightning.svg)
+
+![Image 41](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/pbmckng47fsvvb7hbccb8zx5/CSD-10721_WAC__JSM-3020245023.webp?auto=webp)
+
+[Get started with Jira Service Management](https://www.atlassian.com/software/jira/service-management)
+
+[Learn more](https://www.atlassian.com/customers/dominos)
+
+![Image 42: Loom](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/fr8nxq2h4qmssbqqm5knv9/loom-logo.svg)
+
+#### Loom
+
+### Record, share, collaborate
+
+Easily record and share AI-powered video messages to reach a broader audience for better async collaboration.
+
+“Loom has been the light of my life since you showed me it. I never tire of hearing this from folks.”
+
+![Image 43: Alexis Ohanian](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/6hmsnt7vw96fb45m7rs7fm/alexis-ohanian.webp?auto=webp)
+
+![Image 44: Founder, Seven Seven Six](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/8h9t9q2f3mzn6tnkw3jr/seven-seven-six.webp?auto=webp)
+
+Alexis Ohanian
+
+Founder, Seven Seven Six
+
+[Learn more](https://www.atlassian.com/customers)
+
+![Image 45](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/4mr877grr45rkk5xfwm4vp3m/squiggle-2.svg)
+
+![Image 46](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/t9r5k95j9gbp334vmq7jm93t/CSD-10721_WAC__Loom-791474346.webp?auto=webp)
+
+[Get started with Loom](https://www.loom.com/)
+
+[Learn more](https://www.atlassian.com/customers)
+
+![Image 47: Jira Product Discovery](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/mfqxwwvqbgn8sf3vpznnhhbj/jpd-logo.svg)
+
+#### Jira Product Discovery
+
+### Ideate faster than ever
+
+Capture and prioritize ideas and align everyone with product roadmaps - all in one single Jira platform.
+
+“Jira Product Discovery translated our entire process into a highly transparent workflow, connected to the work we were already doing in Jira. That was a mind-blowing moment.”
+
+![Image 48: Stephanie Leue](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/4xmr4tfhxcnpntftpn8k28pj/stephanie-leue.webp?auto=webp)
+
+![Image 49: Former Chief Product Officer, Doodle](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/49gkxpfsfbz2b2bs5st676g/doodle.webp?auto=webp)
+
+Stephanie Leue
+
+Former Chief Product Officer, Doodle
+
+[Learn more](https://www.atlassian.com/customers/doodle)
+
+![Image 50](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/pg9v4sgc2325g4rw8k4nx/star-grp.svg)
+
+![Image 51](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/6vkbxssxhq8mgkhpbq9qrjk/CSD-10721_WAC__JPD-286968629.webp?auto=webp)
+
+[Get started with Jira Product Discovery](https://www.atlassian.com/software/jira/product-discovery)
+
+[Learn more](https://www.atlassian.com/customers/doodle)
+
+![Image 52: Atlassian Intelligence](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/bgxg5qrw4vpgr592k47zft/atlassian-intelligence.svg)Atlassian Intelligence
+
+Transform teamwork with human-AI collaboration
+----------------------------------------------
+
+![Image 53](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/jghzmt5nq49hs6h7nzj4b537/CSD-10721_WAC__AI-3298633667.webp?auto=webp)
+
+[Explore Atlassian Intelligence](https://www.atlassian.com/software/artificial-intelligence)
+
+Teams across the globe run on Atlassian
+---------------------------------------
+
+### 300000+
+
+companies power team collaboration with Atlassian
+
+### 200+
+
+countries have companies that use Atlassian
+
+### 80%
+
+of Fortune 500 companies use Atlassian products
+
+![Image 54](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/q338n5stm9x4j5mq7tb43m/earth_1.webp?auto=webp)
+
+Empower everyone, on every team
+-------------------------------
+
+*   Software
+*   Product management
+*   Marketing
+*   Project management
+*   Design
+*   IT
+
+### Supercharge dev productivity
+
+Plan, track, and release world-class software with the number one software development tool for agile teams
+
+[Learn more about Software](https://www.atlassian.com/teams/software-development)
+
+![Image 55](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/h4mh7krtmbcwgnqsmxp9cpr/software-main.webp?auto=webp&format=png?auto=webp)
+
+#### Get started with a template
+
+![Image 56](https://wac-cdn.atlassian.com/misc-assets/webp-images/software-card-1.webp)
+
+#### Scrum
+
+Easily plan, track, and manage work across sprints
+
+[Try it out](https://www.atlassian.com/software/jira/templates/scrum)
+
+![Image 57](https://wac-cdn.atlassian.com/misc-assets/webp-images/software-card-2.webp)
+
+#### Bug Tracking
+
+Seamlessly report, track, and prioritize bugs to address development issues
+
+[Try it out](https://www.atlassian.com/software/jira/templates/bug-tracking)
+
+![Image 58](https://wac-cdn.atlassian.com/misc-assets/webp-images/software-card-3.webp)
+
+#### DevOps
+
+Develop, deploy, and manage applications with an open tools approach
+
+[Try it out](https://www.atlassian.com/software/jira/templates/devops)
+
+For teams of all sizes
+----------------------
+
+Everyone from start-ups to large enterprises prefer Atlassian
+
+[Explore all customers stories](https://www.atlassian.com/customers)
+
+![Image 59: Modern Collaboration Platform Team, Mercedes Benz](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/qqc4sgmkh4h8jgh4shpk7nmj/MercedesBenz-357676847.webp)
+
+Large enterprise
+
+“With Atlassian cloud, everything regarding server maintenance is done for us, and there’s less downtime and better performance.”
+
+Mehmet Sari  
+Modern Collaboration Platform Team, Mercedes Benz
+
+[Read Mercedes-Benz’s case study](https://www.atlassian.com/customers/mercedes-benz)
+
+![Image 60: Senior Technical Program Manager, Roblox](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/2w4xm9kcvzqnr73shng42crj/Roblox-3121607094.webp)
+
+Enterprise
+
+“For the two teams we've already migrated from Wrike to Jira, each of those will amount to $150,000/year in savings.”
+
+Joe Cotant  
+Senior Technical Program Manager, Roblox
+
+[Read Roblox’s case study](https://www.atlassian.com/customers/roblox)
+
+![Image 61: Director of Agile Delivery, Global E-commerce, Royal Caribbean](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/xx97fwkmxjkfbprnsk6nspkc/RoyalCaribbean-2310931816.webp)
+
+Large enterprise
+
+“By leveraging Jira and Confluence for automated reporting, we’re saving over 800 hours and $500k per year in management consulting costs.”
+
+Wais Mojaddidi  
+Director of Agile Delivery, Global E-commerce, Royal Caribbean
+
+[Read Royal Caribbean’s case study](https://www.atlassian.com/customers/royal-caribbean)
+
+![Image 62: Former Senior Director, Agile Transformation Office, Lumen](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/9hp62jfcmq8kqkx8b7b8pg5/Lumen-381040365.webp)
+
+Enterprise
+
+“We’ve been able to increase throughput by 200%, which means we’re delivering capabilities faster and increasing customer satisfaction.”
+
+Mai Lian Scarlett  
+Former Senior Director, Agile Transformation Office, Lumen
+
+[Read Lumen’s case study](https://www.atlassian.com/customers/lumen)
+
+![Image 63: Former Chief Product Officer, Doodle](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/p7fw65xf78hkjrkck7q387c/Doodle-3562754075.webp)
+
+Small medium business
+
+“Jira Product Discovery translated our entire process into a highly transparent workflow. That was a mind-blowing moment.”
+
+Stephanie Leue  
+Former Chief Product Officer, Doodle
+
+[Read Doodle’s case study](https://www.atlassian.com/customers/doodle)
+
+![Image 64: Lead Atlassian Administrator, Dropbox](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/smrbg5nc693bk36vw47m7kp5/DropBox-4186472046.webp)
+
+Enterprise
+
+“The big win that we've seen through Confluence Cloud is definitely collaboration. It's a very open way of working.”
+
+Damien Davis  
+Lead Atlassian Administrator, Dropbox
+
+[Read Dropbox’s case study](https://www.atlassian.com/customers/dropbox)
+
+![Image 65: Chief of Factory & Engineering Modernization, DHCS](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/47t7nv3bkc7hfsgmgcqncrp/DHCS-1703508494.webp)
+
+Enterprise
+
+“By tracking in Jira and our developer tools, we reduced the cost to get the team set up and deliver from $2.8 million to $600,000.”
+
+Ryan Mosley  
+Chief of Factory & Engineering Modernization, DHCS
+
+[Read DHCS’s case study](https://www.atlassian.com/customers/dhcs)
+
+![Image 66: Director, Global Copyright Administration, Sony Music Publishing](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/v4f9vrw87nhnvxgnrj5m38cr/SonyMusic-3191867672.webp)
+
+Enterprise
+
+“Full visibility and tracking is at the fingertips of all agents and customers alike. That’s the most basic and wonderful gain.”
+
+Alison Wood  
+Director, Global Copyright Administration, Sony Music Publishing
+
+[Read Sony Music Publishing’s case study](https://www.atlassian.com/customers/sonymusic-publishing)
+
+![Image 67: Process Engineer, Clearwater Analytics](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/nkmbgpqwqh83km7fp9wc45n/ClearwaterAnalytics-823945256.webp)
+
+Enterprise
+
+“Security and compliance are really critical in the financial industry… Atlassian cloud met all of the needs that we have.”
+
+Erica Larson  
+Process Engineer, Clearwater Analytics
+
+[Read Clearwater Analytics’s case study](https://www.atlassian.com/customers/clearwater-analytics)
+
+![Image 68: Director of Communications, Kiva](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/tq8hhr7k2bhnwkfstr5gx5xc/Kiva-1702957319.webp)
+
+Small medium business
+
+“We’re a global workforce, and Atlassian helps us stay in sync while doing async work. It’s been a big win for us.”
+
+Brit Heiring  
+Director of Communications, Kiva
+
+[Read Kiva’s case study](https://www.atlassian.com/customers/kiva)
+
+![Image 69: Jira Global Team Leader, Edenred](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/mgbqcw8sgwtpm7g3643jc6p/Endenred-734004069.webp)
+
+Enterprise
+
+“For me, migrating to the cloud has allowed us to leave all the on-premise pains. It’s been a big relief.”
+
+Razvan Nechifor  
+Jira Global Team Leader, Edenred
+
+[Read Edenred’s case study](https://www.atlassian.com/customers/edenred)
+
+![Image 70: VP of Collaboration, Workplace, and Support, Software AG](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/s76xxv6ntks5zrtjrxvq5rg/Software_AG-2524322619.webp)
+
+Small medium business
+
+“We trust Atlassian to take care of security, availability, and scalability, freeing up time for us to focus on more strategic topics.”
+
+Radoslav Danchev  
+VP of Collaboration, Workplace, and Support, Software AG
+
+[Read Software AG’s case study](https://www.atlassian.com/customers/softwareag)
+
+![Image 71: Head of Service Management, The Very Group](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/9sfwtt3ckgc5scnvxr5vxwkv/TheVeryGroup-1520026636.webp)
+
+Enterprise
+
+“We’ve been getting a 4.9/5 satisfaction score, which has been fantastic. With the previous solution, we had nothing but complaints.”
+
+Rob Crompton  
+Head of Service Management, The Very Group
+
+[Read The Very Group’s case study](https://www.atlassian.com/customers/the-very-group)
+
+![Image 72: Chief Operating Officer of MultiCloud and Infrastructure, Arvato Systems](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/hcfjrxmjvn7m2tnpx4k/Arvato_Systems-4222291387.webp)
+
+Enterprise
+
+“We really have end-to-end visibility and control over our workflow…so we can see how to improve the business.”
+
+Johannes Siebzehnrübl  
+Chief Operating Officer of MultiCloud and Infrastructure, Arvato Systems
+
+[Read Arvato’s case study](https://www.atlassian.com/customers/arvato-systems)
+
+*   ![Image 73: Mercedes Benz logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/nmczw2q3m2cq6tvf89pbgk/mercedes-benz-brand-logo1.svg)
+    
+*   ![Image 74: Roblox logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/5mkrmss54fpt5k4jfkm9pmv7/roblox-brand-logo.svg)
+    
+*   ![Image 75: Royal Caribbean logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/4c5644m7hcrq3htc58t82m/royal-caribbean-brand-logo.svg)
+    
+*   ![Image 76: Lumen logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/x8jnc8bq75gfg2gcs87ff29/lumen-brand-logo.svg)
+    
+*   ![Image 77: Doodle logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/knqwfjq5tkr5wrjxfg9f6jb/doodle-brand-logo.svg)
+    
+*   ![Image 78: Dropbox logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/br3xvhttrk3fnmhh9hnc33cb/dropbox-brand-logo.svg)
+    
+*   ![Image 79: HCS logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/q454vhjsknnkmxf8pqwj5rg7/hcs-brand-logo.svg)
+    
+*   ![Image 80: Sony Music Publishing logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/sxp47zthknst76tf5gcrskfn/sony-brand-logo.svg)
+    
+*   ![Image 81: Clearwater Analytics logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/qxr5gqhfpw88fcqjgrhksjwj/clearwater-analytics-brand-logo.svg)
+    
+*   ![Image 82: Kiva logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/rcx48hmwcjxk5sf8jg99xn/kiva-brand-logo.svg)
+    
+*   ![Image 83: EdenRed logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/fgw4th8g7vh3jmjr3pk79zrb/edenred-brand-logo.svg)
+    
+*   ![Image 84: Software AG logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/q8wkwbpx7rqs67cfpfbfbr7/sag-brand-logo.svg)
+    
+*   ![Image 85: Very Group logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/n9svqvxntb4f8qjmqwhs8r4r/very-grou-brand-logo.svg)
+    
+*   ![Image 86: Arvato logo](https://wac-cdn-bfldr.atlassian.com/K3MHR9G8/at/2ntctgcwss92xcwh5qsjrv/arvato-brand-logo.svg)
+    
+
+![Image 87](https://wac-cdn.atlassian.com/misc-assets/webp-images/colored-shapes-left-desktop2.svg)![Image 88](https://wac-cdn.atlassian.com/misc-assets/webp-images/colored-shapes-right-desktop2.svg)
+
+![Image 89: Atlassian team'24 event logo](https://wac-cdn.atlassian.com/misc-assets/webp-images/team-24_attribution-logo-above-left_full-color_RGB.svg)
+
+That's a wrap! Catch up on all the highlights and more.
+
+![Image 90: A calendar icon](https://wac-cdn.atlassian.com/misc-assets/webp-images/calendar-icon.svg)April 30 - May 2, 2024
+
+![Image 91: A location pin icon](https://wac-cdn.atlassian.com/misc-assets/webp-images/pin-icon.svg)Las Vegas and digitally
+
+[Watch on demand](https://events.atlassian.com/team/home)
+
+![Image 92](https://wac-cdn.atlassian.com/misc-assets/webp-images/big-star.svg)![Image 93](https://wac-cdn.atlassian.com/misc-assets/webp-images/sm-star.svg)![Image 94](https://wac-cdn.atlassian.com/misc-assets/webp-images/circle-checkmark.svg)
+
+Help us shape the future of teamwork
+------------------------------------
+
+At Atlassian, we believe the impossible is possible - together. Join us today to help us inspire teamwork anywhere and everywhere, worldwide.
+
+[Share your story](https://www.atlassian.com/customers/advocacy)
+
+### Unleash the power of teamworkteamwork
+
+![Image 95](https://wac-cdn.atlassian.com/misc-assets/webp-images/power-of-teamwork-stroke.svg)
+
+Join millions teaming up on their best work
+
+[Get started for free](https://www.atlassian.com/try/cloud/signup?bundle=jira-software)
+```
+
+Based on the above content, extract all relevant links that may contain information about the product as specified in the system prompt. Remember to follow the rules and output format specified there.
+
+Example output format:
+{
+  "extracted_links": [
+    {
+      "url": "https://example.com/pricing",
+      "relevance": ["pricing", "features"],
+      "confidence": 0.9
+    },
+    {
+      "url": "https://example.com/features",
+      "relevance": ["features", "pros", "primary_use_case"],
+      "confidence": 0.8
+    }
+  ]
+}
+
+If no relevant links are found, return an object with an empty array: { "extracted_links": [] }
+
+Ensure that you've thoroughly searched for links that might contain ANY of the information types listed in the system prompt. Don't overlook less obvious pages that might contain valuable information.
+
+
+Response:
+{"extracted_links":[{"url":"https://www.atlassian.com/software/rovo","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features"],"confidence":0.9},{"url":"https://www.atlassian.com/software/jira","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features","pros","cons","pricing","integrations","support"],"confidence":0.9},{"url":"https://www.atlassian.com/software/confluence","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features","pros","cons","pricing","integrations","support"],"confidence":0.9},{"url":"https://www.atlassian.com/software/jira/service-management","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features","pros","cons","pricing","integrations","support"],"confidence":0.9},{"url":"https://www.atlassian.com/software/jira/product-discovery","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features","pros","cons","pricing","integrations","support"],"confidence":0.8},{"url":"https://www.atlassian.com/software/compass","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features","pros","cons","pricing","integrations","support"],"confidence":0.8},{"url":"https://www.atlassian.com/software/access","relevance":["product_name","tagline","description","unique_selling_proposition","primary_use_case","features","pros","cons","pricing","integrations","support"],"confidence":0.8}]}

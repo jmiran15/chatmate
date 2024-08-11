@@ -1,0 +1,3298 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T19:10:26.800Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://help.clickup.com/hc/en-us
+  ```
+  ClickUp Help
+===============
+
+[Skip to main content](https://help.clickup.com/hc/en-us#page-container)
+
+ [![Image 1: ClickUp Help Help Center home page](https://help.clickup.com/hc/theming_assets/01HZPQ2C1BC8BSAQF51T8FT00R) ClickUp Help Center The everything app for work.](https://help.clickup.com/hc/en-us)Toggle navigation menu
+
+[Status:](http://status.clickup.com/) [ClickUp API](https://clickup.com/api) [ClickUp University](https://university.clickup.com/)
+
+[Sign in](https://help.clickup.com/hc/en-us/signin?return_to=https%3A%2F%2Fhelp.clickup.com%2Fhc%2Fen-us)
+
+How can we help?
+================
+
+Search
+------
+
+ 
+
+Categories
+----------
+
+*   [### Onboarding New to ClickUp? Read these articles to make the most of our customizable platform!](https://help.clickup.com/hc/en-us/categories/5735245366551-Onboarding)
+    
+*   [### Getting started Joining or setting up a Workspace? Customize your account and Workspace settings.](https://help.clickup.com/hc/en-us/categories/6132419928087-Getting-started)
+    
+*   [### Working in ClickUp Learn how ClickUp is organized so you can get to work.](https://help.clickup.com/hc/en-us/categories/6131794433815-Working-in-ClickUp)
+    
+*   [### Features and ClickApps Use features like Docs, Dashboards, and Whiteboards. And customize your Workspace with ClickApps!](https://help.clickup.com/hc/en-us/categories/5414365970455-Features-and-ClickApps)
+    
+*   [### Views Organize your work with views.](https://help.clickup.com/hc/en-us/categories/17044325701143-Views)
+    
+*   [### Integrations and ClickUp API Connect your Workspace to these supported apps. And get started with the ClickUp API.](https://help.clickup.com/hc/en-us/categories/5735460831255-Integrations-and-ClickUp-API)
+    
+*   [### Technical Support Tips on troubleshooting, bug reporting, and feature requests.](https://help.clickup.com/hc/en-us/categories/5927901136151-Technical-Support)
+    
+*   [### Mobile Access key ClickUp features from outside the platform so you can keep ideas flowing whenever inspiration strikes.](https://help.clickup.com/hc/en-us/categories/5852957874455-Mobile)
+    
+*   [### Use Cases Templates and ideas specific to your industry or professional field.](https://help.clickup.com/hc/en-us/categories/5414351314455-Use-Cases)
+    
+*   [### Data, privacy, and security ClickUp has one of the strictest security policies in our industry to ensure your data never gets into the hands of third parties.](https://help.clickup.com/hc/en-us/categories/19621427111447-Data-privacy-and-security)
+    
+*   [### Release Notes Stay up to date with our latest releases!](https://help.clickup.com/hc/en-us/categories/5414371924503-Release-Notes)
+    
+
+ 
+
+[Go to ClickUp](http://clickup.com/)
+
+English (US)
+
+[Deutsch](https://help.clickup.com/hc/change_language/de?return_to=%2Fhc%2Fde) [Español](https://help.clickup.com/hc/change_language/es?return_to=%2Fhc%2Fes) [Español (Latinoamérica)](https://help.clickup.com/hc/change_language/es-419?return_to=%2Fhc%2Fes-419) [Français (France)](https://help.clickup.com/hc/change_language/fr-fr?return_to=%2Fhc%2Ffr-fr) [Italiano](https://help.clickup.com/hc/change_language/it?return_to=%2Fhc%2Fit) [Português do Brasil](https://help.clickup.com/hc/change_language/pt-br?return_to=%2Fhc%2Fpt-br)
+
+[](https://www.facebook.com/clickupprojectmanagement/)[](https://twitter.com/clickup)[](https://www.linkedin.com/company/clickup-app/)[](https://www.instagram.com/clickup/)[](https://www.youtube.com/channel/UCJC7egHqghye211WgTuXMAw)
+  ```
+
+Source URL: https://clickup.com/compare
+  ```
+  Project Management Software Comparison - Compare ClickUp™
+===============
+
+[ClickUp](https://clickup.com/)
+
+*   Product
+    
+    Product
+    
+    *   [The only AI solution that's custom-built for you](https://clickup.com/ai)
+    *   [**Tasks** Break down any size project into customized tasks.](https://clickup.com/features/tasks)
+    *   [**Docs** Create beautiful docs and connect them to tasks.](https://clickup.com/features/docs)
+    *   [**Goals** Track work against strategy with measurable targets.](https://clickup.com/features/goals)
+    *   [**Whiteboards** Bring team ideas to life with visual collaboration.](https://clickup.com/features/whiteboards)
+    *   [**Dashboards** Visualize progress with real-time reporting.](https://clickup.com/features/dashboards)
+    *   [**Chat** Collaborate with your team in real-time.](https://clickup.com/features/chat-view)
+    *   [**See All Features**](https://clickup.com/features)
+    
+    Platform
+    
+    *   [**RapidViews DB** A new benchmark for speed and stability.](https://clickup.com/performance)
+    *   [**Templates** Save time on project prep with a custom template.](https://clickup.com/templates)
+    *   [**Integrations** Connect your favorite apps to your workflow.](https://clickup.com/integrations)
+    *   [**ClickApps** Add even more custom tools to your workflow.](https://clickup.com/clickapps)
+    *   [**Hierarchy** See the big picture without missing the details.](https://clickup.com/hierarchy-guide)
+    *   [**Automations** Put your routine busywork on autopilot.](https://clickup.com/features/automations)
+    
+    *   [**Contact Us** Get in touch with our 24/7 live sales team for free.](https://clickup.com/contact/contact-sales)
+    
+*   Solutions
+    
+    Team
+    
+    *   [**Software Development** Manage product roadmaps from ideation to release.](https://clickup.com/teams/software)
+    *   [**Marketing** Collaborate on campaigns, clients, content, and more.](https://clickup.com/teams/marketing)
+    *   [**IT and PMO** Consolidate tools and unlock visibility across teams.](https://clickup.com/teams/it-pmo)
+    *   [**Engineering** Organize roadmaps, sprints, backlogs, and more.](https://clickup.com/teams/agile)
+    *   [**Design** Streamline design workflows, files, and feedback.](https://clickup.com/teams/design)
+    *   [**Operations** Streamline workflows to increase business efficiency.](https://clickup.com/teams/operations)
+    *   [**See All**](https://clickup.com/teams)
+    
+    Use Case
+    
+    *   [**Project Management** Manage and track projects of any type and size.](https://clickup.com/teams/project-management)
+    *   [**Remote Work** Stay on the same page even if you're not in the room.](https://clickup.com/teams/remote-work)
+    *   [**CRM** All your clients and all their info in one place.](https://clickup.com/teams/crm)
+    
+    Type
+    
+    *   [**Enterprise** Align your organization toward company-wide goals.](https://clickup.com/plans/enterprise)
+    *   [**Startup** Iterate quickly with a system that scales as you grow.](https://clickup.com/teams/startup)
+    *   [**Non-Profit** Save time working, spend more time saving the world.](https://clickup.com/teams/non-profit)
+    
+    *   [**Contact Us** Get in touch with our 24/7 live sales team for free.](https://clickup.com/contact/contact-sales)
+    
+*   Learn
+    
+    Learn Free
+    
+    *   [**Getting Started** All the tools you need to get started in ClickUp.](https://clickup.com/onboarding)
+    *   [**ClickUp University** Master productivity with interactive ClickUp courses.](https://university.clickup.com/)
+    *   [**Demos** Watch quick videos to learn the basics of ClickUp.](https://clickup.com/on-demand-demo)
+    *   [**Import** Bring all other work into ClickUp in one easy import.](https://clickup.com/import)
+    *   [**Customers** See why ClickUp means success for our clients.](https://clickup.com/customers)
+    *   [**Help Docs** Find simple answers to any question about ClickUp.](https://help.clickup.com/hc/en-us)
+    
+    Services
+    
+    *   [**Professional Services** Get premium support and hands-on help from our Professional Services Team.](https://clickup.com/professional-services)
+    *   [**Partner Program** Find new opportunities, extend your services, and scale your business with ClickUp's partner program.](https://clickup.com/partners)
+    
+    Latest From Blog
+    
+    [**See All**](https://clickup.com/blog/)
+    
+    *    [![Image 1: ClickUp represented by a space-faring unicorn, being triumphantly lifted by a crowd celebrating the unique ways that ClickUp improves their productivity.](https://clickup.com/blog/wp-content/uploads/2022/02/image-design-5-2-1-150x150.png) 12 Benefits That Make ClickUp Unique](https://clickup.com/blog/12-benefits-that-make-clickup-unique/)
+    *    [![Image 2: A ClickUp rocket ship following planned journey across space, towards its ultimate goal, a red planet.](https://clickup.com/blog/wp-content/uploads/2020/05/OKR-examples-150x150.png) How To Write Effective OKRs (With 60+ OKR Exmples)](https://clickup.com/blog/okr-examples/)
+    *    [![Image 3: A notebook with a list of product management methodologies written with question marks beside each, indicating the user is not sure about which method suits their needs best.](https://clickup.com/blog/wp-content/uploads/2018/12/PM-Methodologies-150x150.png) Top 18 Project Management Methodologies](https://clickup.com/blog/project-management-methodologies/)
+    
+    *   [**Contact Us** Get in touch with our 24/7 live sales team for free.](https://clickup.com/contact/contact-sales)
+    
+*   [Pricing](https://clickup.com/pricing)
+*   [Enterprise](https://clickup.com/plans/enterprise)
+
+[Contact Sales](javascript:void\(0\))
+
+Sign Up [Log in](https://app.clickup.com/)
+
+Open menu.
+
+See why  
+ClickUp is the future of work.
+========================================
+
+ClickUp gives teams everything they need to plan, organize, and collaborate on work—all in one place.
+
+[Get Started](javascript:void\(0\))
+
+Asana
+
+Jira
+
+Trello
+
+Notion
+
+Smartsheet
+
+ClickUp
+
+ClickUp
+
+Wrike
+
+Airtable
+
+Monday
+
+compare
+
+[### Views](https://clickup.com/compare#compare-tab-1)[### Customization](https://clickup.com/compare#compare-tab-2)[### Collaboration](https://clickup.com/compare#compare-tab-3)[### Reporting](https://clickup.com/compare#compare-tab-4)
+
+[left](javascript:void\(0\)) [right](javascript:void\(0\))
+
+Compare ClickUp’s features to other platforms!
+
+[ClickUp](https://clickup.com/)
+
+[Asana](https://clickup.com/compare/asana-vs-clickup)
+
+[Jira](https://clickup.com/compare/jira-vs-clickup)
+
+[Monday](https://clickup.com/compare/monday-vs-clickup)
+
+[Trello](https://clickup.com/compare/trello-vs-clickup)
+
+[Notion](https://clickup.com/compare/notion-vs-clickup)
+
+[Smartsheet](https://clickup.com/compare/smartsheet-vs-clickup)
+
+[Airtable](https://clickup.com/compare/airtable-vs-clickup)
+
+[Wrike](https://clickup.com/compare/wrike-vs-clickup)
+
+[Todoist](https://clickup.com/compare/todoist-vs-clickup)
+
+[Basecamp](https://clickup.com/compare/basecamp-vs-clickup)
+
+[Microsoft Project](https://clickup.com/compare/microsoft-project-vs-clickup)
+
+[Teamwork](https://clickup.com/compare/teamwork-vs-clickup)
+
+[List](https://help.clickup.com/hc/en-us/articles/6310260883351-List-view-overview)
+
+[](https://blog.asana.com/2020/04/manage-workflow-project-views/ "Yes, they have this feature")
+
+[](https://www.notion.so/notion/Lists-f66c8f11f79a4844a9ca414fee992aba "Yes, they have this feature")
+
+[](https://3.basecamp-help.com/article/48-to-dos "Yes, they have this feature")
+
+[](https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software?tab=1&ef_id=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&OCID=AID2100137_SEM_Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&lnkd=Google_O365SMB_App&gclid=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/project-sections/project-list-view "Yes, they have this feature")
+
+[Board](https://clickup.com/features/kanban-board)
+
+[](https://blog.asana.com/2020/04/manage-workflow-project-views/ "Yes, they have this feature")
+
+[](https://www.notion.so/notion/Boards-50c5758a474b4cca96e7f8cdf4b2bd8f "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360021502314#h_612e470a-cbba-4796-bf18-9d6ccc9c9938 "Yes, they have this feature")
+
+[](https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software?tab=1&ef_id=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&OCID=AID2100137_SEM_Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&lnkd=Google_O365SMB_App&gclid=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/board-view/ "Yes, they have this feature")
+
+[Box](https://help.clickup.com/hc/en-us/articles/6310063253911-Box-view-overview)
+
+[](https://help.trello.com/article/1249-dashboard-view "No, they don't have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/209604049#UUID-302cb9eb-807e-94c8-af99-97d0a3bfb969 "No, they don't have this feature")
+
+[Calendar](https://clickup.com/features/calendar-view)
+
+[](https://asana.com/guide/help/views/calendar "Yes, they have this feature")
+
+[](https://www.atlassian.com/software/jira/work-management/features#project-management "Yes, they have this feature")
+
+[](https://help.trello.com/article/1244-calendar-view "Yes, they have this feature")
+
+[](https://www.notion.so/notion/Calendars-c00c23c26e31471496b540583e1b8c47 "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360021502314#h_612e470a-cbba-4796-bf18-9d6ccc9c9938 "Yes, they have this feature")
+
+[](https://answers.microsoft.com/en-us/msoffice/forum/all/ms-project-calendar-view/a5bdfe0b-39ff-4ea0-9e03-3359c3343658 "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/features/ "Yes, they have this feature")
+
+[Gantt](https://clickup.com/features/gantt-chart-view)
+
+[](https://www.atlassian.com/agile/project-management/gantt-chart "Yes, they have this feature")
+
+[](https://trello.com/power-ups/5970d4298c14fdf691c95a76/teamgantt "No, they don't have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360021502314#h_612e470a-cbba-4796-bf18-9d6ccc9c9938 "Yes, they have this feature")
+
+[](https://todoist.com/integrations/apps/ganttify "No, they don't have this feature")
+
+[](https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software?tab=1&ef_id=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&OCID=AID2100137_SEM_Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&lnkd=Google_O365SMB_App&gclid=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/features/ "Yes, they have this feature")
+
+[Activity](https://help.clickup.com/hc/en-us/articles/6310079875095-Activity-View)
+
+[](https://support.teamwork.com/projects/dashboard/viewing-project-activity "ClickUp's Activity view allows users to filter by a greater number of activities than Teamwork's Activity feed, including git items, dependencies, attachements, and more.")
+
+[Mind Maps](https://clickup.com/features/mind-maps)
+
+[](https://community.monday.com/t/mind-mapping-in-monday-com-create-mindmaps-turn-nodes-into-pulses/14173 "No, they don't have this feature")
+
+[Timeline](https://help.clickup.com/hc/en-us/articles/6310399909143-Add-a-Timeline-view)
+
+[](https://blog.asana.com/2020/04/manage-workflow-project-views/ "Yes, they have this feature")
+
+[](https://confluence.atlassian.com/advancedroadmapsserver/using-the-timeline-802170554.html "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360017206280-The-Timeline-View?abcb=49450 "Yes, they have this feature but only on their paid plans")
+
+[](https://help.trello.com/article/1246-timeline-view "Yes, they have this feature")
+
+[](https://www.notion.so/guides/timeline-view-unlocks-high-output-planning-for-your-team "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/115013582227-Timeline-app "Yes, they have this feature but only on their paid plans")
+
+[](https://www.microsoft.com/en-us/microsoft-365/project/compare-microsoft-project-management-software?tab=1&ef_id=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&OCID=AID2100137_SEM_Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB:G:s&lnkd=Google_O365SMB_App&gclid=Cj0KCQjw--GFBhDeARIsACH_kdZk-Da8LfC0_pC8H-CIelWWwsJAXX96YpzBt3BvTJq1C_QM4Um94W4aAimvEALw_wcB "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/glossary/gantt-explained "Yes, they have this feature")
+
+[Workload](https://help.clickup.com/hc/en-us/articles/6310449699735-Use-Workload-view)
+
+[](https://confluence.atlassian.com/jiracoreserver073/reporting-861257295.html "No, they don't have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360010699760-The-Workload-View?abcb=33663 "Yes, they have this feature but only on their paid plans")
+
+[](https://help.smartsheet.com/articles/1346969-resource-management-allocation "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360058371073-Managing-your-team-s-workload "No, they don't have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/1500000614522-Resources-View "Yes, they have this feature")
+
+[](https://www.youtube.com/watch?v=BT49qfHHtbM "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/workload/ "Yes, they have this feature")
+
+[Table](https://clickup.com/features/table-view)
+
+[](https://www.atlassian.com/software/jira/features/roadmaps "No, they don't have this feature")
+
+[](https://help.trello.com/article/1235-workspace-table-view "Yes, they have this feature")
+
+[](https://www.notion.so/notion/Tables-66a1cce8fb6f4f64b9996f4146c51fad "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360021502314#h_612e470a-cbba-4796-bf18-9d6ccc9c9938 "Yes, they have this feature")
+
+[](https://advisicon.com/microsoft-releases-project-for-the-web/ "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/teamwork-beta-program/custom-table-views "Yes, they have this feature but only on their paid plans")
+
+[Map](https://clickup.com/features/map-view)
+
+[](https://support.monday.com/hc/en-us/articles/360001263689-The-Map-View?abcb=22642 "Yes, they have this feature but only on their paid plans")
+
+[](https://help.trello.com/article/1245-map-view "Yes, they have this feature")
+
+[Docs](https://clickup.com/features/docs)
+
+[](https://confluence.atlassian.com/cloudkb/the-new-pages-feature-in-jira-software-project-958770525.html#:~:text=Pages%20is%20a%20new%20integration,most%20useful%20to%20your%20team "No, they don't have this feature")
+
+[](http://syscor.co.za/2021/06/13/monday-com-south-africa-launches-monday-doc-feature/ "No, they don't have this feature")
+
+[](https://help.smartsheet.com/learning-track/smartsheet-advanced/document-builder "No, they don't have this feature")
+
+[](https://support.teamwork.com/projects/files/creating-a-new-google-document-through-teamwork "No, they don't have this feature")
+
+[Chat](https://clickup.com/features/chat-view)
+
+[](https://support.teamwork.com/projects/teamwork-chat/enabling-teamwork-chat-for-your-site "Yes, they have this feature")
+
+[Embed](https://help.clickup.com/hc/en-us/articles/6310077597335-Add-an-Embed-view)
+
+[](https://community.atlassian.com/t5/Jira-questions/How-to-embed-dynamic-content-in-a-JIRA-Dashboard/qaq-p/632440 "No, they don't have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360015137434-Embed-app "ClickUp's Embed view allows users to customize embeds via HTML and acts as a designated view at the Space, Folder, or List level whereas Airtable's Embed function can not be placed at any level of the hierarchy and does not allow for HTML customization.")
+
+[Form](https://clickup.com/features/form-view)
+
+[](https://asana.com/guide/help/premium/forms "Yes, they have this feature")
+
+[](https://support.atlassian.com/jira-service-management-cloud/docs/categorize-customer-requests-into-request-types/ "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360000358700-The-Forms?abcb=14379 "Yes, they have this feature")
+
+[](https://trello.com/power-ups/589dcdd510043e5be27aa68a/jotform "No, they don't have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360021502314#h_612e470a-cbba-4796-bf18-9d6ccc9c9938 "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/1500005122521-Request-Forms-in-Wrike "Yes, they have this feature but only on their paid plans")
+
+[](https://support.microsoft.com/en-us/office/overview-of-project-views-6cb1dbcd-5cd5-4cc2-a878-aa365564266d "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/forms/creating-forms-on-your-projects "Yes, they have this feature")
+
+[left](javascript:void\(0\)) [right](javascript:void\(0\))
+
+Compare ClickUp’s features to other platforms!
+
+[ClickUp](https://clickup.com/)
+
+[Asana](https://clickup.com/compare/asana-vs-clickup)
+
+[Jira](https://clickup.com/compare/jira-vs-clickup)
+
+[Monday](https://clickup.com/compare/monday-vs-clickup)
+
+[Trello](https://clickup.com/compare/trello-vs-clickup)
+
+[Notion](https://clickup.com/compare/notion-vs-clickup)
+
+[Smartsheet](https://clickup.com/compare/smartsheet-vs-clickup)
+
+[Airtable](https://clickup.com/compare/airtable-vs-clickup)
+
+[Wrike](https://clickup.com/compare/wrike-vs-clickup)
+
+[Todoist](https://clickup.com/compare/todoist-vs-clickup)
+
+[Basecamp](https://clickup.com/compare/basecamp-vs-clickup)
+
+[Microsoft Project](https://clickup.com/compare/microsoft-project-vs-clickup)
+
+[Teamwork](https://clickup.com/compare/teamwork-vs-clickup)
+
+[Custom Task Statuses](https://clickup.com/features/custom-task-statuses)
+
+[](https://trello.com/guide/activate-views#table-view "Trello Custom Statuses must be created as Custom Fields, and can only grouped/sorted in Table view.")
+
+[](https://help.smartsheet.com/articles/2481116-define-custom-status-labels-for-work "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/210322785-Custom-Workflows-in-Wrike "Yes, they have this feature but only on their paid plans")
+
+[](https://support.microsoft.com/en-us/office/add-indicators-09ee6a60-e171-431a-8e1d-58adc2a317cf "Yes, they have this feature")
+
+[](https://docs.google.com/spreadsheets/d/1eLmYAIQoeYP6LYjbXDGyrS3n2Rt-xdCsLPRLxay8ENQ/edit#gid=376287454&range=N18 "Yes, they have this feature")
+
+[Custom Permissions](https://help.clickup.com/hc/en-us/articles/6309213140375-Configure-advanced-permissions "The specific permissions defined for a role that can be turned on or off for a specific role.")
+
+[](https://asana.com/guide/help/permissions/task-permissions "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360019222479-Permissions-on-monday-com-?abcb=3585 "Yes, they have this feature but only on their paid plans")
+
+[](https://www.notion.so/Sharing-permissions-524c32ac63dc424a842891ace7a99bf8 "Yes, they have this feature")
+
+[](https://help.smartsheet.com/articles/1155182-sharing-permission-levels "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/202887099-Permissions-overview "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/community/posts/115004168809-User-Permissions "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/get-started-with-todoist-business-admins#permissions "No, they don't have this feature")
+
+[](https://3.basecamp-help.com/article/75-permissions "Yes, they have this feature")
+
+[](https://docs.microsoft.com/en-us/projectonline/step-2-add-people-to-project-online "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/planning-managing-work/setting-user-permissions-on-a-project "Yes, they have this feature")
+
+[Custom Fields](https://clickup.com/features/custom-fields)
+
+[](https://asana.com/guide/help/premium/custom-fields "Yes, they have this feature but only on their paid plans")
+
+[](https://support.microsoft.com/en-us/office/create-a-custom-field-in-project-839d206f-b314-48f5-aa06-79140db93b94 "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/custom-fields/creating-project-custom-fields "Yes, they have this feature")
+
+[Custom Workspaces](https://clickup.com/spaces "ClickUp allows you to access multiple Workspaces from a single account.")
+
+[](https://asana.com/guide/help/workspaces/create#gl-create-workspace "No, they don't have this feature")
+
+[](https://confluence.atlassian.com/jirasoftwareserver/setting-up-your-workspace-938845051.html "No, they don't have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360000305499-How-to-Easily-Switch-Between-Accounts?abcb=13878 "Yes, they have this feature")
+
+[](https://thenordicweb.com/Create-join-switch-workspaces-3b9be78982a940a7a27ce712ca6bdcf5 "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/360020311174-Spaces-in-Wrike "Yes, they have this feature")
+
+[Custom Task IDs](https://help.clickup.com/hc/en-us/articles/6304361756951-Custom-Task-IDs-ClickApp-)
+
+[](https://community.atlassian.com/t5/Jira-questions/How-can-I-give-custom-ID-s-to-each-issue-type/qaq-p/1038165 "No, they don't have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360001263345-The-Item-ID-Column?abcb=90473 "While Monday users can add unique IDs to tasks, Monday does not allow for the same level of ID customization as ClickUp.")
+
+[](https://help.smartsheet.com/articles/1108408-auto-numbering-rows "Smartsheet allows users to auto-number rows, allowing for numerical task IDs, but no customization is available otherwise.")
+
+[](https://support.airtable.com/hc/en-us/articles/360051564873-Record-ID "No, they don't have this feature")
+
+[](https://help.wrike.com/hc/en-us/community/posts/360000479949-Include-unique-task-ID-in-title-even-if-it-has-mapped-responses- "No, they don't have this feature")
+
+[](https://www.reddit.com/r/todoist/comments/bml261/tip_how_to_find_the_project_id_number_for_url/ "No, they don't have this feature")
+
+[](https://support.microsoft.com/en-us/office/task-id-assignment-field-1a867cb5-aed7-4d6a-ba7c-c3637bb2d6e2#:~:text=Description%20The%20Task%20ID%20field,add%20it%20to%20the%20project.&text=How%20Calculated%20As%20you%20create,This%20becomes%20the%20Task%20ID. "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/using-teamwork/working-with-unique-ids-in-your-projects "Yes, they have this feature")
+
+[Super Rich Editing](https://clickup.com/features/rich-text-editor)
+
+[](https://asana.com/guide/help/fundamentals/text "Yes, they have this feature")
+
+[](https://confluence.atlassian.com/adminjiraserver/rich-text-editing-938847886.html "Yes, they have this feature")
+
+[](http://monday.com/ "While Monday.com includes rich test editing in some text fields, ClickUp allows for rich text editing virtually anywhere you can add long text (Chat view, comment threads, Docs, and more).")
+
+[](https://www.notion.so/Team-Docs-d483252aef24433fbe34071c66093f26#a3c07e8718b648b2ad64bb78b2f642b8 "Yes, they have this feature")
+
+[](https://help.smartsheet.com/articles/2482268-using-rich-text-widgets "Smartsheet features Rich Text Widgets whereas ClickUp allows for rich text editing virtually anywhere you can add long text (Chat view, comment threads, Docs, and more).")
+
+[](https://support.airtable.com/hc/en-us/articles/360044270034-Formatting-rich-text-in-the-long-text-field "Airtable feautres limited rich text editing in long text field when the option is enabled whereas ClickUp allows for rich text editing virtually anywhere you can add long text (Chat view, comment threads, Docs, and more).")
+
+[](https://help.wrike.com/hc/en-us/community/posts/360026109134--From-Wrike-Collaboration-Just-Got-Easier-Introducing-Rich-Commenting-and-More "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/text-formatting "While Todoist rich editing is limited to task names and comments, ClickUp allows for rich text editing virtually anywhere you can add long text (Chat view, comment threads, Docs, and more).")
+
+[](https://basecamp.com/about/software "Yes, they have this feature")
+
+[Dynamic Recurring Tasks](https://clickup.com/features/recurring-tasks)
+
+[](https://asana.com/guide/help/android/tasks#gl-recurring "No, they don't have this feature")
+
+[](https://community.atlassian.com/t5/Jira-questions/How-to-create-recurring-tasks-in-JIRA/qaq-p/669096 "No, they don't have this feature")
+
+[](https://blog.trello.com/trello-card-repeater "No, they don't have this feature")
+
+[](https://help.smartsheet.com/articles/2479396-ensure-continuous-project-execution-with-recurring-automation "No, they don't have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360056677414-Creating-recurring-records-using-automations "No, they don't have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/209603769-Making-a-Task-Recurrent "No, they don't have this feature")
+
+[](https://www.triedandloved.com/post/todoist-recurring-tasks-and-subtasks "No, they don't have this feature")
+
+[](https://3.basecamp-help.com/article/49-schedule#recurring-events "No, they don't have this feature")
+
+[](https://www.teamwork.com/blog/recurring-tasks/ "Yes, they have this feature")
+
+[Multiple Assignees](https://clickup.com/features/multiple-assignees)
+
+[](https://help.smartsheet.com/articles/518335-assigning-people-to-a-task "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/115002685507-Collaborator-field-type "Airtable allows users to add a single project lead and multiple collaborators whereas ClickUp allows for Mutliple Assignees and multiple Watchers.")
+
+[](https://3.basecamp-help.com/article/48-to-dos#assigning-multiple-people "Yes, they have this feature")
+
+[](https://support.microsoft.com/en-us/office/assign-people-to-work-on-tasks-418e32f8-1491-43c0-9b28-14894bd8b4b8 "Yes, they have this feature")
+
+[Bulk Action Toolbar](https://clickup.com/features/multi-task-toolbar)
+
+[](https://asana.com/guide/help/faq/toolbar-updates#gl-toolbar "ClickUp's Bulk Action Toolbar can be used to edit multiple tasks or subtasks at the same time while Asana's multiple selection feature only allows for task or subtask selection.")
+
+[](https://support.monday.com/hc/en-us/articles/115005335049-Batch-Actions?abcb=77557 "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/115013404068-Batch-update-app "Yes, they have this feature but only on their paid plans")
+
+[](https://help.wrike.com/hc/en-us/articles/115005892225-Wrike-ToDo-Extension "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/use-todoist-with-your-browser "Yes, they have this feature")
+
+[](https://3.basecamp-help.com/article/48-to-dos#bulk-assign-and-bulk-archive-to-dos "ClickUp's Bulk Action Toolbar can be used to select and edit multiple tasks and subtasks at the same time, and can be used to add or remove Custom Fields.")
+
+[](https://support.teamwork.com/projects/efficiency/bulk-edit-all-tasks-in-a-project "While Teamwork has a multi-task editor, it does not allow for users to modify tasks and subtasks simultaneously and has fewer bulk actions compared to ClickUp.")
+
+[Chrome Extension](https://clickup.com/chrome-extension)
+
+[](https://asana.com/guide/help/api/google#sts=Chrome%20Extension "Yes, they have this feature")
+
+[](https://chrome.google.com/webstore/detail/notion-web-clipper/knheggckgoiihginacbkhaalnibhilkk?hl=en "Notion's Chrome Extension only allows users to save and share web pages.")
+
+[](https://support.airtable.com/hc/en-us/articles/360042807333-Adding-and-configuring-the-web-clipper-app "Airtable's Chrome extenison has limited functionality, only allowing users to add web content to Airtable bases.")
+
+[](https://help.wrike.com/hc/en-us/articles/115005892225-Wrike-ToDo-Extension "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/use-todoist-with-your-browser "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/chrome-extension/adding-a-task-using-the-chrome-extension "Yes, they have this feature")
+
+[Robust Hierarchy](https://help.clickup.com/hc/en-us/articles/6310138041367-Add-an-Everything-view "Everything view in ClickUp gives a birds-eye view of any tasks + see related projects, departments, and more automatically with Folder and Space views.")
+
+[](https://asana.com/guide/help/tasks/fields#gl-multi-home "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360021518753-Getting-started-starting-with-the-base-ics "No, they don't have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/1500005120381-Types-of-Spaces "No, they don't have this feature")
+
+[](https://todoist.com/getting-started "No, they don't have this feature")
+
+[](https://support.microsoft.com/en-us/office/indent-or-outdent-tasks-in-your-project-in-project-online-9fe939b4-52ca-4ae5-8521-530000315738 "While MS Project includes some hierarchical features in its project outlines, ClickUp has a fully customizable, multi-level hierarchy visible and accessible from anywhere in the platform.")
+
+[](https://support.teamwork.com/projects/efficiency/hierarchy-of-information-in-teamwork "Yes, they have this feature")
+
+[Task Checklists](https://clickup.com/features/task-checklists)
+
+[](https://help.smartsheet.com/articles/2478856-mobile-card-view "Smartsheet's Mobile Cards, which functions as a virtual checklist feature, are only available on Smartsheet's mobile app.")
+
+[](https://support.airtable.com/hc/en-us/articles/115013405088-Description-app "Airtable's checklist feature is limited to its Description app text boxes.")
+
+[](https://support.teamwork.com/spaces/widgets/adding-a-checklist-to-a-page "Yes, they have this feature")
+
+[Dependencies](https://clickup.com/features/dependencies)
+
+[](https://asana.com/guide/help/tasks/dependencies "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360015643840-The-Gantt-View?abcb=89141 "Yes, they have this feature")
+
+[](https://help.trello.com/article/1165-task-dependencies "No, they don't have this feature")
+
+[](https://dzone.com/articles/how-to-build-tasks-dependencies-with-durations-in "No, they don't have this feature")
+
+[](https://help.smartsheet.com/articles/765727-enabling-dependencies-using-predecessors "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360023550633-Designing-linked-records-and-dependencies#h_0fa69861-9a67-44a4-aad1-82293d6118b3 "Yes, they have this feature")
+
+[](https://support.microsoft.com/en-us/office/link-tasks-in-a-project-31b918ce-4b71-475c-9d6b-0ee501b4be57 "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/tasks/setting-task-dependencies "Yes, they have this feature")
+
+[Task Tray](https://clickup.com/features/task-tray)
+
+[](https://3.basecamp-help.com/article/23-my-stuff "No, they don't have this feature")
+
+[/Slash Commands](https://clickup.com/features/slash-commands)
+
+[](https://asana.com/guide/help/projects/project-overview#sts=Slash%20Commands%20to%20Insert%20Rich%20Text%20Content "Asana /Slash Commands only function in the Project Plan feature and are limited to seven commands (versus ClickUp's 60+ feature commands).")
+
+[](https://support.airtable.com/hc/en-us/articles/360044741993 "No, they don't have this feature")
+
+[](https://todoist.com/help/articles/keyboard-shortcuts "No, they don't have this feature")
+
+[Tags](https://clickup.com/features/task-tags)
+
+[](https://asana.com/guide/help/tasks/fields#gl-tags "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/115005905685-The-Tags-Column?abcb=96174 "Yes, they have this feature")
+
+[](https://help.trello.com/article/797-adding-labels-to-cards "Yes, they have this feature")
+
+[](https://www.alphr.com/notion-add-tags/ "No, they don't have this feature")
+
+[](https://help.smartsheet.com/articles/2481081-add-project-tags "Yes, they have this feature")
+
+[Priorities](https://clickup.com/features/task-priorities)
+
+[](https://asana.com/guide/help/premium/custom-fields "Yes, they have this feature but only on their paid plans")
+
+[](https://support.monday.com/hc/en-us/articles/360001269685-The-Status-Column?abcb=1569 "Monday allows users to create priorities using Custom Statuses, but doesn't feature Priorities as a separate feature")
+
+[](https://www.smartsheet.com/marketplace/templates/team-task-list-priority "Smartsheet templates can be used to create sheets that prioritize work, but Smartsheet lacks a unique Priorities feature like ClickUp's.")
+
+[](https://help.wrike.com/hc/en-us/articles/209603829-Importance "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/getting-started/tasks-overview "Yes, they have this feature")
+
+[White Labeling](https://help.clickup.com/hc/en-us/articles/6326176355991-White-Label-Enterprise-)
+
+[](https://www.atlassian.com/software/jira/work-management/features#project-management "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/115005321529-How-do-I-add-my-logo-and-branding-to-my-monday-com-account- "Yes, they have this feature")
+
+[](https://trello.com/guide/create-project#customize-your-board "No, they don't have this feature")
+
+[](https://help.smartsheet.com/articles/506518-branding-smartsheet-with-your-colors-logo "Yes, they have this feature")
+
+[](https://community.airtable.com/t/how-to-remove-the-airtable-logo-for-our-clients/23436 "Airtable's white labeling is limited to Form views")
+
+[](https://help.wrike.com/hc/en-us/articles/1500005123261-Adding-Company-Logo-to-the-Workspace "Yes, they have this feature")
+
+[Relationships](https://help.clickup.com/hc/en-us/articles/6304528030743-Relationships)
+
+[](https://asana.com/guide/help/premium/task-dependencies)
+
+[](https://trello.com/power-ups/58c85f41d7f012a1879c7b2e/card-relationships-hello-epics "No, they don't have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360023550633-Designing-linked-records-and-dependencies#h_0fa69861-9a67-44a4-aad1-82293d6118b3 "Yes, they have this feature")
+
+[](https://www.reddit.com/r/todoist/comments/9bo3uu/any_way_to_link_tasks/ "No, they don't have this feature")
+
+[](https://support.microsoft.com/en-us/office/link-tasks-in-a-project-31b918ce-4b71-475c-9d6b-0ee501b4be57#:~:text=You%20can%20link%20any%20two,next%20one%2C%20and%20so%20on. "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/getting-started/creating-a-task-list "Yes, they have this feature")
+
+[left](javascript:void\(0\)) [right](javascript:void\(0\))
+
+Compare ClickUp’s features to other platforms!
+
+[ClickUp](https://clickup.com/)
+
+[Asana](https://clickup.com/compare/asana-vs-clickup)
+
+[Jira](https://clickup.com/compare/jira-vs-clickup)
+
+[Monday](https://clickup.com/compare/monday-vs-clickup)
+
+[Trello](https://clickup.com/compare/trello-vs-clickup)
+
+[Notion](https://clickup.com/compare/notion-vs-clickup)
+
+[Smartsheet](https://clickup.com/compare/smartsheet-vs-clickup)
+
+[Airtable](https://clickup.com/compare/airtable-vs-clickup)
+
+[Wrike](https://clickup.com/compare/wrike-vs-clickup)
+
+[Todoist](https://clickup.com/compare/todoist-vs-clickup)
+
+[Basecamp](https://clickup.com/compare/basecamp-vs-clickup)
+
+[Microsoft Project](https://clickup.com/compare/microsoft-project-vs-clickup)
+
+[Teamwork](https://clickup.com/compare/teamwork-vs-clickup)
+
+[Assigned & Threaded Comments](https://clickup.com/features/assign-comments)
+
+[](https://support.atlassian.com/jira-software-cloud/docs/watch-share-and-comment-on-an-issue/ "No, they don't have this feature")
+
+[](https://www.notion.vip/collaborating-in-notion-comments-mentions-reminders/ "Notion has threaded comments, but does not offer assigned comments.")
+
+[](https://help.smartsheet.com/learning-track/get-started/conversations "Smartsheet's Conversations feature allows for threaded comments and @-mentioning others, but it does not include assigned comments.")
+
+[](https://support.teamwork.com/projects/collaboration/commenting-on-items "Yes, they have this feature")
+
+[Proofing: Image & PDF Annotation](https://help.clickup.com/hc/en-us/articles/6325985679383-Proofing-Image-video-and-PDF-Annotation)
+
+[](https://asana.com/guide/help/premium/proofing "Yes, they have this feature but only on their paid plans")
+
+[](https://monday.com/developers/apps-annotation "Yes, they have this feature")
+
+[](https://trello.com/power-ups/5d9a52fa072413238829c741/comment-on-image "No, they don't have this feature")
+
+[](https://help.smartsheet.com/learning-track/smartsheet-advanced/proofing "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/210322845-Proofing-in-Wrike "Yes, they have this feature")
+
+[Publicly Share Anything](https://help.clickup.com/hc/en-us/articles/6309240164503-Privacy-and-Sharing-FAQ)
+
+[](https://asana.com/guide/help/premium/read-only-links "Asana provides read-only links for its views but does offer ClickUp's granular sharing options")
+
+[](https://support.atlassian.com/jira-cloud-administration/docs/prevent-or-remove-public-access/ "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/115005309925-What-are-Shareable-Boards- "Yes, they have this feature")
+
+[](https://help.trello.com/article/824-sharing-links-to-cards-and-boards "Yes, they have this feature")
+
+[](https://www.notion.so/guides/understanding-notions-sharing-settings "Yes, they have this feature")
+
+[](https://help.smartsheet.com/articles/520104-share-sheets-reports-dashboards "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/205752117-Creating-a-base-share-link-or-a-table-view-share-link "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/community/posts/360024739054-Communicating-externally "No, they don't have this feature")
+
+[](https://todoist.com/help/articles/sharing-projects-and-collaborating "Yes, they have this feature")
+
+[](https://3.basecamp-help.com/article/76-sharing-items-with-others "Yes, they have this feature but only on their paid plans")
+
+[](https://docs.microsoft.com/en-us/projectonline/using-project-online-with-external-users "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/using-teamwork/sharing-file-links "Yes, they have this feature")
+
+[In-App Video Recording](https://clickup.com/features/clip)
+
+[](https://forum.asana.com/t/loom-integration-with-asana/1185 "No, they don't have this feature")
+
+[](https://community.atlassian.com/t5/Jira-Mobile-and-Desktop-Apps/New-feature-Record-your-screen-in-real-time-with-Jira-Cloud-for/ba-p/1335231 "Jira's mobile app for Android provides in-app screen recording, but this feature is not available on other OSs at this time.")
+
+[Email in ClickUp](https://clickup.com/features/email-project-management "Includes the ability to send and receive emails directly in your ClickUp tasks.")
+
+[](https://support.monday.com/hc/en-us/articles/360019213180-CommuniHub-App-for-emails-and-activities?abcb=73038 "Yes, they have this feature")
+
+[](https://help.sendboard.com/en/articles/3428756-sending-and-receiving-emails-in-trello "No, they don't have this feature")
+
+[Tasks in Multiple Lists](https://help.clickup.com/hc/en-us/articles/6309958824727-Tasks-in-Multiple-Lists)
+
+[](https://asana.com/guide/videos/multi-home "Yes, they have this feature")
+
+[](https://www.optus.com.au/yesbusiness/article/wrike-5-hacks "Yes, they have this feature")
+
+[Teams](https://help.clickup.com/hc/en-us/articles/6326036524823-Create-user-groups-with-Teams "Team sharing, Team mentions, Team assignees.")
+
+[](https://asana.com/guide/help/organizations/members "While Asana has a Teams feature, it does not allow for team sharing and team mentions on any task in your Workspace, as ClickUp Teams do.")
+
+[](https://confluence.atlassian.com/advancedroadmapsserver/creating-teams-966066115.html "While Jira allows for Team assigning of issues, it does not allow for team @ mentions whereas ClickUp's Team feature does.")
+
+[](https://support.monday.com/hc/en-us/articles/115005884405-How-to-create-a-team?abcb=42860 "Yes, they have this feature")
+
+[](https://www.notion.so/Group-permissions-541a920f960c45319891ce9114413607 "Yes, they have this feature but only on their paid plans")
+
+[](https://support.airtable.com/hc/en-us/articles/360021502454-Getting-started-collaboration "No, they don't have this feature")
+
+[](https://help.wrike.com/hc/en-us/community/posts/360037450534-Getting-started-how-do-I-assemble-my-team-into-Wrike- "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/how-to-collaborate-with-others "No, they don't have this feature")
+
+[](https://3.basecamp-help.com/article/25-teams-and-project "Basecamp's Teams feature does not allow for team sharing, assigning, or mentioning in any task in your Workspace.")
+
+[](https://www.teamwork.com/blog/working-with-teams/ "Yes, they have this feature")
+
+[Guest Accounts](https://help.clickup.com/hc/en-us/articles/6310022323991-Guests-overview)
+
+[](https://asana.com/guide/help/organizations/guests "Yes, they have this feature")
+
+[](https://support.atlassian.com/jira-cloud-administration/docs/allow-anonymous-access-to-projects/ "While Jira anonymous access allows guests to view and create issues, ClickUp Guests can be given access to tasks, views, or entire Folders.")
+
+[](https://support.monday.com/hc/en-us/articles/115005340405-What-do-my-guests-see-and-do-on-my-shareable-board-?abcb=46982 "Yes, they have this feature")
+
+[](https://help.trello.com/article/1236-board-guests#:~:text=A%20Guest%20is%20a%20Normal,ability%20to%20edit%20the%20board. "Yes, they have this feature")
+
+[](https://www.notion.so/Guest-access-823e981ce5e44b348e6df0521f0f2c7c "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/202887099-Permissions-overview "Airtable's permissions have greater limitations around what a guest is able to edit within a Workspace.")
+
+[](https://help.wrike.com/hc/en-us/community/posts/360016734754--New-to-Wrike-Guests-Review-Wrike-Labs- "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/sharing-projects-and-collaborating "Yes, they have this feature")
+
+[](https://3.basecamp-help.com/category/115-working-with-clients "Yes, they have this feature")
+
+[](https://docs.microsoft.com/en-us/microsoftteams/guest-access#:~:text=Anyone%20who%20is%20not%20part,to%20teams%20and%20channel%20experiences. "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/using-teamwork/working-with-collaborators "Yes, they have this feature")
+
+[Natural Language Processing](https://help.clickup.com/hc/en-us/articles/6308688267671-Natural-Language-Processing-for-Dates-and-Times)
+
+[](https://www.alphr.com/notion-add-tags/ "Yes, they have this feature")
+
+[](https://todoist.com/help/articles/task-quick-add "Yes, they have this feature")
+
+[Smart Notifications](https://clickup.com/manage-your-notifications)
+
+[](https://support.atlassian.com/jira-cloud-administration/docs/configure-email-notifications/ "ClickUp allows users to control where they are notified (mobile, email, web, & browser) and exactly what tasks and actions they are notified on.")
+
+[](https://help.trello.com/article/793-receiving-trello-notifications "No, they don't have this feature")
+
+[](https://www.notion.so/Notification-settings-94f63a146f864552abba335881848947 "No, they don't have this feature")
+
+[](https://help.smartsheet.com/articles/2476551-configure-how-smartsheet-notifies-you "ClickUp allows users to control where they are notified (mobile, email, web, & browser) and exactly what tasks and actions they are notified on.")
+
+[](https://todoist.com/help/articles/change-your-notifications-settings "Yes, they have this feature")
+
+[](https://3.basecamp-help.com/article/86-how-notifications-work#work-can-wait "ClickUp's notifications allow users to decide which actions in ClickUp trigger notifications and on which platform with more granularity.")
+
+[](https://support.teamwork.com/projects/collaboration/project-notification-settings "Yes, they have this feature")
+
+[Whiteboard](https://clickup.com/features/whiteboards)
+
+[left](javascript:void\(0\)) [right](javascript:void\(0\))
+
+Compare ClickUp’s features to other platforms!
+
+[ClickUp](https://clickup.com/)
+
+[Asana](https://clickup.com/compare/asana-vs-clickup)
+
+[Jira](https://clickup.com/compare/jira-vs-clickup)
+
+[Monday](https://clickup.com/compare/monday-vs-clickup)
+
+[Trello](https://clickup.com/compare/trello-vs-clickup)
+
+[Notion](https://clickup.com/compare/notion-vs-clickup)
+
+[Smartsheet](https://clickup.com/compare/smartsheet-vs-clickup)
+
+[Airtable](https://clickup.com/compare/airtable-vs-clickup)
+
+[Wrike](https://clickup.com/compare/wrike-vs-clickup)
+
+[Todoist](https://clickup.com/compare/todoist-vs-clickup)
+
+[Basecamp](https://clickup.com/compare/basecamp-vs-clickup)
+
+[Microsoft Project](https://clickup.com/compare/microsoft-project-vs-clickup)
+
+[Teamwork](https://clickup.com/compare/teamwork-vs-clickup)
+
+[Formulas](https://help.clickup.com/hc/en-us/articles/6308656424983-Formula-Fields)
+
+[](https://asana.com/guide/help/api/google-sheets-reporting "No, they don't have this feature")
+
+[](https://wiki.almworks.com/display/structure/Sample+Formulas#SampleFormulas-Accessanitemproperty "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360001235445-The-Formula-Column?abcb=62399 "Yes, they have this feature")
+
+[](https://www.notion.so/Notion-Formulas-30d8d88656534222949d7210eccfa608 "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360041339834-The-essentials-of-Airtable-formulas "Yes, they have this feature")
+
+[](https://www.gristprojectmanagement.us/microsoft-project/using-formulas-in-custom-fields.html "Yes, they have this feature")
+
+[](https://www.teamwork.com/templates/ "Yes, they have this feature")
+
+[Template Everything](https://clickup.com/templates)
+
+[](https://asana.com/guide/team/advanced/create-use-asana-templates "ClickUp allows users to templatize any level of the Hierarchy, from Space templates down to task templates.")
+
+[](https://www.atlassian.com/software/jira/templates "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360001362625-Does-monday-com-offer-templates-?abcb=49428 "ClickUp allows users to templatize any level of the Hierarchy, from Space templates down to task templates.")
+
+[](https://trello.com/templates "ClickUp allows users to templatize any level of the Hierarchy and any view, from Space templates down to task templates.")
+
+[](https://www.notion.so/Template-buttons-5c033c12ac3b4c1fb4703491be74550d "Yes, they have this feature")
+
+[](https://help.smartsheet.com/articles/522123-creating-using-templates "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/218324867-Can-I-make-my-own-templates- "No, they don't have this feature")
+
+[](https://3.basecamp-help.com/article/66-templates "Yes, they have this feature")
+
+[](https://support.microsoft.com/en-us/office/save-a-project-file-as-a-template-5697e036-6505-405a-ad6e-b7912aebc3a7 "No, they don't have this feature")
+
+[](https://www.teamwork.com/project-management-software/features/ "ClickUp allows users to templatize any level of the Hierarchy, from Space templates down to task templates.")
+
+[Goals](https://clickup.com/features/goals)
+
+[](https://marketplace.atlassian.com/apps/1218149/goals-for-jira?hosting=cloud&tab=overview "No, they don't have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360017451079-The-Goal-Widget?abcb=31595 "Monday's Goals are limited to monetary values tracked in a widget.")
+
+[Time Tracking](https://clickup.com/features/project-time-tracking)
+
+[](https://asana.com/apps/trackingtime "No, they don't have this feature")
+
+[](https://support.atlassian.com/jira-cloud-administration/docs/configure-time-tracking/ "Yes, they have this feature")
+
+[](https://help.trello.com/article/1037-using-the-package-tracker-power-up "No, they don't have this feature")
+
+[](https://help.smartsheet.com/learning-track/system-administration-10000ft/10000ft-time-tracking-settings "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/115013739588-Time-tracker-app "Yes, they have this feature but only on their paid plans")
+
+[](https://basecamp.com/extras "No, they don't have this feature")
+
+[](https://support.microsoft.com/en-us/office/track-your-time-and-task-progress-in-project-online-b72ffdc1-4f8b-4254-a198-f14a08b7d324 "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/project-time-tracking-software/ "Yes, they have this feature")
+
+[Granular Time Estimates](https://clickup.com/features/time-estimates)
+
+[](https://support.atlassian.com/jira-software-cloud/docs/configure-estimation-and-tracking/ "Yes, they have this feature")
+
+[](https://www.timecamp.com/integrations/monday-com-time-tracking/ "ClickUp's time tracking does not need to be linked to a specific task and is visible from anywhere in Mini Mode.")
+
+[](https://help.trello.com/article/1037-using-the-package-tracker-power-up "No, they don't have this feature")
+
+[](https://support.microsoft.com/en-us/office/change-a-task-duration-0c551218-e543-4a5a-80f5-363c5c7c4e49 "Yes, they have this feature")
+
+[](https://support.teamwork.com/projects/agency-professional-services/estimated-time-on-tasks "Yes, they have this feature")
+
+[Granular Sprint Points](https://clickup.com/features/sprints)
+
+[](https://asana.com/guide/examples/project-management/asana-agile "No, they don't have this feature")
+
+[](https://trello.com/power-ups/59d4ef8cfea15a55b0086614/agile-tools-by-corrello "No, they don't have this feature")
+
+[Sprints](https://clickup.com/features/sprints)
+
+[](https://www.atlassian.com/agile/tutorials/sprints "Yes, they have this feature")
+
+[](https://support.microsoft.com/en-us/office/use-task-boards-in-microsoft-project-online-desktop-client-1b9b44d7-fd8e-4b3b-ab94-2b97deb9945b#createnewsprintsproj "Yes, they have this feature")
+
+[](https://www.teamwork.com/blog/teamwork-projects-weekly-sprints/ "Yes, they have this feature")
+
+[Pulse: Live Overview](https://help.clickup.com/hc/en-us/articles/6304488850967-Pulse-overview)
+
+[](https://marketplace.atlassian.com/apps/1218874/who-is-online-for-jira?hosting=cloud&tab=overview "Jira lacks a native live overview feature, with only third-party providers hosting Jira-compatible live overview extensions.")
+
+[LineUp](https://help.clickup.com/hc/en-us/articles/6308921446935-Home)
+
+[Milestones](https://help.clickup.com/hc/en-us/articles/6304458574615-Milestones)
+
+[](https://asana.com/guide/help/premium/milestones "Yes, they have this feature but only on their paid plans")
+
+[](https://support.monday.com/hc/en-us/articles/360014147000-Advanced-Project-Management?abcb=79281 "Yes, they have this feature")
+
+[](https://help.smartsheet.com/articles/516406-creating-a-milestone "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/1500002060262-Gantt-view-milestones-dependencies-and-critical-paths "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/209603689-Milestones "Yes, they have this feature")
+
+[](https://support.microsoft.com/en-us/office/add-a-milestone-583be27b-1659-4a7a-a047-e9b9cb6a4834 "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/features/ "Yes, they have this feature")
+
+[Home & Scheduling](https://help.clickup.com/hc/en-us/articles/6308921446935-Home)
+
+[](https://asana.com/guide/help/fundamentals/homepage "Yes, they have this feature")
+
+[](https://www.smartsheet.com/content-center/product-news/release-notes/new-home "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/1500004774521-My-Home-Page "Unlike ClickUp's Home, Wrike's does not allow users to schedule work from Home.")
+
+[](https://blog.doist.com/how-to-use-todoist-effectively/ "Yes, they have this feature")
+
+[](https://3.basecamp-help.com/article/21-the-home-screen "Yes, they have this feature")
+
+[](https://support.microsoft.com/en-us/office/get-started-with-project-home-a3b38418-35e7-4df4-8e4a-ba6a4fa0562a "Yes, they have this feature")
+
+[](https://support.teamwork.com/desk/getting-started/home-overview#:~:text=Within%20Teamwork%2C%20the%20Home%20area,day's%20tasks%2C%20milestones%20and%20events. "Yes, they have this feature")
+
+[Workload Profiles](https://clickup.com/features/gantt-chart-view "ClickUp Profiles provide insight into what tasks other users are working on and allow others to add reminders and make adjustments to workloads.")
+
+[](https://forum.asana.com/t/view-other-peoples-tasks/83318 "Yes, they have this feature")
+
+[](https://support.monday.com/hc/en-us/articles/360000278879-How-do-I-edit-my-profile-?abcb=20525 "No, they don't have this feature")
+
+[](https://help.smartsheet.com/articles/2480796-configure-profile-settings "Smartsheet profiles do not allow other users to assign reminders or adjust workloads.")
+
+[](https://help.wrike.com/hc/en-us/articles/210324365-Editing-Your-Profile "No, they don't have this feature")
+
+[](https://3.basecamp-help.com/article/78-personal-info "Smartsheet profiles do not allow other users to assign reminders or adjust workloads.")
+
+[Bird's Eye (Everything) View](https://help.clickup.com/hc/en-us/articles/6310138041367-Add-an-Everything-view)
+
+[](https://help.trello.com/article/1235-workspace-table-view "ClickUp's Everything View allows users to see all their work from multiple views and drill down or filter to see all relevant information.")
+
+[](https://support.microsoft.com/en-us/office/get-started-with-project-home-a3b38418-35e7-4df4-8e4a-ba6a4fa0562a "No, they don't have this feature")
+
+[](https://support.teamwork.com/projects/everything/everything-section-all-options "Yes, they have this feature")
+
+[Conditional Automations](https://clickup.com/features/automations "ClickUp's automations allow users to set customizable triggers, conditions, & actions.")
+
+[](https://asana.com/product/automation "No, they don't have this feature")
+
+[](https://www.atlassian.com/software/jira/features/automation "Yes, they have this feature")
+
+[](https://help.trello.com/article/1157-variables "Yes, they have this feature")
+
+[](https://help.wrike.com/hc/en-us/articles/360057941793-Wrike-s-Automation-Engine "No, they don't have this feature")
+
+[](https://www.mpug.com/automating-ms-project-for-non-techies/ "No, they don't have this feature")
+
+[](https://www.teamwork.com/blog/board-view-just-got-better-automated-triggers/ "No, they don't have this feature")
+
+[Dashboards](https://clickup.com/features/dashboards)
+
+[](https://asana.com/guide/team/advanced/status-updates-progress "Yes, they have this feature")
+
+[](https://support.airtable.com/hc/en-us/articles/360042807093 "Yes, they have this feature but only on their paid plans")
+
+[](https://www.microsoft.com/en-us/microsoft-365/blog/2019/10/29/new-microsoft-project-rolls-out-worldwide/ "Yes, they have this feature")
+
+[](https://www.teamwork.com/project-management-software/features/ "Yes, they have this feature")
+
+Compare ClickUp
+---------------
+
+*   [Notion vs ClickUp](https://clickup.com/compare/notion-vs-clickup)
+*   [Airtable vs ClickUp](https://clickup.com/compare/airtable-vs-clickup)
+*   [Jira vs ClickUp](https://clickup.com/compare/jira-vs-clickup)
+*   [Monday vs ClickUp](https://clickup.com/compare/monday-vs-clickup)
+*   [Wrike vs ClickUp](https://clickup.com/compare/wrike-vs-clickup)
+*   [Trello vs ClickUp](https://clickup.com/compare/trello-vs-clickup)
+
+*   [Asana vs ClickUp](https://clickup.com/compare/asana-vs-clickup)
+*   [Todoist vs ClickUp](https://clickup.com/compare/todoist-vs-clickup)
+*   [Basecamp vs ClickUp](https://clickup.com/compare/basecamp-vs-clickup)
+*   [Smartsheet vs ClickUp](https://clickup.com/compare/smartsheet-vs-clickup)
+*   [MS Project vs ClickUp](https://clickup.com/compare/microsoft-project-vs-clickup)
+*   [Teamwork vs ClickUp](https://clickup.com/compare/teamwork-vs-clickup)
+
+*   [Podio vs ClickUp](https://clickup.com/compare/podio-vs-clickup)
+*   [Scoro vs ClickUp](https://clickup.com/compare/scoro-vs-clickup)
+*   [Hive vs ClickUp](https://clickup.com/compare/hive-vs-clickup)
+*   [Fibery vs ClickUp](https://clickup.com/compare/fibery-vs-clickup)
+*   [Nifty vs ClickUp](https://clickup.com/compare/nifty-vs-clickup)
+*   [Google Workspace vs ClickUp](https://clickup.com/compare/google-workspace-vs-clickup)
+
+*   [Pivotal Tracker vs ClickUp](https://clickup.com/compare/pivotaltracker-vs-clickup)
+*   [Workzone vs ClickUp](https://clickup.com/compare/workzone-vs-clickup)
+*   [Asana vs Trello vs ClickUp](https://clickup.com/compare/asana-vs-trello)
+*   [Asana vs Jira vs ClickUp](https://clickup.com/compare/asana-vs-jira)
+*   [Asana vs Todoist vs ClickUp](https://clickup.com/compare/asana-vs-todoist)
+*   [Monday vs Trello vs ClickUp](https://clickup.com/compare/monday-vs-trello)
+
+FAQs
+
+Have a question? We've got answers.
+-----------------------------------
+
+What are some tools and features that set ClickUp apart?
+
+ClickUp’s flexible [Hierarchy](https://clickup.com/hierarchy-guide) and customization set it apart from other project management solutions. ClickUp also features [native time tracking](https://clickup.com/features/project-time-tracking) and numerous [time tracking integrations](https://help.clickup.com/hc/en-us), as well as [two-way email synchronization](https://help.clickup.com/hc/en-us/articles/6303747270807-Use-Email-in-ClickUp) and a variety of [unique views](https://clickup.com/features/views) for your work.
+
+How do I choose the right project management tool for my organization?
+
+While there are many considerations when choosing the right software, two requirements are 1) that you and your team are willing and able to learn how to implement and use it, and 2) that it includes the features and integrations you need to organize and execute work.
+
+How do I set up a project management tool for different projects?
+
+While experimentation and trial and error are great ways to build and improve workflows, many users prefer to start with templates that can then be customized for their specific needs. ClickUp provides 100s of free [template](https://clickup.com/templates)s for virtually every experience level and use case.
+
+What level of security can I expect from project management tools?
+
+Because you will likely need to store proprietary information on any solution you choose, it should meet the minimum security requirements as stipulated by your IT or operations teams. ClickUp is SOC 2 certified and ensures end-to-end security. Read more on our [Security](https://clickup.com/terms/security-policy) page.
+
+[View all](javascript:void\(0\))
+
+Can I use project management tools to store personal and protected information?
+
+Many project management platforms feature advanced security features on their higher-tier plans. For example, ClickUp’s [Enterprise Plan](https://clickup.com/plans/enterprise) includes HIPAA compliance, SSO, and other advanced security considerations.
+
+How can I try a project management tool before deciding what plan I need?
+
+Many platforms offer free trial periods that allow you to test out a product’s features and interface before deciding whether you want to pay for it. ClickUp goes one step further by offering a [Free Forever Plan](https://clickup.com/pricing), which allows permanent access to ClickUp at no cost.
+
+How much should I expect to pay for a project management tool?
+
+The answer depends on a number of factors, including team size, features required, security requirements, and more. Most project management tools cost from $5 per user per month for basic plans, up to $30+ per user per month for highly specialized enterprise-level solutions. Learn about ClickUp’s pricing [here](https://clickup.com/pricing).
+
+What steps should I take when switching project management tools?
+
+Before [canceling](https://help.clickup.com/hc/en-us/articles/6303314345623-How-do-I-change-my-ClickUp-Plan-) your current subscription, ensure you know what tool you want to switch to (if any). Then, make sure that the new solution meets the needs of your organization and that you can [import your work](https://help.clickup.com/hc/en-us/articles/6311099045783-Importing-Into-ClickUp) from your current tool to the new project management tool.
+
+Can I import and export work from one project management tool to another?
+
+In most cases, yes. However, before signing up for a particular platform, make sure it has the import and export capabilities you’ll need. Learn about ClickUp data portability [here](https://help.clickup.com/hc/en-us/articles/6310786693015-Data-Portability-Export-your-Workspace-s-Data), and find out how to import work from other tools into ClickUp [here](https://help.clickup.com/hc/en-us/articles/6311099045783-Importing-Into-ClickUp).
+
+### Work smarter with ClickUp  
+and save one day every week.
+  ```
+
+Source URL: https://clickup.com/about
+  ```
+  ClickUp™ | About
+===============
+
+[ClickUp](https://clickup.com/)
+
+*   Product
+    
+    Product
+    
+    *   [The only AI solution that's custom-built for you](https://clickup.com/ai)
+    *   [**Tasks** Break down any size project into customized tasks.](https://clickup.com/features/tasks)
+    *   [**Docs** Create beautiful docs and connect them to tasks.](https://clickup.com/features/docs)
+    *   [**Goals** Track work against strategy with measurable targets.](https://clickup.com/features/goals)
+    *   [**Whiteboards** Bring team ideas to life with visual collaboration.](https://clickup.com/features/whiteboards)
+    *   [**Dashboards** Visualize progress with real-time reporting.](https://clickup.com/features/dashboards)
+    *   [**Chat** Collaborate with your team in real-time.](https://clickup.com/features/chat-view)
+    *   [**See All Features**](https://clickup.com/features)
+    
+    Platform
+    
+    *   [**RapidViews DB** A new benchmark for speed and stability.](https://clickup.com/performance)
+    *   [**Templates** Save time on project prep with a custom template.](https://clickup.com/templates)
+    *   [**Integrations** Connect your favorite apps to your workflow.](https://clickup.com/integrations)
+    *   [**ClickApps** Add even more custom tools to your workflow.](https://clickup.com/clickapps)
+    *   [**Hierarchy** See the big picture without missing the details.](https://clickup.com/hierarchy-guide)
+    *   [**Automations** Put your routine busywork on autopilot.](https://clickup.com/features/automations)
+    
+    *   [**Contact Us** Get in touch with our 24/7 live sales team for free.](https://clickup.com/contact/contact-sales)
+    
+*   Solutions
+    
+    Team
+    
+    *   [**Software Development** Manage product roadmaps from ideation to release.](https://clickup.com/teams/software)
+    *   [**Marketing** Collaborate on campaigns, clients, content, and more.](https://clickup.com/teams/marketing)
+    *   [**IT and PMO** Consolidate tools and unlock visibility across teams.](https://clickup.com/teams/it-pmo)
+    *   [**Engineering** Organize roadmaps, sprints, backlogs, and more.](https://clickup.com/teams/agile)
+    *   [**Design** Streamline design workflows, files, and feedback.](https://clickup.com/teams/design)
+    *   [**Operations** Streamline workflows to increase business efficiency.](https://clickup.com/teams/operations)
+    *   [**See All**](https://clickup.com/teams)
+    
+    Use Case
+    
+    *   [**Project Management** Manage and track projects of any type and size.](https://clickup.com/teams/project-management)
+    *   [**Remote Work** Stay on the same page even if you're not in the room.](https://clickup.com/teams/remote-work)
+    *   [**CRM** All your clients and all their info in one place.](https://clickup.com/teams/crm)
+    
+    Type
+    
+    *   [**Enterprise** Align your organization toward company-wide goals.](https://clickup.com/plans/enterprise)
+    *   [**Startup** Iterate quickly with a system that scales as you grow.](https://clickup.com/teams/startup)
+    *   [**Non-Profit** Save time working, spend more time saving the world.](https://clickup.com/teams/non-profit)
+    
+    *   [**Contact Us** Get in touch with our 24/7 live sales team for free.](https://clickup.com/contact/contact-sales)
+    
+*   Learn
+    
+    Learn Free
+    
+    *   [**Getting Started** All the tools you need to get started in ClickUp.](https://clickup.com/onboarding)
+    *   [**ClickUp University** Master productivity with interactive ClickUp courses.](https://university.clickup.com/)
+    *   [**Demos** Watch quick videos to learn the basics of ClickUp.](https://clickup.com/on-demand-demo)
+    *   [**Import** Bring all other work into ClickUp in one easy import.](https://clickup.com/import)
+    *   [**Customers** See why ClickUp means success for our clients.](https://clickup.com/customers)
+    *   [**Help Docs** Find simple answers to any question about ClickUp.](https://help.clickup.com/hc/en-us)
+    
+    Services
+    
+    *   [**Professional Services** Get premium support and hands-on help from our Professional Services Team.](https://clickup.com/professional-services)
+    *   [**Partner Program** Find new opportunities, extend your services, and scale your business with ClickUp's partner program.](https://clickup.com/partners)
+    
+    Latest From Blog
+    
+    [**See All**](https://clickup.com/blog/)
+    
+    *    [![Image 1: ClickUp represented by a space-faring unicorn, being triumphantly lifted by a crowd celebrating the unique ways that ClickUp improves their productivity.](https://clickup.com/blog/wp-content/uploads/2022/02/image-design-5-2-1-150x150.png) 12 Benefits That Make ClickUp Unique](https://clickup.com/blog/12-benefits-that-make-clickup-unique/)
+    *    [![Image 2: A ClickUp rocket ship following planned journey across space, towards its ultimate goal, a red planet.](https://clickup.com/blog/wp-content/uploads/2020/05/OKR-examples-150x150.png) How To Write Effective OKRs (With 60+ OKR Exmples)](https://clickup.com/blog/okr-examples/)
+    *    [![Image 3: A notebook with a list of product management methodologies written with question marks beside each, indicating the user is not sure about which method suits their needs best.](https://clickup.com/blog/wp-content/uploads/2018/12/PM-Methodologies-150x150.png) Top 18 Project Management Methodologies](https://clickup.com/blog/project-management-methodologies/)
+    
+    *   [**Contact Us** Get in touch with our 24/7 live sales team for free.](https://clickup.com/contact/contact-sales)
+    
+*   [Pricing](https://clickup.com/pricing)
+*   [Enterprise](https://clickup.com/plans/enterprise)
+
+[Contact Sales](javascript:void\(0\))
+
+Sign Up [Log in](https://app.clickup.com/)
+
+Open menu.
+
+We are ClickUp.
+===============
+
+The everything app for work.
+
+[Watch the video to learn more about us.](javascript:void\(0\))
+
+![Image 4: We are ClickUp.](https://clickup.com/images/careers/clickup-people.png)
+
+![Image 5: Our mission.](https://clickup.com/images/about/our-mission.svg)
+
+MISSION
+
+Our mission.
+------------
+
+While we absolutely love productivity software, we believe productivity, in general, is broken. There's just too many tools to keep track of, too many things in entirely separate ecosystems. There has to be a better way to work - that's why we created ClickUp, first an internal tool, now as a way to fulfill our vision of making the world more productive.
+
+Eventually, our goal is to have all work live in ClickUp - thereby making people more productive and giving back at least 20% of time to dedicate to other things. One app to replace them all. We're just getting started, and are so grateful for all of the 2 million teams that are in this together with our team.
+
+Core Values
+-----------
+
+Previous
+
+09
+
+Be direct
+
+(#BeDirect)
+
+10
+
+Be fun to work with
+
+(#Fun)
+
+01
+
+Deliver  
+the best customer experience
+
+(#BestCX)
+
+02
+
+Embrace hard work
+
+(#HardWork)
+
+03
+
+Drive urgency
+
+(#Urgency)
+
+04
+
+Grow 1% every day
+
+(#GrowthMindset)
+
+05
+
+Be in the details
+
+(#DetailsMatter)
+
+06
+
+Do hard things
+
+(#Resilient)
+
+07
+
+Be here  
+to be exceptional
+
+(#Greatness)
+
+08
+
+Be scrappy
+
+(#Scrappy)
+
+09
+
+Be direct
+
+(#BeDirect)
+
+10
+
+Be fun to work with
+
+(#Fun)
+
+01
+
+Deliver  
+the best customer experience
+
+(#BestCX)
+
+02
+
+Embrace hard work
+
+(#HardWork)
+
+03
+
+Drive urgency
+
+(#Urgency)
+
+04
+
+Grow 1% every day
+
+(#GrowthMindset)
+
+05
+
+Be in the details
+
+(#DetailsMatter)
+
+06
+
+Do hard things
+
+(#Resilient)
+
+07
+
+Be here  
+to be exceptional
+
+(#Greatness)
+
+08
+
+Be scrappy
+
+(#Scrappy)
+
+09
+
+Be direct
+
+(#BeDirect)
+
+10
+
+Be fun to work with
+
+(#Fun)
+
+Next
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+*   7
+*   8
+*   9
+*   10
+
+our motto
+
+Save one day every week.
+------------------------
+
+our team
+
+Meet the team!
+--------------
+
+ClickUppers are highly passionate, energetic, and unique people that align in the mission of  
+saving people time and making the world more productive. [Join us](https://clickup.com/careers).
+
+ClickUp Team Map
+
+![Image 6](https://clickup.com/images/all-team/jkm-6155597778591095694188.jpg)
+
+![Image 7](https://clickup.com/images/all-team/ah-7005474455.jpg)
+
+![Image 8](https://clickup.com/images/all-team/cs-918650518745.jpg)
+
+![Image 9](https://clickup.com/images/all-team/ldl-815707018110.jpg)
+
+![Image 10](https://clickup.com/images/all-team/lb-8774108181481.jpg)
+
+![Image 11](https://clickup.com/images/all-team/kl-7181815818.jpg)
+
+![Image 12](https://clickup.com/images/all-team/lp-8621441.jpg)
+
+![Image 13](https://clickup.com/images/all-team/sg-51810131027812.jpg)
+
+![Image 14](https://clickup.com/images/all-team/js-6155597574567.jpg)
+
+![Image 15](https://clickup.com/images/all-team/cp-9791410279467.jpg)
+
+![Image 16](https://clickup.com/images/all-team/jb-61551875615.jpg)
+
+![Image 17](https://clickup.com/images/all-team/jk-6154759.jpg)
+
+![Image 18](https://clickup.com/images/all-team/ss-574745105881.jpg)
+
+![Image 19](https://clickup.com/images/all-team/al-774147874472181.jpg)
+
+![Image 20](https://clickup.com/images/all-team/sc-55910941818570.jpg)
+
+![Image 21](https://clickup.com/images/all-team/bs-8105241.jpg)
+
+![Image 22](https://clickup.com/images/all-team/bb-841007081181.jpg)
+
+![Image 23](https://clickup.com/images/all-team/rs-4700551745.jpg)
+
+![Image 24](https://clickup.com/images/all-team/dh-0705184788.jpg)
+
+![Image 25](https://clickup.com/images/all-team/th-64197541801412.jpg)
+
+![Image 26](https://clickup.com/images/all-team/eg-14597318534681.jpg)
+
+![Image 27](https://clickup.com/images/all-team/ad-7815570527897.jpg)
+
+![Image 28](https://clickup.com/images/all-team/kc-7598148198747510.jpg)
+
+![Image 29](https://clickup.com/images/all-team/ap-7042470.jpg)
+
+![Image 30](https://clickup.com/images/all-team/ef-1024597.jpg)
+
+![Image 31](https://clickup.com/images/all-team/ks-7455650575470010.jpg)
+
+![Image 32](https://clickup.com/images/all-team/sw-547907910518.jpg)
+
+![Image 33](https://clickup.com/images/all-team/jh-610052144781.jpg)
+
+![Image 34](https://clickup.com/images/all-team/sk-5618107174011.jpg)
+
+![Image 35](https://clickup.com/images/all-team/js-6751059185881.jpg)
+
+![Image 36](https://clickup.com/images/all-team/rb-417084190.jpg)
+
+![Image 37](https://clickup.com/images/all-team/ao-787577140107.jpg)
+
+![Image 38](https://clickup.com/images/all-team/ah-7004194799100.jpg)
+
+![Image 39](https://clickup.com/images/all-team/sm-54700109181.jpg)
+
+![Image 40](https://clickup.com/images/all-team/rk-47677667.jpg)
+
+![Image 41](https://clickup.com/images/all-team/mm-974579708191.jpg)
+
+![Image 42](https://clickup.com/images/all-team/vp-88702418750.jpg)
+
+![Image 43](https://clickup.com/images/all-team/mn-9594188107770761.jpg)
+
+![Image 44](https://clickup.com/images/all-team/mb-9594718814314.jpg)
+
+![Image 45](https://clickup.com/images/all-team/hc-474811975641.jpg)
+
+![Image 46](https://clickup.com/images/all-team/lh-814475014746.jpg)
+
+![Image 47](https://clickup.com/images/all-team/jr-61407047001824.jpg)
+
+![Image 48](https://clickup.com/images/all-team/as-7784115795975.jpg)
+
+![Image 49](https://clickup.com/images/all-team/sk-51647724158570.jpg)
+
+![Image 50](https://clickup.com/images/all-team/cm-910149931734.jpg)
+
+![Image 51](https://clickup.com/images/all-team/ms-958155674710.jpg)
+
+![Image 52](https://clickup.com/images/all-team/mm-97664199594185.jpg)
+
+![Image 53](https://clickup.com/images/all-team/dr-070417941.jpg)
+
+![Image 54](https://clickup.com/images/all-team/jd-675100781.jpg)
+
+![Image 55](https://clickup.com/images/all-team/aj-70041961015.jpg)
+
+![Image 56](https://clickup.com/images/all-team/am-785561497495881.jpg)
+
+![Image 57](https://clickup.com/images/all-team/rh-41704191.jpg)
+
+![Image 58](https://clickup.com/images/all-team/lm-8110187910675.jpg)
+
+![Image 59](https://clickup.com/images/all-team/nf-0767851281415.jpg)
+
+![Image 60](https://clickup.com/images/all-team/dd-074950071456.jpg)
+
+![Image 61](https://clickup.com/images/all-team/kf-7765121310.jpg)
+
+![Image 62](https://clickup.com/images/all-team/aw-746474954575.jpg)
+
+![Image 63](https://clickup.com/images/all-team/em-18851669115.jpg)
+
+![Image 64](https://clickup.com/images/all-team/ak-78107122.jpg)
+
+![Image 65](https://clickup.com/images/all-team/cm-974185019106319141.jpg)
+
+![Image 66](https://clickup.com/images/all-team/z-218.jpg)
+
+![Image 67](https://clickup.com/images/all-team/mg-97491341108143.jpg)
+
+![Image 68](https://clickup.com/images/all-team/jw-61119110.jpg)
+
+![Image 69](https://clickup.com/images/all-team/sa-57877984110.jpg)
+
+![Image 70](https://clickup.com/images/all-team/cr-9445561241441010.jpg)
+
+![Image 71](https://clickup.com/images/all-team/gw-374416697421947.jpg)
+
+![Image 72](https://clickup.com/images/all-team/pj-245852670510.jpg)
+
+![Image 73](https://clickup.com/images/all-team/mk-97617527477.jpg)
+
+![Image 74](https://clickup.com/images/all-team/bs-845705144761.jpg)
+
+![Image 75](https://clickup.com/images/all-team/za-279478810.jpg)
+
+![Image 76](https://clickup.com/images/all-team/qa-375061071145.jpg)
+
+![Image 77](https://clickup.com/images/all-team/la-8500511751881.jpg)
+
+![Image 78](https://clickup.com/images/all-team/j-615453.jpg)
+
+![Image 79](https://clickup.com/images/all-team/al-791811.jpg)
+
+![Image 80](https://clickup.com/images/all-team/jh-67565045766.jpg)
+
+![Image 81](https://clickup.com/images/all-team/ks-77181105670045031.jpg)
+
+![Image 82](https://clickup.com/images/all-team/np-015827618.jpg)
+
+![Image 83](https://clickup.com/images/all-team/cs-914115641714.jpg)
+
+![Image 84](https://clickup.com/images/all-team/ag-7810314970.jpg)
+
+![Image 85](https://clickup.com/images/all-team/el-14598799140503.jpg)
+
+![Image 86](https://clickup.com/images/all-team/gr-3114314110.jpg)
+
+![Image 87](https://clickup.com/images/all-team/cm-9174601191555014.jpg)
+
+![Image 88](https://clickup.com/images/all-team/lr-81370475975510.jpg)
+
+![Image 89](https://clickup.com/images/all-team/my-9594718172.jpg)
+
+![Image 90](https://clickup.com/images/all-team/rn-4170018510.jpg)
+
+![Image 91](https://clickup.com/images/all-team/as-71451856124105.jpg)
+
+![Image 92](https://clickup.com/images/all-team/mw-9766419915614.jpg)
+
+![Image 93](https://clickup.com/images/all-team/ds-050757700145.jpg)
+
+![Image 94](https://clickup.com/images/all-team/im-557799786214.jpg)
+
+![Image 95](https://clickup.com/images/all-team/om-1974995079.jpg)
+
+![Image 96](https://clickup.com/images/all-team/kw-718194561.jpg)
+
+![Image 97](https://clickup.com/images/all-team/th-61814412214070.jpg)
+
+![Image 98](https://clickup.com/images/all-team/dr-079104170.jpg)
+
+![Image 99](https://clickup.com/images/all-team/kn-77281534011.jpg)
+
+![Image 100](https://clickup.com/images/all-team/lp-8774102583459.jpg)
+
+![Image 101](https://clickup.com/images/all-team/cq-9445565703754501.jpg)
+
+![Image 102](https://clickup.com/images/all-team/kk-77181070188.jpg)
+
+![Image 103](https://clickup.com/images/all-team/ad-754815340559414.jpg)
+
+![Image 104](https://clickup.com/images/all-team/jg-6756503819910.jpg)
+
+![Image 105](https://clickup.com/images/all-team/hi-4188155779.jpg)
+
+![Image 106](https://clickup.com/images/all-team/dz-0785024103.jpg)
+
+![Image 107](https://clickup.com/images/all-team/cc-97485916681.jpg)
+
+![Image 108](https://clickup.com/images/all-team/ge-350718705.jpg)
+
+![Image 109](https://clickup.com/images/all-team/ld-858107855.jpg)
+
+![Image 110](https://clickup.com/images/all-team/ra-41950361070795.jpg)
+
+![Image 111](https://clickup.com/images/all-team/es-145775256814.jpg)
+
+![Image 112](https://clickup.com/images/all-team/cl-91885081010.jpg)
+
+![Image 113](https://clickup.com/images/all-team/hl-47187103.jpg)
+
+![Image 114](https://clickup.com/images/all-team/s-51431153.jpg)
+
+![Image 115](https://clickup.com/images/all-team/ab-700417874314.jpg)
+
+![Image 116](https://clickup.com/images/all-team/fm-27557897875.jpg)
+
+![Image 117](https://clickup.com/images/all-team/ak-70041759.jpg)
+
+![Image 118](https://clickup.com/images/all-team/sb-5916688156150.jpg)
+
+![Image 119](https://clickup.com/images/all-team/ak-7810770214.jpg)
+
+![Image 120](https://clickup.com/images/all-team/ib-50019106876418125.jpg)
+
+![Image 121](https://clickup.com/images/all-team/hp-47007427470501.jpg)
+
+![Image 122](https://clickup.com/images/all-team/mb-9766877970.jpg)
+
+![Image 123](https://clickup.com/images/all-team/js-675105472214.jpg)
+
+![Image 124](https://clickup.com/images/all-team/ms-9766570.jpg)
+
+![Image 125](https://clickup.com/images/all-team/mn-974105970554.jpg)
+
+![Image 126](https://clickup.com/images/all-team/mk-9741007077470777470.jpg)
+
+![Image 127](https://clickup.com/images/all-team/bb-818875811.jpg)
+
+![Image 128](https://clickup.com/images/all-team/bu-847081170503.jpg)
+
+![Image 129](https://clickup.com/images/all-team/jf-6751021811.jpg)
+
+![Image 130](https://clickup.com/images/all-team/mw-97497591555.jpg)
+
+![Image 131](https://clickup.com/images/all-team/js-6791559166.jpg)
+
+![Image 132](https://clickup.com/images/all-team/sa-5784507700475.jpg)
+
+![Image 133](https://clickup.com/images/all-team/tw-6718149110.jpg)
+
+![Image 134](https://clickup.com/images/all-team/ms-974752703814.jpg)
+
+![Image 135](https://clickup.com/images/all-team/ks-771811594797970.jpg)
+
+![Image 136](https://clickup.com/images/all-team/jk-6107647075035811.jpg)
+
+![Image 137](https://clickup.com/images/all-team/bk-8106795075214.jpg)
+
+![Image 138](https://clickup.com/images/all-team/ga-37801782745870.jpg)
+
+![Image 139](https://clickup.com/images/all-team/bc-88771974614.jpg)
+
+![Image 140](https://clickup.com/images/all-team/ai-707567555754754.jpg)
+
+![Image 141](https://clickup.com/images/all-team/tp-67475210185751.jpg)
+
+![Image 142](https://clickup.com/images/all-team/aa-79141107491667.jpg)
+
+![Image 143](https://clickup.com/images/all-team/ak-781974726.jpg)
+
+![Image 144](https://clickup.com/images/all-team/jp-610764102122470.jpg)
+
+![Image 145](https://clickup.com/images/all-team/bs-85885702140.jpg)
+
+![Image 146](https://clickup.com/images/all-team/rw-459418819740.jpg)
+
+![Image 147](https://clickup.com/images/all-team/hf-470614251805.jpg)
+
+![Image 148](https://clickup.com/images/all-team/jc-677097401075.jpg)
+
+![Image 149](https://clickup.com/images/all-team/js-677155015.jpg)
+
+![Image 150](https://clickup.com/images/all-team/dd-0785001181.jpg)
+
+![Image 151](https://clickup.com/images/all-team/jc-615124910.jpg)
+
+![Image 152](https://clickup.com/images/all-team/mem-97411852781649106319141.jpg)
+
+![Image 153](https://clickup.com/images/all-team/cc-944559700503479.jpg)
+
+![Image 154](https://clickup.com/images/all-team/cyl-917460111810018795.jpg)
+
+![Image 155](https://clickup.com/images/all-team/cs-91746577818700.jpg)
+
+![Image 156](https://clickup.com/images/all-team/dm-0181091470.jpg)
+
+![Image 157](https://clickup.com/images/all-team/jw-679189149700.jpg)
+
+![Image 158](https://clickup.com/images/all-team/be-8410618705.jpg)
+
+![Image 159](https://clickup.com/images/all-team/de-014171857510.jpg)
+
+![Image 160](https://clickup.com/images/all-team/jh-614070475811.jpg)
+
+![Image 161](https://clickup.com/images/all-team/jw-61547797715.jpg)
+
+![Image 162](https://clickup.com/images/all-team/cc-97958819140161.jpg)
+
+![Image 163](https://clickup.com/images/all-team/ls-8774105978811.jpg)
+
+![Image 164](https://clickup.com/images/all-team/a-78107004753.jpg)
+
+![Image 165](https://clickup.com/images/all-team/ge-34706175614.jpg)
+
+![Image 166](https://clickup.com/images/all-team/et-1045967.jpg)
+
+![Image 167](https://clickup.com/images/all-team/jon-677110178.jpg)
+
+![Image 168](https://clickup.com/images/all-team/eg-187031405594.jpg)
+
+![Image 169](https://clickup.com/images/all-team/ao-71146137.jpg)
+
+![Image 170](https://clickup.com/images/all-team/st-561810615711.jpg)
+
+![Image 171](https://clickup.com/images/all-team/he-4150510350610.jpg)
+
+![Image 172](https://clickup.com/images/all-team/rt-47251867011.jpg)
+
+![Image 173](https://clickup.com/images/all-team/tn-61001810.jpg)
+
+![Image 174](https://clickup.com/images/all-team/jos-67918157885870.jpg)
+
+![Image 175](https://clickup.com/images/all-team/bg-841178103110950.jpg)
+
+![Image 176](https://clickup.com/images/all-team/jg-677783709749217.jpg)
+
+![Image 177](https://clickup.com/images/all-team/sm-514351910507.jpg)
+
+![Image 178](https://clickup.com/images/all-team/tr-6701747503.jpg)
+
+![Image 179](https://clickup.com/images/all-team/td-6718140521.jpg)
+
+![Image 180](https://clickup.com/images/all-team/jb-6184700108743.jpg)
+
+![Image 181](https://clickup.com/images/all-team/co-9791410185814.jpg)
+
+![Image 182](https://clickup.com/images/all-team/kg-774831877.jpg)
+
+![Image 183](https://clickup.com/images/all-team/cr-945644747673127870.jpg)
+
+![Image 184](https://clickup.com/images/all-team/a-775650517510.jpg)
+
+![Image 185](https://clickup.com/images/all-team/wk-9176671050314.jpg)
+
+![Image 186](https://clickup.com/images/all-team/jr-67915104151.jpg)
+
+![Image 187](https://clickup.com/images/all-team/jl-6771870514.jpg)
+
+![Image 188](https://clickup.com/images/all-team/js-679756180503.jpg)
+
+![Image 189](https://clickup.com/images/all-team/ps-276519740.jpg)
+
+![Image 190](https://clickup.com/images/all-team/vt-86610.jpg)
+
+![Image 191](https://clickup.com/images/all-team/rg-471358815251.jpg)
+
+![Image 192](https://clickup.com/images/all-team/ts-617370547468122.jpg)
+
+![Image 193](https://clickup.com/images/all-team/dm-05707956678581.jpg)
+
+![Image 194](https://clickup.com/images/all-team/ts-614759497462.jpg)
+
+![Image 195](https://clickup.com/images/all-team/cc-97559470.jpg)
+
+![Image 196](https://clickup.com/images/all-team/nh-05974703351.jpg)
+
+![Image 197](https://clickup.com/images/all-team/gb-3588570874015.jpg)
+
+![Image 198](https://clickup.com/images/all-team/dc-015650197441.jpg)
+
+![Image 199](https://clickup.com/images/all-team/jm-675650950116.jpg)
+
+![Image 200](https://clickup.com/images/all-team/nr-07614188505.jpg)
+
+![Image 201](https://clickup.com/images/all-team/nm-05941875914610.jpg)
+
+![Image 202](https://clickup.com/images/all-team/al-788108191.jpg)
+
+![Image 203](https://clickup.com/images/all-team/jk-61547711.jpg)
+
+![Image 204](https://clickup.com/images/all-team/jb-6155597879474.jpg)
+
+![Image 205](https://clickup.com/images/all-team/sy9-518476150189177.jpg)
+
+![Image 206](https://clickup.com/images/all-team/hj-47007461015.jpg)
+
+![Image 207](https://clickup.com/images/all-team/dd-09564510477.jpg)
+
+![Image 208](https://clickup.com/images/all-team/mw-959471894568747.jpg)
+
+![Image 209](https://clickup.com/images/all-team/cm-97479191225.jpg)
+
+![Image 210](https://clickup.com/images/all-team/ah-7914798850.jpg)
+
+![Image 211](https://clickup.com/images/all-team/kv-71001648509106.jpg)
+
+![Image 212](https://clickup.com/images/all-team/ds-0785057975.jpg)
+
+![Image 213](https://clickup.com/images/all-team/mb-95694811870.jpg)
+
+![Image 214](https://clickup.com/images/all-team/bs-84105159564.jpg)
+
+![Image 215](https://clickup.com/images/all-team/lm-857997410115.jpg)
+
+![Image 216](https://clickup.com/images/all-team/ks-7765154141.jpg)
+
+![Image 217](https://clickup.com/images/all-team/kh-77568104583145.jpg)
+
+![Image 218](https://clickup.com/images/all-team/np-059721617.jpg)
+
+![Image 219](https://clickup.com/images/all-team/ab-703187870014.jpg)
+
+![Image 220](https://clickup.com/images/all-team/bc-87816619471.jpg)
+
+![Image 221](https://clickup.com/images/all-team/mw-9594718978714.jpg)
+
+![Image 222](https://clickup.com/images/all-team/js-61076470577412.jpg)
+
+![Image 223](https://clickup.com/images/all-team/ts-6455475215597.jpg)
+
+![Image 224](https://clickup.com/images/all-team/ns-0597574472.jpg)
+
+![Image 225](https://clickup.com/images/all-team/jf-65991281415.jpg)
+
+![Image 226](https://clickup.com/images/all-team/me-91370188970.jpg)
+
+![Image 227](https://clickup.com/images/all-team/kg-74556135841764.jpg)
+
+![Image 228](https://clickup.com/images/all-team/kn-71850011.jpg)
+
+![Image 229](https://clickup.com/images/all-team/jb-6751087714.jpg)
+
+![Image 230](https://clickup.com/images/all-team/ms-95947185595.jpg)
+
+![Image 231](https://clickup.com/images/all-team/jb-677181910.jpg)
+
+![Image 232](https://clickup.com/images/all-team/kg-7781837445510.jpg)
+
+![Image 233](https://clickup.com/images/all-team/iv-587085887.jpg)
+
+![Image 234](https://clickup.com/images/all-team/ra-472718737711.jpg)
+
+![Image 235](https://clickup.com/images/all-team/zb-279488103166.jpg)
+
+![Image 236](https://clickup.com/images/all-team/rs-4594740519740.jpg)
+
+![Image 237](https://clickup.com/images/all-team/bp-8457021412.jpg)
+
+![Image 238](https://clickup.com/images/all-team/ak-77479747850.jpg)
+
+![Image 239](https://clickup.com/images/all-team/sk-516478759541.jpg)
+
+![Image 240](https://clickup.com/images/all-team/gm-34139170.jpg)
+
+![Image 241](https://clickup.com/images/all-team/ss-59166572597.jpg)
+
+![Image 242](https://clickup.com/images/all-team/av-70318187881.jpg)
+
+![Image 243](https://clickup.com/images/all-team/ah-7810419740.jpg)
+
+![Image 244](https://clickup.com/images/all-team/mm-957711895427.jpg)
+
+![Image 245](https://clickup.com/images/all-team/bs-847081159564.jpg)
+
+![Image 246](https://clickup.com/images/all-team/il-58708775709477.jpg)
+
+![Image 247](https://clickup.com/images/all-team/ap-7079219188.jpg)
+
+![Image 248](https://clickup.com/images/all-team/mp-9594718279786.jpg)
+
+![Image 249](https://clickup.com/images/all-team/pst-245595875948157161441.jpg)
+
+![Image 250](https://clickup.com/images/all-team/jw-677191109740.jpg)
+
+![Image 251](https://clickup.com/images/all-team/tm-619974471.jpg)
+
+![Image 252](https://clickup.com/images/all-team/ja-61076410748107.jpg)
+
+![Image 253](https://clickup.com/images/all-team/tg-69341101.jpg)
+
+![Image 254](https://clickup.com/images/all-team/ap-7885510214614.jpg)
+
+![Image 255](https://clickup.com/images/all-team/jj-6100521461015.jpg)
+
+![Image 256](https://clickup.com/images/all-team/ra-4717375441.jpg)
+
+![Image 257](https://clickup.com/images/all-team/ee-1855781641457510.jpg)
+
+![Image 258](https://clickup.com/images/all-team/av-74970585678.jpg)
+
+![Image 259](https://clickup.com/images/all-team/pf-2712146594.jpg)
+
+![Image 260](https://clickup.com/images/all-team/em-1450974785887.jpg)
+
+![Image 261](https://clickup.com/images/all-team/ms-957158781.jpg)
+
+![Image 262](https://clickup.com/images/all-team/pl-2148781107401.jpg)
+
+![Image 263](https://clickup.com/images/all-team/an-70041037110.jpg)
+
+![Image 264](https://clickup.com/images/all-team/we-9781101873458.jpg)
+
+![Image 265](https://clickup.com/images/all-team/gs-34135970.jpg)
+
+![Image 266](https://clickup.com/images/all-team/aw-79814978714.jpg)
+
+![Image 267](https://clickup.com/images/all-team/lo-8774101494740.jpg)
+
+![Image 268](https://clickup.com/images/all-team/sdm-54700100197491.jpg)
+
+![Image 269](https://clickup.com/images/all-team/mi-9171675561950.jpg)
+
+![Image 270](https://clickup.com/images/all-team/bw-8470059156.jpg)
+
+![Image 271](https://clickup.com/images/all-team/mr-9185557415106478.jpg)
+
+![Image 272](https://clickup.com/images/all-team/cr-944556124144157.jpg)
+
+![Image 273](https://clickup.com/images/all-team/lo-8174175916.jpg)
+
+![Image 274](https://clickup.com/images/all-team/mr-974650418815.jpg)
+
+![Image 275](https://clickup.com/images/all-team/aj-706410161975.jpg)
+
+![Image 276](https://clickup.com/images/all-team/rh-418199741471.jpg)
+
+![Image 277](https://clickup.com/images/all-team/al-775650817814610.jpg)
+
+![Image 278](https://clickup.com/images/all-team/af-781070047277677.jpg)
+
+![Image 279](https://clickup.com/images/all-team/sk-574747762.jpg)
+
+![Image 280](https://clickup.com/images/all-team/jk-61441747550575.jpg)
+
+![Image 281](https://clickup.com/images/all-team/jl-6793718501818103.jpg)
+
+![Image 282](https://clickup.com/images/all-team/ml-976681955.jpg)
+
+![Image 283](https://clickup.com/images/all-team/da-0705187925.jpg)
+
+![Image 284](https://clickup.com/images/all-team/cs-9141159564.jpg)
+
+![Image 285](https://clickup.com/images/all-team/jc-61407094703.jpg)
+
+![Image 286](https://clickup.com/images/all-team/rz-4170217715.jpg)
+
+![Image 287](https://clickup.com/images/all-team/tk-6798107137.jpg)
+
+![Image 288](https://clickup.com/images/all-team/tp-6592174510.jpg)
+
+![Image 289](https://clickup.com/images/all-team/ss-5725594762.jpg)
+
+![Image 290](https://clickup.com/images/all-team/gy-374416617918101.jpg)
+
+![Image 291](https://clickup.com/images/all-team/ma-974170017375874.jpg)
+
+![Image 292](https://clickup.com/images/all-team/kr-77644104199457.jpg)
+
+![Image 293](https://clickup.com/images/all-team/mc-95694189105670650.jpg)
+
+![Image 294](https://clickup.com/images/all-team/ac-7816700419784147.jpg)
+
+![Image 295](https://clickup.com/images/all-team/es-18155756747970.jpg)
+
+![Image 296](https://clickup.com/images/all-team/sk-5747471004597.jpg)
+
+![Image 297](https://clickup.com/images/all-team/jr-67510419188.jpg)
+
+![Image 298](https://clickup.com/images/all-team/am-7870958814.jpg)
+
+![Image 299](https://clickup.com/images/all-team/am-745105797445.jpg)
+
+![Image 300](https://clickup.com/images/all-team/mvd-959471887001140.jpg)
+
+![Image 301](https://clickup.com/images/all-team/fv-241187810957.jpg)
+
+![Image 302](https://clickup.com/images/all-team/mk-953718747314.jpg)
+
+![Image 303](https://clickup.com/images/all-team/bh-84191411814.jpg)
+
+![Image 304](https://clickup.com/images/all-team/mg-976641934181.jpg)
+
+![Image 305](https://clickup.com/images/all-team/lb-85578744515.jpg)
+
+![Image 306](https://clickup.com/images/all-team/dg-0411314314.jpg)
+
+![Image 307](https://clickup.com/images/all-team/sp-547327101.jpg)
+
+![Image 308](https://clickup.com/images/all-team/gs-381457577412.jpg)
+
+![Image 309](https://clickup.com/images/all-team/ah-781047061.jpg)
+
+![Image 310](https://clickup.com/images/all-team/da-078507887412.jpg)
+
+![Image 311](https://clickup.com/images/all-team/ng-07613122.jpg)
+
+![Image 312](https://clickup.com/images/all-team/ln-8557037110.jpg)
+
+![Image 313](https://clickup.com/images/all-team/rw-41819979748970.jpg)
+
+![Image 314](https://clickup.com/images/all-team/hr-4758114785610.jpg)
+
+![Image 315](https://clickup.com/images/all-team/sh-510011470510.jpg)
+
+![Image 316](https://clickup.com/images/all-team/vc-850910697678701.jpg)
+
+![Image 317](https://clickup.com/images/all-team/js-612251410510.jpg)
+
+![Image 318](https://clickup.com/images/all-team/jw-67595019188.jpg)
+
+![Image 319](https://clickup.com/images/all-team/acb-7855457947494970811.jpg)
+
+![Image 320](https://clickup.com/images/all-team/am-70041195415405941071.jpg)
+
+![Image 321](https://clickup.com/images/all-team/ts-645567059473.jpg)
+
+![Image 322](https://clickup.com/images/all-team/bl-8410078762.jpg)
+
+![Image 323](https://clickup.com/images/all-team/tj-6418146140510.jpg)
+
+![Image 324](https://clickup.com/images/all-team/tk-6418147070510.jpg)
+
+![Image 325](https://clickup.com/images/all-team/mz-9766419210566505.jpg)
+
+![Image 326](https://clickup.com/images/all-team/ds-07051858781.jpg)
+
+![Image 327](https://clickup.com/images/all-team/km-7185097874711.jpg)
+
+![Image 328](https://clickup.com/images/all-team/dg-01950593472781.jpg)
+
+![Image 329](https://clickup.com/images/all-team/my-9751017.jpg)
+
+![Image 330](https://clickup.com/images/all-team/sk-51245777950575.jpg)
+
+![Image 331](https://clickup.com/images/all-team/sbg-517878188379.jpg)
+
+![Image 332](https://clickup.com/images/all-team/ph-279147469700.jpg)
+
+![Image 333](https://clickup.com/images/all-team/cm-978556791657.jpg)
+
+![Image 334](https://clickup.com/images/all-team/jf-67951258157.jpg)
+
+![Image 335](https://clickup.com/images/all-team/j-61153.jpg)
+
+![Image 336](https://clickup.com/images/all-team/kw-775681091854.jpg)
+
+![Image 337](https://clickup.com/images/all-team/hc-471811945804155.jpg)
+
+![Image 338](https://clickup.com/images/all-team/lp-879752188740.jpg)
+
+![Image 339](https://clickup.com/images/all-team/mh-913704794597.jpg)
+
+![Image 340](https://clickup.com/images/all-team/cb-94455810014.jpg)
+
+![Image 341](https://clickup.com/images/all-team/vv-850910687434151.jpg)
+
+![Image 342](https://clickup.com/images/all-team/mc-97001974751.jpg)
+
+![Image 343](https://clickup.com/images/all-team/jb-6140871.jpg)
+
+![Image 344](https://clickup.com/images/all-team/az-781070014250941071.jpg)
+
+![Image 345](https://clickup.com/images/all-team/dg-0141731027812.jpg)
+
+![Image 346](https://clickup.com/images/all-team/aa-74970754472570.jpg)
+
+![Image 347](https://clickup.com/images/all-team/ac-774109146.jpg)
+
+![Image 348](https://clickup.com/images/all-team/hp-4758851274714.jpg)
+
+![Image 349](https://clickup.com/images/all-team/rp-411912819970.jpg)
+
+![Image 350](https://clickup.com/images/all-team/kf-71851124156.jpg)
+
+![Image 351](https://clickup.com/images/all-team/pl-2718781212.jpg)
+
+![Image 352](https://clickup.com/images/all-team/mm-913709708191.jpg)
+
+![Image 353](https://clickup.com/images/all-team/mt-915867270.jpg)
+
+![Image 354](https://clickup.com/images/all-team/sd-579910700.jpg)
+
+![Image 355](https://clickup.com/images/all-team/cd-974181007855.jpg)
+
+![Image 356](https://clickup.com/images/all-team/nm-01070914912.jpg)
+
+![Image 357](https://clickup.com/images/all-team/ar-7004194155.jpg)
+
+![Image 358](https://clickup.com/images/all-team/w-915.jpg)
+
+![Image 359](https://clickup.com/images/all-team/crj-91411441561015.jpg)
+
+![Image 360](https://clickup.com/images/all-team/sg-57474314010.jpg)
+
+![Image 361](https://clickup.com/images/all-team/cz-91812148105.jpg)
+
+![Image 362](https://clickup.com/images/all-team/iw-570976510.jpg)
+
+![Image 363](https://clickup.com/images/all-team/jv-67718731.jpg)
+
+![Image 364](https://clickup.com/images/all-team/dk-09164177421071.jpg)
+
+![Image 365](https://clickup.com/images/all-team/cb-9141065087250.jpg)
+
+![Image 366](https://clickup.com/images/all-team/cl-94751870141.jpg)
+
+![Image 367](https://clickup.com/images/all-team/js-6599157885870.jpg)
+
+![Image 368](https://clickup.com/images/all-team/js-6154576610.jpg)
+
+![Image 369](https://clickup.com/images/all-team/js-617075788734.jpg)
+
+![Image 370](https://clickup.com/images/all-team/ls-813705210914.jpg)
+
+![Image 371](https://clickup.com/images/all-team/lm-813709797.jpg)
+
+![Image 372](https://clickup.com/images/all-team/yp-1747214565715.jpg)
+
+![Image 373](https://clickup.com/images/all-team/db-0708740166.jpg)
+
+![Image 374](https://clickup.com/images/all-team/nt-0761671814.jpg)
+
+![Image 375](https://clickup.com/images/all-team/bb-84700108162.jpg)
+
+![Image 376](https://clickup.com/images/all-team/nw-07195914010.jpg)
+
+![Image 377](https://clickup.com/images/all-team/k-71564.jpg)
+
+![Image 378](https://clickup.com/images/all-team/tm-641975958814.jpg)
+
+![Image 379](https://clickup.com/images/all-team/ee-14597159787061.jpg)
+
+![Image 380](https://clickup.com/images/all-team/ld-855707850.jpg)
+
+![Image 381](https://clickup.com/images/all-team/sw-591669788.jpg)
+
+![Image 382](https://clickup.com/images/all-team/aj-745967918510.jpg)
+
+![Image 383](https://clickup.com/images/all-team/ms-977100759762.jpg)
+
+![Image 384](https://clickup.com/images/all-team/rb-41708470014.jpg)
+
+![Image 385](https://clickup.com/images/all-team/sg-5411873475519570.jpg)
+
+![Image 386](https://clickup.com/images/all-team/yt-1503670.jpg)
+
+![Image 387](https://clickup.com/images/all-team/mr-91855574151064785.jpg)
+
+![Image 388](https://clickup.com/images/all-team/an-781005718718.jpg)
+
+![Image 389](https://clickup.com/images/all-team/bw-841007091821.jpg)
+
+![Image 390](https://clickup.com/images/all-team/bb-84708114971.jpg)
+
+![Image 391](https://clickup.com/images/all-team/bg-810374850142.jpg)
+
+![Image 392](https://clickup.com/images/all-team/ln-879505010.jpg)
+
+![Image 393](https://clickup.com/images/all-team/fl-2410819414.jpg)
+
+![Image 394](https://clickup.com/images/all-team/kp-71812110.jpg)
+
+![Image 395](https://clickup.com/images/all-team/no-07678857127871.jpg)
+
+![Image 396](https://clickup.com/images/all-team/ak-703187759.jpg)
+
+![Image 397](https://clickup.com/images/all-team/sp-5797182747.jpg)
+
+![Image 398](https://clickup.com/images/all-team/er-145941061457.jpg)
+
+![Image 399](https://clickup.com/images/all-team/ac-781975641.jpg)
+
+![Image 400](https://clickup.com/images/all-team/mj-97547456978714.jpg)
+
+![Image 401](https://clickup.com/images/all-team/na-0158797478.jpg)
+
+![Image 402](https://clickup.com/images/all-team/wg-97861437144141.jpg)
+
+![Image 403](https://clickup.com/images/all-team/hm-4700749521.jpg)
+
+![Image 404](https://clickup.com/images/all-team/lh-8797547991005.jpg)
+
+![Image 405](https://clickup.com/images/all-team/aw-70155479740.jpg)
+
+![Image 406](https://clickup.com/images/all-team/jm-6107647091142116.jpg)
+
+![Image 407](https://clickup.com/images/all-team/dz-07024703.jpg)
+
+![Image 408](https://clickup.com/images/all-team/kr-77568504756.jpg)
+
+![Image 409](https://clickup.com/images/all-team/mw-9709507814.jpg)
+
+![Image 410](https://clickup.com/images/all-team/jo-618113747110.jpg)
+
+![Image 411](https://clickup.com/images/all-team/ab-7981487615.jpg)
+
+![Image 412](https://clickup.com/images/all-team/nbvg-0578775877016810314501422.jpg)
+
+![Image 413](https://clickup.com/images/all-team/dy-074575170911.jpg)
+
+![Image 414](https://clickup.com/images/all-team/hs-4744551052177.jpg)
+
+![Image 415](https://clickup.com/images/all-team/bb-847001084190.jpg)
+
+![Image 416](https://clickup.com/images/all-team/ks-718505949506.jpg)
+
+![Image 417](https://clickup.com/images/all-team/ms-976657978575.jpg)
+
+![Image 418](https://clickup.com/images/all-team/ah-700417414070012.jpg)
+
+![Image 419](https://clickup.com/images/all-team/nm-07274519107747.jpg)
+
+![Image 420](https://clickup.com/images/all-team/ks-71850564597.jpg)
+
+![Image 421](https://clickup.com/images/all-team/rk-4170710053.jpg)
+
+![Image 422](https://clickup.com/images/all-team/ap-781021746754.jpg)
+
+![Image 423](https://clickup.com/images/all-team/am-7005191862014.jpg)
+
+![Image 424](https://clickup.com/images/all-team/ka-718170014510.jpg)
+
+![Image 425](https://clickup.com/images/all-team/pv-2778876614166.jpg)
+
+![Image 426](https://clickup.com/images/all-team/bw-845667019719541.jpg)
+
+![Image 427](https://clickup.com/images/all-team/cn-94455018510.jpg)
+
+![Image 428](https://clickup.com/images/all-team/ar-781047079707.jpg)
+
+![Image 429](https://clickup.com/images/all-team/mm-981749707181.jpg)
+
+![Image 430](https://clickup.com/images/all-team/sn-5120141725.jpg)
+
+![Image 431](https://clickup.com/images/all-team/km-7185097.jpg)
+
+![Image 432](https://clickup.com/images/all-team/k-7105670650.jpg)
+
+![Image 433](https://clickup.com/images/all-team/js-61545258714.jpg)
+
+![Image 434](https://clickup.com/images/all-team/kd-745561007488143.jpg)
+
+![Image 435](https://clickup.com/images/all-team/pl-274714879.jpg)
+
+![Image 436](https://clickup.com/images/all-team/rc-417097411.jpg)
+
+![Image 437](https://clickup.com/images/all-team/jc-6707191485512.jpg)
+
+![Image 438](https://clickup.com/images/all-team/em-1870914370.jpg)
+
+![Image 439](https://clickup.com/images/all-team/gp-341321870014.jpg)
+
+![Image 440](https://clickup.com/images/all-team/jl-67915878756507.jpg)
+
+![Image 441](https://clickup.com/images/all-team/rs-4597577412.jpg)
+
+![Image 442](https://clickup.com/images/all-team/ln-879500705010.jpg)
+
+![Image 443](https://clickup.com/images/all-team/mm-97047491467.jpg)
+
+![Image 444](https://clickup.com/images/all-team/r-471.jpg)
+
+![Image 445](https://clickup.com/images/all-team/nr-015845995.jpg)
+
+![Image 446](https://clickup.com/images/all-team/mh-9749470510.jpg)
+
+![Image 447](https://clickup.com/images/all-team/ml-97055108110740.jpg)
+
+![Image 448](https://clickup.com/images/all-team/jg-6141913787061.jpg)
+
+![Image 449](https://clickup.com/images/all-team/km-71850918507.jpg)
+
+![Image 450](https://clickup.com/images/all-team/cm-97418501914419.jpg)
+
+![Image 451](https://clickup.com/images/all-team/cg-9411101314970.jpg)
+
+![Image 452](https://clickup.com/images/all-team/kr-7185141101805.jpg)
+
+![Image 453](https://clickup.com/images/all-team/ta-6411740180.jpg)
+
+![Image 454](https://clickup.com/images/all-team/mm-97499707181.jpg)
+
+![Image 455](https://clickup.com/images/all-team/is-53145781818.jpg)
+
+![Image 456](https://clickup.com/images/all-team/zb-279414184190.jpg)
+
+![Image 457](https://clickup.com/images/all-team/lh-8153470047703.jpg)
+
+![Image 458](https://clickup.com/images/all-team/bs-845705410.jpg)
+
+![Image 459](https://clickup.com/images/all-team/ml-97059187551441.jpg)
+
+![Image 460](https://clickup.com/images/all-team/df-070281154970.jpg)
+
+![Image 461](https://clickup.com/images/all-team/oa-1974788170.jpg)
+
+![Image 462](https://clickup.com/images/all-team/agc-78813749579740.jpg)
+
+![Image 463](https://clickup.com/images/all-team/br-810679504752.jpg)
+
+![Image 464](https://clickup.com/images/all-team/gg-34706379881.jpg)
+
+![Image 465](https://clickup.com/images/all-team/vi-85961457548503.jpg)
+
+![Image 466](https://clickup.com/images/all-team/hs-478105185970.jpg)
+
+![Image 467](https://clickup.com/images/all-team/pp-2470782475700777974.jpg)
+
+![Image 468](https://clickup.com/images/all-team/mm-97431691141.jpg)
+
+![Image 469](https://clickup.com/images/all-team/ms-974956101.jpg)
+
+![Image 470](https://clickup.com/images/all-team/tl-6718148110740.jpg)
+
+![Image 471](https://clickup.com/images/all-team/y-17451.jpg)
+
+![Image 472](https://clickup.com/images/all-team/sm-5612470197614.jpg)
+
+![Image 473](https://clickup.com/images/all-team/bp-847001021412.jpg)
+
+![Image 474](https://clickup.com/images/all-team/st-5747464518.jpg)
+
+![Image 475](https://clickup.com/images/all-team/ec-19147809744188.jpg)
+
+![Image 476](https://clickup.com/images/all-team/ss-5470115412740510.jpg)
+
+![Image 477](https://clickup.com/images/all-team/nw-05979182.jpg)
+
+![Image 478](https://clickup.com/images/all-team/sy-5184761501891.jpg)
+
+![Image 479](https://clickup.com/images/all-team/dam-0117976198.jpg)
+
+![Image 480](https://clickup.com/images/all-team/tm-659914455.jpg)
+
+![Image 481](https://clickup.com/images/all-team/sp-5797064721813750.jpg)
+
+![Image 482](https://clickup.com/images/all-team/ha-475811749564103.jpg)
+
+![Image 483](https://clickup.com/images/all-team/kk-718511715107470575.jpg)
+
+![Image 484](https://clickup.com/images/all-team/tj-6700146140510.jpg)
+
+![Image 485](https://clickup.com/images/all-team/kt-75811674014.jpg)
+
+![Image 486](https://clickup.com/images/all-team/rb-4115187661425180.jpg)
+
+![Image 487](https://clickup.com/images/all-team/ds-0185057098191061.jpg)
+
+![Image 488](https://clickup.com/images/all-team/ac-706410197565881.jpg)
+
+![Image 489](https://clickup.com/images/all-team/tn-641975058510.jpg)
+
+![Image 490](https://clickup.com/images/all-team/nf-05972785701.jpg)
+
+![Image 491](https://clickup.com/images/all-team/mc-9747914615.jpg)
+
+![Image 492](https://clickup.com/images/all-team/db-041984162503.jpg)
+
+![Image 493](https://clickup.com/images/all-team/th-61945045945.jpg)
+
+![Image 494](https://clickup.com/images/all-team/tw-619919703.jpg)
+
+![Image 495](https://clickup.com/images/all-team/jl-6100521487975.jpg)
+
+![Image 496](https://clickup.com/images/all-team/al-7004178502874575.jpg)
+
+![Image 497](https://clickup.com/images/all-team/rw-41005194561.jpg)
+
+![Image 498](https://clickup.com/images/all-team/dg-070518314056150.jpg)
+
+![Image 499](https://clickup.com/images/all-team/rs-459759497462.jpg)
+
+![Image 500](https://clickup.com/images/all-team/hg-4180103500.jpg)
+
+![Image 501](https://clickup.com/images/all-team/km-7599998741.jpg)
+
+![Image 502](https://clickup.com/images/all-team/sm-5747491141.jpg)
+
+![Image 503](https://clickup.com/images/all-team/rd-47824071.jpg)
+
+![Image 504](https://clickup.com/images/all-team/cb-9455618459101.jpg)
+
+![Image 505](https://clickup.com/images/all-team/vk-85091067470531.jpg)
+
+![Image 506](https://clickup.com/images/all-team/kk-776778815.jpg)
+
+![Image 507](https://clickup.com/images/all-team/rm-470019744141.jpg)
+
+![Image 508](https://clickup.com/images/all-team/lh-8581472177.jpg)
+
+![Image 509](https://clickup.com/images/all-team/ot-141061816.jpg)
+
+![Image 510](https://clickup.com/images/all-team/cj-9796140510.jpg)
+
+![Image 511](https://clickup.com/images/all-team/ah-77410454594.jpg)
+
+![Image 512](https://clickup.com/images/all-team/bm-8470109718814.jpg)
+
+![Image 513](https://clickup.com/images/all-team/a-781053.jpg)
+
+![Image 514](https://clickup.com/images/all-team/ey-185071777541017.jpg)
+
+![Image 515](https://clickup.com/images/all-team/ab-7810811408150.jpg)
+
+![Image 516](https://clickup.com/images/all-team/df-0785021161.jpg)
+
+![Image 517](https://clickup.com/images/all-team/dw-0705189500.jpg)
+
+![Image 518](https://clickup.com/images/all-team/so-5612414652.jpg)
+
+![Image 519](https://clickup.com/images/all-team/hh-4176414475879.jpg)
+
+![Image 520](https://clickup.com/images/all-team/mm-970019174758.jpg)
+
+![Image 521](https://clickup.com/images/all-team/hp-418812197.jpg)
+
+![Image 522](https://clickup.com/images/all-team/mf-914370247071.jpg)
+
+![Image 523](https://clickup.com/images/all-team/er-14594591.jpg)
+
+![Image 524](https://clickup.com/images/all-team/dd-01417074850.jpg)
+
+![Image 525](https://clickup.com/images/all-team/dm-0101870990522.jpg)
+
+![Image 526](https://clickup.com/images/all-team/jn-67710518510.jpg)
+
+![Image 527](https://clickup.com/images/all-team/bc-878879700503479.jpg)
+
+![Image 528](https://clickup.com/images/all-team/pc-2778915678581.jpg)
+
+![Image 529](https://clickup.com/images/all-team/kj-754761015.jpg)
+
+![Image 530](https://clickup.com/images/all-team/cm-910014999815711.jpg)
+
+![Image 531](https://clickup.com/images/all-team/nw-05941875915914.jpg)
+
+![Image 532](https://clickup.com/images/all-team/ms-974756100740.jpg)
+
+![Image 533](https://clickup.com/images/all-team/ecn-10137518917574078744161.jpg)
+
+![Image 534](https://clickup.com/images/all-team/bi-8470010557795.jpg)
+
+![Image 535](https://clickup.com/images/all-team/ao-7741018510.jpg)
+
+![Image 536](https://clickup.com/images/all-team/jg-67703470075.jpg)
+
+![Image 537](https://clickup.com/images/all-team/jp-61431024588525.jpg)
+
+![Image 538](https://clickup.com/images/all-team/js-6155597587381.jpg)
+
+![Image 539](https://clickup.com/images/all-team/dp-0419218510.jpg)
+
+![Image 540](https://clickup.com/images/all-team/dg-07051881372566.jpg)
+
+![Image 541](https://clickup.com/images/all-team/js-67565059564.jpg)
+
+![Image 542](https://clickup.com/images/all-team/bt-84561975.jpg)
+
+![Image 543](https://clickup.com/images/all-team/am-781097465012.jpg)
+
+![Image 544](https://clickup.com/images/all-team/jh-6140475511.jpg)
+
+![Image 545](https://clickup.com/images/all-team/ap-78102588510.jpg)
+
+![Image 546](https://clickup.com/images/all-team/hh-47007447075.jpg)
+
+![Image 547](https://clickup.com/images/all-team/sk-5475815477974.jpg)
+
+![Image 548](https://clickup.com/images/all-team/cb-9474851874791001.jpg)
+
+![Image 549](https://clickup.com/images/all-team/al-7870817127.jpg)
+
+![Image 550](https://clickup.com/images/all-team/ms-9747521091.jpg)
+
+![Image 551](https://clickup.com/images/all-team/al-7079814015.jpg)
+
+![Image 552](https://clickup.com/images/all-team/bf-817645227756501.jpg)
+
+![Image 553](https://clickup.com/images/all-team/jp-6154241016.jpg)
+
+![Image 554](https://clickup.com/images/all-team/ms-957158701.jpg)
+
+![Image 555](https://clickup.com/images/all-team/av-70781407291.jpg)
+
+![Image 556](https://clickup.com/images/all-team/bs-810574750.jpg)
+
+![Image 557](https://clickup.com/images/all-team/bl-86874510.jpg)
+
+![Image 558](https://clickup.com/images/all-team/lb-8774108179.jpg)
+
+![Image 559](https://clickup.com/images/all-team/js-6100759564.jpg)
+
+![Image 560](https://clickup.com/images/all-team/tt-647855671814.jpg)
+
+![Image 561](https://clickup.com/images/all-team/toc-64185019750.jpg)
+
+![Image 562](https://clickup.com/images/all-team/vt-8596146479.jpg)
+
+![Image 563](https://clickup.com/images/all-team/s-59166.jpg)
+
+![Image 564](https://clickup.com/images/all-team/jd-61701661019714.jpg)
+
+![Image 565](https://clickup.com/images/all-team/ec-14599545881.jpg)
+
+![Image 566](https://clickup.com/images/all-team/dj-0145976797510.jpg)
+
+![Image 567](https://clickup.com/images/all-team/jb-6140819970.jpg)
+
+![Image 568](https://clickup.com/images/all-team/bf-84100102856610.jpg)
+
+![Image 569](https://clickup.com/images/all-team/ic-5709776591.jpg)
+
+![Image 570](https://clickup.com/images/all-team/tm-618149748191.jpg)
+
+![Image 571](https://clickup.com/images/all-team/rb-41814684190.jpg)
+
+![Image 572](https://clickup.com/images/all-team/al-70041854155.jpg)
+
+![Image 573](https://clickup.com/images/all-team/ak-7811007705156106.jpg)
+
+![Image 574](https://clickup.com/images/all-team/ak-7810700147709418571.jpg)
+
+![Image 575](https://clickup.com/images/all-team/ad-7001010780510.jpg)
+
+![Image 576](https://clickup.com/images/all-team/ds-01850561714.jpg)
+
+![Image 577](https://clickup.com/images/all-team/dt-0170076500188.jpg)
+
+![Image 578](https://clickup.com/images/all-team/kn-7764507019970.jpg)
+
+![Image 579](https://clickup.com/images/all-team/ap-788512514979501.jpg)
+
+![Image 580](https://clickup.com/images/all-team/sv-5170851464.jpg)
+
+![Image 581](https://clickup.com/images/all-team/sk-56197610701665.jpg)
+
+![Image 582](https://clickup.com/images/all-team/kh-718504706.jpg)
+
+![Image 583](https://clickup.com/images/all-team/js-6791558766141.jpg)
+
+![Image 584](https://clickup.com/images/all-team/el-10974081212.jpg)
+
+![Image 585](https://clickup.com/images/all-team/bs-84570541441.jpg)
+
+![Image 586](https://clickup.com/images/all-team/lc-815879472.jpg)
+
+![Image 587](https://clickup.com/images/all-team/ec-1459794722188.jpg)
+
+![Image 588](https://clickup.com/images/all-team/hb-415058188197.jpg)
+
+![Image 589](https://clickup.com/images/all-team/tn-64704037110.jpg)
+
+![Image 590](https://clickup.com/images/all-team/dh-07885047101.jpg)
+
+![Image 591](https://clickup.com/images/all-team/dh-07850412218250314.jpg)
+
+![Image 592](https://clickup.com/images/all-team/sd-5916601005.jpg)
+
+![Image 593](https://clickup.com/images/all-team/ms-9749155709412.jpg)
+
+![Image 594](https://clickup.com/images/all-team/mb-976684701.jpg)
+
+![Image 595](https://clickup.com/images/all-team/dg-070013705.jpg)
+
+![Image 596](https://clickup.com/images/all-team/jf-67712415149764.jpg)
+
+![Image 597](https://clickup.com/images/all-team/lm-85799741011.jpg)
+
+![Image 598](https://clickup.com/images/all-team/sr-579718419141.jpg)
+
+![Image 599](https://clickup.com/images/all-team/kg-715643817510.jpg)
+
+![Image 600](https://clickup.com/images/all-team/jr-6104164.jpg)
+
+![Image 601](https://clickup.com/images/all-team/tj-6718146174011.jpg)
+
+![Image 602](https://clickup.com/images/all-team/at-78561495885314.jpg)
+
+![Image 603](https://clickup.com/images/all-team/lf-8112415675.jpg)
+
+![Image 604](https://clickup.com/images/all-team/rm-4100119997410.jpg)
+
+![Image 605](https://clickup.com/images/all-team/c-9445553.jpg)
+
+![Image 606](https://clickup.com/images/all-team/as-70795947862.jpg)
+
+![Image 607](https://clickup.com/images/all-team/ca-9445570795.jpg)
+
+![Image 608](https://clickup.com/images/all-team/mr-9594718418181.jpg)
+
+![Image 609](https://clickup.com/images/all-team/lm-85001914950.jpg)
+
+![Image 610](https://clickup.com/images/all-team/bp-841410274714.jpg)
+
+![Image 611](https://clickup.com/images/all-team/ss-55144756101.jpg)
+
+![Image 612](https://clickup.com/images/all-team/gd-3101070970.jpg)
+
+our progress
+
+Milestones
+----------
+
+2017
+
+ClickUp was founded
+
+March
+
+2017
+
+ClickUp Beta released
+
+June
+
+2017
+
+Out of Beta
+
+september
+
+2017
+
+Moved to San Francisco
+
+november
+
+2017
+
+First paying customer
+
+november
+
+2019
+
+2.0 Released
+
+October
+
+2019
+
+Moved to San Diego
+
+november
+
+2020
+
+🚀 Raised Series A
+
+june
+
+2020
+
+🦄 Raised Series B
+
+december
+
+2021
+
+🌎 Raised Series C
+
+november
+
+2022
+
+Forbes Cloud 100
+
+august
+
+2023
+
+3.0 Released
+
+february
+
+2024
+
+january
+
+To be  
+continued...
+
+gallery
+
+Life at ClickUp.
+----------------
+
+San Diego HQ, United States, Canada, Ireland, United Kingdom, Australia, and across the globe.
+
+[Join Our Team](https://clickup.com/careers#grnhse_app)
+
+Previous
+
+![Image 613: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-9.png)
+
+![Image 614: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-10.png)
+
+![Image 615: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-1.png)
+
+![Image 616: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-2.png)
+
+![Image 617: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-3.png)
+
+![Image 618: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-4.png)
+
+![Image 619: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-5.png)
+
+![Image 620: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-6.png)
+
+![Image 621: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-7.png)
+
+![Image 622: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-8.png)
+
+![Image 623: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-9.png)
+
+![Image 624: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-10.png)
+
+![Image 625: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-1.png)
+
+![Image 626: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-2.png)
+
+![Image 627: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-3.png)
+
+![Image 628: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-4.png)
+
+![Image 629: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-5.png)
+
+![Image 630: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-6.png)
+
+![Image 631: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-7.png)
+
+![Image 632: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-8.png)
+
+![Image 633: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-9.png)
+
+![Image 634: Life at ClickUp](https://clickup.com/images/careers/life-at-clickup-10.png)
+
+Next
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+*   7
+*   8
+*   9
+*   10
+
+[![Image 635: Growd](https://clickup.com/images/reviews/g2-best-software-2022-badge-software-products.svg)](https://www.g2.com/best-software-companies/fastest-growing)
+
+[![Image 636: GetApp Functionality 2020](https://clickup.com/images/reviews/getapp_functionality_leader_2020.png)](https://www.getapp.com/project-management-planning-software/a/clickup/)
+
+[![Image 637: Capterra Shortlist for Project Management Jan-21](https://clickup.com/images/badges/CAP_Badge_Shortlist_2021_Full-Color.png)](https://www.capterra.com/project-management-software/#shortlist)
+
+[![Image 638: GetApp Category Leaders for Resource Management Jan-21](https://clickup.com/images/reviews/GA_Badge_Category+Leaders_2021_Full+Color.png)](https://www.getapp.com/operations-management-software/resource-management/category-leaders/)
+
+[![Image 639: Software Advice FrontRunners for Project Management Jan-21](https://clickup.com/images/reviews/SA_FrontRunners_2021_Full+Color.png)](https://www.softwareadvice.com/project-management/#frontrunners)
+
+[![Image 640: ClickUp-AGS-2020](https://clickup.com/images/badges/ClickUp-AGS-2020-Award_Red.png)](https://www.airiodion.com/best-team-and-tasks-management-software/#ClickUp-Review)
+
+[![Image 641: Productivity Software](https://clickup.com/images/badges/Productivity-Software.png)](https://www.airiodion.com/best-team-and-tasks-management-software/#ClickUp-Review)
+
+[![Image 642: Leader Spring 2020 ClickUp](https://clickup.com/images/reviews/g2-2020-spring-medal-clickup.svg)](https://www.g2.com/products/clickup/reviews)
+
+[![Image 643: ClickUp - Top Task Management Software on Crozdesk](https://clickup.com/images/badges/crozdesk-task-management-software-winner-badge.png)](https://crozdesk.com/operations-management/task-management-software/top-list?year=2020)
+
+[![Image 644: Crozdesk Trusted Vendor Badge](https://crozdesk.com/top_badges/2020/crozdesk-trusted-vendor-badge-2020.png)](https://crozdesk.com/collaboration/project-collaboration-software/clickup "ClickUp - Crozdesk Trusted Vendor Badge")
+
+[![Image 645: ClickUp - Top Project Collaboration Software on Crozdesk](https://clickup.com/images/badges/crozdesk-project-collaboration-software-winner-badge.png)](https://crozdesk.com/collaboration/project-collaboration-software#top-list)
+
+[![Image 646: Crozdesk Happiest Users Badge](https://crozdesk.com/top_badges/2020/crozdesk-happiest-users-badge-2020.png)](https://crozdesk.com/collaboration/project-collaboration-software/clickup "ClickUp - Crozdesk Happiest Users Badge")
+
+[![Image 647](https://crozdesk.com/top_badges/2020/crozdesk-quality-choice-badge-2020.png)](https://crozdesk.com/operations-management/project-management-software/clickup "ClickUp - software ratings and reviews on Crozdesk")
+
+[![Image 648: Best Project Management product](https://clickup.com/images/reviews/clickup-proddy-badge-2020.png)](https://productschool.com/proddys-winners-2020/#clickup "Best Project Management product")
+
+Free forever with 100MB storage
+
+[Get Started](javascript:void\(0\))
+
+[**Free training**](https://clickup.com/on-demand-demo) & [24-hour support](https://help.clickup.com/hc/en-us)
+
+Serious about [**security & privacy**](https://clickup.com/terms/security-policy)
+
+[**Highest levels of uptime**](https://status.clickup.com/) the last 12 months
+
+*   ClickUp
+    *   [Download](https://clickup.com/download)
+    *   [Careers](https://clickup.com/careers)
+    *   [About Us](https://clickup.com/about)
+    *   [Product Roadmap](https://dev-doc.clickup.com/p/ad-3021/click-up-roadmap/ad-3021/%F0%9F%9A%80-click-up-roadmap)
+    *   [Press](https://clickup.com/press)
+    *   [Clients](https://clickup.com/customers)
+    *   [Brand](https://clickup.com/brand)
+    *   [Verified](https://clickup.com/verified)
+    *   [Affiliate & Referrals](https://clickup.com/partners/affiliates)
+    *   [Reviews](https://clickup.com/reviews)
+    *   [Status](https://status.clickup.com/)
+*   Resources
+    *   [Help Docs](https://help.clickup.com/hc/en-us)
+    *   [On-Demand Demo](https://clickup.com/on-demand-demo)
+    *   [Webinars](https://clickup.com/webinars)
+    *   [Contact Us](https://help.clickup.com/hc/en-us)
+    *   [Templates](https://clickup.com/templates)
+    *   [Import](https://clickup.com/import)
+    *   [API](https://clickup.com/api/)
+    *   [Startups](https://clickup.com/startup-program)
+    *   [Partners](https://clickup.com/partners)
+    *   [ClickUp University](https://university.clickup.com/)
+    *   [Events](https://clickup.com/events)
+*   [Features](https://clickup.com/features)
+    *   [Gantt Chart](https://clickup.com/features/gantt-chart-view)
+    *   [Dashboards](https://clickup.com/features/dashboards)
+    *   [Native Time Tracking](https://clickup.com/features/project-time-tracking)
+    *   [Mind Maps](https://clickup.com/features/mind-maps)
+    *   [Automations](https://clickup.com/features/automations)
+    *   [Notepad](https://clickup.com/features/notepad)
+    *   [Integrations](https://clickup.com/integrations)
+    *   [Email](https://clickup.com/features/email-project-management)
+    *   [To-Do List](https://clickup.com/online-to-do-list)
+    *   [Kanban Board](https://clickup.com/features/kanban-board)
+    *   [Sprints](https://clickup.com/features/sprints)
+*   [Compare](https://clickup.com/compare)
+    *   [vs Monday](https://clickup.com/compare/monday-vs-clickup)
+    *   [vs Asana](https://clickup.com/compare/asana-vs-clickup)
+    *   [vs Jira](https://clickup.com/compare/jira-vs-clickup)
+    *   [vs Trello](https://clickup.com/compare/trello-vs-clickup)
+    *   [vs Airtable](https://clickup.com/compare/airtable-vs-clickup)
+    *   [vs Notion](https://clickup.com/compare/notion-vs-clickup)
+    *   [vs Basecamp](https://clickup.com/compare/basecamp-vs-clickup)
+    *   [vs Wrike](https://clickup.com/compare/wrike-vs-clickup)
+    *   [vs MS Project](https://clickup.com/compare/microsoft-project-vs-clickup)
+    *   [vs Todoist](https://clickup.com/compare/todoist-vs-clickup)
+    *   [vs Smartsheet](https://clickup.com/compare/smartsheet-vs-clickup)
+*   Learn
+    
+    *   [Blog](https://clickup.com/blog/)
+    *   [Software Team Hub](https://clickup.com/resources/software-teams)
+    *   [Agency Hub](https://clickup.com/agency-resources)
+    *   [PM Software Guide](https://clickup.com/blog/free-project-management-software/)
+    *   [Newsletter](https://clickup.com/newsletter-1)
+    *   [Podcast](https://clickup.com/when-it-clicked)
+    
+     [![Image 649: App store](https://clickup.com/images/badges/app-store-badge.svg)](https://apps.apple.com/us/app/clickup-manage-teams-tasks/id1535098836)[![Image 650: Google Play badge](https://clickup.com/images/badges/google-play-badge.png)](https://play.google.com/store/apps/details?id=co.mangotechnologies.clickup)
+    
+
+[](https://clickup.com/)
+
+© 2024 ClickUp [Security](https://clickup.com/terms/security-policy) [Your Privacy](https://clickup.com/terms/privacy) [Terms](https://clickup.com/terms) [Cookie Preferences](https://clickup.com/about#)
+
+[Linkedin ClickUp](https://www.linkedin.com/company/12949663) [Facebook ClickUp](https://www.facebook.com/clickupprojectmanagement/) [Instagram ClickUp](https://www.instagram.com/clickup/) [Twitter ClickUp](https://twitter.com/clickup)
+
+[ClickUp](https://clickup.com/)
+
+Product
+
+*   [AI built for you](https://clickup.com/ai)
+*   [Tasks](https://clickup.com/features/tasks)
+*   [Docs](https://clickup.com/features/docs)
+*   [Goals](https://clickup.com/features/goals)
+*   [Whiteboards](https://clickup.com/features/whiteboards)
+*   [Dashboards](https://clickup.com/features/dashboards)
+*   [Chat](https://clickup.com/features/chat-view)
+*   [See All Features](https://clickup.com/features)
+
+*   Platform
+*   [RapidViews DB](https://clickup.com/performance)
+*   [Templates](https://clickup.com/templates)
+*   [Integrations](https://clickup.com/integrations)
+*   [ClickApps](https://clickup.com/clickapps)
+*   [Hierarchy](https://clickup.com/hierarchy-guide)
+*   [Automations](https://clickup.com/features/automations)
+
+Solutions
+
+*   [Software Delevopment](https://clickup.com/teams/software)
+*   [Marketing](https://clickup.com/teams/marketing)
+*   [IT and PMO](https://clickup.com/teams/it-pmo)
+*   [Engineering](https://clickup.com/teams/agile)
+*   [Design](https://clickup.com/teams/design)
+*   [Operations](https://clickup.com/teams/operations)
+
+*   Use Case
+*   [Project Management](https://clickup.com/teams/project-management)
+*   [Remote Work](https://clickup.com/teams/remote-work)
+*   [CRM](https://clickup.com/teams/crm)
+
+*   Type
+*   [Enterprise](https://clickup.com/plans/enterprise)
+*   [Startup](https://clickup.com/teams/startup)
+*   [Non-Profit](https://clickup.com/teams/non-profit)
+
+Learn
+
+*   [Getting Started](https://clickup.com/onboarding)
+*   [ClickUp University](https://university.clickup.com/)
+*   [Demos](https://clickup.com/on-demand-demo)
+*   [Import](https://clickup.com/import)
+*   [Customers](https://clickup.com/customers)
+*   [Help Docs](https://help.clickup.com/hc/en-us)
+*   [Contact Us](https://help.clickup.com/)
+
+*   Services
+    
+*   [Professional Services](https://clickup.com/professional-services)
+*   [Partner Program](https://clickup.com/partners)
+
+*   Latest From Blog [**See All**](https://clickup.com/blog/)
+    
+*    [![Image 651: ClickUp represented by a space-faring unicorn, being triumphantly lifted by a crowd celebrating the unique ways that ClickUp improves their productivity.](https://clickup.com/blog/wp-content/uploads/2022/02/image-design-5-2-1-150x150.png) 12 Benefits That Make ClickUp Unique](https://clickup.com/blog/12-benefits-that-make-clickup-unique/)
+*    [![Image 652: A ClickUp rocket ship following planned journey across space, towards its ultimate goal, a red planet.](https://clickup.com/blog/wp-content/uploads/2020/05/OKR-examples-150x150.png) How To Write Effective OKRs (With 60+ OKR Examples)](https://clickup.com/blog/okr-examples/)
+*    [![Image 653: A notebook with a list of product management methodologies written with question marks beside each, indicating the user is not sure about which method suits their needs best.](https://clickup.com/blog/wp-content/uploads/2018/12/PM-Methodologies-150x150.png) Top 18 Project Management Methodologies](https://clickup.com/blog/project-management-methodologies/)
+
+[Pricing](https://clickup.com/pricing) [Enterprise](https://clickup.com/plans/enterprise) [Contact Sales](javascript:void\(0\)) Sign up [Login](https://app.clickup.com/)
+
+[](javascript:void\(0\))
+
+**Sign up for FREE** and start using ClickUp in seconds!
+
+Next
+
+Please enter a valid email address
+
+  Send
+
+[](https://clickup.com/)
+
+The everything app for work.
+
+Contact Sales
+
+Thanks!
+
+We'll be right with you.
+
+![Image 654](https://px.ads.linkedin.com/collect/?pid=2112970&conversionId=4061220&fmt=gif)
+
+Save one day every week. Guaranteed.
+
+We analyzed the time saved by over 4,000 teams after switching to ClickUp to manage their projects. That's 52 days back every year!
+
+Please enter a valid email address
+
+[Get More Time](javascript:void\(0\))[No, I want to waste 1 day per week](javascript:void\(0\))
+
+![Image 655: Samsung](https://clickup.com/images/join-companies/samsung_white.png)
+
+![Image 656: Belmond](https://clickup.com/images/join-companies/belmond_white.svg)
+
+![Image 657: Booking.com](https://clickup.com/images/join-companies/booking-com-white.svg)
+
+![Image 658: Netflix](https://clickup.com/images/join-companies/netflix_white.svg)
+
+![Image 659: IBM](https://clickup.com/images/join-companies/ibm-white.svg)
+  ```
+
+Source URL: https://clickup.com/community
+  ```
+  Join ClickUp's Global Community | ClickUp™
+=============== 
+
+![Image 1: ClickUp Brain](https://clickup.com/assets/brand/logo-v3-clickup-brain-dark-v2.svg)
+
+Connect all your tasks, docs, people, and knowledge with ClickUp Brain
+
+[Discover Brain](https://clickup.com/ai)
+
+![Image 2: arrow](https://clickup.com/assets/icons/arrow-right-double.svg)
+
+![Image 3: close button](https://clickup.com/assets/icons/banner-close-white.svg)
+
+Close banner
+
+[![Image 4: ClickUp](https://clickup.com/assets/brand/logo-v3-clickup-light.svg)The everything app for work.](https://clickup.com/)
+
+Product
+
+Solutions
+
+Resources
+
+[Pricing](https://clickup.com/pricing)[Enterprise](https://clickup.com/plans/enterprise)
+
+Contact Sales
+
+[Log in](https://app.clickup.com/)
+
+Sign Up
+
+Sign Up
+
+Open mobile Menu
+
+[Log in](https://app.clickup.com/)
+
+Sign Up
+
+Close mobile menu
+
+Product
+
+Solutions
+
+Integrations
+
+Resources
+
+[Pricing](https://clickup.com/pricing)[Enterprise](https://clickup.com/plans/enterprise)
+
+Contact Sales
+
+Join our global community.
+==========================
+
+If you love ClickUp, you're in the right place. See how you can deepen your knowledge, show off your skills, and connect with the wider productivity-community.
+
+*   Share ideas
+    
+*   Get involved
+    
+*   Learn and grow
+    
+*   See what's new
+    
+
+![Image 5: header image.png](https://images.ctfassets.net/w8fc6tgspyjz/2bRw1RKBeXM0V0uUqDN0wG/f34f8810ada3fa91c24a7790d36d577f/header_image.png)
+
+![Image 6: header image.png](https://images.ctfassets.net/w8fc6tgspyjz/2bRw1RKBeXM0V0uUqDN0wG/f34f8810ada3fa91c24a7790d36d577f/header_image.png)
+
+Share Your Ideas
+
+Help us make ClickUp even better.
+---------------------------------
+
+Have a great idea to improve the ClickUp experience? Share it with us on Canny!
+
+[Submit Your Idea](https://feedback.clickup.com/)
+
+![Image 7: Group 1618868765.png](https://images.ctfassets.net/w8fc6tgspyjz/1dJAOhAnhdcwBgadNQ2iC5/25a97b48a62677e80e63beee8195947f/Group_1618868765.png)
+
+GET SOCIAL
+
+Join the productivity conversation.
+-----------------------------------
+
+Meet other ClickUp users on social media and share your voice.
+
+#### Facebook
+
+Connect with fellow ClickUppers.
+
+[Join Group](https://www.facebook.com/groups/ClickUppers)
+
+#### Reddit
+
+Share your use cases and ideas.
+
+[Join Community](https://www.reddit.com/r/clickup/)
+
+#### Twitter
+
+Keep up with the latest in productivity.
+
+[Follow Now](https://twitter.com/clickup)
+
+#### LinkedIn
+
+Expand your professional ClickUp network.
+
+[Follow Now](https://www.linkedin.com/company/clickup-app/)
+
+FLEX YOUR EXPERTISE
+
+Become a ClickUp champion.
+--------------------------
+
+Passionate about ClickUp? Share your love and know-how to unlock special resources, gifts, and rewards.
+
+#### Get verified.
+
+Become ClickUp Verified to access exclusive resources.
+
+[Learn More](https://clickup.com/verified)
+
+#### Get certified.
+
+Show off your ClickUp mastery to the world by earning certifications.
+
+[Learn More](https://university.clickup.com/page/certificates)
+
+#### Get paid.
+
+Join our Affiliate Program to earn rewards for sharing ClickUp with your network.
+
+[Learn More](https://clickup.com/partners/affiliates)
+
+Learn and Grow
+
+Take your ClickUp skills to the next level.
+-------------------------------------------
+
+Become a ClickUp master in no time with these helpful resources.
+
+#### Find quick answers.
+
+Visit our help center to get fast solutions for any challenge. [Go to Help Center](https://help.clickup.com/hc/en-us)
+
+#### Sharpen your skills.
+
+Bolster your ClickUp know-how with tons of free and paid video courses.
+
+[Visit ClickUp University](https://university.clickup.com/)
+
+#### Learn live.
+
+Dive deeper into ClickUp with webinars led by product experts.
+
+[View Upcoming Webinars](https://clickup.com/webinars)
+
+#### Get hands on.
+
+Save time and boost productivity with pre-built templates.
+
+[Get Templates](https://clickup.com/templates)
+
+#### Build your own ClickUp apps.
+
+Extend and enhance your ClickUp experience with the ClickUp API.
+
+[Explore the ClickUp API](https://clickup.com/api/)
+
+#### Learn the latest in productivity.
+
+Get ClickUp tips and discover the latest productivity trends in our blog.
+
+[Check Out Our Blog](https://clickup.com/blog/)
+
+Discover What's New
+
+Stay up-to-date on all things ClickUp.
+--------------------------------------
+
+Learn more about our recent innovations at an event or in our product release notes.
+
+#### Upcoming Events
+
+Join us soon at an online or in-person event.
+
+[View All](https://clickup.com/events)
+
+#### New Product Releases
+
+Check out the latest and greatest from ClickUp.
+
+[Learn More](https://dev-doc.clickup.com/333/p/h/ad-1543613/05ee584fd917f1e/ad-1543613)
+
+CONNECT WITH SPECIALISTS
+
+Partner with us or our consultants.
+-----------------------------------
+
+Maximize your ClickUp investment with expert guidance from proven pros.
+
+#### Partner Program
+
+Choose from a host of approved ClickUp partners committed to your success—or even become one yourself.
+
+[Learn More](https://clickup.com/partners)
+
+#### Verified Consultants
+
+Solve your most pressing challenges quickly with the help of a dedicated expert.
+
+[Learn More](https://clickup.com/consultants)
+
+[](https://clickup.com/)
+
+The everything app for work.
+
+[24/7 support](https://help.clickup.com/hc/en-us)
+
+[Weekly updates](https://dev-doc.clickup.com/333/d/ad-1002505/2024-release-notes/ad-3218801/2024-release-notes)
+
+[Secure and compliant](https://clickup.com/security)
+
+[99.9% uptime](https://status.clickup.com/)
+
+*   ClickUp
+    
+    *   [Download](https://clickup.com/download)
+    *   [About Us](https://clickup.com/about)
+    *   [Careers](https://clickup.com/careers)
+    *   [Customers](https://clickup.com/customers)
+    *   [Community](https://clickup.com/community)
+    *   [Affiliate & Referrals](https://clickup.com/partners/affiliates)
+    *   [Reviews](https://clickup.com/reviews)
+    *   [Press](https://clickup.com/press)
+    *   [Brand](https://clickup.com/brand)
+    *   [Product Roadmap](https://dev-doc.clickup.com/p/ad-3021/click-up-roadmap/ad-3021/%F0%9F%9A%80-click-up-roadmap)
+    *   [Status](https://status.clickup.com/)
+*   Resources
+    
+    *   [Help Docs](https://help.clickup.com/hc/en-us)
+    *   [On-Demand Demo](https://clickup.com/on-demand-demo)
+    *   [ClickUp University](https://university.clickup.com/?_ga=2.213779543.2106551441.1662583868-989641782.1662077755)
+    *   [Webinars](https://clickup.com/webinars)
+    *   [Events](https://clickup.com/events)
+    *   [Templates](https://clickup.com/templates)
+    *   [Import](https://clickup.com/import)
+    *   [API](https://clickup.com/api/)
+    *   [Consultants](https://clickup.com/consultants)
+    *   [Partners](https://clickup.com/partners)
+    *   [Contact Us](https://help.clickup.com/)
+*   [Features](https://clickup.com/features)
+    
+    *   [Gantt Chart](https://clickup.com/features/gantt-chart-view)
+    *   [Dashboards](https://clickup.com/features/dashboards)
+    *   [Native Time Tracking](https://clickup.com/features/project-time-tracking)
+    *   [Mind Maps](https://clickup.com/features/mind-maps)
+    *   [Automations](https://clickup.com/features/automations)
+    *   [Notepad](https://clickup.com/features/notepad)
+    *   [Integrations](https://clickup.com/integrations)
+    *   [Email](https://clickup.com/features/email-project-management)
+    *   [To-Do List](https://clickup.com/online-to-do-list)
+    *   [Kanban Board](https://clickup.com/features/kanban-board)
+    *   [Sprints](https://clickup.com/features/sprints)
+*   [Compare](https://clickup.com/compare)
+    
+    *   [vs Monday](https://clickup.com/compare/monday-vs-clickup)
+    *   [vs Asana](https://clickup.com/compare/asana-vs-clickup)
+    *   [vs Jira](https://clickup.com/compare/jira-vs-clickup)
+    *   [vs Trello](https://clickup.com/compare/trello-vs-clickup)
+    *   [vs Airtable](https://clickup.com/compare/airtable-vs-clickup)
+    *   [vs Notion](https://clickup.com/compare/notion-vs-clickup)
+    *   [vs Basecamp](https://clickup.com/compare/basecamp-vs-clickup)
+    *   [vs Wrike](https://clickup.com/compare/wrike-vs-clickup)
+    *   [vs MS Project](https://clickup.com/compare/microsoft-project-vs-clickup)
+    *   [vs Todoist](https://clickup.com/compare/todoist-vs-clickup)
+    *   [vs Smartsheet](https://clickup.com/compare/smartsheet-vs-clickup)
+*   Learn
+    
+    *   [Blog](https://clickup.com/blog/)
+    *   [Software Team Hub](https://clickup.com/resources/software-teams)
+    *   [Agency Hub](https://clickup.com/agency-resources)
+    
+    Connect
+    
+    [](https://www.linkedin.com/company/12949663)[](https://www.facebook.com/clickupprojectmanagement/)[](https://www.instagram.com/clickup/)[](https://twitter.com/clickup)
+    
+
+[](https://clickup.com/)
+
+The everything app for work.
+
+[![Image 8: Apple App Store](https://clickup.com/assets/badges/v3/app-store-badge-black.svg)](https://apps.apple.com/us/app/clickup-manage-teams-tasks/id1535098836)[![Image 9: Google Play Store](https://clickup.com/assets/badges/v3/google-play-badge-black.svg)](https://play.google.com/store/apps/details?id=co.mangotechnologies.clickup)[![Image 10: Mac App Store](https://clickup.com/assets/badges/v3/app-store-mac-badge-black.svg)](https://desktop.clickup.com/mac)[![Image 11: Microsoft App Store](https://clickup.com/assets/badges/v3/app-store-microsoft-badge-black.svg)](https://desktop.clickup.com/windows)
+
+© 2024 ClickUp[Security](https://clickup.com/terms/security-policy)[Privacy](https://clickup.com/terms/privacy)[Terms](https://clickup.com/terms)Cookie Preferences
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

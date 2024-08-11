@@ -1,0 +1,5754 @@
+LLM: EXTRACT_PRODUCT_INFO
+Timestamp: 2024-08-11T19:10:48.162Z
+Model: gpt-4o-mini
+
+Request:
+[user]: You are an AI assistant specialized in extracting comprehensive and accurate product information from website content. Your primary goal is to gather all relevant details without missing any crucial information. Follow these steps meticulously:
+  
+  1. Carefully analyze the content from each provided website. Pay close attention to all sections, including headers, subheaders, bullet points, and any emphasized text.
+  
+  2. Extract relevant information for the following categories:
+     - Product name (be as specific as possible, including any version numbers if applicable)
+     - Tagline (the main slogan or catchphrase used to describe the product)
+     - Short description (a concise overview of what the product does)
+     - Unique selling proposition (what sets this product apart from competitors)
+     - Primary use case (the main problem this product solves or its primary function)
+     - Key features (important capabilities or aspects of the product)
+     - Pros (advantages or benefits of using the product)
+     - Cons (limitations, drawbacks, or potential issues with the product)
+     - Pricing plans (all available pricing tiers and what they include)
+     - Integrations (other tools or services this product can work with)
+     - Support options (ways users can get help or assistance)
+  
+  3. Use verbatim quotes from the provided content. Do not summarize, paraphrase, or infer information not explicitly stated.
+  
+  4. Include the exact source URL for each piece of extracted information. If a piece of information appears on multiple pages, include all relevant URLs.
+  
+  5. Be thorough: look for information in all parts of the website content, including navigation menus, footers, and any linked pages provided.
+  
+  6. If you cannot find information for a category, explicitly state "No information found" for that category.
+  
+  7. If you find conflicting information, include all versions and note the conflict.
+  
+  The website content is delimited by triple backticks and prefixed with its source URL:
+  
+  Source URL: https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products
+  ```
+  Compare All Microsoft 365 Plans | Microsoft
+===============
+
+Trace Id is missing 
+
+ 
+
+[Skip to main content](javascript:void\(0\))
+
+ [![Image 1](https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31) Microsoft](https://www.microsoft.com/)
+
+Microsoft 365
+
+[Microsoft 365](https://www.microsoft.com/en-us/microsoft-365)
+
+Microsoft 365
+
+*   [Home](https://www.microsoft.com/en-us/microsoft-365)
+*   Products
+    
+    *   For home For home
+        *   [Pricing for Home](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products)
+        *   [For families](https://www.microsoft.com/en-us/microsoft-365/p/microsoft-365-family/cfq7ttc0k5dm)
+        *   [For individuals](https://www.microsoft.com/en-us/microsoft-365/p/microsoft-365-personal/cfq7ttc0k5bf)
+        *   [For students](https://www.microsoft.com/en-us/education/products/office)
+        *   [See all home](https://www.microsoft.com/en-us/microsoft-365/explore-microsoft-365-for-home)
+    *   For business For business
+        *   [Pricing for Business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+        *   [For Small Business](https://www.microsoft.com/en-us/microsoft-365/business)
+    *   For enterprise For enterprise
+        *   [Pricing for Enterprise](https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing)
+        *   [For Enterprise](https://www.microsoft.com/en-us/microsoft-365/enterprise)
+        *   [For Frontline workers](https://www.microsoft.com/en-us/microsoft-365/enterprise/frontline)
+    *   Apps and services Apps and services
+        *   [Excel](https://www.microsoft.com/en-us/microsoft-365/excel)
+        *   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [Word](https://www.microsoft.com/en-us/microsoft-365/word)
+        *   [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)
+        *   [OneNote](https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app)
+        *   [Outlook](https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook)
+        *   [PowerPoint](https://www.microsoft.com/en-us/microsoft-365/powerpoint)
+        *   [Project](https://www.microsoft.com/en-us/microsoft-365/project/project-management-software)
+        *   [SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)
+        *   [See all apps and services](https://www.microsoft.com/en-us/microsoft-365/products-apps-services)
+    *   More More
+        *   [Microsoft Office](https://www.microsoft.com/en-us/microsoft-365/microsoft-office)
+        *   [Windows 365](https://www.microsoft.com/en-us/windows-365)
+        *   [Microsoft Viva](https://www.microsoft.com/en-us/microsoft-viva)
+        *   [Microsoft Authenticator](https://www.microsoft.com/en-us/security/mobile-authenticator-app)
+        *   [Enterprise Mobility + Security](https://www.microsoft.com/en-us/microsoft-365/enterprise-mobility-security)
+        *   [Microsoft Edge](https://www.microsoft.com/en-us/edge)
+        *   [For Nonprofits](https://www.microsoft.com/en-us/microsoft-365/enterprise/nonprofit-plans-and-pricing)
+    *   What’s new What’s new
+        *   [Microsoft Designer](https://www.microsoft.com/en-us/microsoft-365/microsoft-designer)
+        *   [Planner](https://www.microsoft.com/en-us/microsoft-365/planner/microsoft-planner)
+        *   [Microsoft Copilot for Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/microsoft-copilot)
+        *   [Clipchamp](https://www.microsoft.com/en-us/microsoft-365/clipchamp)
+    
+*   [Plans and pricing](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+*   Resources
+    
+    *   [Start your Copilot journey](https://go.microsoft.com/fwlink/?linkid=2264920)
+    *   [Copilot for work](https://www.microsoft.com/en-us/microsoft-365/copilot-for-work)
+    *   [Customer stories](https://go.microsoft.com/fwlink/?linkid=2267637)
+    *   [Setup and install](https://support.office.com/en-us/article/download-and-install-or-reinstall-office-365-or-office-2016-on-a-pc-or-mac-4414eaaf-0478-48be-9c42-23adc4716658)
+    *   [Training](https://support.office.com/en-us/office-training-center?ms.officeurl=training)
+    *   [Trust Center](https://www.microsoft.com/en-us/trust-center)
+    *   [Microsoft 365 Blog](https://go.microsoft.com/fwlink/p/?LinkID=2000803)
+    *   [FAQ](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-frequently-asked-questions)
+    *   [Small Business Resource Center](https://www.microsoft.com/en-us/microsoft-365/small-business-resource-center)
+    
+*   Support
+    
+    *   For personal and family For personal and family
+        *   [Self-help resources](https://support.microsoft.com/)
+        *   [Billing support](https://go.microsoft.com/fwlink/?linkid=2267729)
+        *   [Community](https://go.microsoft.com/fwlink/?linkid=2268025)
+        *   [Contact Microsoft Support](https://support.microsoft.com/contactus)
+    *   For work For work
+        *   [Self-help resources](https://support.microsoft.com/)
+        *   [Admin self-help](https://go.microsoft.com/fwlink/?linkid=2268124)
+        *   [Support plans](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-for-business-support-options)
+        *   [Find a partner](https://appsource.microsoft.com/en-us/marketplace/partner-dir?filter=sort%3D0%3BpageSize%3D18%3BonlyThisCountry%3Dtrue%3Bcountry%3DUS%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue)
+        *   [Contact Sales](https://www.microsoft.com/en-us/microsoft-365/business/sales-support)
+        *   [Community](https://go.microsoft.com/fwlink/?linkid=2267923)
+    *   For education For education
+        *   [Self-help resources](https://go.microsoft.com/fwlink/?linkid=2268026)
+        *   [Educator Center](https://go.microsoft.com/fwlink/?linkid=2267533)
+        *   [Request support](https://aka.ms/edusupport)
+        *   [Contact Microsoft Support](https://support.microsoft.com/contactus)
+        *   [Community](https://go.microsoft.com/fwlink/?linkid=2267640)
+    *   For partners For partners
+        *   [Become a partner](https://partner.microsoft.com/en-US/)
+        *   [Partner resources](https://partner.microsoft.com/en-US/)
+    *   [See all support](https://www.microsoft.com/en-us/microsoft-365/support)
+    
+*   [Contact Sales](https://www.microsoft.com/en-us/microsoft-365/business/sales-support)
+*   [Try for free](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-standard-one-month-trial)
+*   [Admin center](https://go.microsoft.com/fwlink/?linkid=2081615)
+*   More
+    
+
+ Search Search Microsoft 365
+
+*   No results
+
+Cancel
+
+*   All Microsoft
+    
+    *   Global
+        ------
+        
+        *   [Microsoft 365](https://www.microsoft.com/microsoft-365)
+        *   [Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [Copilot](https://copilot.microsoft.com/)
+        *   [Windows](https://www.microsoft.com/en-us/windows/)
+        *   [Surface](https://www.microsoft.com/surface)
+        *   [Xbox](https://www.xbox.com/)
+        *   [Deals](https://www.microsoft.com/en-us/store/b/sale?icid=gm_nav_L0_salepage)
+        *   [Small Business](https://www.microsoft.com/en-us/store/b/business)
+        *   [Support](https://support.microsoft.com/en-us)
+    *   Software Software
+        *   [Windows Apps](https://www.microsoft.com/en-us/store/apps/windows?icid=CNavAppsWindowsApps)
+        *   [AI](https://www.microsoft.com/en-us/ai)
+        *   [Outlook](https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook)
+        *   [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)
+        *   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [OneNote](https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app)
+        *   [Microsoft Edge](https://www.microsoft.com/edge)
+        *   [Skype](https://www.skype.com/en/)
+    *   PCs & Devices PCs & Devices
+        *   [Computers](https://www.microsoft.com/en-us/store/b/pc?icid=CNavDevicesPC)
+        *   [Shop Xbox](https://www.microsoft.com/en-us/store/b/xbox?icid=CNavDevicesXbox)
+        *   [Accessories](https://www.microsoft.com/en-us/store/b/accessories?icid=CNavDevicesAccessories)
+        *   [VR & mixed reality](https://www.microsoft.com/en-us/store/b/virtualreality?icid=CNavVirtualReality)
+        *   [Certified Refurbished](https://www.microsoft.com/en-us/store/b/certified-refurbished-products)
+        *   [Trade-in for cash](https://www.microsoft.com/en-us/store/b/microsoft-trade-in)
+    *   Entertainment Entertainment
+        *   [Xbox Game Pass Ultimate](https://www.xbox.com/en-us/games/store/xbox-game-pass-ultimate/cfq7ttc0khs0?icid=CNavAllXboxGamePassUltimate)
+        *   [PC Game Pass](https://www.xbox.com/en-us/games/store/pc-game-pass/cfq7ttc0kgq8?icid=CNavAllPCGamePass)
+        *   [Xbox games](https://www.microsoft.com/en-us/store/b/xboxgames?icid=CNavGamesXboxGames)
+        *   [PC and Windows games](https://www.microsoft.com/en-us/store/games/windows?icid=CNavGamesWindowsGames)
+        *   [Movies & TV](https://www.microsoft.com/en-us/store/movies-and-tv?icid=TopNavMoviesTv)
+    *   Business Business
+        *   [Microsoft Cloud](https://www.microsoft.com/en-us/microsoft-cloud)
+        *   [Microsoft Security](https://www.microsoft.com/en-us/security)
+        *   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365)
+        *   [Microsoft 365 for business](https://www.microsoft.com/en-us/microsoft-365/business)
+        *   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform)
+        *   [Windows 365](https://www.microsoft.com/en-us/windows-365)
+        *   [Microsoft Industry](https://www.microsoft.com/en-us/industry)
+        *   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore)
+    *   Developer & IT Developer & IT
+        *   [Azure](https://azure.microsoft.com/en-us/)
+        *   [Developer Center](https://developer.microsoft.com/en-us/)
+        *   [Documentation](https://learn.microsoft.com/docs/)
+        *   [Microsoft Learn](https://learn.microsoft.com/)
+        *   [Microsoft Tech Community](https://techcommunity.microsoft.com/)
+        *   [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/)
+        *   [AppSource](https://appsource.microsoft.com/en-us/)
+        *   [Visual Studio](https://visualstudio.microsoft.com/)
+    *   Other Other
+        *   [Microsoft Rewards](https://www.microsoft.com/rewards)
+        *   [Free downloads & security](https://www.microsoft.com/en-us/download)
+        *   [Education](https://www.microsoft.com/en-us/education)
+        *   [Gift cards](https://www.microsoft.com/en-us/store/b/gift-cards)
+        *   [Licensing](https://www.microsoft.com/licensing/)
+        *   [Unlocked stories](https://unlocked.microsoft.com/)
+    *   [View Sitemap](https://www.microsoft.com/en-us/sitemap.aspx)
+    
+*   [Contact Sales](https://www.microsoft.com/en-us/microsoft-365/business/sales-support)
+*   [Try for free](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-standard-one-month-trial)
+*   [Admin center](https://go.microsoft.com/fwlink/?linkid=2081615)
+
+Sign in
+
+ 
+
+ 
+
+Copilot for Microsoft 365 is now available for small and medium-sized businesses.
+
+Find the best Microsoft 365 plan for your business
+==================================================
+
+Choose between plans with and without Microsoft Teams
+-----------------------------------------------------
+
+[See plans without Teams](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products-no-teams)
+
+[For home](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products) [For business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#)
+
+Save 16% when you pay annually
+
+[Paid annually](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#) [Paid monthly](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products-monthly)
+
+Previous Tabs Next Tabs
+
+### Microsoft 365 Business Basic
+
+Originally starting from $6.00 now starting from $6.00
+
+$6.00 $6.00
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253721&clcid=0x409&culture=en-us&country=us)
+
+[Try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=2147547&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+*   #### Apps and services to kick-start your business, including:
+    
+*   Identity, access, and user management for up to 300 employees
+    
+*   Custom business email (you@yourbusiness.com)
+    
+*   Web and mobile versions of Word, Excel, PowerPoint, and Outlook
+    
+*   Chat, call, and video conference with Microsoft Teams
+    
+*   1 TB of cloud storage per employee
+    
+*   10+ additional apps for your business needs (Microsoft Bookings, Planner, Forms, and others)
+    
+*   Automatic spam and malware filtering
+    
+*   Anytime phone and web support
+    
+*   Copilot for Microsoft 365, available as an add-on[3](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote3)
+    
+
+##### Secure cloud services:
+
+*     ![Image 2](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Teams_260px_RE3ahIB?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Teams
+    
+    Bring everyone together in one place to meet, chat, call, and collaborate.
+    
+*    ![Image 3](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/OneDrive_260px_RE4oUAF?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+*    ![Image 4](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Sharepoint_260px_RE4oH1F?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) SharePoint
+    
+    Create team sites to share information, files, and resources.
+    
+*    ![Image 5](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Exchange_RE482e1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Exchange
+    
+    Work smarter with business-class email and calendaring.
+    
+
+##### Web and mobile apps only:
+
+*    ![Image 6](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Word_2x_RE2Xmzs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with built-in intelligent features.
+    
+*    ![Image 7](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Excel_2x_RE2Xztz?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 8](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_2x_RE2Xmzm?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 9](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Outlook_RE47eLs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+
+### Microsoft 365 Business Standard
+
+Originally starting from $12.50 now starting from $12.50
+
+$12.50 $12.50
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253801&clcid=0x409&culture=en-us&country=us)
+
+[Try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=510938&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+*   #### Everything in Business Basic, plus:
+    
+*   Desktop versions of Word, Excel, PowerPoint, and Outlook
+    
+*   Webinars with attendee registration and reporting
+    
+*   Collaborative workspaces to co-create using Microsoft Loop
+    
+*   Video editing and design tools with Microsoft Clipchamp
+    
+*   Copilot for Microsoft 365, available as an add-on[3](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote3)
+    
+
+##### Desktop, web, and mobile apps and secure cloud services:
+
+*    ![Image 10](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Word_2x_RE2Xmzs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with built-in intelligent features.
+    
+*    ![Image 11](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Excel_2x_RE2Xztz?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 12](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_2x_RE2Xmzm?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 13](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Outlook_RE47eLs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 14](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Teams_75x75_1_RE3ahIB?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=98&fit=constrain) Teams
+    
+    Bring everyone together in one place to meet, chat, call, and collaborate.
+    
+*    ![Image 15](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_OneDrive_75x75_0_RE39Ztq?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+*    ![Image 16](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-SharePoint_RE46TUZ?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) SharePoint
+    
+    Create team sites to share information, files, and resources.
+    
+*    ![Image 17](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Exchange_RE46TV5?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Exchange
+    
+    Work smarter with business-class email and calendaring.
+    
+*    ![Image 18](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Clipchamp-25x25?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Clipchamp
+    
+    Create and edit professional-looking videos with easy-to-use tools.
+    
+*    ![Image 19](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/logo_msft_loop_36x36?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Microsoft Loop
+    
+    Co-create with workspaces that bring all the parts of a project together.
+    
+
+### Microsoft 365 Business Premium
+
+Originally starting from $22.00 now starting from $22.00
+
+$22.00 $22.00
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253722&clcid=0x409&culture=en-us&country=us)
+
+[Try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=2102309&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+*   #### Everything in Business Standard, plus:
+    
+*   Advanced identity and access management
+    
+*   Enhanced cyberthreat protection against viruses and phishing attacks
+    
+*   Enterprise-grade device and endpoint protection
+    
+*   Discover, classify, and protect sensitive information
+    
+*   Copilot for Microsoft 365, available as an add-on[3](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote3)
+    
+
+##### Desktop, web, and mobile apps and secure cloud services:
+
+*    ![Image 20](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Word_2x_RE2Xmzs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with built-in intelligent features.
+    
+*    ![Image 21](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Excel_2x_RE2Xztz?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=99&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 22](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_2x_RE2Xmzm?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 23](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Outlook_RE47eLs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 24](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Teams_75x75_1_RE3ahIB?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=99&fit=constrain) Teams
+    
+    Bring everyone together in one place to meet, chat, call, and collaborate.
+    
+*    ![Image 25](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/ds_rac_05onedrive2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+*    ![Image 26](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Sharepoint_260px_RE4oH1F?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) SharePoint
+    
+    Create team sites to share information, files, and resources.
+    
+*    ![Image 27](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Exchange_RE482e1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Exchange
+    
+    Work smarter with business-class email and calendaring.
+    
+*    ![Image 28](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Clipchamp-25x25?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Clipchamp
+    
+    Create and edit professional-looking videos with easy-to-use tools.
+    
+*    ![Image 29](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/logo_msft_loop_36x36?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Microsoft Loop
+    
+    Co-create with workspaces that bring all the parts of a project together.
+    
+*    ![Image 30](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/Icon_Microsoft-Entra-ID_28x28?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Microsoft Entra ID
+    
+    Protect your devices from online threats such as ransomware and malware.
+    
+*    ![Image 31](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Intune_25x25?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Intune
+    
+    Protect your business and application data and access on devices.
+    
+*    ![Image 32](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/MSFT-Microsoft-Defender-SmartScreen?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Microsoft Defender
+    
+    Protect employee identities and credentials and get safe access to resources.
+    
+*    ![Image 33](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/azure1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Microsoft Purview
+    
+    Restrict access to sensitive information through classification, labeling, and protection.
+    
+
+### Microsoft 365 Apps for business
+
+Originally starting from $8.25 now starting from $8.25
+
+$8.25 $8.25
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253802&clcid=0x409&culture=en-us&country=us)
+
+[Try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=507653&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+*   Desktop versions of Word, Excel, PowerPoint, and Outlook:
+    ---------------------------------------------------------
+    
+*   Desktop versions of Word, Excel, PowerPoint, and Outlook
+    
+*   1 TB of cloud storage per user
+    
+*   Anytime phone and web support
+    
+*   Copilot for Microsoft 365, available as an add-on[3](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote3)
+    
+
+##### Desktop, web, and mobile apps and secure cloud services:
+
+*    ![Image 34](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Word_2x_RE2Xmzs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with built-in intelligent features.
+    
+*    ![Image 35](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Excel_2x_RE2Xztz?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 36](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_2x_RE2Xmzm?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 37](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Outlook_RE47eLs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 38](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_OneDrive_75x75_0_RE39Ztq?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+
+  Compare all Microsoft 365 plans
+| 
+*   ![Image 39: Partially included checkmark](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?scl=1) Partial checkmark icons indicate a feature is partially included
+*   ![Image 40: Included checkmark](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?scl=1) Checkmark icons indicate a feature is included
+
+
+
+
+
+
+
+ | 
+
+### Microsoft 365 Business Basic
+
+Originally starting from $6.00 now starting from $6.00
+
+$6.00 $6.00
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253721&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=2147547&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-basic)
+
+
+
+
+
+
+
+ | 
+
+### Microsoft 365 Business Standard
+
+Originally starting from $12.50 now starting from $12.50
+
+$12.50 $12.50
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253801&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=510938&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-standard)
+
+
+
+
+
+
+
+ | 
+
+### Microsoft 365 Business Premium
+
+Originally starting from $22.00 now starting from $22.00
+
+$22.00 $22.00
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253722&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?linkid=2102309&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-premium?activetab=pivot:overviewtab)
+
+
+
+
+
+
+
+ | 
+
+Only includes apps
+
+### Microsoft 365 Apps for business
+
+Originally starting from $8.25 now starting from $8.25
+
+$8.25 $8.25
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253802&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=507653&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-apps-for-business)
+
+
+
+
+
+
+
+ |
+| --- | --- | --- | --- | --- |
+| 
+
+*   ![Image 41: Partially included checkmark](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?scl=1) Partial checkmark icons indicate a feature is partially included
+*   ![Image 42: Included checkmark](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?scl=1) Checkmark icons indicate a feature is included
+
+Expand all | Collapse all
+
+
+
+
+
+
+
+
+
+ |  |  |  |  |
+| 
+
+Toggle visibility of 4 table rows below the Email and calendar row
+
+Email and calendar
+
+
+
+
+
+
+
+ | 
+
+Email and calendar
+
+![Image 43: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Email and calendar
+
+![Image 44: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Email and calendar
+
+![Image 45: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Email and calendar
+
+ |
+| 
+
+Use a custom business email (name@yourbusiness.com)
+
+
+
+
+
+
+
+ | 
+
+Use a custom business email (name@yourbusiness.com)
+
+![Image 46: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Use a custom business email (name@yourbusiness.com)
+
+![Image 47: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Use a custom business email (name@yourbusiness.com)
+
+![Image 48: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Use a custom business email (name@yourbusiness.com)
+
+ |
+| 
+
+Host and administer email with a 50-GB mailbox
+
+
+
+
+
+
+
+ | 
+
+Host and administer email with a 50-GB mailbox
+
+![Image 49: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host and administer email with a 50-GB mailbox
+
+![Image 50: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host and administer email with a 50-GB mailbox
+
+![Image 51: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host and administer email with a 50-GB mailbox
+
+ |
+| 
+
+Easily schedule meetings and respond to invitations using shared calendars
+
+
+
+
+
+
+
+ | 
+
+Easily schedule meetings and respond to invitations using shared calendars
+
+![Image 52: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Easily schedule meetings and respond to invitations using shared calendars
+
+![Image 53: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Easily schedule meetings and respond to invitations using shared calendars
+
+![Image 54: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Easily schedule meetings and respond to invitations using shared calendars
+
+ |
+| 
+
+Manage your calendar, share available meeting times, schedule meetings, and get reminders
+
+
+
+
+
+
+
+ | 
+
+Manage your calendar, share available meeting times, schedule meetings, and get reminders
+
+![Image 55: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage your calendar, share available meeting times, schedule meetings, and get reminders
+
+![Image 56: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage your calendar, share available meeting times, schedule meetings, and get reminders
+
+![Image 57: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage your calendar, share available meeting times, schedule meetings, and get reminders
+
+ |
+| 
+
+Toggle visibility of 4 table rows below the File storage and sharing row
+
+File storage and sharing
+
+
+
+
+
+
+
+ | 
+
+File storage and sharing
+
+![Image 58: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+File storage and sharing
+
+![Image 59: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+File storage and sharing
+
+![Image 60: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+File storage and sharing
+
+![Image 61: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ |
+| 
+
+Collaborate in the same file with real-time coauthoring and editing
+
+
+
+
+
+
+
+ | 
+
+Collaborate in the same file with real-time coauthoring and editing
+
+![Image 62: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate in the same file with real-time coauthoring and editing
+
+![Image 63: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate in the same file with real-time coauthoring and editing
+
+![Image 64: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate in the same file with real-time coauthoring and editing
+
+![Image 65: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Access your files from your computer, tablet, or phone
+
+
+
+
+
+
+
+ | 
+
+Access your files from your computer, tablet, or phone
+
+![Image 66: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Access your files from your computer, tablet, or phone
+
+![Image 67: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Access your files from your computer, tablet, or phone
+
+![Image 68: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Access your files from your computer, tablet, or phone
+
+![Image 69: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Keep your files securely stored, up to date, and accessible across devices
+
+
+
+
+
+
+
+ | 
+
+Keep your files securely stored, up to date, and accessible across devices
+
+![Image 70: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Keep your files securely stored, up to date, and accessible across devices
+
+![Image 71: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Keep your files securely stored, up to date, and accessible across devices
+
+![Image 72: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Keep your files securely stored, up to date, and accessible across devices
+
+ |
+| 
+
+Engage and inform with intelligent video using Stream
+
+
+
+
+
+
+
+ | 
+
+Engage and inform with intelligent video using Stream
+
+![Image 73: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Engage and inform with intelligent video using Stream
+
+![Image 74: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Engage and inform with intelligent video using Stream
+
+![Image 75: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Engage and inform with intelligent video using Stream
+
+ |
+| 
+
+Toggle visibility of 4 table rows below the Teamwork and communication row
+
+Teamwork and communication
+
+
+
+
+
+
+
+ | 
+
+Teamwork and communication
+
+![Image 76: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Teamwork and communication
+
+![Image 77: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Teamwork and communication
+
+![Image 78: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Teamwork and communication
+
+ |
+| 
+
+Chat one-on-one or in a group chat, pin chats, and save messages for quick access
+
+
+
+
+
+
+
+ | 
+
+Chat one-on-one or in a group chat, pin chats, and save messages for quick access
+
+![Image 79: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Chat one-on-one or in a group chat, pin chats, and save messages for quick access
+
+![Image 80: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Chat one-on-one or in a group chat, pin chats, and save messages for quick access
+
+![Image 81: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Chat one-on-one or in a group chat, pin chats, and save messages for quick access
+
+ |
+| 
+
+Host secure, organized meetings with audio, video, screen-sharing, recording, and the option to enter a 3D immersive space
+
+
+
+
+
+
+
+ | 
+
+Host secure, organized meetings with audio, video, screen-sharing, recording, and the option to enter a 3D immersive space
+
+![Image 82: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host secure, organized meetings with audio, video, screen-sharing, recording, and the option to enter a 3D immersive space
+
+![Image 83: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host secure, organized meetings with audio, video, screen-sharing, recording, and the option to enter a 3D immersive space
+
+![Image 84: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host secure, organized meetings with audio, video, screen-sharing, recording, and the option to enter a 3D immersive space
+
+ |
+| 
+
+Create team sites to share information, content, and files throughout your intranet using SharePoint
+
+
+
+
+
+
+
+ | 
+
+Create team sites to share information, content, and files throughout your intranet using SharePoint
+
+![Image 85: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Create team sites to share information, content, and files throughout your intranet using SharePoint
+
+![Image 86: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Create team sites to share information, content, and files throughout your intranet using SharePoint
+
+![Image 87: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Create team sites to share information, content, and files throughout your intranet using SharePoint
+
+ |
+| 
+
+Invite people outside of your business to your meetings—even those without Teams accounts
+
+
+
+
+
+
+
+ | 
+
+Invite people outside of your business to your meetings—even those without Teams accounts
+
+![Image 88: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Invite people outside of your business to your meetings—even those without Teams accounts
+
+![Image 89: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Invite people outside of your business to your meetings—even those without Teams accounts
+
+![Image 90: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Invite people outside of your business to your meetings—even those without Teams accounts
+
+ |
+| 
+
+Toggle visibility of 4 table rows below the Standard security and compliance row
+
+Standard security and compliance
+
+
+
+
+
+
+
+ | 
+
+Standard security and compliance
+
+![Image 91: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Standard security and compliance
+
+![Image 92: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Standard security and compliance
+
+![Image 93: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Standard security and compliance
+
+![Image 94: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Help protect your business against spam and malware with cloud-based email filtering
+
+
+
+
+
+
+
+ | 
+
+Help protect your business against spam and malware with cloud-based email filtering
+
+![Image 95: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Help protect your business against spam and malware with cloud-based email filtering
+
+![Image 96: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Help protect your business against spam and malware with cloud-based email filtering
+
+![Image 97: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Help protect your business against spam and malware with cloud-based email filtering
+
+![Image 98: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Manage security threats by creating password policies
+
+
+
+
+
+
+
+ | 
+
+Manage security threats by creating password policies
+
+![Image 99: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage security threats by creating password policies
+
+![Image 100: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage security threats by creating password policies
+
+![Image 101: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage security threats by creating password policies
+
+![Image 102: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Secure access with multifactor authentication
+
+
+
+
+
+
+
+ | 
+
+Secure access with multifactor authentication
+
+![Image 103: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Secure access with multifactor authentication
+
+![Image 104: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Secure access with multifactor authentication
+
+![Image 105: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Secure access with multifactor authentication
+
+![Image 106: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Control access to business information with security groups and custom permissions
+
+
+
+
+
+
+
+ | 
+
+Control access to business information with security groups and custom permissions
+
+![Image 107: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Control access to business information with security groups and custom permissions
+
+![Image 108: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Control access to business information with security groups and custom permissions
+
+![Image 109: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Control access to business information with security groups and custom permissions
+
+![Image 110: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Toggle visibility of 4 table rows below the Support and deployment row
+
+Support and deployment
+
+
+
+
+
+
+
+ | 
+
+Support and deployment
+
+![Image 111: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Support and deployment
+
+![Image 112: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Support and deployment
+
+![Image 113: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Support and deployment
+
+![Image 114: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Contact phone and online support anytime
+
+
+
+
+
+
+
+ | 
+
+Contact phone and online support anytime
+
+![Image 115: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Contact phone and online support anytime
+
+![Image 116: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Contact phone and online support anytime
+
+![Image 117: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Contact phone and online support anytime
+
+![Image 118: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Get technical support for installation, setup, configuration, and general usage
+
+
+
+
+
+
+
+ | 
+
+Get technical support for installation, setup, configuration, and general usage
+
+![Image 119: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get technical support for installation, setup, configuration, and general usage
+
+![Image 120: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get technical support for installation, setup, configuration, and general usage
+
+![Image 121: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get technical support for installation, setup, configuration, and general usage
+
+![Image 122: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Access help and troubleshooting tools, videos, articles, and forums
+
+
+
+
+
+
+
+ | 
+
+Access help and troubleshooting tools, videos, articles, and forums
+
+![Image 123: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Access help and troubleshooting tools, videos, articles, and forums
+
+![Image 124: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Access help and troubleshooting tools, videos, articles, and forums
+
+![Image 125: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Access help and troubleshooting tools, videos, articles, and forums
+
+![Image 126: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Have peace of mind with a financially backed 99% uptime guarantee
+
+
+
+
+
+
+
+ | 
+
+Have peace of mind with a financially backed 99% uptime guarantee
+
+![Image 127: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Have peace of mind with a financially backed 99% uptime guarantee
+
+![Image 128: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Have peace of mind with a financially backed 99% uptime guarantee
+
+![Image 129: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Have peace of mind with a financially backed 99% uptime guarantee
+
+![Image 130: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Toggle visibility of 3 table rows below the Web and mobile apps<sup><a aria-label="Footnote 4" href="#footnote4" class="ms-rte-link">4</a></sup> row
+
+Web and mobile apps[4](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote4)
+
+
+
+
+
+
+
+ | 
+
+Web and mobile apps[4](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote4)
+
+![Image 131: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Web and mobile apps[4](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote4)
+
+![Image 132: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Web and mobile apps[4](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote4)
+
+![Image 133: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Web and mobile apps[4](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote4)
+
+![Image 134: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ |
+| 
+
+Word, Excel, PowerPoint, OneNote
+
+
+
+
+
+
+
+ | 
+
+Word, Excel, PowerPoint, OneNote
+
+![Image 135: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Word, Excel, PowerPoint, OneNote
+
+![Image 136: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Word, Excel, PowerPoint, OneNote
+
+![Image 137: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Word, Excel, PowerPoint, OneNote
+
+![Image 138: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Outlook
+
+
+
+
+
+
+
+ | 
+
+Outlook
+
+![Image 139: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Outlook
+
+![Image 140: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Outlook
+
+![Image 141: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Outlook
+
+![Image 142: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+No web version
+
+
+
+
+
+
+
+
+
+
+
+
+
+ |
+| 
+
+Teams, Bookings, Forms, Lists, Planner, SharePoint, Stream
+
+
+
+
+
+
+
+ | 
+
+Teams, Bookings, Forms, Lists, Planner, SharePoint, Stream
+
+![Image 143: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Teams, Bookings, Forms, Lists, Planner, SharePoint, Stream
+
+![Image 144: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Teams, Bookings, Forms, Lists, Planner, SharePoint, Stream
+
+![Image 145: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Teams, Bookings, Forms, Lists, Planner, SharePoint, Stream
+
+ |
+| 
+
+Toggle visibility of 2 table rows below the Installable desktop apps row
+
+Installable desktop apps
+
+
+
+
+
+
+
+ | 
+
+Installable desktop apps
+
+ | 
+
+Installable desktop apps
+
+![Image 146: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Installable desktop apps
+
+![Image 147: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Installable desktop apps
+
+![Image 148: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Microsoft 365 apps for PC and Mac, including Word, Excel, PowerPoint, Outlook, OneNote
+
+
+
+
+
+
+
+ | 
+
+Microsoft 365 apps for PC and Mac, including Word, Excel, PowerPoint, Outlook, OneNote
+
+ | 
+
+Microsoft 365 apps for PC and Mac, including Word, Excel, PowerPoint, Outlook, OneNote
+
+![Image 149: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Microsoft 365 apps for PC and Mac, including Word, Excel, PowerPoint, Outlook, OneNote
+
+![Image 150: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Microsoft 365 apps for PC and Mac, including Word, Excel, PowerPoint, Outlook, OneNote
+
+![Image 151: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+PC-only apps, including Access and Publisher
+
+
+
+
+
+
+
+ | 
+
+PC-only apps, including Access and Publisher
+
+ | 
+
+PC-only apps, including Access and Publisher
+
+![Image 152: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+PC-only apps, including Access and Publisher
+
+![Image 153: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+PC-only apps, including Access and Publisher
+
+![Image 154: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Toggle visibility of 2 table rows below the AI powered assistance row
+
+AI powered assistance
+
+
+
+
+
+
+
+ | 
+
+AI powered assistance
+
+![Image 155: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+AI powered assistance
+
+![Image 156: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+AI powered assistance
+
+![Image 157: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+AI powered assistance
+
+![Image 158: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ |
+| 
+
+Get intelligent writing assistance with advanced grammar and style suggestions using Editor
+
+
+
+
+
+
+
+ | 
+
+Get intelligent writing assistance with advanced grammar and style suggestions using Editor
+
+ | 
+
+Get intelligent writing assistance with advanced grammar and style suggestions using Editor
+
+![Image 159: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get intelligent writing assistance with advanced grammar and style suggestions using Editor
+
+![Image 160: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get intelligent writing assistance with advanced grammar and style suggestions using Editor
+
+![Image 161: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ |
+| 
+
+Boost creativity with Copilot for Microsoft 365 in Word, Excel, PowerPoint, Outlook, Teams, and other apps
+
+
+
+
+
+
+
+ | 
+
+Boost creativity with Copilot for Microsoft 365 in Word, Excel, PowerPoint, Outlook, Teams, and other apps
+
+Available as an [add-on](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#feature-ocaf4a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+Boost creativity with Copilot for Microsoft 365 in Word, Excel, PowerPoint, Outlook, Teams, and other apps
+
+Available as an [add-on](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#feature-ocaf4a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+Boost creativity with Copilot for Microsoft 365 in Word, Excel, PowerPoint, Outlook, Teams, and other apps
+
+Available as an [add-on](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#feature-ocaf4a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+Boost creativity with Copilot for Microsoft 365 in Word, Excel, PowerPoint, Outlook, Teams, and other apps
+
+Available as an [add-on](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#feature-ocaf4a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+ |
+| 
+
+Toggle visibility of 5 table rows below the Project and customer relationship management row
+
+Project and customer relationship management
+
+
+
+
+
+
+
+ | 
+
+Project and customer relationship management
+
+![Image 162: Partially Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Partial?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+Limited capabilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+ | 
+
+Project and customer relationship management
+
+![Image 163: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Project and customer relationship management
+
+![Image 164: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Project and customer relationship management
+
+ |
+| 
+
+Easily create, manage, and share schedules and tasks with your team
+
+
+
+
+
+
+
+ | 
+
+Easily create, manage, and share schedules and tasks with your team
+
+![Image 165: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Easily create, manage, and share schedules and tasks with your team
+
+![Image 166: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Easily create, manage, and share schedules and tasks with your team
+
+![Image 167: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Easily create, manage, and share schedules and tasks with your team
+
+ |
+| 
+
+Manage workflow and track important tasks with Microsoft Lists
+
+
+
+
+
+
+
+ | 
+
+Manage workflow and track important tasks with Microsoft Lists
+
+![Image 168: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage workflow and track important tasks with Microsoft Lists
+
+![Image 169: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage workflow and track important tasks with Microsoft Lists
+
+![Image 170: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Manage workflow and track important tasks with Microsoft Lists
+
+ |
+| 
+
+Quickly and easily create custom surveys and analyze results with Microsoft Forms
+
+
+
+
+
+
+
+ | 
+
+Quickly and easily create custom surveys and analyze results with Microsoft Forms
+
+![Image 171: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Quickly and easily create custom surveys and analyze results with Microsoft Forms
+
+![Image 172: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Quickly and easily create custom surveys and analyze results with Microsoft Forms
+
+![Image 173: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Quickly and easily create custom surveys and analyze results with Microsoft Forms
+
+ |
+| 
+
+Streamline client scheduling and manage appointments with Microsoft Bookings
+
+
+
+
+
+
+
+ | 
+
+Streamline client scheduling and manage appointments with Microsoft Bookings
+
+![Image 174: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Streamline client scheduling and manage appointments with Microsoft Bookings
+
+![Image 175: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Streamline client scheduling and manage appointments with Microsoft Bookings
+
+![Image 176: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Streamline client scheduling and manage appointments with Microsoft Bookings
+
+ |
+| 
+
+Collaborate in workspaces to organize your projects, both large and small, with Microsoft Loop 
+
+
+
+
+
+
+
+ | 
+
+Collaborate in workspaces to organize your projects, both large and small, with Microsoft Loop 
+
+ | 
+
+Collaborate in workspaces to organize your projects, both large and small, with Microsoft Loop 
+
+![Image 177: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate in workspaces to organize your projects, both large and small, with Microsoft Loop 
+
+![Image 178: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate in workspaces to organize your projects, both large and small, with Microsoft Loop 
+
+ |
+| 
+
+Toggle visibility of 3 table rows below the Video editing  row
+
+Video editing 
+
+
+
+
+
+
+
+ | 
+
+Video editing 
+
+ | 
+
+Video editing 
+
+![Image 179: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Video editing 
+
+![Image 180: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Video editing 
+
+ |
+| 
+
+Edit videos using basic tools, such as trimming, cropping, and speed control 
+
+
+
+
+
+
+
+ | 
+
+Edit videos using basic tools, such as trimming, cropping, and speed control 
+
+ | 
+
+Edit videos using basic tools, such as trimming, cropping, and speed control 
+
+![Image 181: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Edit videos using basic tools, such as trimming, cropping, and speed control 
+
+![Image 182: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Edit videos using basic tools, such as trimming, cropping, and speed control 
+
+ |
+| 
+
+Create high-quality recordings and set dimensions for upload to multiple platforms 
+
+
+
+
+
+
+
+ | 
+
+Create high-quality recordings and set dimensions for upload to multiple platforms 
+
+ | 
+
+Create high-quality recordings and set dimensions for upload to multiple platforms 
+
+![Image 183: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Create high-quality recordings and set dimensions for upload to multiple platforms 
+
+![Image 184: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Create high-quality recordings and set dimensions for upload to multiple platforms 
+
+ |
+| 
+
+Collaborate live or asynchronously in a video-editing workspace 
+
+
+
+
+
+
+
+ | 
+
+Collaborate live or asynchronously in a video-editing workspace 
+
+ | 
+
+Collaborate live or asynchronously in a video-editing workspace 
+
+![Image 185: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate live or asynchronously in a video-editing workspace 
+
+![Image 186: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Collaborate live or asynchronously in a video-editing workspace 
+
+ |
+| 
+
+Toggle visibility of 3 table rows below the Webinars and live events row
+
+Webinars and live events
+
+
+
+
+
+
+
+ | 
+
+Webinars and live events
+
+ | 
+
+Webinars and live events
+
+![Image 187: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Webinars and live events
+
+![Image 188: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Webinars and live events
+
+ |
+| 
+
+Schedule and host webinars for up to 300 people
+
+
+
+
+
+
+
+ | 
+
+Schedule and host webinars for up to 300 people
+
+ | 
+
+Schedule and host webinars for up to 300 people
+
+![Image 189: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Schedule and host webinars for up to 300 people
+
+![Image 190: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Schedule and host webinars for up to 300 people
+
+ |
+| 
+
+Host webinars that include attendee registration pages and email confirmations
+
+
+
+
+
+
+
+ | 
+
+Host webinars that include attendee registration pages and email confirmations
+
+ | 
+
+Host webinars that include attendee registration pages and email confirmations
+
+![Image 191: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host webinars that include attendee registration pages and email confirmations
+
+![Image 192: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Host webinars that include attendee registration pages and email confirmations
+
+ |
+| 
+
+Get reporting data on webinar registration and meeting attendance
+
+
+
+
+
+
+
+ | 
+
+Get reporting data on webinar registration and meeting attendance
+
+ | 
+
+Get reporting data on webinar registration and meeting attendance
+
+![Image 193: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get reporting data on webinar registration and meeting attendance
+
+![Image 194: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Get reporting data on webinar registration and meeting attendance
+
+ |
+| 
+
+Toggle visibility of 4 table rows below the Advanced cyberattack protection row
+
+Advanced cyberattack protection
+
+
+
+
+
+
+
+ | 
+
+Advanced cyberattack protection
+
+ | 
+
+Advanced cyberattack protection
+
+ | 
+
+Advanced cyberattack protection
+
+![Image 195: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Advanced cyberattack protection
+
+ |
+| 
+
+Enable enterprise-grade endpoint security across devices to protect against ransomware and other cyberthreats
+
+
+
+
+
+
+
+ | 
+
+Enable enterprise-grade endpoint security across devices to protect against ransomware and other cyberthreats
+
+ | 
+
+Enable enterprise-grade endpoint security across devices to protect against ransomware and other cyberthreats
+
+ | 
+
+Enable enterprise-grade endpoint security across devices to protect against ransomware and other cyberthreats
+
+![Image 196: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Enable enterprise-grade endpoint security across devices to protect against ransomware and other cyberthreats
+
+ |
+| 
+
+Help protect against email threats, such as phishing that’s hidden in email attachments and links
+
+
+
+
+
+
+
+ | 
+
+Help protect against email threats, such as phishing that’s hidden in email attachments and links
+
+ | 
+
+Help protect against email threats, such as phishing that’s hidden in email attachments and links
+
+ | 
+
+Help protect against email threats, such as phishing that’s hidden in email attachments and links
+
+![Image 197: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Help protect against email threats, such as phishing that’s hidden in email attachments and links
+
+ |
+| 
+
+Restrict access to sensitive business information with Information Rights Management
+
+
+
+
+
+
+
+ | 
+
+Restrict access to sensitive business information with Information Rights Management
+
+ | 
+
+Restrict access to sensitive business information with Information Rights Management
+
+ | 
+
+Restrict access to sensitive business information with Information Rights Management
+
+![Image 198: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Restrict access to sensitive business information with Information Rights Management
+
+ |
+| 
+
+Help employees securely access business apps wherever they work with conditional access, while helping prevent unauthorized access
+
+
+
+
+
+
+
+ | 
+
+Help employees securely access business apps wherever they work with conditional access, while helping prevent unauthorized access
+
+ | 
+
+Help employees securely access business apps wherever they work with conditional access, while helping prevent unauthorized access
+
+ | 
+
+Help employees securely access business apps wherever they work with conditional access, while helping prevent unauthorized access
+
+![Image 199: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Help employees securely access business apps wherever they work with conditional access, while helping prevent unauthorized access
+
+ |
+| 
+
+Toggle visibility of 3 table rows below the Device management row
+
+Device management
+
+
+
+
+
+
+
+ | 
+
+Device management
+
+ | 
+
+Device management
+
+ | 
+
+Device management
+
+![Image 200: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Device management
+
+ |
+| 
+
+Apply security policies to help protect work data on company-owned and employee devices
+
+
+
+
+
+
+
+ | 
+
+Apply security policies to help protect work data on company-owned and employee devices
+
+ | 
+
+Apply security policies to help protect work data on company-owned and employee devices
+
+ | 
+
+Apply security policies to help protect work data on company-owned and employee devices
+
+![Image 201: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Apply security policies to help protect work data on company-owned and employee devices
+
+ |
+| 
+
+Keep company data within approved apps across iOS, Android, and Windows PCs
+
+
+
+
+
+
+
+ | 
+
+Keep company data within approved apps across iOS, Android, and Windows PCs
+
+ | 
+
+Keep company data within approved apps across iOS, Android, and Windows PCs
+
+ | 
+
+Keep company data within approved apps across iOS, Android, and Windows PCs
+
+![Image 202: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Keep company data within approved apps across iOS, Android, and Windows PCs
+
+ |
+| 
+
+Remotely remove business data from lost or stolen devices
+
+
+
+
+
+
+
+ | 
+
+Remotely remove business data from lost or stolen devices
+
+ | 
+
+Remotely remove business data from lost or stolen devices
+
+ | 
+
+Remotely remove business data from lost or stolen devices
+
+![Image 203: Included](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/CheckMark-Full?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=16&hei=16&qlt=100&fit=constrain)
+
+
+
+
+
+
+
+ | 
+
+Remotely remove business data from lost or stolen devices
+
+ |
+|  | 
+
+### Microsoft 365 Business Basic
+
+Originally starting from $6.00 now starting from $6.00
+
+$6.00 $6.00
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253721&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=2147547&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-basic)
+
+
+
+
+
+
+
+ | 
+
+### Microsoft 365 Business Standard
+
+Originally starting from $12.50 now starting from $12.50
+
+$12.50 $12.50
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253801&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=510938&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-standard)
+
+
+
+
+
+
+
+ | 
+
+### Microsoft 365 Business Premium
+
+Originally starting from $22.00 now starting from $22.00
+
+$22.00 $22.00
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253722&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?linkid=2102309&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-business-premium?activetab=pivot:overviewtab)
+
+
+
+
+
+
+
+ | 
+
+Only includes apps
+
+### Microsoft 365 Apps for business
+
+Originally starting from $8.25 now starting from $8.25
+
+$8.25 $8.25
+
+user/month
+
+(Paid annually–auto renews)[1](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnotes1)
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2253802&clcid=0x409&culture=en-us&country=us)
+
+[Or try free for one month](https://go.microsoft.com/fwlink/p/?LinkID=507653&clcid=0x409&culture=en-us&country=us)
+
+See trial terms[2](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote2)
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-apps-for-business)
+
+
+
+
+
+
+
+ |
+
+Add Copilot to your Microsoft plan[3](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#footnote3) 
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+[Sign in to add Copilot](https://go.microsoft.com/fwlink/?linkid=2255787) to your existing Microsoft 365 business plan.
+
+If you’re not an existing customer, buy a Microsoft 365 plan to get started.
+
+[See Microsoft 365 pricing](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#layout-container-uidda30)  [Learn more](https://www.microsoft.com/en-us/microsoft-365/business/copilot-for-microsoft-365)
+
+![Image 204: copilot-visual](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/copilot-visual-800x532-1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=800&hei=532&qlt=95&fit=constrain)
+
+Explore Microsoft 365
+---------------------
+
+![Image 205](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade001_HERO_1920x500_?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=786&hei=443&qlt=85&fit=constrain)
+
+### Help me choose the right Microsoft 365 plan
+
+[Help me choose](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-plan-chooser)
+
+![Image 206](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade001_HERO_1920x500_?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=786&hei=443&qlt=85&fit=constrain)
+
+### Learn more about Microsoft 365 for business
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/business)
+
+![Image 207](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade001_HERO_1920x500_?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=786&hei=443&qlt=85&fit=constrain)
+
+### Learn more about Microsoft 365 for enterprise
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/enterprise)
+
+[Compare enterprise plans](https://www.microsoft.com/en-us/microsoft-365/compare-microsoft-365-enterprise-plans)
+
+![Image 208](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade001_HERO_1920x500_?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=786&hei=443&qlt=85&fit=constrain)
+
+### Get just the Microsoft 365 desktop apps
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/get-started-with-office-2021#compare_table)
+
+Frequently asked questions
+--------------------------
+
+Expand all | Collapse all
+
+*   ### What is Microsoft 365?
+    
+    Microsoft 365 is the productivity cloud designed to help everyone achieve what matters, in their work and life, with best-in-class Microsoft 365 apps, intelligent cloud services, and advanced security.
+    
+*   ### On how many devices can I install Microsoft 365 apps if I have a Microsoft 365 business plan?
+    
+    Install Microsoft 365 apps on up to five PCs or Macs, five tablets, and five mobile devices. Hybrid Windows devices, such as the Microsoft Surface Pro, count as either a PC or a tablet.
+    
+*   ### What forms of payment can I use?
+    
+    All major credit cards are accepted. When paying with a credit card, your subscription amount will appear on your credit card statement. Existing customers may be eligible to pay by invoice and can contact support to check their eligibility for this payment method. [Learn more about paying by invoice](https://go.microsoft.com/fwlink/p/?linkid=2234495). For Microsoft 365 business plans, depending on your choice of service, you'll be billed monthly or annually.
+    
+*   ### What's the difference between monthly, annual, and annual commitment payments?
+    
+    To provide you with the greatest amount of flexibility, different payment options are available.
+    
+    Microsoft 365 Business Basic, Microsoft 365 Apps for business, Microsoft 365 Business Standard, and Microsoft 365 Business Premium plans are available for monthly commitment payment or annual commitment payment.
+    
+    *   **Monthly commitment payment:** Pay month by month and cancel at any time.
+    *   **Annual commitment payment:** Sign up for a one-year subscription and benefit from a discount for using this payment option. By default, your billing plan will be set to monthly billing. After your purchase, you can change your billing plan to annual billing within the Microsoft 365 admin center.  
+         
+    
+    The Microsoft 365 Enterprise and Office 365 Enterprise plans (including standalone plans such as Exchange Online) and Microsoft 365 Apps for enterprise are available for annual commitment payment.  
+     
+    
+    *   **Annual commitment payment:** Sign up for a one-year subscription and choose to pay monthly or for the entire year at the time you sign up.
+    
+*   ### Can I convert my trial to a paid subscription and retain all my settings and files?
+    
+    Yes. If you purchase Microsoft 365 licenses for the accounts you create during your free trial, the information and configuration for these users' accounts will remain intact. Once your free trial expires, you’ll have an additional 30 days to purchase Microsoft 365 before your account information is erased. Once your trial account information has been erased, it can’t be retrieved.
+    
+*   ### Does Microsoft 365 work when I'm not connected to the internet?
+    
+    The Microsoft 365 apps that you install on your PC or Mac—such as Word, Excel, PowerPoint, and Outlook—are available to you when you’re not online.
+    
+    With OneDrive in Microsoft 365, get file storage that you can access when you’re offline. When you make changes while offline, they’ll be synced to OneDrive and across the rest of your devices when you reconnect.
+    
+    With Outlook, read emails already delivered to your inbox, or draft new emails and meeting requests. Your inbox and outbox will sync across the rest of your devices when you reconnect.
+    
+*   ### What happens to my data if I cancel my subscription?
+    
+    Your data is yours. If you decide to cancel your Microsoft 365 subscription, download your data—for example, your email and documents on team sites—and save it to another location. You should save your data before you cancel. After you cancel your subscription, data associated with your Microsoft 365 account will be available to your administrator(s) in a limited function account for 90 days.
+    
+*   ### Where can I find more answers to frequently asked questions?
+    
+    Find more answers to frequently asked questions on the [Microsoft 365 for business FAQ page](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-frequently-asked-questions).
+    
+*   ### What is Microsoft Defender for Business?
+    
+    Microsoft Defender for Business is an endpoint security solution designed to help businesses with up to 300 employees. It helps protect against cybersecurity threats, including malware and ransomware, in an easy-to-use, cost-effective package. Microsoft Defender for Business is included with Microsoft 365 Business Premium and is available as a standalone product. [Learn more](https://www.microsoft.com/en-us/security/business/endpoint-security/microsoft-defender-business).
+    
+*   ### How many users can I host for online meetings and video calls using Microsoft Teams?
+    
+    With Microsoft 365 Business Basic, Microsoft 365 Business Standard, and Microsoft 365 Business Premium subscriptions that have a Microsoft Teams license, you can host online meetings and video calls for up to 300 people.
+    
+    With Microsoft 365 E3 and E5, Microsoft 365 A3 and A5, and Microsoft 365 Government G3 and G5 subscriptions that have a Microsoft Teams license, this limit increases up to 1,000 people. [Learn more](https://go.microsoft.com/fwlink/?linkid=2207401&clcid=0x409&culture=en-us&country=us).
+    
+*   ### For IT providers, what are the options to manage more than one customer at a time?
+    
+    Managed Service Providers (MSPs) who are part of Microsoft’s Cloud Solution Provider program can use Microsoft 365 Lighthouse as one central place to secure, manage, and grow their customers using Microsoft 365 Business Basic, Business Standard, Business Premium, Defender for Business, and Microsoft 365 for enterprise and education products. [Learn more](https://go.microsoft.com/fwlink/p/?linkid=2222733).
+    
+*   ### Copilot for Microsoft 365 frequently asked questions
+    
+    Find more answers to frequently asked questions. [Learn more](https://www.microsoft.com/en-us/microsoft-365/business/copilot-for-microsoft-365#faqs).
+    
+
+*   \[1\] Once your paid subscription begins, cancellation policies vary based on your status as a new customer and your product and domain selections on Microsoft. [Learn more](https://go.microsoft.com/fwlink/?linkid=2184462). Cancel your Microsoft 365 subscription any time by going to the Microsoft 365 admin center. When a subscription is canceled, all associated data will be deleted. [Learn more about data retention, deletion, and destruction in Microsoft 365](https://go.microsoft.com/fwlink/?linkid=2166910).
+*   \[2\] After your one-month free trial ends, your subscription will automatically convert into a 12-month paid subscription and you will be charged the applicable subscription fee. Cancel anytime during your free trial to stop future charges. Credit card required to sign-up. [Learn more](https://go.microsoft.com/fwlink/?linkid=2213940).
+*   \[3\] Copilot for Microsoft 365 may not be available for all markets and languages. To purchase, customers must have a qualifying plan for [enterprise](https://go.microsoft.com/fwlink/?linkid=2266802) or [business](https://go.microsoft.com/fwlink/?linkid=2267117).
+*   \[4\] Availability of mobile apps varies by country/region.
+
+Connect with Microsoft 365 :
+----------------------------
+
+*    [![Image 209: Support icon](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon%20-%20Get%20Support%20Resources?scl=1) Get support resources](https://go.microsoft.com/fwlink/?linkid=2166378)
+*    [![Image 210: Chat icon](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon%20-%20Contact%20Business%20Sales?scl=1) Contact business sales](https://go.microsoft.com/fwlink/?linkid=2162947)
+
+Follow Us
+---------
+
+*   [![Image 211: LinkedIn logo](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-LinkedIn-Black-1?scl=1)](https://go.microsoft.com/fwlink/?linkid=2182787)
+*   [![Image 212: X (Formerly Twitter)](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Twitter-Black-1?scl=1)](https://go.microsoft.com/fwlink/?linkid=2184864)
+*   [![Image 213: Blog logo](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Blog-Black-1?scl=1)](https://go.microsoft.com/fwlink/p/?LinkID=2000803)
+
+What's new
+
+*   [Surface Pro](https://www.microsoft.com/en-us/surface/devices/surface-pro-11th-edition)
+*   [Surface Laptop](https://www.microsoft.com/en-us/surface/devices/surface-laptop-7th-edition)
+*   [Surface Laptop Studio 2](https://www.microsoft.com/en-us/d/Surface-Laptop-Studio-2/8rqr54krf1dz)
+*   [Surface Laptop Go 3](https://www.microsoft.com/en-us/d/Surface-Laptop-Go-3/8p0wwgj6c6l2)
+*   [Microsoft Copilot](https://www.microsoft.com/en-us/microsoft-copilot)
+*   [AI in Windows](https://www.microsoft.com/en-us/windows/copilot-ai-features)
+*   [Explore Microsoft products](https://www.microsoft.com/en-us/microsoft-products-and-apps)
+*   [Windows 11 apps](https://www.microsoft.com/windows/windows-11-apps)
+
+Microsoft Store
+
+*   [Account profile](https://account.microsoft.com/)
+*   [Download Center](https://www.microsoft.com/en-us/download)
+*   [Microsoft Store support](https://go.microsoft.com/fwlink/?linkid=2139749)
+*   [Returns](https://www.microsoft.com/en-us/store/b/returns)
+*   [Order tracking](https://www.microsoft.com/en-us/store/b/order-tracking)
+*   [Certified Refurbished](https://www.microsoft.com/en-us/store/b/certified-refurbished-products)
+*   [Microsoft Store Promise](https://www.microsoft.com/en-us/store/b/why-microsoft-store?icid=footer_why-msft-store_7102020)
+*   [Flexible Payments](https://www.microsoft.com/en-us/store/b/payment-financing-options?icid=footer_financing_vcc)
+
+Education
+
+*   [Microsoft in education](https://www.microsoft.com/en-us/education)
+*   [Devices for education](https://www.microsoft.com/en-us/education/devices/overview)
+*   [Microsoft Teams for Education](https://www.microsoft.com/en-us/education/products/teams)
+*   [Microsoft 365 Education](https://www.microsoft.com/en-us/education/products/microsoft-365)
+*   [How to buy for your school](https://www.microsoft.com/education/how-to-buy)
+*   [Educator training and development](https://education.microsoft.com/)
+*   [Deals for students and parents](https://www.microsoft.com/en-us/store/b/education)
+*   [Azure for students](https://azure.microsoft.com/en-us/free/students/)
+
+Business
+
+*   [Microsoft Cloud](https://www.microsoft.com/en-us/microsoft-cloud)
+*   [Microsoft Security](https://www.microsoft.com/en-us/security)
+*   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365)
+*   [Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/business)
+*   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform)
+*   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+*   [Copilot for Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/business/copilot-for-microsoft-365)
+*   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore)
+
+Developer & IT
+
+*   [Azure](https://azure.microsoft.com/en-us/)
+*   [Developer Center](https://developer.microsoft.com/en-us/)
+*   [Documentation](https://learn.microsoft.com/docs/)
+*   [Microsoft Learn](https://learn.microsoft.com/)
+*   [Microsoft Tech Community](https://techcommunity.microsoft.com/)
+*   [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/)
+*   [AppSource](https://appsource.microsoft.com/en-us/)
+*   [Visual Studio](https://visualstudio.microsoft.com/)
+
+Company
+
+*   [Careers](https://careers.microsoft.com/)
+*   [About Microsoft](https://www.microsoft.com/en-us/about)
+*   [Company news](https://news.microsoft.com/)
+*   [Privacy at Microsoft](https://privacy.microsoft.com/en-us)
+*   [Investors](https://www.microsoft.com/investor/default.aspx)
+*   [Diversity and inclusion](https://www.microsoft.com/en-us/diversity/)
+*   [Accessibility](https://www.microsoft.com/en-us/accessibility)
+*   [Sustainability](https://www.microsoft.com/en-us/sustainability/)
+
+[English (United States)](https://www.microsoft.com/en-US/microsoft-365/locale) [Your Privacy Choices](https://aka.ms/yourcaliforniaprivacychoices)[Consumer Health Privacy](https://go.microsoft.com/fwlink/?linkid=2259814)
+
+*   [Sitemap](https://www.microsoft.com/en-us/sitemap1.aspx)
+*   [Contact Microsoft](https://support.microsoft.com/contactus)
+*   [Privacy](https://go.microsoft.com/fwlink/?LinkId=521839)
+*   [Manage cookies](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products#)
+*   [Terms of use](https://go.microsoft.com/fwlink/?LinkID=206977)
+*   [Trademarks](https://go.microsoft.com/fwlink/?linkid=2196228)
+*   [Safety & eco](https://go.microsoft.com/fwlink/?linkid=2196227)
+*   [Recycling](https://www.microsoft.com/en-us/legal/compliance/recycling)
+*   [About our ads](https://choice.microsoft.com/)
+*   © Microsoft 2024
+  ```
+
+Source URL: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+  ```
+  Compare All Microsoft 365 Plans (Formerly Office 365) - Microsoft Store
+===============     
+
+Trace Id is missing 
+
+Questions? Talk to an expert
+
+![Image 1](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/chat-2?scl=1)Can we help you?
+
+Chat now
+
+No thanks
+
+   
+
+[Skip to main content](javascript:void\(0\))
+
+ [![Image 2](https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31) Microsoft](https://www.microsoft.com/)
+
+Microsoft 365
+
+[Microsoft 365](https://www.microsoft.com/en-us/microsoft-365)
+
+Microsoft 365
+
+*   [Home](https://www.microsoft.com/en-us/microsoft-365)
+*   Products
+    
+    *   For home For home
+        *   [Pricing for Home](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products)
+        *   [For families](https://www.microsoft.com/en-us/microsoft-365/p/microsoft-365-family/cfq7ttc0k5dm)
+        *   [For individuals](https://www.microsoft.com/en-us/microsoft-365/p/microsoft-365-personal/cfq7ttc0k5bf)
+        *   [For students](https://www.microsoft.com/en-us/education/products/office)
+        *   [See all home](https://www.microsoft.com/en-us/microsoft-365/explore-microsoft-365-for-home)
+    *   For business For business
+        *   [Pricing for Business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+        *   [For Small Business](https://www.microsoft.com/en-us/microsoft-365/business)
+    *   For enterprise For enterprise
+        *   [Pricing for Enterprise](https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft365-plans-and-pricing)
+        *   [For Enterprise](https://www.microsoft.com/en-us/microsoft-365/enterprise)
+        *   [For Frontline workers](https://www.microsoft.com/en-us/microsoft-365/enterprise/frontline)
+    *   Apps and services Apps and services
+        *   [Excel](https://www.microsoft.com/en-us/microsoft-365/excel)
+        *   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [Word](https://www.microsoft.com/en-us/microsoft-365/word)
+        *   [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)
+        *   [OneNote](https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app)
+        *   [Outlook](https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook)
+        *   [PowerPoint](https://www.microsoft.com/en-us/microsoft-365/powerpoint)
+        *   [Project](https://www.microsoft.com/en-us/microsoft-365/project/project-management-software)
+        *   [SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)
+        *   [See all apps and services](https://www.microsoft.com/en-us/microsoft-365/products-apps-services)
+    *   More More
+        *   [Microsoft Office](https://www.microsoft.com/en-us/microsoft-365/microsoft-office)
+        *   [Windows 365](https://www.microsoft.com/en-us/windows-365)
+        *   [Microsoft Viva](https://www.microsoft.com/en-us/microsoft-viva)
+        *   [Microsoft Authenticator](https://www.microsoft.com/en-us/security/mobile-authenticator-app)
+        *   [Enterprise Mobility + Security](https://www.microsoft.com/en-us/microsoft-365/enterprise-mobility-security)
+        *   [Microsoft Edge](https://www.microsoft.com/en-us/edge)
+        *   [For Nonprofits](https://www.microsoft.com/en-us/microsoft-365/enterprise/nonprofit-plans-and-pricing)
+    *   What’s new What’s new
+        *   [Microsoft Designer](https://www.microsoft.com/en-us/microsoft-365/microsoft-designer)
+        *   [Planner](https://www.microsoft.com/en-us/microsoft-365/planner/microsoft-planner)
+        *   [Microsoft Copilot for Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/microsoft-copilot)
+        *   [Clipchamp](https://www.microsoft.com/en-us/microsoft-365/clipchamp)
+    
+*   [Plans and pricing](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+*   Resources
+    
+    *   [Start your Copilot journey](https://go.microsoft.com/fwlink/?linkid=2264920)
+    *   [Copilot for work](https://www.microsoft.com/en-us/microsoft-365/copilot-for-work)
+    *   [Cost savings](https://www.microsoft.com/en-us/microsoft-365/cost-savings)
+    *   [Accounts and billing](https://support.office.com/en-us/article/accounts-in-office-628ea040-f265-49de-b986-be09c3ebf8a9)
+    *   [FAQ](https://www.microsoft.com/en-us/microsoft-365/microsoft-365-for-home-and-school-faq)
+    *   [Setup and install](https://go.microsoft.com/fwlink/?linkid=2268122)
+    *   [Templates](https://templates.office.com/)
+    *   [Training](https://go.microsoft.com/fwlink/?linkid=2268123)
+    *   [What's new](https://support.office.com/en-us/article/what-s-new-in-office-365-95c8d81d-08ba-42c1-914f-bca4603e1426?ui=en-US&rs=en-US&ad=US)
+    *   [Small Business Resource Center](https://www.microsoft.com/en-us/microsoft-365/small-business-resource-center)
+    
+*   Support
+    
+    *   For personal and family For personal and family
+        *   [Self-help resources](https://support.microsoft.com/)
+        *   [Billing support](https://go.microsoft.com/fwlink/?linkid=2267729)
+        *   [Community](https://go.microsoft.com/fwlink/?linkid=2268025)
+        *   [Contact Microsoft Support](https://support.microsoft.com/contactus)
+    *   For work For work
+        *   [Self-help resources](https://support.microsoft.com/)
+        *   [Admin self-help](https://go.microsoft.com/fwlink/?linkid=2268124)
+        *   [Support plans](https://www.microsoft.com/en-us/microsoft-365/business/microsoft-365-for-business-support-options)
+        *   [Find a partner](https://appsource.microsoft.com/en-us/marketplace/partner-dir?filter=sort%3D0%3BpageSize%3D18%3BonlyThisCountry%3Dtrue%3Bcountry%3DUS%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue)
+        *   [Contact Sales](https://www.microsoft.com/en-us/microsoft-365/business/sales-support)
+        *   [Community](https://go.microsoft.com/fwlink/?linkid=2267923)
+    *   For education For education
+        *   [Self-help resources](https://go.microsoft.com/fwlink/?linkid=2268026)
+        *   [Educator Center](https://go.microsoft.com/fwlink/?linkid=2267533)
+        *   [Request support](https://aka.ms/edusupport)
+        *   [Contact Microsoft Support](https://support.microsoft.com/contactus)
+        *   [Community](https://go.microsoft.com/fwlink/?linkid=2267640)
+    *   For partners For partners
+        *   [Become a partner](https://partner.microsoft.com/en-US/)
+        *   [Partner resources](https://partner.microsoft.com/en-US/)
+    *   [See all support](https://www.microsoft.com/en-us/microsoft-365/support)
+    
+*   [Try for free](https://www.microsoft.com/en-us/microsoft-365/try)
+*   More
+    
+
+*   All Microsoft
+    
+    *   Global
+        ------
+        
+        *   [Microsoft 365](https://www.microsoft.com/microsoft-365)
+        *   [Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [Copilot](https://copilot.microsoft.com/)
+        *   [Windows](https://www.microsoft.com/en-us/windows/)
+        *   [Surface](https://www.microsoft.com/surface)
+        *   [Xbox](https://www.xbox.com/)
+        *   [Deals](https://www.microsoft.com/en-us/store/b/sale?icid=gm_nav_L0_salepage)
+        *   [Small Business](https://www.microsoft.com/en-us/store/b/business)
+        *   [Support](https://support.microsoft.com/en-us)
+    *   Software Software
+        *   [Windows Apps](https://www.microsoft.com/en-us/store/apps/windows?icid=CNavAppsWindowsApps)
+        *   [AI](https://www.microsoft.com/en-us/ai)
+        *   [Outlook](https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook)
+        *   [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)
+        *   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [OneNote](https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app)
+        *   [Microsoft Edge](https://www.microsoft.com/edge)
+        *   [Skype](https://www.skype.com/en/)
+    *   PCs & Devices PCs & Devices
+        *   [Computers](https://www.microsoft.com/en-us/store/b/pc?icid=CNavDevicesPC)
+        *   [Shop Xbox](https://www.microsoft.com/en-us/store/b/xbox?icid=CNavDevicesXbox)
+        *   [Accessories](https://www.microsoft.com/en-us/store/b/accessories?icid=CNavDevicesAccessories)
+        *   [VR & mixed reality](https://www.microsoft.com/en-us/store/b/virtualreality?icid=CNavVirtualReality)
+        *   [Certified Refurbished](https://www.microsoft.com/en-us/store/b/certified-refurbished-products)
+        *   [Trade-in for cash](https://www.microsoft.com/en-us/store/b/microsoft-trade-in)
+    *   Entertainment Entertainment
+        *   [Xbox Game Pass Ultimate](https://www.xbox.com/en-us/games/store/xbox-game-pass-ultimate/cfq7ttc0khs0?icid=CNavAllXboxGamePassUltimate)
+        *   [PC Game Pass](https://www.xbox.com/en-us/games/store/pc-game-pass/cfq7ttc0kgq8?icid=CNavAllPCGamePass)
+        *   [Xbox games](https://www.microsoft.com/en-us/store/b/xboxgames?icid=CNavGamesXboxGames)
+        *   [PC and Windows games](https://www.microsoft.com/en-us/store/games/windows?icid=CNavGamesWindowsGames)
+        *   [Movies & TV](https://www.microsoft.com/en-us/store/movies-and-tv?icid=TopNavMoviesTv)
+    *   Business Business
+        *   [Microsoft Cloud](https://www.microsoft.com/en-us/microsoft-cloud)
+        *   [Microsoft Security](https://www.microsoft.com/en-us/security)
+        *   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365)
+        *   [Microsoft 365 for business](https://www.microsoft.com/en-us/microsoft-365/business)
+        *   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform)
+        *   [Windows 365](https://www.microsoft.com/en-us/windows-365)
+        *   [Microsoft Industry](https://www.microsoft.com/en-us/industry)
+        *   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore)
+    *   Developer & IT Developer & IT
+        *   [Azure](https://azure.microsoft.com/en-us/)
+        *   [Developer Center](https://developer.microsoft.com/en-us/)
+        *   [Documentation](https://learn.microsoft.com/docs/)
+        *   [Microsoft Learn](https://learn.microsoft.com/)
+        *   [Microsoft Tech Community](https://techcommunity.microsoft.com/)
+        *   [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/)
+        *   [AppSource](https://appsource.microsoft.com/en-us/)
+        *   [Visual Studio](https://visualstudio.microsoft.com/)
+    *   Other Other
+        *   [Microsoft Rewards](https://www.microsoft.com/rewards)
+        *   [Free downloads & security](https://www.microsoft.com/en-us/download)
+        *   [Education](https://www.microsoft.com/en-us/education)
+        *   [Gift cards](https://www.microsoft.com/en-us/store/b/gift-cards)
+        *   [Licensing](https://www.microsoft.com/licensing/)
+        *   [Unlocked stories](https://unlocked.microsoft.com/)
+    *   [View Sitemap](https://www.microsoft.com/en-us/sitemap.aspx)
+    
+
+ Search Search Microsoft 365
+
+*   No results
+
+Cancel
+
+Sign in
+
+College and University students can now get Microsoft 365 Personal for only $2.99 a month
+
+Maximize the everyday
+=====================
+
+With Microsoft 365, get online protection, secure cloud storage, and innovative apps all in one plan.
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US)
+
+    ![Image 3: Microsoft 365 suite of apps such as Teams, Word, Outlook, and more.](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-FEATURE-powerful-apps-2120x1190:VP1-539x349)
+
+ 
+
+  
+
+*   [For home](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#For%20home)
+*   [For business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+
+Save 16% when you pay yearly for Microsoft 365
+----------------------------------------------
+
+*   [Paid yearly](javascript:;)
+*   [Paid monthly](javascript:;)
+
+Save $19.89 with a yearly plan
+
+### Microsoft 365 Family
+
+$9.99/month
+
+$99.99/year
+
+    ![Image 4: MS Word](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-Word-72x72?scl=1)
+
+    ![Image 5: MS Excel](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-Excel-75x75?scl=1)
+
+    ![Image 6: MS Powerpoint](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Powerpoint-75x75?scl=1)
+
+    ![Image 7: MS Defender](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Defender-75x75?scl=1)
+
+    ![Image 8: MS OneDrive](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-OneDrive-75x75?scl=1)
+
+    ![Image 9: MS Outlook](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-Outlook-75x75?scl=1)
+
+    ![Image 10: MS Editor](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Gldn-Editor-app-icon-75x75?scl=1)
+
+    ![Image 11: MS Clipchamp](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Clipchamp-75x75?scl=1)
+
+    ![Image 12: MS OneNote](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-OneNote-75x75?scl=1)
+
+*   For one to six people
+*   Sign in to five devices at once
+*   Use on PCs, Macs, phones, and tablets
+*   Up to 6 TB of secure cloud storage
+*   Apps with premium features and offline access
+*   Identity,Footnote1 data, and device security
+*   Ad-free secure email
+
+[Buy Now](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US) [Buy Now](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#M365Familymonthly) [Or buy at $99.99/year](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US) [Or buy at $9.99/month](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#M365Family) [Try free for 1 month](https://www.microsoft.com/en-us/microsoft-365/try)
+
+Save $13.89 with a yearly plan
+
+### Microsoft 365 Personal
+
+$6.99/month
+
+$69.99/year
+
+    ![Image 13: MS Word ](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-Word-72x72?scl=1)
+
+    ![Image 14: MS Excel](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-Excel-75x75?scl=1)
+
+    ![Image 15: MS Powerpoint](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Powerpoint-75x75?scl=1)
+
+    ![Image 16: MS Defender](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Defender-75x75?scl=1)
+
+    ![Image 17: MS OneDrive](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-OneDrive-75x75?scl=1)
+
+    ![Image 18: MS Outlook](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Microsoft-Outlook-75x75?scl=1)
+
+    ![Image 19: MS Editor](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Gldn-Editor-app-icon-75x75?scl=1)
+
+    ![Image 20: MS Clipchamp](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-Clipchamp-75x75?scl=1)
+
+    ![Image 21: MS OneNote](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkNav-OneNote-75x75?scl=1)
+
+*   For one person
+*   Sign in to five devices at once
+*   Use on PCs, Macs, phones, and tablets
+*   1 TB of cloud storage
+*   Apps with premium features and offline access
+*   Identity,Footnote1 data, and device security
+*   Ad-free secure email
+
+[Buy Now](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US) [Buy Now](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#M365Personalmonthly) [Or buy at $69.99/year](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US) [Or buy at $6.99/month](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#M365Personal)
+
+Subscription automatically renews. Cancel anytime to stop future charges.2  
+Already have a subscription?
+
+[Renew now](https://www.microsoft.com/en-us/microsoft-365/buy/microsoft-365-family)
+
+Explore even more benefits of Microsoft 365 
+--------------------------------------------
+
+![Image 22](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Defender-CC-H-111x111-1?fmt=png-alpha&wid=111&hei=111&fit=crop)
+
+### Simplify your online security
+
+Keep you and your family safer online with continuous monitoring for threats, real-time alerts, tips, and expert guidance from Microsoft Defender.
+
+![Image 23](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-M365-Office-Mobile-App-logo-111x111-1?fmt=png-alpha&wid=111&hei=111&fit=crop)
+
+### Powerful productivity apps
+
+Use Word, Excel, and PowerPoint to collaborate in real time or work offline.
+
+![Image 24](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-OneDrive-111x111?fmt=png-alpha&wid=111&hei=111&fit=crop)
+
+### Trusted storage for priceless memories
+
+Quickly save, share, and edit your photos and files with OneDrive and Microsoft 365.
+
+![Image 25](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Outlook-111x111?fmt=png-alpha&wid=111&hei=111&fit=crop)
+
+### Make the most of your day
+
+With Outlook as command central, you can spend less time organizing your life and more time enjoying it.
+
+![Image 26](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/OneNote-CC-H-111x111?fmt=png-alpha&wid=111&hei=111&fit=crop)
+
+### All your ideas in one place
+
+Capture inspiration in text, audio, photos, and videos to create your next big idea with OneNote.
+
+![Image 27](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Clipchamp-CC-H-111x111?fmt=png-alpha&wid=111&hei=111&fit=crop)
+
+### Tell your story, your way
+
+Easily turn captured memories into beautiful videos with Clipchamp and Microsoft 365.
+
+ 
+
+Compare Microsoft 365 with Office
+---------------------------------
+
+Best value for 2-6 people
+
+### Microsoft 365 Family
+
+Subscription
+
+$99.99/year
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US)
+
+ [Or buy at $9.99/month](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#M365Family1)
+
+[Try free for 1 month](https://www.microsoft.com/en-us/microsoft-365/try)
+
+### Microsoft 365 Personal
+
+Subscription
+
+$69.99/year
+
+[Buy now](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US)
+
+ [Or buy at $6.99/month](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#M365Personal1)
+
+### Office Home & Student 2021
+
+One-time purchase for PC or Mac
+
+$149.99
+
+[Buy now](https://go.microsoft.com/fwlink/p/?LinkID=2113574&CLCID=0x1009&culture=en-us&country=US)
+
+  
+
+### Microsoft 365 Family
+
+[Buy now for $99.99/year](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US)
+
+[Try free for 1 month](https://www.microsoft.com/en-us/microsoft-365/try)
+
+### Microsoft 365 Personal
+
+[Buy now for $69.99/year](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US)
+
+### Office Home & Student 2021
+
+[Buy now for $149.99](https://go.microsoft.com/fwlink/p/?LinkID=2113574&CLCID=0x1009&culture=en-us&country=US)
+
+#### Microsoft 365 Family
+
+#### Microsoft 365 Personal
+
+#### Office Home & Student 2021
+
+| 
+ | 
+
+Microsoft 365 Family
+
+
+
+ | 
+
+Microsoft 365 Personal
+
+
+
+ | 
+
+Office Home & Student 2021
+
+
+
+ |
+| --- | --- | --- | --- |
+| 
+
+Number of users
+
+
+
+ | 
+
+Number of users
+
+1-6 people
+
+
+
+ | 
+
+Number of users
+
+1 person
+
+
+
+ | 
+
+Number of users
+
+1 PC or Mac
+
+
+
+ |
+| 
+
+Number of accounts
+
+
+
+ | 
+
+Number of accounts
+
+1-6
+
+
+
+ | 
+
+Number of accounts
+
+1
+
+
+
+ | 
+
+Number of accounts
+
+1 PC or Mac
+
+
+
+ |
+| 
+
+Cloud storage
+
+
+
+ | 
+
+Cloud storage
+
+Up to 6 TB (1 TB per person)
+
+
+
+ | 
+
+Cloud storage
+
+1 TB
+
+
+
+ | 
+
+Cloud storage
+
+ |
+| 
+
+Multiple devices and platforms
+
+
+
+ | 
+
+Multiple devices and platforms
+
+Included
+
+ | 
+
+Multiple devices and platforms
+
+Included
+
+ | 
+
+Multiple devices and platforms
+
+ |
+| 
+
+Word, Excel, PowerPoint
+
+
+
+ | 
+
+Word, Excel, PowerPoint
+
+Included
+
+ | 
+
+Word, Excel, PowerPoint
+
+Included
+
+ | 
+
+Word, Excel, PowerPoint
+
+Included
+
+ |
+| 
+
+Outlook
+
+
+
+ | 
+
+Outlook
+
+Included
+
+ | 
+
+Outlook
+
+Included
+
+ | 
+
+Outlook
+
+ |
+| 
+
+Ongoing technical support
+
+
+
+ | 
+
+Ongoing technical support
+
+Included
+
+ | 
+
+Ongoing technical support
+
+Included
+
+ | 
+
+Ongoing technical support
+
+ |
+| 
+
+Microsoft Defender
+
+
+
+ | 
+
+Microsoft Defender
+
+Included
+
+ | 
+
+Microsoft Defender
+
+Included
+
+ | 
+
+Microsoft Defender
+
+ |
+| 
+
+Microsoft Editor
+
+
+
+ | 
+
+Microsoft Editor
+
+Included
+
+ | 
+
+Microsoft Editor
+
+Included
+
+ | 
+
+Microsoft Editor
+
+ |
+| 
+
+Clipchamp
+
+
+
+ | 
+
+Clipchamp
+
+Included
+
+ | 
+
+Clipchamp
+
+Included
+
+ | 
+
+Clipchamp
+
+ |
+| 
+
+Microsoft Teams
+
+
+
+ | 
+
+Microsoft Teams
+
+Included
+
+ | 
+
+Microsoft Teams
+
+Included
+
+ | 
+
+Microsoft Teams
+
+ |
+| 
+
+OneNote
+
+
+
+ | 
+
+OneNote
+
+Included
+
+ | 
+
+OneNote
+
+Included
+
+ | 
+
+OneNote
+
+ |
+| 
+
+Access (PC only)
+
+
+
+ | 
+
+Access (PC only)
+
+Included
+
+ | 
+
+Access (PC only)
+
+Included
+
+ | 
+
+Access (PC only)
+
+ |
+| 
+
+Publisher (PC only)
+
+
+
+ | 
+
+Publisher (PC only)
+
+Included
+
+ | 
+
+Publisher (PC only)
+
+Included
+
+ | 
+
+Publisher (PC only)
+
+ |
+| 
+
+Microsoft Forms
+
+
+
+ | 
+
+Microsoft Forms
+
+Included
+
+ | 
+
+Microsoft Forms
+
+Included
+
+ | 
+
+Microsoft Forms
+
+ |
+| 
+
+Skype
+
+
+
+ | 
+
+Skype
+
+Included
+
+ | 
+
+Skype
+
+Included
+
+ | 
+
+Skype
+
+ |
+| 
+
+ | 
+
+&nbsp;
+
+*   [Learn more](https://go.microsoft.com/fwlink/p/?linkid=2013703&CLCID=0x409&culture=en-us&country=US)
+    
+
+
+
+ | 
+
+&nbsp;
+
+*   [Learn more](https://go.microsoft.com/fwlink/p/?linkid=2013818&CLCID=0x409&culture=en-us&country=US)
+    
+
+
+
+ | 
+
+&nbsp;
+
+*   [Learn more](https://go.microsoft.com/fwlink/?linkid=2027162&CLCID=0x409&culture=en-us&country=US)
+    
+
+
+
+ |
+
+ 
+
+Save with an annual subscription
+--------------------------------
+
+Switch to an annual subscription and enjoy the full power of Microsoft 365 for less than paying monthly.
+
+[Pay annually](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US) [Continue with monthly plan](https://go.microsoft.com/fwlink/?linkid=2234432&CLCID=0x409&culture=en-us&country=US)
+
+Save with an annual subscription
+--------------------------------
+
+Switch to an annual subscription and enjoy the full power of Microsoft 365 for less than paying monthly.
+
+[Pay annually](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US) [Continue with monthly plan](https://go.microsoft.com/fwlink/?linkid=2234432&CLCID=0x409&culture=en-us&country=US)
+
+Save with an annual subscription
+--------------------------------
+
+Switch to an annual subscription and enjoy the full power of Microsoft 365 for less than paying monthly.
+
+[Pay annually](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US) [Continue with monthly plan](https://go.microsoft.com/fwlink/?linkid=2234339&CLCID=0x409&culture=en-us&country=US)
+
+Save with an annual subscription
+--------------------------------
+
+Switch to an annual subscription and enjoy the full power of Microsoft 365 for less than paying monthly.
+
+[Pay annually](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US) [Continue with monthly plan](https://go.microsoft.com/fwlink/?linkid=2234339&CLCID=0x409&culture=en-us&country=US)
+
+Save with an annual subscription
+--------------------------------
+
+Switch to an annual subscription and enjoy the full power of Microsoft 365 for less than paying monthly.
+
+[Pay annually](https://go.microsoft.com/fwlink/?linkid=2234616&CLCID=0x409&culture=en-us&country=US) [Continue with monthly plan](https://go.microsoft.com/fwlink/?linkid=2234432&CLCID=0x409&culture=en-us&country=US)
+
+Save with an annual subscription
+--------------------------------
+
+Switch to an annual subscription and enjoy the full power of Microsoft 365 for less than paying monthly.
+
+[Pay annually](https://go.microsoft.com/fwlink/?linkid=2234515&CLCID=0x409&culture=en-us&country=US) [Continue with monthly plan](https://go.microsoft.com/fwlink/?linkid=2234339&CLCID=0x409&culture=en-us&country=US)
+
+Office Home & Business 2021
+---------------------------
+
+*   One-time purchase for 1 PC or Mac
+*   Classic 2021 versions of Word, Excel, PowerPoint, and Outlook
+*   Access to support experts
+
+[Buy now](https://go.microsoft.com/fwlink/p/?LinkID=2014585&clcid=0x409&culture=en-us&country=US) [Learn more](https://www.microsoft.com/en-us/microsoft-365/get-started-with-office-2021)
+
+    ![Image 28: A person uses Microsoft Teams on a Surface device.](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Highlight-Office-Home-Productivity-3000x1682:VP1-539x349)
+
+Frequently asked questions
+--------------------------
+
+Expand All | Collapse All
+
+*   ### What’s the difference between Office 2021 (one-time purchase) and Microsoft 365 (subscription)?
+    
+    Office 2021 is sold as a one-time purchase, which means you pay a single, up-front cost to get Office apps for one computer. One-time purchases are available for both PCs and Macs. However, there are no upgrade options, which means if you plan to upgrade to the next major release, you'll have to buy it at full price.
+    
+    Microsoft 365 is a subscription that includes the most collaborative, up-to-date features in one seamless, integrated experience. Microsoft 365 includes the robust Office desktop apps that you’re familiar with, like Word, PowerPoint, and Excel. You also get extra online storage and cloud-connected features that let you collaborate on files in real time. With a subscription, you'll always have the latest features, fixes, and security updates along with ongoing tech support at no extra cost. You can choose to pay for your subscription on a monthly or yearly basis, and the Microsoft 365 Family plan lets you share your subscription with your family for up to 6 people, and use your apps on multiple PCs, Macs, tablets, and phones.
+    
+*   ### How do I know if my PC or Mac can run Microsoft 365?
+    
+    Microsoft 365 is compatible with PC, Mac, Android, and iOS. See [system requirements](https://office.com/systemrequirements) for compatible versions of your devices, and for other feature requirements.
+    
+*   ### Will Microsoft 365 be identical on a PC and on a Mac?
+    
+    No. Microsoft 365’s applications are tailored for each platform and each operating system. The applications available for Mac users and the specific features included may be different from those available for PC users. With Microsoft 365, you can be flexible. With your account, you are not limited to exclusively Mac or exclusively PC, so you can transition across devices.
+    
+*   ### Do I keep control of my documents with a Microsoft 365 subscription?
+    
+    Yes. Documents that you have created belong fully to you. You can choose to store them online on OneDrive or locally on your PC or Mac.
+    
+*   ### Is internet access required for Microsoft 365?
+    
+    Internet access is required to install and activate all the latest releases of apps and services included in all Microsoft 365 subscription plans. Note that if you are an existing subscriber, you do not need to reinstall or purchase another subscription.
+    
+    For Microsoft 365 plans, Internet access is also needed to manage your subscription account, for example to install Office apps on other PCs or to change billing options. Internet access is also required to access documents stored on OneDrive, unless you install the [OneDrive desktop app](https://products.office.com/microsoft-office-for-home-and-school-faq#cd6f27d6-3bb0-22a8-9228-1385af8f3445).
+    
+    You should also connect to the Internet regularly to keep your version of Microsoft 365 up to date and to benefit from automatic upgrades. If you do not connect to the Internet at least every 31 days, your apps will go into reduced functionality mode, which means that you can view or print your documents but cannot edit the documents or create new ones. To reactivate your apps, simply reconnect to the Internet.
+    
+    You do not need to be connected to the Internet to use the Office apps, such as Word, Excel, and PowerPoint, because the apps are fully installed on your computer.
+    
+*   ### What is a Microsoft account and why do I need it for Microsoft 365?
+    
+    Your Microsoft account is the combination of an email address and password that you use to sign in to services like OneDrive, Xbox LIVE, and Outlook.com. If you use any of these services, you already have a Microsoft account that you can use or you can create a new account. [Learn more about a Microsoft account](http://go.microsoft.com/fwlink/p/?LinkID=403717&CLCID=0x1009&culture=en-us&country=US).
+    
+    As part of signing up for a trial or purchasing Microsoft 365, you will be prompted to sign in with a Microsoft account. You must be signed in with this account to install and manage your Microsoft 365 subscription, or to use some subscription benefits, including cloud storage.
+    
+*   ### How many people can use a Microsoft 365 subscription?
+    
+    You can share Microsoft 365 Family with five other people, for a total of six users. Microsoft 365 Personal can be used by one person.
+    
+*   ### How do I share my subscription benefits with members of my family?
+    
+    If you have an active Microsoft 365 Family subscription, you can share it with up to five other people. Each person you share your subscription with can install Microsoft 365 on all their devices and sign in to five devices at the same time.  
+      
+    To add someone to your subscription, sign in to your [Microsoft account](https://account.microsoft.com/) and follow the on-screen instructions to add a user. Each person you add will receive an email with the steps they need to follow. Once they have accepted and completed the steps, their information, including the installs they are using, will appear on their My account page. You can stop sharing your subscription with someone or remove a device they are using by logging into your [Microsoft account](https://account.microsoft.com/).  
+    
+*   ### If I’m not paying for a subscription, what do I get for free?
+    
+    Visit [learn more about free apps](https://products.office.com/en-us/free-productivity-apps).
+    
+*   ### What is Microsoft Defender?
+    
+    Microsoft Defender is a cross-device security app that helps individuals and families protect their data and devices by continuously scanning the web for threats to your identity and personal data (US only). Defender also helps you stay safer online with malware protection, real-time security notifications, and security tips. [Download the Microsoft Defender app.](ms-windows-store://pdp/?productid=9P6PMZTM93LR)
+    
+*   ### What is the difference between Microsoft Defender and Windows Security?
+    
+    Microsoft Defender is a new cross-device app that helps people and families stay safer online. Microsoft Defender adds new features and a simplified, user interface. Microsoft Defender also brings valuable device protection to iOS, Android, Windows, and Mac, with malware protection, web protection, real-time security notifications, and security tips.1,2 Microsoft Defender is available in the Apple, Google, and Microsoft app stores and requires a Microsoft 365 Personal or Family subscription to use.
+    
+    Windows Security, formerly known as Windows Defender Security Center, is built-in security on Windows PCs to protect your device and data. Windows Security is pre-installed and automatically enabled. Windows Security includes Microsoft Defender Antivirus software that protects your Windows device and data against viruses, ransomware, trojans, and other malware unless non-Microsoft Antivirus software is active.
+    
+*   ### What is Clipchamp?
+    
+    A free in-browser video editing platform designed to make video creation accessible for everyone.
+    
+
+*   App availability varies by device/language. Features vary by platform.
+*   Features and app availability may vary by region.
+*   \[1\] Identity theft monitoring is only available in the United States and US territories.
+*   \[2\] You can cancel online by visiting the [Microsoft Account site](https://nam06.safelinks.protection.outlook.com/?url=https://account.microsoft.com/&data=04%7c01%7cv-jestho%40microsoft.com%7cfaa0c4398d8a48d8ace408d968cde2de%7c72f988bf86f141af91ab2d7cd011db47%7c1%7c0%7c637656055754477604%7cUnknown%7cTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7c1000&sdata=H4Lu6GAt2hBUMQm61A130eDwKIpWDlTFG2iM/0Ip/RM%3D&reserved=0). Sign in with the Microsoft account that you used to buy your subscription, and then turn off recurring billing. Then, your subscription will automatically expire when your remaining subscription time is up. For details, see “[How to cancel your Microsoft subscription](https://nam06.safelinks.protection.outlook.com/?url=https://support.microsoft.com/account-billing/cancel-a-microsoft-subscription-c2c6b0e3-cab3-cb98-d83e-c9ad54620530&data=04%7c01%7cv-jestho%40microsoft.com%7cfaa0c4398d8a48d8ace408d968cde2de%7c72f988bf86f141af91ab2d7cd011db47%7c1%7c0%7c637656055754487599%7cUnknown%7cTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7c1000&sdata=S8TUPwdl/RFY3%2B/ZsHOsAqa6Cn3u%2BfGEmaYvmqy6INY%3D&reserved=0)” at the [Microsoft Support site](https://nam06.safelinks.protection.outlook.com/?url=https://support.microsoft.com/&data=04%7c01%7cv-jestho%40microsoft.com%7cfaa0c4398d8a48d8ace408d968cde2de%7c72f988bf86f141af91ab2d7cd011db47%7c1%7c0%7c637656055754497593%7cUnknown%7cTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7c1000&sdata=gzGgu8/EHkbt/73JY0ikLaYPXKjOKPOaGZLwE0rSnRY%3D&reserved=0).
+
+Follow Microsoft 365
+--------------------
+
+*   [![Image 29: Linkedin](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Linkedin_noBG?scl=1)](https://go.microsoft.com/fwlink/?linkid=2144764)
+*   [![Image 30: X (Formerly Twitter)](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Twitter%202x?scl=1)](https://go.microsoft.com/fwlink/p/?LinkId=2000804)
+*   [![Image 31: Blog](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blog-1?scl=1)](https://www.microsoft.com/en-us/microsoft-365/blog/)
+
+[Back to top](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#page-top)
+
+What's new
+
+*   [Surface Pro](https://www.microsoft.com/en-us/surface/devices/surface-pro-11th-edition)
+*   [Surface Laptop](https://www.microsoft.com/en-us/surface/devices/surface-laptop-7th-edition)
+*   [Surface Laptop Studio 2](https://www.microsoft.com/en-us/d/Surface-Laptop-Studio-2/8rqr54krf1dz)
+*   [Surface Laptop Go 3](https://www.microsoft.com/en-us/d/Surface-Laptop-Go-3/8p0wwgj6c6l2)
+*   [Microsoft Copilot](https://www.microsoft.com/en-us/microsoft-copilot)
+*   [AI in Windows](https://www.microsoft.com/en-us/windows/copilot-ai-features)
+*   [Explore Microsoft products](https://www.microsoft.com/en-us/microsoft-products-and-apps)
+*   [Windows 11 apps](https://www.microsoft.com/windows/windows-11-apps)
+
+Microsoft Store
+
+*   [Account profile](https://account.microsoft.com/)
+*   [Download Center](https://www.microsoft.com/en-us/download)
+*   [Microsoft Store support](https://go.microsoft.com/fwlink/?linkid=2139749)
+*   [Returns](https://www.microsoft.com/en-us/store/b/returns)
+*   [Order tracking](https://www.microsoft.com/en-us/store/b/order-tracking)
+*   [Certified Refurbished](https://www.microsoft.com/en-us/store/b/certified-refurbished-products)
+*   [Microsoft Store Promise](https://www.microsoft.com/en-us/store/b/why-microsoft-store?icid=footer_why-msft-store_7102020)
+*   [Flexible Payments](https://www.microsoft.com/en-us/store/b/payment-financing-options?icid=footer_financing_vcc)
+
+Education
+
+*   [Microsoft in education](https://www.microsoft.com/en-us/education)
+*   [Devices for education](https://www.microsoft.com/en-us/education/devices/overview)
+*   [Microsoft Teams for Education](https://www.microsoft.com/en-us/education/products/teams)
+*   [Microsoft 365 Education](https://www.microsoft.com/en-us/education/products/microsoft-365)
+*   [How to buy for your school](https://www.microsoft.com/education/how-to-buy)
+*   [Educator training and development](https://education.microsoft.com/)
+*   [Deals for students and parents](https://www.microsoft.com/en-us/store/b/education)
+*   [Azure for students](https://azure.microsoft.com/en-us/free/students/)
+
+Business
+
+*   [Microsoft Cloud](https://www.microsoft.com/en-us/microsoft-cloud)
+*   [Microsoft Security](https://www.microsoft.com/en-us/security)
+*   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365)
+*   [Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/business)
+*   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform)
+*   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+*   [Copilot for Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/business/copilot-for-microsoft-365)
+*   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore)
+
+Developer & IT
+
+*   [Azure](https://azure.microsoft.com/en-us/)
+*   [Developer Center](https://developer.microsoft.com/en-us/)
+*   [Documentation](https://learn.microsoft.com/docs/)
+*   [Microsoft Learn](https://learn.microsoft.com/)
+*   [Microsoft Tech Community](https://techcommunity.microsoft.com/)
+*   [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/)
+*   [AppSource](https://appsource.microsoft.com/en-us/)
+*   [Visual Studio](https://visualstudio.microsoft.com/)
+
+Company
+
+*   [Careers](https://careers.microsoft.com/)
+*   [About Microsoft](https://www.microsoft.com/en-us/about)
+*   [Company news](https://news.microsoft.com/)
+*   [Privacy at Microsoft](https://privacy.microsoft.com/en-us)
+*   [Investors](https://www.microsoft.com/investor/default.aspx)
+*   [Diversity and inclusion](https://www.microsoft.com/en-us/diversity/)
+*   [Accessibility](https://www.microsoft.com/en-us/accessibility)
+*   [Sustainability](https://www.microsoft.com/en-us/sustainability/)
+
+[English (United States)](https://www.microsoft.com/en-US/microsoft-365/locale) [Your Privacy Choices](https://aka.ms/yourcaliforniaprivacychoices)[Consumer Health Privacy](https://go.microsoft.com/fwlink/?linkid=2259814)
+
+*   [Sitemap](https://www.microsoft.com/en-us/sitemap1.aspx)
+*   [Contact Microsoft](https://support.microsoft.com/contactus)
+*   [Privacy](https://go.microsoft.com/fwlink/?LinkId=521839)
+*   [Manage cookies](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products#)
+*   [Terms of use](https://go.microsoft.com/fwlink/?LinkID=206977)
+*   [Trademarks](https://go.microsoft.com/fwlink/?linkid=2196228)
+*   [Safety & eco](https://go.microsoft.com/fwlink/?linkid=2196227)
+*   [Recycling](https://www.microsoft.com/en-us/legal/compliance/recycling)
+*   [About our ads](https://choice.microsoft.com/)
+*   © Microsoft 2024
+  ```
+
+Source URL: https://www.microsoft.com/en-us/microsoft-365/excel#x827443dd1d724f7b9444b3ac037d9be4
+  ```
+  Free Online Spreadsheet Software: Excel | Microsoft 365
+===============
+
+Trace Id is missing 
+
+ 
+
+[Skip to main content](javascript:void\(0\))
+
+ [![Image 1](https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31) Microsoft](https://www.microsoft.com/)
+
+Microsoft 365
+
+[Microsoft 365](https://www.microsoft.com/en-us/microsoft-365)
+
+Microsoft 365
+
+*   [Home](https://www.microsoft.com/en-us/microsoft-365)
+*   [Excel](https://www.microsoft.com/en-us/microsoft-365/excel)
+*   Plans and pricing
+    
+    *   [For home](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products)
+    *   [For business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+    
+*   Resources
+    
+    *   [Data analysis](https://www.microsoft.com/en-us/microsoft-365/excel/data-analysis)
+    *   [Python in Excel](https://www.microsoft.com/en-us/microsoft-365/python-in-excel)
+    *   [Spreadsheets](https://www.microsoft.com/en-us/microsoft-365/excel/spreadsheets)
+    
+*   [More Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/products-apps-services)
+*   [Try for free](https://www.microsoft.com/en-us/microsoft-365/try)
+*   More
+    
+
+ Search Search Microsoft 365
+
+*   No results
+
+Cancel
+
+*   All Microsoft
+    
+    *   Global
+        ------
+        
+        *   [Microsoft 365](https://www.microsoft.com/microsoft-365)
+        *   [Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [Copilot](https://copilot.microsoft.com/)
+        *   [Windows](https://www.microsoft.com/en-us/windows/)
+        *   [Surface](https://www.microsoft.com/surface)
+        *   [Xbox](https://www.xbox.com/)
+        *   [Deals](https://www.microsoft.com/en-us/store/b/sale?icid=gm_nav_L0_salepage)
+        *   [Small Business](https://www.microsoft.com/en-us/store/b/business)
+        *   [Support](https://support.microsoft.com/en-us)
+    *   Software Software
+        *   [Windows Apps](https://www.microsoft.com/en-us/store/apps/windows?icid=CNavAppsWindowsApps)
+        *   [AI](https://www.microsoft.com/en-us/ai)
+        *   [Outlook](https://www.microsoft.com/en-us/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook)
+        *   [OneDrive](https://www.microsoft.com/en-us/microsoft-365/onedrive/online-cloud-storage)
+        *   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+        *   [OneNote](https://www.microsoft.com/en-us/microsoft-365/onenote/digital-note-taking-app)
+        *   [Microsoft Edge](https://www.microsoft.com/edge)
+        *   [Skype](https://www.skype.com/en/)
+    *   PCs & Devices PCs & Devices
+        *   [Computers](https://www.microsoft.com/en-us/store/b/pc?icid=CNavDevicesPC)
+        *   [Shop Xbox](https://www.microsoft.com/en-us/store/b/xbox?icid=CNavDevicesXbox)
+        *   [Accessories](https://www.microsoft.com/en-us/store/b/accessories?icid=CNavDevicesAccessories)
+        *   [VR & mixed reality](https://www.microsoft.com/en-us/store/b/virtualreality?icid=CNavVirtualReality)
+        *   [Certified Refurbished](https://www.microsoft.com/en-us/store/b/certified-refurbished-products)
+        *   [Trade-in for cash](https://www.microsoft.com/en-us/store/b/microsoft-trade-in)
+    *   Entertainment Entertainment
+        *   [Xbox Game Pass Ultimate](https://www.xbox.com/en-us/games/store/xbox-game-pass-ultimate/cfq7ttc0khs0?icid=CNavAllXboxGamePassUltimate)
+        *   [PC Game Pass](https://www.xbox.com/en-us/games/store/pc-game-pass/cfq7ttc0kgq8?icid=CNavAllPCGamePass)
+        *   [Xbox games](https://www.microsoft.com/en-us/store/b/xboxgames?icid=CNavGamesXboxGames)
+        *   [PC and Windows games](https://www.microsoft.com/en-us/store/games/windows?icid=CNavGamesWindowsGames)
+        *   [Movies & TV](https://www.microsoft.com/en-us/store/movies-and-tv?icid=TopNavMoviesTv)
+    *   Business Business
+        *   [Microsoft Cloud](https://www.microsoft.com/en-us/microsoft-cloud)
+        *   [Microsoft Security](https://www.microsoft.com/en-us/security)
+        *   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365)
+        *   [Microsoft 365 for business](https://www.microsoft.com/en-us/microsoft-365/business)
+        *   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform)
+        *   [Windows 365](https://www.microsoft.com/en-us/windows-365)
+        *   [Microsoft Industry](https://www.microsoft.com/en-us/industry)
+        *   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore)
+    *   Developer & IT Developer & IT
+        *   [Azure](https://azure.microsoft.com/en-us/)
+        *   [Developer Center](https://developer.microsoft.com/en-us/)
+        *   [Documentation](https://learn.microsoft.com/docs/)
+        *   [Microsoft Learn](https://learn.microsoft.com/)
+        *   [Microsoft Tech Community](https://techcommunity.microsoft.com/)
+        *   [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/)
+        *   [AppSource](https://appsource.microsoft.com/en-us/)
+        *   [Visual Studio](https://visualstudio.microsoft.com/)
+    *   Other Other
+        *   [Microsoft Rewards](https://www.microsoft.com/rewards)
+        *   [Free downloads & security](https://www.microsoft.com/en-us/download)
+        *   [Education](https://www.microsoft.com/en-us/education)
+        *   [Gift cards](https://www.microsoft.com/en-us/store/b/gift-cards)
+        *   [Licensing](https://www.microsoft.com/licensing/)
+        *   [Unlocked stories](https://unlocked.microsoft.com/)
+    *   [View Sitemap](https://www.microsoft.com/en-us/sitemap.aspx)
+    
+*   [Try for free](https://www.microsoft.com/en-us/microsoft-365/try)
+
+Sign in
+
+ 
+
+ 
+
+Learn more about Python in Excel.
+
+[Read the announcement](https://go.microsoft.com/fwlink/?linkid=2245314&clcid=0x409&culture=en-us&country=us)
+
+Microsoft Excel
+===============
+
+Turn data into insights with free and premium spreadsheets.
+
+[Sign up for free](https://go.microsoft.com/fwlink/?linkid=2267311&clcid=0x409&culture=en-us&country=us) [Sign in](https://go.microsoft.com/fwlink/?linkid=2267213&clcid=0x409&culture=en-us&country=us)
+
+[See plans and pricing](https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products)
+
+ ![Image 2: A tablet and phone displaying a file open in Excel](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Hero_MicrosoftExcel_960x675_2x_RE4r1u3?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=1920&hei=1000&qlt=99&fmt=png-alpha&fit=constrain)
+
+Microsoft Excel
+---------------
+
+*   [Buy for business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+    
+*   [Buy for home](https://go.microsoft.com/fwlink/p/?linkid=2135526&clcid=0x409&culture=en-us&country=us)
+    
+*   [Try for business](https://www.microsoft.com/en-us/microsoft-365/microsoft-365-business-standard-one-month-trial)
+    
+*   [Try for home](https://go.microsoft.com/fwlink/p/?linkid=2204492&clcid=0x409&culture=en-us&country=us)
+    
+
+[Microsoft Excel](javascript:void\(0\))
+
+*   [Buy for business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products)
+    
+*   [Buy for home](https://go.microsoft.com/fwlink/p/?linkid=2135526&clcid=0x409&culture=en-us&country=us)
+    
+*   [Try for business](https://www.microsoft.com/en-us/microsoft-365/microsoft-365-business-standard-one-month-trial)
+    
+*   [Try for home](https://go.microsoft.com/fwlink/p/?linkid=2204492&clcid=0x409&culture=en-us&country=us)
+    
+
+![Image 3: Blurred picture for excel using copilot](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/copilot_excel_1920x1080?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=750&qlt=100&fit=constrain)
+
+Copilot in Excel
+----------------
+
+Analyze, comprehend and visualize your data with ease. Get it now when you add Copilot Pro or Copilot for Microsoft 365 to your Microsoft 365 subscription.
+
+[Learn what’s possible with Copilot](https://go.microsoft.com/fwlink/?linkid=2255721&clcid=0x409&culture=en-us&country=us)
+
+Streamline your business decisions
+----------------------------------
+
+Copilot in Excel will help you analyze and explore your data so you can make the best decisions. Copilot will help identify trends, propose what-if scenarios, suggest ideas for improving your business, and will even build everything into an easy-to-read dashboard.
+
+[Learn more](https://go.microsoft.com/fwlink/p/?linkid=2227463&clcid=0x409&culture=en-us&country=us)
+
+Streamline your business decisions
+
+     
+
+![Image 4: Close-up of a person’s hands working on an Excel spreadsheet on a tablet screen](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/image_KM1_EnhancedByIntelligence_750x510_2x_RE4qbLA?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=750&qlt=100&fit=constrain)
+
+Save time with intelligence-enhanced tools for experts and beginners
+--------------------------------------------------------------------
+
+Let Excel learn your patterns, organize your data, and save you time. Easily create [spreadsheets](https://go.microsoft.com/fwlink/?linkid=2246323) from templates or on your own and use modern formulas to perform calculations.
+
+Present your data clearly
+-------------------------
+
+Visualize data in compelling ways with new charts and graphs, and make it easier to understand using formatting, sparklines, and tables to predict trends.[1](https://www.microsoft.com/en-us/microsoft-365/excel#footnote1)
+
+![Image 5: Two people working on a desktop computer using a large monitor](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/1Image_KM2_GettingABetterPicture_750x510_2x_RE4qOl7?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=750&qlt=100&fit=constrain)
+
+![Image 6: Two business owners looking at a laptop inside a retail store.](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/image_KM3_750x510_2x_RE4qbLK?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=750&qlt=100&fit=constrain)
+
+Work better together
+--------------------
+
+Share your workbooks and spreadsheets with others and always work on the latest version from the mobile, desktop, or online app for faster collaboration in real time.[2](https://www.microsoft.com/en-us/microsoft-365/excel#footnote2)
+
+Make analog spreadsheets digital with a camera click
+----------------------------------------------------
+
+Take a picture of a printed data table with the Excel app on your Android or iPhone device and automatically convert the picture into a fully editable table in Excel.
+
+![Image 7: Close-up of a person’s hands as they use Excel on a mobile device screen](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/image_KM4_750x510_2x_RE4r1jY?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=750&qlt=100&fit=constrain)
+
+![Image 8: An Excel spreadsheet showing Power BI Datasets.](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade7_KeyMessage_993x675_2X_RE4ROso?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=750&qlt=100&fmt=png-alpha&fit=constrain)
+
+Connect to your trusted Power BI data sources
+---------------------------------------------
+
+Discover Power BI tables available to you through the data types gallery and connect to live, trusted data coming directly from Power BI.
+
+[Learn more](https://go.microsoft.com/fwlink/?linkid=2190455&clcid=0x409&culture=en-us&country=us)
+
+Excel is better with Microsoft 365
+----------------------------------
+
+[For home](https://www.microsoft.com/en-us/microsoft-365/excel#x7e010ea8d0db462f83038cbcdff9b1aa) [For business](https://www.microsoft.com/en-us/microsoft-365/excel#x307fcb31eec148ba8bc4ba9674782ec7)
+
+Previous Next
+
+### Microsoft Excel
+
+Originally starting from Free now starting from Free
+
+Free Free
+
+[Sign up for free](https://go.microsoft.com/fwlink/?linkid=2267311&clcid=0x409&culture=en-us&country=us)
+
+[Already have a Microsoft account? Sign in](https://go.microsoft.com/fwlink/?linkid=2267213&clcid=0x409&culture=en-us&country=us)
+
+*   One person
+    
+*   Sharing and real-time collaboration
+    
+*   Excel for the web
+    
+*   5 GB of cloud storage
+    
+*   Ad-supported Outlook email and calendar
+    
+*   Works on web, iOS, and AndroidTM
+    
+
+#### Apps and services included
+
+*    ![Image 9](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade005_3-Up%20Icon%20Card_Excel_24x22_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Excel (online only)
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+
+Copilot Pro available as an add-on.[\*](https://www.microsoft.com/en-us/microsoft-365/excel#footnote*)
+
+### Microsoft 365 Personal
+
+Originally starting from $6.99 now starting from $6.99
+
+$6.99 $6.99
+
+/month
+
+(Annual subscription–auto renews)[3](https://www.microsoft.com/en-us/microsoft-365/excel#footnote3)
+
+[Buy now](https://go.microsoft.com/fwlink/p/?LinkID=2111558&clcid=0x409&culture=en-us&country=us)
+
+*   One person
+    
+*   Sharing and real-time collaboration
+    
+*   Excel for the web and Excel desktop app for offline use
+    
+*   1 TB (1000 GB) of cloud storage
+    
+*   Premium desktop, web, and mobile apps
+    
+*   Advanced security
+    
+*   Ad-free experience
+    
+*   Works on Windows, macOS, iOS, and AndroidTM
+    
+
+*   **Copilot Pro available as an add-on.[\*](https://www.microsoft.com/en-us/microsoft-365/excel#footnote*)**
+    
+
+#### Apps and services included
+
+*    ![Image 10](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade005_3-Up%20Icon%20Card_Excel_24x22_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 11](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/MSFT-Microsoft-Word-Icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with intelligent assistance features.
+    
+*    ![Image 12](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_75x75_RE3acud?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 13](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade002_icon_Defender_64x64_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Microsoft Defender
+    
+    Protect your devices from online threats such as ransomware and malware.
+    
+*    ![Image 14](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade002_icon_OneDrive_64x64_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+*    ![Image 15](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/ADO164195_Outlook_Icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 16](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/OneNote_2x_RE2zY1a?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) OneNote
+    
+    Meet all your notetaking needs with one cross-functional notebook.
+    
+*    ![Image 17](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Editor-60x60-2x_RWO47y?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Microsoft Editor
+    
+    Elevate your writing with real-time, intelligent assistance.
+    
+
+Copilot Pro available as an add-on.[\*](https://www.microsoft.com/en-us/microsoft-365/excel#footnote*)
+
+### Microsoft 365 Family
+
+Originally starting from $9.99 now starting from $9.99
+
+$9.99 $9.99
+
+/month
+
+(Annual subscription–auto renews)[3](https://www.microsoft.com/en-us/microsoft-365/excel#footnote3)
+
+[Buy now](https://go.microsoft.com/fwlink/p/?LinkID=2111556&clcid=0x409&culture=en-us&country=us)
+
+*   One to six people
+    
+*   Sharing and real-time collaboration
+    
+*   Excel for the web and Excel desktop app for offline use
+    
+*   Up to 6 TB of cloud storage, 1 TB (1000 GB) per person
+    
+*   Premium desktop, web, and mobile apps
+    
+*   Advanced security
+    
+*   Ad-free experience
+    
+*   Works on Windows, macOS, iOS, and AndroidTM
+    
+
+*   **Copilot Pro available as an add-on.[\*](https://www.microsoft.com/en-us/microsoft-365/excel#footnote*)**
+    
+
+#### Apps and services included
+
+*    ![Image 18](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade008_icon_excel_32x32_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 19](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade005_3-Up%20Icon%20Card_Word_24x22_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with intelligent assistance features.
+    
+*    ![Image 20](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_75x75_RE3acud?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 21](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade002_icon_Defender_64x64_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Microsoft Defender
+    
+    Protect your devices from online threats such as ransomware and malware.
+    
+*    ![Image 22](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade002_icon_OneDrive_64x64_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+*    ![Image 23](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Outlook_75x75_2x_RWJy4Q?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 24](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/IconMicrosoftOneNote-logo?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) OneNote
+    
+    Meet all your notetaking needs with one cross-functional notebook.
+    
+*    ![Image 25](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Editor-60x60-2x_RWO47y?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Microsoft Editor
+    
+    Elevate your writing with real-time, intelligent assistance.
+    
+
+### Microsoft Excel
+
+Originally starting from Free now starting from Free
+
+Free Free
+
+[Sign up for free](https://go.microsoft.com/fwlink/?linkid=2267311&clcid=0x409&culture=en-us&country=us)
+
+[Already have a Microsoft account? Sign in](https://go.microsoft.com/fwlink/?linkid=2267213&clcid=0x409&culture=en-us&country=us)
+
+*   One person
+    
+*   Sharing and real-time collaboration
+    
+*   Excel for the web
+    
+*   5 GB of cloud storage
+    
+*   Ad-supported Outlook email and calendar
+    
+*   Works on web, iOS, and AndroidTM
+    
+
+#### Apps and services included
+
+*    ![Image 26](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade008_icon_excel_32x32_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Excel (online only)
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+
+### Microsoft 365 Apps for business
+
+Originally starting from $8.25 now starting from $8.25
+
+$8.25 $8.25
+
+user/month
+
+(Annual subscription–auto renews)[4](https://www.microsoft.com/en-us/microsoft-365/excel#footnote4)
+
+[Buy now](https://go.microsoft.com/fwlink/p/?LinkID=404308&clcid=0x409&culture=en-us&country=US)
+
+*   Available for up to 300 employes
+    
+*   Desktop versions of Word, Excel, PowerPoint, and Outlook
+    
+*   1 TB of cloud storage per user
+    
+*   Anytime phone and web support
+    
+
+#### Desktop, web, and mobile apps and secure cloud services:
+
+*    ![Image 27](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Word_75x75_RE3acu9?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with intelligent assistance features.
+    
+*    ![Image 28](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Excel_75x75_RE3a9Se?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 29](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_75x75_RE3acud?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 30](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Outlook_RE47eLs?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 31](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_OneDrive_75x75_0_RE39Ztq?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+
+Copilot for Microsoft 365 available as an add-on.[\*\*](https://www.microsoft.com/en-us/microsoft-365/excel#footnote**)
+
+### Microsoft 365 Business Standard
+
+Originally starting from $12.50 now starting from $12.50
+
+$12.50 $12.50
+
+user/month
+
+(Annual subscription–auto renews)[4](https://www.microsoft.com/en-us/microsoft-365/excel#footnote4)
+
+[Buy now](https://go.microsoft.com/fwlink/p/?LinkID=510935&clcid=0x409&culture=en-us&country=us)
+
+*   #### Everything in Microsoft 365 Apps for business, plus:
+    
+*   Web, and mobile versions of Word, Excel, PowerPoint, and Outlook
+    
+*   Custom business email (you@yourbusiness.com)
+    
+*   Chat, call, and video conference with Microsoft Teams
+    
+*   10+ additional apps for your business needs (Bookings, Planner, Microsoft Forms, and others)
+    
+*   Automatic spam and malware filtering
+    
+*   Webinars with attendee registration and reporting
+    
+*   _New:_ Collaborative workspaces to co-create using Microsoft Loop
+    
+*   _New:_ Video editing and design tools with Clipchamp
+    
+
+*   **Copilot for Microsoft 365 available as an add-on.**[\*\*](https://www.microsoft.com/en-us/microsoft-365/excel#footnote**)
+    
+
+#### Desktop, web, and mobile apps and secure cloud services:
+
+*    ![Image 32](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Word_75x75_RE3acu9?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Word
+    
+    Create impressive documents and improve your writing with intelligent assistance features.
+    
+*    ![Image 33](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_Excel_75x75_RE3a9Se?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Excel
+    
+    Simplify complex data and create easy-to-read spreadsheets.
+    
+*    ![Image 34](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_PowerPoint_75x75_RE3acud?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) PowerPoint
+    
+    Easily create polished presentations that stand out.
+    
+*    ![Image 35](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/ADO164195_Outlook_Icon?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Outlook
+    
+    Manage your email, calendar, tasks, and contacts together in one place.
+    
+*    ![Image 36](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blade005_3-Up%20Icon%20Card_Teams_24x22_2x?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Teams
+    
+    Bring everyone together in one place to meet, chat, call, and collaborate.
+    
+*    ![Image 37](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon_OneDrive_75x75_0_RE39Ztq?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) OneDrive
+    
+    Save, access, edit, and share files and photos wherever you are.
+    
+*    ![Image 38](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-SharePoint_RE46TUZ?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) SharePoint
+    
+    Create team sites to share information, files, and resources.
+    
+*    ![Image 39](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/BP-Exchange_RE46TV5?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Exchange
+    
+    Work smarter with business-class email and calendaring.
+    
+*    ![Image 40](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Icon-Clipchamp-25x25?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Clipchamp
+    
+    Create and edit professional-looking videos with easy-to-use tools.
+    
+*    ![Image 41](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/logo_msft_loop_36x36?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=32&hei=32&qlt=100&fmt=png-alpha&fit=constrain) Microsoft Loop
+    
+    Co-create with workspaces that bring all the parts of a project together.
+    
+
+Back to tabs
+
+[Shop for small and medium business](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products?&activetab=tab:primaryr2)
+
+[Shop for enterprise](https://www.microsoft.com/en-us/microsoft-365/compare-microsoft-365-enterprise-plans)
+
+Add Copilot to your Microsoft plan
+----------------------------------
+
+Achieve more than ever using AI integrated with Word, Excel, PowerPoint, Outlook, and other Microsoft 365 apps.
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/microsoft-copilot)
+
+![Image 42: copilot-visual](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/copilot-visual-800x532-1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=800&hei=532&qlt=100&fit=constrain)
+
+Manage tasks with Excel and Microsoft 365
+-----------------------------------------
+
+Assign, manage, and complete tasks across your favorite apps including Excel with Microsoft 365.
+
+[Learn more](https://www.microsoft.com/en-us/microsoft-365/task-management-in-microsoft-365)
+
+Get the Excel mobile app
+------------------------
+
+ ![Image 43: Apple, Android](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/icons_0_RE4DSNF?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=77&hei=40&qlt=100&fit=constrain)
+
+![Image 44: QR code to download the Excel mobile app](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/qrcode_excel_app-1?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=200&hei=200&qlt=100&fit=constrain)
+
+[Click here](https://www.microsoft.com/en-us/microsoft-365/excel#) if you're having trouble with the QR code
+
+Using your mobile device, go to aka.ms/excelmobiledownload to get the Excel mobile app.
+
+![Image 45: apple](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/RWWirh?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=55&hei=67&qlt=100&fmt=png-alpha&fit=constrain)
+
+Start using Excel today
+-----------------------
+
+[Download Excel](https://go.microsoft.com/fwlink/?linkid=2139286&clcid=0x409&culture=en-us&country=us)
+
+![Image 46: Android](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/RWWaGH?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=55&hei=67&qlt=100&fmt=png-alpha&fit=constrain)
+
+Start using Excel today
+-----------------------
+
+[Download Excel](https://go.microsoft.com/fwlink/?linkid=2139811&clcid=0x409&culture=en-us&country=us)
+
+Start using Excel with Microsoft 365
+------------------------------------
+
+[See plans and pricing](https://go.microsoft.com/fwlink/p/?LinkID=2135526&clcid=0x409&culture=en-us&country=us) [Learn more about Excel](https://go.microsoft.com/fwlink/p/?LinkID=2081182&clcid=0x409&culture=en-us&country=us)
+
+See more from Microsoft Excel
+-----------------------------
+
+![Image 47](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/icon_SM_CollaborateShared_40x40_2x_RE2bQTG?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=40&hei=40&qlt=100&fit=constrain)
+
+### Collaborate on shared projects
+
+Get commonly used features and real-time coauthoring capabilities in your browser.
+
+[Use Excel on the web](https://go.microsoft.com/fwlink/p/?LinkID=746665&clcid=0x409&culture=en-us&country=us)
+
+![Image 48](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/icon_SM_JumpstartDocuments_58x40_2x_RE2bxJ8?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=40&hei=40&qlt=100&fit=constrain)
+
+### Jumpstart your spreadsheets
+
+Show your professionalism and save time with Excel templates for over 40 categories.
+
+[Explore free templates](https://go.microsoft.com/fwlink/p/?LinkID=506569&clcid=0x409&culture=en-us&country=us)
+
+![Image 49](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/icon_SM_ConnectExperts_35x40_2x_RE2bEuL?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=40&hei=40&qlt=100&fit=constrain)
+
+### Connect with experts
+
+See what’s new and get tips to help you create, edit, and polish spreadsheets like a pro.
+
+[Read the blog](https://go.microsoft.com/fwlink/p/?LinkID=506570&clcid=0x409&culture=en-us&country=us)
+
+Read more about data analytics
+------------------------------
+
+### Growing your business with data analysis tools
+
+[Read more](https://go.microsoft.com/fwlink/p/?linkid=2219880&clcid=0x409&culture=en-us&country=us)
+
+### See how Molly Moon's uses data to shape their menu
+
+[Read more](https://go.microsoft.com/fwlink/p/?linkid=2220084&clcid=0x409&culture=en-us&country=us)
+
+### See how Molly Moon’s uses data analytics to give back
+
+[Read more](https://go.microsoft.com/fwlink/p/?linkid=2220085&clcid=0x409&culture=en-us&country=us)
+
+What’s new in Excel?
+--------------------
+
+[Read more](https://go.microsoft.com/fwlink/p/?linkid=871117&clcid=0x409&culture=en-us&country=us)
+
+Microsoft Excel with a Microsoft 365 subscription is the latest version of Excel. Previous versions include [Excel 2016](https://www.microsoft.com/en-us/microsoft-365/previous-versions/microsoft-office-2016), [Excel 2013](https://www.microsoft.com/en-us/microsoft-365/previous-versions/microsoft-excel-2013), [Excel 2010](https://www.microsoft.com/en-us/microsoft-365/previous-versions/microsoft-excel-2010), [Excel 2007](https://www.microsoft.com/en-us/microsoft-365/previous-versions/microsoft-excel-2007), and [Excel 2003](https://go.microsoft.com/fwlink/?linkid=2255722).
+
+iTunes, iPhone, and iPad are registered trademarks of Apple Inc., registered in the U.S. and other countries. Android is a trademark of Google Inc.
+
+*   \[1\] Some Excel charts and graphics require a Microsoft 365 subscription.
+*   \[2\] You must have a Microsoft 365 subscription to share and coauthor in Excel.
+*   \[3\] Subscription automatically renews. Cancel any time to stop future charges.
+*   \[4\] Once your paid subscription begins, cancelation policies vary based on your status as a new customer, product, and domain selections on Microsoft [Learn more.](https://go.microsoft.com/fwlink/?linkid=2252966) Cancel your Microsoft 365 subscription any time by going to the Microsoft 365 admin center. When a subscription is canceled, all associated data will be deleted. [Learn more about data retention, deletion, and destruction in Microsoft 365.](https://go.microsoft.com/fwlink/?linkid=2252967)
+*   \[\*\] Copilot Pro benefits are currently available on web, Windows, and macOS and iPadOS. A Microsoft 365 Personal or Family subscription is required to access Copilot in select apps, including Word, Excel, PowerPoint, OneNote, and Outlook. Excel features are currently in preview in English only. Microsoft 365 Personal or Family and Copilot Pro are not available in the same transaction and must be purchased in two separate transactions.
+*   \[\*\*\] Copilot for Microsoft 365 may not be available for all markets and languages. To purchase, [enterprise customers](https://www.microsoft.com/en-us/microsoft-365/enterprise/copilot-for-microsoft-365) must have a license for Microsoft 365 E3 or E5 or Office 365 E3 or E5, and [business customers](https://www.microsoft.com/en-us/microsoft-365/business/copilot-for-microsoft-365) must have a license for Microsoft 365 Business Standard or Business Premium. 
+
+Follow Microsoft 365
+--------------------
+
+*   [![Image 50: linkedin logo](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/LinkedIn-29?scl=1)](https://go.microsoft.com/fwlink/?linkid=2144764)
+*   [![Image 51: Twitter logo](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Twitter-34?scl=1)](https://go.microsoft.com/fwlink/p/?LinkId=2000804)
+*   [![Image 52: Microsoft 365 blog logo](https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Blog-1?scl=1)](https://go.microsoft.com/fwlink/p/?LinkID=2000803)
+
+What's new
+
+*   [Surface Pro](https://www.microsoft.com/en-us/surface/devices/surface-pro-11th-edition)
+*   [Surface Laptop](https://www.microsoft.com/en-us/surface/devices/surface-laptop-7th-edition)
+*   [Surface Laptop Studio 2](https://www.microsoft.com/en-us/d/Surface-Laptop-Studio-2/8rqr54krf1dz)
+*   [Surface Laptop Go 3](https://www.microsoft.com/en-us/d/Surface-Laptop-Go-3/8p0wwgj6c6l2)
+*   [Microsoft Copilot](https://www.microsoft.com/en-us/microsoft-copilot)
+*   [AI in Windows](https://www.microsoft.com/en-us/windows/copilot-ai-features)
+*   [Explore Microsoft products](https://www.microsoft.com/en-us/microsoft-products-and-apps)
+*   [Windows 11 apps](https://www.microsoft.com/windows/windows-11-apps)
+
+Microsoft Store
+
+*   [Account profile](https://account.microsoft.com/)
+*   [Download Center](https://www.microsoft.com/en-us/download)
+*   [Microsoft Store support](https://go.microsoft.com/fwlink/?linkid=2139749)
+*   [Returns](https://www.microsoft.com/en-us/store/b/returns)
+*   [Order tracking](https://www.microsoft.com/en-us/store/b/order-tracking)
+*   [Certified Refurbished](https://www.microsoft.com/en-us/store/b/certified-refurbished-products)
+*   [Microsoft Store Promise](https://www.microsoft.com/en-us/store/b/why-microsoft-store?icid=footer_why-msft-store_7102020)
+*   [Flexible Payments](https://www.microsoft.com/en-us/store/b/payment-financing-options?icid=footer_financing_vcc)
+
+Education
+
+*   [Microsoft in education](https://www.microsoft.com/en-us/education)
+*   [Devices for education](https://www.microsoft.com/en-us/education/devices/overview)
+*   [Microsoft Teams for Education](https://www.microsoft.com/en-us/education/products/teams)
+*   [Microsoft 365 Education](https://www.microsoft.com/en-us/education/products/microsoft-365)
+*   [How to buy for your school](https://www.microsoft.com/education/how-to-buy)
+*   [Educator training and development](https://education.microsoft.com/)
+*   [Deals for students and parents](https://www.microsoft.com/en-us/store/b/education)
+*   [Azure for students](https://azure.microsoft.com/en-us/free/students/)
+
+Business
+
+*   [Microsoft Cloud](https://www.microsoft.com/en-us/microsoft-cloud)
+*   [Microsoft Security](https://www.microsoft.com/en-us/security)
+*   [Dynamics 365](https://www.microsoft.com/en-us/dynamics-365)
+*   [Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/business)
+*   [Microsoft Power Platform](https://www.microsoft.com/en-us/power-platform)
+*   [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams/group-chat-software)
+*   [Copilot for Microsoft 365](https://www.microsoft.com/en-us/microsoft-365/business/copilot-for-microsoft-365)
+*   [Small Business](https://www.microsoft.com/en-us/store/b/business?icid=CNavBusinessStore)
+
+Developer & IT
+
+*   [Azure](https://azure.microsoft.com/en-us/)
+*   [Developer Center](https://developer.microsoft.com/en-us/)
+*   [Documentation](https://learn.microsoft.com/docs/)
+*   [Microsoft Learn](https://learn.microsoft.com/)
+*   [Microsoft Tech Community](https://techcommunity.microsoft.com/)
+*   [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/)
+*   [AppSource](https://appsource.microsoft.com/en-us/)
+*   [Visual Studio](https://visualstudio.microsoft.com/)
+
+Company
+
+*   [Careers](https://careers.microsoft.com/)
+*   [About Microsoft](https://www.microsoft.com/en-us/about)
+*   [Company news](https://news.microsoft.com/)
+*   [Privacy at Microsoft](https://privacy.microsoft.com/en-us)
+*   [Investors](https://www.microsoft.com/investor/default.aspx)
+*   [Diversity and inclusion](https://www.microsoft.com/en-us/diversity/)
+*   [Accessibility](https://www.microsoft.com/en-us/accessibility)
+*   [Sustainability](https://www.microsoft.com/en-us/sustainability/)
+
+[English (United States)](https://www.microsoft.com/en-US/microsoft-365/locale) [Your Privacy Choices](https://aka.ms/yourcaliforniaprivacychoices)[Consumer Health Privacy](https://go.microsoft.com/fwlink/?linkid=2259814)
+
+*   [Sitemap](https://www.microsoft.com/en-us/sitemap1.aspx)
+*   [Contact Microsoft](https://support.microsoft.com/contactus)
+*   [Privacy](https://go.microsoft.com/fwlink/?LinkId=521839)
+*   [Manage cookies](https://www.microsoft.com/en-us/microsoft-365/excel#)
+*   [Terms of use](https://go.microsoft.com/fwlink/?LinkID=206977)
+*   [Trademarks](https://go.microsoft.com/fwlink/?linkid=2196228)
+*   [Safety & eco](https://go.microsoft.com/fwlink/?linkid=2196227)
+*   [Recycling](https://www.microsoft.com/en-us/legal/compliance/recycling)
+*   [About our ads](https://choice.microsoft.com/)
+*   © Microsoft 2024
+  ```
+  
+  Provide your output as a JSON object.
+  
+  Be as comprehensive as possible in your extraction.
+
+Response:
+[object Object]

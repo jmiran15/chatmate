@@ -1,0 +1,60 @@
+LLM: EXTRACT_RELEVANT_LINKS
+Timestamp: 2024-08-11T18:56:02.267Z
+Model: gpt-4o-mini
+
+Request:
+[user]: 
+Base URL: https://www.google.com
+
+Website content delimited by triple backticks:
+```
+https://www.google.com/
+===============
+
+* * *
+
+  
+
+* * *
+
+**About this page**  
+  
+Our systems have detected unusual traffic from your computer network. This page checks to see if it's really you sending the requests, and not a robot. [Why did this happen?](https://www.google.com/#)  
+  
+
+This page appears when Google automatically detects requests coming from your computer network which appear to be in violation of the [Terms of Service](https://www.google.com/policies/terms/). The block will expire shortly after those requests stop. In the meantime, solving the above CAPTCHA will let you continue to use our services.  
+  
+This traffic may have been sent by malicious software, a browser plug-in, or a script that sends automated requests. If you share your network connection, ask your administrator for help — a different computer using the same IP address may be responsible. [Learn more](https://support.google.com/websearch/answer/86640)  
+  
+Sometimes you may be asked to solve the CAPTCHA if you are using advanced terms that robots are known to use, or sending requests very quickly.
+
+IP address: 2600:1900:0:2d05::1900  
+Time: 2024-08-11T18:56:00Z  
+URL: https://www.google.com/
+```
+
+Based on the above content, extract all relevant links that may contain information about the product as specified in the system prompt. Remember to follow the rules and output format specified there.
+
+Example output format:
+{
+  "extracted_links": [
+    {
+      "url": "https://example.com/pricing",
+      "relevance": ["pricing", "features"],
+      "confidence": 0.9
+    },
+    {
+      "url": "https://example.com/features",
+      "relevance": ["features", "pros", "primary_use_case"],
+      "confidence": 0.8
+    }
+  ]
+}
+
+If no relevant links are found, return an object with an empty array: { "extracted_links": [] }
+
+Ensure that you've thoroughly searched for links that might contain ANY of the information types listed in the system prompt. Don't overlook less obvious pages that might contain valuable information.
+
+
+Response:
+{"extracted_links":[]}
