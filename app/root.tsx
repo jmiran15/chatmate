@@ -80,6 +80,11 @@ export default function App() {
       })(window, document, "clarity", "script", "l2cwgd2upk");`,
           }}
         />
+        <script
+          defer
+          data-domain="chatmate.so"
+          src="https://plausible.io/js/script.js"
+        ></script>
       </head>
 
       <body className="h-full bg-transparent">

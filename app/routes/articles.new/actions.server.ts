@@ -16,8 +16,8 @@ export const LLMS = {
 const urlSchema = z.string().url();
 
 const formSchema = z.object({
-  title: z.string().min(10, "Title must be at least 10 characters long"),
-  instructions: z.string().optional(),
+  title: z.string().min(5, "Title must be at least 5 characters long"),
+  // instructions: z.string().optional(),
   rootUrl: urlSchema,
   alternativeProducts: z
     .array(urlSchema)
@@ -40,22 +40,18 @@ export async function action({ request }: ActionFunctionArgs) {
     case "create-article": {
       console.log("\n📄 CREATE ARTICLE PROCESS STARTED");
       const title = formData.get("title");
-      const instructions = formData.get("instructions");
+      // const instructions = formData.get("instructions");
       const rootUrl = formData.get("rootUrl");
       const alternativeProducts = formData.getAll("alternativeProducts");
 
       console.log("📊 RECEIVED FORM DATA:");
       console.log(
-        JSON.stringify(
-          { title, instructions, rootUrl, alternativeProducts },
-          null,
-          2,
-        ),
+        JSON.stringify({ title, rootUrl, alternativeProducts }, null, 2),
       );
 
       const result = formSchema.safeParse({
         title,
-        instructions,
+        // instructions,
         rootUrl,
         alternativeProducts,
       });
@@ -118,7 +114,7 @@ export async function action({ request }: ActionFunctionArgs) {
       const article = await prisma.article.create({
         data: {
           title: data.title,
-          instructions: data.instructions,
+          // instructions: data.instructions,
           type: ArticleType.ALTERNATIVE,
           userId,
           products: {

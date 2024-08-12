@@ -53,7 +53,7 @@ export default function ArticlesNew() {
 
   const isFormValid = useMemo(() => {
     return (
-      title.trim().length >= 10 &&
+      title.trim().length >= 5 &&
       rootUrl.trim() !== "" &&
       alternativeProducts.filter((url) => url.trim() !== "").length > 0
     );
@@ -102,7 +102,7 @@ export default function ArticlesNew() {
             )}
           </label>
 
-          <label className="block">
+          {/* <label className="block">
             <span className="text-lg font-semibold">
               Special Instructions (Optional)
             </span>
@@ -111,7 +111,7 @@ export default function ArticlesNew() {
               placeholder="E.g., Focus on affordable alternatives, or highlight open-source options"
               className="mt-1 w-full"
             />
-          </label>
+          </label> */}
 
           <label className="block">
             <span className="text-lg font-semibold">Root Product URL</span>
@@ -175,3 +175,7 @@ export default function ArticlesNew() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

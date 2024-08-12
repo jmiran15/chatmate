@@ -94,3 +94,7 @@ export default function ArticlesIndex() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

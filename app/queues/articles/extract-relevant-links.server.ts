@@ -127,6 +127,8 @@ export const extractRelevantLinksQueue = Queue<ExtractLinksJob>(
 
     console.log(`🏁 [extractRelevantLinksQueue] Job completed successfully!`);
     // TODO - change Prisma schema so that relevantUrls is an array LinkSchema
-    return { relevantUrls: links.map((link) => link.url).slice(0, 3) };
+    return {
+      relevantUrls: [...links.map((link) => link.url).slice(0, 4)],
+    };
   },
 );

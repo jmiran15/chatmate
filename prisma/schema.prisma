@@ -259,6 +259,8 @@ model Article {
   user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   products        Product[]
 
+  blogFileContents String? // only for generating training data
+
   @@index([userId])
 }
 

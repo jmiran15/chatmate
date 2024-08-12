@@ -81,3 +81,47 @@
     opacity: 0;
   }
 }
+
+@layer components {
+  .prose table {
+    @apply w-full text-sm text-left text-gray-500 dark:text-gray-400 rounded-lg overflow-hidden border bg-card text-card-foreground shadow-sm;
+  }
+
+  .prose thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+  }
+
+  .prose th {
+    @apply px-6 py-3;
+  }
+
+  .prose td {
+    @apply px-6 py-4;
+  }
+
+  .prose tbody tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+  }
+
+  .prose tbody tr:nth-child(even) {
+    @apply bg-gray-50 dark:bg-gray-700;
+  }
+
+  .prose tbody tr:hover {
+    @apply bg-gray-100 dark:bg-gray-600;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-gray-400 {
+    scrollbar-color: #a0aec0 #e2e8f0;
+  }
+
+  .scrollbar-track-gray-200 {
+    scrollbar-color: #e2e8f0 #e2e8f0;
+  }
+}

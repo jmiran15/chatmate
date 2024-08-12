@@ -83,8 +83,8 @@ export const generateArticleQueue = Queue<GenerateArticleJob>(
               product.position
             }\nProduct screenshot: ${
               product.screenshot
-            }\Product information: ${JSON.stringify(
-              JSON.parse(product.extractedProductInfo),
+            }\nProduct information: ${JSON.stringify(
+              JSON.parse(product.extractedProductInfo as string),
               null,
               2,
             )}`,
@@ -96,6 +96,24 @@ export const generateArticleQueue = Queue<GenerateArticleJob>(
         `🤖 [generateArticle] Sending request to OpenAI for article generation...`,
       );
 
+      const completion = await openai.chat.completions.create({
+        // model: "gpt-4o-mini",
+        model: "ft:gpt-4o-mini-2024-07-18:personal:article-gen-v1-1:9vJX0aw5",
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        temperature: 0.4,
+        max_tokens: 16383,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        response_format: {
+          type: "text",
+        },
+      });
+      console.log(`✅ [generateArticle] OpenAI request completed`);
+
       console.log(`📝 [extractRelevantLinks] Logging API call...`);
       await logAPICall({
         llm: LLMS.GENERATE_CONTENT,
@@ -105,22 +123,8 @@ export const generateArticleQueue = Queue<GenerateArticleJob>(
           { role: "system", content: systemPrompt },
           { role: "user", content: userPrompt },
         ],
-        response: "",
+        response: completion.choices[0].message?.content || "",
       });
-
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
-        ],
-        temperature: 0.7,
-        max_tokens: 16383,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      });
-      console.log(`✅ [generateArticle] OpenAI request completed`);
 
       const generatedContent = completion.choices[0].message?.content;
       if (!generatedContent) {
