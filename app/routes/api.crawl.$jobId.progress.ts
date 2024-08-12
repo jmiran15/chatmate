@@ -14,11 +14,10 @@ export interface Progress {
 }
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
-  console.log("params", params);
   const { jobId } = params;
 
   if (!jobId) {
-    return null;
+    return json({ error: "Job ID not provided" }, { status: 400 });
   }
 
   if (
@@ -32,14 +31,17 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
   const job = await registeredQueue.queue.getJob(jobId);
   if (!job) {
-    return null;
+    return json({ error: "Job not found" }, { status: 404 });
   }
+
   try {
     return eventStream(
       request.signal,
       function setup(send: (event: { event?: string; data: string }) => void) {
         const eventsToListenTo = ["failed", "completed", "progress"];
+        const listeners: { [key: string]: (args: any) => void } = {};
 
+        // Initial check for job completion
         job.isCompleted().then((completed) => {
           if (completed) {
             send({
@@ -50,48 +52,53 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
                 jobId: job.id,
               } as Progress),
             });
-            return null;
           }
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        async function listener(args: any) {
-          if (args.jobId !== jobId) return null;
-          try {
-            send({
-              // event,
-              data: JSON.stringify({
-                progress: args.data ?? undefined,
-                returnvalue: args.returnvalue ?? undefined,
-                jobId: args.jobId ?? undefined,
-              } as Progress),
-            });
-
-            if (args.returnvalue) {
-              eventsToListenTo.forEach((event) => {
-                registeredQueue?.queueEvents.off(event, (args) =>
-                  listener(args),
-                );
+        function createListener(event: string) {
+          return function listener(args: any) {
+            if (args.jobId !== jobId) return;
+            try {
+              send({
+                data: JSON.stringify({
+                  progress: args.data ?? undefined,
+                  returnvalue: args.returnvalue ?? undefined,
+                  jobId: args.jobId ?? undefined,
+                  completed: event === "completed",
+                } as Progress),
               });
-              return null;
+
+              if (event === "completed") {
+                eventsToListenTo.forEach((evt) => {
+                  registeredQueue?.queueEvents.removeListener(
+                    evt,
+                    listeners[evt],
+                  );
+                });
+              }
+            } catch (error) {
+              console.error(`Error sending event: ${event}`, error);
             }
-          } catch (error) {
-            console.log(`error sending event: ${error}`);
-          }
+          };
         }
 
         eventsToListenTo.forEach((event) => {
-          registeredQueue?.queueEvents.on(event, (args) => listener(args));
+          listeners[event] = createListener(event);
+          registeredQueue?.queueEvents.on(event, listeners[event]);
         });
 
         return function clear() {
           eventsToListenTo.forEach((event) => {
-            registeredQueue?.queueEvents.off(event, (args) => listener(args));
+            registeredQueue?.queueEvents.removeListener(
+              event,
+              listeners[event],
+            );
           });
         };
       },
     );
   } catch (error) {
-    console.log(`error sending event: ${error}`);
+    console.error(`Error in eventStream:`, error);
+    return json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -14,14 +14,12 @@ export interface ProgressData {
   queueName: string;
   progress: number | object | null;
   completed: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   returnvalue: any | null;
 }
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { chatbotId } = params;
 
-  // maybe make a single preprocessing queue that has a switch inside for getting the content - since the rest is the same?
   if (
     !global.__registeredQueues ||
     !global.__registeredQueues[ingestionQueue.name] ||
@@ -39,49 +37,82 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return eventStream(
       request.signal,
       function setup(send: (event: { event?: string; data: string }) => void) {
-        // IF IT FINISHES REMOVE THE LISTENERS AND SEND FINAL EVENT
-
-        async function listener(
-          event: "failed" | "completed" | "progress",
-          registeredQueue: RegisteredQueue,
-          jobId: string,
-        ) {
-          const job = await registeredQueue?.queue.getJob(jobId);
-          if (!job || !isRelatedToChatbot(job, chatbotId)) return;
-
-          // we should send better info
-
-          try {
-            send({
-              // event,
-              data: JSON.stringify({
-                documentId: job.data.document.id,
-                queueName: registeredQueue.queue.name,
-                progress: job.progress,
-                completed: Boolean(await job.isCompleted()),
-                returnvalue: job.returnvalue,
-                failedReason: job.failedReason,
-              }),
-            });
-          } catch (error) {
-            console.error(
-              `error sending event: ${event} - ${JSON.stringify(
-                job.failedReason,
-              )}`,
-            );
-          }
-        }
-
-        // all the queues we listen to
         const queues = [ingestionQueue, scrapeQueue, parseFileQueue];
         const eventsToListenTo = ["failed", "completed", "progress"];
+        const listeners: { [key: string]: (args: any) => Promise<void> } = {};
+
+        async function createListener(
+          event: string,
+          registeredQueue: RegisteredQueue,
+        ) {
+          return async function listener(args: any) {
+            const job = await registeredQueue?.queue.getJob(args.jobId);
+            if (!job || !isRelatedToChatbot(job, chatbotId)) return;
+
+            const isCompleted =
+              event === "completed" || (await job.isCompleted());
+
+            try {
+              // Check if the request is still open before sending
+              if (!request.signal.aborted) {
+                send({
+                  data: JSON.stringify({
+                    documentId: job.data.document.id,
+                    queueName: registeredQueue.queue.name,
+                    progress: job.progress,
+                    completed: isCompleted,
+                    returnvalue: job.returnvalue,
+                    failedReason: job.failedReason,
+                  }),
+                });
+              }
+
+              if (isCompleted) {
+                // Remove listeners if the job is completed
+                eventsToListenTo.forEach((evt) => {
+                  registeredQueue?.queueEvents.removeListener(
+                    evt as keyof QueueEventsListener,
+                    listeners[`${registeredQueue.queue.name}-${evt}`],
+                  );
+                });
+              }
+            } catch (error) {
+              console.error(`Error sending event: ${event}`, error);
+            }
+          };
+        }
+
         queues.forEach((queue) => {
           const registeredQueue = global.__registeredQueues[queue.name];
-          eventsToListenTo.forEach((event) => {
+          eventsToListenTo.forEach(async (event) => {
+            const listener = await createListener(event, registeredQueue);
+            listeners[`${queue.name}-${event}`] = listener;
             registeredQueue?.queueEvents.on(
               event as keyof QueueEventsListener,
-              (args) => listener(event, registeredQueue, args.jobId),
+              listener,
             );
+          });
+        });
+
+        // Initial check for completed jobs
+        queues.forEach(async (queue) => {
+          const registeredQueue = global.__registeredQueues[queue.name];
+          const jobs = await registeredQueue.queue.getJobs(["completed"]);
+          jobs.forEach(async (job) => {
+            if (isRelatedToChatbot(job, chatbotId)) {
+              // Check if the request is still open before sending
+              if (!request.signal.aborted) {
+                send({
+                  data: JSON.stringify({
+                    documentId: job.data.document.id,
+                    queueName: registeredQueue.queue.name,
+                    progress: 100,
+                    completed: true,
+                    returnvalue: job.returnvalue,
+                  }),
+                });
+              }
+            }
           });
         });
 
@@ -89,9 +120,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
           queues.forEach((queue) => {
             const registeredQueue = global.__registeredQueues[queue.name];
             eventsToListenTo.forEach((event) => {
-              registeredQueue?.queueEvents.off(
+              registeredQueue?.queueEvents.removeListener(
                 event as keyof QueueEventsListener,
-                (args) => listener(event, registeredQueue, args.jobId),
+                listeners[`${queue.name}-${event}`],
               );
             });
           });
@@ -99,7 +130,8 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       },
     );
   } catch (error) {
-    console.log(`error: ${error}`);
+    console.error(`Error in eventStream:`, error);
+    return json({ error: "Internal server error" }, { status: 500 });
   }
 }
 

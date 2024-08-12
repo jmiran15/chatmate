@@ -1,9 +1,7 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
   useLoaderData,
-  useBeforeUnload,
   useSearchParams,
-  useNavigation,
   useParams,
   useSubmit,
   useActionData,
@@ -11,37 +9,30 @@ import {
 import { DialogDemo } from "./modal";
 import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
-import { DocumentType } from "@prisma/client";
+import { Document, DocumentType } from "@prisma/client";
 import { crawlQueue } from "~/queues/crawl.server";
 import { scrapeQueue } from "~/queues/scrape.server";
 import { parseFileQueue } from "~/queues/parsefile.server";
 import invariant from "tiny-invariant";
 import { webFlow } from "./flows.server";
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { useVirtual } from "react-virtual";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useEventSource } from "remix-utils/sse/react";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
-import { DocumentCard } from "./document-card";
 import { queue } from "~/queues/ingestion.server";
 import { validateUrl } from "~/utils";
 import { usePendingDocuments } from "./hooks/use-pending-documents";
 import { deleteDocumentById } from "~/models/document.server";
 import { useToast } from "~/components/ui/use-toast";
-import { ItemMeasurer } from "../chatbots.$chatbotId.chats/item-measurer";
+import { searchDocuments, getDocuments } from "./documents.server";
+import { LRUCache } from "lru-cache";
+import { invalidateIndex } from "./documents.server";
+import { Input } from "~/components/ui/input";
+import { useDebouncedCallback } from "use-debounce";
+import DocumentsList, { getStartLimit, LIMIT } from "./documentsList";
 
-const LIMIT = 20;
-const DATA_OVERSCAN = 4;
-
-const getStartLimit = (searchParams: URLSearchParams) => ({
-  start: Number(searchParams.get("start") || "0"),
-  limit: Number(searchParams.get("limit") || LIMIT.toString()),
+export const searchCache = new LRUCache<string, any>({
+  max: 100,
+  ttl: 1000 * 60 * 5, // 5 minutes
 });
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -60,41 +51,56 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     throw new Error("User does not have access to chatbot");
   }
 
-  const { start, limit } = getStartLimit(new URL(request.url).searchParams);
+  const url = new URL(request.url);
+  const { start, limit } = getStartLimit(url.searchParams);
+  const query = url.searchParams.get("q");
 
-  // we should probably do some caching with localforage here - especially for search
+  const cacheKey = `${chatbotId}:${query || ""}:${start}:${limit}`;
+  const cachedResult = searchCache.get(cacheKey);
 
-  const [totalItems, items] = await prisma.$transaction([
-    prisma.document.count({
-      where: { chatbotId },
-    }),
-    prisma.document.findMany({
-      where: { chatbotId },
-      orderBy: { createdAt: "desc" },
-      skip: start,
-      take: limit,
-    }),
-  ]);
+  if (cachedResult) {
+    console.log(`Cache hit for ${cacheKey}`);
+    return json(cachedResult);
+  }
 
-  return json(
-    {
-      items,
-      totalItems,
-    },
-    { headers: { "Cache-Control": "public, max-age=120" } },
-  );
+  console.log(`Cache miss for ${cacheKey}`);
+
+  let items, totalItems, searchResults;
+
+  try {
+    if (query) {
+      const searchResult = await searchDocuments(
+        chatbotId,
+        query,
+        start,
+        limit,
+      );
+      items = searchResult.items;
+      totalItems = searchResult.totalItems;
+      searchResults = searchResult.searchResults;
+    } else {
+      const result = await getDocuments(chatbotId, start, limit);
+      items = result.items;
+      totalItems = result.totalItems;
+    }
+
+    const result = { items, totalItems, query, searchResults };
+    searchCache.set(cacheKey, result);
+
+    return json(result);
+  } catch (error) {
+    console.error("Error fetching documents:", error);
+    return json(
+      {
+        items: [],
+        totalItems: 0,
+        query,
+        error: "An error occurred while fetching documents.",
+      },
+      { status: 500 },
+    );
+  }
 };
-
-const isServerRender = typeof document === "undefined";
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const useSSRLayoutEffect = isServerRender ? () => {} : useLayoutEffect;
-
-function useIsHydrating(queryString: string) {
-  const [isHydrating] = useState(
-    () => !isServerRender && Boolean(document.querySelector(queryString)),
-  );
-  return isHydrating;
-}
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -157,6 +163,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
+      // Invalidate the index after creating new documents
+      invalidateIndex(chatbotId);
+
       const trees = await webFlow({
         documents,
         preprocessingQueue: scrapeQueue,
@@ -195,6 +204,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           })),
         });
 
+        // Invalidate the index after creating new documents
+        invalidateIndex(chatbotId);
+
         const trees = await webFlow({
           documents,
           preprocessingQueue: parseFileQueue,
@@ -221,6 +233,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         },
       });
 
+      console.log(`Invalidating cache for chatbot ${chatbotId}`);
+      invalidateIndex(chatbotId);
+
       await queue.add(
         `ingestion-${document.id}`,
         { document },
@@ -234,9 +249,16 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "delete": {
       const documentId = String(formData.get("documentId"));
+      const deletedDocument = await deleteDocumentById({ id: documentId });
+
+      // Invalidate the index after deleting a document
+      if (deletedDocument) {
+        invalidateIndex(deletedDocument.chatbotId);
+      }
+
       return json({
         intent: "delete",
-        document: await deleteDocumentById({ id: documentId }),
+        document: deletedDocument,
       });
     }
     default: {
@@ -247,118 +269,41 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
 export default function Data() {
   let data = useLoaderData<typeof loader>();
-  const [totalItems, setTotalItems] = useState(data.totalItems);
   const { toast } = useToast();
+
+  // what if we get progress here - keep documents in state and update them when progres changes
+  // then we can just send items to the infinite scroll list instead of each card having to calculate its content and status
+  // when we get usePendingDocuments (i.e. inflight documents that havent caused revalidation) we just add them to the "items" state
+  // and whenever we get progress we can update the state again
+
+  // and we can probably do the local storage stuff in the useBefore... where we save the scroll position - also note ... we need to change the name of the scroll position localstorage key
+  // can probably do the local storage stuff in client loader/action so that the "items" that we get from server is already the most up to date stuff - we just have to take care of new info!!!
+
+  // PROBABLY CLEANEST WAY TO DO THIS ^^^^^
+
+  const [totalItems, setTotalItems] = useState(data.totalItems);
+  const [searchTerm, setSearchTerm] = useState(data.query || "");
   const { chatbotId } = useParams();
-  const navigation = useNavigation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const actionData = useActionData<typeof action>();
   const submit = useSubmit();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { start, limit } = getStartLimit(searchParams);
-  const [initialStart] = useState(() => start);
-  const hydrating = useIsHydrating("[data-hydrating-signal]");
-  const isMountedRef = useRef(false);
-  const parentRef = useRef<HTMLDivElement>(null);
+
   const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
   const progress: ProgressData | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
 
-  const rowVirtualizer = useVirtual({
-    size: totalItems,
-    parentRef,
-    estimateSize: useCallback(() => 142, []),
-    initialRect: { width: 0, height: 800 },
-  });
-
-  // saving the user's scroll position
-  useBeforeUnload(
-    useCallback(() => {
-      if (!parentRef.current) return;
-      sessionStorage.setItem(
-        "infiniteScrollTop",
-        parentRef.current.scrollTop.toString(),
-      );
-    }, []),
-  );
-
-  // hydrating the scroll position
-  useSSRLayoutEffect(() => {
-    if (!hydrating) return;
-    if (!parentRef.current) return;
-
-    const infiniteScrollTop = sessionStorage.getItem("infiniteScrollTop");
-    if (!infiniteScrollTop) return;
-
-    parentRef.current.scrollTop = Number(infiniteScrollTop);
-
-    return () => {
-      sessionStorage.removeItem("infiniteScrollTop");
-    };
-  }, [initialStart, hydrating]);
-
-  const lowerBoundary = start + DATA_OVERSCAN;
-  const upperBoundary = start + limit - DATA_OVERSCAN;
-  const middleCount = Math.ceil(limit / 2);
-
-  const [firstVirtualItem] = rowVirtualizer.virtualItems;
-  const [lastVirtualItem] = [...rowVirtualizer.virtualItems].reverse();
-
-  let neededStart = start;
-
-  if (!firstVirtualItem || !lastVirtualItem) {
-    // throw new Error("this should never happen");
-    neededStart = 0;
-  } else {
-    if (firstVirtualItem?.index < lowerBoundary) {
-      // user is scrolling up. Move the window up
-      neededStart =
-        Math.floor((firstVirtualItem?.index - middleCount) / DATA_OVERSCAN) *
-        DATA_OVERSCAN;
-    } else if (lastVirtualItem?.index > upperBoundary) {
-      // user is scrolling down. Move the window down
-      neededStart =
-        Math.ceil((lastVirtualItem?.index - middleCount) / DATA_OVERSCAN) *
-        DATA_OVERSCAN;
-    }
-
-    // can't go above our data
-    if (neededStart + limit > data.totalItems) {
-      neededStart = data.totalItems - limit;
-    }
-
-    // can't go below 0
-    if (neededStart < 0) {
-      neededStart = 0;
-    }
-  }
-
-  useEffect(() => {
-    if (!isMountedRef.current) {
-      return;
-    }
-    if (neededStart !== start) {
-      setSearchParams(
-        {
-          start: String(neededStart),
-          limit: LIMIT.toString(),
-        },
-        { replace: true },
-      );
-    }
-  }, [start, neededStart, setSearchParams]);
-
-  useEffect(() => {
-    isMountedRef.current = true;
-  }, []);
-
   // optimistic documents
 
   // on slow networks, the last document gets cut off the virtual list
   const pendingDocuments = usePendingDocuments();
-  const updatedData = { ...data };
-  updatedData.items = [...pendingDocuments, ...data.items];
-  updatedData.totalItems = data.totalItems + pendingDocuments.length;
+  const updatedData = useMemo(() => {
+    const newData = { ...data };
+    newData.items = [...pendingDocuments, ...data.items];
+    newData.totalItems = data.totalItems + pendingDocuments.length;
+    return newData;
+  }, [data, pendingDocuments]);
+
   data = updatedData;
 
   useEffect(() => {
@@ -374,74 +319,89 @@ export default function Data() {
     }
   }, [actionData]);
 
+  const handleProgressUpdate = useCallback(
+    (progressData: ProgressData) => {
+      setTotalItems((prevTotalItems: number) => {
+        const updatedData = { ...data };
+        const documentIndex = updatedData.items.findIndex(
+          (item: Document) => item.id === progressData.documentId,
+        );
+        if (documentIndex !== -1) {
+          updatedData.items[documentIndex] = {
+            ...updatedData.items[documentIndex],
+            isPending: !progressData.completed,
+            content:
+              progressData.returnvalue?.content ??
+              updatedData.items[documentIndex].content,
+          };
+        }
+        return prevTotalItems;
+      });
+    },
+    [data],
+  );
+
+  useEffect(() => {
+    if (progress) {
+      handleProgressUpdate(progress);
+    }
+  }, [progress, handleProgressUpdate]);
+
+  const debouncedSearch = useDebouncedCallback((term: string) => {
+    setSearchParams(
+      {
+        start: "0", // Reset to first page on search
+        limit: LIMIT.toString(),
+        ...(term ? { q: term } : {}),
+      },
+      { replace: true },
+    );
+  }, 300);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    debouncedSearch(term);
+  };
+
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
       <div className="flex flex-row items-start justify-between">
         <div className="flex flex-col gap-2">
           <h1 className="text-lg font-semibold md:text-2xl">Data</h1>
           <h1 className="text-sm text-muted-foreground">
-            This is the data that your chatbot will be able to reference in it's
+            This is the data that your chatbot will be able to reference in its
             responses
           </h1>
         </div>
         <DialogDemo submit={submit} />
       </div>
 
-      <div
-        key={`list-${updatedData.totalItems}`}
-        ref={parentRef}
-        data-hydrating-signal
-        className="List"
-        style={{
-          height: `800px`,
-          width: `100%`,
-          overflow: "auto",
-        }}
-      >
-        <div
-          style={{
-            height: `${rowVirtualizer.totalSize}px`,
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {rowVirtualizer.virtualItems.map((virtualRow) => {
-            const index = isMountedRef.current
-              ? Math.abs(start - virtualRow.index)
-              : virtualRow.index;
-            const item = data.items[index];
-
-            return (
-              <ItemMeasurer
-                tagName="div"
-                key={virtualRow.index}
-                measure={virtualRow.measureRef}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  transform: `translateY(${virtualRow.start}px)`,
-                }}
-              >
-                {item ? (
-                  <DocumentCard
-                    item={item}
-                    progress={
-                      progress?.documentId === item.id ? progress : undefined
-                    }
-                  />
-                ) : navigation.state === "loading" ? (
-                  <span>Loading...</span>
-                ) : (
-                  <span>Nothing to see here...</span>
-                )}
-              </ItemMeasurer>
-            );
-          })}
-          {rowVirtualizer.virtualItems.length === 0 && <p>No documents yet</p>}
-        </div>
+      <div className="w-full max-w-md self-start">
+        <Input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          placeholder="Search documents..."
+          className="w-full"
+        />
+        {searchTerm && (
+          <p className="text-sm text-muted-foreground mt-2">
+            {data.error ? (
+              <span className="text-red-500">{data.error}</span>
+            ) : (
+              `Showing ${totalItems} results for: "${searchTerm}"`
+            )}
+          </p>
+        )}
       </div>
+      <DocumentsList
+        items={data.items}
+        totalItems={data.totalItems}
+        searchTerm={searchTerm}
+        searchResults={data.searchResults}
+        progress={progress}
+      />
     </div>
   );
 }

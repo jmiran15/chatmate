@@ -11,9 +11,10 @@ import {
   createSubscriptionCheckout,
 } from "~/models/subscription.server";
 import { requireUserId } from "~/session.server";
-import { CURRENCIES } from "~/routes/_index/pricing-page";
+import { CURRENCIES } from "~/routes/_header._index/pricing-page";
 import { prisma } from "~/db.server";
 import ManageSubscription from "./manage-subscription";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Chatmate - Billing" }];
@@ -69,3 +70,7 @@ export default function BillingSettings() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

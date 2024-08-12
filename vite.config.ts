@@ -3,6 +3,13 @@ import { installGlobals } from "@remix-run/node";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig } from "vite";
 import { envOnlyMacros } from "vite-env-only";
+import mdx from "@mdx-js/rollup";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import rehypePrettyCode from "rehype-pretty-code";
+import wasm from "vite-plugin-wasm";
+import topLevelAwait from "vite-plugin-top-level-await";
+import remarkGfm from "remark-gfm";
 
 installGlobals();
 
@@ -27,6 +34,12 @@ export default defineConfig({
     },
   },
   plugins: [
+    mdx({
+      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
+      rehypePlugins: [rehypePrettyCode],
+    }),
+    wasm(),
+    topLevelAwait(),
     envOnlyMacros(),
     remix({
       ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{ts,tsx}"],

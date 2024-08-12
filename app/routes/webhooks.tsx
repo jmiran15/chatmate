@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { z } from "zod";
 import { stripe } from "~/models/subscription.server";
-import { PLANS } from "~/routes/_index/pricing-page";
+import { PLANS } from "~/routes/_header._index/pricing-page";
 import { prisma } from "~/db.server";
 //   sendSubscriptionSuccessEmail,
 //   sendSubscriptionErrorEmail,

@@ -1,6 +1,6 @@
 import { useParams } from "@remix-run/react";
-import { useLinks } from "../_index/use-links";
-import SidebarLink from "../_index/sidebar-link";
+import { useLinks } from "../_header._index/use-links";
+import SidebarLink from "../_header._index/sidebar-link";
 import {
   Accordion,
   AccordionContent,

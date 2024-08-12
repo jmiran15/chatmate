@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
+import typography from "@tailwindcss/typography";
 
 const config = {
   darkMode: ["class"],
@@ -160,6 +161,24 @@ const config = {
         "tremor-title": ["1.125rem", { lineHeight: "1.75rem" }],
         "tremor-metric": ["1.875rem", { lineHeight: "2.25rem" }],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            h1: {
+              fontSize: theme("fontSize.4xl"),
+              fontWeight: theme("fontWeight.bold"),
+              marginTop: theme("spacing.4"),
+              marginBottom: theme("spacing.4"),
+            },
+            h2: {
+              fontSize: theme("fontSize.3xl"),
+              fontWeight: theme("fontWeight.semibold"),
+              marginTop: theme("spacing.3"),
+              marginBottom: theme("spacing.3"),
+            },
+          },
+        },
+      }),
     },
   },
   safelist: [
@@ -191,7 +210,11 @@ const config = {
         /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
     },
   ],
-  plugins: [require("@headlessui/tailwindcss"), require("tailwindcss-animate")],
+  plugins: [
+    require("@headlessui/tailwindcss"),
+    require("tailwindcss-animate"),
+    typography,
+  ],
 } satisfies Config;
 
 export default config;

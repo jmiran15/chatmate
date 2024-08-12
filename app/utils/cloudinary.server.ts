@@ -52,4 +52,35 @@ async function uploadImage(data: AsyncIterable<Uint8Array>) {
   return uploadPromise;
 }
 
-export { uploadFile, uploadImage };
+async function uploadScreenshot(data: Blob) {
+  return new Promise((resolve, reject) => {
+    const uploadStream = cloudinary.v2.uploader.upload_stream(
+      {
+        folder: "screenshots",
+      },
+      (error, result) => {
+        if (error) {
+          console.error("❌ ERROR UPLOADING TO CLOUDINARY:", error);
+          reject(error);
+          return;
+        }
+        console.log("✅ CLOUDINARY UPLOAD SUCCESSFUL");
+        resolve(result);
+      },
+    );
+
+    data
+      .arrayBuffer()
+      .then((arrayBuffer) => {
+        const buffer = Buffer.from(arrayBuffer);
+        uploadStream.write(buffer);
+        uploadStream.end();
+      })
+      .catch((error) => {
+        console.error("❌ ERROR CONVERTING BLOB TO BUFFER:", error);
+        reject(error);
+      });
+  });
+}
+
+export { uploadFile, uploadImage, uploadScreenshot };

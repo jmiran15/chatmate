@@ -4,6 +4,7 @@ import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { Queue } from "~/utils/queue.server";
 import axios from "axios";
+import { invalidateIndex } from "~/routes/chatbots.$chatbotId.data._index/documents.server";
 
 export interface ParseFileQueueData {
   document: Document;
@@ -28,6 +29,9 @@ export const parseFileQueue = Queue<ParseFileQueueData>(
         content: parsedContents,
       },
     });
+
+    // Invalidate the index after updating the document
+    invalidateIndex(updatedDocument.chatbotId);
 
     return updatedDocument;
   },

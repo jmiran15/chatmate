@@ -1,5 +1,6 @@
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 import { Outlet } from "@remix-run/react";
-import { Header } from "~/routes/_index/header";
+import { Header } from "~/routes/_header._index/header";
 
 // should probably add loader for auth check here?
 
@@ -13,3 +14,7 @@ export default function ChatbotsLayout() {
     </div>
   );
 }
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+};

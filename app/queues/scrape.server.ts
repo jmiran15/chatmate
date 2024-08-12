@@ -3,6 +3,7 @@ import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { Queue } from "~/utils/queue.server";
 import { scrapSingleUrl } from "~/utils/single-url";
+import { invalidateIndex } from "~/routes/chatbots.$chatbotId.data._index/documents.server";
 
 export interface ScrapeQueueData {
   document: Document;
@@ -19,6 +20,9 @@ export const scrapeQueue = Queue<ScrapeQueueData>(
         content: scrapedContents?.content, // metadata ...
       },
     });
+
+    // Invalidate the index after updating the document
+    invalidateIndex(updatedDocument.chatbotId);
 
     return updatedDocument;
   },
