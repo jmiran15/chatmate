@@ -5,7 +5,7 @@ import {
   useEffect,
   SyntheticEvent,
 } from "react";
-import { useDropzone } from "react-dropzone";
+import { useDropzone } from "react-dropzone-esm";
 import ReactCrop, {
   centerCrop,
   makeAspectCrop,
