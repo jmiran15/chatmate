@@ -2,6 +2,7 @@
   "name": "chatmate",
   "private": true,
   "sideEffects": false,
+  "type": "module",
   "scripts": {
     "dev": "tsx ./server.ts",
     "build": "remix vite:build",
@@ -125,7 +126,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
+    "react-dropzone-esm": "^15.0.1",
     "react-hook-form": "^7.50.1",
     "react-icons": "^5.2.1",
     "react-image-crop": "^11.0.5",
