@@ -4,7 +4,7 @@ interface SEOProps {
   title: string;
   description: string;
   url: string;
-  image: string;
+  image?: string;
   type?: "website" | "article";
   publishedTime?: string;
   author?: string;
@@ -31,16 +31,21 @@ export const generateMetaTags = ({
     { property: "og:type", content: type },
     { property: "og:site_name", content: "Chatmate" },
     { property: "og:locale", content: "en_US" },
-    { property: "og:image", content: image },
-    { property: "og:image:width", content: "1400" },
-    { property: "og:image:height", content: "1050" },
-    { property: "og:image:type", content: "image/png" },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:site", content: "@chatmate_so" },
-    { name: "twitter:title", content: title },
-    { name: "twitter:description", content: description },
-    { name: "twitter:image", content: image },
   ];
+
+  if (image) {
+    metaTags.push(
+      { property: "og:image", content: image },
+      { property: "og:image:width", content: "1400" },
+      { property: "og:image:height", content: "1050" },
+      { property: "og:image:type", content: "image/png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@chatmate_so" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: image },
+    );
+  }
 
   if (publishedTime) {
     metaTags.push({

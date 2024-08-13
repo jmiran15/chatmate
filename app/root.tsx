@@ -46,10 +46,7 @@ export const meta: MetaFunction = ({ location }) => {
         "Solve 80% of your customers' support inflow instantly on web using our AI customer support platform",
       url: canonicalUrl,
       type: "website",
-      applicationName: "Chatmate",
     }),
-    { charset: "utf-8" },
-    { viewport: "width=device-width,initial-scale=1" },
   ];
 };
 
@@ -68,6 +65,8 @@ export default function App() {
       <head>
         <Meta />
         <Links />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="canonical" href={generateCanonicalUrl(location.pathname)} />
         <script
           type="text/javascript"
