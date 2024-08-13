@@ -1,5 +1,4 @@
 import { useRef, useEffect } from "react";
-
 import { TableOfContents } from "./TOC";
 import * as runtime from "react/jsx-runtime";
 import { useMemo } from "react";
@@ -8,9 +7,7 @@ import type { RunOptions } from "@mdx-js/mdx";
 import rehypeStringify from "rehype-stringify";
 import remarkGfm from "remark-gfm";
 
-// Add these imports
 import {
-  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -21,6 +18,16 @@ import { TableWrapper } from "./TableWrapper";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import { Link } from "@remix-run/react";
+import type { MDXComponents } from "mdx/types";
+
+const components: MDXComponents = {
+  table: TableWrapper,
+  thead: TableHeader,
+  tbody: TableBody,
+  tr: TableRow,
+  th: TableHead,
+  td: TableCell,
+};
 
 export function useMdxComponent(code: string) {
   return useMemo(() => {
@@ -29,19 +36,6 @@ export function useMdxComponent(code: string) {
       development: false,
       remarkPlugins: [remarkGfm],
       rehypePlugins: [rehypeStringify],
-      // Add custom components here
-      components: {
-        table: (props) => (
-          <TableWrapper>
-            <Table {...props}>{props.children}</Table>
-          </TableWrapper>
-        ),
-        thead: TableHeader,
-        tbody: TableBody,
-        tr: TableRow,
-        th: TableHead,
-        td: TableCell,
-      },
     });
     return MDXComponent;
   }, [code]);
@@ -77,11 +71,11 @@ export function PostWrapper({
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 w-full justify-start mb-16">
-      <aside className="w-full lg:w-64 lg:sticky lg:top-8 lg:self-start">
+    <div className="flex flex-col sm:flex-row gap-8 w-full justify-start mb-16 max-w-full">
+      <aside className="w-full sm:w-64 sm:sticky sm:top-8 sm:self-start sm:max-h-[calc(100vh-2rem)] overflow-y-auto">
         <TableOfContents />
       </aside>
-      <article className="flex-1 w-full max-w-3xl">
+      <article className="flex-1 w-full max-w-3xl overflow-x-hidden">
         <div ref={contentRef} className="prose dark:prose-invert w-full">
           <h1 className="text-4xl font-bold">{title}</h1>
           <time className="text-sm text-muted-foreground" dateTime={published}>
@@ -99,8 +93,8 @@ export function PostWrapper({
             />
           </div>
           <p className="text-lg text-muted-foreground mb-8">{description}</p>
-          <MDXContent />
-          <Card className="bg-orange-100 dark:bg-orange-900 rounded-lg  shadow-md">
+          <MDXContent components={components} />
+          <Card className="bg-orange-100 dark:bg-orange-900 rounded-lg shadow-md">
             <CardContent className="p-6">
               <h2 className="text-2xl font-bold mb-4">Ready to get started?</h2>
               <p className="mb-4">

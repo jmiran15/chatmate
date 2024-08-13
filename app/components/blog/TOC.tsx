@@ -9,6 +9,7 @@ import {
 } from "~/components/ui/tooltip";
 import { motion, AnimatePresence } from "framer-motion";
 import { List, X } from "lucide-react";
+import { useMobileScreen } from "~/utils/mobile";
 
 interface TOCItem {
   id: string;
@@ -90,8 +91,9 @@ export function TableOfContents() {
   const activeItemRef = useRef<HTMLLIElement>(null);
   const [isAtBottom, setIsAtBottom] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+
+  const isMobile = useMobileScreen();
 
   const handleScroll = useCallback(() => {
     if (tocRef.current) {
@@ -137,15 +139,6 @@ export function TableOfContents() {
     }
   }, [activeId]);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
   const toggleTOC = () => {
     setIsOpen(!isOpen);
   };
@@ -156,6 +149,8 @@ export function TableOfContents() {
       setIsOpen(false);
     }
   };
+
+  console.log("isMobile", isMobile);
 
   if (isMobile) {
     return (
