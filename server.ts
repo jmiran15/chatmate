@@ -20,15 +20,19 @@ async function run() {
           }),
         );
 
+  async function getBuild() {
+    const build = viteDevServer
+      ? await viteDevServer.ssrLoadModule("virtual:remix/server-build")
+      : await import("./build/server/index.js");
+    return build;
+  }
+
   const remixHandler = createRequestHandler({
     getLoadContext: (_: any, res: any) => ({
-      serverBuild: viteDevServer
-        ? viteDevServer.ssrLoadModule("virtual:remix/server-build")
-        : import("./build/server/index.js"),
+      serverBuild: getBuild(),
     }),
-    build: viteDevServer
-      ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
-      : () => import("./build/server/index.js"),
+    build: getBuild,
+    mode: process.env.NODE_ENV,
   });
 
   const app = express();
