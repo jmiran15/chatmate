@@ -11,13 +11,7 @@ function getDomainUrl(request: Request) {
 }
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
-  const serverBuild = (await context.serverBuild) as ServerBuild | undefined;
-
-  console.log("context", context, serverBuild);
-
-  if (!serverBuild || !serverBuild.routes) {
-    throw new Error("Server build or routes not available");
-  }
+  const serverBuild = (await context.serverBuild) as ServerBuild;
 
   return generateSitemap(request, serverBuild.routes, {
     siteUrl: getDomainUrl(request),
