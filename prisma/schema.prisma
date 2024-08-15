@@ -175,6 +175,8 @@ model Document {
   filepath   String?
   chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   embeddings Embedding[]
+
+  @@index([chatbotId, type, isPending, createdAt, updatedAt])
 }
 
 model Embedding {
