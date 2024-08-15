@@ -50,16 +50,29 @@ const getIndex = serverOnly$(async (chatbotId: string): Promise<lunr.Index> => {
   return index;
 });
 
+type Filters = {
+  type?: DocumentType[];
+  progress?: string[];
+};
+
+function getIsPendingFilter(
+  progress: string[] | undefined,
+): boolean | undefined {
+  if (!progress || progress.length === 0) return undefined;
+  if (progress.includes("pending") && progress.includes("completed"))
+    return undefined;
+  if (progress.includes("pending")) return true;
+  if (progress.includes("completed")) return false;
+  return undefined;
+}
+
 export const searchDocuments = serverOnly$(
   async (
     chatbotId: string,
     query: string,
     start: number,
     limit: number,
-    filters: {
-      type?: DocumentType[];
-      isPending?: boolean;
-    },
+    filters: Filters,
     sort: {
       field: "createdAt" | "updatedAt";
       direction: "asc" | "desc";
@@ -79,15 +92,15 @@ export const searchDocuments = serverOnly$(
     console.log("Search results:", searchResults);
     const paginatedResults = searchResults.slice(start, start + limit);
 
+    const isPendingFilter = getIsPendingFilter(filters.progress);
+
     const whereClause = {
       id: { in: paginatedResults.map((result) => result.ref) },
       chatbotId,
       ...(filters.type && filters.type.length > 0
         ? { type: { in: filters.type } }
         : {}),
-      ...(filters.isPending !== undefined
-        ? { isPending: filters.isPending }
-        : {}),
+      ...(isPendingFilter !== undefined ? { isPending: isPendingFilter } : {}),
     };
 
     const [totalItems, items] = await prisma.$transaction([
@@ -100,17 +113,10 @@ export const searchDocuments = serverOnly$(
       }),
     ]);
 
-    const filterCounts = await prisma.document.groupBy({
-      by: ["type", "isPending"],
-      where: { chatbotId },
-      _count: true,
-    });
-
     return {
       items,
       totalItems,
       searchResults: searchResults.slice(start, start + limit),
-      filterCounts,
     };
   },
 );
@@ -120,23 +126,20 @@ export const getDocuments = serverOnly$(
     chatbotId: string,
     start: number,
     limit: number,
-    filters: {
-      type?: DocumentType[];
-      isPending?: boolean;
-    },
+    filters: Filters,
     sort: {
       field: "createdAt" | "updatedAt";
       direction: "asc" | "desc";
     },
   ) => {
+    const isPendingFilter = getIsPendingFilter(filters.progress);
+
     const whereClause = {
       chatbotId,
       ...(filters.type && filters.type.length > 0
         ? { type: { in: filters.type } }
         : {}),
-      ...(filters.isPending !== undefined
-        ? { isPending: filters.isPending }
-        : {}),
+      ...(isPendingFilter !== undefined ? { isPending: isPendingFilter } : {}),
     };
 
     const [totalItems, items] = await prisma.$transaction([
@@ -149,13 +152,7 @@ export const getDocuments = serverOnly$(
       }),
     ]);
 
-    const filterCounts = await prisma.document.groupBy({
-      by: ["type", "isPending"],
-      where: { chatbotId },
-      _count: true,
-    });
-
-    return { items, totalItems, filterCounts };
+    return { items, totalItems };
   },
 );
 

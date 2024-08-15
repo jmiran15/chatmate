@@ -63,14 +63,14 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { start, limit } = getStartLimit(url.searchParams);
   const query = url.searchParams.get("q");
   const types = url.searchParams.getAll("type");
-  const progress = url.searchParams.get("progress");
+  const progress = url.searchParams.getAll("progress");
   const sort = url.searchParams.get("sort") || "createdAt:desc";
 
   const [sortField, sortDirection] = sort.split(":");
 
   const cacheKey = `${chatbotId}:${query}:${start}:${limit}:${types.join(
     ",",
-  )}:${progress}:${sort}`;
+  )}:${progress.join(",")}:${sort}`;
   const cachedResult = searchCache.get(cacheKey);
 
   if (cachedResult) {
@@ -82,7 +82,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
   const filters = {
     type: types.length > 0 ? (types as DocumentType[]) : undefined,
-    isPending: progress ? progress === "pending" : undefined,
+    progress: progress.length > 0 ? progress : undefined,
   };
 
   const sortOption = {
@@ -326,6 +326,7 @@ export default function Data() {
 
   // on slow networks, the last document gets cut off the virtual list
   const pendingDocuments = usePendingDocuments();
+  const [_, setTotalItems] = useState(data.totalItems);
   const updatedData = useMemo(() => {
     const newData = { ...data };
     newData.items = [...pendingDocuments, ...data.items];
@@ -333,7 +334,11 @@ export default function Data() {
     return newData;
   }, [data, pendingDocuments]);
 
-  // data = updatedData;
+  data = updatedData;
+
+  useEffect(() => {
+    setTotalItems(data.totalItems);
+  }, [data.totalItems]);
 
   useEffect(() => {
     if (actionData?.intent === "delete" && actionData?.document) {
@@ -346,19 +351,23 @@ export default function Data() {
 
   const handleProgressUpdate = useCallback(
     (progressData: ProgressData) => {
-      const updatedData = { ...data };
-      const documentIndex = updatedData.items.findIndex(
-        (item: Document) => item.id === progressData.documentId,
-      );
-      if (documentIndex !== -1) {
-        updatedData.items[documentIndex] = {
-          ...updatedData.items[documentIndex],
-          isPending: !progressData.completed,
-          content:
-            progressData.returnvalue?.content ??
-            updatedData.items[documentIndex].content,
-        };
-      }
+      setTotalItems((prevTotalItems: number) => {
+        const updatedData = { ...data };
+        const documentIndex = updatedData.items.findIndex(
+          (item: Document) => item.id === progressData.documentId,
+        );
+        if (documentIndex !== -1) {
+          updatedData.items[documentIndex] = {
+            ...updatedData.items[documentIndex],
+            isPending: !progressData.completed,
+            content:
+              progressData.returnvalue?.content ??
+              updatedData.items[documentIndex].content,
+          };
+        }
+
+        return prevTotalItems;
+      });
     },
     [data],
   );
@@ -394,7 +403,7 @@ export default function Data() {
   };
 
   const handleProgressChange = (selected: string[]) => {
-    setSelectedProgress(selected[0] || "");
+    setSelectedProgress(selected);
   };
 
   const handleSortChange = (selected: string) => {
@@ -405,17 +414,14 @@ export default function Data() {
     {
       value: "WEBSITE",
       label: "Website",
-      count: data.filterCounts.find((c) => c.type === "WEBSITE")?._count || 0,
     },
     {
       value: "FILE",
       label: "File",
-      count: data.filterCounts.find((c) => c.type === "FILE")?._count || 0,
     },
     {
       value: "RAW",
       label: "Raw",
-      count: data.filterCounts.find((c) => c.type === "RAW")?._count || 0,
     },
   ];
 
@@ -423,12 +429,10 @@ export default function Data() {
     {
       value: "pending",
       label: "Pending",
-      count: data.filterCounts.find((c) => c.isPending === true)?._count || 0,
     },
     {
       value: "completed",
       label: "Completed",
-      count: data.filterCounts.find((c) => c.isPending === false)?._count || 0,
     },
   ];
 
@@ -453,8 +457,8 @@ export default function Data() {
       const typeLabels = selectedTypes.map(getTypeLabel);
       parts.push(`of type ${typeLabels.join(" or ")}`);
     }
-    if (selectedProgress) {
-      parts.push(`with ${selectedProgress} status`);
+    if (selectedProgress.length > 0) {
+      parts.push(`with ${selectedProgress.join(" or ")} status`);
     }
 
     let feedback = `Showing ${updatedData.totalItems} document${
@@ -481,15 +485,15 @@ export default function Data() {
   const handleClearAll = () => {
     setSearchTerm("");
     setSelectedTypes([]);
-    setSelectedProgress("");
+    setSelectedProgress([]);
     setSelectedSort("createdAt:desc");
   };
 
   useEffect(() => {
-    const newParams: Record<string, string> = {};
+    const newParams: Record<string, string | string[]> = {};
     if (searchTerm) newParams.q = searchTerm;
-    if (selectedTypes.length > 0) newParams.type = selectedTypes.join(",");
-    if (selectedProgress) newParams.progress = selectedProgress;
+    if (selectedTypes.length > 0) newParams.type = selectedTypes;
+    if (selectedProgress.length > 0) newParams.progress = selectedProgress;
     if (selectedSort) newParams.sort = selectedSort;
 
     setSearchParams(newParams, { replace: true });
@@ -538,7 +542,7 @@ export default function Data() {
         </div>
         {(searchTerm ||
           selectedTypes.length > 0 ||
-          selectedProgress ||
+          selectedProgress.length > 0 ||
           selectedSort !== "createdAt:desc") && (
           <p className="text-sm text-muted-foreground">
             {data.error ? (
@@ -571,7 +575,7 @@ function useFilterSort(searchParams: URLSearchParams) {
     const storedFilters = getFromLocalStorage("documentFilters", {
       searchTerm: "",
       selectedTypes: [],
-      selectedProgress: "",
+      selectedProgress: [],
       selectedSort: "createdAt:desc",
     });
 
@@ -582,7 +586,9 @@ function useFilterSort(searchParams: URLSearchParams) {
           ? searchParams.getAll("type")
           : storedFilters.selectedTypes,
       selectedProgress:
-        searchParams.get("progress") || storedFilters.selectedProgress,
+        searchParams.getAll("progress").length > 0
+          ? searchParams.getAll("progress")
+          : storedFilters.selectedProgress,
       selectedSort: searchParams.get("sort") || storedFilters.selectedSort,
     };
   });
@@ -595,7 +601,7 @@ function useFilterSort(searchParams: URLSearchParams) {
     setFilters((prev) => ({ ...prev, searchTerm: term }));
   const setSelectedTypes = (types: string[]) =>
     setFilters((prev) => ({ ...prev, selectedTypes: types }));
-  const setSelectedProgress = (progress: string) =>
+  const setSelectedProgress = (progress: string[]) =>
     setFilters((prev) => ({ ...prev, selectedProgress: progress }));
   const setSelectedSort = (sort: string) =>
     setFilters((prev) => ({ ...prev, selectedSort: sort }));

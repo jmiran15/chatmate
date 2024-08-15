@@ -45,9 +45,9 @@ const FilterSortBar: React.FC<FilterSortBarProps> = ({
         selected={typeOptions.filter((option) =>
           selectedTypes.includes(option.value),
         )}
-        onChange={(selected) =>
-          onTypeChange(selected.map((option) => option.value))
-        }
+        onChange={(selected) => {
+          onTypeChange(selected.map((option) => option.value));
+        }}
         placeholder="Filter by type"
         className="min-w-[150px] max-w-[300px] flex-grow mt-2"
       />
