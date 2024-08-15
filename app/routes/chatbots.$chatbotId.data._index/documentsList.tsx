@@ -1,8 +1,11 @@
+import { Document } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 import {
   useBeforeUnload,
   useNavigation,
   useSearchParams,
 } from "@remix-run/react";
+import lunr from "lunr";
 import {
   useCallback,
   useEffect,
@@ -11,18 +14,15 @@ import {
   useState,
 } from "react";
 import { useVirtual } from "react-virtual";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { ItemMeasurer } from "../chatbots.$chatbotId.chats/item-measurer";
 import { DocumentCard } from "./document-card";
-import { SerializeFrom } from "@remix-run/node";
-import lunr from "lunr";
-import { Document } from "@prisma/client";
-import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 
 // increase both - like @chats-list.tsx
 // should probably share all of these common infinite scroll functions with @chats-list.tsx
 // or maybe just a modularize infinite scroll component?
-export const LIMIT = 20;
-const DATA_OVERSCAN = 4;
+export const LIMIT = 64;
+const DATA_OVERSCAN = 8;
 
 export const getStartLimit = (searchParams: URLSearchParams) => ({
   start: Number(searchParams.get("start") || "0"),
