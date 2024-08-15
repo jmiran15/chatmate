@@ -1,6 +1,6 @@
 // app/routes/chatbots.$chatbotId.data._index/hooks/use-local-storage.tsx
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function useLocalStorage<T>(
   key: string,

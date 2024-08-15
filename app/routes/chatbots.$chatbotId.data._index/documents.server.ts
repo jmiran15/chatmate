@@ -1,8 +1,9 @@
-import { prisma } from "~/db.server";
-import lunr from "lunr";
+import { DocumentType } from "@prisma/client";
 import { LRUCache } from "lru-cache";
-import { searchCache } from "./route";
+import lunr from "lunr";
 import { serverOnly$ } from "vite-env-only/macros";
+import { prisma } from "~/db.server";
+import { searchCache } from "./route";
 
 const indexCache = new LRUCache<string, lunr.Index>({
   max: 100,
@@ -49,11 +50,36 @@ const getIndex = serverOnly$(async (chatbotId: string): Promise<lunr.Index> => {
   return index;
 });
 
+type Filters = {
+  type?: DocumentType[];
+  progress?: string[];
+};
+
+function getIsPendingFilter(
+  progress: string[] | undefined,
+): boolean | undefined {
+  if (!progress || progress.length === 0) return undefined;
+  if (progress.includes("pending") && progress.includes("completed"))
+    return undefined;
+  if (progress.includes("pending")) return true;
+  if (progress.includes("completed")) return false;
+  return undefined;
+}
+
 export const searchDocuments = serverOnly$(
-  async (chatbotId: string, query: string, start: number, limit: number) => {
+  async (
+    chatbotId: string,
+    query: string,
+    start: number,
+    limit: number,
+    filters: Filters,
+    sort: {
+      field: "createdAt" | "updatedAt";
+      direction: "asc" | "desc";
+    },
+  ) => {
     const index = await getIndex(chatbotId);
 
-    // Prepare the query for wildcard search on both name and content
     const preparedQuery = query
       .split(" ")
       .map((term) => `name:${term}* content:${term}*`)
@@ -64,29 +90,63 @@ export const searchDocuments = serverOnly$(
     const searchResults = index.search(preparedQuery);
 
     console.log("Search results:", searchResults);
-
-    const totalItems = searchResults.length;
     const paginatedResults = searchResults.slice(start, start + limit);
 
-    const items = await prisma.document.findMany({
-      where: {
-        id: { in: paginatedResults.map((result) => result.ref) },
-        chatbotId,
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    const isPendingFilter = getIsPendingFilter(filters.progress);
 
-    return { items, totalItems, searchResults: paginatedResults };
+    const whereClause = {
+      id: { in: paginatedResults.map((result) => result.ref) },
+      chatbotId,
+      ...(filters.type && filters.type.length > 0
+        ? { type: { in: filters.type } }
+        : {}),
+      ...(isPendingFilter !== undefined ? { isPending: isPendingFilter } : {}),
+    };
+
+    const [totalItems, items] = await prisma.$transaction([
+      prisma.document.count({ where: whereClause }),
+      prisma.document.findMany({
+        where: whereClause,
+        orderBy: { [sort.field]: sort.direction },
+        skip: start,
+        take: limit,
+      }),
+    ]);
+
+    return {
+      items,
+      totalItems,
+      searchResults: searchResults.slice(start, start + limit),
+    };
   },
 );
 
 export const getDocuments = serverOnly$(
-  async (chatbotId: string, start: number, limit: number) => {
+  async (
+    chatbotId: string,
+    start: number,
+    limit: number,
+    filters: Filters,
+    sort: {
+      field: "createdAt" | "updatedAt";
+      direction: "asc" | "desc";
+    },
+  ) => {
+    const isPendingFilter = getIsPendingFilter(filters.progress);
+
+    const whereClause = {
+      chatbotId,
+      ...(filters.type && filters.type.length > 0
+        ? { type: { in: filters.type } }
+        : {}),
+      ...(isPendingFilter !== undefined ? { isPending: isPendingFilter } : {}),
+    };
+
     const [totalItems, items] = await prisma.$transaction([
-      prisma.document.count({ where: { chatbotId } }),
+      prisma.document.count({ where: whereClause }),
       prisma.document.findMany({
-        where: { chatbotId },
-        orderBy: { createdAt: "desc" },
+        where: whereClause,
+        orderBy: { [sort.field]: sort.direction },
         skip: start,
         take: limit,
       }),

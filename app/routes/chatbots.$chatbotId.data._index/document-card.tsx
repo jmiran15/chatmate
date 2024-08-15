@@ -1,18 +1,25 @@
 import { Document } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
+import { useMemo } from "react";
 import { Badge } from "../../components/ui/badge";
 import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { useDocumentProgress } from "./hooks/use-document-progress";
-import { useMemo } from "react";
-import { SerializeFrom } from "@remix-run/node";
+
+function escapeRegExp(string: string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
 
 function highlightText(text: string, matches: string[]): JSX.Element {
-  const parts = text.split(new RegExp(`(${matches.join("|")})`, "gi"));
+  const escapedMatches = matches.map(escapeRegExp);
+  const parts = text.split(new RegExp(`(${escapedMatches.join("|")})`, "gi"));
   return (
     <>
       {parts.map((part, i) =>
-        matches.some((match) => part.toLowerCase() === match.toLowerCase()) ? (
+        escapedMatches.some(
+          (match) => part.toLowerCase() === match.toLowerCase(),
+        ) ? (
           <mark key={i}>{part}</mark>
         ) : (
           part

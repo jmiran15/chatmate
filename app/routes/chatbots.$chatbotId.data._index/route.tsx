@@ -1,34 +1,42 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
-import {
-  useLoaderData,
-  useSearchParams,
-  useParams,
-  useSubmit,
-  useActionData,
-} from "@remix-run/react";
-import { DialogDemo } from "./modal";
-import { requireUserId } from "~/session.server";
-import { prisma } from "~/db.server";
 import { Document, DocumentType } from "@prisma/client";
-import { crawlQueue } from "~/queues/crawl.server";
-import { scrapeQueue } from "~/queues/scrape.server";
-import { parseFileQueue } from "~/queues/parsefile.server";
-import invariant from "tiny-invariant";
-import { webFlow } from "./flows.server";
+import { ActionFunctionArgs, json, LoaderFunctionArgs } from "@remix-run/node";
+import {
+  useActionData,
+  useLoaderData,
+  useParams,
+  useSearchParams,
+  useSubmit,
+} from "@remix-run/react";
+import { LRUCache } from "lru-cache";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useEventSource } from "remix-utils/sse/react";
-import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
-import { queue } from "~/queues/ingestion.server";
-import { validateUrl } from "~/utils";
-import { usePendingDocuments } from "./hooks/use-pending-documents";
-import { deleteDocumentById } from "~/models/document.server";
-import { useToast } from "~/components/ui/use-toast";
-import { searchDocuments, getDocuments } from "./documents.server";
-import { LRUCache } from "lru-cache";
-import { invalidateIndex } from "./documents.server";
-import { Input } from "~/components/ui/input";
+import invariant from "tiny-invariant";
 import { useDebouncedCallback } from "use-debounce";
+import { Input } from "~/components/ui/input";
+import { useToast } from "~/components/ui/use-toast";
+import { prisma } from "~/db.server";
+import { deleteDocumentById } from "~/models/document.server";
+import { crawlQueue } from "~/queues/crawl.server";
+import { queue } from "~/queues/ingestion.server";
+import { parseFileQueue } from "~/queues/parsefile.server";
+import { scrapeQueue } from "~/queues/scrape.server";
+import { requireUserId } from "~/session.server";
+import { validateUrl } from "~/utils";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
+import {
+  getDocuments,
+  invalidateIndex,
+  searchDocuments,
+} from "./documents.server";
 import DocumentsList, { getStartLimit, LIMIT } from "./documentsList";
+import FilterSortBar from "./FilterSortBar";
+import { webFlow } from "./flows.server";
+import {
+  getFromLocalStorage,
+  setToLocalStorage,
+} from "./hooks/use-local-storage";
+import { usePendingDocuments } from "./hooks/use-pending-documents";
+import { DialogDemo } from "./modal";
 
 export const searchCache = new LRUCache<string, any>({
   max: 100,
@@ -54,8 +62,15 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const { start, limit } = getStartLimit(url.searchParams);
   const query = url.searchParams.get("q");
+  const types = url.searchParams.getAll("type");
+  const progress = url.searchParams.getAll("progress");
+  const sort = url.searchParams.get("sort") || "createdAt:desc";
 
-  const cacheKey = `${chatbotId}:${query || ""}:${start}:${limit}`;
+  const [sortField, sortDirection] = sort.split(":");
+
+  const cacheKey = `${chatbotId}:${query}:${start}:${limit}:${types.join(
+    ",",
+  )}:${progress.join(",")}:${sort}`;
   const cachedResult = searchCache.get(cacheKey);
 
   if (cachedResult) {
@@ -65,26 +80,32 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
   console.log(`Cache miss for ${cacheKey}`);
 
-  let items, totalItems, searchResults;
+  const filters = {
+    type: types.length > 0 ? (types as DocumentType[]) : undefined,
+    progress: progress.length > 0 ? progress : undefined,
+  };
+
+  const sortOption = {
+    field: sortField as "createdAt" | "updatedAt",
+    direction: sortDirection as "asc" | "desc",
+  };
 
   try {
+    let result;
+
     if (query) {
-      const searchResult = await searchDocuments(
+      result = await searchDocuments(
         chatbotId,
         query,
         start,
         limit,
+        filters,
+        sortOption,
       );
-      items = searchResult.items;
-      totalItems = searchResult.totalItems;
-      searchResults = searchResult.searchResults;
     } else {
-      const result = await getDocuments(chatbotId, start, limit);
-      items = result.items;
-      totalItems = result.totalItems;
+      result = await getDocuments(chatbotId, start, limit, filters, sortOption);
     }
 
-    const result = { items, totalItems, query, searchResults };
     searchCache.set(cacheKey, result);
 
     return json(result);
@@ -270,6 +291,21 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 export default function Data() {
   let data = useLoaderData<typeof loader>();
   const { toast } = useToast();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { chatbotId } = useParams();
+  const actionData = useActionData<typeof action>();
+  const submit = useSubmit();
+
+  const {
+    searchTerm,
+    selectedTypes,
+    selectedProgress,
+    selectedSort,
+    setSearchTerm,
+    setSelectedTypes,
+    setSelectedProgress,
+    setSelectedSort,
+  } = useFilterSort(searchParams);
 
   // what if we get progress here - keep documents in state and update them when progres changes
   // then we can just send items to the infinite scroll list instead of each card having to calculate its content and status
@@ -281,13 +317,6 @@ export default function Data() {
 
   // PROBABLY CLEANEST WAY TO DO THIS ^^^^^
 
-  const [totalItems, setTotalItems] = useState(data.totalItems);
-  const [searchTerm, setSearchTerm] = useState(data.query || "");
-  const { chatbotId } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const actionData = useActionData<typeof action>();
-  const submit = useSubmit();
-
   const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
   const progress: ProgressData | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
@@ -297,6 +326,7 @@ export default function Data() {
 
   // on slow networks, the last document gets cut off the virtual list
   const pendingDocuments = usePendingDocuments();
+  const [_, setTotalItems] = useState(data.totalItems);
   const updatedData = useMemo(() => {
     const newData = { ...data };
     newData.items = [...pendingDocuments, ...data.items];
@@ -335,6 +365,7 @@ export default function Data() {
               updatedData.items[documentIndex].content,
           };
         }
+
         return prevTotalItems;
       });
     },
@@ -350,9 +381,12 @@ export default function Data() {
   const debouncedSearch = useDebouncedCallback((term: string) => {
     setSearchParams(
       {
-        start: "0", // Reset to first page on search
+        start: "0",
         limit: LIMIT.toString(),
-        ...(term ? { q: term } : {}),
+        q: term,
+        type: selectedTypes,
+        progress: selectedProgress,
+        sort: selectedSort,
       },
       { replace: true },
     );
@@ -363,6 +397,113 @@ export default function Data() {
     setSearchTerm(term);
     debouncedSearch(term);
   };
+
+  const handleTypeChange = (selected: string[]) => {
+    setSelectedTypes(selected);
+  };
+
+  const handleProgressChange = (selected: string[]) => {
+    setSelectedProgress(selected);
+  };
+
+  const handleSortChange = (selected: string) => {
+    setSelectedSort(selected);
+  };
+
+  const typeOptions = [
+    {
+      value: "WEBSITE",
+      label: "Website",
+    },
+    {
+      value: "FILE",
+      label: "File",
+    },
+    {
+      value: "RAW",
+      label: "Raw",
+    },
+  ];
+
+  const progressOptions = [
+    {
+      value: "pending",
+      label: "Pending",
+    },
+    {
+      value: "completed",
+      label: "Completed",
+    },
+  ];
+
+  const sortOptions = [
+    { value: "createdAt:desc", label: "Created: new to old" },
+    { value: "createdAt:asc", label: "Created: old to new" },
+    { value: "updatedAt:desc", label: "Updated: new to old" },
+    { value: "updatedAt:asc", label: "Updated: old to new" },
+  ];
+
+  const getTypeLabel = (value: string): string => {
+    const option = typeOptions.find((opt) => opt.value === value);
+    return option ? option.label : value;
+  };
+
+  const getFilterFeedback = () => {
+    const parts = [];
+    if (searchTerm) {
+      parts.push(`matching "${searchTerm}"`);
+    }
+    if (selectedTypes.length > 0) {
+      const typeLabels = selectedTypes.map(getTypeLabel);
+      parts.push(`of type ${typeLabels.join(" or ")}`);
+    }
+    if (selectedProgress.length > 0) {
+      parts.push(`with ${selectedProgress.join(" or ")} status`);
+    }
+
+    let feedback = `Showing ${updatedData.totalItems} document${
+      updatedData.totalItems !== 1 ? "s" : ""
+    }`;
+    if (parts.length > 0) {
+      feedback += ` ${parts.join(", ")}`;
+    }
+
+    const sortOption = sortOptions.find(
+      (option) => option.value === selectedSort,
+    );
+    if (sortOption) {
+      feedback += `, sorted by ${sortOption.label.toLowerCase()}`;
+    }
+
+    // Apply lowercase transformation and capitalize the first letter
+    feedback = feedback.toLowerCase();
+    feedback = feedback.charAt(0).toUpperCase() + feedback.slice(1);
+
+    return feedback;
+  };
+
+  const handleClearAll = () => {
+    setSearchTerm("");
+    setSelectedTypes([]);
+    setSelectedProgress([]);
+    setSelectedSort("createdAt:desc");
+  };
+
+  useEffect(() => {
+    const newParams: Record<string, string | string[]> = {};
+    if (searchTerm) newParams.q = searchTerm;
+    if (selectedTypes.length > 0) newParams.type = selectedTypes;
+    if (selectedProgress.length > 0) newParams.progress = selectedProgress;
+    if (selectedSort) newParams.sort = selectedSort;
+
+    setSearchParams(newParams, { replace: true });
+  }, [
+    searchTerm,
+    selectedTypes,
+    selectedProgress,
+    selectedSort,
+    setSearchParams,
+  ]);
 
   return (
     <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
@@ -377,27 +518,45 @@ export default function Data() {
         <DialogDemo submit={submit} />
       </div>
 
-      <div className="w-full max-w-md self-start">
-        <Input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Search documents..."
-          className="w-full"
-        />
-        {searchTerm && (
-          <p className="text-sm text-muted-foreground mt-2">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 flex-wrap">
+          <Input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search documents..."
+            className="w-full sm:max-w-md sm:min-w-sm"
+          />
+          <FilterSortBar
+            typeOptions={typeOptions}
+            progressOptions={progressOptions}
+            sortOptions={sortOptions}
+            selectedTypes={selectedTypes}
+            selectedProgress={selectedProgress}
+            selectedSort={selectedSort}
+            onTypeChange={handleTypeChange}
+            onProgressChange={handleProgressChange}
+            onSortChange={handleSortChange}
+            onClearAll={handleClearAll}
+          />
+        </div>
+        {(searchTerm ||
+          selectedTypes.length > 0 ||
+          selectedProgress.length > 0 ||
+          selectedSort !== "createdAt:desc") && (
+          <p className="text-sm text-muted-foreground">
             {data.error ? (
               <span className="text-red-500">{data.error}</span>
             ) : (
-              `Showing ${totalItems} results for: "${searchTerm}"`
+              getFilterFeedback()
             )}
           </p>
         )}
       </div>
+
       <DocumentsList
-        items={data.items}
-        totalItems={data.totalItems}
+        items={updatedData.items}
+        totalItems={updatedData.totalItems}
         searchTerm={searchTerm}
         searchResults={data.searchResults}
         progress={progress}
@@ -410,3 +569,48 @@ export const handle = {
   PATH: (chatbotId: string) => `/chatbots/${chatbotId}/data`,
   breadcrumb: "data",
 };
+
+function useFilterSort(searchParams: URLSearchParams) {
+  const [filters, setFilters] = useState(() => {
+    const storedFilters = getFromLocalStorage("documentFilters", {
+      searchTerm: "",
+      selectedTypes: [],
+      selectedProgress: [],
+      selectedSort: "createdAt:desc",
+    });
+
+    return {
+      searchTerm: searchParams.get("q") || storedFilters.searchTerm,
+      selectedTypes:
+        searchParams.getAll("type").length > 0
+          ? searchParams.getAll("type")
+          : storedFilters.selectedTypes,
+      selectedProgress:
+        searchParams.getAll("progress").length > 0
+          ? searchParams.getAll("progress")
+          : storedFilters.selectedProgress,
+      selectedSort: searchParams.get("sort") || storedFilters.selectedSort,
+    };
+  });
+
+  useEffect(() => {
+    setToLocalStorage("documentFilters", filters);
+  }, [filters]);
+
+  const setSearchTerm = (term: string) =>
+    setFilters((prev) => ({ ...prev, searchTerm: term }));
+  const setSelectedTypes = (types: string[]) =>
+    setFilters((prev) => ({ ...prev, selectedTypes: types }));
+  const setSelectedProgress = (progress: string[]) =>
+    setFilters((prev) => ({ ...prev, selectedProgress: progress }));
+  const setSelectedSort = (sort: string) =>
+    setFilters((prev) => ({ ...prev, selectedSort: sort }));
+
+  return {
+    ...filters,
+    setSearchTerm,
+    setSelectedTypes,
+    setSelectedProgress,
+    setSelectedSort,
+  };
+}
