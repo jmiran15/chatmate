@@ -150,8 +150,6 @@ export function TableOfContents() {
     }
   };
 
-  console.log("isMobile", isMobile);
-
   if (isMobile) {
     return (
       <>
