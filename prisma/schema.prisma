@@ -10,12 +10,11 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  customerId String?  @unique
-
+  id           String        @id @default(uuid())
+  email        String        @unique
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  customerId   String?       @unique
   chats        Chat[]
   chatbots     Chatbot[]
   password     Password?
@@ -51,6 +50,7 @@ model Chatbot {
   embeddedOn           String?
   installed            Boolean         @default(false)
   lastPingedAt         DateTime?
+  widgetPosition       WidgetPosition? @default(BOTTOM_RIGHT)
   chats                Chat[]
   user                 User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   commonClusters       Cluster[]       @relation("CommonClusters")
@@ -58,7 +58,6 @@ model Chatbot {
   documents            Document[]
   embeddings           Embedding[]
   labels               Label[]
-  widgetPosition       WidgetPosition? @default(BOTTOM_RIGHT)
 
   @@index([userId, createdAt(sort: Desc)])
 }
