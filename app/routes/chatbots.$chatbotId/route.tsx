@@ -1,12 +1,13 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
-import Sidebar from "./sidebar";
-import { requireUserId } from "~/session.server";
+import { useEffect, useState } from "react";
 import type { Socket } from "socket.io-client";
 import { io } from "socket.io-client";
-import { SocketProvider } from "~/providers/socket";
-import { useEffect, useState } from "react";
 import { prisma } from "~/db.server";
+import { SidebarWidthProvider } from "~/providers/sidebarWidth";
+import { SocketProvider } from "~/providers/socket";
+import { requireUserId } from "~/session.server";
+import Sidebar from "./sidebar";
 
 // jmiran15@jhu.edu
 const adminUserId = "47ea213c-227a-42f4-9a91-b1ac4580330f";
@@ -75,12 +76,14 @@ export default function ChatbotLayout() {
 
   return (
     <SocketProvider socket={socket}>
-      <div className="flex flex-col w-full h-full lg:grid lg:grid-cols-6 overflow-hidden">
-        <Sidebar />
-        <div className="grow lg:col-span-5 h-full overflow-hidden">
-          <Outlet />
+      <SidebarWidthProvider>
+        <div className="flex flex-col w-full h-full lg:grid lg:grid-cols-6 overflow-hidden">
+          <Sidebar />
+          <div className="grow lg:col-span-5 h-full overflow-hidden">
+            <Outlet />
+          </div>
         </div>
-      </div>
+      </SidebarWidthProvider>
     </SocketProvider>
   );
 }

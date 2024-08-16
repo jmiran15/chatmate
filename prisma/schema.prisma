@@ -10,12 +10,12 @@ datasource db {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  email        String        @unique
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  customerId   String?       @unique
-  articles     Article[]
+  id         String   @id @default(uuid())
+  email      String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  customerId String?  @unique
+
   chats        Chat[]
   chatbots     Chatbot[]
   password     Password?
@@ -29,35 +29,36 @@ model Password {
 }
 
 model Chatbot {
-  id                   String      @id @default(uuid())
-  createdAt            DateTime    @default(now())
-  updatedAt            DateTime    @updatedAt
+  id                   String          @id @default(uuid())
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
   name                 String
   userId               String
-  publicName           String      @default("Your Chatbot")
-  introMessages        String[]    @default(["Hello, how can I help you today?"])
-  model                String?     @default("gpt-3.5-turbo-0125")
-  responseLength       String?     @default("short")
+  publicName           String          @default("Your Chatbot")
+  introMessages        String[]        @default(["Hello, how can I help you today?"])
+  model                String?         @default("gpt-3.5-turbo-0125")
+  responseLength       String?         @default("short")
   systemPrompt         String?
-  openIcon             String      @default("plus")
-  themeColor           String      @default("zinc")
-  starterQuestions     String[]    @default(["What are your features?"])
+  openIcon             String          @default("plus")
+  themeColor           String          @default("zinc")
+  starterQuestions     String[]        @default(["What are your features?"])
   croppedLogoFilepath  String?
   lastCrop             Json?
   originalLogoFilepath String?
-  containerRadius      String?     @default("1.0")
+  containerRadius      String?         @default("1.0")
   openButtonText       String?
-  widgetRestrictedUrls String[]    @default([])
+  widgetRestrictedUrls String[]        @default([])
   embeddedOn           String?
-  installed            Boolean     @default(false)
+  installed            Boolean         @default(false)
   lastPingedAt         DateTime?
   chats                Chat[]
-  user                 User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  commonClusters       Cluster[]   @relation("CommonClusters")
-  gapClusters          Cluster[]   @relation("GapClusters")
+  user                 User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  commonClusters       Cluster[]       @relation("CommonClusters")
+  gapClusters          Cluster[]       @relation("GapClusters")
   documents            Document[]
   embeddings           Embedding[]
   labels               Label[]
+  widgetPosition       WidgetPosition? @default(BOTTOM_RIGHT)
 
   @@index([userId, createdAt(sort: Desc)])
 }
@@ -246,50 +247,6 @@ model Subscription {
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// WIP - blog posts
-model Article {
-  id              String      @id @default(cuid())
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  userId          String
-  type            ArticleType @default(ALTERNATIVE)
-  instructions    String?
-  title           String
-  markdownContent String?
-  wordCount       Int?
-  readingTimeMs   Int?
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  products        Product[]
-
-  blogFileContents String? // only for generating training data
-
-  @@index([userId])
-}
-
-model Product {
-  id                   String           @id @default(cuid())
-  createdAt            DateTime         @default(now())
-  updatedAt            DateTime         @updatedAt
-  position             Int
-  article              Article          @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  articleId            String
-  screenshot           String?
-  scrapedWebsites      ScrapedWebsite[]
-  relevantUrls         String[]
-  baseUrl              String
-  extractedProductInfo Json?
-}
-
-model ScrapedWebsite {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  url       String
-  content   String?
-  productId String
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-}
-
 enum DocumentType {
   WEBSITE
   FILE
@@ -301,8 +258,7 @@ enum TicketStatus {
   CLOSED
 }
 
-enum ArticleType {
-  ALTERNATIVE
-  COMPARE
-  LISTICLE
+enum WidgetPosition {
+  BOTTOM_RIGHT
+  BOTTOM_LEFT
 }

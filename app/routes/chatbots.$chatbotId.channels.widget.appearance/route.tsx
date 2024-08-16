@@ -1,4 +1,4 @@
-import Customizer from "./theme-customizer";
+import { WidgetPosition } from "@prisma/client";
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -8,12 +8,15 @@ import {
   unstable_createMemoryUploadHandler,
   unstable_parseMultipartFormData,
 } from "@remix-run/node";
-import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
 import { useFetcher, useLoaderData } from "@remix-run/react";
-import Preview from "./widget/preview";
+import { useEffect, useRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { useIsMediumScreen } from "~/hooks/use-is-medium-screen";
+import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
+import { useSidebarWidth } from "~/providers/sidebarWidth";
 import { uploadImage } from "~/utils/cloudinary.server";
+import Customizer from "./theme-customizer";
+import Preview from "./widget/preview";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatbotId } = params;
@@ -54,10 +57,17 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   switch (intent) {
     case "generalUpdate": {
+      const updateData = JSON.parse(String(formData.get("update"))) ?? {};
+
+      // Ensure widgetPosition is correctly typed if it's present in the update
+      if (updateData.widgetPosition) {
+        updateData.widgetPosition = updateData.widgetPosition as WidgetPosition;
+      }
+
       return json({
         chatbot: await updateChatbotById({
           id: chatbotId,
-          ...(JSON.parse(String(formData.get("update"))) ?? {}),
+          ...updateData,
         }),
       });
     }
@@ -102,6 +112,22 @@ export default function Appearance() {
   const { chatbot } = useLoaderData<typeof loader>();
   const fetcher = useFetcher();
   const isMedium = useIsMediumScreen();
+  const customizerRef = useRef<HTMLDivElement>(null);
+  const [customizerWidth, setCustomizerWidth] = useState<number | null>(null);
+  const { sidebarWidth } = useSidebarWidth();
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (customizerRef.current) {
+        setCustomizerWidth(customizerRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
   const optimisticChatbot = fetcher.formData
     ? {
@@ -138,20 +164,36 @@ export default function Appearance() {
             </TabsList>
 
             <TabsContent value="edit" className="w-full flex-1 overflow-y-auto">
-              <Customizer fetcher={fetcher} chatbot={optimisticChatbot} />
+              <Customizer
+                ref={customizerRef}
+                fetcher={fetcher}
+                chatbot={optimisticChatbot}
+              />
             </TabsContent>
             <TabsContent value="preview" asChild>
-              <div className="flex flex-col flex-1 w-full items-end justify-end p-[20px]">
-                <Preview chatbot={optimisticChatbot} />
+              <div className="flex flex-col flex-1 w-full items-end justify-end p-[20px] bg-red-500">
+                <Preview
+                  chatbot={optimisticChatbot}
+                  customizerWidth={customizerWidth ?? 0}
+                  sidebarWidth={sidebarWidth ?? 0}
+                />
               </div>
             </TabsContent>
           </Tabs>
         </div>
       ) : (
         <div className="grid grid-cols-4 overflow-y-auto h-full w-full">
-          <Customizer fetcher={fetcher} chatbot={optimisticChatbot} />
+          <Customizer
+            ref={customizerRef}
+            fetcher={fetcher}
+            chatbot={optimisticChatbot}
+          />
           <div className="col-span-2 flex flex-col items-end justify-end h-full p-[20px]">
-            <Preview chatbot={optimisticChatbot} />
+            <Preview
+              chatbot={optimisticChatbot}
+              customizerWidth={customizerWidth ?? 0}
+              sidebarWidth={sidebarWidth ?? 0}
+            />
           </div>
         </div>
       )}
