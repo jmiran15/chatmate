@@ -8,9 +8,8 @@ import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import * as gtag from "~/utils/gtags.client";
 
-import { createUser, getUserByEmail } from "~/models/user.server";
-import { createUserSession, getUserId } from "~/session.server";
-import { safeRedirect, validateEmail } from "~/utils";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
+import { Loader2 } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -19,16 +18,17 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { prisma } from "~/db.server";
+import { useIsPending } from "~/hooks/use-is-pending";
 import {
   createCustomer,
   createFreeSubscription,
 } from "~/models/subscription.server";
-import { prisma } from "~/db.server";
-import { Loader2 } from "lucide-react";
-import { useIsPending } from "~/hooks/use-is-pending";
-import { SEOHandle } from "@nasa-gcn/remix-seo";
+import { createUser, getUserByEmail } from "~/models/user.server";
+import { createUserSession, getUserId } from "~/session.server";
+import { safeRedirect, validateEmail } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -40,8 +40,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
+
   const redirectTo = safeRedirect(formData.get("redirectTo"), "/chatbots");
 
+  // TODO - do this stuff with Zod
   if (!validateEmail(email)) {
     return json(
       { errors: { email: "Email is invalid", password: null } },
@@ -76,13 +78,18 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   }
 
+  // TODO - since we are going to add email verification, set a flag to indicate not verified yet
+  // or create in a new schema model - most likely the latter
   const user = await createUser(email, password);
+
+  // TODO - migrate to Paddle
   await createCustomer({ userId: user.id });
   const subscription = await prisma.subscription.findUnique({
     where: { userId: user.id },
   });
   if (!subscription) await createFreeSubscription({ userId: user.id });
 
+  // logs the user in and redirects them to the dashboard (or the redirectTo page)
   return createUserSession({
     redirectTo,
     remember: false,
@@ -180,6 +187,11 @@ export default function Join() {
               ) : (
                 "Create an account"
               )}
+            </Button>
+
+            <Button variant="outline" className="w-full">
+              {/* TODO - add Google SSO logo */}
+              Sign up with Google
             </Button>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}

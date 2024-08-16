@@ -22,6 +22,14 @@ model User {
   subscription Subscription?
 }
 
+model UnverifiedUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  passwordHash String
+}
+
 model Password {
   hash   String
   userId String @unique
@@ -246,22 +254,20 @@ model Subscription {
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-// WIP - blog posts
 model Article {
-  id              String      @id @default(cuid())
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  userId          String
-  type            ArticleType @default(ALTERNATIVE)
-  instructions    String?
-  title           String
-  markdownContent String?
-  wordCount       Int?
-  readingTimeMs   Int?
-  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  products        Product[]
-
-  blogFileContents String? // only for generating training data
+  id               String      @id @default(cuid())
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  userId           String
+  type             ArticleType @default(ALTERNATIVE)
+  instructions     String?
+  title            String
+  markdownContent  String?
+  wordCount        Int?
+  readingTimeMs    Int?
+  blogFileContents String?
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products         Product[]
 
   @@index([userId])
 }
@@ -271,13 +277,13 @@ model Product {
   createdAt            DateTime         @default(now())
   updatedAt            DateTime         @updatedAt
   position             Int
-  article              Article          @relation(fields: [articleId], references: [id], onDelete: Cascade)
   articleId            String
   screenshot           String?
-  scrapedWebsites      ScrapedWebsite[]
   relevantUrls         String[]
   baseUrl              String
   extractedProductInfo Json?
+  article              Article          @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  scrapedWebsites      ScrapedWebsite[]
 }
 
 model ScrapedWebsite {
