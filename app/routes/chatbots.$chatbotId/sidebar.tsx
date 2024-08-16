@@ -1,24 +1,40 @@
 import { useParams } from "@remix-run/react";
-import { useLinks } from "../_header._index/use-links";
-import SidebarLink from "../_header._index/sidebar-link";
+import { useEffect, useRef } from "react";
+import { useSidebarWidth } from "~/providers/sidebarWidth";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../../components/ui/accordion";
+import SidebarLink from "../_header._index/sidebar-link";
+import { useLinks } from "../_header._index/use-links";
 
 export default function Sidebar() {
   const { chatbotId } = useParams();
   const { routes } = useLinks();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const { setSidebarWidth } = useSidebarWidth();
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (sidebarRef.current) {
+        setSidebarWidth(sidebarRef.current.offsetWidth);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+
+    return () => window.removeEventListener("resize", updateWidth);
+  }, [setSidebarWidth]);
 
   if (!chatbotId) {
     return null;
   }
 
   return (
-    // large and medium screens
-    <div className="hidden border-r bg-muted/40 lg:block">
+    <div ref={sidebarRef} className="hidden border-r bg-muted/40 lg:block">
       <div className="flex flex-col h-full max-h-screen gap-2">
         <nav className="grid items-start p-2 text-sm font-medium lg:p-4 ">
           {routes.map((link, index) =>

@@ -1,7 +1,8 @@
-import { Label } from "../../components/ui/label";
-import { Textarea } from "../../components/ui/textarea";
+import { Chatbot, WidgetPosition } from "@prisma/client";
 import { useFetcher } from "@remix-run/react";
+import { forwardRef } from "react";
 import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
 import {
   Select,
   SelectContent,
@@ -11,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
-import { Chatbot } from "@prisma/client";
+import { Textarea } from "../../components/ui/textarea";
 import { ImagePicker } from "./image-picker";
 
 const THEME_COLORS = [
@@ -51,13 +52,18 @@ const OPEN_ICONS = ["plus", "chevron", "chat"];
 
 const INTENT = "generalUpdate";
 
-export default function Customizer({
-  fetcher,
-  chatbot,
-}: {
-  fetcher: ReturnType<typeof useFetcher>;
-  chatbot: Chatbot;
-}) {
+const WIDGET_POSITIONS = [
+  { label: "Bottom Right", value: WidgetPosition.BOTTOM_RIGHT },
+  { label: "Bottom Left", value: WidgetPosition.BOTTOM_LEFT },
+];
+
+const Customizer = forwardRef<
+  HTMLDivElement,
+  {
+    fetcher: ReturnType<typeof useFetcher>;
+    chatbot: Chatbot;
+  }
+>(({ fetcher, chatbot }, ref) => {
   const {
     publicName,
     originalLogoFilepath,
@@ -70,13 +76,17 @@ export default function Customizer({
     containerRadius,
     openButtonText,
     widgetRestrictedUrls,
+    widgetPosition,
   } = chatbot;
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
   const restrictedUrls = widgetRestrictedUrls.join("\n");
 
   return (
-    <div className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 w-full">
+    <div
+      ref={ref}
+      className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 w-full "
+    >
       <div className="flex flex-col gap-1.5 w-full">
         <Label htmlFor="name">Name</Label>
         <Input
@@ -211,6 +221,36 @@ export default function Customizer({
         </Select>
       </div>
       <div className="flex flex-col gap-1.5">
+        <Label>Widget Position</Label>
+        <Select
+          name="widgetPosition"
+          defaultValue={widgetPosition ?? WidgetPosition.BOTTOM_RIGHT}
+          onValueChange={(value: WidgetPosition) => {
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ widgetPosition: value }),
+              },
+              { method: "post", encType: "multipart/form-data" },
+            );
+          }}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select widget position" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Widget Position</SelectLabel>
+              {WIDGET_POSITIONS.map((position) => (
+                <SelectItem key={position.value} value={position.value}>
+                  {position.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="flex flex-col gap-1.5">
         <Label htmlFor="intro">Intro messages</Label>
         <Textarea
           id="intro"
@@ -281,7 +321,11 @@ export default function Customizer({
           Include all paths to your website where you would like the chatbot
           widget to not appear.
         </p>
-      </div>{" "}
+      </div>
     </div>
   );
-}
+});
+
+Customizer.displayName = "Customizer";
+
+export default Customizer;

@@ -1,9 +1,9 @@
-import { Chatbot } from "@prisma/client";
-import OpenButton from "./open-button";
-import ChatWindow from "./chat-window";
-import "./styles.css";
+import { Chatbot, WidgetPosition } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { useMobileScreen } from "~/utils/mobile";
+import ChatWindow from "./chat-window";
+import OpenButton from "./open-button";
+import "./styles.css";
 
 export const colors = {
   zinc: "zinc-900",
@@ -26,7 +26,15 @@ export const colors = {
   rose: "rose-500",
 };
 
-export default function Preview({ chatbot }: { chatbot: Chatbot }) {
+export default function Preview({
+  chatbot,
+  sidebarWidth,
+  customizerWidth,
+}: {
+  chatbot: Chatbot;
+  sidebarWidth: number;
+  customizerWidth: number;
+}) {
   const [isChatOpen, setIsChatOpen] = useState(true);
   const isMobile = useMobileScreen();
 
@@ -40,16 +48,35 @@ export default function Preview({ chatbot }: { chatbot: Chatbot }) {
 
   if (!chatbot) return null;
 
+  console;
+
+  const isLeftAligned = chatbot.widgetPosition === WidgetPosition.BOTTOM_LEFT;
+
   return (
     <>
       {isChatOpen && (
-        <ChatWindow chatbot={chatbot} closeChat={() => setIsChatOpen(false)} />
+        <ChatWindow
+          chatbot={chatbot}
+          closeChat={() => setIsChatOpen(false)}
+          sidebarWidth={sidebarWidth}
+          customizerWidth={customizerWidth}
+          isLeftAligned={isLeftAligned}
+        />
       )}
-      <OpenButton
-        chatbot={chatbot}
-        setIsChatOpen={setIsChatOpen}
-        isChatOpen={isChatOpen}
-      />
+      {isMobile && isChatOpen ? null : (
+        <OpenButton
+          chatbot={{
+            ...chatbot,
+            openIcon: chatbot.openIcon as "plus" | "chevron" | "chat",
+            themeColor: chatbot.themeColor as keyof typeof colors,
+          }}
+          setIsChatOpen={setIsChatOpen}
+          isChatOpen={isChatOpen}
+          sidebarWidth={sidebarWidth}
+          customizerWidth={customizerWidth}
+          isLeftAligned={isLeftAligned}
+        />
+      )}
     </>
   );
 }
