@@ -171,7 +171,7 @@ export default function Appearance() {
               />
             </TabsContent>
             <TabsContent value="preview" asChild>
-              <div className="flex flex-col flex-1 w-full items-end justify-end p-[20px] bg-red-500">
+              <div className="flex flex-col flex-1 w-full items-end justify-end p-[20px]">
                 <Preview
                   chatbot={optimisticChatbot}
                   customizerWidth={customizerWidth ?? 0}

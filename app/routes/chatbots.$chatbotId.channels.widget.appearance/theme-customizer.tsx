@@ -85,7 +85,7 @@ const Customizer = forwardRef<
   return (
     <div
       ref={ref}
-      className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 w-full bg-red-100"
+      className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 w-full "
     >
       <div className="flex flex-col gap-1.5 w-full">
         <Label htmlFor="name">Name</Label>
