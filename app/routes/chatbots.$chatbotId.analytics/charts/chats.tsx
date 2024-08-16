@@ -1,4 +1,5 @@
 import { TrendingUp } from "lucide-react";
+import { DateTime } from "luxon";
 import { Bar, BarChart, XAxis } from "recharts";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import {
@@ -7,7 +8,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/chart";
-import { DateTime } from "luxon";
+import chatsEmptyImage from "~/images/chats-empty.png";
+import { EmptyState } from "../EmptyState";
 
 const chartConfig = {
   chats: {
@@ -114,22 +116,13 @@ export default function ChatsChart({ chats, period, percentageChanges }: any) {
   const filledChats = fillMissingDates(chats, period);
   const totalChats = filledChats.reduce((sum, chat) => sum + chat.chats, 0);
 
+  const isEmptyData = totalChats === 0;
+
   return (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader className="w-full flex flex-row items-start justify-between">
         <div className="flex flex-col gap-1">
           <div className="font-medium leading-none">Chats</div>
-          {/* <div>
-            <div className="flex gap-2 items-center text-secondary leading-none">
-              <div className="relative w-2 h-2">
-                <div className="animate-[pulsate_1s_ease-out_infinite] opacity-0 absolute h-2 w-2 rounded-full bg-green-600"></div>
-                <div className="h-2 w-2 absolute rounded-full bg-green-600"></div>
-              </div>
-              <div className="text-sm text-muted-foreground leading-none">
-                {filledChats[filledChats.length - 1].chats} online
-              </div>
-            </div>
-          </div> */}
         </div>
         <div className="flex gap-2 items-start">
           <div className="text-[32px] leading-none tracking-[-0.1px] font-bold">
@@ -154,38 +147,47 @@ export default function ChatsChart({ chats, period, percentageChanges }: any) {
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <BarChart data={filledChats}>
-            <XAxis
-              dataKey="date"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => formatXAxis(value, period)}
-              interval={
-                period === "1hr"
-                  ? 11
-                  : period === "24hr"
-                  ? 3
-                  : period === "30d"
-                  ? 3
-                  : 0
-              }
-            />
+      <CardContent className="flex-grow">
+        {isEmptyData ? (
+          <EmptyState
+            image={chatsEmptyImage}
+            title="No chat data yet"
+            description="Start conversations with your chatbot to see analytics here."
+            className="h-full"
+          />
+        ) : (
+          <ChartContainer config={chartConfig} className="h-full">
+            <BarChart data={filledChats}>
+              <XAxis
+                dataKey="date"
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+                tickFormatter={(value) => formatXAxis(value, period)}
+                interval={
+                  period === "1hr"
+                    ? 11
+                    : period === "24hr"
+                    ? 3
+                    : period === "30d"
+                    ? 3
+                    : 0
+                }
+              />
 
-            <ChartTooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  formatter={(value) => [value.toLocaleString(), " Chats"]}
-                  hideLabel
-                />
-              }
-            />
-            <Bar dataKey="chats" fill="#3ba6f1" radius={[0, 0, 0, 0]} />
-          </BarChart>
-        </ChartContainer>
+              <ChartTooltip
+                cursor={false}
+                content={
+                  <ChartTooltipContent
+                    formatter={(value) => [value.toLocaleString(), " Chats"]}
+                    hideLabel
+                  />
+                }
+              />
+              <Bar dataKey="chats" fill="#3ba6f1" radius={[0, 0, 0, 0]} />
+            </BarChart>
+          </ChartContainer>
+        )}
       </CardContent>
     </Card>
   );

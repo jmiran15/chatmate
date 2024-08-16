@@ -9,6 +9,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "~/components/ui/chart";
+import tagsEmptyImage from "~/images/tags-empty.png";
+import { EmptyState } from "../EmptyState";
 
 function getRandomColor() {
   const letters = "0123456789ABCDEF";
@@ -51,8 +53,10 @@ export function TagsChart({
     fill: chartConfig[tag.label]?.color || getRandomColor(),
   }));
 
+  const isEmptyData = tags.length === 0;
+
   return (
-    <Card className="flex flex-col">
+    <Card className="h-full flex flex-col">
       <CardHeader className="items-start pb-0">
         <div className="flex flex-col gap-1">
           <div className="font-medium leading-none">Labels</div>
@@ -65,23 +69,32 @@ export function TagsChart({
           </div>
         </div>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[300px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Pie data={chartData} dataKey="value" />
-            <ChartLegend
-              content={<ChartLegendContent nameKey="name" />}
-              className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
-            />
-          </PieChart>
-        </ChartContainer>
+      <CardContent className="flex-grow pb-0">
+        {isEmptyData ? (
+          <EmptyState
+            image={tagsEmptyImage}
+            title="No tags data yet"
+            description="Add tags to your chats to see them visualized here."
+            className="h-full"
+          />
+        ) : (
+          <ChartContainer
+            config={chartConfig}
+            className="h-full w-full flex items-center justify-center"
+          >
+            <PieChart className="w-full h-full">
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie data={chartData} dataKey="value" />
+              <ChartLegend
+                content={<ChartLegendContent nameKey="name" />}
+                className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+              />
+            </PieChart>
+          </ChartContainer>
+        )}
       </CardContent>
     </Card>
   );

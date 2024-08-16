@@ -30,6 +30,7 @@
     "@anthropic-ai/sdk": "^0.25.1",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.19.0",
+    "@faker-js/faker": "^8.4.1",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.4",

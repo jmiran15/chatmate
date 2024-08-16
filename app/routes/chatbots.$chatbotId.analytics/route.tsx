@@ -1,9 +1,15 @@
-import { LoaderFunctionArgs, ActionFunctionArgs, json } from "@remix-run/node";
-import { requireUserId } from "~/session.server";
-import { prisma } from "~/db.server";
+import { faker } from "@faker-js/faker";
 import { Prisma, TicketStatus } from "@prisma/client";
+import {
+  ActionFunctionArgs,
+  json,
+  LoaderFunctionArgs,
+  TypedResponse,
+} from "@remix-run/node";
 import { useLoaderData, useSearchParams, useSubmit } from "@remix-run/react";
+import { MessageSquare } from "lucide-react";
 import { DateTime, Duration } from "luxon";
+import { z } from "zod";
 import {
   Select,
   SelectContent,
@@ -11,14 +17,86 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { prisma } from "~/db.server";
+import { requireUserId } from "~/session.server";
 import ChatsChart from "./charts/chats";
-import KPIs from "./kpis";
-import { MessageSquare } from "lucide-react";
 import { TagsChart } from "./charts/tags";
 import VisitorsBarlist from "./charts/visitors";
-// import { faker } from "@faker-js/faker";
+import KPIs from "./kpis";
 
-const DATE_RANGES = [
+// Define schemas for all data structures
+const DateRangeSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+});
+
+const ChatCountSchema = z.object({
+  date: z.date(),
+  chats: z.number().int(),
+});
+
+const TagCountSchema = z.object({
+  label: z.string(),
+  count: z.number().int(),
+});
+
+const LabelSchema = z.object({
+  name: z.string(),
+  color: z.string(),
+});
+
+const CountryDataSchema = z.object({
+  country: z.string(),
+  country_code: z.string(),
+  count: z.number().int(),
+});
+
+const BrowserDataSchema = z.object({
+  browser: z.string(),
+  count: z.number().int(),
+});
+
+const DeviceDataSchema = z.object({
+  device: z.string(),
+  count: z.number().int(),
+});
+
+const KPIDataSchema = z.object({
+  totalChats: z.number().int(),
+  avgResolutionTime: z.number(),
+  resolutionRate: z.number(),
+  totalTimeSaved: z.number(),
+});
+
+const PercentageChangeSchema = z.object({
+  totalChats: z.number(),
+  avgResolutionTime: z.number(),
+  resolutionRate: z.number(),
+  totalTimeSaved: z.number(),
+});
+
+// Create main loader data schema
+const LoaderDataSchema = z.object({
+  totalChats: z.number().int(),
+  avgResolutionTime: z.number(),
+  resolutionRate: z.number(),
+  totalTimeSaved: z.number(),
+  tagsCount: z.array(TagCountSchema),
+  chatCountsByDay: z.array(ChatCountSchema),
+  labelNames: z.array(z.string()),
+  period: z.string(),
+  previousPeriod: KPIDataSchema,
+  percentageChanges: PercentageChangeSchema,
+  countryData: z.array(CountryDataSchema),
+  browserData: z.array(BrowserDataSchema),
+  deviceData: z.array(DeviceDataSchema),
+  distinctLabels: z.array(LabelSchema),
+});
+
+// Infer the loader return type
+type LoaderData = z.infer<typeof LoaderDataSchema>;
+
+const DATE_RANGES: z.infer<typeof DateRangeSchema>[] = [
   { label: "Last hour", value: "1hr" },
   { label: "Last 24 hours", value: "24hr" },
   { label: "Last 7 days", value: "7d" },
@@ -52,9 +130,9 @@ const getPeriodFilter = (searchParams: URLSearchParams) => {
 export const loader = async ({
   params,
   request,
-}: LoaderFunctionArgs): Promise<Response> => {
+}: LoaderFunctionArgs): Promise<TypedResponse<LoaderData>> => {
   await requireUserId(request);
-  const chatbotId = params.chatbotId;
+  const chatbotId = z.string().parse(params.chatbotId);
 
   if (!chatbotId) {
     throw new Error("chatbotId is required");
@@ -208,12 +286,14 @@ export const loader = async ({
     SELECT 
       au.country,
       au.country_code,
-      COUNT(*)::integer as count
+      COUNT(DISTINCT c.id)::integer as count
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
+      AND c.deleted = false
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
+      AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
     GROUP BY au.country, au.country_code
     ORDER BY count DESC
   `,
@@ -227,12 +307,14 @@ export const loader = async ({
   >`
     SELECT 
       au.browser_name as browser,
-      COUNT(*)::integer as count
+      COUNT(DISTINCT c.id)::integer as count
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
+      AND c.deleted = false
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
+      AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
     GROUP BY au.browser_name
     ORDER BY count DESC
   `;
@@ -245,17 +327,19 @@ export const loader = async ({
   >`
     SELECT 
       au.device_type as device,
-      COUNT(*)::integer as count
+      COUNT(DISTINCT c.id)::integer as count
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
+      AND c.deleted = false
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
+      AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
     GROUP BY au.device_type
     ORDER BY count DESC
   `;
 
-  return json({
+  const loaderData = {
     totalChats,
     avgResolutionTime: timeStats._avg.elapsedMs || 0,
     resolutionRate,
@@ -289,96 +373,101 @@ export const loader = async ({
     browserData,
     deviceData,
     distinctLabels,
-  });
+  };
+
+  // Validate and parse the data
+  const validatedData = LoaderDataSchema.parse(loaderData);
+
+  return json<LoaderData>(validatedData);
 };
 
-// const generateRandomDate = (start: DateTime, end: DateTime) => {
-//   return DateTime.fromMillis(
-//     start.toMillis() + Math.random() * (end.toMillis() - start.toMillis()),
-//   );
-// };
+const generateRandomDate = (start: DateTime, end: DateTime) => {
+  return DateTime.fromMillis(
+    start.toMillis() + Math.random() * (end.toMillis() - start.toMillis()),
+  );
+};
 
-// const generateRandomMessages = (count: number) => {
-//   const messages = [];
-//   for (let i = 0; i < count; i++) {
-//     messages.push({
-//       role: i % 2 === 0 ? "user" : "assistant",
-//       content: `Message ${i + 1} content`,
-//     });
-//   }
-//   return messages;
-// };
+const generateRandomMessages = (count: number) => {
+  const messages = [];
+  for (let i = 0; i < count; i++) {
+    messages.push({
+      role: i % 2 === 0 ? "user" : "assistant",
+      content: `Message ${i + 1} content`,
+    });
+  }
+  return messages;
+};
 
-// const seedChats = async (chatbotId: string) => {
-//   const now = DateTime.now().setZone("utc");
-//   const oneYearAgo = now.minus({ months: 12 });
+const seedChats = async (chatbotId: string) => {
+  const now = DateTime.now().setZone("utc");
+  const oneYearAgo = now.minus({ months: 12 });
 
-//   const labels = await prisma.label.findMany({
-//     where: { chatbotId },
-//     select: { id: true },
-//   });
+  const labels = await prisma.label.findMany({
+    where: { chatbotId },
+    select: { id: true },
+  });
 
-//   for (let i = 0; i < 100; i++) {
-//     const createdAt = generateRandomDate(oneYearAgo, now);
-//     const messageCount = Math.floor(Math.random() * 10) + 1;
-//     const status =
-//       Math.random() > 0.5 ? TicketStatus.OPEN : TicketStatus.CLOSED;
-//     const elapsedMs = Math.floor(Math.random() * 300000);
+  for (let i = 0; i < 100; i++) {
+    const createdAt = generateRandomDate(oneYearAgo, now);
+    const messageCount = Math.floor(Math.random() * 10) + 1;
+    const status =
+      Math.random() > 0.5 ? TicketStatus.OPEN : TicketStatus.CLOSED;
+    const elapsedMs = Math.floor(Math.random() * 300000);
 
-//     const chatLabels = labels
-//       .sort(() => 0.5 - Math.random())
-//       .slice(0, Math.floor(Math.random() * 3));
+    const chatLabels = labels
+      .sort(() => 0.5 - Math.random())
+      .slice(0, Math.floor(Math.random() * 3));
 
-//     const chat = await prisma.chat.create({
-//       data: {
-//         chatbotId,
-//         createdAt: createdAt.toUTC().toJSDate(),
-//         updatedAt: createdAt.toUTC().toJSDate(),
-//         deleted: false,
-//         seen: Math.random() > 0.5,
-//         status,
-//         elapsedMs,
-//         messages: {
-//           create: generateRandomMessages(messageCount),
-//         },
-//         labels: {
-//           connect: chatLabels.map((label) => ({ id: label.id })),
-//         },
-//       },
-//     });
+    const chat = await prisma.chat.create({
+      data: {
+        chatbotId,
+        createdAt: createdAt.toUTC().toJSDate(),
+        updatedAt: createdAt.toUTC().toJSDate(),
+        deleted: false,
+        seen: Math.random() > 0.5,
+        status,
+        elapsedMs,
+        messages: {
+          create: generateRandomMessages(messageCount),
+        },
+        labels: {
+          connect: chatLabels.map((label) => ({ id: label.id })),
+        },
+      },
+    });
 
-//     // Create anonymous user data for each chat
-//     await prisma.anonymousUser.create({
-//       data: {
-//         sessionId: faker.datatype.uuid(),
-//         chatId: chat.id,
-//         ip: faker.internet.ip(),
-//         country: faker.address.country(),
-//         country_code: faker.address.countryCode(),
-//         city: faker.address.city(),
-//         browser_name: faker.helpers.arrayElement([
-//           "Chrome",
-//           "Firefox",
-//           "Safari",
-//           "Edge",
-//         ]),
-//         browser_version: faker.system.semver(),
-//         device_type: faker.helpers.arrayElement([
-//           "desktop",
-//           "mobile",
-//           "tablet",
-//         ]),
-//         os_name: faker.helpers.arrayElement([
-//           "Windows",
-//           "MacOS",
-//           "Linux",
-//           "iOS",
-//           "Android",
-//         ]),
-//       },
-//     });
-//   }
-// };
+    // Create anonymous user data for each chat
+    await prisma.anonymousUser.create({
+      data: {
+        sessionId: faker.datatype.uuid(),
+        chatId: chat.id,
+        ip: faker.internet.ip(),
+        country: faker.address.country(),
+        country_code: faker.address.countryCode(),
+        city: faker.address.city(),
+        browser_name: faker.helpers.arrayElement([
+          "Chrome",
+          "Firefox",
+          "Safari",
+          "Edge",
+        ]),
+        browser_version: faker.system.semver(),
+        device_type: faker.helpers.arrayElement([
+          "desktop",
+          "mobile",
+          "tablet",
+        ]),
+        os_name: faker.helpers.arrayElement([
+          "Windows",
+          "MacOS",
+          "Linux",
+          "iOS",
+          "Android",
+        ]),
+      },
+    });
+  }
+};
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const { chatbotId } = params;
@@ -391,7 +480,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   const action = formData.get("action");
 
   if (action === "seed") {
-    // await seedChats(chatbotId);
+    await seedChats(chatbotId);
     return { success: true, message: "Chats seeded successfully" };
   }
 
@@ -422,9 +511,7 @@ export default function Analytics() {
     totalTimeSaved,
     tagsCount,
     chatCountsByDay,
-    // labelNames,
     period,
-    // previousPeriod,
     percentageChanges,
     countryData,
     browserData,
@@ -442,66 +529,81 @@ export default function Analytics() {
   };
 
   return (
-    <div className="h-full w-full overflow-y-auto">
-      <div className="max-w-screen-lg flex flex-col gap-4 p-8">
-        <Select value={period} onValueChange={handlePeriodChange}>
-          <SelectTrigger
-            className="w-[160px] rounded-lg sm:ml-auto"
-            aria-label="Select time range"
-          >
-            <SelectValue placeholder="Select time range" />
-          </SelectTrigger>
-          <SelectContent className="rounded-xl">
-            {DATE_RANGES.map((range) => (
-              <SelectItem
-                key={range.value}
-                value={range.value}
-                className="rounded-lg"
-              >
-                {range.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <KPIs
-          data={[
-            {
-              name: "Total chats",
-              stat: totalChats,
-              change: Math.abs(percentageChanges.totalChats).toFixed(1),
-              changeType:
-                percentageChanges.totalChats > 0 ? "positive" : "negative",
-              icon: MessageSquare,
-            },
-            {
-              name: "Resolution time",
-              stat: formatDuration(avgResolutionTime),
-              change: Math.abs(percentageChanges.avgResolutionTime).toFixed(1),
-              changeType:
-                percentageChanges.avgResolutionTime > 0
-                  ? "negative"
-                  : "positive",
-              icon: MessageSquare,
-            },
-            {
-              name: "Resolution rate",
-              stat: Math.round(resolutionRate) + "%",
-              change: Math.abs(percentageChanges.resolutionRate).toFixed(1),
-              changeType:
-                percentageChanges.resolutionRate > 0 ? "positive" : "negative",
-              icon: MessageSquare,
-            },
-            {
-              name: "Time saved",
-              stat: formatDuration(totalTimeSaved),
-              change: Math.abs(percentageChanges.totalTimeSaved).toFixed(1),
-              changeType:
-                percentageChanges.totalTimeSaved > 0 ? "positive" : "negative",
-              icon: MessageSquare,
-            },
-          ]}
-        />
-        <div className="grid gap-4 lg:grid-cols-2 items-start">
+    <div className="h-full w-full overflow-y-auto ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 sm:mb-0">
+            Analytics
+          </h1>
+          <Select value={period} onValueChange={handlePeriodChange}>
+            <SelectTrigger
+              className="w-full sm:w-[160px]"
+              aria-label="Select time range"
+            >
+              <SelectValue placeholder="Select time range" />
+            </SelectTrigger>
+            <SelectContent className="rounded-xl">
+              {DATE_RANGES.map((range) => (
+                <SelectItem
+                  key={range.value}
+                  value={range.value}
+                  className="rounded-lg"
+                >
+                  {range.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+          <KPIs
+            data={[
+              {
+                name: "Total chats",
+                stat: String(totalChats),
+                change: Math.abs(percentageChanges.totalChats).toFixed(1),
+                changeType:
+                  percentageChanges.totalChats > 0 ? "positive" : "negative",
+                icon: MessageSquare,
+              },
+              {
+                name: "Resolution time",
+                stat: formatDuration(avgResolutionTime),
+                change: Math.abs(percentageChanges.avgResolutionTime).toFixed(
+                  1,
+                ),
+                changeType:
+                  percentageChanges.avgResolutionTime > 0
+                    ? "negative"
+                    : "positive",
+                icon: MessageSquare,
+              },
+              {
+                name: "Resolution rate",
+                stat: Math.round(resolutionRate) + "%",
+                change: Math.abs(percentageChanges.resolutionRate).toFixed(1),
+                changeType:
+                  percentageChanges.resolutionRate > 0
+                    ? "positive"
+                    : "negative",
+                icon: MessageSquare,
+              },
+              {
+                name: "Time saved",
+                stat: formatDuration(totalTimeSaved),
+                change: Math.abs(percentageChanges.totalTimeSaved).toFixed(1),
+                changeType:
+                  percentageChanges.totalTimeSaved > 0
+                    ? "positive"
+                    : "negative",
+                icon: MessageSquare,
+              },
+            ]}
+          />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 items-stretch">
           <ChatsChart
             chats={chatCountsByDay}
             period={period}
