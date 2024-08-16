@@ -20,7 +20,7 @@ export default function VisitorsBarlist({
     count: number;
   }[];
   deviceData: {
-    device: string;
+    device: string | null;
     count: number;
   }[];
 }) {

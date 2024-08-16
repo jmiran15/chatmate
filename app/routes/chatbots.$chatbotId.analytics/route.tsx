@@ -57,7 +57,7 @@ const BrowserDataSchema = z.object({
 });
 
 const DeviceDataSchema = z.object({
-  device: z.string(),
+  device: z.string().nullable(),
   count: z.number().int(),
 });
 
@@ -321,12 +321,12 @@ export const loader = async ({
 
   const deviceData = await prisma.$queryRaw<
     {
-      device: string;
+      device: string | null;
       count: number;
     }[]
   >`
     SELECT 
-      au.device_type as device,
+      COALESCE(au.device_type, 'Unknown') as device,
       COUNT(DISTINCT c.id)::integer as count
     FROM "AnonymousUser" au
     JOIN "Chat" c ON au."chatId" = c.id
@@ -335,7 +335,7 @@ export const loader = async ({
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
       AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
-    GROUP BY au.device_type
+    GROUP BY COALESCE(au.device_type, 'Unknown')
     ORDER BY count DESC
   `;
 
@@ -456,6 +456,7 @@ const seedChats = async (chatbotId: string) => {
           "desktop",
           "mobile",
           "tablet",
+          null, // Add null as a possible value
         ]),
         os_name: faker.helpers.arrayElement([
           "Windows",
