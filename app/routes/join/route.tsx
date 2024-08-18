@@ -25,10 +25,12 @@ import { useIsPending } from "~/hooks/use-is-pending";
 import { getUserByEmail } from "~/models/user.server";
 import { getUserId } from "~/session.server";
 import { validateEmail } from "~/utils";
+import { sendEmail } from "~/utils/email.server";
 import {
   prepareVerification,
   verifySessionStorage,
 } from "../verify/verify.server";
+import { SignupEmail } from "./email";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -120,37 +122,37 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   });
 
   // send the verification email
-  // const response = await sendEmail({
-  //   to: email,
-  //   subject: `Welcome to Epic Notes!`,
-  //   react: <SignupEmail onboardingUrl={verifyUrl.toString()} otp={otp} />,
-  // });
+  const response = await sendEmail({
+    to: email,
+    subject: `Welcome to Chatmate!`,
+    react: <SignupEmail onboardingUrl={verifyUrl.toString()} otp={otp} />,
+  });
 
-  console.log(
-    `dummy email sent to ${email} with otp ${otp} and verifyUrl ${verifyUrl}`,
-  );
+  // console.log(
+  //   `dummy email sent to ${email} with otp ${otp} and verifyUrl ${verifyUrl}`,
+  // );
 
   // return redirect(redirectTo.toString());
 
-  return redirect(redirectTo.toString(), {
-    headers: {
-      "set-cookie": await verifySessionStorage.commitSession(verifySession),
-    },
-  });
-
   // if the email was sent successfully, redirect to the redirectTo page, otherwise return the email sending error
-  // if (response.status === "success") {
-  //   return redirect(redirectTo.toString());
-  // } else {
-  //   return json(
-  //     {
-  //       result: the error from the email sending
-  //     },
-  //     {
-  //       status: 500,
-  //     },
-  //   );
-  // }
+  if (response.status === "success") {
+    return redirect(redirectTo.toString(), {
+      headers: {
+        "set-cookie": await verifySessionStorage.commitSession(verifySession),
+      },
+    });
+  } else {
+    return json(
+      {
+        // result: submission.reply({ formErrors: [response.error.message] }),
+        result: response.error.message,
+      },
+
+      {
+        status: 500,
+      },
+    );
+  }
 };
 
 export const meta: MetaFunction = () => [{ title: "Sign Up" }];

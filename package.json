@@ -173,6 +173,7 @@
     "remix-seo": "^0.1.0",
     "remix-utils": "^7.6.0",
     "request-ip": "^3.3.0",
+    "resend": "^4.0.0",
     "satori": "^0.10.14",
     "scrapingbee": "^1.7.4",
     "shiki": "^1.12.1",
