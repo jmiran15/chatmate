@@ -23,11 +23,12 @@ import { Field } from "~/components/ui/field";
 import { prisma } from "~/db.server";
 import { sendEmail } from "~/utils/email.server";
 import { StatusButton } from "../../components/ui/status-button";
+import { EmailSchema } from "../_auth.login/route";
 import { prepareVerification } from "../verify/verify.server";
 import { ForgotPasswordEmail } from "./email";
 
 const ForgotPasswordSchema = z.object({
-  email: z.string().email(),
+  email: EmailSchema,
 });
 
 export const meta: MetaFunction = () => {

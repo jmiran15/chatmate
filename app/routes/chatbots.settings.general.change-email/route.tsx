@@ -20,23 +20,17 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { ErrorList } from "~/components/ui/error-list";
+import { Field } from "~/components/ui/field";
 import { prisma } from "~/db.server";
 import { requireUserId } from "~/session.server";
 import { StatusButton } from "../../components/ui/status-button";
-import { ErrorList, Field } from "../_auth.forgot-password/route";
+import { EmailSchema } from "../_auth.login/route";
 import {
   newEmailAddressSessionKey,
   prepareVerification,
   verifySessionStorage,
 } from "../verify/verify.server";
-
-export const EmailSchema = z
-  .string({ required_error: "Email is required" })
-  .email({ message: "Email is invalid" })
-  .min(3, { message: "Email is too short" })
-  .max(100, { message: "Email is too long" })
-  // users can type the email in any case, but we store it in lowercase
-  .transform((value) => value.toLowerCase());
 
 const ChangeEmailSchema = z.object({
   email: EmailSchema,

@@ -65,6 +65,13 @@ export async function requireUser(request: Request) {
   throw await logout(request);
 }
 
+export async function requireAnonymous(request: Request) {
+  const userId = await getUserId(request);
+  if (userId) {
+    throw redirect("/");
+  }
+}
+
 // export async function requirePaidUserId(
 //   request: Request,
 //   // redirectTo: string = new URL(request.url).pathname,
