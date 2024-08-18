@@ -22,8 +22,8 @@ import {
 } from "~/components/ui/card";
 import { prisma } from "~/db.server";
 import { requireUserId } from "~/session.server";
-import { ErrorList, Field } from "../forgot-password/route";
-import { StatusButton } from "../forgot-password/statusButton";
+import { StatusButton } from "../../components/ui/status-button";
+import { ErrorList, Field } from "../_auth.forgot-password/route";
 import {
   newEmailAddressSessionKey,
   prepareVerification,

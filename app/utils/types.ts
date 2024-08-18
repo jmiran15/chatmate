@@ -57,3 +57,5 @@ export const STEPS = {
   FILE: "file",
   BLANK: "blank",
 };
+
+export type ListOfErrors = Array<string | null | undefined> | null | undefined;

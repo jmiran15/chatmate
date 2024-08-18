@@ -24,6 +24,7 @@ import {
 import { Checkbox } from "~/components/ui/checkbox";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { GoogleIcon } from "../join/route";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -172,8 +173,13 @@ export default function LoginPage() {
               Login
             </Button>
             <Form action="/auth/google" method="post">
-              <Button type="submit" className="w-full">
-                Login with Google
+              <Button
+                type="submit"
+                className="w-full flex items-center justify-center gap-2"
+                variant="outline"
+              >
+                <GoogleIcon className="w-5 h-5" />
+                <span>Login with Google</span>
               </Button>
             </Form>
             <div className="mt-4 text-center text-sm">
