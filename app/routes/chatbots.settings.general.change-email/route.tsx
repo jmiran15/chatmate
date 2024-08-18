@@ -1,24 +1,142 @@
-import { ActionFunctionArgs } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
-import { useRef } from "react";
-import { Button } from "~/components/ui/button";
+import { getFormProps, getInputProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod";
+import {
+  ActionFunctionArgs,
+  json,
+  LoaderFunctionArgs,
+  redirect,
+} from "@remix-run/node";
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useNavigation,
+} from "@remix-run/react";
+import { z } from "zod";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { Input } from "~/components/ui/input";
+import { prisma } from "~/db.server";
+import { requireUserId } from "~/session.server";
+import { ErrorList, Field } from "../forgot-password/route";
+import { StatusButton } from "../forgot-password/statusButton";
+import {
+  newEmailAddressSessionKey,
+  prepareVerification,
+  verifySessionStorage,
+} from "../verify/verify.server";
 
-export const action = async ({ request }: ActionFunctionArgs) => {};
+export const EmailSchema = z
+  .string({ required_error: "Email is required" })
+  .email({ message: "Email is invalid" })
+  .min(3, { message: "Email is too short" })
+  .max(100, { message: "Email is too long" })
+  // users can type the email in any case, but we store it in lowercase
+  .transform((value) => value.toLowerCase());
+
+const ChangeEmailSchema = z.object({
+  email: EmailSchema,
+});
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  // await requireRecentVerification(request);
+  const userId = await requireUserId(request);
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { email: true },
+  });
+  if (!user) {
+    const params = new URLSearchParams({ redirectTo: request.url });
+    throw redirect(`/login?${params}`);
+  }
+  return json({ user });
+}
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const userId = await requireUserId(request);
+  const formData = await request.formData();
+  const submission = await parseWithZod(formData, {
+    schema: ChangeEmailSchema.superRefine(async (data, ctx) => {
+      const existingUser = await prisma.user.findUnique({
+        where: { email: data.email },
+      });
+      if (existingUser) {
+        ctx.addIssue({
+          path: ["email"],
+          code: z.ZodIssueCode.custom,
+          message: "This email is already in use.",
+        });
+      }
+    }),
+    async: true,
+  });
+
+  if (submission.status !== "success") {
+    return json(
+      { result: submission.reply() },
+      { status: submission.status === "error" ? 400 : 200 },
+    );
+  }
+
+  const { otp, redirectTo, verifyUrl } = await prepareVerification({
+    period: 10 * 60,
+    request,
+    target: userId,
+    type: "change-email",
+  });
+
+  // send the email
+  // const response = await sendEmail({
+  // 	to: submission.value.email,
+  // 	subject: `Epic Notes Email Change Verification`,
+  // 	react: <EmailChangeEmail verifyUrl={verifyUrl.toString()} otp={otp} />,
+  // })
+
+  console.log(
+    `dummy email sent to ${submission.value.email} with otp ${otp} and verifyUrl ${verifyUrl}`,
+  );
+
+  const verifySession = await verifySessionStorage.getSession();
+  verifySession.set(newEmailAddressSessionKey, submission.value.email);
+  return redirect(redirectTo.toString(), {
+    headers: {
+      "set-cookie": await verifySessionStorage.commitSession(verifySession),
+    },
+  });
+
+  // if (response.status === 'success') {
+  // const verifySession = await verifySessionStorage.getSession()
+  // verifySession.set(newEmailAddressSessionKey, submission.value.email)
+  // return redirect(redirectTo.toString(), {
+  // 	headers: {
+  // 		'set-cookie': await verifySessionStorage.commitSession(verifySession),
+  // 	},
+  // })
+  // } else {
+  // 	return json(
+  // 		{ result: submission.reply({ formErrors: [response.error.message] }) },
+  // 		{ status: 500 },
+  // 	)
+  // }
+};
 
 export default function ChangeEmail() {
   const loaderData = useLoaderData();
-  const formRef = useRef<HTMLFormElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
   const actionData = useActionData();
+  const navigation = useNavigation();
+
+  const [form, fields] = useForm({
+    id: "change-email-form",
+    constraint: getZodConstraint(ChangeEmailSchema),
+    lastResult: actionData?.result,
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: ChangeEmailSchema });
+    },
+  });
 
   return (
     <Card className="w-full max-w-lg">
@@ -27,40 +145,36 @@ export default function ChangeEmail() {
         <CardDescription>
           You will receive an email at the new email address to confirm. An
           email notice will also be sent to your old address{" "}
-          <span className="font-semibold">{`some email`}</span>
+          <span className="font-semibold">{loaderData?.user?.email}</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Form method="post" ref={formRef} className="grid gap-2">
+        <Form method="POST" {...getFormProps(form)}>
           <input type="hidden" name="intent" value="changeEmail" />
-          <Input
-            ref={emailRef}
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus={true}
-            name="email"
-            autoComplete="email"
-            aria-invalid={actionData?.errors?.email ? true : undefined}
-            aria-describedby="email-error"
-            id="email"
-            type="email"
-            placeholder="m@example.com"
-            required
-            defaultValue={loaderData?.user.email}
-          />
 
-          {actionData?.errors?.email ? (
-            <p
-              className="pt-1 text-red-700 text-sm font-medium leading-none"
-              id="email-error"
-            >
-              {actionData.errors.email}
-            </p>
-          ) : null}
+          <Field
+            labelProps={{ children: "New Email" }}
+            inputProps={{
+              ...getInputProps(fields.email, { type: "email" }),
+              autoComplete: "email",
+            }}
+            errors={fields.email.errors}
+          />
+          <ErrorList id={form.errorId} errors={form.errors} />
+          <StatusButton
+            type="submit"
+            status={
+              navigation.state === "loading"
+                ? "pending"
+                : navigation.state === "idle"
+                ? "idle"
+                : "success"
+            }
+          >
+            Send Confirmation
+          </StatusButton>
         </Form>
       </CardContent>
-      <CardFooter>
-        <Button type="submit">Send Confirmation Email</Button>
-      </CardFooter>
     </Card>
   );
 }
