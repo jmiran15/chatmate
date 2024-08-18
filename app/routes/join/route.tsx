@@ -8,9 +8,9 @@ import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import * as gtag from "~/utils/gtags.client";
 
-import { createUser, getUserByEmail } from "~/models/user.server";
-import { createUserSession, getUserId } from "~/session.server";
-import { safeRedirect, validateEmail } from "~/utils";
+import { SEOHandle } from "@nasa-gcn/remix-seo";
+import bcrypt from "bcryptjs";
+import { Loader2 } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -19,16 +19,16 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { Label } from "~/components/ui/label";
 import { Input } from "~/components/ui/input";
-import {
-  createCustomer,
-  createFreeSubscription,
-} from "~/models/subscription.server";
-import { prisma } from "~/db.server";
-import { Loader2 } from "lucide-react";
+import { Label } from "~/components/ui/label";
 import { useIsPending } from "~/hooks/use-is-pending";
-import { SEOHandle } from "@nasa-gcn/remix-seo";
+import { getUserByEmail } from "~/models/user.server";
+import { getUserId } from "~/session.server";
+import { validateEmail } from "~/utils";
+import {
+  prepareVerification,
+  verifySessionStorage,
+} from "../verify/verify.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -36,12 +36,16 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({});
 };
 
+export const joinPasswordHashSessionKey = "joinPasswordHash";
+
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = safeRedirect(formData.get("redirectTo"), "/chatbots");
 
+  // const redirectTo = safeRedirect(formData.get("redirectTo"), "/chatbots");
+
+  // TODO - do this stuff with Zod
   if (!validateEmail(email)) {
     return json(
       { errors: { email: "Email is invalid", password: null } },
@@ -76,19 +80,77 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   }
 
-  const user = await createUser(email, password);
-  await createCustomer({ userId: user.id });
-  const subscription = await prisma.subscription.findUnique({
-    where: { userId: user.id },
-  });
-  if (!subscription) await createFreeSubscription({ userId: user.id });
+  // TODO - since we are going to add email verification, set a flag to indicate not verified yet
+  // or create in a new schema model - most likely the latter
 
-  return createUserSession({
-    redirectTo,
-    remember: false,
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  // OR - we can save this info in the verificationSessionCookie (so it is consistent with the rest of the verification types)
+  // const unverifiedUser = await prisma.unverifiedUser.create({
+  //   data: {
+  //     email,
+  //     passwordHash,
+  //   },
+  // });
+
+  const verifySession = await verifySessionStorage.getSession();
+  verifySession.set(joinPasswordHashSessionKey, passwordHash);
+
+  // TODO - migrate to Paddle + don't need this here since the user hasnt been made officialy
+  // await createCustomer({ userId: user.id });
+  // const subscription = await prisma.subscription.findUnique({
+  //   where: { userId: user.id },
+  // });
+  // if (!subscription) await createFreeSubscription({ userId: user.id });
+
+  // logs the user in and redirects them to the dashboard (or the redirectTo page)
+  // return createUserSession({
+  //   redirectTo,
+  //   remember: false,
+  //   request,
+  //   userId: user.id,
+  // });
+
+  // Prepare the verification
+  const { verifyUrl, redirectTo, otp } = await prepareVerification({
+    period: 10 * 60,
     request,
-    userId: user.id,
+    type: "onboarding",
+    target: email,
   });
+
+  // send the verification email
+  // const response = await sendEmail({
+  //   to: email,
+  //   subject: `Welcome to Epic Notes!`,
+  //   react: <SignupEmail onboardingUrl={verifyUrl.toString()} otp={otp} />,
+  // });
+
+  console.log(
+    `dummy email sent to ${email} with otp ${otp} and verifyUrl ${verifyUrl}`,
+  );
+
+  // return redirect(redirectTo.toString());
+
+  return redirect(redirectTo.toString(), {
+    headers: {
+      "set-cookie": await verifySessionStorage.commitSession(verifySession),
+    },
+  });
+
+  // if the email was sent successfully, redirect to the redirectTo page, otherwise return the email sending error
+  // if (response.status === "success") {
+  //   return redirect(redirectTo.toString());
+  // } else {
+  //   return json(
+  //     {
+  //       result: the error from the email sending
+  //     },
+  //     {
+  //       status: 500,
+  //     },
+  //   );
+  // }
 };
 
 export const meta: MetaFunction = () => [{ title: "Sign Up" }];
@@ -181,6 +243,12 @@ export default function Join() {
                 "Create an account"
               )}
             </Button>
+
+            <Form action="/auth/google" method="post">
+              <Button type="submit" className="w-full">
+                Login with Google
+              </Button>
+            </Form>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
               <Link to="/login" className="underline">

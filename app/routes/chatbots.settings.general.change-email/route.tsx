@@ -1,10 +1,6 @@
-import {
-  Form,
-  useActionData,
-  useLoaderData,
-  useSubmit,
-} from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { ActionFunctionArgs } from "@remix-run/node";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { useRef } from "react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -16,25 +12,22 @@ import {
 } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
 
-export default function ChangeEmail() {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-  const actionData = useActionData();
-  const loaderData = useLoaderData();
-  const submit = useSubmit();
+export const action = async ({ request }: ActionFunctionArgs) => {};
 
-  useEffect(() => {
-    if (actionData?.errors?.email) {
-      emailRef.current?.focus();
-    }
-  }, [actionData]);
+export default function ChangeEmail() {
+  const loaderData = useLoaderData();
+  const formRef = useRef<HTMLFormElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const actionData = useActionData();
 
   return (
-    <Card x-chunk="dashboard-04-chunk-1">
+    <Card className="w-full max-w-lg">
       <CardHeader>
-        <CardTitle>Email</CardTitle>
+        <CardTitle>Change Email</CardTitle>
         <CardDescription>
-          This is the email that will be used to login to your account.
+          You will receive an email at the new email address to confirm. An
+          email notice will also be sent to your old address{" "}
+          <span className="font-semibold">{`some email`}</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -65,8 +58,8 @@ export default function ChangeEmail() {
           ) : null}
         </Form>
       </CardContent>
-      <CardFooter className="border-t px-6 py-4">
-        <Button onClick={() => submit(formRef.current)}>Save</Button>
+      <CardFooter>
+        <Button type="submit">Send Confirmation Email</Button>
       </CardFooter>
     </Card>
   );

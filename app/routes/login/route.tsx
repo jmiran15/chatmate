@@ -4,15 +4,16 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Link, useActionData, Form, useSearchParams } from "@remix-run/react";
+import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import * as gtag from "~/utils/gtags.client";
 
+import { Button } from "~/components/ui/button";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
-import { Button } from "~/components/ui/button";
 
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 import {
   Card,
   CardContent,
@@ -20,9 +21,9 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { Checkbox } from "~/components/ui/checkbox";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
-import { SEOHandle } from "@nasa-gcn/remix-seo";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await getUserId(request);
@@ -155,10 +156,26 @@ export default function LoginPage() {
               ) : null}
             </div>
             <input type="hidden" name="redirectTo" value={redirectTo} />
+            <div className="flex justify-between">
+              <div className="flex items-center space-x-2">
+                <Checkbox id="remember" />
+                <Label htmlFor="remember">Remember me</Label>
+              </div>
+              <div>
+                <Label asChild>
+                  <Link to="/forgot-password">Forgot password?</Link>
+                </Label>
+              </div>
+            </div>
 
             <Button type="submit" className="w-full">
               Login
             </Button>
+            <Form action="/auth/google" method="post">
+              <Button type="submit" className="w-full">
+                Login with Google
+              </Button>
+            </Form>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
               <Link to="/join" className="underline">

@@ -62,6 +62,8 @@ export async function verifyLogin(
     },
   });
 
+  console.log("userWithPassword", userWithPassword);
+
   if (!userWithPassword || !userWithPassword.password) {
     return null;
   }
