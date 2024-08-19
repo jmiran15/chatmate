@@ -6,13 +6,9 @@ import {
   LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
-import {
-  Form,
-  useActionData,
-  useLoaderData,
-  useNavigation,
-} from "@remix-run/react";
+import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
 import { z } from "zod";
+import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -22,17 +18,19 @@ import {
 } from "~/components/ui/card";
 import { ErrorList } from "~/components/ui/error-list";
 import { Field } from "~/components/ui/field";
+import { StatusButton } from "~/components/ui/status-button";
 import { prisma } from "~/db.server";
+import { useIsPending } from "~/hooks/use-is-pending";
 import { requireUserId } from "~/session.server";
-import { StatusButton } from "../../components/ui/status-button";
-import { EmailSchema } from "../_auth.login/route";
+import { EmailSchema } from "~/utils/types";
 import {
   newEmailAddressSessionKey,
   prepareVerification,
   verifySessionStorage,
-} from "../verify/verify.server";
+} from "../_auth.verify/verify.server";
 
 const ChangeEmailSchema = z.object({
+  intent: z.string().optional(),
   email: EmailSchema,
 });
 
@@ -121,52 +119,61 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export default function ChangeEmail() {
   const loaderData = useLoaderData();
   const actionData = useActionData();
-  const navigation = useNavigation();
+  const isPending = useIsPending({ intent: "changeEmail" });
 
   const [form, fields] = useForm({
     id: "change-email-form",
     constraint: getZodConstraint(ChangeEmailSchema),
     lastResult: actionData?.result,
+    defaultValue: {
+      intent: "changeEmail",
+    },
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: ChangeEmailSchema });
     },
+    shouldRevalidate: "onBlur",
   });
 
   return (
     <Card className="w-full max-w-lg">
-      <CardHeader>
-        <CardTitle>Change Email</CardTitle>
-        <CardDescription>
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl font-bold">Change Email</CardTitle>
+        <CardDescription className="text-sm text-gray-500">
           You will receive an email at the new email address to confirm. An
           email notice will also be sent to your old address{" "}
           <span className="font-semibold">{loaderData?.user?.email}</span>
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Form method="POST" {...getFormProps(form)}>
+        <Form
+          method="POST"
+          {...getFormProps(form)}
+          className="flex flex-col gap-4 sm:gap-6"
+        >
           <input type="hidden" name="intent" value="changeEmail" />
-
           <Field
             labelProps={{ children: "New Email" }}
             inputProps={{
               ...getInputProps(fields.email, { type: "email" }),
               autoComplete: "email",
+              className: "lowercase",
             }}
             errors={fields.email.errors}
           />
           <ErrorList id={form.errorId} errors={form.errors} />
-          <StatusButton
-            type="submit"
-            status={
-              navigation.state === "loading"
-                ? "pending"
-                : navigation.state === "idle"
-                ? "idle"
-                : "success"
-            }
-          >
-            Send Confirmation
-          </StatusButton>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <Button variant="outline" asChild className="w-full sm:w-auto">
+              <Link to="/chatbots/settings/general">Cancel</Link>
+            </Button>
+            <StatusButton
+              type="submit"
+              className="w-full sm:w-auto"
+              status={isPending ? "pending" : form.status ?? "idle"}
+              disabled={isPending}
+            >
+              Send Confirmation
+            </StatusButton>
+          </div>
         </Form>
       </CardContent>
     </Card>

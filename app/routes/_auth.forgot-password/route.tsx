@@ -14,7 +14,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
@@ -22,9 +21,10 @@ import { ErrorList } from "~/components/ui/error-list";
 import { Field } from "~/components/ui/field";
 import { prisma } from "~/db.server";
 import { sendEmail } from "~/utils/email.server";
+import { EmailSchema } from "~/utils/types";
 import { StatusButton } from "../../components/ui/status-button";
-import { EmailSchema } from "../_auth.login/route";
-import { prepareVerification } from "../verify/verify.server";
+
+import { prepareVerification } from "../_auth.verify/verify.server";
 import { ForgotPasswordEmail } from "./email";
 
 const ForgotPasswordSchema = z.object({
@@ -112,11 +112,11 @@ export default function ForgotPassword() {
   });
 
   return (
-    <Card className="w-full max-w-[90%] sm:max-w-md md:max-w-lg">
-      <CardHeader>
-        <CardTitle>Forgot Password</CardTitle>
-        <CardDescription>
-          Don&apos;t worry! Fill in your email and we&apos;ll send you a link to
+    <Card className="w-full max-w-[90%] sm:max-w-sm shadow-lg">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl font-bold">Forgot Password</CardTitle>
+        <CardDescription className="text-sm text-gray-500">
+          Don&apos;t worry! Enter your email and we&apos;ll send you a link to
           reset your password.
         </CardDescription>
       </CardHeader>
@@ -125,43 +125,41 @@ export default function ForgotPassword() {
           method="post"
           {...getFormProps(form)}
           ref={formRef}
-          className="space-y-4"
+          className="flex flex-col gap-4 sm:gap-6"
         >
-          <div>
-            <Field
-              labelProps={{
-                htmlFor: fields.email.id,
-                children: "Email",
-              }}
-              inputProps={{
-                autoFocus: true,
-                ...getInputProps(fields.email, { type: "text" }),
-              }}
-              errors={fields.email.errors}
-            />
-          </div>
+          <Field
+            labelProps={{
+              htmlFor: fields.email.id,
+              children: "Email",
+            }}
+            inputProps={{
+              autoFocus: true,
+              ...getInputProps(fields.email, { type: "email" }),
+              className: "lowercase",
+            }}
+            errors={fields.email.errors}
+          />
           <ErrorList errors={form.errors} id={form.errorId} />
+
+          <div className="flex flex-col gap-2 sm:gap-4">
+            <StatusButton
+              status={
+                forgotPassword.state === "submitting"
+                  ? "pending"
+                  : form.status ?? "idle"
+              }
+              type="submit"
+              disabled={forgotPassword.state !== "idle"}
+              className="w-full"
+            >
+              Recover password
+            </StatusButton>
+            <Button variant="outline" asChild className="w-full">
+              <Link to="/login">Back to Login</Link>
+            </Button>
+          </div>
         </forgotPassword.Form>
       </CardContent>
-      <CardFooter className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-        <Button variant="secondary" asChild className="w-full sm:w-auto">
-          <Link to="/login">Back to Login</Link>
-        </Button>
-        <StatusButton
-          status={
-            forgotPassword.state === "submitting"
-              ? "pending"
-              : form.status ?? "idle"
-          }
-          onClick={() => {
-            forgotPassword.submit(formRef.current);
-          }}
-          disabled={forgotPassword.state !== "idle"}
-          className="w-full sm:w-auto"
-        >
-          Recover password
-        </StatusButton>
-      </CardFooter>
     </Card>
   );
 }

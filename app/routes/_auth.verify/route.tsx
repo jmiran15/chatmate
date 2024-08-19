@@ -3,8 +3,17 @@ import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { type ActionFunctionArgs } from "@remix-run/node";
 import { Form, useActionData, useSearchParams } from "@remix-run/react";
 import { z } from "zod";
-import { Button } from "~/components/ui/button";
-import { ErrorList, OTPField } from "./otpField";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
+import { ErrorList } from "~/components/ui/error-list";
+import { StatusButton } from "~/components/ui/status-button";
+import { useIsPending } from "~/hooks/use-is-pending";
+import { OTPField } from "./otpField";
 import { validateRequest } from "./verify.server";
 
 export const codeQueryParam = "code"; // so we can get the OTP code in search params
@@ -20,6 +29,7 @@ export const VerifySchema = z.object({
   [typeQueryParam]: VerificationTypeSchema,
   [targetQueryParam]: z.string(),
   [redirectToQueryParam]: z.string().optional(),
+  intent: z.string().optional(),
 });
 
 // on submit
@@ -36,6 +46,7 @@ export default function VerifyRoute() {
     searchParams.get(typeQueryParam),
   );
   const type = parseWithZoddType.success ? parseWithZoddType.data : null;
+  const isPending = useIsPending({ intent: "verifyOTP" });
 
   const checkEmail = (
     <>
@@ -65,57 +76,71 @@ export default function VerifyRoute() {
       type: type,
       target: searchParams.get(targetQueryParam),
       redirectTo: searchParams.get(redirectToQueryParam),
+      intent: "verifyOTP",
     },
   });
 
   return (
-    <main className="container flex flex-col justify-center pb-32 pt-20">
-      <div className="text-center">
-        {type ? headings[type] : "Invalid Verification Type"}
-      </div>
-
-      <div className="mx-auto flex w-72 max-w-full flex-col justify-center gap-1">
-        <div>
-          <ErrorList errors={form.errors} id={form.errorId} />
-        </div>
-        <div className="flex w-full gap-2">
-          <Form method="POST" {...getFormProps(form)} className="flex-1">
-            <div className="flex items-center justify-center">
-              <OTPField
-                labelProps={{
-                  htmlFor: fields[codeQueryParam].id,
-                  children: "Code",
-                }}
-                inputProps={{
-                  ...getInputProps(fields[codeQueryParam], { type: "text" }),
-                  autoComplete: "one-time-code",
-                  autoFocus: true,
-                }}
-                errors={fields[codeQueryParam].errors}
-              />
-            </div>
-            <input
-              {...getInputProps(fields[typeQueryParam], { type: "hidden" })}
+    <Card className="w-full max-w-[90%] sm:max-w-sm shadow-lg">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl font-bold">
+          {type ? "Check your email" : "Invalid Verification Type"}
+        </CardTitle>
+        <CardDescription className="text-sm text-gray-500">
+          {type
+            ? "We've sent you a code to verify your email address."
+            : "Please try again or contact support."}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form
+          method="POST"
+          {...getFormProps(form)}
+          className="flex flex-col gap-4 sm:gap-6"
+        >
+          <div>
+            <ErrorList errors={form.errors} id={form.errorId} />
+          </div>
+          <div className="flex items-center justify-center">
+            <OTPField
+              labelProps={{
+                htmlFor: fields[codeQueryParam].id,
+                children: "Code",
+              }}
+              inputProps={{
+                ...getInputProps(fields[codeQueryParam], { type: "text" }),
+                autoComplete: "one-time-code",
+                autoFocus: true,
+              }}
+              errors={fields[codeQueryParam].errors}
             />
-            <input
-              {...getInputProps(fields[targetQueryParam], { type: "hidden" })}
-            />
-            <input
-              {...getInputProps(fields[redirectToQueryParam], {
-                type: "hidden",
-              })}
-            />
-            <Button
-              className="w-full"
-              //   status={isPending ? "pending" : form.status ?? "idle"}
-              type="submit"
-              //   disabled={isPending}
-            >
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-    </main>
+          </div>
+          <input
+            {...getInputProps(fields[typeQueryParam], { type: "hidden" })}
+          />
+          <input
+            {...getInputProps(fields[targetQueryParam], { type: "hidden" })}
+          />
+          <input
+            {...getInputProps(fields[redirectToQueryParam], {
+              type: "hidden",
+            })}
+          />
+          <input
+            {...getInputProps(fields.intent, {
+              type: "hidden",
+            })}
+          />
+          <StatusButton
+            className="w-full"
+            status={isPending ? "pending" : form.status ?? "idle"}
+            type="submit"
+            disabled={isPending}
+          >
+            Submit
+          </StatusButton>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }

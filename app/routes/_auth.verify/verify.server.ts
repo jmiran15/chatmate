@@ -25,7 +25,7 @@ export function getDomainUrl(request: Request) {
 }
 
 import { createCookieSessionStorage } from "@remix-run/node";
-import { joinPasswordHashSessionKey } from "../join/route";
+import { joinPasswordHashSessionKey } from "../_auth.join/route";
 
 export const verifySessionStorage = createCookieSessionStorage({
   cookie: {
@@ -203,12 +203,6 @@ export async function handleOnboardingVerification({
     "Submission should be successful by now",
   );
   const email = submission.value.target;
-
-  // find the unverified user
-  // const unverifiedUser = await prisma.unverifiedUser.findFirst({
-  //   where: { email },
-  //   orderBy: { createdAt: "desc" },
-  // });
 
   const verifySession = await verifySessionStorage.getSession(
     request.headers.get("cookie"),

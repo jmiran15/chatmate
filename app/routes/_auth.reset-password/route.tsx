@@ -9,28 +9,29 @@ import {
   redirect,
   type ActionFunctionArgs,
 } from "@remix-run/node";
-import { Link, useActionData, useFetcher } from "@remix-run/react";
-import { useRef } from "react";
+import { Form, Link, useActionData } from "@remix-run/react";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { ErrorList } from "~/components/ui/error-list";
+import { Field } from "~/components/ui/field";
+import { StatusButton } from "~/components/ui/status-button";
 import { prisma } from "~/db.server";
-import { StatusButton } from "../../components/ui/status-button";
-import { ErrorList, Field } from "../_auth.forgot-password/route";
+import { useIsPending } from "~/hooks/use-is-pending";
 import {
   resetPasswordEmailSessionKey,
   verifySessionStorage,
-} from "../verify/verify.server";
+} from "../_auth.verify/verify.server";
 
 const ChangePasswordSchema = z
   .object({
+    intent: z.string().optional(),
     newPassword: z
       .string()
       .min(8, "New password must be at least 8 characters"),
@@ -99,14 +100,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 export default function ChangePasswordPage() {
   const actionData = useActionData<typeof action>();
-  const formRef = useRef<HTMLFormElement>(null);
-  const resetPassword = useFetcher();
-
-  const isPending = resetPassword.state === "submitting";
+  const isPending = useIsPending({ intent: "resetPassword" });
 
   const [form, fields] = useForm({
     id: "reset-password",
     constraint: getZodConstraint(ChangePasswordSchema),
+    defaultValue: {
+      intent: "resetPassword",
+    },
     lastResult: actionData?.result,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: ChangePasswordSchema });
@@ -115,67 +116,66 @@ export default function ChangePasswordPage() {
   });
 
   return (
-    <div className="flex justify-center items-center h-screen p-4">
-      <Card className="w-full max-w-lg ">
-        <CardHeader>
-          <CardTitle>Password Reset</CardTitle>
-          <CardDescription>
-            Hi, fgfvbcf. No worries. It happens all the time.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <resetPassword.Form
-            method="post"
-            ref={formRef}
-            {...getFormProps(form)}
-          >
-            <div className="space-y-4">
-              <Field
-                labelProps={{
-                  htmlFor: fields.newPassword.id,
-                  children: "New Password",
-                }}
-                inputProps={{
-                  ...getInputProps(fields.newPassword, { type: "password" }),
-                  autoComplete: "new-password",
-                  autoFocus: true,
-                }}
-                errors={fields.newPassword.errors}
-              />
-              <Field
-                labelProps={{
-                  htmlFor: fields.confirmPassword.id,
-                  children: "Confirm Password",
-                }}
-                inputProps={{
-                  ...getInputProps(fields.confirmPassword, {
-                    type: "password",
-                  }),
-                  autoComplete: "new-password",
-                }}
-                errors={fields.confirmPassword.errors}
-              />
+    <Card className="w-full max-w-[90%] sm:max-w-sm shadow-lg">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
+        <CardDescription className="text-sm text-gray-500">
+          Enter your new password below.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form
+          method="post"
+          {...getFormProps(form)}
+          className="flex flex-col gap-4 sm:gap-6"
+        >
+          <Field
+            labelProps={{
+              htmlFor: fields.newPassword.id,
+              children: "New Password",
+            }}
+            inputProps={{
+              ...getInputProps(fields.newPassword, { type: "password" }),
+              autoComplete: "new-password",
+              autoFocus: true,
+            }}
+            errors={fields.newPassword.errors}
+          />
+          <Field
+            labelProps={{
+              htmlFor: fields.confirmPassword.id,
+              children: "Confirm Password",
+            }}
+            inputProps={{
+              ...getInputProps(fields.confirmPassword, {
+                type: "password",
+              }),
+              autoComplete: "new-password",
+            }}
+            errors={fields.confirmPassword.errors}
+          />
+          <input
+            {...getInputProps(fields.intent, {
+              type: "hidden",
+            })}
+          />
+          <ErrorList errors={form.errors} id={form.errorId} />
 
-              <ErrorList errors={form.errors} id={form.errorId} />
-            </div>
-          </resetPassword.Form>
-        </CardContent>
-        <CardFooter className="flex items-center justify-between">
-          <Button variant="secondary" asChild>
-            <Link to="/chatbots/settings/general">Cancel</Link>
-          </Button>
-
-          <StatusButton
-            className="w-full"
-            status={isPending ? "pending" : form.status ?? "idle"}
-            type="submit"
-            disabled={isPending}
-            onClick={() => resetPassword.submit(formRef.current)}
-          >
-            Reset password
-          </StatusButton>
-        </CardFooter>
-      </Card>
-    </div>
+          <div className="flex flex-col gap-2 sm:gap-4">
+            <StatusButton
+              className="w-full"
+              status={isPending ? "pending" : form.status ?? "idle"}
+              type="submit"
+              disabled={isPending}
+            >
+              Reset password
+            </StatusButton>
+            <Button variant="outline" asChild className="w-full">
+              <Link to="/login">Back to Login</Link>
+            </Button>
+          </div>
+        </Form>
+      </CardContent>
+    </Card>
   );
 }

@@ -28,21 +28,11 @@ import { Field } from "~/components/ui/field";
 import { Label } from "~/components/ui/label";
 import { StatusButton } from "~/components/ui/status-button";
 import { useIsPending } from "~/hooks/use-is-pending";
-import { GoogleIcon } from "../join/route";
-
-export const PasswordSchema = z
-  .string({ required_error: "Password is required" })
-  .min(6, { message: "Password is too short" })
-  .max(100, { message: "Password is too long" });
-
-export const EmailSchema = z
-  .string({ required_error: "Email is required" })
-  .email({ message: "Email is invalid" })
-  .min(3, { message: "Email is too short" })
-  .max(100, { message: "Email is too long" })
-  .transform((value) => value.toLowerCase());
+import { EmailSchema, PasswordSchema } from "~/utils/types";
+import { GoogleIcon } from "../_auth.join/route";
 
 const LoginFormSchema = z.object({
+  intent: z.string().optional(),
   email: EmailSchema,
   password: PasswordSchema,
   redirectTo: z.string().optional(),

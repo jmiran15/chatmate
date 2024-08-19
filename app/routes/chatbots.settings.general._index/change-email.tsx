@@ -1,10 +1,4 @@
-import {
-  Link,
-  useActionData,
-  useLoaderData,
-  useSubmit,
-} from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -15,17 +9,7 @@ import {
 } from "~/components/ui/card";
 
 export default function ChangeEmail() {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-  const actionData = useActionData();
   const loaderData = useLoaderData();
-  const submit = useSubmit();
-
-  useEffect(() => {
-    if (actionData?.errors?.email) {
-      emailRef.current?.focus();
-    }
-  }, [actionData]);
 
   return (
     <Card x-chunk="dashboard-04-chunk-1">
