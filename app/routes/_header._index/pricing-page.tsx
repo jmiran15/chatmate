@@ -1,8 +1,13 @@
-import { Button, buttonVariants } from "../../components/ui/button";
-import { Container } from "~/components/landing/container";
-import { cn } from "~/lib/utils";
-import { Form, Link } from "@remix-run/react";
 import { Price, User } from "@prisma/client";
+import { Form, Link } from "@remix-run/react";
+import { Loader2 } from "lucide-react";
+import { Container } from "~/components/landing/container";
+import { useIsPending } from "~/hooks/use-is-pending";
+import { cn } from "~/lib/utils";
+import { useOptionalUser } from "~/utils";
+import H2 from "../../components/landing/h2";
+import H3 from "../../components/landing/h3";
+import { Button, buttonVariants } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,11 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import H2 from "../../components/landing/h2";
-import H3 from "../../components/landing/h3";
-import { useOptionalUser } from "~/utils";
-import { Loader2 } from "lucide-react";
-import { useIsPending } from "~/hooks/use-is-pending";
 
 export const PLANS = {
   FREE: `free`,

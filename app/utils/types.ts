@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export class Document {
   id?: string;
   content: string;
@@ -57,3 +59,17 @@ export const STEPS = {
   FILE: "file",
   BLANK: "blank",
 };
+
+export type ListOfErrors = Array<string | null | undefined> | null | undefined;
+
+export const PasswordSchema = z
+  .string({ required_error: "Password is required" })
+  .min(6, { message: "Password is too short" })
+  .max(100, { message: "Password is too long" });
+
+export const EmailSchema = z
+  .string({ required_error: "Email is required" })
+  .email({ message: "Email is invalid" })
+  .min(3, { message: "Email is too short" })
+  .max(100, { message: "Email is too long" })
+  .transform((value) => value.toLowerCase());

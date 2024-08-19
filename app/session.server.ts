@@ -17,7 +17,7 @@ export const sessionStorage = createCookieSessionStorage({
   },
 });
 
-const USER_SESSION_KEY = "userId";
+export const USER_SESSION_KEY = "userId";
 
 export async function getSession(request: Request) {
   const cookie = request.headers.get("Cookie");
@@ -28,6 +28,7 @@ export async function getUserId(
   request: Request,
 ): Promise<User["id"] | undefined> {
   const session = await getSession(request);
+
   const userId = session.get(USER_SESSION_KEY);
   return userId;
 }
@@ -46,6 +47,7 @@ export async function requireUserId(
   request: Request,
   redirectTo: string = new URL(request.url).pathname,
 ) {
+  console.log("request", request);
   const userId = await getUserId(request);
   if (!userId) {
     const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
@@ -61,6 +63,13 @@ export async function requireUser(request: Request) {
   if (user) return user;
 
   throw await logout(request);
+}
+
+export async function requireAnonymous(request: Request) {
+  const userId = await getUserId(request);
+  if (userId) {
+    throw redirect("/");
+  }
 }
 
 // export async function requirePaidUserId(

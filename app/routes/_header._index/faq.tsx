@@ -1,8 +1,4 @@
 import { Link } from "@remix-run/react";
-import { buttonVariants } from "../../components/ui/button";
-import { Container } from "../../components/landing/container";
-import H2 from "../../components/landing/h2";
-import H3 from "../../components/landing/h3";
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +6,10 @@ import {
   AccordionTrigger,
 } from "~/components/ui/accordion";
 import { cn } from "~/lib/utils";
+import { Container } from "../../components/landing/container";
+import H2 from "../../components/landing/h2";
+import H3 from "../../components/landing/h3";
+import { buttonVariants } from "../../components/ui/button";
 
 const faqs = [
   {
@@ -32,7 +32,7 @@ const faqs = [
     question:
       "Can I use Chatmate if my website is on Webflow, Wix, Framer, Wordpress, Shopify, etc…?",
     answer:
-      "Yes, you can embed Chatmate on any platform that allows you to add custom code to your website. If you face any troubles while embedding, or have questions, feel free to contact us at help@chatmate.so",
+      "Yes, you can embed Chatmate on any platform that allows you to add custom code to your website. If you face any troubles while embedding, or have questions, feel free to contact us at jonathan@chatmate.so",
   },
   {
     question: "Can Chatmate be customized to match my website’s style?",
@@ -42,7 +42,7 @@ const faqs = [
   {
     question: "What kind of support does Chatmate offer if I encounter issues?",
     answer:
-      "For any issues or queries, you can reach us at help@chatmate.so, and our team will assist you promptly. We are committed to ensuring a smooth experience with Chatmate and are always ready to help with any challenges you may face.",
+      "For any issues or queries, you can reach us at jonathan@chatmate.so, and our team will assist you promptly. We are committed to ensuring a smooth experience with Chatmate and are always ready to help with any challenges you may face.",
   },
 
   {
@@ -63,13 +63,13 @@ export function Faqs() {
               Have a question? We have answers. If you can’t find what you’re
               looking for, email our support team at{" "}
               <Link
-                to="mailto:help@chatmate.so"
+                to="mailto:jonathan@chatmate.so"
                 className={cn(
                   buttonVariants({ variant: "link" }),
                   "inline-block text-xl p-0",
                 )}
               >
-                help@chatmate.so
+                jonathan@chatmate.so
               </Link>
             </H3>
           </div>
