@@ -39,29 +39,28 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function VerifyRoute() {
-  // TODO - add pending states
   const [searchParams] = useSearchParams();
   const actionData = useActionData<typeof action>();
-  const parseWithZoddType = VerificationTypeSchema.safeParse(
+  const parseWithZodType = VerificationTypeSchema.safeParse(
     searchParams.get(typeQueryParam),
   );
-  const type = parseWithZoddType.success ? parseWithZoddType.data : null;
+  const type = parseWithZodType.success ? parseWithZodType.data : null;
   const isPending = useIsPending({ intent: "verifyOTP" });
 
-  const checkEmail = (
-    <>
-      <h1 className="text-h1">Check your email</h1>
-      <p className="mt-3 text-body-md text-muted-foreground">
-        We've sent you a code to verify your email address.
-      </p>
-    </>
-  );
+  // const checkEmail = (
+  //   <>
+  //     <h1 className="text-h1">Check your email</h1>
+  //     <p className="mt-3 text-body-md text-muted-foreground">
+  //       We've sent you a code to verify your email address.
+  //     </p>
+  //   </>
+  // );
 
-  const headings: Record<VerificationTypes, React.ReactNode> = {
-    onboarding: checkEmail,
-    "reset-password": checkEmail,
-    "change-email": checkEmail,
-  };
+  // const headings: Record<VerificationTypes, React.ReactNode> = {
+  //   onboarding: checkEmail,
+  //   "reset-password": checkEmail,
+  //   "change-email": checkEmail,
+  // };
 
   // conform - https://conform.guide/tutorial
   const [form, fields] = useForm({

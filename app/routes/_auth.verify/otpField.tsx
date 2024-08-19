@@ -1,5 +1,6 @@
 import { REGEXP_ONLY_DIGITS_AND_CHARS, type OTPInputProps } from "input-otp";
 import React, { useId } from "react";
+import { ErrorList } from "~/components/ui/error-list";
 import {
   InputOTP,
   InputOTPGroup,
@@ -23,7 +24,7 @@ export function OTPField({
 }) {
   const fallbackId = useId();
   const id = inputProps.id ?? fallbackId;
-  const errorId = errors?.length ? `${id}-error` : undefined;
+  const errorId = errors?.length ?? 0 > 0 ? `${id}-error` : undefined;
   return (
     <div className={className}>
       <Label htmlFor={id} {...labelProps} />

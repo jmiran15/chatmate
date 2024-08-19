@@ -7,12 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { loader } from "./route";
 
-export default function ChangeEmail() {
-  const loaderData = useLoaderData();
+export default function AccountDetails() {
+  const loaderData = useLoaderData<typeof loader>();
 
   return (
-    <Card x-chunk="dashboard-04-chunk-1">
+    <Card>
       <CardHeader>
         <CardTitle>Account details</CardTitle>
         <CardDescription>Change your account details here.</CardDescription>

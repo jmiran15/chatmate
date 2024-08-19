@@ -7,7 +7,7 @@ export function ErrorList({
   errors?: ListOfErrors;
   id?: string;
 }) {
-  const errorsToRender = errors?.filter(Boolean);
+  const errorsToRender = errors?.filter(Boolean) ?? [];
   if (!errorsToRender?.length) return null;
   return (
     <ul id={id} className="flex flex-col gap-1">

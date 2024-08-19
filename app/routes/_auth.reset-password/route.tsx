@@ -24,6 +24,7 @@ import { Field } from "~/components/ui/field";
 import { StatusButton } from "~/components/ui/status-button";
 import { prisma } from "~/db.server";
 import { useIsPending } from "~/hooks/use-is-pending";
+import { requireAnonymous } from "~/session.server";
 import {
   resetPasswordEmailSessionKey,
   verifySessionStorage,
@@ -47,7 +48,7 @@ export const meta: MetaFunction = () => {
 };
 
 async function requireResetPasswordEmail(request: Request) {
-  // await requireAnonymous(request); TODO - make sure the user is logged out
+  await requireAnonymous(request);
   const verifySession = await verifySessionStorage.getSession(
     request.headers.get("cookie"),
   );
@@ -79,16 +80,29 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-  await prisma.user.update({
-    where: { email: resetPasswordEmail },
-    data: {
-      password: {
-        update: {
-          hash: hashedPassword,
+  try {
+    await prisma.user.update({
+      where: { email: resetPasswordEmail },
+      data: {
+        password: {
+          update: {
+            hash: hashedPassword,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (error) {
+    console.error("Error updating password:", error);
+    return json(
+      {
+        result: {
+          status: "error",
+          message: "Failed to update password. Please try again.",
+        },
+      },
+      { status: 500 },
+    );
+  }
 
   const verifySession = await verifySessionStorage.getSession();
   return redirect("/login", {

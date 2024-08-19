@@ -66,12 +66,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const { email } = submission.value;
 
-  // TODO - is this needed?
-  const user = await prisma.user.findUniqueOrThrow({
-    where: { email },
-    select: { email: true },
-  });
-
   const { verifyUrl, redirectTo, otp } = await prepareVerification({
     period: 10 * 60,
     request,
@@ -80,7 +74,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   });
 
   const response = await sendEmail({
-    to: user.email,
+    to: email,
     subject: `Chatmate Password Reset`,
     react: (
       <ForgotPasswordEmail onboardingUrl={verifyUrl.toString()} otp={otp} />
@@ -135,7 +129,6 @@ export default function ForgotPassword() {
             inputProps={{
               autoFocus: true,
               ...getInputProps(fields.email, { type: "email" }),
-              className: "lowercase",
             }}
             errors={fields.email.errors}
           />

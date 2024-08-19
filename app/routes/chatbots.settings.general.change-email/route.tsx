@@ -84,7 +84,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const response = await sendEmail({
     to: submission.value.email,
-    subject: `Epic Notes Email Change Verification`,
+    subject: `Chatmate Email Change Verification`,
     react: <EmailChangeEmail verifyUrl={verifyUrl.toString()} otp={otp} />,
   });
 
@@ -105,8 +105,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function ChangeEmail() {
-  const loaderData = useLoaderData();
-  const actionData = useActionData();
+  const loaderData = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
   const isPending = useIsPending({ intent: "changeEmail" });
 
   const [form, fields] = useForm({

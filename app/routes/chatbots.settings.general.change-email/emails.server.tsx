@@ -49,11 +49,9 @@ export async function handleChangeEmailVerification({
 
   void sendEmail({
     to: preUpdateUser.email,
-    subject: "Epic Stack email changed",
+    subject: "Chatmate email changed",
     react: <EmailChangeNoticeEmail userId={user.id} />,
   });
-
-  console.log("Email changed");
 
   return redirect("/chatbots/settings/general", {
     headers: {

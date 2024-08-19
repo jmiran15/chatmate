@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import ChangeEmail from "./change-email";
+import AccountDetails from "./change-email";
 import DeleteAccount from "./delete-account";
 
 import { SEOHandle } from "@nasa-gcn/remix-seo";
@@ -11,8 +11,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function GeneralSettings() {
   return (
-    <div className="grid gap-6 ">
-      <ChangeEmail />
+    <div className="grid gap-6">
+      <AccountDetails />
       <DeleteAccount />
     </div>
   );

@@ -54,7 +54,6 @@ export function CheckboxField({
             input.blur();
             buttonProps.onBlur?.(event);
           }}
-          type="button"
         />
         <Label htmlFor={id} {...labelProps} />
       </div>
