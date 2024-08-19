@@ -10,6 +10,7 @@ import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { SEOHandle } from "@nasa-gcn/remix-seo";
 import bcrypt from "bcryptjs";
+import SignupEmail from "emails/sign-up";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import {
@@ -31,7 +32,6 @@ import {
   prepareVerification,
   verifySessionStorage,
 } from "../_auth.verify/verify.server";
-import { SignupEmail } from "./email";
 
 export const joinPasswordHashSessionKey = "joinPasswordHash";
 

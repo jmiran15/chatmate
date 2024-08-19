@@ -1,6 +1,6 @@
 import * as E from "@react-email/components";
 
-export function ForgotPasswordEmail({
+export default function ForgotPasswordEmail({
   onboardingUrl,
   otp,
 }: {

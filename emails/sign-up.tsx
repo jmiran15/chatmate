@@ -1,6 +1,6 @@
 import * as E from "@react-email/components";
 
-export function SignupEmail({
+export default function SignupEmail({
   onboardingUrl,
   otp,
 }: {

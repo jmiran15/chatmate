@@ -7,6 +7,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { Form, Link, useActionData, useLoaderData } from "@remix-run/react";
+import EmailChangeEmail from "emails/change-email";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import {
@@ -28,7 +29,7 @@ import {
   prepareVerification,
   verifySessionStorage,
 } from "../_auth.verify/verify.server";
-import { EmailChangeEmail, newEmailAddressSessionKey } from "./emails.server";
+import { newEmailAddressSessionKey } from "./emails.server";
 
 const ChangeEmailSchema = z.object({
   intent: z.string().optional(),
