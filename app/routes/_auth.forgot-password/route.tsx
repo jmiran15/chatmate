@@ -24,7 +24,7 @@ import { sendEmail } from "~/utils/email.server";
 import { EmailSchema } from "~/utils/types";
 import { StatusButton } from "../../components/ui/status-button";
 
-import ForgotPasswordEmail from "../../../emails/forgot-password";
+import ForgotPasswordEmail from "../../../emails/forgotPassword";
 import { prepareVerification } from "../_auth.verify/verify.server";
 
 const ForgotPasswordSchema = z.object({
