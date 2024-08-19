@@ -1,4 +1,12 @@
 import { Link } from "@remix-run/react";
+import { cn } from "~/lib/utils";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "../../components/ui/accordion";
+import { buttonVariants } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,14 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import { buttonVariants } from "../../components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../../components/ui/accordion";
-import { cn } from "~/lib/utils";
 
 const PLATFORMS = [
   {
@@ -95,7 +95,7 @@ export default function HowTo() {
       </CardContent>
       <CardFooter>
         <Link
-          to="mailto:help@chatmate.so"
+          to="mailto:jonathan@chatmate.so"
           className={cn(buttonVariants({ variant: "link" }), "p-0 h-0")}
         >
           Not sure how to install? Contact us

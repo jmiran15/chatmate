@@ -25,6 +25,10 @@ export function getDomainUrl(request: Request) {
 }
 
 import { createCookieSessionStorage } from "@remix-run/node";
+import {
+  createCustomer,
+  createFreeSubscription,
+} from "~/models/subscription.server";
 import { joinPasswordHashSessionKey } from "../_auth.join/route";
 import { handleChangeEmailVerification } from "../chatbots.settings.general.change-email/emails.server";
 
@@ -225,11 +229,11 @@ export async function handleOnboardingVerification({
   });
 
   // TODO - switch to Paddle
-  // await createCustomer({ userId: user.id });
-  // const subscription = await prisma.subscription.findUnique({
-  //   where: { userId: user.id },
-  // });
-  // if (!subscription) await createFreeSubscription({ userId: user.id });
+  await createCustomer({ userId: user.id });
+  const subscription = await prisma.subscription.findUnique({
+    where: { userId: user.id },
+  });
+  if (!subscription) await createFreeSubscription({ userId: user.id });
 
   // TODO - fix the remember me stuff so that it works with the join flow
   return createUserSession({

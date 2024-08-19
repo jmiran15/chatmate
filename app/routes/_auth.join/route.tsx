@@ -126,9 +126,9 @@ export default function Join() {
   const [form, fields] = useForm({
     id: "signup-form",
     constraint: getZodConstraint(SignupSchema),
-    // defaultValue: {
-    //   intent: "signUp",
-    // },
+    defaultValue: {
+      intent: "signUp",
+    },
     lastResult: actionData?.result,
     onValidate({ formData }) {
       const result = parseWithZod(formData, { schema: SignupSchema });
