@@ -24,14 +24,6 @@ model User {
   provider     String?
 }
 
-model UnverifiedUser {
-  id           String   @id @default(cuid())
-  email        String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  passwordHash String
-}
-
 model Verification {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())

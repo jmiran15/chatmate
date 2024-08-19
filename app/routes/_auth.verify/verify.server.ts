@@ -26,6 +26,7 @@ export function getDomainUrl(request: Request) {
 
 import { createCookieSessionStorage } from "@remix-run/node";
 import { joinPasswordHashSessionKey } from "../_auth.join/route";
+import { handleChangeEmailVerification } from "../chatbots.settings.general.change-email/emails.server";
 
 export const verifySessionStorage = createCookieSessionStorage({
   cookie: {
@@ -223,11 +224,6 @@ export async function handleOnboardingVerification({
     },
   });
 
-  // delete the unverified user
-  // await prisma.unverifiedUser.delete({
-  //   where: { id: unverifiedUser.id },
-  // });
-
   // TODO - switch to Paddle
   // await createCustomer({ userId: user.id });
   // const subscription = await prisma.subscription.findUnique({
@@ -238,7 +234,7 @@ export async function handleOnboardingVerification({
   // TODO - fix the remember me stuff so that it works with the join flow
   return createUserSession({
     redirectTo: "/chatbots",
-    remember: false,
+    remember: true,
     request,
     userId: user.id,
   });
@@ -272,61 +268,6 @@ export async function handleResetPasswordVerification({
   return redirect("/reset-password", {
     headers: {
       "set-cookie": await verifySessionStorage.commitSession(verifySession),
-    },
-  });
-}
-
-export const newEmailAddressSessionKey = "new-email-address";
-
-// import { sendEmail } from '#app/utils/email.server.ts'
-
-export async function handleChangeEmailVerification({
-  request,
-  submission,
-}: VerifyFunctionArgs) {
-  // await requireRecentVerification(request)
-  invariant(
-    submission.status === "success",
-    "Submission should be successful by now",
-  );
-
-  const verifySession = await verifySessionStorage.getSession(
-    request.headers.get("cookie"),
-  );
-  const newEmail = verifySession.get(newEmailAddressSessionKey);
-  if (!newEmail) {
-    return json(
-      {
-        result: submission.reply({
-          formErrors: [
-            "You must submit the code on the same device that requested the email change.",
-          ],
-        }),
-      },
-      { status: 400 },
-    );
-  }
-  const preUpdateUser = await prisma.user.findFirstOrThrow({
-    select: { email: true },
-    where: { id: submission.value.target },
-  });
-  const user = await prisma.user.update({
-    where: { id: submission.value.target },
-    select: { id: true, email: true },
-    data: { email: newEmail },
-  });
-
-  // void sendEmail({
-  // 	to: preUpdateUser.email,
-  // 	subject: 'Epic Stack email changed',
-  // 	react: <EmailChangeNoticeEmail userId={user.id} />,
-  // })
-
-  console.log("Email changed");
-
-  return redirect("/chatbots/settings/general", {
-    headers: {
-      "set-cookie": await verifySessionStorage.destroySession(verifySession),
     },
   });
 }

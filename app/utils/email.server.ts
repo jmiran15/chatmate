@@ -39,6 +39,16 @@ export async function sendEmail({
     ...(react ? await renderReactEmail(react) : null),
   };
 
+  // Debug logging for development environment
+  if (process.env.NODE_ENV === "development") {
+    console.log("Development environment detected. Email not sent.");
+    console.log("Email contents:", JSON.stringify(email, null, 2));
+    return {
+      status: "success",
+      data: { id: "development-mode" },
+    } as const;
+  }
+
   // feel free to remove this condition once you've set up resend
   if (!process.env.RESEND_API_KEY) {
     console.error(`RESEND_API_KEY not set and we're not in mocks mode.`);

@@ -22,12 +22,13 @@ import { StatusButton } from "~/components/ui/status-button";
 import { prisma } from "~/db.server";
 import { useIsPending } from "~/hooks/use-is-pending";
 import { requireUserId } from "~/session.server";
+import { sendEmail } from "~/utils/email.server";
 import { EmailSchema } from "~/utils/types";
 import {
-  newEmailAddressSessionKey,
   prepareVerification,
   verifySessionStorage,
 } from "../_auth.verify/verify.server";
+import { EmailChangeEmail, newEmailAddressSessionKey } from "./emails.server";
 
 const ChangeEmailSchema = z.object({
   intent: z.string().optional(),
@@ -81,39 +82,26 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     type: "change-email",
   });
 
-  // send the email
-  // const response = await sendEmail({
-  // 	to: submission.value.email,
-  // 	subject: `Epic Notes Email Change Verification`,
-  // 	react: <EmailChangeEmail verifyUrl={verifyUrl.toString()} otp={otp} />,
-  // })
-
-  console.log(
-    `dummy email sent to ${submission.value.email} with otp ${otp} and verifyUrl ${verifyUrl}`,
-  );
-
-  const verifySession = await verifySessionStorage.getSession();
-  verifySession.set(newEmailAddressSessionKey, submission.value.email);
-  return redirect(redirectTo.toString(), {
-    headers: {
-      "set-cookie": await verifySessionStorage.commitSession(verifySession),
-    },
+  const response = await sendEmail({
+    to: submission.value.email,
+    subject: `Epic Notes Email Change Verification`,
+    react: <EmailChangeEmail verifyUrl={verifyUrl.toString()} otp={otp} />,
   });
 
-  // if (response.status === 'success') {
-  // const verifySession = await verifySessionStorage.getSession()
-  // verifySession.set(newEmailAddressSessionKey, submission.value.email)
-  // return redirect(redirectTo.toString(), {
-  // 	headers: {
-  // 		'set-cookie': await verifySessionStorage.commitSession(verifySession),
-  // 	},
-  // })
-  // } else {
-  // 	return json(
-  // 		{ result: submission.reply({ formErrors: [response.error.message] }) },
-  // 		{ status: 500 },
-  // 	)
-  // }
+  if (response.status === "success") {
+    const verifySession = await verifySessionStorage.getSession();
+    verifySession.set(newEmailAddressSessionKey, submission.value.email);
+    return redirect(redirectTo.toString(), {
+      headers: {
+        "set-cookie": await verifySessionStorage.commitSession(verifySession),
+      },
+    });
+  } else {
+    return json(
+      { result: submission.reply({ formErrors: [response.error.message] }) },
+      { status: 500 },
+    );
+  }
 };
 
 export default function ChangeEmail() {
