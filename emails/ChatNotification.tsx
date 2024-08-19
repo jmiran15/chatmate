@@ -1,28 +1,24 @@
 // ChatNotificationEmail.tsx
+import { AnonymousUser, Message } from "@prisma/client";
 import * as E from "@react-email/components";
+import { DateTime } from "luxon";
 import { BaseEmailTemplate } from "./BaseEmailTemplate";
 import { sharedStyles } from "./sharedStyles";
 
 // Updated sample data
-const sampleAnonymousUser = {
-  id: "clhxz1234abcd",
-  createdAt: new Date("2023-05-15T10:30:00Z"),
-  ip: "192.168.1.1",
-  city: "New York",
-  country: "United States",
-  device_type: "Chrome on Mac OS X",
-};
+// const sampleAnonymousUser = {
+//   id: "clhxz1234abcd",
+//   createdAt: "2023-05-15T10:30:00Z",
+//   ip: "192.168.1.1",
+//   city: "New York",
+//   country: "United States",
+//   device_type: "Chrome on Mac OS X",
+// };
 
-const sampleUserMessage = {
-  content: "Hi, I'm having trouble resetting my password. Can you help?",
-  timestamp: new Date("2023-05-15T10:31:00Z"),
-};
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("en", {
-    dateStyle: "long",
-    timeStyle: "short",
-  }).format(date);
-};
+// const sampleUserMessage = {
+//   content: "Hi, I'm having trouble resetting my password. Can you help?",
+//   timestamp: "2023-05-15T10:31:00Z",
+// };
 
 const userMessageStyles = {
   container: {
@@ -46,12 +42,12 @@ const userMessageStyles = {
 };
 
 export default function ChatNotificationEmail({
-  anonymousUser = sampleAnonymousUser,
-  userMessage = sampleUserMessage,
-  chatUrl = "https://app.chatmate.so/chats/clhxz1234abcd",
+  anonymousUser,
+  userMessage,
+  chatUrl,
 }: {
-  anonymousUser: typeof sampleAnonymousUser;
-  userMessage: typeof sampleUserMessage;
+  anonymousUser: AnonymousUser | null;
+  userMessage: Message;
   chatUrl: string;
 }) {
   return (
@@ -66,15 +62,18 @@ export default function ChatNotificationEmail({
       <E.Section style={{ marginBottom: "24px" }}>
         <E.Text style={sharedStyles.paragraph}>
           <strong>Time: </strong>
-          {formatDate(anonymousUser.createdAt)}
+          {DateTime.fromJSDate(userMessage?.createdAt).toLocaleString(
+            DateTime.DATETIME_FULL,
+          )}
         </E.Text>
         <E.Text style={{ ...sharedStyles.paragraph, marginTop: -5 }}>
           <strong>Device: </strong>
-          {anonymousUser.device_type}
+          {anonymousUser?.device_type || "Unknown"}
         </E.Text>
         <E.Text style={{ ...sharedStyles.paragraph, marginTop: -5 }}>
           <strong>Location: </strong>
-          {anonymousUser.city}, {anonymousUser.country}
+          {anonymousUser?.city || "Unknown"},{" "}
+          {anonymousUser?.country || "Unknown"}
         </E.Text>
         <E.Text
           style={{
@@ -85,7 +84,7 @@ export default function ChatNotificationEmail({
           }}
         >
           *Approximate geographic location based on IP address:{" "}
-          {anonymousUser.ip}
+          {anonymousUser?.ip || "Unknown"}
         </E.Text>
       </E.Section>
 

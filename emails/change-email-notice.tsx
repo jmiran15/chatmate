@@ -1,15 +1,10 @@
-// EmailChangeNoticeEmail.tsx
 import * as E from "@react-email/components";
 import { BaseEmailTemplate } from "./BaseEmailTemplate";
 import { sharedStyles } from "./sharedStyles";
 
-const testUserId = "user_abc123";
+// const testUserId = "user_abc123";
 
-export default function EmailChangeNoticeEmail({
-  userId = testUserId,
-}: {
-  userId: string;
-}) {
+export default function EmailChangeNoticeEmail({ userId }: { userId: string }) {
   return (
     <BaseEmailTemplate
       previewText="Your Chatmate email address has been changed"

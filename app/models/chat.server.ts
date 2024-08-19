@@ -162,12 +162,17 @@ export async function getMessagesAndUnseenCount({
   };
 }
 export function createMessage({
+  id,
   chatId,
   role,
   content,
-}: Pick<Message, "role" | "content"> & { chatId: Chat["id"] }) {
+}: Pick<Message, "role" | "content"> & {
+  id?: Message["id"];
+  chatId: Chat["id"];
+}) {
   return prisma.message.create({
     data: {
+      ...(id ? { id } : {}),
       role,
       content,
       chat: {

@@ -1,4 +1,9 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
+import ChatNotificationEmail from "emails/ChatNotification";
+import { getClientIPAddress } from "remix-utils/get-client-ip-address";
+import uap from "ua-parser-js";
+import { v4 as uuidv4 } from "uuid";
+import { prisma } from "~/db.server";
 import {
   Chat,
   createChatWithStarterMessages,
@@ -9,11 +14,8 @@ import {
   updateChatAIInsights,
   updateChatNameWithAI,
 } from "~/models/chat.server";
-import { v4 as uuidv4 } from "uuid";
+import { sendEmail } from "~/utils/email.server";
 import { chat } from "~/utils/openai";
-import { getClientIPAddress } from "remix-utils/get-client-ip-address";
-import uap from "ua-parser-js";
-import { prisma } from "~/db.server";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { sessionId, chatbotId } = params;
@@ -47,13 +49,11 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   if (!_anonymousUser) {
     const isDev = process.env.NODE_ENV === "development";
     const ipAddress = isDev ? "8.8.8.8" : getClientIPAddress(request);
-    // console.log(`api.chat.${chatbotId}.${sessionId} - ipAddress: ${ipAddress}`);
-    // console.log(`api.chat.${chatbotId}.${sessionId} - user agent: `, ua);
 
     try {
       const ipapiResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
       const ipData = await ipapiResponse.json();
-      // console.log(`api.chat.${chatbotId}.${sessionId} - ipData: `, ipData);
+
       _anonymousUser = await prisma.anonymousUser.create({
         data: {
           sessionId: sessionId,
@@ -83,10 +83,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       );
     }
   }
-  // console.log(
-  //   `api.chat.${chatbotId}.${sessionId} - _anonymousUser: `,
-  //   _anonymousUser,
-  // );
 
   if (!_chat) {
     return json({ error: "Failed to create chat" }, { status: 500 });
@@ -137,6 +133,13 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       const body = JSON.parse(await request.text());
       const { chatbot, messages, chattingWithAgent } = body;
 
+      const userMessage =
+        messages.length > 0 ? messages[messages.length - 1] : null;
+
+      if (!userMessage) {
+        return json({ error: "No user message provided" }, { status: 400 });
+      }
+
       // try to find the sessionId in the chats
       let _chat: Chat | null = null;
       if (body.chatId) {
@@ -144,8 +147,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       } else {
         _chat = await getChatBySessionId({ sessionId });
       }
-
-      console.log("_chat", _chat);
 
       // if no chat, create one with the given sessionId
       if (!_chat) {
@@ -162,21 +163,69 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         return json({ error: "Failed to create chat" }, { status: 500 });
       }
 
-      const userMessage =
-        messages.length > 0 ? messages[messages.length - 1] : null;
-
-      if (!userMessage) {
-        return json({ error: "No user message provided" }, { status: 400 });
-      }
-
-      console.log("userMessage", userMessage);
       // add the user message to the chat
       const createdMessage = await createMessage({
         chatId: _chat.id,
         ...userMessage,
       });
 
-      console.log("createdMessage", createdMessage);
+      // check if the payload only had one user message - meaning its the first message
+      if (
+        messages.filter(
+          (message: { role: string; content: string }) =>
+            message.role === "user",
+        ).length === 1
+      ) {
+        // get the chatbot
+        const chatbot = await prisma.chatbot.findUnique({
+          where: {
+            id: chatbotId,
+          },
+          include: {
+            user: {
+              select: {
+                email: true,
+              },
+            },
+          },
+        });
+
+        // get the chat id
+        const chatId = _chat.id;
+        const userEmail = chatbot?.user?.email;
+
+        // get the anonymous user
+        let _anonymousUser = await prisma.anonymousUser.findUnique({
+          where: {
+            sessionId: sessionId,
+          },
+        });
+
+        if (userEmail) {
+          const BASE =
+            process.env.NODE_ENV === "development"
+              ? "http://localhost:3000"
+              : "https://chatmate.so";
+
+          // send email to owner that they have a new chat
+
+          try {
+            await sendEmail({
+              to: userEmail,
+              subject: "Chatmate - New chat",
+              react: (
+                <ChatNotificationEmail
+                  anonymousUser={_anonymousUser}
+                  userMessage={createdMessage}
+                  chatUrl={`${BASE}/chatbots/${chatbotId}/chats/${chatId}`}
+                />
+              ),
+            });
+          } catch (error) {
+            console.log("error sending email", error);
+          }
+        }
+      }
 
       const corsHeader =
         process.env.NODE_ENV === "production"
@@ -240,12 +289,12 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
               }
 
               // push the final text as a new messsgae in the chat
-              const assistantResponse = await createMessage({
+              await createMessage({
+                id: uuid,
                 chatId: _chat.id,
                 role: "assistant",
                 content: fullText,
               });
-              console.log("assistantResponse", assistantResponse);
             } catch (error) {
               console.log("error", error);
 

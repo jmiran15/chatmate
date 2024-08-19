@@ -1,15 +1,14 @@
-// EmailChangeEmail.tsx
 import * as E from "@react-email/components";
 import { BaseEmailTemplate } from "./BaseEmailTemplate";
 import { sharedStyles } from "./sharedStyles";
 
-const testOTP = "51CX7T";
-const testVerifyUrl =
-  "https://chatmate.so/verify?type=change-email&target=f1c049a5-1ddc-4f3d-8e61-20e82ec9bd06&code=51CX7T";
+// const testOTP = "51CX7T";
+// const testVerifyUrl =
+//   "https://chatmate.so/verify?type=change-email&target=f1c049a5-1ddc-4f3d-8e61-20e82ec9bd06&code=51CX7T";
 
 export default function EmailChangeEmail({
-  verifyUrl = testVerifyUrl,
-  otp = testOTP,
+  verifyUrl,
+  otp,
 }: {
   verifyUrl: string;
   otp: string;

@@ -1,41 +1,14 @@
 import * as E from "@react-email/components";
-
 import { BaseEmailTemplate } from "./BaseEmailTemplate";
 import { sharedStyles } from "./sharedStyles";
-const testOTP = "51CX7T";
-const testOnboardingUrl =
-  "https://chatmate.so/verify?type=change-email&target=f1c049a5-1ddc-4f3d-8e61-20e82ec9bd06&code=51CX7T";
 
-// export default function SignupEmail({
-//   onboardingUrl,
-//   otp,
-// }: {
-//   onboardingUrl: string;
-//   otp: string;
-// }) {
-//   return (
-//     <E.Html lang="en" dir="ltr">
-//       <E.Container>
-//         <h1>
-//           <E.Text>Welcome to Chatmate!</E.Text>
-//         </h1>
-//         <p>
-//           <E.Text>
-//             Here's your verification code: <strong>{otp}</strong>
-//           </E.Text>
-//         </p>
-//         <p>
-//           <E.Text>Or click the link to get started:</E.Text>
-//         </p>
-//         <E.Link href={onboardingUrl}>{onboardingUrl}</E.Link>
-//       </E.Container>
-//     </E.Html>
-//   );
-// }
+// const testOTP = "51CX7T";
+// const testOnboardingUrl =
+//   "https://chatmate.so/verify?type=change-email&target=f1c049a5-1ddc-4f3d-8e61-20e82ec9bd06&code=51CX7T";
 
 export default function SignupEmail({
-  onboardingUrl = testOnboardingUrl,
-  otp = testOTP,
+  onboardingUrl,
+  otp,
 }: {
   onboardingUrl: string;
   otp: string;
