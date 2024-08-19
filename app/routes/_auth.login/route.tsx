@@ -170,7 +170,7 @@ export default function LoginPage() {
               type="submit"
               disabled={isPending}
             >
-              Log in
+              Login
             </StatusButton>
 
             <Form action="/auth/google" method="post" className="w-full">

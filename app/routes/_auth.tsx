@@ -22,7 +22,7 @@ const AuthHeader = () => {
 
   return (
     <header className="sticky top-0 h-16 border-b bg-muted/40">
-      <div className="flex items-center justify-between mx-auto h-full px-4 max-w-7xl">
+      <div className="flex items-center justify-between mx-auto h-full px-4 max-w-6xl">
         <Link to="/" className="flex items-center gap-2 font-semibold">
           <Icons.logo className="h-8 w-8" />
           <span className="text-lg">Chatmate</span>
