@@ -174,7 +174,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         messages.filter(
           (message: { role: string; content: string }) =>
             message.role === "user",
-        ).length === 1
+        ).length === 1 &&
+        !body.chatId
       ) {
         // get the chatbot
         const chatbot = await prisma.chatbot.findUnique({

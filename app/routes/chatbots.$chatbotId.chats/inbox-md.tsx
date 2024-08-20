@@ -24,14 +24,14 @@ export default function InboxIndexMd() {
         <span aria-hidden="true"> &rarr;</span>
       </Link>
       <Link
-        to={`/chatbots/${chatbotId}/appearance`}
+        to={`/chatbots/${chatbotId}/channels/widget/appearance`}
         className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
       >
         Customize your widget
         <span aria-hidden="true"> &rarr;</span>
       </Link>
       <Link
-        to={`/chatbots/${chatbotId}/share`}
+        to={`/chatbots/${chatbotId}/channels/widget/install`}
         className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
       >
         Add to your website
