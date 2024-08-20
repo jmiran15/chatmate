@@ -29,7 +29,11 @@ export const BaseEmailTemplate: React.FC<BaseEmailTemplateProps> = ({
           {children}
           <E.Hr style={sharedStyles.hr} />
           <E.Section style={sharedStyles.footer}>
-            <E.Link href="https://chatmate.so" style={sharedStyles.footerLink}>
+            <E.Link
+              href="https://chatmate.so"
+              style={sharedStyles.footerLink}
+              rel="noopener noreferrer"
+            >
               chatmate.so
             </E.Link>
           </E.Section>

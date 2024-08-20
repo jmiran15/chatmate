@@ -57,9 +57,7 @@ export function Footer() {
                 <MarketingLink path={REFUND_POLICY_URL} external>
                   Refund Policy
                 </MarketingLink>
-                <MarketingLink path={CONTACT_US_URL} external>
-                  Contact Us
-                </MarketingLink>
+                <MarketingLink path={CONTACT_US_URL}>Contact Us</MarketingLink>
               </nav>
             </div>
           </div>

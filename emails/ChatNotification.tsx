@@ -1,4 +1,3 @@
-// ChatNotificationEmail.tsx
 import { AnonymousUser, Message } from "@prisma/client";
 import * as E from "@react-email/components";
 import { DateTime } from "luxon";
@@ -62,9 +61,9 @@ export default function ChatNotificationEmail({
       <E.Section style={{ marginBottom: "24px" }}>
         <E.Text style={sharedStyles.paragraph}>
           <strong>Time: </strong>
-          {DateTime.fromJSDate(userMessage?.createdAt).toLocaleString(
-            DateTime.DATETIME_FULL,
-          )}
+          {DateTime.fromJSDate(
+            userMessage?.createdAt || new Date(),
+          ).toLocaleString(DateTime.DATETIME_FULL)}
         </E.Text>
         <E.Text style={{ ...sharedStyles.paragraph, marginTop: -5 }}>
           <strong>Device: </strong>
