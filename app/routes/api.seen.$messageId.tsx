@@ -8,6 +8,17 @@ export const action = async ({ params }: ActionFunctionArgs) => {
     return json({ error: "No messageId provided" }, { status: 400 });
   }
 
+  // make sure the message exists
+  const message = await prisma.message.findUnique({
+    where: {
+      id: messageId,
+    },
+  });
+
+  if (!message) {
+    return json({ error: "Message not found" }, { status: 404 });
+  }
+
   const updateMessage = await prisma.message.update({
     where: {
       id: messageId,

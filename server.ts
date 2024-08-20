@@ -1,11 +1,11 @@
-import { createServer } from "http";
 import prom from "@isaacs/express-prometheus-middleware";
 import { createRequestHandler } from "@remix-run/express";
 import compression from "compression";
 import express from "express";
+import { createServer } from "http";
 import morgan from "morgan";
-import sourceMapSupport from "source-map-support";
 import { Server } from "socket.io";
+import sourceMapSupport from "source-map-support";
 
 sourceMapSupport.install();
 run();
@@ -56,30 +56,25 @@ async function run() {
     socket.emit("confirmation", "connected!");
 
     socket.on("messages", (data) => {
-      console.log(`${socket.id} - messages: `, data);
       socket.broadcast.emit("messages", data);
     });
 
     socket.on("isAgent", (data: { sessionId: string; isAgent: boolean }) => {
-      console.log(`${socket.id} - isAgent: `, data);
       socket.broadcast.emit("isAgent", data);
     });
 
     socket.on("pollingAgent", (data: { sessionId: string }) => {
-      console.log(`${socket.id} - pollingAgent: `, data);
       socket.broadcast.emit("pollingAgent", data);
     });
 
     socket.on(
       "widgetConnected",
       (data: { sessionId: string; connected: boolean }) => {
-        console.log(`${socket.id} - widgetConnected: `, data);
         socket.broadcast.emit("widgetConnected", data);
       },
     );
 
     socket.on("pollingWidgetStatus", (data: { sessionId: string }) => {
-      console.log(`${socket.id} - pollingWidgetStatus: `, data);
       socket.broadcast.emit("pollingWidgetStatus", data);
     });
   });

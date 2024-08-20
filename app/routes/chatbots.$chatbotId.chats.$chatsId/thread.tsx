@@ -1,8 +1,10 @@
 import { Message } from "@prisma/client";
-import { useParams, useFetcher } from "@remix-run/react";
+import { SerializeFrom } from "@remix-run/node";
+import { useFetcher, useParams } from "@remix-run/react";
 import { format } from "date-fns";
 import { Clipboard } from "lucide-react";
 import { lazy, Suspense, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import { ChatAction } from "~/components/chat/chat-action";
 import {
   HoverCard,
@@ -10,15 +12,13 @@ import {
   HoverCardTrigger,
 } from "~/components/ui/hover-card";
 import { Loading } from "~/components/ui/loading";
-const Markdown = lazy(() => import("~/components/ui/markdown"));
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { useToast } from "~/components/ui/use-toast";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { cn } from "~/lib/utils";
 import { useSocket } from "~/providers/socket";
 import { copyToClipboard } from "~/utils/clipboard";
-import { useInView } from "react-intersection-observer";
-import { SerializeFrom } from "@remix-run/node";
+const Markdown = lazy(() => import("~/components/ui/markdown"));
 
 export default function Thread({
   thread,
@@ -86,7 +86,6 @@ export default function Thread({
       messages: SerializeFrom<Message[]>;
     }) => {
       if (sessionId === data.sessionId) {
-        console.log(`${sessionId} - messagesChanged: `, data.messages);
         setThread(data.messages);
       }
     };
