@@ -70,6 +70,8 @@ export default function Sidebar() {
     return null;
   }
 
+  console.log(routes);
+
   const memoizedAccordion = useMemo(
     () => (
       <ul
