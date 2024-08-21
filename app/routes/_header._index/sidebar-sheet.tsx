@@ -29,7 +29,7 @@ export default function SidebarSheet() {
       return routes.find(
         (route) =>
           route.children &&
-          route.children.some((child) => path.startsWith(child.path)),
+          route.children.find((child) => path.startsWith(child.path)),
       );
     },
     [routes],
@@ -49,7 +49,7 @@ export default function SidebarSheet() {
   useEffect(() => {
     setOpen(false);
     updateAccordionState(location.pathname);
-  }, [location.hash, location.pathname, updateAccordionState]);
+  }, [location.pathname, updateAccordionState]);
 
   const handleAccordionChange = useCallback((value: string | undefined) => {
     setOpenAccordion(value);
@@ -138,10 +138,6 @@ export default function SidebarSheet() {
     ),
     [routes, openAccordion, handleAccordionChange, updateAccordionState],
   );
-
-  if (typeof document === "undefined") {
-    return null;
-  }
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>

@@ -70,8 +70,6 @@ export default function Sidebar() {
     return null;
   }
 
-  console.log(routes);
-
   const memoizedAccordion = useMemo(
     () => (
       <ul
@@ -131,7 +129,7 @@ export default function Sidebar() {
                       </ul>
                     </AccordionContent>
                   )}
-                </AnimatePresence>{" "}
+                </AnimatePresence>
               </AccordionItem>
             </Accordion>
           ) : (
