@@ -1,17 +1,17 @@
 import { useFetchers, useMatches, useParams } from "@remix-run/react";
 import {
-  TestTube,
-  Database,
-  Settings,
   AreaChart,
-  LucideIcon,
-  Inbox,
-  Workflow,
+  Database,
   Flame,
+  Inbox,
+  LucideIcon,
   Megaphone,
+  Settings,
+  TestTube,
+  Workflow,
 } from "lucide-react";
-import { useOptionalUser } from "~/utils";
 import { useMemo } from "react";
+import { useOptionalUser } from "~/utils";
 
 export interface RouteLink {
   title: string;
@@ -31,8 +31,11 @@ export const useLinks = () => {
   ) as { data: { unseenChats: number } } | undefined;
 
   const fetchers = useFetchers();
-  const readFetchers = fetchers.filter((fetcher) =>
-    fetcher.key.startsWith(`mark-seen-`),
+  const readFetchers = fetchers.filter(
+    (fetcher) =>
+      fetcher.key.startsWith(`mark-seen-`) &&
+      fetcher.formData &&
+      fetcher.formData.get("intent") === "mark-seen",
   );
 
   const unseenChats = chatbotIdRoute?.data?.unseenChats
