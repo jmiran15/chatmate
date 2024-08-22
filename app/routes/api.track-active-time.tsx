@@ -36,7 +36,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
   if (!chat) {
     // throw new Error("Chat not found");
-    console.log("api.track-active-time - chat not found");
     return json({ success: true });
   }
 
@@ -48,8 +47,6 @@ export async function action({ request }: ActionFunctionArgs) {
       elapsedMs: Number(activeTime),
     },
   });
-
-  console.log("api.track-active-time - updatedChat: ", updatedChat);
 
   const corsHeader =
     process.env.NODE_ENV === "production"

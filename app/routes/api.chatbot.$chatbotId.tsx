@@ -23,5 +23,5 @@ export async function loader({ params }: LoaderFunctionArgs) {
     "Access-Control-Allow-Headers": "Content-Type",
   } as HeadersInit;
 
-  return json(chatbot, { headers });
+  return json({ chatbot }, { headers });
 }

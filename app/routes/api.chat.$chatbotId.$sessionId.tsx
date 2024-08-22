@@ -1,8 +1,8 @@
+import { createId } from "@paralleldrive/cuid2";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import ChatNotificationEmail from "emails/ChatNotification";
 import { getClientIPAddress } from "remix-utils/get-client-ip-address";
 import uap from "ua-parser-js";
-import { v4 as uuidv4 } from "uuid";
 import { prisma } from "~/db.server";
 import {
   Chat,
@@ -16,6 +16,14 @@ import {
 } from "~/models/chat.server";
 import { sendEmail } from "~/utils/email.server";
 import { chat } from "~/utils/openai";
+
+interface SSEMessage {
+  id: string;
+  type: "textResponseChunk" | "abort";
+  textResponse: string | null;
+  error: string | null;
+  streaming: boolean;
+}
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { sessionId, chatbotId } = params;
@@ -32,7 +40,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   let _chat = await getChatBySessionId({ sessionId });
 
   if (!_chat) {
-    const id = uuidv4();
+    const id = createId();
     _chat = await createChatWithStarterMessages({
       sessionId: id, // TODO - this is chat id - sId below is the actual sessionId -- bad API!
       chatbotId,
@@ -131,10 +139,26 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     case "POST": {
       // chat
       const body = JSON.parse(await request.text());
-      const { chatbot, messages, chattingWithAgent } = body;
+      const { messages, chattingWithAgent } = body;
+
+      // get the chatbot - CACHE THIS ...
+      const chatbot = await prisma.chatbot.findUnique({
+        where: {
+          id: chatbotId,
+        },
+        include: {
+          user: {
+            select: {
+              email: true,
+            },
+          },
+        },
+      });
 
       const userMessage =
         messages.length > 0 ? messages[messages.length - 1] : null;
+
+      // TODO - make sure this is an actual user message, i.e role === user
 
       if (!userMessage) {
         return json({ error: "No user message provided" }, { status: 400 });
@@ -151,7 +175,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       // if no chat, create one with the given sessionId
       if (!_chat) {
         // CREATE NEW ID
-        const id = uuidv4();
+        const id = createId();
         _chat = await createChatWithStarterMessages({
           sessionId: id,
           chatbotId,
@@ -177,20 +201,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         ).length === 1 &&
         !body.chatId
       ) {
-        // get the chatbot
-        const chatbot = await prisma.chatbot.findUnique({
-          where: {
-            id: chatbotId,
-          },
-          include: {
-            user: {
-              select: {
-                email: true,
-              },
-            },
-          },
-        });
-
         // get the chat id
         const chatId = _chat.id;
         const userEmail = chatbot?.user?.email;
@@ -250,12 +260,24 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         start(controller) {
           (async () => {
             let fullText = "";
-            const uuid = uuidv4();
+            const id = createId();
 
             try {
+              console.log(
+                "messages: ",
+                messages.map((message: any) => ({
+                  role: message.role,
+                  content: message.content,
+                })),
+              );
+
+              // just so we don't have to send this over the wire every time, just fetch it here from cache
               const chatStream = await chat({
                 chatbot,
-                messages,
+                messages: messages.map((message: any) => ({
+                  role: message.role,
+                  content: message.content,
+                })),
               });
 
               for await (const chunk of chatStream) {
@@ -267,47 +289,54 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
                   controller.enqueue(
                     `data: ${JSON.stringify({
-                      uuid,
+                      id,
                       type: "textResponseChunk",
                       textResponse: delta,
-                      sources: [],
-                      error: false,
-                      close: false,
-                    })}\n\n`,
+                      error: null,
+                      streaming: true,
+                    } as SSEMessage)}\n\n`,
                   );
                 }
 
-                controller.enqueue(
-                  `data: ${JSON.stringify({
-                    uuid,
-                    type: "textResponseChunk",
-                    textResponse: "",
-                    sources: [],
-                    error: false,
-                    close: true,
-                  })}\n\n`,
-                );
+                // controller.enqueue(
+                //   `data: ${JSON.stringify({
+                //     id,
+                //     type: "textResponseChunk",
+                //     textResponse: "",
+                //     error: null,
+                //     streaming: false,
+                //   } as SSEMessage)}\n\n`,
+                // );
               }
+              // enqueue the final message - indicating we finished streaming
+              controller.enqueue(
+                `data: ${JSON.stringify({
+                  id,
+                  type: "textResponseChunk",
+                  textResponse: "",
+                  error: null,
+                  streaming: false,
+                } as SSEMessage)}\n\n`,
+              );
 
-              // push the final text as a new messsgae in the chat
+              // push the final text as a new message in the chat
               await createMessage({
-                id: uuid,
+                id,
                 chatId: _chat.id,
                 role: "assistant",
                 content: fullText,
               });
-            } catch (error) {
+            } catch (error: any) {
               console.log("error", error);
 
               controller.enqueue(
                 `data: ${JSON.stringify({
-                  uuid,
+                  id,
                   type: "abort",
                   textResponse: null,
-                  sources: [],
                   error: error.message,
-                  close: true,
-                })}\n\n`,
+                  streaming: false,
+                } as SSEMessage)}\n\n`,
               );
             }
 
@@ -340,7 +369,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       } as HeadersInit;
 
       // create a new chat with the given sessionId
-      const id = uuidv4();
+      const id = createId();
       const newChat = await createChatWithStarterMessages({
         sessionId: id,
         chatbotId,

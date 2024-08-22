@@ -1,6 +1,6 @@
-import { openai } from "~/utils/providers.server";
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { follow_up_system_prompt } from "~/utils/prompts";
+import { openai } from "~/utils/providers.server";
 
 export async function loader() {
   console.log("loader");
@@ -83,19 +83,7 @@ async function generateFollowUps(
     history +
     "POSSIBLE FOLLOW UP QUESTIONS (separated by new line, min 0, max 3)";
 
-  // const completion = await groq.chat.completions.create({
-  //   messages: [
-  //     {
-  //       role: "system",
-  //       content: follow_up_system_prompt,
-  //     },
-  //     {
-  //       role: "user",
-  //       content: user_prompt,
-  //     },
-  //   ],
-  //   model: "mixtral-8x7b-32768",
-  // });
+  // TODO - use gpt4o-mini with json structured output
   const completion = await openai.chat.completions.create({
     messages: [
       {

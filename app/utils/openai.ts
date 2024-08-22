@@ -1,10 +1,10 @@
 import { Chatbot, Document, DocumentType, Embedding } from "@prisma/client";
 import invariant from "tiny-invariant";
-import { prisma } from "~/db.server";
-import { system_prompt, user_prompt } from "./prompts";
 import { v4 as uuidv4 } from "uuid";
+import { prisma } from "~/db.server";
 import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings/route";
-import { openai, anyscale } from "./providers.server";
+import { system_prompt, user_prompt } from "./prompts";
+import { anyscale, openai } from "./providers.server";
 import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
 
 export const CHUNK_SIZE = 1024;
@@ -88,6 +88,9 @@ export async function chat({
     messages: [{ role: "system", content: SP }, ...messages],
     model: chatbot.model,
     stream: true,
+    stream_options: {
+      include_usage: true,
+    },
   });
 
   return stream;
