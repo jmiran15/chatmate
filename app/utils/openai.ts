@@ -88,9 +88,9 @@ export async function chat({
     messages: [{ role: "system", content: SP }, ...messages],
     model: chatbot.model,
     stream: true,
-    stream_options: {
-      include_usage: true,
-    },
+    // stream_options: {
+    //   include_usage: true,
+    // },
   });
 
   return stream;

@@ -1,14 +1,8 @@
-// import "katex/dist/katex.min.css";
 import React, { RefObject, useRef } from "react";
 import ReactMarkdown from "react-markdown";
-// import RehypeHighlight from "rehype-highlight";
-// import RehypeKatex from "rehype-katex";
-// import RemarkBreaks from "remark-breaks";
-// import RemarkGfm from "remark-gfm";
-// import RemarkMath from "remark-math";
-import { copyToClipboard } from "~/utils/clipboard";
-import { useToast } from "~/components/ui/use-toast";
 import { Loading } from "~/components/ui/loading";
+import { useToast } from "~/components/ui/use-toast";
+import { copyToClipboard } from "~/utils/clipboard";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function PreCode(props: { children: any }) {
@@ -18,7 +12,7 @@ export function PreCode(props: { children: any }) {
   return (
     <>
       {/* eslint-disable-next-line react/jsx-no-leaked-render */}
-      <pre ref={ref} className="group relative">
+      <pre ref={ref} className="group relative overflow-x-auto">
         <span
           className="copy-code-button group-hover:translate-x-0 group-hover:opacity-100 group-hover:pointer-events-auto"
           onClick={() => {
@@ -47,6 +41,13 @@ function _MarkDownContent(props: { content: string }) {
           // eslint-disable-next-line jsx-a11y/anchor-has-content
           return <a {...aProps} target={target} />;
         },
+        // Add constraints to other elements that might cause overflow
+        img: (imgProps) => <img {...imgProps} className="max-w-full h-auto" />,
+        table: (tableProps) => (
+          <div className="overflow-x-auto">
+            <table {...tableProps} />
+          </div>
+        ),
       }}
     >
       {props.content}
@@ -69,7 +70,7 @@ export default function Markdown(
 
   return (
     <div
-      className="markdown-body"
+      className="markdown-body max-w-full overflow-hidden"
       style={{
         fontSize: `${props.fontSize ?? 14}px`,
       }}

@@ -1,3 +1,5 @@
+import { createId } from "@paralleldrive/cuid2";
+import { Prisma, TicketStatus } from "@prisma/client";
 import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -5,33 +7,32 @@ import {
   redirect,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { useEffect, useRef, useState } from "react";
-import { useScrollToBottom } from "~/hooks/useScroll";
-import { format } from "date-fns";
-import { useMobileScreen } from "~/utils/mobile";
-import { prisma } from "~/db.server";
-import { Separator } from "~/components/ui/separator";
-import PromptInput from "./prompt-input";
-import AnonSidebar from "./anon-sidebar";
-import Thread from "./thread";
-import { useSocket } from "~/providers/socket";
 import axios from "axios";
-import Subheader from "./subheader";
-import { Prisma, TicketStatus } from "@prisma/client";
-import useAgent from "./use-agent";
+import { format } from "date-fns";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Separator } from "~/components/ui/separator";
+import { prisma } from "~/db.server";
+import { useScrollToBottom } from "~/hooks/useScroll";
+import { useSocket } from "~/providers/socket";
+import { useMobileScreen } from "~/utils/mobile";
+import AnonSidebar from "./anon-sidebar";
+import MobileThread from "./mobile-thread";
+import PromptInput from "./prompt-input";
 import {
+  connectLabel,
+  createLabel,
   deleteChat,
+  deleteLabel,
+  disconnectLabel,
   getChatInfo,
   markChatAsSeen,
-  createLabel,
-  updateLabel,
-  deleteLabel,
-  connectLabel,
-  disconnectLabel,
   updateChatStatus,
+  updateLabel,
 } from "./queries.server";
-import { createId } from "@paralleldrive/cuid2";
-import MobileThread from "./mobile-thread";
+import ScrollToBottomButton from "./ScrollToBottomButton";
+import Subheader from "./subheader";
+import Thread from "./thread";
+import useAgent from "./use-agent";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
@@ -165,17 +166,33 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 export default function ChatRoute() {
   const { messages, chatbot, chat, anonUser, API_PATH } =
     useLoaderData<typeof loader>();
-  const { setAutoScroll, scrollDomToBottom } = useScrollToBottom();
   const isMobile = useMobileScreen();
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const inputContainer = useRef<HTMLDivElement>(null);
   const [thread, setThread] = useState(() => messages ?? []); // we can move this by just using Remix - action?
   const [userInput, setUserInput] = useState("");
+  const {
+    setAutoScroll,
+    scrollRef: threadRef,
+    scrollDomToBottom: scrollThreadToBottom,
+  } = useScrollToBottom();
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [promptInputHeight, setPromptInputHeight] = useState(
+    () => inputContainer.current?.offsetHeight ?? 0,
+  );
   const socket = useSocket();
   useAgent(chat?.sessionId);
 
   useEffect(() => {
     setThread(messages);
   }, [messages]);
+
+  useEffect(() => {
+    if (threadRef.current) {
+      const { scrollHeight, clientHeight } = threadRef.current;
+      setShowScrollButton(scrollHeight > clientHeight);
+    }
+  }, [threadRef.current?.scrollHeight, threadRef.current?.clientHeight]);
 
   async function handleSubmit(event: React.SyntheticEvent) {
     if (!socket) return;
@@ -214,6 +231,29 @@ export default function ChatRoute() {
     });
   }
 
+  const handleScroll = useCallback(() => {
+    if (!threadRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = threadRef.current;
+    const atBottom = scrollHeight - scrollTop - clientHeight < 100; // Show button when not at bottom
+    setShowScrollButton(!atBottom);
+  }, [threadRef.current]);
+
+  useEffect(() => {
+    const threadElement = threadRef.current;
+    if (threadElement) {
+      threadElement.addEventListener("scroll", handleScroll);
+      return () => {
+        threadElement.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [handleScroll]);
+
+  useEffect(() => {
+    if (inputContainer.current) {
+      setPromptInputHeight(inputContainer.current.offsetHeight);
+    }
+  }, [userInput]);
+
   return isMobile ? (
     <MobileThread
       thread={thread}
@@ -225,24 +265,34 @@ export default function ChatRoute() {
     <div className="flex flex-col col-span-7 overflow-y-auto h-full">
       <Subheader chat={chat} />
       <div className="grid grid-cols-10 flex-1 overflow-y-auto">
-        <div className="flex flex-col col-span-7 overflow-y-auto h-full relative">
+        <div className="flex flex-col col-span-7 overflow-y-auto h-full relative w-full">
           <Thread
+            ref={threadRef}
             thread={thread}
             setThread={setThread}
             sessionId={chat?.sessionId}
             seen={chat?.seen}
+            scrollThreadToBottom={scrollThreadToBottom}
           />
           <Separator />
-          <div className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 ">
+          <div
+            ref={inputContainer}
+            className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 "
+          >
             <PromptInput
               userInput={userInput}
               setUserInput={setUserInput}
               inputRef={inputRef}
               handleSendMessage={handleSubmit}
-              scrollToBottom={scrollDomToBottom}
+              scrollToBottom={scrollThreadToBottom}
               setAutoScroll={setAutoScroll}
             />
           </div>
+          <ScrollToBottomButton
+            isVisible={showScrollButton}
+            onClick={scrollThreadToBottom}
+            promptInputHeight={promptInputHeight}
+          />
         </div>
         <AnonSidebar anonUser={anonUser} sessionId={chat?.sessionId} />
       </div>

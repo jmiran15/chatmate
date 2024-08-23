@@ -51,6 +51,7 @@ async function run() {
   // Then you can use `io` to listen the `connection` event and get a socket
   // from a client
   io.on("connection", (socket) => {
+    console.log("a user connected");
     // from this point you are on the WS connection with a specific client
 
     socket.emit("confirmation", "connected!");
@@ -64,6 +65,7 @@ async function run() {
     });
 
     socket.on("pollingAgent", (data: { sessionId: string }) => {
+      console.log("pollingAgent", data);
       socket.broadcast.emit("pollingAgent", data);
     });
 

@@ -1,72 +1,31 @@
 import { Message } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { useFetcher, useParams } from "@remix-run/react";
-import { format } from "date-fns";
-import { Clipboard } from "lucide-react";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { DateTime } from "luxon";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useInView } from "react-intersection-observer";
-import { ChatAction } from "~/components/chat/chat-action";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "~/components/ui/hover-card";
-import { Loading } from "~/components/ui/loading";
-import { ScrollArea } from "~/components/ui/scroll-area";
-import { useToast } from "~/components/ui/use-toast";
-import { useScrollToBottom } from "~/hooks/useScroll";
+import { PreviewMarkdown } from "~/components/MarkdownTest";
 import { cn } from "~/lib/utils";
 import { useSocket } from "~/providers/socket";
-import { copyToClipboard } from "~/utils/clipboard";
-const Markdown = lazy(() => import("~/components/ui/markdown"));
 
-export default function Thread({
-  thread,
-  setThread,
-  sessionId,
-  seen = false,
-}: {
-  thread: SerializeFrom<Message[]>;
-  setThread: (thread: SerializeFrom<Message[]>) => void;
-  sessionId: string | null;
-  seen: boolean | null;
-}) {
-  const { scrollRef } = useScrollToBottom();
-  const { toast } = useToast();
-  const socket = useSocket();
-  const { chatsId: chatId } = useParams();
+// Custom hook for marking messages as seen
+const useMarkSeen = (chatId: string | undefined, seen: boolean | null) => {
   const fetcher = useFetcher({ key: `mark-seen-${chatId}` });
-
-  const findLastUserMessage = () => {
-    for (let i = thread.length - 1; i >= 0; i--) {
-      if (thread[i].role === "user") {
-        return i;
-      }
-    }
-    return -1;
-  };
-
-  const lastUserMessageIndex = findLastUserMessage();
-
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-    triggerOnce: true,
-  });
-
   const [hasMarkedSeen, setHasMarkedSeen] = useState(false);
 
   useEffect(() => {
-    setHasMarkedSeen(false);
+    setHasMarkedSeen(seen === true);
   }, [chatId, seen]);
 
-  useEffect(() => {
-    if (
-      inView &&
-      !seen &&
-      lastUserMessageIndex !== -1 &&
-      !hasMarkedSeen &&
-      chatId
-    ) {
+  const markSeen = useCallback(() => {
+    if (!seen && !hasMarkedSeen && chatId) {
       fetcher.submit(
         { chatId, intent: "mark-seen" },
         {
@@ -76,113 +35,187 @@ export default function Thread({
       );
       setHasMarkedSeen(true);
     }
-  }, [inView, seen, lastUserMessageIndex, fetcher, chatId, hasMarkedSeen]);
+  }, [seen, hasMarkedSeen, chatId, fetcher]);
+
+  return { markSeen, hasMarkedSeen };
+};
+
+// Function to format date
+const formatMessageDate = (date: Date) => {
+  const messageDate = DateTime.fromJSDate(date);
+  const now = DateTime.local();
+
+  if (messageDate.hasSame(now, "day")) {
+    return messageDate.toFormat("h:mm a"); // Today: 2:30 PM
+  } else if (messageDate.hasSame(now.minus({ days: 1 }), "day")) {
+    return "Yesterday " + messageDate.toFormat("h:mm a"); // Yesterday 2:30 PM
+  } else if (messageDate.hasSame(now, "year")) {
+    return messageDate.toFormat("MMM d, h:mm a"); // This year: Jun 15, 2:30 PM
+  } else {
+    return messageDate.toFormat("MMM d, yyyy, h:mm a"); // Other years: Jun 15, 2022, 2:30 PM
+  }
+};
+
+// Memoized Message component
+const MessageComponent = React.memo(
+  ({
+    message,
+    isUser,
+    isLastUserMessage,
+    seen,
+    hasMarkedSeen,
+    inViewRef,
+  }: {
+    message: SerializeFrom<Message>;
+    isUser: boolean;
+    isLastUserMessage: boolean;
+    seen: boolean | null;
+    hasMarkedSeen: boolean;
+    inViewRef: (node?: Element | null) => void;
+  }) => {
+    const formattedDate = useMemo(
+      () => formatMessageDate(new Date(message.createdAt)),
+      [message.createdAt],
+    );
+
+    return (
+      <div
+        className={cn(
+          "flex flex-col w-full items-start justify-start",
+          isUser ? "items-end" : "items-start",
+        )}
+        ref={
+          isLastUserMessage && !seen && !hasMarkedSeen ? inViewRef : undefined
+        }
+      >
+        <div
+          className={cn(
+            "max-w-[80%] prose prose-zinc border rounded-lg p-2",
+            isUser ? "bg-primary text-primary-foreground" : "bg-muted",
+          )}
+        >
+          <PreviewMarkdown source={message.content} />
+        </div>
+        <div className="text-xs text-muted-foreground opacity-80 whitespace-nowrap box-border pointer-events-none z-[1]">
+          {formattedDate}
+        </div>
+      </div>
+    );
+  },
+  (prevProps, nextProps) => {
+    return (
+      prevProps.message.id === nextProps.message.id &&
+      prevProps.isLastUserMessage === nextProps.isLastUserMessage &&
+      prevProps.seen === nextProps.seen &&
+      prevProps.hasMarkedSeen === nextProps.hasMarkedSeen
+    );
+  },
+);
+
+MessageComponent.displayName = "MessageComponent";
+
+const Thread = forwardRef(function Thread(
+  {
+    thread,
+    setThread,
+    sessionId,
+    seen = false,
+    scrollThreadToBottom,
+  }: {
+    thread: SerializeFrom<Message[]>;
+    setThread: React.Dispatch<React.SetStateAction<SerializeFrom<Message[]>>>;
+    sessionId: string | null;
+    seen: boolean | null;
+    scrollThreadToBottom: () => void;
+  },
+  ref: React.Ref<HTMLDivElement>,
+) {
+  const socket = useSocket();
+  const { chatsId: chatId } = useParams();
+  const { markSeen, hasMarkedSeen } = useMarkSeen(chatId, seen);
+
+  const lastUserMessageIndex = useMemo(() => {
+    for (let i = thread.length - 1; i >= 0; i--) {
+      if (thread[i].role === "user") {
+        return i;
+      }
+    }
+    return -1;
+  }, [thread]);
+
+  const { ref: inViewRef, inView } = useInView({
+    threshold: 0.5,
+    triggerOnce: true,
+  });
+
+  useEffect(() => {
+    if (inView && !seen && lastUserMessageIndex !== -1 && !hasMarkedSeen) {
+      markSeen();
+    }
+  }, [inView, seen, lastUserMessageIndex, markSeen, hasMarkedSeen]);
+
+  const handleThread = useCallback(
+    (data: { sessionId: string; messages: SerializeFrom<Message[]> }) => {
+      if (sessionId === data.sessionId) {
+        setThread((prevThread: SerializeFrom<Message[]>) => {
+          const newThread = [...prevThread, ...data.messages];
+          // Remove duplicates based on message id
+          return Array.from(new Map(newThread.map((m) => [m.id, m])).values());
+        });
+        scrollThreadToBottom();
+      }
+    },
+    [sessionId, setThread, scrollThreadToBottom],
+  );
 
   useEffect(() => {
     if (!socket) return;
-
-    const handleThread = (data: {
-      sessionId: string;
-      messages: SerializeFrom<Message[]>;
-    }) => {
-      if (sessionId === data.sessionId) {
-        setThread(data.messages);
-      }
-    };
 
     socket.on("messages", handleThread);
 
     return () => {
       socket.off("messages", handleThread);
     };
-  }, [socket, sessionId]);
+  }, [socket, handleThread]);
+
+  const threadRef = useRef(thread);
+  useEffect(() => {
+    threadRef.current = thread;
+  }, [thread]);
+
+  useEffect(() => {
+    const shouldScroll = threadRef.current.length !== thread.length;
+    if (shouldScroll) {
+      scrollThreadToBottom();
+    }
+  }, [thread, scrollThreadToBottom]);
 
   if (!chatId) {
     return null;
   }
 
   return (
-    <ScrollArea
-      ref={scrollRef}
-      className="flex-1 overflow-auto overflow-x-hidden relative overscroll-none pb-10 p-5"
+    <div
+      ref={ref}
+      className="flex-1 overflow-y-auto relative overscroll-none overflow-x-hidden pb-10 p-5 w-full"
     >
-      <div className="space-y-5">
-        {thread.map((message, i) => {
-          const isUser = message.role === "user";
-          const showActions = i > 0 && !(message.content.length === 0);
-          const isLastUserMessage = i === lastUserMessageIndex;
-
-          return (
-            <div className="space-y-5" key={i}>
-              <div
-                className={
-                  isUser
-                    ? "flex flex-row-reverse"
-                    : "flex flex-row last:animate-[slide-in_ease_0.3s]"
-                }
-                ref={
-                  isLastUserMessage && !seen && !hasMarkedSeen ? ref : undefined
-                }
-              >
-                <HoverCard openDelay={200}>
-                  <HoverCardTrigger asChild>
-                    <div
-                      className={cn(
-                        "max-w-[80%] flex flex-col items-start",
-                        isUser && "items-end",
-                      )}
-                    >
-                      <div
-                        className={cn(
-                          "box-border max-w-full text-sm select-text relative break-words rounded-lg px-3 py-2",
-                          isUser
-                            ? "ml-auto bg-primary text-primary-foreground"
-                            : "bg-muted",
-                        )}
-                      >
-                        <Suspense fallback={<Loading />}>
-                          <Markdown
-                            content={message.content}
-                            parentRef={scrollRef}
-                            defaultShow={i >= thread.length - 6}
-                          />
-                        </Suspense>
-                      </div>
-                      <div className="text-xs text-muted-foreground opacity-80 whitespace-nowrap text-right w-full box-border pointer-events-none z-[1]">
-                        {format(
-                          new Date(message.createdAt),
-                          "M/d/yyyy, h:mm:ss a",
-                        )}
-                      </div>
-                    </div>
-                  </HoverCardTrigger>
-                  {showActions ? (
-                    <HoverCardContent
-                      side="top"
-                      align={isUser ? "end" : "start"}
-                      className="py-1 px-0 w-fit"
-                    >
-                      <div className="flex items-center divide-x">
-                        <>
-                          <ChatAction
-                            text={"Copy"}
-                            icon={<Clipboard className="w-4 h-4" />}
-                            onClick={() =>
-                              copyToClipboard(message.content, toast)
-                            }
-                          />
-                        </>
-                      </div>
-                    </HoverCardContent>
-                  ) : (
-                    <></>
-                  )}
-                </HoverCard>
-              </div>
-            </div>
-          );
-        })}
+      <div className="space-y-5 w-full">
+        {thread.map((message, i) => (
+          <MessageComponent
+            key={message.id}
+            message={message}
+            isUser={message.role === "user"}
+            isLastUserMessage={i === lastUserMessageIndex}
+            seen={seen}
+            hasMarkedSeen={hasMarkedSeen}
+            inViewRef={inViewRef}
+          />
+        ))}
       </div>
-    </ScrollArea>
+    </div>
   );
-}
+});
+
+Thread.displayName = "Thread";
+
+export default Thread;
