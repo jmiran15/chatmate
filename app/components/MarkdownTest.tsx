@@ -1,8 +1,8 @@
 import type { EvaluateOptions } from "@mdx-js/mdx";
-import { evaluate } from "@mdx-js/mdx";
+import { evaluateSync } from "@mdx-js/mdx";
 import type { MDXComponents, MDXProps } from "mdx/types";
 import type { FC, ReactNode } from "react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 
 type ReactMDXContent = (props: MDXProps) => ReactNode;
@@ -18,7 +18,9 @@ export const PreviewMarkdown: FC<{ source?: string }> = ({ source = "" }) => {
   );
 
   useEffect(() => {
-    evaluate(source, runtime).then((r) => setMdxContent(() => r.default));
+    const r = evaluateSync(source, runtime);
+
+    setMdxContent(() => r.default as ReactMDXContent);
   }, [source]);
 
   return <MdxContent components={components} />;
