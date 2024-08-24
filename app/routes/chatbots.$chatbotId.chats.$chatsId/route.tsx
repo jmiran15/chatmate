@@ -8,7 +8,8 @@ import {
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import axios from "axios";
-import { format } from "date-fns";
+import { AnimatePresence, motion } from "framer-motion";
+import { DateTime } from "luxon";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Separator } from "~/components/ui/separator";
 import { prisma } from "~/db.server";
@@ -31,7 +32,7 @@ import {
 } from "./queries.server";
 import ScrollToBottomButton from "./ScrollToBottomButton";
 import Subheader from "./subheader";
-import Thread from "./thread";
+import Thread, { DateSeparator } from "./thread";
 import useAgent from "./use-agent";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -180,6 +181,86 @@ export default function ChatRoute() {
   const [promptInputHeight, setPromptInputHeight] = useState(
     () => inputContainer.current?.offsetHeight ?? 0,
   );
+  const [floatingDateState, setFloatingDateState] = useState({
+    date: null as Date | null,
+    show: false,
+    y: 0,
+  });
+  const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const updateFloatingDate = useCallback(() => {
+    if (!threadRef.current) return;
+
+    const target = threadRef.current;
+    const messages = target.querySelectorAll("[data-message-date]");
+    const threadRect = target.getBoundingClientRect();
+
+    let currentDate: Date | null = null;
+    let currentDateY = 0;
+    let nextDateY = Infinity;
+
+    for (let i = 0; i < messages.length; i++) {
+      const messageRect = messages[i].getBoundingClientRect();
+      const messageTop = messageRect.top - threadRect.top;
+      const messageBottom = messageRect.bottom - threadRect.top;
+
+      if (messageBottom > 0 && messageTop < threadRect.height) {
+        const messageDate = new Date(
+          messages[i].getAttribute("data-message-date") || "",
+        );
+
+        if (
+          !currentDate ||
+          messageDate.toDateString() !== currentDate.toDateString()
+        ) {
+          if (!currentDate) {
+            currentDate = messageDate;
+            currentDateY = Math.max(0, messageTop);
+          } else {
+            nextDateY = Math.max(0, messageTop);
+            break;
+          }
+        }
+      }
+    }
+
+    if (currentDate) {
+      const threadHeight = threadRect.height;
+      const visibilityThreshold = threadHeight * 0.1;
+      const show =
+        currentDateY < visibilityThreshold && nextDateY > visibilityThreshold;
+
+      setFloatingDateState({
+        date: currentDate,
+        show: show,
+        y: Math.max(0, Math.min(currentDateY, nextDateY - 50)),
+      });
+
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+      }
+      hideTimerRef.current = setTimeout(() => {
+        setFloatingDateState((prev) => ({ ...prev, show: false }));
+      }, 2000);
+    } else {
+      setFloatingDateState((prev) => ({ ...prev, show: false }));
+    }
+  }, [threadRef]);
+
+  useEffect(() => {
+    return () => {
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (inputContainer.current) {
+      setPromptInputHeight(inputContainer.current.offsetHeight);
+    }
+  }, [userInput]);
+
   const socket = useSocket();
   useAgent(chat?.sessionId);
 
@@ -200,8 +281,7 @@ export default function ChatRoute() {
     event.preventDefault();
     if (!userInput || userInput === "") return false;
 
-    const currentDate = new Date();
-    const formattedDate = format(currentDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+    const formattedDate = DateTime.now().toISO();
 
     const newMessage = {
       id: createId(),
@@ -234,9 +314,10 @@ export default function ChatRoute() {
   const handleScroll = useCallback(() => {
     if (!threadRef.current) return;
     const { scrollTop, scrollHeight, clientHeight } = threadRef.current;
-    const atBottom = scrollHeight - scrollTop - clientHeight < 100; // Show button when not at bottom
+    const atBottom = scrollHeight - scrollTop - clientHeight < 100;
     setShowScrollButton(!atBottom);
-  }, [threadRef.current]);
+    updateFloatingDate();
+  }, [threadRef, updateFloatingDate]);
 
   useEffect(() => {
     const threadElement = threadRef.current;
@@ -249,10 +330,15 @@ export default function ChatRoute() {
   }, [handleScroll]);
 
   useEffect(() => {
-    if (inputContainer.current) {
-      setPromptInputHeight(inputContainer.current.offsetHeight);
-    }
-  }, [userInput]);
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "d" && e.ctrlKey) {
+        setFloatingDateState((prev) => ({ ...prev, show: !prev.show }));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, []);
 
   return isMobile ? (
     <MobileThread
@@ -293,6 +379,19 @@ export default function ChatRoute() {
             onClick={scrollThreadToBottom}
             promptInputHeight={promptInputHeight}
           />
+
+          <AnimatePresence mode="wait">
+            {floatingDateState.show && floatingDateState.date && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute top-0 left-0 right-0 flex justify-center pointer-events-none"
+              >
+                <DateSeparator date={floatingDateState.date} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         <AnonSidebar anonUser={anonUser} sessionId={chat?.sessionId} />
       </div>

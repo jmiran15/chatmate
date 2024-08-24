@@ -19,7 +19,6 @@ export const PreviewMarkdown: FC<{ source?: string }> = ({ source = "" }) => {
 
   useEffect(() => {
     const r = evaluateSync(source, runtime);
-
     setMdxContent(() => r.default as ReactMDXContent);
   }, [source]);
 

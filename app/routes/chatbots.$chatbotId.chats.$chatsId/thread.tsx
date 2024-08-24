@@ -15,7 +15,6 @@ import { PreviewMarkdown } from "~/components/MarkdownTest";
 import { cn } from "~/lib/utils";
 import { useSocket } from "~/providers/socket";
 
-// Custom hook for marking messages as seen
 const useMarkSeen = (chatId: string | undefined, seen: boolean | null) => {
   const fetcher = useFetcher({ key: `mark-seen-${chatId}` });
   const [hasMarkedSeen, setHasMarkedSeen] = useState(false);
@@ -40,15 +39,26 @@ const useMarkSeen = (chatId: string | undefined, seen: boolean | null) => {
   return { markSeen, hasMarkedSeen };
 };
 
-// Function to format date
 const formatMessageDate = (date: Date) => {
   const messageDate = DateTime.fromJSDate(date);
   const now = DateTime.local();
+  const diff = now.diff(messageDate, ["minutes", "hours", "days"]);
+
+  // Ensure the message date is not in the future
+  if (messageDate > now) {
+    return "just now";
+  }
 
   if (messageDate.hasSame(now, "day")) {
-    return messageDate.toFormat("h:mm a"); // Today: 2:30 PM
+    if (diff.minutes < 1) {
+      return "just now";
+    } else if (diff.minutes < 60) {
+      return `${Math.floor(diff.minutes)}m ago`;
+    } else {
+      return messageDate.toFormat("h:mm a"); // Today: 2:30 PM
+    }
   } else if (messageDate.hasSame(now.minus({ days: 1 }), "day")) {
-    return "Yesterday " + messageDate.toFormat("h:mm a"); // Yesterday 2:30 PM
+    return messageDate.toFormat("h:mm a"); // Yesterday's time
   } else if (messageDate.hasSame(now, "year")) {
     return messageDate.toFormat("MMM d, h:mm a"); // This year: Jun 15, 2:30 PM
   } else {
@@ -56,7 +66,28 @@ const formatMessageDate = (date: Date) => {
   }
 };
 
-// Memoized Message component
+export const DateSeparator = ({ date }: { date: Date }) => {
+  const messageDate = DateTime.fromJSDate(date);
+  const now = DateTime.local();
+
+  let formattedDate;
+  if (messageDate.hasSame(now, "day")) {
+    formattedDate = "Today";
+  } else if (messageDate.hasSame(now.minus({ days: 1 }), "day")) {
+    formattedDate = "Yesterday";
+  } else {
+    formattedDate = messageDate.toFormat("MMMM d, yyyy");
+  }
+
+  return (
+    <div className="flex items-center justify-center my-4">
+      <div className="bg-gray-200 text-gray-600 text-xs font-medium px-3 py-1 rounded-full">
+        {formattedDate}
+      </div>
+    </div>
+  );
+};
+
 const MessageComponent = React.memo(
   ({
     message,
@@ -178,13 +209,14 @@ const Thread = forwardRef(function Thread(
     };
   }, [socket, handleThread]);
 
-  const threadRef = useRef(thread);
+  const messagesRef = useRef(thread);
+
   useEffect(() => {
-    threadRef.current = thread;
+    messagesRef.current = thread;
   }, [thread]);
 
   useEffect(() => {
-    const shouldScroll = threadRef.current.length !== thread.length;
+    const shouldScroll = messagesRef.current.length !== thread.length;
     if (shouldScroll) {
       scrollThreadToBottom();
     }
@@ -194,24 +226,57 @@ const Thread = forwardRef(function Thread(
     return null;
   }
 
+  const renderMessagesWithSeparators = () => {
+    let lastMessageDate: DateTime | null = null;
+    return thread.map((message, index) => {
+      const currentMessageDate = DateTime.fromJSDate(
+        new Date(message.createdAt),
+      );
+      let dateSeparator: React.ReactNode = null;
+
+      if (
+        !lastMessageDate ||
+        !currentMessageDate.hasSame(lastMessageDate, "day")
+      ) {
+        dateSeparator = (
+          <div
+            key={`date-${message.createdAt}`}
+            data-date-separator={message.createdAt}
+          >
+            <DateSeparator date={new Date(message.createdAt)} />
+          </div>
+        );
+        lastMessageDate = currentMessageDate;
+      }
+
+      const messageComponent = (
+        <div key={message.id} data-message-date={message.createdAt}>
+          <MessageComponent
+            message={message}
+            isUser={message.role === "user"}
+            isLastUserMessage={index === lastUserMessageIndex}
+            seen={seen}
+            hasMarkedSeen={hasMarkedSeen}
+            inViewRef={inViewRef}
+          />
+        </div>
+      );
+
+      return (
+        <React.Fragment key={message.id}>
+          {dateSeparator}
+          {messageComponent}
+        </React.Fragment>
+      );
+    });
+  };
+
   return (
     <div
       ref={ref}
       className="flex-1 overflow-y-auto relative overscroll-none overflow-x-hidden pb-10 p-5 w-full"
     >
-      <div className="space-y-5 w-full">
-        {thread.map((message, i) => (
-          <MessageComponent
-            key={message.id}
-            message={message}
-            isUser={message.role === "user"}
-            isLastUserMessage={i === lastUserMessageIndex}
-            seen={seen}
-            hasMarkedSeen={hasMarkedSeen}
-            inViewRef={inViewRef}
-          />
-        ))}
-      </div>
+      <div className="space-y-5 w-full">{renderMessagesWithSeparators()}</div>
     </div>
   );
 });
