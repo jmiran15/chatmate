@@ -22,6 +22,9 @@ interface SSEMessage {
   streaming: boolean;
 }
 
+// create types for the payloads and the outputs
+// then whenever we call these API routes - use those types
+
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const { sessionId, chatbotId } = params;
 
@@ -290,7 +293,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       } as HeadersInit;
 
       const newChat = await createAnonymousChat({
-        sessionId,
+        sessionId: sessionIdOrChatId,
         chatbotId,
       });
 

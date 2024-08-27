@@ -1,11 +1,13 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
+
 import { useLoaderData, useParams, useSearchParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
 
-import { format } from "date-fns";
+import { createId } from "@paralleldrive/cuid2";
 import { Clipboard } from "lucide-react";
-import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
-import { v4 } from "uuid";
+import { Suspense, lazy, useMemo, useRef } from "react";
 import {
   HoverCard,
   HoverCardContent,
@@ -13,6 +15,7 @@ import {
 } from "~/components/ui/hover-card";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { cn } from "~/lib/utils";
+import { loader } from "~/routes/chatbots.$chatbotId.chat.$chatId/route";
 import { copyToClipboard } from "~/utils/clipboard";
 import { useMobileScreen } from "~/utils/mobile";
 import { Button } from "../ui/button";
@@ -22,44 +25,79 @@ import { Separator } from "../ui/separator";
 import { useToast } from "../ui/use-toast";
 import { ChatAction } from "./chat-action";
 
+// replace this with the new PreviewMarkdown component that uses mdx.js
 const Markdown = lazy(() => import("../ui/markdown"));
+
+interface SSEMessage {
+  id: string;
+  type: "textResponseChunk" | "abort";
+  textResponse: string | null;
+  error: string | null;
+  streaming: boolean;
+}
 
 export const CHAT_PAGE_SIZE = 15;
 
 export default function Chat() {
-  const data = useLoaderData();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [userInput, setUserInput] = useState(data?.userMessage ?? "");
+  const data = useLoaderData<typeof loader>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const [userInput, setUserInput] = useState(() => data?.userMessage ?? "");
   const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
   const { chatId, chatbotId } = useParams();
-  const [chatbot, setChatbot] = useState(data?.chatbot);
-  const [BASE_URL, setBASE_URL] = useState(data?.BASE_URL);
+  const [chatbot, setChatbot] = useState(() => data?.chatbot);
+  const [BASE_URL, setBASE_URL] = useState(() => data?.BASE_URL);
   const [messages, setMessages] = useState<
-    { role: "user" | "assistant"; content: string }[]
-  >(data.messages);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    ({ role: "user" | "assistant"; content: string } & {
+      id: string;
+      createdAt: string;
+      streaming: boolean;
+    })[]
+  >(
+    () =>
+      data?.messages?.map((msg) => ({
+        id: msg.id,
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+        createdAt: msg.createdAt,
+        streaming: false,
+      })) ?? [],
+  );
   const [_, setSearchParams] = useSearchParams();
 
-  const showInitalStarterQuestions =
-    messages?.length <= chatbot.introMessages?.length;
-
-  const [followUps, setFollowUps] = useState<string[]>(
-    showInitalStarterQuestions ? chatbot?.starterQuestions : [],
+  const [followUps, setFollowUps] = useState<string[]>([]);
+  const { toast } = useToast();
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [msgRenderIndex, _setMsgRenderIndex] = useState(
+    Math.max(0, messages.length - CHAT_PAGE_SIZE),
   );
+  const isMobileScreen = useMobileScreen();
 
   useEffect(() => {
-    setMessages(data.messages);
-    setChatbot(data.chatbot);
-    setBASE_URL(data.BASE_URL);
-
-    setFollowUps(
-      data.messages?.length <= data.chatbot?.introMessages?.length
-        ? data.chatbot?.starterQuestions
-        : [],
+    setMessages(
+      data?.messages?.map((msg) => ({
+        id: msg.id,
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+        createdAt: msg.createdAt,
+        streaming: false,
+      })) ?? [],
     );
+    setChatbot(data?.chatbot);
+    setBASE_URL(data?.BASE_URL);
 
+    const showInitalStarterQuestions =
+      data?.messages?.length <= (data?.chatbot?.introMessages?.length || 0);
+
+    if (showInitalStarterQuestions) {
+      setFollowUps(data?.chatbot?.starterQuestions || []);
+    } else {
+      setFollowUps([]);
+    }
+
+    // example queries
     if (data?.userMessage) {
-      handleSubmit();
+      handleSubmit({ preventDefault: () => {} } as any);
       setSearchParams((prev) => {
         prev.delete("userMessage");
         return prev;
@@ -67,80 +105,40 @@ export default function Chat() {
     }
   }, [chatId]);
 
-  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
-    if ((!userInput || userInput === "") && !data.submit) return false;
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!userInput || userInput === "") return false;
+
+    const currentDate = new Date();
+    // const formattedDate = format(currentDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 
     const prevChatHistory = [
       ...messages,
-      { createdAt: new Date().toISOString(), content: userInput, role: "user" },
       {
-        createdAt: new Date().toISOString(),
+        id: createId(),
+        content: userInput,
+        role: "user" as "user",
+        createdAt: String(currentDate),
+        streaming: false,
+      },
+      {
+        id: createId(),
         content: "",
-        role: "assistant",
-        pending: true,
-        userMessage: userInput,
-        animate: true,
+        role: "assistant" as "assistant",
+        createdAt: String(currentDate),
+        streaming: true,
       },
     ];
 
+    setLoading(true);
     setMessages(prevChatHistory);
     setUserInput("");
-    setIsSubmitting(true);
+    setFollowUps([]);
+
+    return await streamChat({
+      message: userInput,
+    });
   };
-
-  useEffect(() => {
-    // this is where we call our api for a chat response
-    async function fetchReply() {
-      const promptMessage =
-        messages.length > 0 ? messages[messages.length - 1] : null;
-      const remHistory = messages.length > 0 ? messages.slice(0, -1) : [];
-      const _chatHistory = [...remHistory];
-
-      if (!promptMessage || !promptMessage?.userMessage) {
-        setIsSubmitting(false);
-        return false;
-      }
-
-      if (isSubmitting) setFollowUps([]);
-
-      await streamChat(
-        BASE_URL,
-        chatbot,
-        remHistory,
-        chatbotId,
-        chatId,
-        (chatResult) =>
-          handleChat(
-            chatResult,
-            setIsSubmitting,
-            setMessages,
-            remHistory,
-            _chatHistory,
-          ),
-      );
-
-      const followUpRes = await fetch(`${BASE_URL}/api/generatefollowups`, {
-        method: "POST",
-        body: JSON.stringify({ history: _chatHistory }),
-      });
-
-      const { followUps } = await followUpRes.json();
-
-      setFollowUps(followUps);
-
-      return;
-    }
-
-    isSubmitting === true && fetchReply();
-  }, [isSubmitting, messages]);
-
-  const { toast } = useToast();
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  const [msgRenderIndex, _setMsgRenderIndex] = useState(
-    Math.max(0, messages.length - CHAT_PAGE_SIZE),
-  );
 
   function setMsgRenderIndex(newIndex: number) {
     newIndex = Math.min(messages.length - CHAT_PAGE_SIZE, newIndex);
@@ -176,11 +174,196 @@ export default function Chat() {
     setAutoScroll(isHitBottom);
   };
 
-  const isMobileScreen = useMobileScreen();
-
   function scrollToBottom() {
     setMsgRenderIndex(messages.length - CHAT_PAGE_SIZE);
     scrollDomToBottom();
+  }
+
+  const streamChat = async ({
+    message,
+  }: {
+    message: string;
+  }): Promise<void> => {
+    const currentDate = new Date();
+    // const formattedDate = format(currentDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+    const _messages = [
+      ...messages,
+      {
+        id: createId(),
+        content: message,
+        role: "user" as "user",
+        createdAt: String(currentDate),
+        streaming: false,
+      },
+    ];
+    setFollowUps([]);
+
+    const ctrl = new AbortController();
+
+    await fetchEventSource(`${BASE_URL}/api/chat/${chatbotId}/${chatId}`, {
+      method: "POST",
+      body: JSON.stringify({
+        messages: [
+          ...messages.map((message) => ({
+            role: message.role,
+            content: message.content,
+          })),
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+        chattingWithAgent: false,
+        chatId: true,
+      }),
+      signal: ctrl.signal,
+      openWhenHidden: true,
+      async onopen(response) {
+        if (response.ok) {
+          return;
+        } else if (response.status >= 400) {
+          await response
+            .json()
+            .then((serverResponse) => {
+              handleChat({
+                sseMessage: serverResponse,
+                _messages,
+              });
+            })
+            .catch(() => {
+              handleChat({
+                sseMessage: {
+                  id: createId(),
+                  type: "abort",
+                  textResponse: null,
+                  streaming: false,
+                  error: `An error occurred while streaming response. Code ${response.status}`,
+                },
+                _messages,
+              });
+            });
+          ctrl.abort();
+          throw new Error();
+        } else {
+          await handleChat({
+            sseMessage: {
+              id: createId(),
+              type: "abort",
+              textResponse: null,
+              streaming: false,
+              error: `An error occurred while streaming response. Unknown Error.`,
+            },
+            _messages,
+          });
+          ctrl.abort();
+          throw new Error("Unknown Error");
+        }
+      },
+      async onmessage(msg) {
+        try {
+          const sseMessage = JSON.parse(msg.data);
+          await handleChat({
+            sseMessage,
+            _messages,
+          });
+        } catch {}
+      },
+      onerror(err) {
+        handleChat({
+          sseMessage: {
+            id: createId(),
+            type: "abort",
+            textResponse: null,
+            streaming: false,
+            error: `An error occurred while streaming response. ${err.message}`,
+          },
+          _messages,
+        });
+        ctrl.abort();
+        throw new Error();
+      },
+    });
+  };
+
+  async function handleChat({
+    sseMessage,
+    _messages,
+  }: {
+    sseMessage: SSEMessage;
+    _messages: any[];
+  }) {
+    const { id, textResponse, type, error, streaming } = sseMessage;
+    const currentDate = new Date();
+    // const formattedDate = format(currentDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+    setLoading(false);
+
+    switch (type) {
+      case "abort": {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            id,
+            content: "",
+            error: error ?? undefined,
+            role: "assistant" as "assistant",
+            createdAt: String(currentDate),
+            streaming,
+            loading: false,
+          },
+        ]);
+        break;
+      }
+      case "textResponseChunk": {
+        const chatIdx = _messages.findIndex((chat) => chat.id === id);
+
+        if (chatIdx !== -1) {
+          const existingMessage = { ..._messages[chatIdx] };
+          const updatedMessage = {
+            ...existingMessage,
+            content: (existingMessage.content ?? "") + (textResponse ?? ""),
+            streaming,
+          };
+          _messages[chatIdx] = updatedMessage;
+        } else {
+          _messages.push({
+            id,
+            content: textResponse ?? "",
+            role: "assistant" as "assistant",
+            createdAt: String(currentDate),
+            streaming,
+            error: undefined,
+            loading: false,
+          });
+        }
+
+        setMessages([..._messages]);
+        if (!streaming) {
+          await generateFollowUps({ messages: _messages });
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
+  async function generateFollowUps({
+    messages,
+  }: {
+    messages: RenderableMessage[];
+  }) {
+    const followUpRes = await fetch(`${BASE_URL}/api/generatefollowups`, {
+      method: "POST",
+      body: JSON.stringify({
+        history: messages.map((msg) => ({
+          role: msg.role,
+          content: msg.content,
+        })),
+      }),
+    });
+
+    const { followUps } = await followUpRes.json();
+    return setFollowUps(followUps);
   }
 
   return (
@@ -230,7 +413,7 @@ export default function Chat() {
                               content={message.content}
                               loading={
                                 // eslint-disable-next-line react/jsx-no-leaked-render
-                                isSubmitting && !isUser && message.pending
+                                loading && !isUser && message.streaming
                               }
                               onDoubleClickCapture={() => {
                                 if (!isMobileScreen) return;
@@ -311,200 +494,4 @@ export default function Chat() {
       </div>
     </div>
   );
-}
-
-async function streamChat(
-  BASE_URL,
-  chatbot,
-  remHistory,
-  chatbotId,
-  sessionId,
-  handleChat,
-) {
-  const ctrl = new AbortController();
-
-  if (!BASE_URL) {
-    handleChat({
-      createdAt: new Date().toISOString(),
-      id: v4(),
-      type: "abort",
-      textResponse: null,
-      sources: [],
-      close: true,
-      error: `An error occurred while streaming response. No messages to send. BASE_URL not found.`,
-    });
-    ctrl.abort();
-    throw new Error();
-  }
-
-  const URL_TEST = `${BASE_URL}/api/chat/${chatbotId}/${sessionId}`;
-  await fetchEventSource(URL_TEST, {
-    method: "POST",
-    body: JSON.stringify({
-      chatbot,
-      messages: remHistory.map((msg) => {
-        return {
-          role: msg.role === "user" ? "user" : "assistant",
-          content: msg.content,
-        };
-      }),
-      chatId: true,
-    }),
-    signal: ctrl.signal,
-    openWhenHidden: true,
-    async onopen(response) {
-      if (response.ok) {
-        return; // everything's good
-      } else if (response.status >= 400) {
-        await response
-          .json()
-          .then((serverResponse) => {
-            handleChat(serverResponse);
-          })
-          .catch(() => {
-            handleChat({
-              createdAt: new Date().toISOString(),
-              id: v4(),
-              type: "abort",
-              textResponse: null,
-              sources: [],
-              close: true,
-              error: `An error occurred while streaming response. Code ${response.status}`,
-            });
-          });
-        ctrl.abort();
-        throw new Error();
-      } else {
-        handleChat({
-          createdAt: new Date().toISOString(),
-          id: v4(),
-          type: "abort",
-          textResponse: null,
-          sources: [],
-          close: true,
-          error: `An error occurred while streaming response. Unknown Error.`,
-        });
-        ctrl.abort();
-        throw new Error("Unknown Error");
-      }
-    },
-    async onmessage(msg) {
-      try {
-        const chatResult = JSON.parse(msg.data);
-        handleChat(chatResult);
-
-        // eslint-disable-next-line no-empty
-      } catch {}
-    },
-    onerror(err) {
-      handleChat({
-        createdAt: new Date().toISOString(),
-        id: v4(),
-        type: "abort",
-        textResponse: null,
-        sources: [],
-        close: true,
-        error: `An error occurred while streaming response. ${err.message}`,
-      });
-      ctrl.abort();
-      throw new Error();
-    },
-  });
-}
-
-// For handling of synchronous chats that are not utilizing streaming or chat requests.
-function handleChat(
-  chatResult,
-  setLoadingResponse,
-  setChatHistory,
-  remHistory,
-  _chatHistory,
-) {
-  const { uuid, textResponse, type, sources = [], error, close } = chatResult;
-
-  if (type === "abort") {
-    setLoadingResponse(false);
-    setChatHistory([
-      ...remHistory,
-      {
-        createdAt: new Date().toISOString(),
-        uuid,
-        content: textResponse,
-        role: "assistant",
-        sources,
-        closed: true,
-        error,
-        animate: false,
-        pending: false,
-      },
-    ]);
-    _chatHistory.push({
-      createdAt: new Date().toISOString(),
-      uuid,
-      content: textResponse,
-      role: "assistant",
-      sources,
-      closed: true,
-      error,
-      animate: false,
-      pending: false,
-    });
-  } else if (type === "textResponse") {
-    setLoadingResponse(false);
-    setChatHistory([
-      ...remHistory,
-      {
-        createdAt: new Date().toISOString(),
-
-        uuid,
-        content: textResponse,
-        role: "assistant",
-        sources,
-        closed: close,
-        error,
-        animate: !close,
-        pending: false,
-      },
-    ]);
-    _chatHistory.push({
-      createdAt: new Date().toISOString(),
-
-      uuid,
-      content: textResponse,
-      role: "assistant",
-      sources,
-      closed: close,
-      error,
-      animate: !close,
-      pending: false,
-    });
-  } else if (type === "textResponseChunk") {
-    const chatIdx = _chatHistory.findIndex((chat) => chat.uuid === uuid);
-    if (chatIdx !== -1) {
-      const existingHistory = { ..._chatHistory[chatIdx] };
-      const updatedHistory = {
-        ...existingHistory,
-        content: existingHistory.content + textResponse,
-        sources,
-        error,
-        closed: close,
-        animate: !close,
-        pending: false,
-      };
-      _chatHistory[chatIdx] = updatedHistory;
-    } else {
-      _chatHistory.push({
-        createdAt: new Date().toISOString(),
-        uuid,
-        sources,
-        error,
-        content: textResponse,
-        role: "assistant",
-        closed: close,
-        animate: !close,
-        pending: false,
-      });
-    }
-    setChatHistory([..._chatHistory]);
-  }
 }

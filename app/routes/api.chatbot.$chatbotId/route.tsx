@@ -1,15 +1,15 @@
+// get a chatbot by id
 import { LoaderFunctionArgs, json } from "@remix-run/node";
-import { getChatbotById } from "~/models/chatbot.server";
+import { getChatbot } from "./queries.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { chatbotId } = params;
 
-  console.log("api.chatbot.$chatbotId - chatbotId: ", chatbotId);
   if (!chatbotId) {
     throw new Error("Chatbot ID is required");
   }
 
-  const chatbot = await getChatbotById({ id: chatbotId });
+  const chatbot = await getChatbot({ id: chatbotId });
 
   const corsHeader =
     process.env.NODE_ENV === "production"

@@ -1,3 +1,4 @@
+// marks an agent/asistant message as seenByUser (i.e. seen by anon user via widget)
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "~/db.server";
 
@@ -5,10 +6,9 @@ export const action = async ({ params }: ActionFunctionArgs) => {
   const { messageId } = params;
 
   if (!messageId) {
-    return json({ error: "No messageId provided" }, { status: 400 });
+    throw new Error("No messageId provided");
   }
 
-  // make sure the message exists - this probably slows us down unnecessarily!
   const message = await prisma.message.findUnique({
     where: {
       id: messageId,
@@ -16,7 +16,7 @@ export const action = async ({ params }: ActionFunctionArgs) => {
   });
 
   if (!message) {
-    return json({ error: "Message not found" }, { status: 404 });
+    return new Response(null, { status: 204 });
   }
 
   const updateMessage = await prisma.message.update({

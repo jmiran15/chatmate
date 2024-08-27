@@ -1,35 +1,39 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import Chat from "~/components/chat/chat";
+import { prisma } from "~/db.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatId, chatbotId } = params;
-  const url = new URL(request.url);
 
-  const userMessage = url.searchParams.get("userMessage");
-
-  if (!chatId) {
-    throw new Error("Chat ID is required");
+  if (!chatId || !chatbotId) {
+    throw new Error("Chat ID and Chatbot ID are required");
   }
 
-  if (!chatbotId) {
-    throw new Error("Chatbot ID is required");
+  const BASE_URL =
+    process.env.NODE_ENV === "development"
+      ? process.env.DEV_BASE
+      : process.env.PROD_BASE;
+
+  const [messages, chatbotRes] = await Promise.all([
+    prisma.message.findMany({
+      where: { chatId },
+      orderBy: { createdAt: "asc" },
+      select: { id: true, content: true, role: true, createdAt: true },
+    }),
+    fetch(`${BASE_URL}/api/chatbot/${chatbotId}`),
+  ]);
+
+  if (!chatbotRes.ok) {
+    throw new Error("Failed to fetch chatbot");
   }
 
-  const isDev = process.env.NODE_ENV === "development";
-
-  const BASE_URL = isDev ? process.env.DEV_BASE : process.env.PROD_BASE;
-
-  const messagesRes = await fetch(`${BASE_URL}/api/messages/${chatId}`);
-  const { messages } = await messagesRes.json();
-
-  const chatbotRes = await fetch(`${BASE_URL}/api/chatbot/${chatbotId}`);
-  const chatbot = await chatbotRes.json();
+  const { chatbot } = await chatbotRes.json();
 
   return json({
     chatbot,
     messages,
     BASE_URL,
-    userMessage,
+    userMessage: new URL(request.url).searchParams.get("userMessage"),
   });
 };
 

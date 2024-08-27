@@ -35,8 +35,7 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   if (!chat) {
-    // throw new Error("Chat not found");
-    return json({ success: true });
+    return new Response(null, { status: 204 });
   }
 
   const updatedChat = await prisma.chat.update({
