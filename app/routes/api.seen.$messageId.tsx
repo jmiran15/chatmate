@@ -8,7 +8,7 @@ export const action = async ({ params }: ActionFunctionArgs) => {
     return json({ error: "No messageId provided" }, { status: 400 });
   }
 
-  // make sure the message exists
+  // make sure the message exists - this probably slows us down unnecessarily!
   const message = await prisma.message.findUnique({
     where: {
       id: messageId,
@@ -24,7 +24,7 @@ export const action = async ({ params }: ActionFunctionArgs) => {
       id: messageId,
     },
     data: {
-      seen: true,
+      seenByUser: true,
     },
   });
 

@@ -2,25 +2,25 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { useLoaderData, useParams, useSearchParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
 
-import { ScrollArea } from "../ui/scroll-area";
+import { format } from "date-fns";
+import { Clipboard } from "lucide-react";
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
-import { ChatAction } from "./chat-action";
+import { v4 } from "uuid";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "~/components/ui/hover-card";
-import { useToast } from "../ui/use-toast";
+import { useScrollToBottom } from "~/hooks/useScroll";
 import { cn } from "~/lib/utils";
 import { copyToClipboard } from "~/utils/clipboard";
-import { Separator } from "../ui/separator";
-import { Clipboard } from "lucide-react";
-import { format } from "date-fns";
-import { useScrollToBottom } from "~/hooks/useScroll";
 import { useMobileScreen } from "~/utils/mobile";
-import { Loading } from "../ui/loading";
-import { v4 } from "uuid";
 import { Button } from "../ui/button";
+import { Loading } from "../ui/loading";
+import { ScrollArea } from "../ui/scroll-area";
+import { Separator } from "../ui/separator";
+import { useToast } from "../ui/use-toast";
+import { ChatAction } from "./chat-action";
 
 const Markdown = lazy(() => import("../ui/markdown"));
 
@@ -41,7 +41,7 @@ export default function Chat() {
   const [_, setSearchParams] = useSearchParams();
 
   const showInitalStarterQuestions =
-    messages.length <= chatbot.introMessages.length;
+    messages?.length <= chatbot.introMessages?.length;
 
   const [followUps, setFollowUps] = useState<string[]>(
     showInitalStarterQuestions ? chatbot?.starterQuestions : [],
@@ -53,7 +53,7 @@ export default function Chat() {
     setBASE_URL(data.BASE_URL);
 
     setFollowUps(
-      data.messages.length <= data.chatbot.introMessages.length
+      data.messages?.length <= data.chatbot?.introMessages?.length
         ? data.chatbot?.starterQuestions
         : [],
     );

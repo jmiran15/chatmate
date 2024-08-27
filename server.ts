@@ -79,6 +79,15 @@ async function run() {
     socket.on("pollingWidgetStatus", (data: { sessionId: string }) => {
       socket.broadcast.emit("pollingWidgetStatus", data);
     });
+
+    // marking an agent message as seen
+    socket.on(
+      "seenAgentMessage",
+      (data: { sessionId: string; messageId: string }) => {
+        console.log("seenAgentMessage", data);
+        socket.broadcast.emit("seenAgentMessage", data);
+      },
+    );
   });
 
   const metricsApp = express();

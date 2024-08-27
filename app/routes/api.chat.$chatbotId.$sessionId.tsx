@@ -193,6 +193,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         ...userMessage,
       });
 
+      console.log("createdMessage", createdMessage);
+
       // check if the payload only had one user message - meaning its the first message
       if (
         messages.filter(

@@ -32,7 +32,8 @@ import {
 } from "./queries.server";
 import ScrollToBottomButton from "./ScrollToBottomButton";
 import Subheader from "./subheader";
-import Thread, { DateSeparator } from "./thread";
+import { DateSeparator } from "./thread/DateSeparator";
+import Thread from "./thread/thread";
 import useAgent from "./use-agent";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -158,6 +159,26 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const status = String(formData.get("status")) as TicketStatus;
       const chat = await updateChatStatus({ chatId: chatsId, status });
       return json({ chat });
+    }
+    case "mark-user-messages-seen": {
+      const id = String(formData.get("messageId"));
+
+      try {
+        await prisma.message.update({
+          where: {
+            id,
+            role: "user",
+            chatId: chatsId,
+            seenByAgent: false,
+          },
+          data: {
+            seenByAgent: true,
+          },
+        });
+      } catch (error) {
+        console.error("Failed to mark message as seen:", error);
+      }
+      return json({ success: true });
     }
     default:
       throw new Error("undefined intent");
@@ -290,7 +311,9 @@ export default function ChatRoute() {
       createdAt: formattedDate,
       updatedAt: formattedDate,
       chatId: chat.id,
-      seen: false,
+      // seen: false,
+      seenByUser: false,
+      seenByAgent: true,
       clusterId: null,
     };
 
@@ -356,7 +379,9 @@ export default function ChatRoute() {
             ref={threadRef}
             thread={thread}
             setThread={setThread}
-            sessionId={chat?.sessionId}
+            // This should be chatId
+            // sessionId={chat?.sessionId}
+            sessionId={chat?.id}
             seen={chat?.seen}
             scrollThreadToBottom={scrollThreadToBottom}
           />

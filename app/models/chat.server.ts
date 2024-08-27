@@ -134,6 +134,7 @@ export function getMessagesByChatId({ chatId }: { chatId: Chat["id"] }) {
   });
 }
 
+// unseen assistant/agent messages, not seenByUser
 export async function getMessagesAndUnseenCount({
   chatId,
 }: {
@@ -151,7 +152,7 @@ export async function getMessagesAndUnseenCount({
     prisma.message.count({
       where: {
         chatId,
-        seen: false,
+        seenByUser: false,
         role: "assistant", // we only care about non user messages for now
       },
     }),

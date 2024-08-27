@@ -1,9 +1,9 @@
-import { AnimatePresence } from "framer-motion";
-import Modal from "~/components/custom-mobile-modal";
-import Thread from "./thread";
 import { Chat, Chatbot, Message } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { useNavigate, useParams, useSearchParams } from "@remix-run/react";
+import { AnimatePresence } from "framer-motion";
+import Modal from "~/components/custom-mobile-modal";
+import Thread from "./thread/thread";
 
 export default function MobileThread({
   thread,
