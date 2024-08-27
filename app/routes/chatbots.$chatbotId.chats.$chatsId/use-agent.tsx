@@ -1,24 +1,24 @@
 import { useEffect } from "react";
 import { useSocket } from "~/providers/socket";
 
-export default function useAgent(sessionId: string | null): void {
+export default function useAgent(chatId: string | null): void {
   const socket = useSocket();
 
   useEffect(() => {
-    if (!socket || !sessionId) return;
+    if (!socket || !chatId) return;
 
-    const handlePollingIsAgent = (data: { sessionId: string }) => {
-      if (sessionId === data.sessionId) {
+    const handlePollingIsAgent = (data: { chatId: string }) => {
+      if (chatId === data.chatId) {
         socket.emit("isAgent", { ...data, isAgent: true });
       }
     };
 
     socket.on("pollingAgent", handlePollingIsAgent);
-    socket.emit("isAgent", { sessionId, isAgent: true });
+    socket.emit("isAgent", { chatId, isAgent: true });
 
     return () => {
       socket.off("pollingAgent", handlePollingIsAgent);
-      socket.emit("isAgent", { sessionId, isAgent: false });
+      socket.emit("isAgent", { chatId, isAgent: false });
     };
-  }, [socket, sessionId]);
+  }, [socket, chatId]);
 }

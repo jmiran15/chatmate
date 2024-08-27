@@ -283,7 +283,7 @@ export default function ChatRoute() {
   }, [userInput]);
 
   const socket = useSocket();
-  useAgent(chat?.sessionId);
+  useAgent(chat?.id);
 
   useEffect(() => {
     setThread(messages);

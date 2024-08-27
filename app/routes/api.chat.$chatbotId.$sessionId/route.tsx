@@ -117,7 +117,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       const userMessage =
         messages.length > 0 ? messages[messages.length - 1] : null;
 
-      if (!userMessage || userMessage.role !== "user") {
+      if (!userMessage || (userMessage.role !== "user" && !chattingWithAgent)) {
         throw new Error("No user message provided");
       }
 

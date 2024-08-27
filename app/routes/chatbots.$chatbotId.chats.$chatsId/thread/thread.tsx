@@ -21,7 +21,7 @@ const Thread = forwardRef(function Thread(
   {
     thread,
     setThread,
-    sessionId, // the chatId - dont even need - we are using useParams
+    sessionId,
     seen = false,
     scrollThreadToBottom,
   }: {
@@ -51,8 +51,8 @@ const Thread = forwardRef(function Thread(
   const messagesRef = useRef(thread);
 
   const handleMarkSeen = useCallback(
-    (data: { sessionId: string; messageId: string }) => {
-      if (sessionId === data.sessionId) {
+    (data: { chatId: string; messageId: string }) => {
+      if (sessionId === data.chatId) {
         setThread((prevThread) =>
           prevThread.map((message) =>
             message.id === data.messageId

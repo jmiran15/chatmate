@@ -51,21 +51,19 @@ async function run() {
   // Then you can use `io` to listen the `connection` event and get a socket
   // from a client
   io.on("connection", (socket) => {
-    console.log("a user connected");
-    // from this point you are on the WS connection with a specific client
-
     socket.emit("confirmation", "connected!");
 
     socket.on("messages", (data) => {
       socket.broadcast.emit("messages", data);
     });
 
-    socket.on("isAgent", (data: { sessionId: string; isAgent: boolean }) => {
+    // change to chatId - DONE/S
+    socket.on("isAgent", (data: { chatId: string; isAgent: boolean }) => {
       socket.broadcast.emit("isAgent", data);
     });
 
-    socket.on("pollingAgent", (data: { sessionId: string }) => {
-      console.log("pollingAgent", data);
+    // chatId - DONE/SW
+    socket.on("pollingAgent", (data: { chatId: string }) => {
       socket.broadcast.emit("pollingAgent", data);
     });
 
@@ -81,10 +79,10 @@ async function run() {
     });
 
     // marking an agent message as seen
+    // chatId - DONE/SW
     socket.on(
       "seenAgentMessage",
-      (data: { sessionId: string; messageId: string }) => {
-        console.log("seenAgentMessage", data);
+      (data: { chatId: string; messageId: string }) => {
         socket.broadcast.emit("seenAgentMessage", data);
       },
     );
