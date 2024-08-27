@@ -47,7 +47,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     throw new Error("chatbotId is required");
   }
 
-  const chat = await getChatInfo(chatsId);
+  const chat = await getChatInfo!(chatsId);
 
   if (!chat) {
     throw new Error("Chat not found");
@@ -107,7 +107,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         createdAt: (createdAt === "asc" ? "asc" : "desc") as Prisma.SortOrder,
       };
 
-      const nextChatId = await deleteChat({
+      const nextChatId = await deleteChat!({
         chatId,
         chatbotId,
         starredQuery,
@@ -126,38 +126,38 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "mark-seen": {
       const chatId = String(formData.get("chatId"));
-      return await markChatAsSeen({ chatId });
+      return await markChatAsSeen!({ chatId });
     }
     case "create-label": {
       const name = String(formData.get("label-name"));
-      const label = await createLabel({ name, chatbotId });
+      const label = await createLabel!({ name, chatbotId });
       return json({ label });
     }
     case "update-label": {
       const labelId = String(formData.get("label-id"));
       const name = String(formData.get("label-name"));
       const color = String(formData.get("label-color"));
-      const label = await updateLabel({ labelId, name, color });
+      const label = await updateLabel!({ labelId, name, color });
       return json({ label });
     }
     case "delete-label": {
       const labelId = String(formData.get("label-id"));
-      const label = await deleteLabel({ labelId });
+      const label = await deleteLabel!({ labelId });
       return json({ label });
     }
     case "connect-label": {
       const labelId = String(formData.get("label-id"));
-      const chat = await connectLabel({ chatId: chatsId, labelId });
+      const chat = await connectLabel!({ chatId: chatsId, labelId });
       return json({ chat });
     }
     case "disconnect-label": {
       const labelId = String(formData.get("label-id"));
-      const chat = await disconnectLabel({ chatId: chatsId, labelId });
+      const chat = await disconnectLabel!({ chatId: chatsId, labelId });
       return json({ chat });
     }
     case "update-status": {
       const status = String(formData.get("status")) as TicketStatus;
-      const chat = await updateChatStatus({ chatId: chatsId, status });
+      const chat = await updateChatStatus!({ chatId: chatsId, status });
       return json({ chat });
     }
     case "mark-user-messages-seen": {
@@ -191,7 +191,7 @@ export default function ChatRoute() {
   const isMobile = useMobileScreen();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const inputContainer = useRef<HTMLDivElement>(null);
-  const [thread, setThread] = useState(() => messages ?? []); // we can move this by just using Remix - action?
+  const [thread, setThread] = useState(() => messages ?? []);
   const [userInput, setUserInput] = useState("");
   const {
     setAutoScroll,
@@ -208,6 +208,8 @@ export default function ChatRoute() {
     y: 0,
   });
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const socket = useSocket();
+  useAgent(chat?.id);
 
   const updateFloatingDate = useCallback(() => {
     if (!threadRef.current) return;
@@ -269,7 +271,16 @@ export default function ChatRoute() {
   }, [threadRef]);
 
   useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "d" && e.ctrlKey) {
+        setFloatingDateState((prev) => ({ ...prev, show: !prev.show }));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+
     return () => {
+      window.removeEventListener("keydown", handleKeyPress);
       if (hideTimerRef.current) {
         clearTimeout(hideTimerRef.current);
       }
@@ -281,9 +292,6 @@ export default function ChatRoute() {
       setPromptInputHeight(inputContainer.current.offsetHeight);
     }
   }, [userInput]);
-
-  const socket = useSocket();
-  useAgent(chat?.id);
 
   useEffect(() => {
     setThread(messages);
@@ -311,7 +319,6 @@ export default function ChatRoute() {
       createdAt: formattedDate,
       updatedAt: formattedDate,
       chatId: chat.id,
-      // seen: false,
       seenByUser: false,
       seenByAgent: true,
       clusterId: null,
@@ -319,17 +326,18 @@ export default function ChatRoute() {
 
     const prevChatHistory = [...thread, newMessage];
 
-    await axios.post(`${API_PATH}/api/chat/${chatbot?.id}/${chat?.sessionId}`, {
+    await axios.post(`${API_PATH}/api/chat/${chatbot?.id}/${chat?.id}`, {
       chatbot,
       messages: prevChatHistory,
       chattingWithAgent: true,
+      chatId: true,
     });
 
     setThread(prevChatHistory);
     setUserInput("");
 
     socket.emit("messages", {
-      sessionId: chat?.sessionId,
+      chatId: chat?.id,
       messages: prevChatHistory,
     });
   }
@@ -352,17 +360,6 @@ export default function ChatRoute() {
     }
   }, [handleScroll]);
 
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === "d" && e.ctrlKey) {
-        setFloatingDateState((prev) => ({ ...prev, show: !prev.show }));
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, []);
-
   return isMobile ? (
     <MobileThread
       thread={thread}
@@ -379,9 +376,6 @@ export default function ChatRoute() {
             ref={threadRef}
             thread={thread}
             setThread={setThread}
-            // This should be chatId
-            // sessionId={chat?.sessionId}
-            sessionId={chat?.id}
             seen={chat?.seen}
             scrollThreadToBottom={scrollThreadToBottom}
           />

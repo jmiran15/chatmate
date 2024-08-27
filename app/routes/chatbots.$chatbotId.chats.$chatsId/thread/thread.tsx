@@ -21,13 +21,11 @@ const Thread = forwardRef(function Thread(
   {
     thread,
     setThread,
-    sessionId,
     seen = false,
     scrollThreadToBottom,
   }: {
     thread: SerializeFrom<Message[]>;
     setThread: React.Dispatch<React.SetStateAction<SerializeFrom<Message[]>>>;
-    sessionId: string | null;
     seen: boolean | null;
     scrollThreadToBottom: () => void;
   },
@@ -52,7 +50,7 @@ const Thread = forwardRef(function Thread(
 
   const handleMarkSeen = useCallback(
     (data: { chatId: string; messageId: string }) => {
-      if (sessionId === data.chatId) {
+      if (chatId === data.chatId) {
         setThread((prevThread) =>
           prevThread.map((message) =>
             message.id === data.messageId
@@ -62,19 +60,19 @@ const Thread = forwardRef(function Thread(
         );
       }
     },
-    [sessionId, setThread],
+    [chatId, setThread],
   );
 
   // optimistically set seen by user
   useEffect(() => {
-    if (!socket || !sessionId) return;
+    if (!socket || !chatId) return;
 
     socket.on("seenAgentMessage", handleMarkSeen);
 
     return () => {
       socket.off("seenAgentMessage", handleMarkSeen);
     };
-  }, [socket, sessionId]);
+  }, [socket, chatId]);
 
   const lastUserMessageIndex = useMemo(() => {
     for (let i = thread.length - 1; i >= 0; i--) {
@@ -122,12 +120,8 @@ const Thread = forwardRef(function Thread(
   }, [inView, seen, lastUserMessageIndex, markSeen, hasMarkedSeen]);
 
   const handleThread = useCallback(
-    (data: { sessionId: string; messages: SerializeFrom<Message[]> }) => {
-      console.log("handleThread: ", {
-        sid: sessionId,
-        session: data.sessionId,
-      });
-      if (sessionId === data.sessionId) {
+    (data: { chatId: string; messages: SerializeFrom<Message[]> }) => {
+      if (chatId === data.chatId) {
         setThread((prevThread: SerializeFrom<Message[]>) => {
           const messageMap = new Map(prevThread.map((m) => [m.id, m]));
 
@@ -158,7 +152,7 @@ const Thread = forwardRef(function Thread(
         // scrollThreadToBottom();
       }
     },
-    [sessionId, setThread, scrollThreadToBottom],
+    [chatId, setThread, scrollThreadToBottom],
   );
 
   useEffect(() => {
