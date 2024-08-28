@@ -2,11 +2,18 @@
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import { prisma } from "~/db.server";
 
-export const action = async ({ params }: ActionFunctionArgs) => {
+export const action = async ({ params, request }: ActionFunctionArgs) => {
   const { messageId } = params;
 
   if (!messageId) {
     throw new Error("No messageId provided");
+  }
+
+  // Parse the request body to get the seenAt value
+  let { seenAt } = await request.json();
+
+  if (!seenAt) {
+    seenAt = new Date().toISOString();
   }
 
   const message = await prisma.message.findUnique({
@@ -25,6 +32,7 @@ export const action = async ({ params }: ActionFunctionArgs) => {
     },
     data: {
       seenByUser: true,
+      seenByUserAt: new Date(seenAt),
     },
   });
 

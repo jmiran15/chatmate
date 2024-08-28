@@ -1,11 +1,17 @@
 import { type Message } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { motion } from "framer-motion";
-import { Check, CheckCheck, Keyboard, Pause } from "lucide-react";
+import { Check, CheckCheck, Eye, Keyboard, Pause, Send } from "lucide-react";
 import { DateTime } from "luxon";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { PreviewMarkdown } from "~/components/PreviewMarkdown";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
 import { TypingInformation } from "./thread";
 import { useMarkMessageSeen } from "./useMarkMessagesSeen";
@@ -68,6 +74,15 @@ const TypewriterText = ({ text }: { text: string }) => {
   );
 };
 
+const formatTooltipDate = (date: Date | string | null | undefined) => {
+  if (!date) return null;
+  const dateTime =
+    typeof date === "string"
+      ? DateTime.fromISO(date)
+      : DateTime.fromJSDate(date);
+  return dateTime.isValid ? dateTime.toFormat("d LLL 'at' h:mm a") : null;
+};
+
 const MessageComponent = memo(
   ({ message }: { message: SerializeFrom<Message & TypingInformation> }) => {
     const { markMessageSeen, isMessageSeen } = useMarkMessageSeen(message);
@@ -89,6 +104,33 @@ const MessageComponent = memo(
       () => formatMessageDate(new Date(message.createdAt)),
       [message.createdAt],
     );
+
+    const tooltipContent = useMemo(() => {
+      const sentDate = formatTooltipDate(message.createdAt);
+      const seenDate =
+        !isUser && message.seenByUser && message.seenByUserAt
+          ? formatTooltipDate(message.seenByUserAt)
+          : null;
+
+      if (!sentDate) return null;
+
+      console.log("message", message);
+
+      return (
+        <div className="flex flex-col space-y-1">
+          <div className="flex items-center">
+            <Send className="w-4 h-4 mr-2" />
+            <span>Sent on {sentDate}</span>
+          </div>
+          {seenDate && (
+            <div className="flex items-center">
+              <Eye className="w-4 h-4 mr-2" />
+              <span>Seen on {seenDate}</span>
+            </div>
+          )}
+        </div>
+      );
+    }, [isUser, message.createdAt, message.seenByUser, message.seenByUserAt]);
 
     return (
       <div
@@ -124,15 +166,32 @@ const MessageComponent = memo(
                 <PreviewMarkdown source={message.content} />
               )}
             </div>
-            <div className="flex items-center whitespace-nowrap text-[10px] text-muted-foreground opacity-80 translate-y-[0.125em] ml-1 self-end flex-shrink-0">
-              <span className="mr-1">{formattedDate}</span>
-              {!isUser &&
-                (message.seenByUser ? (
-                  <CheckCheck className="w-3 h-3 text-blue-400" />
-                ) : (
-                  <Check className="w-3 h-3 text-muted-foreground" />
-                ))}
-            </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div
+                    className={cn(
+                      "flex items-center whitespace-nowrap text-[10px] text-muted-foreground opacity-80 translate-y-[0.125em] ml-1 self-end flex-shrink-0",
+                      "transition-colors duration-200 ease-in-out rounded px-1 py-0.5",
+                      "hover:bg-gray-200 dark:hover:bg-gray-700",
+                    )}
+                  >
+                    <span className="mr-1">{formattedDate}</span>
+                    {!isUser &&
+                      (message.seenByUser ? (
+                        <CheckCheck className="w-3 h-3 text-blue-400" />
+                      ) : (
+                        <Check className="w-3 h-3 text-muted-foreground" />
+                      ))}
+                  </div>
+                </TooltipTrigger>
+                {tooltipContent && (
+                  <TooltipContent side="left" align="end">
+                    {tooltipContent}
+                  </TooltipContent>
+                )}
+              </Tooltip>
+            </TooltipProvider>
           </div>
         </div>
         {isUser && isPreview && (

@@ -77,7 +77,7 @@ async function run() {
 
     socket.on(
       "seenAgentMessage",
-      (data: { chatId: string; messageId: string }) => {
+      (data: { chatId: string; messageId: string; seenAt: string }) => {
         socket.broadcast.emit("seenAgentMessage", data);
       },
     );

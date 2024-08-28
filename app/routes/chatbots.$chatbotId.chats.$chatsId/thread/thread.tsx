@@ -59,12 +59,16 @@ const Thread = forwardRef(function Thread(
   const messagesRef = useRef(thread);
 
   const handleMarkSeen = useCallback(
-    (data: { chatId: string; messageId: string }) => {
+    (data: { chatId: string; messageId: string; seenAt: string }) => {
       if (chatId === data.chatId) {
         setThread((prevThread) =>
           prevThread.map((message) =>
             message.id === data.messageId
-              ? { ...message, seenByUser: true }
+              ? {
+                  ...message,
+                  seenByUser: true,
+                  seenByUserAt: data.seenAt,
+                }
               : message,
           ),
         );
@@ -138,6 +142,7 @@ const Thread = forwardRef(function Thread(
               clusterId: null,
               seenByUser: null,
               seenByAgent: null,
+              seenByUserAt: null, // Add this line
             },
           ];
         }
@@ -217,6 +222,8 @@ const Thread = forwardRef(function Thread(
                 ...newMessage,
                 seenByAgent: existingMessage.seenByAgent,
                 seenByUser: existingMessage.seenByUser,
+                seenByUserAt:
+                  existingMessage.seenByUserAt || newMessage.seenByUserAt,
               });
             } else {
               // If it's a new message, add it to the map

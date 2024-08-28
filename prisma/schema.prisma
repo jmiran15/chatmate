@@ -227,17 +227,18 @@ model Embedding {
 }
 
 model Message {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  role      String
-  content   String
-  chatId    String
-  clusterId String?
-  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  cluster   Cluster? @relation(fields: [clusterId], references: [id])
-  seenByUser  Boolean? @default(false)
-  seenByAgent Boolean? @default(false)
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  role         String
+  content      String
+  chatId       String
+  clusterId    String?
+  chat         Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  cluster      Cluster?  @relation(fields: [clusterId], references: [id])
+  seenByUser   Boolean?  @default(false)
+  seenByAgent  Boolean?  @default(false)
+  seenByUserAt DateTime?
 
   @@index([chatId, role])
 }
