@@ -188,7 +188,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 <ChatNotificationEmail
                   anonymousUser={anonymousUser}
                   userMessage={createdUserMessage}
-                  chatUrl={`${BASE}/chatbots/${chatbotId}/chats/${chatId}`}
+                  chatUrl={`${BASE}/chatbots/${chatbotId}/chats/${chat.id}`}
                 />
               ),
             });

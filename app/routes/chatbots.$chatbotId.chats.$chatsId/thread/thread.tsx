@@ -1,6 +1,7 @@
 import { Message } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { useParams } from "@remix-run/react";
+import debounce from "lodash.debounce";
 import { DateTime } from "luxon";
 import React, {
   forwardRef,
@@ -17,6 +18,13 @@ import MessageComponent from "./Message";
 import { UnseenSeparator } from "./UnseenSeparator";
 import { useMarkSeen } from "./useMarkSeen";
 
+export interface TypingInformation {
+  isPreview?: boolean; // indicates if it is a typing message
+  isTyping?: boolean;
+  typingState?: "typing" | "typed";
+  typedContents?: string;
+}
+
 const Thread = forwardRef(function Thread(
   {
     thread,
@@ -24,8 +32,10 @@ const Thread = forwardRef(function Thread(
     seen = false,
     scrollThreadToBottom,
   }: {
-    thread: SerializeFrom<Message[]>;
-    setThread: React.Dispatch<React.SetStateAction<SerializeFrom<Message[]>>>;
+    thread: SerializeFrom<(Message & TypingInformation)[]>;
+    setThread: React.Dispatch<
+      React.SetStateAction<SerializeFrom<(Message & TypingInformation)[]>>
+    >;
     seen: boolean | null;
     scrollThreadToBottom: () => void;
   },
@@ -63,14 +73,91 @@ const Thread = forwardRef(function Thread(
     [chatId, setThread],
   );
 
+  const lastTypingDataRef = useRef<{
+    isTyping: boolean;
+    typingState?: "typing" | "typed";
+    typedContents?: string;
+  } | null>(null);
+
+  const debouncedSetThread = useCallback(
+    debounce(
+      (
+        updateFn: (
+          prevThread: SerializeFrom<(Message & TypingInformation)[]>,
+        ) => SerializeFrom<(Message & TypingInformation)[]>,
+      ) => {
+        setThread(updateFn);
+      },
+      50,
+    ),
+    [],
+  );
+
+  const handleUserTyping = useCallback(
+    (data: {
+      chatId: string;
+      isTyping: boolean;
+      typingState?: "typing" | "typed";
+      typedContents?: string;
+    }) => {
+      if (chatId !== data.chatId) return;
+
+      lastTypingDataRef.current = data;
+
+      debouncedSetThread((prevThread) => {
+        const lastMessage = prevThread[prevThread.length - 1];
+
+        if (lastMessage?.role === "user" && lastMessage.isPreview) {
+          if (!data.isTyping) {
+            return prevThread.slice(0, -1);
+          } else {
+            return [
+              ...prevThread.slice(0, -1),
+              {
+                ...lastMessage,
+                isTyping: data.isTyping,
+                typingState: data.typingState,
+                content: data.typedContents ?? "", // Ensure content is always a string
+                updatedAt: new Date().toISOString(),
+              },
+            ];
+          }
+        } else if (data.typingState) {
+          return [
+            ...prevThread,
+            {
+              id: `preview-${Date.now()}`,
+              role: "user",
+              isPreview: true,
+              isTyping: data.isTyping,
+              typingState: data.typingState,
+              content: data.typedContents ?? "", // Ensure content is always a string
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString(),
+              chatId: chatId,
+              clusterId: null,
+              seenByUser: null,
+              seenByAgent: null,
+            },
+          ];
+        }
+
+        return prevThread;
+      });
+    },
+    [chatId, debouncedSetThread],
+  );
+
   // optimistically set seen by user
   useEffect(() => {
     if (!socket || !chatId) return;
 
     socket.on("seenAgentMessage", handleMarkSeen);
+    socket.on("userTyping", handleUserTyping);
 
     return () => {
       socket.off("seenAgentMessage", handleMarkSeen);
+      socket.off("userTyping", handleUserTyping);
     };
   }, [socket, chatId]);
 
@@ -84,14 +171,10 @@ const Thread = forwardRef(function Thread(
   }, [thread]);
 
   useEffect(() => {
-    // get pending ones here via useFetchers
-    // const unseenMessages = thread.filter(
-    //   (m) => m.role === "user" && !isMessageSeen(m.id),
-    // );
     const unseenMessages = thread.filter(
       (m) => m.role === "user" && m.seenByAgent === false,
     );
-    if (unseenMessages.length > 0 && !unseenSeparatorInfo.show) {
+    if (unseenMessages.length > 0) {
       setUnseenSeparatorInfo({
         show: true,
         count: unseenMessages.length,
@@ -149,7 +232,7 @@ const Thread = forwardRef(function Thread(
 
           return updatedThread;
         });
-        // scrollThreadToBottom();
+        scrollThreadToBottom();
       }
     },
     [chatId, setThread, scrollThreadToBottom],

@@ -13,6 +13,7 @@ export default function useAgent(chatId: string | null): void {
       }
     };
 
+    console.log("connecting agent");
     socket.on("pollingAgent", handlePollingIsAgent);
     socket.emit("isAgent", { chatId, isAgent: true });
 

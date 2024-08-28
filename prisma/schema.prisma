@@ -233,11 +233,9 @@ model Message {
   role      String
   content   String
   chatId    String
-  // seen      Boolean? @default(false)
   clusterId String?
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
   cluster   Cluster? @relation(fields: [clusterId], references: [id])
-
   seenByUser  Boolean? @default(false)
   seenByAgent Boolean? @default(false)
 

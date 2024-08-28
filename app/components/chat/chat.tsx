@@ -347,11 +347,7 @@ export default function Chat() {
     }
   }
 
-  async function generateFollowUps({
-    messages,
-  }: {
-    messages: RenderableMessage[];
-  }) {
+  async function generateFollowUps({ messages }: { messages: any[] }) {
     const followUpRes = await fetch(`${BASE_URL}/api/generatefollowups`, {
       method: "POST",
       body: JSON.stringify({

@@ -3,7 +3,7 @@ import { SerializeFrom } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 
 export const useMarkMessageSeen = (message: SerializeFrom<Message>) => {
-  const fetcher = useFetcher({ key: `mark-message-seen-${message.chatId}` });
+  const fetcher = useFetcher({ key: `mark-message-seen-${message.id}` });
 
   const markMessageSeen = () =>
     fetcher.submit(

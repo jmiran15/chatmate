@@ -1,3 +1,7 @@
+import { StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
+import { Chat } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 import {
   Link,
   useFetcher,
@@ -6,12 +10,8 @@ import {
   useSearchParams,
 } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
-import { Button } from "../../components/ui/button";
-import { StarIcon } from "@heroicons/react/24/outline";
-import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { cn } from "~/lib/utils";
-import { Chat } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
+import { Button } from "../../components/ui/button";
 
 export default function ChatsCard({
   chat,

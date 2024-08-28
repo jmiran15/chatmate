@@ -2,7 +2,6 @@ import { type Chat, type Message } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
-import { generateChatName, generateChatSummary } from "~/utils/openai";
 export type { Chat, Message } from "@prisma/client";
 
 export function createChat({ chatbotId }: { chatbotId: Chat["chatbotId"] }) {
@@ -281,56 +280,6 @@ export function getChatsByChatbotId({
           createdAt: "desc",
         },
       },
-    },
-  });
-}
-
-export async function updateChatNameWithAI({ chatId }: { chatId: Chat["id"] }) {
-  // get the chat messages
-  const messages = await getMessagesByChatId({ chatId });
-  const formattedMessages = messages.map((message) => ({
-    role: message.role as "user" | "assistant",
-    content: message.content,
-  }));
-
-  // generate a name for the chat
-  const newName = await generateChatName(formattedMessages);
-
-  if (!newName.chatName) {
-    throw new Error("Failed to generate a name for the chat");
-  }
-
-  return prisma.chat.update({
-    where: {
-      id: chatId,
-    },
-    data: {
-      name: newName.chatName,
-    },
-  });
-}
-
-export async function updateChatAIInsights({ chatId }: { chatId: Chat["id"] }) {
-  // get the chat messages
-  const messages = await getMessagesByChatId({ chatId });
-  const formattedMessages = messages.map((message) => ({
-    role: message.role as "user" | "assistant",
-    content: message.content,
-  }));
-
-  // generate a name for the chat
-  const insights = await generateChatSummary(formattedMessages);
-
-  if (!insights.chatSummary) {
-    throw new Error("Failed to generate insights for the chat");
-  }
-
-  return prisma.chat.update({
-    where: {
-      id: chatId,
-    },
-    data: {
-      aiInsights: insights.chatSummary,
     },
   });
 }

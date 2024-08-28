@@ -48,8 +48,7 @@ async function run() {
       methods: ["GET", "POST"],
     },
   });
-  // Then you can use `io` to listen the `connection` event and get a socket
-  // from a client
+
   io.on("connection", (socket) => {
     socket.emit("confirmation", "connected!");
 
@@ -57,12 +56,10 @@ async function run() {
       socket.broadcast.emit("messages", data);
     });
 
-    // change to chatId - DONE/S
     socket.on("isAgent", (data: { chatId: string; isAgent: boolean }) => {
       socket.broadcast.emit("isAgent", data);
     });
 
-    // chatId - DONE/SW
     socket.on("pollingAgent", (data: { chatId: string }) => {
       socket.broadcast.emit("pollingAgent", data);
     });
@@ -78,12 +75,21 @@ async function run() {
       socket.broadcast.emit("pollingWidgetStatus", data);
     });
 
-    // marking an agent message as seen
-    // chatId - DONE/SW
     socket.on(
       "seenAgentMessage",
       (data: { chatId: string; messageId: string }) => {
         socket.broadcast.emit("seenAgentMessage", data);
+      },
+    );
+    socket.on(
+      "userTyping",
+      (data: {
+        chatId: string;
+        isTyping: boolean;
+        typingState?: "typing" | "typed";
+        typedContents?: string;
+      }) => {
+        socket.broadcast.emit("userTyping", data);
       },
     );
   });

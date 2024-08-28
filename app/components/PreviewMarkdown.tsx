@@ -18,8 +18,13 @@ export const PreviewMarkdown: FC<{ source?: string }> = ({ source = "" }) => {
   );
 
   useEffect(() => {
-    const r = evaluateSync(source, runtime);
-    setMdxContent(() => r.default as ReactMDXContent);
+    try {
+      const r = evaluateSync(source, runtime);
+      setMdxContent(() => r.default as ReactMDXContent);
+    } catch (error) {
+      console.error("Error evaluating MDX:", error);
+      setMdxContent(() => () => <div>Error rendering markdown</div>);
+    }
   }, [source]);
 
   return <MdxContent components={components} />;
