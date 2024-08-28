@@ -390,7 +390,6 @@ export default function ChatRoute() {
               inputRef={inputRef}
               handleSendMessage={handleSubmit}
               scrollToBottom={scrollThreadToBottom}
-              setAutoScroll={setAutoScroll}
             />
           </div>
           <ScrollToBottomButton

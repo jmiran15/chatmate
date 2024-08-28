@@ -14,17 +14,14 @@ export default function PromptInput({
   inputRef,
   scrollToBottom,
   handleSendMessage,
-  setAutoScroll,
 }: {
   userInput: string;
   setUserInput: (value: string) => void;
   inputRef: React.RefObject<HTMLTextAreaElement>;
   scrollToBottom: () => void;
   handleSendMessage: (e: React.SyntheticEvent) => void;
-  setAutoScroll: (autoScroll: boolean) => void;
 }) {
   const formRef = useRef<HTMLFormElement | null>(null);
-  const isSubmitting = false;
   const { shouldSubmit } = useSubmitHandler();
   const isMobileScreen = useMobileScreen();
 
@@ -47,27 +44,17 @@ export default function PromptInput({
 
   useEffect(measure, [userInput]);
 
-  useEffect(() => {
-    if (isSubmitting) {
-      formRef.current?.reset();
-      setUserInput("");
-      setAutoScroll(true);
-    } else {
-      inputRef.current?.focus();
-    }
-  }, [isSubmitting]);
-
   const autoFocus = !isMobileScreen; // wont auto focus on mobile screen
 
   // check if should send message
   const onInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (shouldSubmit(e)) {
-      if (!isSubmitting) {
-        handleSendMessage(e);
-      }
+      handleSendMessage(e);
       e.preventDefault();
     }
   };
+
+  const isInputEmpty = userInput.trim() === "";
 
   return (
     <form
@@ -100,11 +87,11 @@ export default function PromptInput({
 
       <div className="my-2 flex items-center gap-2.5 absolute right-[15px]">
         {isMobileScreen ? (
-          <Button type="submit" size="icon" disabled={isSubmitting}>
+          <Button type="submit" size="icon" disabled={isInputEmpty}>
             <Send className="h-4 w-4" />
           </Button>
         ) : (
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isInputEmpty}>
             <Send className="h-4 w-4 mr-2" />
             Send
           </Button>
