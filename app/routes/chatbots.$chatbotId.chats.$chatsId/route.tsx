@@ -308,7 +308,7 @@ export default function ChatRoute() {
     if (!socket) return;
 
     event.preventDefault();
-    if (!userInput || userInput === "") return false;
+    if (!userInput || userInput.trim() === "") return false;
 
     const formattedDate = DateTime.now().toISO();
 
