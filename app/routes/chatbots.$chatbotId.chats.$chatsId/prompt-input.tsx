@@ -14,12 +14,14 @@ export default function PromptInput({
   inputRef,
   scrollToBottom,
   handleSendMessage,
+  hasJoined,
 }: {
   userInput: string;
   setUserInput: (value: string) => void;
   inputRef: React.RefObject<HTMLTextAreaElement>;
   scrollToBottom: () => void;
   handleSendMessage: (e: React.SyntheticEvent) => void;
+  hasJoined: boolean;
 }) {
   const formRef = useRef<HTMLFormElement | null>(null);
   const { shouldSubmit } = useSubmitHandler();
@@ -68,6 +70,7 @@ export default function PromptInput({
       <Textarea
         className={cn(
           "ring-inset focus-visible:ring-offset-0 pr-28 md:pr-40 min-h-[56px]",
+          !hasJoined && "pointer-events-none",
         )}
         ref={inputRef}
         placeholder={
@@ -75,23 +78,31 @@ export default function PromptInput({
             ? "Enter to send"
             : "Enter to send, Shift + Enter to wrap"
         }
-        onFocus={scrollToBottom}
-        onClick={scrollToBottom}
-        rows={inputRows}
-        onKeyDown={onInputKeyDown}
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-        // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus={autoFocus}
+        {...(hasJoined
+          ? {
+              onFocus: scrollToBottom,
+              onClick: scrollToBottom,
+              rows: inputRows,
+              onKeyDown: onInputKeyDown,
+              value: userInput,
+              onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setUserInput(e.target.value),
+              autoFocus: autoFocus,
+            }
+          : {})}
       />
 
       <div className="my-2 flex items-center gap-2.5 absolute right-[15px]">
         {isMobileScreen ? (
-          <Button type="submit" size="icon" disabled={isInputEmpty}>
+          <Button
+            type="submit"
+            size="icon"
+            disabled={isInputEmpty || !hasJoined}
+          >
             <Send className="h-4 w-4" />
           </Button>
         ) : (
-          <Button type="submit" disabled={isInputEmpty}>
+          <Button type="submit" disabled={isInputEmpty || !hasJoined}>
             <Send className="h-4 w-4 mr-2" />
             Send
           </Button>

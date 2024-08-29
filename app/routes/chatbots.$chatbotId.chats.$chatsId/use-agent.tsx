@@ -1,8 +1,15 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useSocket } from "~/providers/socket";
 
-export default function useAgent(chatId: string | null): void {
+export default function useAgent(chatId: string | null): {
+  joinChat: () => void;
+} {
   const socket = useSocket();
+
+  const joinChat = useCallback(() => {
+    if (!socket || !chatId) return;
+    socket.emit("isAgent", { chatId, isAgent: true });
+  }, [socket, chatId]);
 
   useEffect(() => {
     if (!socket || !chatId) return;
@@ -15,11 +22,12 @@ export default function useAgent(chatId: string | null): void {
 
     console.log("connecting agent");
     socket.on("pollingAgent", handlePollingIsAgent);
-    socket.emit("isAgent", { chatId, isAgent: true });
 
     return () => {
       socket.off("pollingAgent", handlePollingIsAgent);
       socket.emit("isAgent", { chatId, isAgent: false });
     };
   }, [socket, chatId]);
+
+  return { joinChat };
 }

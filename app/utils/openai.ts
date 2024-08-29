@@ -1,11 +1,11 @@
-import { Chatbot, Document, DocumentType, Embedding } from "@prisma/client";
+import { Chatbot, Document, Embedding } from "@prisma/client";
 import invariant from "tiny-invariant";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "~/db.server";
 import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings/route";
 import { system_prompt, user_prompt } from "./prompts";
 import { anyscale, openai } from "./providers.server";
-import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
+import { Chunk } from "./types";
 
 export const CHUNK_SIZE = 1024;
 export const OVERLAP = 20;
@@ -93,6 +93,8 @@ export async function chat({
   return stream;
 }
 
+// TODO - modularize the RAG code out of here
+// DOCUMENT RETRIEVAL (RAG)
 // WE NEED TO BE SUMMARIZING THE PREV CHAT AS WELL AND USING THAT TO GET EMBEDDINGS
 export async function fetchRelevantDocs({
   chatbotId,
@@ -115,6 +117,7 @@ export async function fetchRelevantDocs({
   return relevantDocs;
 }
 
+// DOCUMENT PREPROCESSING FLOW
 export function splitStringIntoChunks(
   document: Document,
   chunkSize: number,
@@ -210,57 +213,57 @@ export async function generatePossibleQuestionsForChunk(
   });
 }
 
-export async function convertUploadedFilesToDocuments(
-  files: FormDataEntryValue[],
-): Promise<(FullDocument & { type: DocumentType })[]> {
-  const newFormData = new FormData();
+// export async function convertUploadedFilesToDocuments(
+//   files: FormDataEntryValue[],
+// ): Promise<(FullDocument & { type: DocumentType })[]> {
+//   const newFormData = new FormData();
 
-  // Append each file to the new FormData instance
-  files.forEach((file) => {
-    newFormData.append("files", file);
-  });
+//   // Append each file to the new FormData instance
+//   files.forEach((file) => {
+//     newFormData.append("files", file);
+//   });
 
-  const response = await fetch(UNSTRUCTURED_URL, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
-    },
-    body: newFormData,
-  });
+//   const response = await fetch(UNSTRUCTURED_URL, {
+//     method: "POST",
+//     headers: {
+//       accept: "application/json",
+//       "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
+//     },
+//     body: newFormData,
+//   });
 
-  if (!response.ok) {
-    throw new Error(
-      `Failed to partition file with error ${
-        response.status
-      } and message ${await response.text()}`,
-    );
-  }
+//   if (!response.ok) {
+//     throw new Error(
+//       `Failed to partition file with error ${
+//         response.status
+//       } and message ${await response.text()}`,
+//     );
+//   }
 
-  const elements = await response.json();
-  if (!Array.isArray(elements)) {
-    throw new Error(
-      `Expected partitioning request to return an array, but got ${elements}`,
-    );
-  }
+//   const elements = await response.json();
+//   if (!Array.isArray(elements)) {
+//     throw new Error(
+//       `Expected partitioning request to return an array, but got ${elements}`,
+//     );
+//   }
 
-  if (elements[0].constructor !== Array) {
-    return [
-      {
-        name: elements[0].metadata.filename,
-        content: elements.map((element) => element.text).join("\n"),
-        type: DocumentType.FILE,
-        id: uuidv4(),
-      },
-    ];
-  } else {
-    return elements.map((fileElements) => {
-      return {
-        name: fileElements[0].metadata.filename,
-        content: fileElements.map((element) => element.text).join("\n"),
-        id: uuidv4(),
-        type: DocumentType.FILE,
-      };
-    });
-  }
-}
+//   if (elements[0].constructor !== Array) {
+//     return [
+//       {
+//         name: elements[0].metadata.filename,
+//         content: elements.map((element) => element.text).join("\n"),
+//         type: DocumentType.FILE,
+//         id: uuidv4(),
+//       },
+//     ];
+//   } else {
+//     return elements.map((fileElements) => {
+//       return {
+//         name: fileElements[0].metadata.filename,
+//         content: fileElements.map((element) => element.text).join("\n"),
+//         id: uuidv4(),
+//         type: DocumentType.FILE,
+//       };
+//     });
+//   }
+// }

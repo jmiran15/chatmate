@@ -240,6 +240,8 @@ model Message {
   seenByAgent  Boolean?  @default(false)
   seenByUserAt DateTime?
 
+  activity ActivityType? // we can use this in regular messages, + show in the LLM requests (e.g, show on frontend "--- Live chat requested ---", which also gets sent to LLM as { role: "assistant", content: "--- Live chat requested ---" })
+
   @@index([chatId, role])
 }
 
@@ -296,4 +298,10 @@ enum TicketStatus {
 enum WidgetPosition {
   BOTTOM_RIGHT
   BOTTOM_LEFT
+}
+
+enum ActivityType {
+  REQUESTED_LIVE_CHAT
+  AGENT_JOINED
+  AGENT_LEFT
 }

@@ -11,6 +11,7 @@ import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { DateTime } from "luxon";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { prisma } from "~/db.server";
 import { useScrollToBottom } from "~/hooks/useScroll";
@@ -209,7 +210,8 @@ export default function ChatRoute() {
   });
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const socket = useSocket();
-  useAgent(chat?.id);
+  const { joinChat } = useAgent(chat?.id);
+  const [hasJoined, setHasJoined] = useState(false);
 
   const updateFloatingDate = useCallback(() => {
     if (!threadRef.current) return;
@@ -360,6 +362,11 @@ export default function ChatRoute() {
     }
   }, [handleScroll]);
 
+  const handleJoinChat = () => {
+    joinChat();
+    setHasJoined(true);
+  };
+
   return isMobile ? (
     <MobileThread
       thread={thread}
@@ -382,7 +389,7 @@ export default function ChatRoute() {
           <Separator />
           <div
             ref={inputContainer}
-            className="relative w-full box-border flex-col pt-2.5 p-5 space-y-2 "
+            className="relative w-full box-border flex-col p-5"
           >
             <PromptInput
               userInput={userInput}
@@ -390,7 +397,15 @@ export default function ChatRoute() {
               inputRef={inputRef}
               handleSendMessage={handleSubmit}
               scrollToBottom={scrollThreadToBottom}
+              hasJoined={hasJoined}
             />
+            {!hasJoined && (
+              <div className="absolute inset-0 flex items-center justify-center bg-muted/20 backdrop-blur-sm">
+                <Button onClick={handleJoinChat} variant="default" size="lg">
+                  Join the chat
+                </Button>
+              </div>
+            )}
           </div>
           <ScrollToBottomButton
             isVisible={showScrollButton}
