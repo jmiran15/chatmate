@@ -114,8 +114,6 @@ const MessageComponent = memo(
 
       if (!sentDate) return null;
 
-      console.log("message", message);
-
       return (
         <div className="flex flex-col space-y-1">
           <div className="flex items-center">
@@ -131,6 +129,11 @@ const MessageComponent = memo(
         </div>
       );
     }, [isUser, message.createdAt, message.seenByUser, message.seenByUserAt]);
+
+    console.log("message: ", message);
+    if (message.activity) {
+      return <TextSeparator text={message.content} />;
+    }
 
     return (
       <div
@@ -223,3 +226,27 @@ const MessageComponent = memo(
 MessageComponent.displayName = "MessageComponent";
 
 export default MessageComponent;
+
+interface TextSeparatorProps {
+  text: string;
+  className?: string;
+  lineColor?: string;
+  textColor?: string;
+}
+
+function TextSeparator({
+  text,
+  className = "",
+  lineColor = "border-gray-300",
+  textColor = "text-gray-500",
+}: TextSeparatorProps) {
+  return (
+    <div className={`flex items-center w-full ${className}`}>
+      <div className={`flex-grow border-t ${lineColor}`}></div>
+      <span className={`flex-shrink mx-4 text-sm font-medium ${textColor}`}>
+        {text}
+      </span>
+      <div className={`flex-grow border-t ${lineColor}`}></div>
+    </div>
+  );
+}

@@ -136,10 +136,15 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
           `Failed to create or find chat for session ${sessionIdOrChatId}`,
         );
       }
+
+      console.log("userMessage: ", userMessage);
+
       const createdUserMessage = await createMessage({
         chatId: chat.id,
         ...userMessage,
       });
+
+      console.log("createdUserMessage: ", createdUserMessage);
 
       const corsHeader =
         process.env.NODE_ENV === "production"

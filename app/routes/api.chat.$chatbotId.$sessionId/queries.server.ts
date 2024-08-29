@@ -155,25 +155,8 @@ export async function createAnonymousUser({
   }
 }
 
-export async function createMessage({
-  id,
-  role,
-  content,
-  chatId,
-}: Pick<Message, "role" | "content"> & {
-  id?: Message["id"];
-  chatId: Chat["id"];
-}) {
+export async function createMessage(data: { data: Partial<Message> }) {
   return prisma.message.create({
-    data: {
-      ...(id ? { id } : {}),
-      role,
-      content,
-      chat: {
-        connect: {
-          id: chatId,
-        },
-      },
-    },
+    data,
   });
 }

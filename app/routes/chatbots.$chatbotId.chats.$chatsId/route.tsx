@@ -186,6 +186,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
+// TODO - this component has a bunch of unnecessary state - stuff should be moved to the server loader/actions
 export default function ChatRoute() {
   const { messages, chatbot, chat, anonUser, API_PATH } =
     useLoaderData<typeof loader>();
@@ -210,8 +211,12 @@ export default function ChatRoute() {
   });
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
   const socket = useSocket();
-  const { joinChat } = useAgent(chat?.id);
-  const [hasJoined, setHasJoined] = useState(false);
+  const { hasJoined, joinChat } = useAgent({
+    chatId: chat?.id,
+    chatbotId: chatbot?.id,
+    API_PATH,
+    setThread,
+  });
 
   const updateFloatingDate = useCallback(() => {
     if (!threadRef.current) return;
@@ -362,11 +367,6 @@ export default function ChatRoute() {
     }
   }, [handleScroll]);
 
-  const handleJoinChat = () => {
-    joinChat();
-    setHasJoined(true);
-  };
-
   return isMobile ? (
     <MobileThread
       thread={thread}
@@ -401,7 +401,11 @@ export default function ChatRoute() {
             />
             {!hasJoined && (
               <div className="absolute inset-0 flex items-center justify-center bg-muted/20 backdrop-blur-sm">
-                <Button onClick={handleJoinChat} variant="default" size="lg">
+                <Button
+                  onClick={async () => await joinChat()}
+                  variant="default"
+                  size="lg"
+                >
                   Join the chat
                 </Button>
               </div>
