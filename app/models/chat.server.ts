@@ -1,4 +1,4 @@
-import { type Chat, type Message } from "@prisma/client";
+import { type Chat } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
@@ -160,28 +160,6 @@ export async function getMessagesAndUnseenCount({
     allMessages,
     unseenMessagesCount,
   };
-}
-export function createMessage({
-  id,
-  chatId,
-  role,
-  content,
-}: Pick<Message, "role" | "content"> & {
-  id?: Message["id"];
-  chatId: Chat["id"];
-}) {
-  return prisma.message.create({
-    data: {
-      ...(id ? { id } : {}),
-      role,
-      content,
-      chat: {
-        connect: {
-          id: chatId,
-        },
-      },
-    },
-  });
 }
 
 export function getChatsByUserAndChatbotId({

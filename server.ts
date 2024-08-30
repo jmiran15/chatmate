@@ -52,8 +52,12 @@ async function run() {
   io.on("connection", (socket) => {
     socket.emit("confirmation", "connected!");
 
-    socket.on("messages", (data) => {
-      socket.broadcast.emit("messages", data);
+    // socket.on("messages", (data) => {
+    //   socket.broadcast.emit("messages", data);
+    // });
+
+    socket.on("new message", (data) => {
+      socket.broadcast.emit("new message", data);
     });
 
     socket.on("isAgent", (data: { chatId: string; isAgent: boolean }) => {

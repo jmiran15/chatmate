@@ -226,6 +226,8 @@ model Embedding {
   @@index([chatbotId])
 }
 
+
+
 model Message {
   id           String    @id @default(uuid())
   createdAt    DateTime  @default(now())

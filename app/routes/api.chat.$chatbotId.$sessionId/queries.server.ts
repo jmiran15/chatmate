@@ -2,6 +2,7 @@ import { Chat, Message } from "@prisma/client";
 import { getClientIPAddress } from "remix-utils/get-client-ip-address";
 import uap from "ua-parser-js";
 import { prisma } from "~/db.server";
+import { Message as ThreadMessage } from "../chatbots.$chatbotId.chats.$chatsId/useThread";
 
 interface ChatWithMessagesAndCount extends Chat {
   messages: Message[];
@@ -155,8 +156,19 @@ export async function createAnonymousUser({
   }
 }
 
-export async function createMessage(data: { data: Partial<Message> }) {
+export async function createMessage(data: ThreadMessage) {
+  const {
+    isPreview,
+    isTyping,
+    typingState,
+    typedContents,
+    streaming,
+    loading,
+    error,
+    ...prismaMessageData
+  } = data;
+
   return prisma.message.create({
-    data,
+    data: prismaMessageData,
   });
 }

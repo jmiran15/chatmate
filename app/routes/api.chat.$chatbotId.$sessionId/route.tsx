@@ -137,14 +137,10 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         );
       }
 
-      console.log("userMessage: ", userMessage);
-
       const createdUserMessage = await createMessage({
         chatId: chat.id,
         ...userMessage,
       });
-
-      console.log("createdUserMessage: ", createdUserMessage);
 
       const corsHeader =
         process.env.NODE_ENV === "production"
@@ -252,6 +248,13 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 chatId: chat.id,
                 role: "assistant",
                 content: fullText,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+                clusterId: null,
+                seenByUser: null,
+                seenByAgent: null,
+                seenByUserAt: null,
+                activity: null,
               });
             } catch (error: any) {
               console.error("Failed to stream chat", error);

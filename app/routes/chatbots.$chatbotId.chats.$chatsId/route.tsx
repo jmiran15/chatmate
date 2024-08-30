@@ -6,8 +6,7 @@ import {
   json,
   redirect,
 } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import axios from "axios";
+import { useLoaderData, useNavigation, useSubmit } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { DateTime } from "luxon";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -36,7 +35,9 @@ import Subheader from "./subheader";
 import { DateSeparator } from "./thread/DateSeparator";
 import Thread from "./thread/thread";
 import useAgent from "./use-agent";
+import useThread from "./useThread";
 
+// TODO - export this stuff out of this file - file is too long (loader, actions, etc...)
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatsId, chatbotId } = params;
 
@@ -181,22 +182,32 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       }
       return json({ success: true });
     }
+    case "createMessage": {
+      const message = JSON.parse(String(formData.get("message")));
+
+      const createdMessage = await prisma.message.create({
+        data: {
+          ...message,
+        },
+      });
+
+      return json({ message: createdMessage });
+    }
     default:
       throw new Error("undefined intent");
   }
 };
 
-// TODO - this component has a bunch of unnecessary state - stuff should be moved to the server loader/actions
 export default function ChatRoute() {
-  const { messages, chatbot, chat, anonUser, API_PATH } =
-    useLoaderData<typeof loader>();
+  const { chatbot, chat, anonUser } = useLoaderData<typeof loader>();
+  const { thread } = useThread();
   const isMobile = useMobileScreen();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const inputContainer = useRef<HTMLDivElement>(null);
-  const [thread, setThread] = useState(() => messages ?? []);
+  const socket = useSocket();
   const [userInput, setUserInput] = useState("");
   const {
-    setAutoScroll,
+    // setAutoScroll,
     scrollRef: threadRef,
     scrollDomToBottom: scrollThreadToBottom,
   } = useScrollToBottom();
@@ -210,13 +221,13 @@ export default function ChatRoute() {
     y: 0,
   });
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const socket = useSocket();
+  const submit = useSubmit();
   const { hasJoined, joinChat } = useAgent({
     chatId: chat?.id,
-    chatbotId: chatbot?.id,
-    API_PATH,
-    setThread,
+    submit,
   });
+  const navigation = useNavigation();
+  const SEND_INTENT = "createMessage";
 
   const updateFloatingDate = useCallback(() => {
     if (!threadRef.current) return;
@@ -301,53 +312,63 @@ export default function ChatRoute() {
   }, [userInput]);
 
   useEffect(() => {
-    setThread(messages);
-  }, [messages]);
-
-  useEffect(() => {
     if (threadRef.current) {
       const { scrollHeight, clientHeight } = threadRef.current;
       setShowScrollButton(scrollHeight > clientHeight);
     }
   }, [threadRef.current?.scrollHeight, threadRef.current?.clientHeight]);
 
-  async function handleSubmit(event: React.SyntheticEvent) {
-    if (!socket) return;
-
-    event.preventDefault();
+  // TODO - can make this pure? i.e no sideEffects - take everything in as params - input message + thread
+  // TODO - then we can just put it in the prompt input component?
+  function sendMessage() {
     if (!userInput || userInput.trim() === "") return false;
-
-    const formattedDate = DateTime.now().toISO();
+    // const formattedDate = DateTime.now().toISO();
+    const currentDate = DateTime.now();
 
     const newMessage = {
       id: createId(),
       content: userInput,
       role: "assistant",
-      createdAt: formattedDate,
-      updatedAt: formattedDate,
+      createdAt: currentDate,
+      updatedAt: currentDate,
       chatId: chat.id,
       seenByUser: false,
       seenByAgent: true,
-      clusterId: null,
     };
 
-    const prevChatHistory = [...thread, newMessage];
+    submit(
+      {
+        intent: SEND_INTENT,
+        message: JSON.stringify(newMessage),
+      },
+      {
+        method: "POST",
+      },
+    );
 
-    await axios.post(`${API_PATH}/api/chat/${chatbot?.id}/${chat?.id}`, {
-      chatbot,
-      messages: prevChatHistory,
-      chattingWithAgent: true,
-      chatId: true,
-    });
-
-    setThread(prevChatHistory);
-    setUserInput("");
-
-    socket.emit("messages", {
-      chatId: chat?.id,
-      messages: prevChatHistory,
-    });
+    // socket
+    if (socket) {
+      // socket.emit("messages", {
+      //   chatId: chat?.id,
+      //   messages: [...thread, newMessage],
+      // });
+      socket.emit("new message", {
+        chatId: chat?.id,
+        message: newMessage,
+      });
+    }
   }
+
+  // TODO - this can probably be inside the promtp input component
+  useEffect(() => {
+    if (
+      navigation.state === "submitting" &&
+      navigation.formData &&
+      navigation.formData.get("intent") === SEND_INTENT
+    ) {
+      setUserInput("");
+    }
+  }, [navigation]);
 
   const handleScroll = useCallback(() => {
     if (!threadRef.current) return;
@@ -368,12 +389,7 @@ export default function ChatRoute() {
   }, [handleScroll]);
 
   return isMobile ? (
-    <MobileThread
-      thread={thread}
-      setThread={setThread}
-      chat={chat}
-      chatbot={chatbot}
-    />
+    <MobileThread thread={thread} chat={chat} chatbot={chatbot} />
   ) : (
     <div className="flex flex-col col-span-7 overflow-y-auto h-full">
       <Subheader chat={chat} />
@@ -382,7 +398,6 @@ export default function ChatRoute() {
           <Thread
             ref={threadRef}
             thread={thread}
-            setThread={setThread}
             seen={chat?.seen}
             scrollThreadToBottom={scrollThreadToBottom}
           />
@@ -395,7 +410,7 @@ export default function ChatRoute() {
               userInput={userInput}
               setUserInput={setUserInput}
               inputRef={inputRef}
-              handleSendMessage={handleSubmit}
+              handleSendMessage={sendMessage}
               scrollToBottom={scrollThreadToBottom}
               hasJoined={hasJoined}
             />
@@ -435,3 +450,23 @@ export default function ChatRoute() {
     </div>
   );
 }
+
+// todo - bring all the socket listeners here (main route)
+// make sure to set the state correctly in the listener events
+
+// update the "messages" event - to be "new message" - only send the new message instead of the whole thing
+
+// +++++when do we send (widget)
+// when we call handle submit (user message)
+// when streamChat returns a chatbot message
+
+// +++++on the main app
+// when we call handle submit
+// when an agent joins / leaves
+
+// TODO -
+// add typing indicator on widget side when agent is connected and typing
+// add typing indicator on agent side for when chatbot is streaming response
+//  - maybe stream the chatbot typing (with the same typing animation as widget end) so that the agent can see the entire convo happening
+//  - when agent joins - it should be made clear how they will interrupt the chatbot (if it is typing something)
+//      - maybe show a "stop generation" button on the agent side - in the textarea - like chatgpt

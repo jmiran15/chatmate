@@ -1,25 +1,18 @@
 import { createId } from "@paralleldrive/cuid2";
 import { type ActivityType } from "@prisma/client";
-import axios from "axios";
+import { useSubmit } from "@remix-run/react";
 import { DateTime } from "luxon";
 import { useEffect, useRef } from "react";
 import { useSocket } from "~/providers/socket";
 
 interface UseAgentParams {
   chatId: string | null;
-  chatbotId: string | null;
-  API_PATH: string | undefined;
-  setThread: React.Dispatch<React.SetStateAction<any[]>>;
+  submit: ReturnType<typeof useSubmit>;
 }
 
-export default function useAgent({
-  chatId,
-  chatbotId,
-  API_PATH,
-  setThread,
-}: UseAgentParams): {
-  joinChat: () => Promise<void>;
-  leaveChat: () => Promise<void>;
+export default function useAgent({ chatId, submit }: UseAgentParams): {
+  joinChat: () => void;
+  leaveChat: () => void;
   hasJoined: boolean;
 } {
   const socket = useSocket();
@@ -28,84 +21,57 @@ export default function useAgent({
   useEffect(() => {
     hasJoinedRef.current = false;
     return () => {
-      if (!hasJoinedRef.current || !chatId || !chatbotId) return;
-      const formattedDate = DateTime.now().toISO();
-      const newMessage = {
-        id: createId(),
-        role: "assistant",
-        content: "Agent has left the chat",
-        createdAt: formattedDate,
-        updatedAt: formattedDate,
-        chatId,
-        seenByUser: false,
-        seenByAgent: true,
-        clusterId: null,
-        activity: "AGENT_LEFT",
-      };
-
-      axios
-        .post(`${API_PATH}/api/chat/${chatbotId}/${chatId}`, {
-          messages: [newMessage],
-          chattingWithAgent: true,
-          chatId: true,
-        })
-        .then(() => {
-          socket?.emit("messages", {
-            chatId,
-            messages: [newMessage],
-          });
-        });
+      if (chatId) {
+        leaveChat();
+      }
     };
   }, [chatId]);
 
-  const sendActivityMessage = async (
-    activity: ActivityType,
-    content: string,
-  ) => {
-    if (!socket || !chatId || !chatbotId) return;
-
-    const formattedDate = DateTime.now().toISO();
+  const sendActivityMessage = (activity: ActivityType, content: string) => {
+    // const formattedDate = DateTime.now().toISO();
+    const currentDate = DateTime.now();
     const newMessage = {
       id: createId(),
       content,
       role: "assistant",
-      createdAt: formattedDate,
-      updatedAt: formattedDate,
+      createdAt: currentDate,
+      updatedAt: currentDate,
       chatId,
       seenByUser: false,
       seenByAgent: true,
-      clusterId: null,
       activity,
     };
 
-    await axios.post(`${API_PATH}/api/chat/${chatbotId}/${chatId}`, {
-      messages: [newMessage],
-      chattingWithAgent: true,
-      chatId: true,
-    });
+    submit(
+      {
+        intent: "createMessage",
+        message: JSON.stringify(newMessage),
+      },
+      {
+        method: "POST",
+      },
+    );
 
-    setThread((prevThread) => {
-      console.log("setThread: ", [...prevThread, newMessage]);
-      return [...prevThread, newMessage];
-    });
-
-    socket.emit("messages", {
-      chatId,
-      messages: [newMessage],
-    });
+    if (socket) {
+      socket.emit("new message", {
+        chatId,
+        message: newMessage,
+      });
+    }
   };
 
-  const joinChat = async () => {
+  const joinChat = () => {
     if (!socket || !chatId || hasJoinedRef.current) return;
     socket.emit("isAgent", { chatId, isAgent: true });
-    await sendActivityMessage("AGENT_JOINED", "Agent has joined the chat");
+    sendActivityMessage("AGENT_JOINED", "Agent has joined the chat");
     hasJoinedRef.current = true;
   };
 
-  const leaveChat = async () => {
+  const leaveChat = () => {
+    console.log("Leaving chat:", chatId, "hasJoined:", hasJoinedRef.current);
     if (!socket || !chatId || !hasJoinedRef.current) return;
     socket.emit("isAgent", { chatId, isAgent: false });
-    await sendActivityMessage("AGENT_LEFT", "Agent has left the chat");
+    sendActivityMessage("AGENT_LEFT", "Agent has left the chat");
     hasJoinedRef.current = false;
   };
 
@@ -114,8 +80,7 @@ export default function useAgent({
 
     const handlePollingIsAgent = (data: { chatId: string }) => {
       if (chatId === data.chatId) {
-        socket.emit("isAgent", { ...data, isAgent: true });
-        hasJoinedRef.current = true;
+        socket.emit("isAgent", { ...data, isAgent: hasJoinedRef.current });
       }
     };
 

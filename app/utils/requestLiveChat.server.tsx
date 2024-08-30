@@ -69,5 +69,5 @@ export async function requestLiveChat(
  */
 
 // Add the "Agent has joined" message when the click the "Join"
-// Add the left after X minutes/seconds of inactivity - for example - if the agent leaves the page to go check something, or navigates to another chat
-// We don't want to add a bunch of left/joined messages in the chat
+// Add the agent left activity after X minutes/seconds of inactivity - for example - if the agent leaves the page to go check something, or navigates to another chat
+// !!!We don't want to add a bunch of left/joined messages in the chat!!!
