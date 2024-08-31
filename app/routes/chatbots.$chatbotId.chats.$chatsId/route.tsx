@@ -20,8 +20,9 @@ import useThread from "./useThread";
 export { action, loader };
 
 export default function ChatRoute() {
-  const { chatbot, chat, anonUser } = useLoaderData<typeof loader>();
-  const { thread } = useThread();
+  const { messages, chatbot, chat, anonUser } = useLoaderData<typeof loader>();
+  const { thread } = useThread({ loaderMessages: messages });
+  const submit = useSubmit();
   const isMobile = useMobileScreen();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const inputContainer = useRef<HTMLDivElement>(null);
@@ -41,12 +42,10 @@ export default function ChatRoute() {
     y: 0,
   });
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const submit = useSubmit();
   const { hasJoined, joinChat } = useAgent({
     chatId: chat?.id,
     submit,
   });
-
   const updateFloatingDate = useCallback(() => {
     if (!threadRef.current) return;
 
@@ -216,19 +215,6 @@ export default function ChatRoute() {
     </div>
   );
 }
-
-// todo - bring all the socket listeners here (main route)
-// make sure to set the state correctly in the listener events
-
-// update the "messages" event - to be "new message" - only send the new message instead of the whole thing
-
-// +++++when do we send (widget)
-// when we call handle submit (user message)
-// when streamChat returns a chatbot message
-
-// +++++on the main app
-// when we call handle submit
-// when an agent joins / leaves
 
 // TODO -
 // add typing indicator on widget side when agent is connected and typing

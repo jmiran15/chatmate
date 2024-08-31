@@ -1,11 +1,10 @@
 import { type Message as PrismaMessage } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
-import { useFetchers, useLoaderData, useParams } from "@remix-run/react";
+import { useFetchers, useParams } from "@remix-run/react";
 import debounce from "lodash.debounce";
 import { DateTime } from "luxon";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSocket } from "~/providers/socket";
-import { loader } from "./route";
 
 export const SEND_INTENT = "createMessage";
 
@@ -62,9 +61,17 @@ function usePendingMessages() {
     );
 }
 
-export default function useThread() {
-  const { messages } = useLoaderData<typeof loader>();
-  const [thread, setThread] = useState<Message[]>(() => messages ?? []);
+const initializeThread = (loaderMessages: SerializeFrom<PrismaMessage>[]) =>
+  loaderMessages ?? [];
+
+export default function useThread({
+  loaderMessages,
+}: {
+  loaderMessages: SerializeFrom<PrismaMessage>[];
+}) {
+  const [thread, setThread] = useState<Message[]>(() =>
+    initializeThread(loaderMessages),
+  );
   const socket = useSocket();
   const { chatsId: chatId } = useParams();
   const lastTypingDataRef = useRef<Pick<
@@ -73,9 +80,46 @@ export default function useThread() {
   > | null>(null);
 
   // keep thread in sync with loader (revalidation and initial loads)
+  // TODO - this is what causes the issue with seen messages -> current solution is hacky and not ideal
+  //   useEffect(() => {
+  //     setThread(initializeThread(loaderMessages));
+  //   }, [loaderMessages]);
   useEffect(() => {
-    setThread(messages);
-  }, [messages]);
+    setThread((currentThread) => {
+      const mergedThread = [...loaderMessages];
+      const threadMap = new Map(loaderMessages.map((msg) => [msg.id, msg]));
+
+      // Add messages from currentThread that are not in loaderMessages
+      for (const message of currentThread) {
+        if (!threadMap.has(message.id)) {
+          mergedThread.push(message);
+        } else {
+          // Update existing messages with any socket-updated properties
+          const index = mergedThread.findIndex((m) => m.id === message.id);
+          if (index !== -1) {
+            mergedThread[index] = {
+              ...mergedThread[index],
+              ...message,
+              // Preserve certain properties from the loader message
+              createdAt: mergedThread[index].createdAt,
+              updatedAt: mergedThread[index].updatedAt,
+            };
+          }
+        }
+      }
+
+      // Sort the merged thread by createdAt
+      mergedThread.sort(
+        (a, b) =>
+          DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt))
+            .milliseconds,
+      );
+
+      return mergedThread;
+    });
+    //   }
+  }, [loaderMessages]);
+
   const optimisticMessages = usePendingMessages();
 
   useEffect(() => {
@@ -114,15 +158,24 @@ export default function useThread() {
     (data: SeenAgentMessage) => {
       if (chatId === data.chatId) {
         setThread((prevThread) => {
-          return prevThread.map((message) => {
-            return message.id === data.messageId
-              ? {
-                  ...message,
-                  seenByUser: true,
-                  seenByUserAt: data.seenAt,
-                }
-              : message;
-          });
+          const newThread = [...prevThread];
+
+          const index = newThread.findIndex((msg) => msg.id === data.messageId);
+          if (index !== -1) {
+            newThread[index] = {
+              ...newThread[index],
+              seenByUser: true,
+              seenByUserAt: data.seenAt,
+            };
+          }
+          console.log(
+            "newThread inside handleMarkSeen",
+            newThread
+              .map((msg) => `${msg.id}\n${msg.content}\n${msg.seenByUser}`)
+              .join("\n\n\n"),
+          );
+
+          return newThread;
         });
       }
     },
@@ -253,6 +306,8 @@ export default function useThread() {
       socket.off("userTyping", handleUserTyping);
       socket.off("new message", handleThread);
     };
+
+    // maybe we need to put thread as a dependency here?
   }, [socket, chatId, handleMarkSeen, handleUserTyping, handleThread]);
 
   return {
