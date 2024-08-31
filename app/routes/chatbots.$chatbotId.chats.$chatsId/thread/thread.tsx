@@ -12,7 +12,7 @@ const Thread = forwardRef(function Thread(
   {
     thread,
     seen = false,
-    scrollThreadToBottom,
+    scrollThreadToBottom, // keeps changing
   }: {
     thread: Message[];
     seen: boolean | null;

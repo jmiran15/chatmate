@@ -9,9 +9,6 @@ import { loader } from "./route";
 
 export const SEND_INTENT = "createMessage";
 
-// TODO - use zod for types - extremely strongly type everything
-// TODO - add return types
-
 interface SeenAgentMessage {
   chatId: string;
   messageId: string;
@@ -34,7 +31,6 @@ export interface TypingInformation {
   typedContents?: string;
 }
 
-// if not there or false - means the message is completed - if streaming is true, means the chatbot is typing/streaming response
 export interface StreamingInformation {
   streaming?: boolean;
   loading?: boolean;
@@ -47,12 +43,30 @@ interface PrismaMessageWithTyping
     StreamingInformation {}
 export type Message = SerializeFrom<PrismaMessageWithTyping>;
 
+function usePendingMessages() {
+  return useFetchers()
+    .filter(
+      (fetcher) =>
+        fetcher.state === "submitting" &&
+        fetcher.formData &&
+        fetcher.formData.get("intent") === SEND_INTENT,
+    )
+    .map((fetcher) => {
+      const message = JSON.parse(String(fetcher.formData!.get("message"))!);
+      return { ...message, OPTIMISTIC: true };
+    })
+    .sort(
+      (a, b) =>
+        DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt))
+          .milliseconds,
+    );
+}
+
 export default function useThread() {
   const { messages } = useLoaderData<typeof loader>();
   const [thread, setThread] = useState<Message[]>(() => messages ?? []);
   const socket = useSocket();
   const { chatsId: chatId } = useParams();
-  const fetchers = useFetchers();
   const lastTypingDataRef = useRef<Pick<
     UserTyping,
     "isTyping" | "typingState" | "typedContents"
@@ -62,34 +76,27 @@ export default function useThread() {
   useEffect(() => {
     setThread(messages);
   }, [messages]);
-
-  const optimisticMessages = fetchers
-    .filter(
-      (fetcher) =>
-        fetcher.state === "submitting" &&
-        fetcher.formData &&
-        fetcher.formData.get("intent") === SEND_INTENT,
-    )
-    .map((fetcher) => {
-      const message = JSON.parse(String(fetcher.formData!.get("message"))!);
-      return message;
-    })
-    .sort(
-      (a, b) =>
-        DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt))
-          .milliseconds,
-    );
+  const optimisticMessages = usePendingMessages();
 
   useEffect(() => {
     if (optimisticMessages.length === 0) return;
 
     setThread((currentThread) => {
       const newThread = [...currentThread];
+      const messagesToInsert = [...optimisticMessages];
 
-      for (const message of optimisticMessages) {
+      messagesToInsert.sort(
+        (a, b) =>
+          DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt))
+            .milliseconds,
+      );
+
+      for (const message of messagesToInsert) {
         const insertIndex = newThread.findIndex(
           (m) =>
-            DateTime.fromISO(m.createdAt) > DateTime.fromISO(message.createdAt),
+            DateTime.fromISO(m.createdAt).diff(
+              DateTime.fromISO(message.createdAt),
+            ).milliseconds > 0,
         );
 
         if (insertIndex === -1) {
@@ -101,19 +108,13 @@ export default function useThread() {
 
       return newThread;
     });
-  }, [optimisticMessages]);
+  }, [optimisticMessages.length]);
 
-  // SOCKET.IO HANDLERS
   const handleMarkSeen = useCallback(
     (data: SeenAgentMessage) => {
       if (chatId === data.chatId) {
-        console.log("handleMarkSeen", data);
-
-        setThread((prevThread) =>
-          prevThread.map((message) => {
-            if (message.id === data.messageId) {
-              console.log("seen message", message);
-            }
+        setThread((prevThread) => {
+          return prevThread.map((message) => {
             return message.id === data.messageId
               ? {
                   ...message,
@@ -121,14 +122,12 @@ export default function useThread() {
                   seenByUserAt: data.seenAt,
                 }
               : message;
-          }),
-        );
+          });
+        });
       }
     },
     [chatId, setThread],
   );
-
-  console.log("thread", thread);
 
   const debouncedSetThread = useCallback(
     debounce((updateFn: (prevThread: Message[]) => Message[]) => {
@@ -190,86 +189,52 @@ export default function useThread() {
     [chatId, debouncedSetThread],
   );
 
-  //   const handleThread = useCallback(
-  //     (data: MessagesEvent) => {
-  //       if (chatId === data.chatId) {
-  //         setThread((prevThread: Message[]) => {
-  //           const messageMap = new Map(prevThread.map((m) => [m.id, m]));
-
-  //           data.messages.forEach((newMessage) => {
-  //             if (messageMap.has(newMessage.id)) {
-  //               // If the message already exists, update only new properties
-  //               const existingMessage = messageMap.get(newMessage.id)!;
-  //               messageMap.set(newMessage.id, {
-  //                 ...existingMessage,
-  //                 ...newMessage,
-  //                 seenByAgent: existingMessage.seenByAgent,
-  //                 seenByUser: existingMessage.seenByUser,
-  //                 seenByUserAt:
-  //                   existingMessage.seenByUserAt || newMessage.seenByUserAt,
-  //               });
-  //             } else {
-  //               // If it's a new message, add it to the map
-  //               messageMap.set(newMessage.id, newMessage);
-  //             }
-  //           });
-
-  //           // Convert the map back to an array and sort by createdAt
-  //           const updatedThread = Array.from(messageMap.values()).sort(
-  //             (a, b) =>
-  //               new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-  //           );
-
-  //           return updatedThread;
-  //         });
-  //         // TODO - scrollThreadToBottom(); ?
-  //       }
-  //     },
-  //     [chatId, setThread],
-  //   );
-
   const handleThread = useCallback(
     (data: { chatId: string; message: Message }) => {
       if (chatId === data.chatId) {
         setThread((prevThread) => {
           const newMessage = data.message;
-          const newMessageTime = new Date(newMessage.createdAt).getTime();
+          const newMessageTime = DateTime.fromISO(
+            newMessage.createdAt,
+          ).toMillis();
 
-          // Check if the message already exists
           const existingIndex = prevThread.findIndex(
             (m) => m.id === newMessage.id,
           );
           if (existingIndex !== -1) {
-            // Update existing message
-            const updatedThread = [...prevThread];
-            updatedThread[existingIndex] = {
-              ...updatedThread[existingIndex],
-              ...newMessage,
-              seenByAgent: updatedThread[existingIndex].seenByAgent,
-              seenByUser: updatedThread[existingIndex].seenByUser,
-              seenByUserAt:
-                updatedThread[existingIndex].seenByUserAt ||
-                newMessage.seenByUserAt,
-            };
-            return updatedThread;
+            return prevThread.map((message, index) =>
+              index === existingIndex
+                ? {
+                    ...message,
+                    ...newMessage,
+                    seenByAgent: message.seenByAgent,
+                    seenByUser: message.seenByUser,
+                    seenByUserAt:
+                      message.seenByUserAt || newMessage.seenByUserAt,
+                  }
+                : message,
+            );
           }
 
-          // Find the correct insertion position
-          let insertIndex = prevThread.length;
-          for (let i = prevThread.length - 1; i >= 0; i--) {
-            const currentMessageTime = new Date(
-              prevThread[i].createdAt,
-            ).getTime();
-            if (currentMessageTime <= newMessageTime) {
-              insertIndex = i + 1;
-              break;
+          let low = 0;
+          let high = prevThread.length;
+          while (low < high) {
+            const mid = Math.floor((low + high) / 2);
+            if (
+              DateTime.fromISO(prevThread[mid].createdAt).toMillis() >
+              newMessageTime
+            ) {
+              high = mid;
+            } else {
+              low = mid + 1;
             }
           }
 
-          // Insert the new message at the correct position
-          const updatedThread = [...prevThread];
-          updatedThread.splice(insertIndex, 0, newMessage);
-          return updatedThread;
+          return [
+            ...prevThread.slice(0, low),
+            newMessage,
+            ...prevThread.slice(low),
+          ];
         });
       }
     },

@@ -94,6 +94,7 @@ const MessageComponent = memo(
       triggerOnce: true,
     });
 
+    // sometimes the message doesnt exist in the database yet
     useEffect(() => {
       if (inView && isUser && !isMessageSeen && !isPreview) {
         markMessageSeen();
@@ -143,6 +144,9 @@ const MessageComponent = memo(
         )}
         ref={isUser && !isPreview ? ref : undefined}
       >
+        {/* <span>
+          {message.id} {message.OPTIMISTIC ? "❌" : "✅"}
+        </span> */}
         <div
           className={cn(
             "flex flex-col max-w-[80%] prose prose-zinc border rounded-lg px-3 py-2",

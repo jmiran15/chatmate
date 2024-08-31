@@ -49,15 +49,17 @@ export default function useAgent({ chatId, submit }: UseAgentParams): {
       },
       {
         method: "POST",
+        navigate: false,
+        fetcherKey: `agent-send-message-${newMessage.id}`,
       },
     );
 
-    if (socket) {
-      socket.emit("new message", {
-        chatId,
-        message: newMessage,
-      });
-    }
+    // if (socket) {
+    //   socket.emit("new message", {
+    //     chatId,
+    //     message: newMessage,
+    //   });
+    // }
   };
 
   const joinChat = () => {
