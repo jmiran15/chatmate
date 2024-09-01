@@ -1,4 +1,8 @@
-import { useLoaderData, useSubmit } from "@remix-run/react";
+import {
+  ShouldRevalidateFunctionArgs,
+  useLoaderData,
+  useSubmit,
+} from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -18,6 +22,17 @@ import useAgent from "./use-agent";
 import useThread from "./useThread";
 
 export { action, loader };
+
+// dont revalidate on createMessage
+export function shouldRevalidate({
+  actionResult,
+  defaultShouldRevalidate,
+}: ShouldRevalidateFunctionArgs) {
+  if (actionResult?.dontRevalidate) {
+    return false;
+  }
+  return defaultShouldRevalidate;
+}
 
 export default function ChatRoute() {
   const { messages, chatbot, chat, anonUser } = useLoaderData<typeof loader>();

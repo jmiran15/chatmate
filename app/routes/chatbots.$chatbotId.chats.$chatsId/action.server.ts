@@ -128,6 +128,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       return json({
         messageCreatedSuccessfully: true,
         message: createdMessage,
+        dontRevalidate: true,
       });
     }
     default:

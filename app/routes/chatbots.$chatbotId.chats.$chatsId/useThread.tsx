@@ -81,44 +81,45 @@ export default function useThread({
 
   // keep thread in sync with loader (revalidation and initial loads)
   // TODO - this is what causes the issue with seen messages -> current solution is hacky and not ideal
-  //   useEffect(() => {
-  //     setThread(initializeThread(loaderMessages));
-  //   }, [loaderMessages]);
   useEffect(() => {
-    setThread((currentThread) => {
-      const mergedThread = [...loaderMessages];
-      const threadMap = new Map(loaderMessages.map((msg) => [msg.id, msg]));
-
-      // Add messages from currentThread that are not in loaderMessages
-      for (const message of currentThread) {
-        if (!threadMap.has(message.id)) {
-          mergedThread.push(message);
-        } else {
-          // Update existing messages with any socket-updated properties
-          const index = mergedThread.findIndex((m) => m.id === message.id);
-          if (index !== -1) {
-            mergedThread[index] = {
-              ...mergedThread[index],
-              ...message,
-              // Preserve certain properties from the loader message
-              createdAt: mergedThread[index].createdAt,
-              updatedAt: mergedThread[index].updatedAt,
-            };
-          }
-        }
-      }
-
-      // Sort the merged thread by createdAt
-      mergedThread.sort(
-        (a, b) =>
-          DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt))
-            .milliseconds,
-      );
-
-      return mergedThread;
-    });
-    //   }
+    console.log("loaderMessages", loaderMessages);
+    setThread(initializeThread(loaderMessages));
   }, [loaderMessages]);
+  //   useEffect(() => {
+  //     setThread((currentThread) => {
+  //       const mergedThread = [...loaderMessages];
+  //       const threadMap = new Map(loaderMessages.map((msg) => [msg.id, msg]));
+
+  //       // Add messages from currentThread that are not in loaderMessages
+  //       for (const message of currentThread) {
+  //         if (!threadMap.has(message.id)) {
+  //           mergedThread.push(message);
+  //         } else {
+  //           // Update existing messages with any socket-updated properties
+  //           const index = mergedThread.findIndex((m) => m.id === message.id);
+  //           if (index !== -1) {
+  //             mergedThread[index] = {
+  //               ...mergedThread[index],
+  //               ...message,
+  //               // Preserve certain properties from the loader message
+  //               createdAt: mergedThread[index].createdAt,
+  //               updatedAt: mergedThread[index].updatedAt,
+  //             };
+  //           }
+  //         }
+  //       }
+
+  //       // Sort the merged thread by createdAt
+  //       mergedThread.sort(
+  //         (a, b) =>
+  //           DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt))
+  //             .milliseconds,
+  //       );
+
+  //       return mergedThread;
+  //     });
+  //     //   }
+  //   }, [loaderMessages]);
 
   const optimisticMessages = usePendingMessages();
 
@@ -157,9 +158,10 @@ export default function useThread({
   const handleMarkSeen = useCallback(
     (data: SeenAgentMessage) => {
       if (chatId === data.chatId) {
+        // revalidate the loader.
+        // if we got this event, it means the message has already been marked seen (i.e the api returned? )
         setThread((prevThread) => {
           const newThread = [...prevThread];
-
           const index = newThread.findIndex((msg) => msg.id === data.messageId);
           if (index !== -1) {
             newThread[index] = {
@@ -174,7 +176,6 @@ export default function useThread({
               .map((msg) => `${msg.id}\n${msg.content}\n${msg.seenByUser}`)
               .join("\n\n\n"),
           );
-
           return newThread;
         });
       }
