@@ -52,10 +52,6 @@ async function run() {
   io.on("connection", (socket) => {
     socket.emit("confirmation", "connected!");
 
-    // socket.on("messages", (data) => {
-    //   socket.broadcast.emit("messages", data);
-    // });
-
     socket.on("new message", (data) => {
       socket.broadcast.emit("new message", data);
     });
@@ -96,6 +92,10 @@ async function run() {
         socket.broadcast.emit("userTyping", data);
       },
     );
+
+    socket.on("agent typing", (data: { chatId: string; isTyping: boolean }) => {
+      socket.broadcast.emit("agent typing", data);
+    });
   });
 
   const metricsApp = express();

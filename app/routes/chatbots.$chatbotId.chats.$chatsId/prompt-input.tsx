@@ -39,6 +39,7 @@ const PromptInput = React.memo(
     scrollToBottom,
     hasJoined,
     submit,
+    widgetConnected,
   }: {
     userInput: string;
     setUserInput: (value: string) => void;
@@ -46,6 +47,7 @@ const PromptInput = React.memo(
     scrollToBottom: () => void;
     hasJoined: boolean;
     submit: ReturnType<typeof useSubmit>;
+    widgetConnected: boolean;
   }) => {
     const { shouldSubmit } = useSubmitHandler();
     const isMobileScreen = useMobileScreen();
@@ -53,9 +55,31 @@ const PromptInput = React.memo(
     const socket = useSocket();
     const { chatsId: chatId } = useParams();
     const navigation = useNavigation();
-
     const lastMeasureTime = useRef(0);
     const measureTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+      if (widgetConnected) {
+        const contents = userInput.trim();
+        if (contents) {
+          sendEvent({
+            isTyping: true,
+          });
+        } else {
+          sendEvent({ isTyping: false });
+        }
+      }
+    }, [widgetConnected]);
+
+    const sendEvent = useCallback(
+      (event: { isTyping: boolean }) => {
+        console.log("sending event: ", widgetConnected);
+        if (widgetConnected) {
+          socket?.emit("agent typing", { ...event, chatId });
+        }
+      },
+      [socket, chatId, widgetConnected],
+    );
 
     const measure = useCallback(() => {
       if (inputRef.current) {
@@ -79,6 +103,8 @@ const PromptInput = React.memo(
     const sendMessage = useCallback(
       ({ message, chatId }: { message: string; chatId: string }) => {
         if (!message || message.trim() === "") return false;
+        // sendEvent({ isTyping: false });
+
         const currentDate = DateTime.now();
 
         const newMessage = {
@@ -110,7 +136,6 @@ const PromptInput = React.memo(
     );
 
     // TODO - do this stuff in the main route or thread?
-    // get input fetchers
     const fetchers = useFetchers();
     const inputFetchers = fetchers.filter(
       (fetcher) =>
@@ -133,7 +158,6 @@ const PromptInput = React.memo(
               chatId,
               message: {
                 ...fetcher.data.message,
-                // convert all dates - these dates were stringified - they were initially generared via New Date(). Do not use DateTime.fromIso ... to actual dates
                 createdAt: new Date(fetcher.data.message.createdAt),
                 updatedAt: new Date(fetcher.data.message.updatedAt),
                 seenByUserAt: new Date(fetcher.data.message.seenByUserAt),
@@ -152,7 +176,6 @@ const PromptInput = React.memo(
               chatId,
               message: {
                 ...fetcher.data.message,
-                // convert all dates to actual dates
                 createdAt: new Date(fetcher.data.message.createdAt),
                 updatedAt: new Date(fetcher.data.message.updatedAt),
                 seenByUserAt: new Date(fetcher.data.message.seenByUserAt),
@@ -195,6 +218,40 @@ const PromptInput = React.memo(
       };
     }, []);
 
+    // -=======--
+
+    const handleStopTyping = () => {
+      const contents = userInput.trim();
+      if (contents) {
+        sendEvent({
+          isTyping: true,
+        });
+      } else {
+        sendEvent({ isTyping: false });
+      }
+    };
+
+    useEffect(() => {
+      const stopTypingTimer = setTimeout(handleStopTyping, 1000);
+
+      const handleWindowBlur = () => {
+        handleStopTyping();
+      };
+
+      window.addEventListener("blur", handleWindowBlur);
+
+      if (userInput.trim() !== "") {
+        sendEvent({ isTyping: true });
+      } else {
+        sendEvent({ isTyping: false });
+      }
+
+      return () => {
+        clearTimeout(stopTypingTimer);
+        window.removeEventListener("blur", handleWindowBlur);
+      };
+    }, [userInput]);
+
     if (!chatId) return null;
 
     return (
@@ -221,6 +278,7 @@ const PromptInput = React.memo(
                   measureTimeoutRef.current = setTimeout(measure, 0);
                 },
                 autoFocus: autoFocus,
+                onBlur: handleStopTyping,
               }
             : {})}
         />

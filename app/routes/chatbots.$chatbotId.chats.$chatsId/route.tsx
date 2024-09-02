@@ -19,6 +19,7 @@ import Subheader from "./subheader";
 import { DateSeparator } from "./thread/DateSeparator";
 import Thread from "./thread/thread";
 import useAgent from "./use-agent";
+import useWidgetConnectionStatus from "./use-widget-connection-status";
 import useThread from "./useThread";
 
 export { action, loader };
@@ -61,6 +62,8 @@ export default function ChatRoute() {
     chatId: chat?.id,
     submit,
   });
+  const { widgetConnected } = useWidgetConnectionStatus(chat?.sessionId);
+
   const updateFloatingDate = useCallback(() => {
     if (!threadRef.current) return;
 
@@ -193,6 +196,7 @@ export default function ChatRoute() {
               scrollToBottom={scrollThreadToBottom}
               hasJoined={hasJoined}
               submit={submit}
+              widgetConnected={widgetConnected}
             />
             {!hasJoined && (
               <div className="absolute inset-0 flex items-center justify-center bg-muted/20 backdrop-blur-sm">
@@ -225,7 +229,7 @@ export default function ChatRoute() {
             )}
           </AnimatePresence>
         </div>
-        <AnonSidebar anonUser={anonUser} sessionId={chat?.sessionId} />
+        <AnonSidebar anonUser={anonUser} widgetConnected={widgetConnected} />
       </div>
     </div>
   );

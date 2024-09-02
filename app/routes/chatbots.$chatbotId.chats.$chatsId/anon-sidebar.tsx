@@ -5,17 +5,16 @@ import { formatDuration, intervalToDuration } from "date-fns";
 import { FancyBox } from "./labels/labels-combobox";
 import { loader } from "./route";
 import StatusComboboxPopover from "./status-combobox";
-import useWidgetConnectionStatus from "./use-widget-connection-status";
 
 export default function AnonSidebar({
   anonUser,
-  sessionId,
+  widgetConnected,
 }: {
   anonUser: SerializeFrom<AnonymousUser> | null;
-  sessionId: string | null;
+  widgetConnected: boolean;
 }) {
+  const status = widgetConnected ? "Connected" : "Disconnected";
   const { chat } = useLoaderData<typeof loader>();
-  const { status } = useWidgetConnectionStatus(sessionId);
   const duration = intervalToDuration({
     start: 0,
     end: Number(chat?.elapsedMs),
