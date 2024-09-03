@@ -2,9 +2,12 @@ import { Chatbot, Document, Embedding } from "@prisma/client";
 import invariant from "tiny-invariant";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "~/db.server";
-import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings/route";
-import { system_prompt, user_prompt } from "./prompts";
-import { anyscale, openai } from "./providers.server";
+import {
+  mainChatSystemPrompt_v2,
+  mainChatUserPrompt_v2,
+  mainTools,
+} from "./prompts";
+import { openai } from "./providers.server";
 import { Chunk } from "./types";
 
 export const CHUNK_SIZE = 1024;
@@ -39,18 +42,20 @@ export async function chat({
 
   const query = messages[messages.length - 1].content;
 
-  // THIS STUFF SHOULD BE DONE OUTSIDE OF THE "CHAT" FUNCTION SO THAT IT IS PURE
+  // TODO - move RAG into a pure function
   const references = (await fetchRelevantDocs({
     chatbotId: chatbot.id,
     input: query,
   })) as Embedding[];
 
-  const SP = system_prompt({
+  const systemPrompt = mainChatSystemPrompt_v2({
     chatbotName: chatbot.name,
     systemPrompt: chatbot.systemPrompt
       ? chatbot.systemPrompt
       : "Your are a friendly chatbot here to help you with any questions you have.",
-    responseLength: chatbot.responseLength ? chatbot.responseLength : "short",
+    responseLength: chatbot.responseLength
+      ? (chatbot.responseLength as "short" | "medium" | "long")
+      : "short",
     startWords:
       chatbot.responseLength === "short"
         ? "25"
@@ -65,7 +70,7 @@ export async function chat({
         : "100+",
   });
 
-  const UP = user_prompt({
+  const userPrompt = mainChatUserPrompt_v2({
     retrievedData: references
       .map(
         (reference) =>
@@ -75,19 +80,14 @@ export async function chat({
     question: query,
   });
 
-  messages[messages.length - 1].content = UP;
+  messages[messages.length - 1].content = userPrompt;
 
-  const client = ANYSCALE_MODELS.includes(chatbot.model) ? anyscale : openai;
-
-  console.log("messages going to openai: ", [
-    { role: "system", content: SP },
-    ...messages,
-  ]);
-
-  const stream = await client.chat.completions.create({
-    messages: [{ role: "system", content: SP }, ...messages],
-    model: chatbot.model,
+  const stream = await openai.chat.completions.create({
+    messages: [{ role: "system", content: systemPrompt }, ...messages],
+    model: "gpt-4o",
+    temperature: 0.2,
     stream: true,
+    tools: mainTools,
   });
 
   return stream;

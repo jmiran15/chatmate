@@ -22,6 +22,7 @@ export default function useAgent({ chatId, submit }: UseAgentParams): {
     hasJoinedRef.current = false;
     return () => {
       if (chatId) {
+        // TODO - call a backrgound cron job that automatically leaves the chat after X minutes (in case for some reason the leaveChat failed or did get called)
         leaveChat();
       }
     };

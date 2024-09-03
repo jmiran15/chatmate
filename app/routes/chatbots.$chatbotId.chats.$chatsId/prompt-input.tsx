@@ -103,7 +103,7 @@ const PromptInput = React.memo(
     const sendMessage = useCallback(
       ({ message, chatId }: { message: string; chatId: string }) => {
         if (!message || message.trim() === "") return false;
-        // sendEvent({ isTyping: false });
+        sendEvent({ isTyping: false });
 
         const currentDate = DateTime.now();
 
@@ -239,6 +239,8 @@ const PromptInput = React.memo(
       };
 
       window.addEventListener("blur", handleWindowBlur);
+
+      console.log("userInput", userInput, userInput.trim() !== "");
 
       if (userInput.trim() !== "") {
         sendEvent({ isTyping: true });

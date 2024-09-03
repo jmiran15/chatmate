@@ -4,8 +4,8 @@ import compression from "compression";
 import express from "express";
 import { createServer } from "http";
 import morgan from "morgan";
-import { Server } from "socket.io";
 import sourceMapSupport from "source-map-support";
+import { initializeSocket } from "~/utils/socketmanager.server.js";
 
 sourceMapSupport.install();
 run();
@@ -41,62 +41,7 @@ async function run() {
   const httpServer = createServer(app);
 
   // And then attach the socket.io server to the HTTP server
-  const io = new Server(httpServer, {
-    cors: {
-      origin: "*", // Be cautious with this in production
-      // TODO - change cors origins to local widget and prod widget
-      methods: ["GET", "POST"],
-    },
-  });
-
-  io.on("connection", (socket) => {
-    socket.emit("confirmation", "connected!");
-
-    socket.on("new message", (data) => {
-      socket.broadcast.emit("new message", data);
-    });
-
-    socket.on("isAgent", (data: { chatId: string; isAgent: boolean }) => {
-      socket.broadcast.emit("isAgent", data);
-    });
-
-    socket.on("pollingAgent", (data: { chatId: string }) => {
-      socket.broadcast.emit("pollingAgent", data);
-    });
-
-    socket.on(
-      "widgetConnected",
-      (data: { sessionId: string; connected: boolean }) => {
-        socket.broadcast.emit("widgetConnected", data);
-      },
-    );
-
-    socket.on("pollingWidgetStatus", (data: { sessionId: string }) => {
-      socket.broadcast.emit("pollingWidgetStatus", data);
-    });
-
-    socket.on(
-      "seenAgentMessage",
-      (data: { chatId: string; messageId: string; seenAt: string }) => {
-        socket.broadcast.emit("seenAgentMessage", data);
-      },
-    );
-    socket.on(
-      "userTyping",
-      (data: {
-        chatId: string;
-        isTyping: boolean;
-        typingState?: "typing" | "typed";
-        typedContents?: string;
-      }) => {
-        socket.broadcast.emit("userTyping", data);
-      },
-    );
-
-    socket.on("agent typing", (data: { chatId: string; isTyping: boolean }) => {
-      socket.broadcast.emit("agent typing", data);
-    });
-  });
+  initializeSocket(httpServer);
 
   const metricsApp = express();
   app.use(

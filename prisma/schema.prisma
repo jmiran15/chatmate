@@ -226,8 +226,6 @@ model Embedding {
   @@index([chatbotId])
 }
 
-
-
 model Message {
   id           String    @id @default(uuid())
   createdAt    DateTime  @default(now())
@@ -244,7 +242,29 @@ model Message {
 
   activity ActivityType? // we can use this in regular messages, + show in the LLM requests (e.g, show on frontend "--- Live chat requested ---", which also gets sent to LLM as { role: "assistant", content: "--- Live chat requested ---" })
 
+  toolCalls ToolCall[]
+
   @@index([chatId, role])
+}
+
+model ToolCall {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messageId String
+  message   Message       @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  type      String?
+  function  ToolFunction?
+}
+
+model ToolFunction {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  name       String?
+  arguments  String?
+  toolCall   ToolCall? @relation(fields: [toolCallId], references: [id], onDelete: Cascade)
+  toolCallId String    @unique
 }
 
 model Plan {

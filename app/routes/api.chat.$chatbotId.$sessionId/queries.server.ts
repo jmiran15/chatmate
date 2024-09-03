@@ -34,7 +34,9 @@ export async function getLatestChatBySessionID({
           messages: {
             where: {
               seenByUser: false,
-              role: "assistant",
+              role: {
+                not: "user",
+              },
             },
           },
         },
@@ -90,7 +92,9 @@ export async function createAnonymousChat({
           messages: {
             where: {
               seenByUser: false,
-              role: "assistant",
+              role: {
+                not: "user",
+              },
             },
           },
         },

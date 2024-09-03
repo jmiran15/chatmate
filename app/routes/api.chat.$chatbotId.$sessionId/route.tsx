@@ -1,9 +1,17 @@
 import { createId } from "@paralleldrive/cuid2";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import ChatNotificationEmail from "emails/ChatNotification";
+import {
+  ChatCompletionChunk,
+  ChatCompletionMessage,
+  ChatCompletionMessageToolCall,
+} from "openai/resources/index.mjs";
 import { prisma } from "~/db.server";
 import { sendEmail } from "~/utils/email.server";
 import { chat as streamChat } from "~/utils/openai";
+import { mainTools } from "~/utils/prompts";
+import { openai } from "~/utils/providers.server";
+import { requestLiveChat } from "~/utils/requestLiveChat.server";
 import { startInsightsFlow, startNameGenerationFlow } from "./flows.server";
 import {
   createAnonymousChat,
@@ -199,75 +207,163 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         }
       }
 
+      async function callTool(
+        tool_call: ChatCompletionMessageToolCall,
+      ): Promise<any> {
+        if (tool_call.type !== "function")
+          throw new Error("Unexpected tool_call type:" + tool_call.type);
+        const args = JSON.parse(tool_call.function.arguments);
+        switch (tool_call.function.name) {
+          case "requestLiveChat":
+            console.log("REQUESTING LIVE CHAT");
+            // inside of here we should controller.enqueue() created activity message, IF it was successful
+            return await requestLiveChat({
+              userEmail: args["userEmail"],
+              agentEmail: "jonathan@chatmate.so",
+              agentConnected: false,
+              chatId: chat!.id!,
+            });
+          default:
+            throw new Error("No function found");
+        }
+      }
+
       const stream = new ReadableStream({
         start(controller) {
           (async () => {
-            let fullText = "";
-            const id = createId();
+            let callingTools = true;
+            while (callingTools) {
+              let fullText = "";
+              const id = createId();
 
-            try {
-              const chatStream = await streamChat({
-                chatbot,
-                messages: messages.map((message: any) => ({
-                  role: message.role,
-                  content: message.content,
-                })),
-              });
+              try {
+                const lastMessageIsUser =
+                  messages[messages.length - 1].role === "user";
 
-              for await (const chunk of chatStream) {
-                for (const choice of chunk.choices) {
-                  const delta = choice.delta?.content;
-                  if (!delta) continue;
+                // if the lastMessage is not a user message, it means that we are doing a tool call
+                const chatStream = lastMessageIsUser
+                  ? await streamChat({
+                      chatbot,
+                      messages: messages.map((message: any) => ({
+                        role: message.role,
+                        content: message.content,
+                      })),
+                    })
+                  : await openai.chat.completions.create({
+                      messages,
+                      model: "gpt-4o",
+                      temperature: 0.2,
+                      stream: true,
+                      tools: mainTools,
+                    });
 
-                  fullText += delta;
+                let message = {} as ChatCompletionMessage;
+                for await (const chunk of chatStream) {
+                  message = messageReducer(message, chunk);
 
+                  for (const choice of chunk.choices) {
+                    const delta = choice.delta?.content;
+                    if (!delta) continue;
+
+                    fullText += delta;
+
+                    controller.enqueue(
+                      `data: ${JSON.stringify({
+                        id,
+                        type: "textResponseChunk",
+                        textResponse: delta,
+                        error: null,
+                        streaming: true,
+                      } as SSEMessage)}\n\n`,
+                    );
+                  }
+                }
+
+                messages.push(message);
+
+                console.log("GOT THE FOLLOWING CONTENTS: ", {
+                  fullText,
+                  message,
+                });
+
+                // If there are no tool calls, we're done and can exit this loop
+                if (!message.tool_calls && message.content) {
                   controller.enqueue(
                     `data: ${JSON.stringify({
                       id,
                       type: "textResponseChunk",
-                      textResponse: delta,
+                      textResponse: "",
                       error: null,
-                      streaming: true,
+                      streaming: false,
                     } as SSEMessage)}\n\n`,
                   );
+
+                  await createMessage({
+                    id,
+                    chatId: chat.id,
+                    role: message.role,
+                    content: message.content ?? "",
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                    clusterId: null,
+                    seenByUser: null,
+                    seenByAgent: null,
+                    seenByUserAt: null,
+                    activity: null,
+                    toolCalls: message.tool_calls
+                      ? {
+                          create: message.tool_calls.map((toolCall) => ({
+                            id: toolCall.id,
+                            type: toolCall.type,
+                            function: {
+                              create: {
+                                name: toolCall.function.name,
+                                arguments: toolCall.function.arguments,
+                              },
+                            },
+                          })),
+                        }
+                      : undefined,
+                  });
+
+                  callingTools = false;
+
+                  // now we want to leave the while loop immediately
+                  break;
                 }
+
+                // If there are tool calls, we generate a new message with the role 'tool' for each tool call.
+                if (message.tool_calls) {
+                  for (const toolCall of message.tool_calls) {
+                    const result = await callTool(toolCall);
+
+                    const newMessage = {
+                      tool_call_id: toolCall.id,
+                      role: "tool" as const,
+                      name: toolCall.function.name,
+                      content: JSON.stringify(result),
+                    };
+                    console.log("TOOL MESSAGE: ", newMessage);
+                    messages.push(newMessage);
+                  }
+                }
+              } catch (error: any) {
+                console.error("Failed to stream chat", error);
+
+                controller.enqueue(
+                  `data: ${JSON.stringify({
+                    id,
+                    type: "abort",
+                    textResponse: null,
+                    error: error.message,
+                    streaming: false,
+                  } as SSEMessage)}\n\n`,
+                );
+
+                // if there was an error, we want to break out of the while loop
+                callingTools = false;
+                break;
               }
-
-              controller.enqueue(
-                `data: ${JSON.stringify({
-                  id,
-                  type: "textResponseChunk",
-                  textResponse: "",
-                  error: null,
-                  streaming: false,
-                } as SSEMessage)}\n\n`,
-              );
-
-              await createMessage({
-                id,
-                chatId: chat.id,
-                role: "assistant",
-                content: fullText,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-                clusterId: null,
-                seenByUser: null,
-                seenByAgent: null,
-                seenByUserAt: null,
-                activity: null,
-              });
-            } catch (error: any) {
-              console.error("Failed to stream chat", error);
-
-              controller.enqueue(
-                `data: ${JSON.stringify({
-                  id,
-                  type: "abort",
-                  textResponse: null,
-                  error: error.message,
-                  streaming: false,
-                } as SSEMessage)}\n\n`,
-              );
             }
 
             controller.close();
@@ -312,3 +408,42 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
     }
   }
 };
+
+function messageReducer(
+  previous: ChatCompletionMessage,
+  item: ChatCompletionChunk,
+): ChatCompletionMessage {
+  const reduce = (acc: any, delta: ChatCompletionChunk.Choice.Delta) => {
+    acc = { ...acc };
+    for (const [key, value] of Object.entries(delta)) {
+      if (acc[key] === undefined || acc[key] === null) {
+        acc[key] = value;
+        //  OpenAI.Chat.Completions.ChatCompletionMessageToolCall does not have a key, .index
+        if (Array.isArray(acc[key])) {
+          for (const arr of acc[key]) {
+            delete arr.index;
+          }
+        }
+      } else if (typeof acc[key] === "string" && typeof value === "string") {
+        acc[key] += value;
+      } else if (typeof acc[key] === "number" && typeof value === "number") {
+        acc[key] = value;
+      } else if (Array.isArray(acc[key]) && Array.isArray(value)) {
+        const accArray = acc[key];
+        for (let i = 0; i < value.length; i++) {
+          const { index, ...chunkTool } = value[i];
+          if (index - accArray.length > 1) {
+            throw new Error(
+              `Error: An array has an empty value when tool_calls are constructed. tool_calls: ${accArray}; tool: ${value}`,
+            );
+          }
+          accArray[index] = reduce(accArray[index], chunkTool);
+        }
+      } else if (typeof acc[key] === "object" && typeof value === "object") {
+        acc[key] = reduce(acc[key], value);
+      }
+    }
+    return acc;
+  };
+  return reduce(previous, item.choices[0]!.delta) as ChatCompletionMessage;
+}
