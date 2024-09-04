@@ -13,7 +13,18 @@ export const updateChatFromChildrenQueue =
     "updateChatFromChildren",
     async (job) => {
       const childrenValues = await job.getChildrenValues();
+
+      if (Object.keys(childrenValues).length === 0) {
+        console.warn(`No child values found for chat update job ${job.id}`);
+        return null; // Or handle this case as appropriate for your application
+      }
+
       const data = Object.values(childrenValues)[0];
+
+      if (!data) {
+        console.error(`No valid data found in child values for job ${job.id}`);
+        throw new Error(`No valid data found in child values for chat update`);
+      }
 
       if (!isValidPartialChat(data)) {
         console.error(`Invalid data format for chat update`);
@@ -26,12 +37,16 @@ export const updateChatFromChildrenQueue =
         );
       }
 
-      const updatedChat = await prisma.chat.update({
-        where: { id: job.data.chatId },
-        data,
-      });
-
-      return updatedChat;
+      try {
+        const updatedChat = await prisma.chat.update({
+          where: { id: job.data.chatId },
+          data,
+        });
+        return updatedChat;
+      } catch (error) {
+        console.error(`Error updating chat ${job.data.chatId}:`, error);
+        throw new Error(`Failed to update chat: ${error}`);
+      }
     },
   );
 
@@ -42,11 +57,16 @@ function isValidPartialChat(
     return false;
   }
 
+  const dataKeys = Object.keys(data);
+  if (dataKeys.length === 0) {
+    return false; // Reject empty objects
+  }
+
   const allowedKeys = Object.keys(prisma.chat.fields).filter(
     (key) => !["id", "createdAt", "updatedAt"].includes(key),
   );
 
-  const isValid = Object.keys(data).every((key) => allowedKeys.includes(key));
+  const isValid = dataKeys.every((key) => allowedKeys.includes(key));
 
   return isValid;
 }

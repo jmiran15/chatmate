@@ -39,8 +39,8 @@ export async function loader() {
 export async function action({ request }: ActionFunctionArgs) {
   const { history } = await request.json();
 
-  if (!history) {
-    throw new Error("History required to generate follow ups");
+  if (!Array.isArray(history) || history.length === 0) {
+    throw new Error("History must be a non-empty array to generate follow-ups");
   }
 
   const followUps: z.infer<typeof FollowUpQuestions> | null =

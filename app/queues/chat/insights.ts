@@ -1,4 +1,8 @@
+import { zodResponseFormat } from "openai/helpers/zod.mjs";
+import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import invariant from "tiny-invariant";
+import { z } from "zod";
+import { openai } from "~/utils/providers.server";
 import { Queue } from "~/utils/queue.server";
 
 export interface GenerateInsightsQueueData {
@@ -8,11 +12,6 @@ export interface GenerateInsightsQueueData {
 export interface GenerateInsightsQueueResult {
   aiInsights: string;
 }
-
-import { zodResponseFormat } from "openai/helpers/zod.mjs";
-import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
-import { z } from "zod";
-import { openai } from "~/utils/providers.server";
 
 const InsightType = z.enum([
   "user_intent",

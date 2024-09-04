@@ -63,8 +63,21 @@ export default function useAgent({ chatId, submit }: UseAgentParams): {
     // }
   };
 
-  const joinChat = () => {
+  const joinChat = async () => {
     if (!socket || !chatId || hasJoinedRef.current) return;
+
+    submit(
+      {
+        intent: "notifyUserAgentJoined",
+        chatId,
+      },
+      {
+        method: "POST",
+        navigate: false,
+        fetcherKey: `agent-notify-user-agent-joined-${chatId}`,
+      },
+    );
+
     socket.emit("isAgent", { chatId, isAgent: true });
     sendActivityMessage("AGENT_JOINED", "Agent has joined the chat");
     hasJoinedRef.current = true;

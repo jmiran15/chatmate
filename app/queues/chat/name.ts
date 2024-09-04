@@ -34,10 +34,13 @@ export const generateChatName = Queue<GenerateChatNameQueueData>(
       `Chat ID mismatch: ${chat?.id} !== ${job.data.chatId}`,
     );
 
-    const formattedMessages = chat?.messages?.map((message) => ({
-      role: message.role as "user" | "assistant",
-      content: message.content,
-    }));
+    const formattedMessages = chat?.messages
+      ? chat.messages.map((message: { role: string; content: string }) => ({
+          role: message.role as "user" | "assistant",
+          content: message.content,
+        }))
+      : [];
+
     const previousName = chat?.name;
 
     const newName = await generate(formattedMessages, previousName);

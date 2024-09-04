@@ -154,6 +154,7 @@ export function splitStringIntoChunks(
   return chunks;
 }
 
+// TODO - switch to gpt-4o/mini + structured output
 export async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
   const completion = await openai.chat.completions.create({
     messages: [
@@ -178,6 +179,7 @@ export async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
   };
 }
 
+// TODO - switch to gpt-4o/mini + structured output
 export async function generatePossibleQuestionsForChunk(
   chunk: Chunk,
 ): Promise<Chunk[]> {
@@ -212,58 +214,3 @@ export async function generatePossibleQuestionsForChunk(
     };
   });
 }
-
-// export async function convertUploadedFilesToDocuments(
-//   files: FormDataEntryValue[],
-// ): Promise<(FullDocument & { type: DocumentType })[]> {
-//   const newFormData = new FormData();
-
-//   // Append each file to the new FormData instance
-//   files.forEach((file) => {
-//     newFormData.append("files", file);
-//   });
-
-//   const response = await fetch(UNSTRUCTURED_URL, {
-//     method: "POST",
-//     headers: {
-//       accept: "application/json",
-//       "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
-//     },
-//     body: newFormData,
-//   });
-
-//   if (!response.ok) {
-//     throw new Error(
-//       `Failed to partition file with error ${
-//         response.status
-//       } and message ${await response.text()}`,
-//     );
-//   }
-
-//   const elements = await response.json();
-//   if (!Array.isArray(elements)) {
-//     throw new Error(
-//       `Expected partitioning request to return an array, but got ${elements}`,
-//     );
-//   }
-
-//   if (elements[0].constructor !== Array) {
-//     return [
-//       {
-//         name: elements[0].metadata.filename,
-//         content: elements.map((element) => element.text).join("\n"),
-//         type: DocumentType.FILE,
-//         id: uuidv4(),
-//       },
-//     ];
-//   } else {
-//     return elements.map((fileElements) => {
-//       return {
-//         name: fileElements[0].metadata.filename,
-//         content: fileElements.map((element) => element.text).join("\n"),
-//         id: uuidv4(),
-//         type: DocumentType.FILE,
-//       };
-//     });
-//   }
-// }

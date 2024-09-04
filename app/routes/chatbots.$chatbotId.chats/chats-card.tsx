@@ -1,4 +1,4 @@
-import { StarIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleLeftIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { Chat } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
@@ -76,9 +76,9 @@ export default function ChatsCard({
             })}
           </div>
         </div>
-        <div className="ml-auto text-xs text-muted-foreground">
+        {/* <div className="ml-auto text-xs text-muted-foreground">
           Session id: {chat.sessionId}
-        </div>
+        </div> */}
       </div>
       <div className="text-xs text-muted-foreground">
         {chat.aiInsights ? (
@@ -92,9 +92,10 @@ export default function ChatsCard({
         )}
       </div>
       <div className="flex w-full items-center justify-between">
-        <p className="text-muted-foreground text-xs">
-          {chat._count.messages} messages
-        </p>
+        <div className="flex items-center text-muted-foreground text-xs">
+          <ChatBubbleLeftIcon className="w-4 h-4 mr-1" />
+          {chat._count.messages}
+        </div>
 
         <Button
           onClick={(e) => {

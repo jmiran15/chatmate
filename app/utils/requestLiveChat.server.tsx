@@ -22,7 +22,6 @@ const RequestLiveChatResultSchema = z.object({
 
 type RequestLiveChatResult = z.infer<typeof RequestLiveChatResultSchema>;
 
-// TODO - make the email required + update the prompts.
 // TODO - work on the prompts so that they suggest the live chat option more naturally and when it doesnt know an answer.
 export async function requestLiveChat(
   input: z.infer<typeof RequestLiveChatSchema>,
@@ -83,6 +82,29 @@ export async function requestLiveChat(
       };
     }
 
+    // find the anon user
+    const anonUser = chat.sessionId
+      ? await prisma.anonymousUser.findUnique({
+          where: {
+            sessionId: chat.sessionId,
+          },
+        })
+      : null;
+
+    if (anonUser) {
+      await prisma.anonymousUser.update({
+        where: {
+          id: anonUser.id,
+        },
+        data: { email: userEmail },
+      });
+    }
+
+    const domain =
+      process.env.NODE_ENV === "production"
+        ? "https://chatmate.so"
+        : "http://localhost:3000";
+
     // 3. We then need to notify the agent that a user has requested a live chat
     const requestEmail = await sendEmail({
       to: agentEmail,
@@ -90,7 +112,7 @@ export async function requestLiveChat(
       react: (
         <UserRequestedLiveChat
           userEmail={userEmail}
-          chatLink={"https://example.com"}
+          chatLink={`${domain}/chatbots/${chat.chatbotId}/chats/${chat.id}`}
         />
       ),
     });

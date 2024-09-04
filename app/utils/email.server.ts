@@ -31,7 +31,8 @@ export async function sendEmail({
   | { html: string; text: string; react?: never }
   | { react: ReactElement; html?: never; text?: never }
 )) {
-  const from = "jonathan@chatmate.so";
+  // "Your Name <sender@domain.com>"
+  const from = "Jonathan at Chatmate <jonathan@chatmate.so>";
 
   const email = {
     from,

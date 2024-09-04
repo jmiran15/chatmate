@@ -69,7 +69,7 @@ model Chatbot {
   userId               String
   publicName           String          @default("Your Chatbot")
   introMessages        String[]        @default(["Hello, how can I help you today?"])
-  model                String?         @default("gpt-3.5-turbo-0125")
+  model                String?         @default("gpt-4o")
   responseLength       String?         @default("short")
   systemPrompt         String?
   openIcon             String          @default("plus")
@@ -192,6 +192,8 @@ model AnonymousUser {
   version              String?
   chatId               String?  @unique
   chat                 Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  email String? // email if we get it
 
   @@index([chatId])
 }

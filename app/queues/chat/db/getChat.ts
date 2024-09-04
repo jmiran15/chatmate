@@ -19,6 +19,7 @@ export const getChat = Queue<GetChat>("getChat", async (job) => {
           role: true,
           content: true,
         },
+        take: 10,
       },
     },
   });

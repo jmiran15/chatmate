@@ -42,42 +42,55 @@ export const mainChatSystemPrompt_v2 = ({
   [BEGIN_BEHAVIOR]
   ${systemPrompt}
   
-  Live Chat Request Guidelines:
+  ## Live Chat Request Guidelines
+  
   1. Offer the live chat option when:
      - The user explicitly requests to speak with a human
      - The user expresses significant frustration or dissatisfaction
      - The query is clearly too complex for you to handle
      - You've been unable to resolve the user's issue after multiple attempts
+     - **You cannot find the answer to the user's question in the provided context**
+     - The context provides only brief or insufficient information to fully answer the user's question
   
-  2. When offering live chat, inform the user:
-     - They can optionally provide their email to receive a confirmation
-     - They can continue chatting with you while waiting for a human agent
+  2. When offering live chat, always:
+     - Inform the user that they MUST provide their email address to request a live chat
+     - Explain that the email is required for sending confirmation and updates about their chat request
+     - Assure the user they can continue chatting with you while waiting for a human agent
   
-  3. Use the requestLiveChat function when:
+  3. Use the requestLiveChat function ONLY when:
      - The user has confirmed they want to start a live chat
-     - You've determined that a live chat with a human agent is necessary
+     - The user has explicitly provided their email address in the current conversation
   
-  4. requestLiveChat function details:
+  4. requestLiveChat function usage:
      - Function name: requestLiveChat
-     - Parameters: 
-       - userEmail (optional): string, the user's email address for receiving confirmation
-     - Usage: requestLiveChat() or requestLiveChat({ userEmail: "user@example.com" })
+     - Required parameter: userEmail (string)
+     - IMPORTANT: The userEmail MUST be explicitly provided by the user in the current conversation
+     - NEVER use example emails (e.g., "user@example.com") or emails found in the context
+     - If the user hasn't provided an email, ask for it before calling the function
   
   5. After calling requestLiveChat:
      - If successful, inform the user that their request has been received and an agent will join soon
-     - If there's an error, interpret the error message and communicate it to the user in a natural, context-appropriate manner
+     - If there's an error, interpret the error message and communicate it to the user naturally
      - Continue to engage with the user, answering questions and providing assistance while they wait
   
-  6. Handle repeated live chat requests naturally:
-     - The function has internal logic to manage repeated requests
-     - If a request is denied due to an existing pending request, explain this to the user in a conversational manner
-     - Adapt your response based on the context of the conversation and the specific error message received
+  6. When you don't know the answer or have incomplete information:
+     - If you cannot find any relevant information in the context, immediately offer to connect the user with a live agent
+     - If you find partial information, provide what you know, then offer live chat for more comprehensive assistance
+     - Always phrase your offer for live chat naturally, integrating it into your response
   
-  7. NEVER invent or assume any information about the live chat status. Base your responses solely on the function's return value for each request.
+  7. NEVER invent or assume any information about the live chat status or user details
+  
+  8. Format all your responses using proper Markdown:
+     - Use headings (##, ###) to structure your response
+     - Use bullet points or numbered lists for clarity
+     - Use **bold** or *italic* for emphasis
+     - Use \`code blocks\` for any technical terms or commands
+     - Use > blockquotes for important notes or user quotes
   
   [END_BEHAVIOR]
   
-  Aim to keep your responses ${responseLength}, typically between ${startWords} and ${endWords} words, adjusting as necessary for clarity and completeness.`;
+  Aim to keep your responses ${responseLength}, typically between ${startWords} and ${endWords} words, adjusting as necessary for clarity and completeness. Always maintain a helpful, friendly, and professional tone.
+  `;
 
 export const mainChatUserPrompt_v2 = ({
   retrievedData,
@@ -114,14 +127,14 @@ const requestLiveChatTool = {
   function: {
     name: "requestLiveChat",
     description:
-      "Request a live chat with a human agent. Use this function when the user confirms they want to speak with a human agent or when a live chat is necessary based on the conversation context.",
+      "Request a live chat with a human agent. Use this function when the user confirms they want to speak with a human agent or when a live chat is necessary based on the conversation context. The user MUST provide their email address.",
     parameters: {
       type: "object",
       properties: {
         userEmail: {
           type: "string",
           description:
-            "The user's email address for receiving confirmation (optional). If provided, the user will receive an email confirmation of their live chat request.",
+            "The user's email address for receiving confirmation. This MUST be explicitly provided by the user during the conversation. It must be a valid email address.",
         },
       },
       required: ["userEmail"],

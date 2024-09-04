@@ -169,6 +169,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         return new Response(null, { status: 200, headers });
       }
 
+      const agentEmail = chatbot.user.email;
+
       // check if the payload only had one user message - meaning its the first message
       if (
         messages.filter(
@@ -177,13 +179,11 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         ).length === 1 &&
         !chatId
       ) {
-        const userEmail = chatbot.user.email;
-
         const anonymousUser = await getAnonymousUserBySessionId({
           sessionId: sessionIdOrChatId,
         });
 
-        if (userEmail) {
+        if (agentEmail) {
           const BASE =
             process.env.NODE_ENV === "development"
               ? "http://localhost:3000"
@@ -191,7 +191,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
           try {
             await sendEmail({
-              to: userEmail,
+              to: agentEmail,
               subject: "Chatmate - New chat",
               react: (
                 <ChatNotificationEmail
@@ -219,8 +219,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
             // inside of here we should controller.enqueue() created activity message, IF it was successful
             return await requestLiveChat({
               userEmail: args["userEmail"],
-              agentEmail: "jonathan@chatmate.so",
-              agentConnected: false,
+              agentEmail,
+              agentConnected: false, // TODO - implement this! -> socket.io
               chatId: chat!.id!,
             });
           default:

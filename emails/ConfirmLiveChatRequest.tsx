@@ -1,29 +1,28 @@
 import * as E from "@react-email/components";
+import { BaseEmailTemplate } from "./BaseEmailTemplate";
+import { sharedStyles } from "./sharedStyles";
 
-function ConfirmLiveChatRequest() {
+export default function ConfirmLiveChatRequest() {
   return (
-    <E.Html lang="en" dir="ltr">
-      <E.Container>
-        <E.Heading as="h1">Live Chat Request Confirmed</E.Heading>
+    <BaseEmailTemplate
+      previewText="Your Chatmate live chat request has been confirmed"
+      heading="Live Chat Request Confirmed"
+    >
+      <E.Text style={sharedStyles.paragraph}>Hello,</E.Text>
 
-        <E.Text>Hello,</E.Text>
+      <E.Text style={sharedStyles.paragraph}>
+        We've successfully received your request for a live chat session. An
+        agent will join the chat soon.
+      </E.Text>
 
-        <E.Text>
-          We've successfully received your request for a live chat session. An
-          agent will join the chat soon.
-        </E.Text>
+      <E.Text style={sharedStyles.paragraph}>
+        You'll receive another email notification when an agent is ready to chat
+        with you.
+      </E.Text>
 
-        <E.Text>
-          You'll receive another email notification when an agent is ready to
-          chat with you. That email will contain a link to join the chat.
-        </E.Text>
-
-        <E.Text>
-          Thank you for your patience. We look forward to assisting you soon.
-        </E.Text>
-      </E.Container>
-    </E.Html>
+      <E.Text style={sharedStyles.paragraph}>
+        Thank you for your patience. We look forward to assisting you soon.
+      </E.Text>
+    </BaseEmailTemplate>
   );
 }
-
-export default ConfirmLiveChatRequest;
