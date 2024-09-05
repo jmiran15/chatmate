@@ -8,6 +8,12 @@
 CREATE TYPE "ActivityType" AS ENUM ('REQUESTED_LIVE_CHAT', 'AGENT_JOINED', 'AGENT_LEFT');
 
 -- AlterTable
+ALTER TABLE "AnonymousUser" ADD COLUMN     "email" TEXT;
+
+-- AlterTable
+ALTER TABLE "Chatbot" ALTER COLUMN "model" SET DEFAULT 'gpt-4o';
+
+-- AlterTable
 ALTER TABLE "Message" DROP COLUMN "seen",
 ADD COLUMN     "activity" "ActivityType",
 ADD COLUMN     "seenByAgent" BOOLEAN DEFAULT false,
