@@ -1,10 +1,10 @@
+import { Prisma } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { Outlet, useLoaderData, useSearchParams } from "@remix-run/react";
 import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { prisma } from "~/db.server";
 import { updateChatStarredStatus } from "~/models/chat.server";
 import { requireUserId } from "~/session.server";
-import { prisma } from "~/db.server";
-import { Prisma } from "@prisma/client";
 import ChatsList, { LIMIT } from "./chats-list";
 
 const getStartLimit = (
@@ -57,6 +57,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     prisma.chat.count({
       where: WHERE,
     }),
+
     prisma.chat.findMany({
       where: WHERE,
       orderBy: {

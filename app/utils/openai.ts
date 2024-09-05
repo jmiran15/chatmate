@@ -1,11 +1,14 @@
-import { Chatbot, Document, DocumentType, Embedding } from "@prisma/client";
+import { Chatbot, Document, Embedding } from "@prisma/client";
 import invariant from "tiny-invariant";
-import { prisma } from "~/db.server";
-import { system_prompt, user_prompt } from "./prompts";
 import { v4 as uuidv4 } from "uuid";
-import { ANYSCALE_MODELS } from "~/routes/chatbots.$chatbotId.settings/route";
-import { openai, anyscale } from "./providers.server";
-import { Chunk, FullDocument, UNSTRUCTURED_URL } from "./types";
+import { prisma } from "~/db.server";
+import {
+  mainChatSystemPrompt_v2,
+  mainChatUserPrompt_v2,
+  mainTools,
+} from "./prompts";
+import { openai } from "./providers.server";
+import { Chunk } from "./types";
 
 export const CHUNK_SIZE = 1024;
 export const OVERLAP = 20;
@@ -39,18 +42,20 @@ export async function chat({
 
   const query = messages[messages.length - 1].content;
 
-  // THIS STUFF SHOULD BE DONE OUTSIDE OF THE "CHAT" FUNCTION SO THAT IT IS PURE
+  // TODO - move RAG into a pure function
   const references = (await fetchRelevantDocs({
     chatbotId: chatbot.id,
     input: query,
   })) as Embedding[];
 
-  const SP = system_prompt({
+  const systemPrompt = mainChatSystemPrompt_v2({
     chatbotName: chatbot.name,
     systemPrompt: chatbot.systemPrompt
       ? chatbot.systemPrompt
       : "Your are a friendly chatbot here to help you with any questions you have.",
-    responseLength: chatbot.responseLength ? chatbot.responseLength : "short",
+    responseLength: chatbot.responseLength
+      ? (chatbot.responseLength as "short" | "medium" | "long")
+      : "short",
     startWords:
       chatbot.responseLength === "short"
         ? "25"
@@ -65,7 +70,7 @@ export async function chat({
         : "100+",
   });
 
-  const UP = user_prompt({
+  const userPrompt = mainChatUserPrompt_v2({
     retrievedData: references
       .map(
         (reference) =>
@@ -75,24 +80,21 @@ export async function chat({
     question: query,
   });
 
-  messages[messages.length - 1].content = UP;
+  messages[messages.length - 1].content = userPrompt;
 
-  const client = ANYSCALE_MODELS.includes(chatbot.model) ? anyscale : openai;
-
-  console.log("messages going to openai: ", [
-    { role: "system", content: SP },
-    ...messages,
-  ]);
-
-  const stream = await client.chat.completions.create({
-    messages: [{ role: "system", content: SP }, ...messages],
-    model: chatbot.model,
+  const stream = await openai.chat.completions.create({
+    messages: [{ role: "system", content: systemPrompt }, ...messages],
+    model: "gpt-4o",
+    temperature: 0.2,
     stream: true,
+    tools: mainTools,
   });
 
   return stream;
 }
 
+// TODO - modularize the RAG code out of here
+// DOCUMENT RETRIEVAL (RAG)
 // WE NEED TO BE SUMMARIZING THE PREV CHAT AS WELL AND USING THAT TO GET EMBEDDINGS
 export async function fetchRelevantDocs({
   chatbotId,
@@ -115,56 +117,7 @@ export async function fetchRelevantDocs({
   return relevantDocs;
 }
 
-export async function generateChatName(
-  chat: { role: "user" | "assistant"; content: string }[],
-) {
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Generate a short name for the chat. I should be able to see only the chat name and know what the chat is about. For example, if in the chat the user is talking about a heap in java algorithms, your chat name should be something like 'Java heaps'; if the user is inquiring about a new feature, you should name the chat something like 'New chat inquiry', or naming the actual feature would be even better.",
-      },
-      {
-        role: "user",
-        content: `Chat: ${chat
-          .map((message) => `${message.role}: ${message.content}`)
-          .join("\n")}\nChat name:`,
-      },
-    ],
-    model: "gpt-3.5-turbo-0125",
-  });
-
-  return {
-    chatName: completion.choices[0].message.content as string,
-  };
-}
-
-export async function generateChatSummary(
-  chat: { role: "user" | "assistant"; content: string }[],
-) {
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Generate a list of key insights about a chat that a user had with a chatbot. Each insight should be about one key takeaway from the chat. Your key takeaways should be about what the user is doing! These insights will be helpful to the chatbot owner, who wants to know how users are interaction with the chatbot. For example, if the user is asking about something in the chat, you should point this out as one of the insights; if they sound angry, or confused, or some other emotion, you should point this out. Key takeaways are essentially the top 5 things that a chatbot owner would take away when analyzing chats that user's had with their chatbot. Insights must be AT MOST one sentence long. Your list should have AT MOST 5 INSIGHTS.\nYour responses should be in the following format: 'item 1\nitem 2\nitem 3\nitem 4\nitem 5'. You do not NEED all 5 items, but you should have at least 1 strong bullet point. In fact, shorter is better! DO NOT ADD ANY MARKDOWN OR HTML TO YOUR RESPONSE. Just plain text, one insight per line. For example numbered lists, bulleted lists, etc, are ALL WRONG! Just plain text, one insight per line. You do not need to have a key insight per message; for example, the user may ask a question about X and the chatbot/assistant later responds about X. In this case (and all similar cases) you do NOT need an insight saying the the user asked about X and another insight saying that the assitant responded about X. Just have one concise insight indicating the user's intent.",
-      },
-      {
-        role: "user",
-        content: `Chat: ${chat
-          .map((message) => `${message.role}: ${message.content}`)
-          .join("\n")}\nChat list with max of 5 key insights:`,
-      },
-    ],
-    model: "gpt-3.5-turbo-0125",
-  });
-
-  return {
-    chatSummary: completion.choices[0].message.content as string,
-  };
-}
-
+// DOCUMENT PREPROCESSING FLOW
 export function splitStringIntoChunks(
   document: Document,
   chunkSize: number,
@@ -201,6 +154,7 @@ export function splitStringIntoChunks(
   return chunks;
 }
 
+// TODO - switch to gpt-4o/mini + structured output
 export async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
   const completion = await openai.chat.completions.create({
     messages: [
@@ -225,6 +179,7 @@ export async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
   };
 }
 
+// TODO - switch to gpt-4o/mini + structured output
 export async function generatePossibleQuestionsForChunk(
   chunk: Chunk,
 ): Promise<Chunk[]> {
@@ -258,59 +213,4 @@ export async function generatePossibleQuestionsForChunk(
       documentId: chunk.documentId,
     };
   });
-}
-
-export async function convertUploadedFilesToDocuments(
-  files: FormDataEntryValue[],
-): Promise<(FullDocument & { type: DocumentType })[]> {
-  const newFormData = new FormData();
-
-  // Append each file to the new FormData instance
-  files.forEach((file) => {
-    newFormData.append("files", file);
-  });
-
-  const response = await fetch(UNSTRUCTURED_URL, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "unstructured-api-key": process.env.UNSTRUCTURED_API_KEY as string,
-    },
-    body: newFormData,
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to partition file with error ${
-        response.status
-      } and message ${await response.text()}`,
-    );
-  }
-
-  const elements = await response.json();
-  if (!Array.isArray(elements)) {
-    throw new Error(
-      `Expected partitioning request to return an array, but got ${elements}`,
-    );
-  }
-
-  if (elements[0].constructor !== Array) {
-    return [
-      {
-        name: elements[0].metadata.filename,
-        content: elements.map((element) => element.text).join("\n"),
-        type: DocumentType.FILE,
-        id: uuidv4(),
-      },
-    ];
-  } else {
-    return elements.map((fileElements) => {
-      return {
-        name: fileElements[0].metadata.filename,
-        content: fileElements.map((element) => element.text).join("\n"),
-        id: uuidv4(),
-        type: DocumentType.FILE,
-      };
-    });
-  }
 }

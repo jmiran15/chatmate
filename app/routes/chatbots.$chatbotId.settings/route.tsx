@@ -11,23 +11,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
 import { Chatbot } from "@prisma/client";
-import { Label } from "~/components/ui/label";
-import { Input } from "~/components/ui/input";
-import { Textarea } from "~/components/ui/textarea";
-import { Button } from "~/components/ui/button";
-import { ScrollArea } from "~/components/ui/scroll-area";
-import { useRef, useState, Fragment, useEffect } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { useToast } from "~/components/ui/use-toast";
+import { Fragment, useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,25 +23,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
-
-export const OPENAI_MODELS = ["gpt-4-0125-preview", "gpt-3.5-turbo-0125"];
-
-export const ANYSCALE_MODELS = [
-  "codellama/CodeLlama-70b-Instruct-hf",
-  "mlabonne/NeuralHermes-2.5-Mistral-7B",
-];
-
-export const GROQ_MODELS = [
-  "llama2-70b-4096",
-  "mixtral-8x7b-32768",
-  "gemma-7b-it",
-];
-
-export const SUPPORTED_MODELS = [
-  ...OPENAI_MODELS,
-  ...GROQ_MODELS,
-  ...ANYSCALE_MODELS,
-];
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
+import { Textarea } from "~/components/ui/textarea";
+import { useToast } from "~/components/ui/use-toast";
 
 export const PROMPT_TEMPLATES = [
   {
@@ -86,7 +67,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     case "save": {
       const name = formData.get("name") as Chatbot["name"];
       const systemPrompt = formData.get("system") as Chatbot["systemPrompt"];
-      const model = formData.get("model") as Chatbot["model"];
       const responseLength = formData.get(
         "response-length",
       ) as Chatbot["responseLength"];
@@ -95,7 +75,6 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         id: chatbotId,
         name,
         systemPrompt,
-        model,
         responseLength,
       });
 
@@ -116,7 +95,12 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 };
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const chatbotId = params.chatbotId;
+  const { chatbotId } = params;
+
+  if (!chatbotId) {
+    throw new Error("Chatbot not found");
+  }
+
   const chatbot = await getChatbotById({ id: chatbotId });
 
   return json({ chatbot });
@@ -132,7 +116,7 @@ export default function ModelC() {
   const cancelButtonRef = useRef(null);
 
   const [systemPrompt, setSystemPrompt] = useState<string>(
-    data.chatbot!.systemPrompt as string,
+    data?.chatbot?.systemPrompt || "",
   );
 
   const pendingSystemPrompt = useRef<string>("");
@@ -303,34 +287,6 @@ export default function ModelC() {
                 setSystemPrompt(e.target.value);
               }}
             />
-          </div>
-
-          {/* model */}
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <div>
-              <Label htmlFor="model">Model</Label>
-              <p className="text-sm text-muted-foreground">
-                Select the model you want to use for your chatbot. Test the
-                model after changing it for optimal performance.
-              </p>
-            </div>
-            <Select name="model" defaultValue={data.chatbot!.model}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a model" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Models</SelectLabel>
-                  {SUPPORTED_MODELS.map((model) => {
-                    return (
-                      <SelectItem key={model} value={model}>
-                        {model}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
           </div>
 
           {/* response length */}

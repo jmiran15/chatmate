@@ -14,8 +14,9 @@ import {
 } from "react";
 import ChatsCard from "~/routes/chatbots.$chatbotId.chats/chats-card";
 
-import { useVirtual } from "react-virtual";
 import { Chat } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
+import { useVirtual } from "react-virtual";
 import {
   Select,
   SelectContent,
@@ -23,10 +24,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { getCreatedAt } from "./route";
-import { ItemMeasurer } from "./item-measurer";
 import { EmptyState } from "./empty-state";
-import { SerializeFrom } from "@remix-run/node";
+import { ItemMeasurer } from "./item-measurer";
+import { getCreatedAt } from "./route";
 
 export const LIMIT = 64;
 const DATA_OVERSCAN = 8;
@@ -201,7 +201,7 @@ export default function ChatsList({
 
   return (
     <>
-      <div className="flex w-full justify-between items-center flex-wrap md:flex-nowrap gap-2 px-4 sm:px-6">
+      <div className="flex w-full justify-between items-center flex-wrap md:flex-nowrap gap-2 px-4">
         <p className="text-muted-foreground text-sm text-nowrap shrink-0">
           {total} Chats
         </p>
@@ -237,7 +237,7 @@ export default function ChatsList({
       <div
         ref={parentRef}
         data-hydrating-signal
-        className="px-4 sm:px-6 "
+        className="px-4"
         style={{
           height: `100%`,
           width: `100%`,

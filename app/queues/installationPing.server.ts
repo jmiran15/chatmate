@@ -1,10 +1,10 @@
 import type { Chatbot } from "@prisma/client";
-import invariant from "tiny-invariant";
-import { prisma } from "~/db.server";
-import { repeat } from "~/routes/api.$chatbotId.installed";
-import { Queue } from "~/utils/queue.server";
 import axios, { isAxiosError } from "axios";
 import { JSDOM } from "jsdom";
+import invariant from "tiny-invariant";
+import { prisma } from "~/db.server";
+import { repeat } from "~/routes/api.$chatbotId.installed/route";
+import { Queue } from "~/utils/queue.server";
 
 export interface InstallationPingQueueData {
   chatbotId: string;

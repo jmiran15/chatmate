@@ -20,7 +20,7 @@ export function useScrollToBottom() {
     if (autoScroll) {
       scrollDomToBottom();
     }
-  });
+  }, [autoScroll]);
 
   return {
     scrollRef,

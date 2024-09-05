@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSocket } from "~/providers/socket";
 
 export default function useWidgetConnectionStatus(sessionId: string | null): {
-  status: "Connected" | "Disconnected";
+  widgetConnected: boolean;
 } {
   const [widgetConnected, setWidgetConnected] = useState(false);
   const socket = useSocket();
@@ -41,5 +41,5 @@ export default function useWidgetConnectionStatus(sessionId: string | null): {
     };
   }, [socket, sessionId]);
 
-  return { status: widgetConnected ? "Connected" : "Disconnected" };
+  return { widgetConnected };
 }

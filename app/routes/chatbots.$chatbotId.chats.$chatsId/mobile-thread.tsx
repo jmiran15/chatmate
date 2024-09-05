@@ -1,18 +1,16 @@
-import { AnimatePresence } from "framer-motion";
-import Modal from "~/components/custom-mobile-modal";
-import Thread from "./thread";
 import { Chat, Chatbot, Message } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { useNavigate, useParams, useSearchParams } from "@remix-run/react";
+import { AnimatePresence } from "framer-motion";
+import Modal from "~/components/custom-mobile-modal";
+import Thread from "./thread/thread";
 
 export default function MobileThread({
   thread,
-  setThread,
   chat,
   chatbot,
 }: {
   thread: SerializeFrom<Message[]>;
-  setThread: (thread: SerializeFrom<Message[]>) => void;
   chat: SerializeFrom<Chat>;
   chatbot: SerializeFrom<Chatbot>;
 }) {
@@ -29,9 +27,8 @@ export default function MobileThread({
         <div className="h-[80vh] overflow-y-auto">
           <Thread
             thread={thread}
-            setThread={setThread}
-            sessionId={chat?.sessionId}
             seen={chat?.seen}
+            scrollThreadToBottom={() => {}}
           />
         </div>
       </Modal>

@@ -4,8 +4,8 @@ import compression from "compression";
 import express from "express";
 import { createServer } from "http";
 import morgan from "morgan";
-import { Server } from "socket.io";
 import sourceMapSupport from "source-map-support";
+import { initializeSocket } from "~/utils/socketmanager.server.js";
 
 sourceMapSupport.install();
 run();
@@ -41,43 +41,7 @@ async function run() {
   const httpServer = createServer(app);
 
   // And then attach the socket.io server to the HTTP server
-  const io = new Server(httpServer, {
-    cors: {
-      origin: "*", // Be cautious with this in production
-      // TODO - change cors origins to local widget and prod widget
-      methods: ["GET", "POST"],
-    },
-  });
-  // Then you can use `io` to listen the `connection` event and get a socket
-  // from a client
-  io.on("connection", (socket) => {
-    // from this point you are on the WS connection with a specific client
-
-    socket.emit("confirmation", "connected!");
-
-    socket.on("messages", (data) => {
-      socket.broadcast.emit("messages", data);
-    });
-
-    socket.on("isAgent", (data: { sessionId: string; isAgent: boolean }) => {
-      socket.broadcast.emit("isAgent", data);
-    });
-
-    socket.on("pollingAgent", (data: { sessionId: string }) => {
-      socket.broadcast.emit("pollingAgent", data);
-    });
-
-    socket.on(
-      "widgetConnected",
-      (data: { sessionId: string; connected: boolean }) => {
-        socket.broadcast.emit("widgetConnected", data);
-      },
-    );
-
-    socket.on("pollingWidgetStatus", (data: { sessionId: string }) => {
-      socket.broadcast.emit("pollingWidgetStatus", data);
-    });
-  });
+  initializeSocket(httpServer);
 
   const metricsApp = express();
   app.use(

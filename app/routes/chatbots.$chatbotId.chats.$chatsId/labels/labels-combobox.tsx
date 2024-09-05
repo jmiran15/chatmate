@@ -1,5 +1,7 @@
+import type { Label as LabelType } from "@prisma/client";
+import { useFetcher, useLoaderData, useParams } from "@remix-run/react";
 import { Check, Edit2, Plus } from "lucide-react";
-import { cn } from "~/lib/utils";
+import { useRef, useState } from "react";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import {
@@ -15,12 +17,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import type { Label as LabelType } from "@prisma/client";
-import { useRef, useState } from "react";
-import { useFetcher, useLoaderData, useParams } from "@remix-run/react";
+import { cn } from "~/lib/utils";
 import { loader } from "~/routes/chatbots.$chatbotId.chats.$chatsId/route";
-import EditDialog from "./edit-dialog";
 import CommandItemCreate from "./command-item-create";
+import EditDialog from "./edit-dialog";
 
 const badgeStyle = (color: string) => ({
   borderColor: `${color}20`,
@@ -44,11 +44,6 @@ export function FancyBox() {
   // 2. The labels that are selected
   const labels: LabelType[] = chatbot.labels;
   const selectedLabels: LabelType[] = chat.labels;
-
-  console.log("combobox: ", {
-    chat,
-    chatbot,
-  });
 
   const createLabel = ({ name }: Pick<LabelType, "name">) => {
     fetcher.submit(

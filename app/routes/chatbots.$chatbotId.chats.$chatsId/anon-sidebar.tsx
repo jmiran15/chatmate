@@ -1,21 +1,20 @@
 import { AnonymousUser } from "@prisma/client";
-import StatusComboboxPopover from "./status-combobox";
-import { FancyBox } from "./labels/labels-combobox";
-import { formatDuration, intervalToDuration } from "date-fns";
-import { useLoaderData } from "@remix-run/react";
-import { loader } from "./route";
 import { SerializeFrom } from "@remix-run/node";
-import useWidgetConnectionStatus from "./use-widget-connection-status";
+import { useLoaderData } from "@remix-run/react";
+import { formatDuration, intervalToDuration } from "date-fns";
+import { FancyBox } from "./labels/labels-combobox";
+import { loader } from "./route";
+import StatusComboboxPopover from "./status-combobox";
 
 export default function AnonSidebar({
   anonUser,
-  sessionId,
+  widgetConnected,
 }: {
   anonUser: SerializeFrom<AnonymousUser> | null;
-  sessionId: string | null;
+  widgetConnected: boolean;
 }) {
+  const status = widgetConnected ? "Connected" : "Disconnected";
   const { chat } = useLoaderData<typeof loader>();
-  const { status } = useWidgetConnectionStatus(sessionId);
   const duration = intervalToDuration({
     start: 0,
     end: Number(chat?.elapsedMs),

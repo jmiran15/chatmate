@@ -69,7 +69,7 @@ model Chatbot {
   userId               String
   publicName           String          @default("Your Chatbot")
   introMessages        String[]        @default(["Hello, how can I help you today?"])
-  model                String?         @default("gpt-3.5-turbo-0125")
+  model                String?         @default("gpt-4o")
   responseLength       String?         @default("short")
   systemPrompt         String?
   openIcon             String          @default("plus")
@@ -110,7 +110,7 @@ model Cluster {
 }
 
 model Chat {
-  id         String         @id @default(uuid())
+  id         String         @id @default(cuid())
   createdAt  DateTime       @default(now())
   updatedAt  DateTime       @updatedAt
   userId     String?
@@ -193,6 +193,8 @@ model AnonymousUser {
   chatId               String?  @unique
   chat                 Chat?    @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
+  email String? // email if we get it
+
   @@index([chatId])
 }
 
@@ -227,18 +229,44 @@ model Embedding {
 }
 
 model Message {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  role      String
-  content   String
-  chatId    String
-  seen      Boolean? @default(false)
-  clusterId String?
-  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  cluster   Cluster? @relation(fields: [clusterId], references: [id])
+  id           String    @id @default(uuid())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  role         String
+  content      String
+  chatId       String
+  clusterId    String?
+  chat         Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  cluster      Cluster?  @relation(fields: [clusterId], references: [id])
+  seenByUser   Boolean?  @default(false)
+  seenByAgent  Boolean?  @default(false)
+  seenByUserAt DateTime?
+
+  activity ActivityType? // we can use this in regular messages, + show in the LLM requests (e.g, show on frontend "--- Live chat requested ---", which also gets sent to LLM as { role: "assistant", content: "--- Live chat requested ---" })
+
+  toolCalls ToolCall[]
 
   @@index([chatId, role])
+}
+
+model ToolCall {
+  id        String        @id @default(cuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  messageId String
+  message   Message       @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  type      String?
+  function  ToolFunction?
+}
+
+model ToolFunction {
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  name       String?
+  arguments  String?
+  toolCall   ToolCall? @relation(fields: [toolCallId], references: [id], onDelete: Cascade)
+  toolCallId String    @unique
 }
 
 model Plan {
@@ -294,4 +322,10 @@ enum TicketStatus {
 enum WidgetPosition {
   BOTTOM_RIGHT
   BOTTOM_LEFT
+}
+
+enum ActivityType {
+  REQUESTED_LIVE_CHAT
+  AGENT_JOINED
+  AGENT_LEFT
 }
