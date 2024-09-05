@@ -1,3 +1,5 @@
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import type {
   LinksFunction,
   LoaderFunctionArgs,
@@ -13,16 +15,14 @@ import {
   useLoaderData,
   useLocation,
 } from "@remix-run/react";
-import * as gtag from "~/utils/gtags.client";
-import "@radix-ui/themes/styles.css";
-import { Theme } from "@radix-ui/themes";
-import stylesheet from "~/tailwind.css?url";
-import markdownStyle from "./styles/lib/markdown.css?url";
-import highlightStyle from "./styles/lib/highlight.css?url";
-import { Toaster } from "./components/ui/toaster";
 import { useEffect } from "react";
+import stylesheet from "~/tailwind.css?url";
+import * as gtag from "~/utils/gtags.client";
+import { generateCanonicalUrl, generateMetaTags } from "~/utils/seo";
+import { Toaster } from "./components/ui/toaster";
 import { getUser } from "./session.server";
-import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
+import highlightStyle from "./styles/lib/highlight.css?url";
+import markdownStyle from "./styles/lib/markdown.css?url";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -138,10 +138,20 @@ export default function App() {
         </Theme>
         {/* widget */}
         <script
+          type="module"
           data-chatmate-widget-script="true"
           data-embed-id="f4fce919-86f4-481f-93b7-1b4dd58dee2a"
           src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
+          async
         ></script>
+
+        {/* <script
+      type="module"
+      data-chatmate-widget-script="true"
+      data-embed-id="2564a644-fdf7-4e26-9e07-0308c77484df"
+      src="dist/chatmate-chat-widget.js"
+      async
+    ></script> */}
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
-import { useLoaderData, useParams } from "@remix-run/react";
 import { json, LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData, useParams } from "@remix-run/react";
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { checkInstallation } from "~/queues/installationPing.server";
 import CopyEmbedCode from "./code";
 import HowTo from "./how-to";
-import { useState, useEffect } from "react";
-import { checkInstallation } from "~/queues/installationPing.server";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 interface InstallationStatusProps {
   isInstalled: boolean;
@@ -86,7 +86,7 @@ export default function Share() {
     <div className="flex flex-col h-full w-full p-4 gap-4 overflow-y-auto">
       <InstallationStatus isInstalled={installationStatus} />
       <CopyEmbedCode
-        code={`<script data-chatmate-widget-script="true" data-embed-id="${chatbotId}" src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"></script>`}
+        code={`<script type="module" data-chatmate-widget-script="true" data-embed-id="${chatbotId}" src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js" async></script>`}
       />
       <HowTo />
     </div>
