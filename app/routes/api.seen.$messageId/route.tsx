@@ -14,7 +14,7 @@ export async function loader() {
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   } as HeadersInit;
-  return json({ headers });
+  return json({ success: true }, { headers });
 }
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
