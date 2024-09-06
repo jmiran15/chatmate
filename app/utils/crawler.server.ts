@@ -1,7 +1,7 @@
-import axios from "axios";
-import cheerio from "cheerio";
-import { URL } from "url";
 import async from "async";
+import axios from "axios";
+import * as cheerio from "cheerio";
+import { URL } from "url";
 import { getLinksFromSitemap } from "./sitemap.server";
 
 interface Progress {
