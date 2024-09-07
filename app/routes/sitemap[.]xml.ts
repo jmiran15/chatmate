@@ -59,6 +59,12 @@ export const loader: LoaderFunction = async ({ request }) => {
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
+    <url>
+    <loc>${domain}/blog/tidio-alternatives</loc>
+    <lastmod>${currentDate}</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>`;
 
   // Return the sitemap with the correct headers
