@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { Icons } from "../../components/icons";
+import { CompareColumn } from "./compare-column";
 import { MarketingLink } from "./marketing-link";
 import { useLinks } from "./use-links";
 
@@ -31,7 +32,7 @@ export function Footer() {
           </div>
 
           {/* Right columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
             {/* Product column */}
             <div>
               <h3 className="font-semibold text-lg mb-4">Product</h3>
@@ -43,6 +44,9 @@ export function Footer() {
                 ))}
               </nav>
             </div>
+
+            {/* Compare column */}
+            <CompareColumn />
 
             {/* Company column */}
             <div>
