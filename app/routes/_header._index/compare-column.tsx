@@ -9,6 +9,7 @@ const comparisonLinks: ComparisonLink[] = [
   { path: "/blog/intercom-alternatives", title: "Intercom alternatives" },
   { path: "/blog/front-alternatives", title: "Front alternatives" },
   { path: "/blog/tidio-alternatives", title: "Tidio alternatives" },
+  { path: "/blog/helpscout-alternatives", title: "HelpScout alternatives" },
 ];
 
 export function CompareColumn() {
