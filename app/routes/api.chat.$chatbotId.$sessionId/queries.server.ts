@@ -131,11 +131,12 @@ export async function createAnonymousUser({
   try {
     const ipapiResponse = await fetch(`https://ipapi.co/${ipAddress}/json/`);
     const ipData = await ipapiResponse.json();
+    const { error, reason, message, ...ipDataWithoutError } = ipData;
 
     return prisma.anonymousUser.create({
       data: {
         sessionId,
-        ...ipData,
+        ...ipDataWithoutError,
         ua: ua.ua,
         browser_name: ua.browser.name,
         browser_version: ua.browser.version,
