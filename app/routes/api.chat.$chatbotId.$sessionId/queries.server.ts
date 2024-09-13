@@ -25,6 +25,10 @@ export async function getLatestChatBySessionID({
     },
     include: {
       messages: {
+        include: {
+          form: true, // so we can send over the formSchema
+          formSubmission: true, // so we can see if the form was submitted
+        },
         orderBy: {
           createdAt: "asc",
         },
@@ -83,6 +87,10 @@ export async function createAnonymousChat({
     },
     include: {
       messages: {
+        include: {
+          form: true, // so we can send over the formSchema
+          formSubmission: true, // so we can see if the form was submitted
+        },
         orderBy: {
           createdAt: "asc",
         },

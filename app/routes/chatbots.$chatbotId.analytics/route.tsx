@@ -127,6 +127,7 @@ const getPeriodFilter = (searchParams: URLSearchParams) => {
   }
 };
 
+// TODO - showing chats from owner user. Need to add AND c.user = null
 export const loader = async ({
   params,
   request,

@@ -93,6 +93,9 @@ model Chatbot {
   embeddings           Embedding[]
   labels               Label[]
 
+  forms Form[]
+  flows Flow[]
+
   @@index([userId, createdAt(sort: Desc)])
 }
 
@@ -246,7 +249,47 @@ model Message {
 
   toolCalls ToolCall[]
 
+  isFormMessage  Boolean?        @default(false)
+  formId         String?
+  form           Form?           @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formSubmission FormSubmission?
+
   @@index([chatId, role])
+}
+
+model Form {
+  id            String           @id @default(cuid())
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  name          String
+  chatbotId     String
+  chatbot       Chatbot          @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  formSchema    Json?
+  schemaVersion Int              @default(1)
+  submissions   FormSubmission[]
+  messages      Message[]
+}
+
+model FormSubmission {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  formId         String
+  form           Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  submissionData Json
+
+  messageId String?  @unique
+  message   Message? @relation(fields: [messageId], references: [id], onDelete: Cascade)
+}
+
+model Flow {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  chatbotId  String
+  chatbot    Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  name       String
+  flowSchema Json
 }
 
 model ToolCall {

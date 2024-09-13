@@ -1,8 +1,8 @@
 import { useFetchers, useMatches, useParams } from "@remix-run/react";
 import {
   AreaChart,
+  BookPlus,
   Database,
-  Flame,
   Inbox,
   LucideIcon,
   Megaphone,
@@ -57,11 +57,17 @@ export const useLinks = () => {
       navigate: true,
     },
     {
-      title: "Actions",
-      path: `/chatbots/${chatbotId}/actions`,
-      icon: Flame,
+      title: "Forms",
+      path: `/chatbots/${chatbotId}/forms`,
+      icon: BookPlus,
       navigate: true,
     },
+    // {
+    //   title: "Actions",
+    //   path: `/chatbots/${chatbotId}/actions`,
+    //   icon: Flame,
+    //   navigate: true,
+    // },
     {
       title: "Data",
       path: `/chatbots/${chatbotId}/data`,
@@ -79,21 +85,21 @@ export const useLinks = () => {
           path: `/chatbots/${chatbotId}/channels/widget/appearance`,
           navigate: true,
         },
-        {
-          title: "Email",
-          path: `/chatbots/${chatbotId}/channels/email`,
-          navigate: true,
-        },
-        {
-          title: "Phone",
-          path: `/chatbots/${chatbotId}/channels/phone`,
-          navigate: true,
-        },
-        {
-          title: "WhatsApp",
-          path: `/chatbots/${chatbotId}/channels/whatsapp`,
-          navigate: true,
-        },
+        // {
+        //   title: "Email",
+        //   path: `/chatbots/${chatbotId}/channels/email`,
+        //   navigate: true,
+        // },
+        // {
+        //   title: "Phone",
+        //   path: `/chatbots/${chatbotId}/channels/phone`,
+        //   navigate: true,
+        // },
+        // {
+        //   title: "WhatsApp",
+        //   path: `/chatbots/${chatbotId}/channels/whatsapp`,
+        //   navigate: true,
+        // },
       ],
     },
     {

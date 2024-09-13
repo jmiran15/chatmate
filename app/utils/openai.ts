@@ -1,4 +1,5 @@
 import { Chatbot, Document, Embedding } from "@prisma/client";
+import { ChatCompletionTool } from "openai/resources/index.mjs";
 import invariant from "tiny-invariant";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "~/db.server";
@@ -30,9 +31,11 @@ export async function embed({ input }: { input: string }) {
 export async function chat({
   chatbot,
   messages,
+  extraTools,
 }: {
   chatbot: Chatbot;
   messages: { role: "user" | "assistant"; content: string }[];
+  extraTools?: ChatCompletionTool[];
 }) {
   invariant(messages.length > 0, "Messages must not be empty");
   invariant(
@@ -87,7 +90,7 @@ export async function chat({
     model: "gpt-4o",
     temperature: 0.2,
     stream: true,
-    tools: mainTools,
+    tools: [...mainTools, ...extraTools],
   });
 
   return stream;
