@@ -133,7 +133,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         },
       });
 
-      const extraTools = customFlows
+      let extraTools = customFlows
         .map((flow) => {
           if (!flow.flowSchema) {
             throw new Error("Flow schema is null");
@@ -269,11 +269,23 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
           default: {
             // throw new Error("No function found");
             // check if the tool call is a custom flow
-            console.log("SENDING PRICING CAROUSEL");
-            return {
-              message: await callCustomFlow(tool_call.function.name, chat!.id!),
-              continue: false,
-            };
+
+            const output = await callCustomFlow(
+              tool_call.function.name,
+              chat!.id!,
+            );
+
+            if (output.success) {
+              return {
+                message: output,
+                continue: false,
+              };
+            } else {
+              return {
+                message: output.error,
+                continue: true,
+              };
+            }
           }
         }
       }
@@ -363,6 +375,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     seenByAgent: null,
                     seenByUserAt: null,
                     activity: null,
+                    // this is probably not needed, the IF statement above should prevent this from happening
                     toolCalls: message.tool_calls
                       ? {
                           create: message.tool_calls.map((toolCall) => ({
@@ -389,28 +402,43 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 if (message.tool_calls) {
                   // removes the dummy message for loading purposes on the client side
                   // enqueue a blank message to the last message that was already in the array
+
+                  // maybe move this after the await callTool() and only if the tool call was successful
                   controller.enqueue(
                     `data: ${JSON.stringify({
                       type: "toolCall",
                     })}\n\n`,
                   );
 
+                  // TODO - the messages.pop() inside here will only work if only one tool was called
                   for (const toolCall of message.tool_calls) {
                     const { message: result, continue: shouldContinue } =
                       await callTool(toolCall);
 
-                    const newMessage = {
-                      tool_call_id: toolCall.id,
-                      role: "tool" as const,
-                      name: toolCall.function.name,
-                      content: JSON.stringify(result),
-                    };
-                    console.log("TOOL MESSAGE: ", newMessage);
-                    messages.push(newMessage);
-
+                    // means the tool call was successful
                     if (!shouldContinue) {
+                      const newMessage = {
+                        tool_call_id: toolCall.id,
+                        role: "tool" as const,
+                        name: toolCall.function.name,
+                        content: JSON.stringify(result),
+                      };
+                      console.log("TOOL MESSAGE: ", newMessage);
+                      messages.push(newMessage);
+
                       callingTools = false;
                       break;
+                    } else {
+                      // remove the tool from the extraTools array
+                      // continue the while loop
+                      extraTools = extraTools.filter(
+                        (tool) => tool.function.name !== toolCall.function.name,
+                      );
+
+                      // pop the last message from the messages array
+                      messages.pop();
+                      console.log("EXTRA TOOLS: ", extraTools);
+                      continue;
                     }
                   }
                 }

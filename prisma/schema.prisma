@@ -254,6 +254,7 @@ model Message {
   form           Form?           @relation(fields: [formId], references: [id], onDelete: Cascade)
   formSubmission FormSubmission?
 
+
   @@index([chatId, role])
 }
 

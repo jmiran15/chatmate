@@ -13,7 +13,6 @@ export type InputType =
   | "email"
   | "checkbox"
   | "select"
-  | "multiSelect"
   | "number"
   | "rating"
   | "scale"
@@ -32,6 +31,7 @@ export interface FormElement {
   max?: number;
   step?: number;
   order: number; // Add this line
+  pattern?: string;
 }
 
 export const inputTypes: InputType[] = [
@@ -42,7 +42,6 @@ export const inputTypes: InputType[] = [
   "email",
   "checkbox",
   "select",
-  "multiSelect",
   "number",
   "rating",
   "scale",

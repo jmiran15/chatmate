@@ -9,30 +9,7 @@ import { getIO } from "~/utils/socketmanager.server";
 export async function callCustomFlow(toolId: string, chatId: string) {
   // we should also implmeent some logic in here so that Forms can't be sent multiple times??? -> maybe this is better to just put in the description/prompt of the trigger
   // i.e. only call this once, and in the worst case, we fine tune to teach it this
-
   // get the flow schema from the database
-  // const dummyFlow = {
-  //   name: "My Flow",
-  //   trigger: {
-  //     type: "customTrigger",
-  //     description: "hello",
-  //   },
-  //   actions: [
-  //     {
-  //       type: "text",
-  //       text: "Heyyy... seems your interested in our pricing. Please provide your email address to get access to our pricing.",
-  //       delay: 1,
-  //     },
-  //     // put an example zod schema of a form here
-  //     {
-  //       type: "form",
-  //       formName: "Feedback form", // this will be the formId
-  //       delay: 3,
-  //     },
-  //   ],
-  // };
-
-  // load in the flow
   const flow = await prisma.flow.findUnique({
     where: {
       id: toolId,
@@ -48,34 +25,32 @@ export async function callCustomFlow(toolId: string, chatId: string) {
 
   const flowSchema = flow.flowSchema;
 
-  console.log("The flow schema is: ", flowSchema);
-
-  // const jsonSchema = {
-  //   $ref: "#/definitions/formSchema",
-  //   definitions: {
-  //     formSchema: {
-  //       type: "object",
-  //       properties: {
-  //         field_1726113810774: {
-  //           type: "string",
-  //           description: "New url input",
-  //         },
-  //         field_1726113812296: {
-  //           type: "string",
-  //           description: "New phone input",
-  //         },
-  //       },
-  //       additionalProperties: false,
-  //     },
-  //   },
-  //   $schema: "http://json-schema.org/draft-07/schema#",
-  // };
-
-  // we need to turn the above actions into a function
-
   const actions = flowSchema.actions;
 
   console.log("The actions are: ", actions);
+
+  // check if there are any actions that are of type form
+  const formActions = actions.filter((action) => action.type === "form");
+
+  // now search for messages with isForm and formId
+  const formMessages = await prisma.message.findMany({
+    where: {
+      chatId,
+      isFormMessage: true,
+      formId: {
+        in: formActions.map((action) => action.formId),
+      },
+    },
+  });
+
+  console.log("Form messages are: ", formMessages.length);
+
+  if (formMessages.length > 0) {
+    return {
+      success: false,
+      error: "Form already sent",
+    };
+  }
 
   for (const action of actions) {
     if (action.type === "text") {
@@ -139,22 +114,6 @@ export async function callCustomFlow(toolId: string, chatId: string) {
       });
 
       console.log("Created a message for the form: ", createdMessage);
-
-      // const createdMessage = {
-      //   id: createId(),
-      //   role: "assistant",
-      //   content: "",
-      //   chatId,
-      //   seenByUser: false,
-      //   seenByAgent: true,
-      //   isFormMessage: true,
-      //   form: {
-      //     id: "123",
-      //     formSchema: jsonSchema,
-      //   },
-      //   createdAt: new Date(),
-      //   updatedAt: new Date(),
-      // };
 
       if (!createdMessage) {
         return {

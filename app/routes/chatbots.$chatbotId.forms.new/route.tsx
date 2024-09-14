@@ -96,11 +96,10 @@ export default function NewForm() {
   return (
     <Form
       method="post"
-      className="flex flex-col gap-8 w-full py-12 px-8 md:px-20 xl:px-96"
+      className="flex flex-col items-center justify-start gap-8 w-full py-12 px-8"
     >
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-1.5 w-full max-w-lg">
         <Label htmlFor="name">Form Name: </Label>
-
         <Input
           ref={nameRef}
           id="name"
@@ -117,12 +116,7 @@ export default function NewForm() {
         ) : null}
       </div>
 
-      {/* TODO: Add template selection here later */}
-      {/* <div>
-        <Label>Template Selection (to be implemented)</Label>
-      </div> */}
-
-      <div className="text-right">
+      <div className="text-right w-full max-w-lg flex justify-end">
         <Button type="submit">Create Form</Button>
       </div>
     </Form>

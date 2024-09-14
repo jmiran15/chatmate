@@ -18,7 +18,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Prisma } from "@prisma/client";
+import { FormSubmission, Prisma } from "@prisma/client";
 import {
   ActionFunctionArgs,
   json,
@@ -27,6 +27,7 @@ import {
 } from "@remix-run/node";
 import { Link, useFetcher, useLoaderData } from "@remix-run/react";
 import { ArrowLeft, GripVertical, Plus, Trash2, X } from "lucide-react";
+import { DateTime } from "luxon";
 import React, {
   useCallback,
   useEffect,
@@ -49,6 +50,12 @@ import {
 import AutoForm, { AutoFormSubmit } from "~/components/ui/auto-form";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
@@ -79,7 +86,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       id: true,
       name: true,
       formSchema: true,
-      schemaVersion: true, // Include schemaVersion
+      schemaVersion: true,
+      submissions: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
     },
   });
 
@@ -95,11 +107,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!formSchema) {
     throw new Error("Form schema not found");
   }
-
-  //   console.log(
-  //     "formSchema from loader",
-  //     formSchema.schema.definitions.formSchema,
-  //   );
+  console.log("formSchema", JSON.stringify(formSchema, null, 2));
 
   return json({
     form: { ...form, chatbotId },
@@ -178,6 +186,7 @@ export default function FormBuilder() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isElementDeleteDialogOpen, setIsElementDeleteDialogOpen] =
     useState(false);
+  const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
 
   const fetcher = useFetcher();
   const { toast } = useToast();
@@ -187,17 +196,46 @@ export default function FormBuilder() {
       schema: z.ZodObject<any>,
       fieldConfig: Record<string, any>,
     ): FormElement[] => {
+      console.log("schema", schema);
+
+      function getBaseSchema<
+        ChildType extends z.ZodAny | z.AnyZodObject = z.ZodAny,
+      >(schema: ChildType | z.ZodEffects<ChildType>): ChildType | null {
+        if (!schema) return null;
+        if ("innerType" in schema._def) {
+          return getBaseSchema(schema._def.innerType as ChildType);
+        }
+        if ("schema" in schema._def) {
+          return getBaseSchema(schema._def.schema as ChildType);
+        }
+
+        return schema as ChildType;
+      }
+
+      function getBaseType(schema: z.ZodAny): string {
+        const baseSchema = getBaseSchema(schema);
+        return baseSchema ? baseSchema._def.typeName : "";
+      }
+
       return Object.keys(schema.shape).map((name, index) => {
-        const field = schema.shape[name];
+        console.log(
+          "name and field: ",
+          name,
+          schema.shape[name]._def.innerType,
+          getBaseType(schema.shape[name]),
+        );
+        const baseSchema = getBaseSchema(schema.shape[name]);
+
+        // const field = schema.shape[name];
         const config = fieldConfig[name] || {};
         const type =
-          field instanceof z.ZodString
+          baseSchema instanceof z.ZodString
             ? "text"
-            : field instanceof z.ZodNumber
+            : baseSchema instanceof z.ZodNumber
             ? "number"
-            : field instanceof z.ZodBoolean
+            : baseSchema instanceof z.ZodBoolean
             ? "checkbox"
-            : field instanceof z.ZodEnum
+            : baseSchema instanceof z.ZodEnum
             ? "select"
             : "text";
 
@@ -205,11 +243,12 @@ export default function FormBuilder() {
           id: name,
           type: type as InputType,
           name,
-          label: (field as any).description || name,
-          required: !(field as any).isOptional(),
+          label: (baseSchema as any).description || name,
+          required: !(baseSchema as any).isOptional(),
           placeholder: config.inputProps?.placeholder || "",
           description: config.description || "",
-          options: type === "select" ? (field as any)._def.values : undefined,
+          options:
+            type === "select" ? (baseSchema as any)._def.values : undefined,
           min: type === "number" ? config.inputProps?.min : undefined,
           max: type === "number" ? config.inputProps?.max : undefined,
           step: type === "number" ? config.inputProps?.step : undefined,
@@ -295,6 +334,7 @@ export default function FormBuilder() {
     }),
   );
 
+  console.log("formElements", formElements);
   const addFormElement = (type: InputType) => {
     const newElement: FormElement = {
       id: Date.now().toString(),
@@ -303,12 +343,16 @@ export default function FormBuilder() {
       label: `New ${type} input`,
       required: false,
       placeholder: `Enter ${type}`,
-      order: formElements.length, // Set the order to the current length of formElements
+      order: formElements.length,
+      options: type === "select" ? ["Option 1", "Option 2"] : undefined, // Initialize options as an empty array for select and multiSelect
     };
-    setFormElements([...formElements, newElement]);
-    setIsAddingBlock(false);
-    setEditingElement(newElement);
-    updateFormSchema([...formElements, newElement]);
+    setFormElements((prevElements) => {
+      setIsAddingBlock(false);
+      setEditingElement(newElement);
+      console.log("newElement", newElement);
+      updateFormSchema([...prevElements, newElement]);
+      return [...prevElements, newElement];
+    });
   };
 
   const updateFormElement = useCallback((updatedElement: FormElement) => {
@@ -324,44 +368,58 @@ export default function FormBuilder() {
   }, []);
 
   const updateFormSchema = useCallback((elements: FormElement[]) => {
-    const schemaObj: Record<string, any> = {};
+    const schemaObj: Record<string, z.ZodTypeAny> = {};
     const fieldConfigObj: Record<string, any> = {};
 
-    elements.forEach((element, index) => {
+    // Sort elements by order
+    const sortedElements = [...elements].sort((a, b) => a.order - b.order);
+
+    sortedElements.forEach((element) => {
       let fieldSchema: z.ZodTypeAny;
 
       switch (element.type) {
         case "text":
-        case "url":
-        case "phone":
-        case "email":
           fieldSchema = z.string();
+          break;
+        case "url":
+          fieldSchema = z.string().url();
+          break;
+        case "phone":
+          fieldSchema = z
+            .string()
+            .regex(/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/);
+          break;
+        case "email":
+          fieldSchema = z.string().email();
           break;
         case "number":
         case "rating":
         case "scale":
         case "slider":
-          fieldSchema = z.number();
+          fieldSchema = z.coerce.number();
           break;
         case "date":
-          fieldSchema = z.date();
+          fieldSchema = z.coerce.date();
           break;
         case "checkbox":
           fieldSchema = z.boolean();
           break;
         case "select":
-        case "multiSelect":
-          fieldSchema = z.enum(element.options as [string, ...string[]]);
+          const options = element.options?.filter(Boolean) || [
+            "Option 1",
+            "Option 2",
+          ];
+          fieldSchema =
+            options.length === 1
+              ? z.literal(options[0])
+              : z.enum(options as [string, ...string[]]);
           break;
         default:
           fieldSchema = z.string();
       }
 
-      if (element.required) {
-        fieldSchema = fieldSchema.describe(element.label);
-      } else {
-        fieldSchema = fieldSchema.optional().describe(element.label);
-      }
+      fieldSchema = element.required ? fieldSchema : fieldSchema.optional();
+      fieldSchema = fieldSchema.describe(element.label);
 
       schemaObj[element.name] = fieldSchema;
 
@@ -369,12 +427,24 @@ export default function FormBuilder() {
         description: element.description,
         inputProps: {
           placeholder: element.placeholder,
+          min: element.min,
+          max: element.max,
+          step: element.step,
+          required: element.required,
+          fieldType: element.type,
+          options: element.options,
+          label: element.label,
+          name: element.name,
+          id: element.id,
         },
-        order: index, // Use the current index as the order
+        order: element.order,
       };
 
-      if (element.type === "select" || element.type === "multiSelect") {
-        fieldConfigObj[element.name].options = element.options;
+      if (element.type === "select") {
+        fieldConfigObj[element.name].options = element.options || [
+          "Option 1",
+          "Option 2",
+        ];
       }
 
       if (
@@ -395,7 +465,9 @@ export default function FormBuilder() {
     });
   }, []);
 
-  const handleSave = useCallback(() => {
+  console.log("formSchema", formSchema.schema.shape);
+
+  const handleSave = () => {
     const orderedElements = [...formElements].sort((a, b) => a.order - b.order);
     const orderedSchemaObj: Record<string, z.ZodTypeAny> = {};
     const orderedFieldConfigObj: Record<string, any> = {};
@@ -409,7 +481,10 @@ export default function FormBuilder() {
     });
 
     const orderedSchema = z.object(orderedSchemaObj);
+
     const jsonSchema = zodToJsonSchema(orderedSchema, "formSchema");
+
+    console.log("jsonSchema", { orderedSchema, jsonSchema });
 
     fetcher.submit(
       {
@@ -423,7 +498,7 @@ export default function FormBuilder() {
       { method: "post" },
     );
     setUnsavedChanges(false);
-  }, [fetcher, formSchema, formElements, form.schemaVersion]);
+  };
 
   const handleDelete = useCallback(() => {
     setIsDeleteDialogOpen(true);
@@ -654,13 +729,12 @@ export default function FormBuilder() {
           </>
         );
       case "select":
-      case "multiSelect":
         return (
           <div>
             <Label htmlFor="options">Options (one per line)</Label>
             <Textarea
               id="options"
-              value={editingElement.options?.join("\n")}
+              value={editingElement.options?.join("\n") || ""} // Provide a default empty string
               onChange={(e) =>
                 updateFormElement({
                   ...editingElement,
@@ -738,6 +812,7 @@ export default function FormBuilder() {
         isDeleteDialogOpen={isDeleteDialogOpen}
         setIsDeleteDialogOpen={setIsDeleteDialogOpen}
         confirmDelete={confirmDelete}
+        onViewSubmissions={() => setIsSubmissionsOpen(true)}
       />
       <div className="flex flex-1 overflow-hidden">
         {/* Left Column - Structure */}
@@ -758,6 +833,7 @@ export default function FormBuilder() {
                     key={element.id}
                     element={element}
                     onEdit={handleElementClick}
+                    isActive={editingElement?.id === element.id}
                   />
                 ))}
               </ul>
@@ -842,6 +918,11 @@ export default function FormBuilder() {
           </div>
         </div>
       </div>
+      <SubmissionsModal
+        isOpen={isSubmissionsOpen}
+        onClose={() => setIsSubmissionsOpen(false)}
+        submissions={form.submissions}
+      />
     </div>
   );
 }
@@ -849,9 +930,11 @@ export default function FormBuilder() {
 function SortableItem({
   element,
   onEdit,
+  isActive,
 }: {
   element: FormElement;
   onEdit: (element: FormElement) => void;
+  isActive: boolean;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: element.id });
@@ -875,7 +958,10 @@ function SortableItem({
         onEdit(element);
         listeners?.onPointerDown?.(e as any)();
       }}
-      className="flex items-center justify-between p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100"
+      className={cn(
+        "flex items-center justify-between p-2 rounded cursor-pointer",
+        isActive ? "bg-gray-200" : "bg-gray-50 hover:bg-gray-100",
+      )}
     >
       <div className="flex items-center space-x-2">
         <span>
@@ -898,6 +984,7 @@ const Header = React.forwardRef<
     isDeleteDialogOpen: boolean;
     setIsDeleteDialogOpen: (open: boolean) => void;
     confirmDelete: () => void;
+    onViewSubmissions: () => void;
   }
 >(
   (
@@ -909,6 +996,7 @@ const Header = React.forwardRef<
       isDeleteDialogOpen,
       setIsDeleteDialogOpen,
       confirmDelete,
+      onViewSubmissions,
     },
     ref,
   ) => {
@@ -951,6 +1039,9 @@ const Header = React.forwardRef<
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+          <Button variant="ghost" onClick={onViewSubmissions}>
+            View submissions
+          </Button>
           <Button onClick={onSave}>Save</Button>
         </div>
       </div>
@@ -959,6 +1050,54 @@ const Header = React.forwardRef<
 );
 
 Header.displayName = "Header";
+
+function SubmissionsModal({
+  isOpen,
+  onClose,
+  submissions,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  submissions: FormSubmission[];
+}) {
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Form Submissions</DialogTitle>
+        </DialogHeader>
+        <div className="h-full pr-4">
+          {submissions.length === 0 ? (
+            <div className="text-center text-gray-500 mt-8">
+              No submissions yet.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-full">
+              {submissions.map((submission) => (
+                <Card key={submission.id} className="p-4">
+                  {Object.entries(submission.submissionData).map(
+                    ([key, value]) => (
+                      <div key={key} className="mb-2">
+                        <span className="font-bold">{key}:</span>{" "}
+                        <span>{value}</span>
+                      </div>
+                    ),
+                  )}
+                  <div className="text-sm text-gray-500 mt-4">
+                    Submitted on:{" "}
+                    {DateTime.fromISO(submission.createdAt).toLocaleString(
+                      DateTime.DATETIME_FULL,
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export const handle = {
   PATH: (chatbotId: string, formId: string) => `/chatbots/${chatbotId}/forms`,

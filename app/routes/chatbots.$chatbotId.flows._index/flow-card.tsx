@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Card, CardHeader, CardTitle } from "~/components/ui/card";
 
 interface FlowCardProps {
   flow: {
@@ -12,17 +12,17 @@ interface FlowCardProps {
 
 export function FlowCard({ flow }: FlowCardProps) {
   return (
-    <Card className="hover:shadow-md transition-shadow">
-      <Link to={flow.id}>
-        <CardHeader>
-          <CardTitle>{flow.name}</CardTitle>
+    <Link to={`${flow.id}`} className="block w-full">
+      <Card>
+        <CardHeader className="p-4">
+          <div className="flex flex-col w-full gap-2">
+            <CardTitle>{flow.name}</CardTitle>
+            <p className="text-sm text-gray-500">
+              Last updated {formatDistanceToNow(new Date(flow.lastUpdated))} ago
+            </p>
+          </div>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm text-gray-500">
-            Last updated {formatDistanceToNow(new Date(flow.lastUpdated))} ago
-          </p>
-        </CardContent>
-      </Link>
-    </Card>
+      </Card>
+    </Link>
   );
 }
