@@ -357,7 +357,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     `data: ${JSON.stringify({
                       id,
                       type: "textResponseChunk",
-                      textResponse: "mm",
+                      textResponse: "",
                       error: null,
                       streaming: false,
                     } as SSEMessage)}\n\n`,

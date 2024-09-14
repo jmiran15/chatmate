@@ -17,6 +17,7 @@ export function initializeSocket(httpServer: HttpServer) {
         methods: ["GET", "POST"],
       },
     });
+    console.log("Socket.IO initialized in production: ", io);
   } else {
     if (!global.__io) {
       global.__io = new Server(httpServer, {
