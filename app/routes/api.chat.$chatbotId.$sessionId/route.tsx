@@ -5,6 +5,7 @@ import {
   ChatCompletionChunk,
   ChatCompletionMessage,
   ChatCompletionMessageToolCall,
+  ChatCompletionTool,
 } from "openai/resources/index.mjs";
 import { prisma } from "~/db.server";
 import { sendEmail } from "~/utils/email.server";
@@ -12,6 +13,7 @@ import { chat as streamChat } from "~/utils/openai";
 import { mainTools } from "~/utils/prompts";
 import { openai } from "~/utils/providers.server";
 import { requestLiveChat } from "~/utils/requestLiveChat.server";
+import { callCustomFlow } from "./customFlows.server";
 import { startInsightsFlow, startNameGenerationFlow } from "./flows.server";
 import {
   createAnonymousChat,
@@ -122,6 +124,35 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         },
       });
 
+      // get the custom flows, as "extraTools"
+      // format them as actual JSON schema tools
+      // pass them into the streamChat function as "extraTools"
+      const customFlows = await prisma.flow.findMany({
+        where: {
+          chatbotId,
+        },
+      });
+
+      let extraTools = customFlows
+        .map((flow) => {
+          if (!flow.flowSchema) {
+            throw new Error("Flow schema is null");
+          }
+          const trigger = flow.flowSchema.trigger;
+          if (trigger.type === "customTrigger") {
+            return {
+              type: "function",
+              function: {
+                name: flow.id,
+                description: flow.flowSchema.trigger.description,
+              },
+            };
+          } else {
+            return false;
+          }
+        })
+        .filter(Boolean) as ChatCompletionTool[];
+
       const userMessage =
         messages.length > 0 ? messages[messages.length - 1] : null;
 
@@ -209,7 +240,10 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
       async function callTool(
         tool_call: ChatCompletionMessageToolCall,
-      ): Promise<any> {
+      ): Promise<{
+        message: any;
+        continue: boolean;
+      }> {
         if (tool_call.type !== "function")
           throw new Error("Unexpected tool_call type:" + tool_call.type);
         const args = JSON.parse(tool_call.function.arguments);
@@ -217,14 +251,42 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
           case "requestLiveChat":
             console.log("REQUESTING LIVE CHAT");
             // inside of here we should controller.enqueue() created activity message, IF it was successful
-            return await requestLiveChat({
-              userEmail: args["userEmail"],
-              agentEmail,
-              agentConnected: false, // TODO - implement this! -> socket.io
-              chatId: chat!.id!,
-            });
-          default:
-            throw new Error("No function found");
+            return {
+              message: await requestLiveChat({
+                userEmail: args["userEmail"],
+                agentEmail,
+                agentConnected: false, // TODO - implement this! -> socket.io
+                chatId: chat!.id!,
+              }),
+              continue: true,
+            };
+          // case "sendPricingCarousel":
+          //   console.log("SENDING PRICING CAROUSEL");
+          //   return {
+          //     message: await callCustomFlow(tool_call.function.name, chat!.id!),
+          //     continue: false,
+          //   };
+          default: {
+            // throw new Error("No function found");
+            // check if the tool call is a custom flow
+
+            const output = await callCustomFlow(
+              tool_call.function.name,
+              chat!.id!,
+            );
+
+            if (output.success) {
+              return {
+                message: output,
+                continue: false,
+              };
+            } else {
+              return {
+                message: output.error,
+                continue: true,
+              };
+            }
+          }
         }
       }
 
@@ -248,13 +310,14 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                         role: message.role,
                         content: message.content,
                       })),
+                      extraTools,
                     })
                   : await openai.chat.completions.create({
                       messages,
                       model: "gpt-4o",
                       temperature: 0.2,
                       stream: true,
-                      tools: mainTools,
+                      tools: [...mainTools, ...extraTools],
                     });
 
                 let message = {} as ChatCompletionMessage;
@@ -266,6 +329,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     if (!delta) continue;
 
                     fullText += delta;
+
+                    console.log("DELTA: ", delta);
 
                     controller.enqueue(
                       `data: ${JSON.stringify({
@@ -292,7 +357,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     `data: ${JSON.stringify({
                       id,
                       type: "textResponseChunk",
-                      textResponse: "",
+                      textResponse: "mm",
                       error: null,
                       streaming: false,
                     } as SSEMessage)}\n\n`,
@@ -310,6 +375,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     seenByAgent: null,
                     seenByUserAt: null,
                     activity: null,
+                    // this is probably not needed, the IF statement above should prevent this from happening
                     toolCalls: message.tool_calls
                       ? {
                           create: message.tool_calls.map((toolCall) => ({
@@ -334,17 +400,46 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
                 // If there are tool calls, we generate a new message with the role 'tool' for each tool call.
                 if (message.tool_calls) {
-                  for (const toolCall of message.tool_calls) {
-                    const result = await callTool(toolCall);
+                  // removes the dummy message for loading purposes on the client side
+                  // enqueue a blank message to the last message that was already in the array
 
-                    const newMessage = {
-                      tool_call_id: toolCall.id,
-                      role: "tool" as const,
-                      name: toolCall.function.name,
-                      content: JSON.stringify(result),
-                    };
-                    console.log("TOOL MESSAGE: ", newMessage);
-                    messages.push(newMessage);
+                  // maybe move this after the await callTool() and only if the tool call was successful
+                  controller.enqueue(
+                    `data: ${JSON.stringify({
+                      type: "toolCall",
+                    })}\n\n`,
+                  );
+
+                  // TODO - the messages.pop() inside here will only work if only one tool was called
+                  for (const toolCall of message.tool_calls) {
+                    const { message: result, continue: shouldContinue } =
+                      await callTool(toolCall);
+
+                    // means the tool call was successful
+                    if (!shouldContinue) {
+                      const newMessage = {
+                        tool_call_id: toolCall.id,
+                        role: "tool" as const,
+                        name: toolCall.function.name,
+                        content: JSON.stringify(result),
+                      };
+                      console.log("TOOL MESSAGE: ", newMessage);
+                      messages.push(newMessage);
+
+                      callingTools = false;
+                      break;
+                    } else {
+                      // remove the tool from the extraTools array
+                      // continue the while loop
+                      extraTools = extraTools.filter(
+                        (tool) => tool.function.name !== toolCall.function.name,
+                      );
+
+                      // pop the last message from the messages array
+                      messages.pop();
+                      console.log("EXTRA TOOLS: ", extraTools);
+                      continue;
+                    }
                   }
                 }
               } catch (error: any) {

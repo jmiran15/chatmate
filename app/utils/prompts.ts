@@ -144,4 +144,16 @@ const requestLiveChatTool = {
   },
 };
 
-export const mainTools = [requestLiveChatTool] as ChatCompletionTool[];
+// const customTriggerToolExample = {
+//   type: "function",
+//   function: {
+//     name: "sendPricingCarousel", // should put some type of ID here
+//     description:
+//       "Send the user our pricing carousel. This is a carousel of cards with the pricing for our product. You should send this when the user asks about pricing or anything related to pricing.",
+//   },
+// };
+
+export const mainTools = [
+  requestLiveChatTool,
+  // customTriggerToolExample,
+] as ChatCompletionTool[];
