@@ -9,27 +9,28 @@ declare global {
 }
 
 export function initializeSocket(httpServer: HttpServer) {
-  if (process.env.NODE_ENV === "production") {
-    io = new Server(httpServer, {
+  // if (process.env.NODE_ENV === "production") {
+  // io = new Server(httpServer, {
+  //   cors: {
+  //     origin: "*", // Be cautious with this in production
+  //     // TODO - change cors origins to local widget and prod widget
+  //     methods: ["GET", "POST"],
+  //   },
+  // });
+  // } else {
+  if (!global.__io) {
+    global.__io = new Server(httpServer, {
       cors: {
         origin: "*", // Be cautious with this in production
         // TODO - change cors origins to local widget and prod widget
         methods: ["GET", "POST"],
       },
     });
-    console.log("Socket.IO initialized in production: ", io);
-  } else {
-    if (!global.__io) {
-      global.__io = new Server(httpServer, {
-        cors: {
-          origin: "*", // Be cautious with this in production
-          // TODO - change cors origins to local widget and prod widget
-          methods: ["GET", "POST"],
-        },
-      });
-    }
-    io = global.__io;
   }
+  io = global.__io;
+  console.log("Socket.IO initialized: ", io);
+
+  // }
 
   io.on("connection", (socket) => {
     socket.emit("confirmation", "connected!");
@@ -100,4 +101,5 @@ export function initializeSocket(httpServer: HttpServer) {
 
 export function getIO(): Server | undefined {
   return global.__io;
+  // return io;
 }
