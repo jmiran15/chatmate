@@ -52,6 +52,8 @@ export async function callCustomFlow(toolId: string, chatId: string) {
     };
   }
 
+  const triggerType = flow.trigger;
+
   for (const action of actions) {
     if (action.type === "text") {
       const newMessage = {
@@ -78,14 +80,17 @@ export async function callCustomFlow(toolId: string, chatId: string) {
 
       const io = getIO();
       if (io) {
-        // emit an agent is typing event so it looks like it is typing while we wait for the delay
-        io.emit("agent typing", { isTyping: true, chatId });
+        if (triggerType === "CUSTOM_EVENT") {
+          // Simulate typing and delay only for CUSTOM_EVENT triggers
+          io.emit("agent typing", { isTyping: true, chatId });
 
-        await new Promise((resolve) =>
-          setTimeout(resolve, action.delay * 1000),
-        );
+          await new Promise((resolve) =>
+            setTimeout(resolve, action.delay * 1000),
+          );
 
-        io.emit("agent typing", { isTyping: false, chatId });
+          io.emit("agent typing", { isTyping: false, chatId });
+        }
+
         io.emit("new message", {
           chatId,
           message: createdMessage,
@@ -124,14 +129,17 @@ export async function callCustomFlow(toolId: string, chatId: string) {
 
       const io = getIO();
       if (io) {
-        // emit an agent is typing event so it looks like it is typing while we wait for the delay
-        io.emit("agent typing", { isTyping: true, chatId });
+        if (triggerType === "CUSTOM_EVENT") {
+          // Simulate typing and delay only for CUSTOM_EVENT triggers
+          io.emit("agent typing", { isTyping: true, chatId });
 
-        await new Promise((resolve) =>
-          setTimeout(resolve, action.delay * 1000),
-        );
+          await new Promise((resolve) =>
+            setTimeout(resolve, action.delay * 1000),
+          );
 
-        io.emit("agent typing", { isTyping: false, chatId });
+          io.emit("agent typing", { isTyping: false, chatId });
+        }
+
         io.emit("new message", {
           chatId,
           message: createdMessage,

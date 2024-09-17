@@ -57,7 +57,7 @@ export default function Trigger({
                   <Select
                     onValueChange={(value) => {
                       field.onChange(value);
-                      if (value === "onInitialLoad") {
+                      if (value === "INITIAL_LOAD") {
                         form.setValue("trigger.description", undefined);
                       }
                     }}
@@ -67,10 +67,10 @@ export default function Trigger({
                       <SelectValue placeholder="Select trigger type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="onInitialLoad">
+                      <SelectItem value={"INITIAL_LOAD"}>
                         On initial load
                       </SelectItem>
-                      <SelectItem value="customTrigger">
+                      <SelectItem value={"CUSTOM_EVENT"}>
                         Custom trigger
                       </SelectItem>
                     </SelectContent>
@@ -80,7 +80,7 @@ export default function Trigger({
               </FormItem>
             )}
           />
-          {form.watch("trigger.type") === "customTrigger" && (
+          {form.watch("trigger.type") === "CUSTOM_EVENT" && (
             <FormField
               control={form.control}
               name="trigger.description"

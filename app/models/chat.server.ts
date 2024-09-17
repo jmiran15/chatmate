@@ -2,6 +2,7 @@ import { type Chat } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 
 import { prisma } from "~/db.server";
+import { createAnonymousChat } from "~/routes/api.chat.$chatbotId.$sessionId/queries.server";
 export type { Chat, Message } from "@prisma/client";
 
 export function createChat({ chatbotId }: { chatbotId: Chat["chatbotId"] }) {
@@ -82,7 +83,11 @@ export async function createChatWithStartersAndUser({
   chatbotId: Chat["chatbotId"];
   userId: string;
 }) {
-  const chat = await createChatWithStarterMessages({ chatbotId });
+  const chat = await createAnonymousChat({ chatbotId });
+
+  if (!chat) {
+    throw new Error("Failed to create chat");
+  }
 
   return prisma.chat.update({
     where: {

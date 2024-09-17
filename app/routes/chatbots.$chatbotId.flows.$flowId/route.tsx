@@ -17,19 +17,10 @@ import Action from "./action";
 import Header from "./header";
 import Trigger from "./trigger";
 
-const triggerSchema = z.discriminatedUnion("type", [
-  z.object({
-    type: z.literal("onInitialLoad"),
-    description: z.string().optional(),
-  }),
-  z.object({
-    type: z.literal("customTrigger"),
-    description: z
-      .string()
-      .min(1, "Description is required for custom trigger"),
-  }),
-]);
-
+const triggerSchema = z.object({
+  type: z.enum(["INITIAL_LOAD", "CUSTOM_EVENT"]),
+  description: z.string().optional(),
+});
 const actionSchema = z
   .object({
     type: z.enum(["form", "text"]),
@@ -107,6 +98,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         where: { id: flowId },
         data: {
           name: validatedData.name,
+          trigger: validatedData.trigger.type,
           flowSchema: validatedData,
         },
       });
@@ -170,7 +162,7 @@ export default function FlowMaker() {
   };
 
   return (
-    <div className="container mx-auto p-4 h-full flex flex-col overflow-y-auto">
+    <div className="mx-auto p-4 h-full  flex flex-col overflow-hidden">
       <Form {...form}>
         <Header
           flowName={form.watch("name")}
@@ -180,7 +172,7 @@ export default function FlowMaker() {
           setIsDeleteDialogOpen={setIsDeleteDialogOpen}
           confirmDelete={confirmDelete}
         />
-        <div className="gap-6 mt-4 max-h-full overflow-y-auto w-full h-full flex flex-col items-center">
+        <div className="gap-6 mt-4 w-full h-full flex flex-col items-center overflow-y-auto">
           <Trigger toggleCard={toggleCard} openCards={openCards} form={form} />
           {fields.map((field, index) => (
             <Action
@@ -194,7 +186,6 @@ export default function FlowMaker() {
               forms={forms}
             />
           ))}
-
           <Button
             type="button"
             onClick={() => {
@@ -205,11 +196,10 @@ export default function FlowMaker() {
               const newId = fields[fields.length].id;
               setOpenCards((prev) => ({ ...prev, [newId]: true }));
             }}
-            className="rounded-full w-12 h-12 p-0"
+            className="rounded-full p-2"
             variant="ghost"
           >
             <Plus className="h-6 w-6" />
-            <span className="sr-only">Add Action</span>
           </Button>
         </div>
       </Form>

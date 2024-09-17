@@ -7,7 +7,15 @@ import { redis } from "~/utils/redis.server";
 
 export const flowProducer = new FlowProducer({ connection: redis });
 
-export async function startNameGenerationFlow({ chatId }: { chatId: string }) {
+export async function startNameGenerationFlow({
+  chatId,
+  sessionId,
+  sessionName,
+}: {
+  chatId: string;
+  sessionId: string;
+  sessionName: string;
+}) {
   const flow = await flowProducer.add({
     name: `update-chat-${chatId}`,
     queueName: updateChatFromChildrenQueue.name,
@@ -16,7 +24,7 @@ export async function startNameGenerationFlow({ chatId }: { chatId: string }) {
       {
         name: `generate-name-${chatId}`,
         queueName: generateChatName.name,
-        data: { chatId },
+        data: { chatId, sessionId, sessionName },
         children: [
           {
             name: `get-chat-${chatId}`,
@@ -31,7 +39,15 @@ export async function startNameGenerationFlow({ chatId }: { chatId: string }) {
   return flow;
 }
 
-export async function startInsightsFlow({ chatId }: { chatId: string }) {
+export async function startInsightsFlow({
+  chatId,
+  sessionId,
+  sessionName,
+}: {
+  chatId: string;
+  sessionId: string;
+  sessionName: string;
+}) {
   const flow = await flowProducer.add({
     name: `update-chat-${chatId}`,
     queueName: updateChatFromChildrenQueue.name,
@@ -40,7 +56,7 @@ export async function startInsightsFlow({ chatId }: { chatId: string }) {
       {
         name: `generate-insights-${chatId}`,
         queueName: generateAIInsights.name,
-        data: { chatId },
+        data: { chatId, sessionId, sessionName },
         children: [
           {
             name: `get-chat-${chatId}`,

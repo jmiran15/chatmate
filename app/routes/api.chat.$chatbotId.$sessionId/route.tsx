@@ -1,4 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
+import { Trigger } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import ChatNotificationEmail from "emails/ChatNotification";
 import {
@@ -8,6 +9,7 @@ import {
   ChatCompletionTool,
 } from "openai/resources/index.mjs";
 import { prisma } from "~/db.server";
+import { getChat } from "~/queues/chat/db/getChat";
 import { sendEmail } from "~/utils/email.server";
 import { chat as streamChat } from "~/utils/openai";
 import { mainTools } from "~/utils/prompts";
@@ -130,6 +132,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       const customFlows = await prisma.flow.findMany({
         where: {
           chatbotId,
+          trigger: Trigger.CUSTOM_EVENT,
         },
       });
 
@@ -138,18 +141,13 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
           if (!flow.flowSchema) {
             throw new Error("Flow schema is null");
           }
-          const trigger = flow.flowSchema.trigger;
-          if (trigger.type === "customTrigger") {
-            return {
-              type: "function",
-              function: {
-                name: flow.id,
-                description: flow.flowSchema.trigger.description,
-              },
-            };
-          } else {
-            return false;
-          }
+          return {
+            type: "function",
+            function: {
+              name: flow.id,
+              description: flow.flowSchema.trigger.description,
+            },
+          };
         })
         .filter(Boolean) as ChatCompletionTool[];
 
@@ -289,6 +287,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
           }
         }
       }
+      let sessionId = createId();
 
       const stream = new ReadableStream({
         start(controller) {
@@ -311,14 +310,30 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                         content: message.content,
                       })),
                       extraTools,
+                      sessionId,
+                      chatName:
+                        `${chat.name}-${sessionId}` ??
+                        `Untitled Chat-${sessionId}`,
                     })
-                  : await openai.chat.completions.create({
-                      messages,
-                      model: "gpt-4o",
-                      temperature: 0.2,
-                      stream: true,
-                      tools: [...mainTools, ...extraTools],
-                    });
+                  : await openai.chat.completions.create(
+                      {
+                        messages,
+                        model: "gpt-4o",
+                        temperature: 0,
+                        stream: true,
+                        tools: [...mainTools, ...extraTools],
+                      },
+                      {
+                        headers: {
+                          "Helicone-Property-Environment": process.env.NODE_ENV,
+                          "Helicone-Session-Id": sessionId, // the message id
+                          "Helicone-Session-Path": "/message", // /message
+                          "Helicone-Session-Name":
+                            `${chat.name}-${sessionId}` ??
+                            `Untitled Chat-${sessionId}`, // the chat name
+                        },
+                      },
+                    );
 
                 let message = {} as ChatCompletionMessage;
                 for await (const chunk of chatStream) {
@@ -329,8 +344,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     if (!delta) continue;
 
                     fullText += delta;
-
-                    console.log("DELTA: ", delta);
 
                     controller.enqueue(
                       `data: ${JSON.stringify({
@@ -345,11 +358,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 }
 
                 messages.push(message);
-
-                console.log("GOT THE FOLLOWING CONTENTS: ", {
-                  fullText,
-                  message,
-                });
 
                 // If there are no tool calls, we're done and can exit this loop
                 if (!message.tool_calls && message.content) {
@@ -466,12 +474,28 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         },
       });
 
+      // TEST
+      const job = await getChat.add("up", {
+        chatId: chat.id,
+      });
+
+      console.log("JOB: ", job);
+
+      console.log("POST PROCESSING SESSION ID: ", sessionId);
       // TODO - add more AI post processing like markResolved/not, add tags, etc...
       // TODO - test this and make sure it works
       // TODO - add progress streaming to the client
       const [nameFlow, insightsFlow] = await Promise.all([
-        startNameGenerationFlow({ chatId: chat.id }),
-        startInsightsFlow({ chatId: chat.id }),
+        startNameGenerationFlow({
+          chatId: chat.id,
+          sessionId: sessionId!,
+          sessionName: `${chat.name ?? `Untitled Chat`}-${sessionId}`,
+        }),
+        startInsightsFlow({
+          chatId: chat.id,
+          sessionId: sessionId!,
+          sessionName: `${chat.name ?? `Untitled Chat`}-${sessionId}`,
+        }),
       ]);
 
       return new Response(stream, {

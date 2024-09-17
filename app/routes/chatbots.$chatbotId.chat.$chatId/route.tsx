@@ -18,7 +18,10 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     prisma.message.findMany({
       where: { chatId },
       orderBy: { createdAt: "asc" },
-      select: { id: true, content: true, role: true, createdAt: true },
+      include: {
+        form: true,
+        formSubmission: true,
+      },
     }),
     fetch(`${BASE_URL}/api/chatbot/${chatbotId}`),
   ]);

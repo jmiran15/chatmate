@@ -9,28 +9,15 @@ declare global {
 }
 
 export function initializeSocket(httpServer: HttpServer) {
-  // if (process.env.NODE_ENV === "production") {
-  // io = new Server(httpServer, {
-  //   cors: {
-  //     origin: "*", // Be cautious with this in production
-  //     // TODO - change cors origins to local widget and prod widget
-  //     methods: ["GET", "POST"],
-  //   },
-  // });
-  // } else {
   if (!global.__io) {
     global.__io = new Server(httpServer, {
       cors: {
         origin: "*", // Be cautious with this in production
-        // TODO - change cors origins to local widget and prod widget
         methods: ["GET", "POST"],
       },
     });
   }
   io = global.__io;
-  console.log("Socket.IO initialized: ", io);
-
-  // }
 
   io.on("connection", (socket) => {
     socket.emit("confirmation", "connected!");
@@ -91,12 +78,6 @@ export function initializeSocket(httpServer: HttpServer) {
       console.warn("Socket.IO instance not initialized");
     }
   });
-
-  //   io.on("new message", (data) => {
-  //     console.log("new message", data);
-  //     // broadcast to all clients except the sender
-  //     io
-  //   });
 }
 
 export function getIO(): Server | undefined {

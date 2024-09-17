@@ -4,8 +4,8 @@ import invariant from "tiny-invariant";
 import { v4 as uuidv4 } from "uuid";
 import { prisma } from "~/db.server";
 import {
-  mainChatSystemPrompt_v2,
-  mainChatUserPrompt_v2,
+  mainChatSystemPrompt_v3,
+  mainChatUserPrompt_v3,
   mainTools,
 } from "./prompts";
 import { openai } from "./providers.server";
@@ -32,10 +32,14 @@ export async function chat({
   chatbot,
   messages,
   extraTools,
+  sessionId,
+  chatName,
 }: {
   chatbot: Chatbot;
   messages: { role: "user" | "assistant"; content: string }[];
   extraTools?: ChatCompletionTool[];
+  sessionId: string;
+  chatName: string;
 }) {
   invariant(messages.length > 0, "Messages must not be empty");
   invariant(
@@ -51,7 +55,7 @@ export async function chat({
     input: query,
   })) as Embedding[];
 
-  const systemPrompt = mainChatSystemPrompt_v2({
+  const systemPrompt = mainChatSystemPrompt_v3({
     chatbotName: chatbot.name,
     systemPrompt: chatbot.systemPrompt
       ? chatbot.systemPrompt
@@ -73,7 +77,7 @@ export async function chat({
         : "100+",
   });
 
-  const userPrompt = mainChatUserPrompt_v2({
+  const userPrompt = mainChatUserPrompt_v3({
     retrievedData: references
       .map(
         (reference) =>
@@ -85,13 +89,25 @@ export async function chat({
 
   messages[messages.length - 1].content = userPrompt;
 
-  const stream = await openai.chat.completions.create({
-    messages: [{ role: "system", content: systemPrompt }, ...messages],
-    model: "gpt-4o",
-    temperature: 0.2,
-    stream: true,
-    tools: [...mainTools, ...extraTools],
-  });
+  const enviroment = process.env.NODE_ENV;
+
+  const stream = await openai.chat.completions.create(
+    {
+      messages: [{ role: "system", content: systemPrompt }, ...messages],
+      model: "gpt-4o",
+      temperature: 0,
+      stream: true,
+      tools: [...mainTools, ...(extraTools ?? [])],
+    },
+    {
+      headers: {
+        "Helicone-Property-Environment": enviroment,
+        "Helicone-Session-Id": sessionId, // the message id
+        "Helicone-Session-Path": "/message", // /message
+        "Helicone-Session-Name": chatName, // the chat name
+      },
+    },
+  );
 
   return stream;
 }

@@ -1,3 +1,4 @@
+import { Trigger } from "@prisma/client";
 import {
   ActionFunctionArgs,
   json,
@@ -14,7 +15,7 @@ import { prisma } from "~/db.server";
 const starterFlowSchema = (name: string) => ({
   name,
   trigger: {
-    type: "customTrigger",
+    type: Trigger.CUSTOM_EVENT,
     description: "Whenever the user asks about our pricing",
   },
   actions: [

@@ -1,13 +1,19 @@
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
 
 import { useLoaderData, useParams, useSearchParams } from "@remix-run/react";
 import ChatInput from "./chat-input";
 
 import { createId } from "@paralleldrive/cuid2";
-import { Clipboard } from "lucide-react";
+import { Form, FormSubmission } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
+import axios from "axios";
+import jsonSchemaToZod from "json-schema-to-zod";
+import { Check, Clipboard } from "lucide-react";
 import { Suspense, lazy, useMemo, useRef } from "react";
+import { z } from "zod";
 import {
   HoverCard,
   HoverCardContent,
@@ -15,9 +21,11 @@ import {
 } from "~/components/ui/hover-card";
 import { useScrollToBottom } from "~/hooks/useScroll";
 import { cn } from "~/lib/utils";
+import { useSocket } from "~/providers/socket";
 import { loader } from "~/routes/chatbots.$chatbotId.chat.$chatId/route";
 import { copyToClipboard } from "~/utils/clipboard";
 import { useMobileScreen } from "~/utils/mobile";
+import AutoForm, { AutoFormSubmit } from "../ui/auto-form";
 import { Button } from "../ui/button";
 import { Loading } from "../ui/loading";
 import { ScrollArea } from "../ui/scroll-area";
@@ -52,6 +60,9 @@ export default function Chat() {
       id: string;
       createdAt: string;
       streaming: boolean;
+      isFormMessage: boolean;
+      form: SerializeFrom<Form | null>;
+      formSubmission: SerializeFrom<FormSubmission | null>;
     })[]
   >(
     () =>
@@ -61,6 +72,9 @@ export default function Chat() {
         content: msg.content,
         createdAt: msg.createdAt,
         streaming: false,
+        isFormMessage: msg.isFormMessage ?? false,
+        form: msg.form ?? null,
+        formSubmission: msg.formSubmission ?? null,
       })) ?? [],
   );
   const [_, setSearchParams] = useSearchParams();
@@ -81,6 +95,9 @@ export default function Chat() {
         content: msg.content,
         createdAt: msg.createdAt,
         streaming: false,
+        isFormMessage: msg.isFormMessage ?? false,
+        form: msg.form ?? null,
+        formSubmission: msg.formSubmission ?? null,
       })) ?? [],
     );
     setChatbot(data?.chatbot);
@@ -120,6 +137,9 @@ export default function Chat() {
         role: "user" as "user",
         createdAt: String(currentDate),
         streaming: false,
+        isFormMessage: false,
+        form: null,
+        formSubmission: null,
       },
       {
         id: createId(),
@@ -127,6 +147,9 @@ export default function Chat() {
         role: "assistant" as "assistant",
         createdAt: String(currentDate),
         streaming: true,
+        isFormMessage: false,
+        form: null,
+        formSubmission: null,
       },
     ];
 
@@ -309,6 +332,9 @@ export default function Chat() {
             createdAt: String(currentDate),
             streaming,
             loading: false,
+            isFormMessage: false,
+            form: null,
+            formSubmission: null,
           },
         ]);
         break;
@@ -362,6 +388,75 @@ export default function Chat() {
     return setFollowUps(followUps);
   }
 
+  // add agent typing and new message events to the socket manager
+
+  const handleThread = useCallback(
+    (data: { chatId: string; message: any }) => {
+      if (chatId === data.chatId) {
+        setMessages((prevThread) => {
+          const newMessage = data.message;
+
+          return [...prevThread, newMessage];
+        });
+      }
+    },
+    [chatId, setMessages],
+  );
+
+  const handleAgentTyping = useCallback(
+    (data: any) => {
+      if (chatId !== data.chatId) return;
+
+      setMessages((prevThread) => {
+        const lastMessage = prevThread[prevThread.length - 1];
+        const isTypingMessage =
+          lastMessage?.role === "assistant" && lastMessage?.streaming;
+
+        if (isTypingMessage && data.isTyping) {
+          setLoading(true);
+          return prevThread; // No change needed
+        } else if (isTypingMessage && !data.isTyping) {
+          setLoading(false);
+          return prevThread.slice(0, -1);
+        } else if (!isTypingMessage && data.isTyping) {
+          setLoading(true);
+          return [
+            ...prevThread,
+            {
+              id: `preview-${Date.now()}`,
+              role: "assistant",
+              createdAt: String(new Date()),
+              content: "",
+              streaming: true,
+              isFormMessage: false,
+              form: null,
+              formSubmission: null,
+            },
+          ];
+        } else {
+          return prevThread;
+        }
+      });
+    },
+    [chatId, setMessages, setLoading],
+  );
+
+  const socket = useSocket();
+
+  useEffect(() => {
+    if (!socket || !chatId) return;
+
+    socket.on("agent typing", handleAgentTyping);
+    socket.on("new message", handleThread);
+
+    return () => {
+      socket.off("agent typing", handleAgentTyping);
+      socket.off("new message", handleThread);
+    };
+
+    // maybe we need to put thread as a dependency here?
+  }, [socket, chatId, handleAgentTyping, handleThread]);
+
   return (
     <div className="flex flex-col relative h-full">
       <ScrollArea
@@ -378,6 +473,120 @@ export default function Chat() {
           {msgs.map((message, i) => {
             const isUser = message.role === "user";
             const showActions = i > 0;
+
+            const messageContent = () => {
+              if (loading && !isUser && message.streaming) {
+                return <Loading />;
+              }
+              if (message.isFormMessage) {
+                // check if we have a formSubmission
+                if (message.formSubmission) {
+                  return <FormSubmissionMessage />;
+                }
+
+                const formSchema = message.form?.formSchema;
+                const zodSchemaString = jsonSchemaToZod(
+                  formSchema?.schema?.definitions.formSchema,
+                );
+
+                const schemaString = `
+          // you can put any helper function or code directly inside the string and use them in your schema
+          
+          function getZodSchema({z, ctx}) {
+            // use ctx for any dynamic data that your schema depends on
+            return ${zodSchemaString};
+          }
+          `;
+
+                const zodSchema = Function(
+                  "...args",
+                  `${schemaString}; return getZodSchema(...args)`,
+                )({ z, ctx: {} });
+
+                const handleSubmit = (
+                  data: z.infer<typeof formSchema.schema>,
+                ) => {
+                  try {
+                    const validatedData = zodSchema.parse(data);
+
+                    // lets call the route /api/form-submission with axios as POSt with the data as json body
+                    axios
+                      .post(`${BASE_URL}/api/form-submission`, {
+                        formId: message.form?.id,
+                        messageId: message.id,
+                        submissionData: validatedData,
+                      })
+                      .then((response) => {
+                        const updatedMessage = response.data?.updatedMessage;
+                        // update the state with the submission
+                        // we need to setMessages after the submission to update it
+                        setMessages((messages) =>
+                          messages.map((msg) =>
+                            msg.id === updatedMessage.id
+                              ? {
+                                  id: updatedMessage.id,
+                                  role: updatedMessage.role,
+                                  content: updatedMessage.content,
+                                  createdAt: updatedMessage.createdAt,
+                                  streaming: updatedMessage.streaming,
+                                  isFormMessage: updatedMessage.isFormMessage,
+                                  form: updatedMessage.form,
+                                  formSubmission: updatedMessage.formSubmission,
+                                }
+                              : msg,
+                          ),
+                        );
+                      })
+                      .catch(function (error) {
+                        if (error.response) {
+                          // The request was made and the server responded with a status code
+                          // that falls out of the range of 2xx
+                          console.log(error.response.data);
+                          console.log(error.response.status);
+                          console.log(error.response.headers);
+                        } else if (error.request) {
+                          // The request was made but no response was received
+                          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                          // http.ClientRequest in node.js
+                          console.log(error.request);
+                        } else {
+                          // Something happened in setting up the request that triggered an Error
+                          console.log("Error", error.message);
+                        }
+                        console.log(error.config);
+                      });
+                  } catch (error) {
+                    if (error instanceof z.ZodError) {
+                      console.log("Form submitted with errors:", error.errors);
+                    }
+                  }
+                };
+
+                return (
+                  <AutoForm
+                    formSchema={zodSchema}
+                    fieldConfig={formSchema?.fieldConfig}
+                    onSubmit={handleSubmit}
+                  >
+                    <AutoFormSubmit>Submit</AutoFormSubmit>
+                  </AutoForm>
+                );
+              } else {
+                return (
+                  <Suspense fallback={<Loading />}>
+                    <Markdown
+                      content={message.content}
+                      onDoubleClickCapture={() => {
+                        if (!isMobileScreen) return;
+                        setUserInput(message.content);
+                      }}
+                      parentRef={scrollRef}
+                      defaultShow={i >= msgs.length - 6}
+                    />
+                  </Suspense>
+                );
+              }
+            };
 
             return (
               <div className="space-y-5" key={i}>
@@ -404,21 +613,7 @@ export default function Chat() {
                               : "bg-muted",
                           )}
                         >
-                          <Suspense fallback={<Loading />}>
-                            <Markdown
-                              content={message.content}
-                              loading={
-                                // eslint-disable-next-line react/jsx-no-leaked-render
-                                loading && !isUser && message.streaming
-                              }
-                              onDoubleClickCapture={() => {
-                                if (!isMobileScreen) return;
-                                setUserInput(message.content);
-                              }}
-                              parentRef={scrollRef}
-                              defaultShow={i >= msgs.length - 6}
-                            />
-                          </Suspense>
+                          {messageContent()}
                         </div>
                         <div className="text-xs text-muted-foreground opacity-80 whitespace-nowrap text-right w-full box-border pointer-events-none z-[1]">
                           {format(
@@ -488,6 +683,26 @@ export default function Chat() {
           setAutoScroll={setAutoScroll}
         />
       </div>
+    </div>
+  );
+}
+
+function FormSubmissionMessage() {
+  return (
+    <div className="flex flex-col items-start space-y-3">
+      <motion.div
+        className="flex items-center space-x-2"
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2, duration: 0.3 }}
+      >
+        <div className="bg-blue-100 rounded-full p-1">
+          <Check className="w-5 h-5 text-blue-500" />
+        </div>
+        <span className="whitespace-normal flex flex-col gap-y-1 text-[14px] leading-[1.4] min-h-[10px] font-medium">
+          Thank you for your submission!
+        </span>
+      </motion.div>
     </div>
   );
 }

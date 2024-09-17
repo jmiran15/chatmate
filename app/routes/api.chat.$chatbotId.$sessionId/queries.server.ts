@@ -1,8 +1,9 @@
-import { Chat, Message } from "@prisma/client";
+import { Chat, Message, Trigger } from "@prisma/client";
 import { getClientIPAddress } from "remix-utils/get-client-ip-address";
 import uap from "ua-parser-js";
 import { prisma } from "~/db.server";
 import { Message as ThreadMessage } from "../chatbots.$chatbotId.chats.$chatsId/useThread";
+import { callCustomFlow } from "./customFlows.server";
 
 interface ChatWithMessagesAndCount extends Chat {
   messages: Message[];
@@ -61,7 +62,7 @@ export async function createAnonymousChat({
   sessionId,
   chatbotId, // should probably only fetch chatbot once and then just cache
 }: {
-  sessionId: string;
+  sessionId?: string;
   chatbotId: string;
 }): Promise<ChatWithMessagesAndCount | null> {
   const chatbot = await prisma.chatbot.findUniqueOrThrow({
@@ -70,7 +71,22 @@ export async function createAnonymousChat({
     },
   });
 
-  return prisma.chat.create({
+  // On creating a new “chat” in the api.chat…. loader, check if there are any flows with the “initial load” trigger, order by updatedAt
+  // If there are… call the callTool function for each of those flows…
+  const flows = await prisma.flow.findMany({
+    where: {
+      trigger: Trigger.INITIAL_LOAD,
+      chatbotId,
+    },
+    orderBy: {
+      updatedAt: "desc",
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const chat = await prisma.chat.create({
     data: {
       chatbot: {
         connect: {
@@ -83,7 +99,7 @@ export async function createAnonymousChat({
           content: question,
         })),
       },
-      sessionId,
+      ...(sessionId ? { sessionId } : {}),
     },
     include: {
       messages: {
@@ -109,6 +125,13 @@ export async function createAnonymousChat({
       },
     },
   });
+
+  // call the callCustomFlow function for each of those flows
+  for (const flow of flows) {
+    await callCustomFlow(flow.id, chat.id);
+  }
+
+  return chat;
 }
 
 export async function getAnonymousUserBySessionId({

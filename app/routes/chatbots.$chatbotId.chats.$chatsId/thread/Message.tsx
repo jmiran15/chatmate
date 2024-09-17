@@ -12,6 +12,11 @@ import {
 } from "~/components/ui/tooltip";
 import { cn } from "~/lib/utils";
 
+import { useLoaderData } from "@remix-run/react";
+import jsonSchemaToZod from "json-schema-to-zod";
+import { z } from "zod";
+import AutoForm, { AutoFormSubmit } from "~/components/ui/auto-form";
+import { loader } from "../loader.server";
 import { Message } from "../useThread";
 import { useMarkMessageSeen } from "./useMarkMessagesSeen";
 
@@ -83,6 +88,7 @@ const formatTooltipDate = (date: Date | string | null | undefined) => {
 };
 
 const MessageComponent = memo(({ message }: { message: Message }) => {
+  const { API_PATH } = useLoaderData<typeof loader>();
   const { markMessageSeen, isMessageSeen } = useMarkMessageSeen(message);
   const isUser = message.role === "user";
   const isPreview = message.isPreview;
@@ -133,6 +139,51 @@ const MessageComponent = memo(({ message }: { message: Message }) => {
     return <TextSeparator text={message.content} />;
   }
 
+  const messageContent = useMemo(() => {
+    if (message.isFormMessage) {
+      // check if we have a formSubmission
+      if (message.formSubmission) {
+        return <FormSubmissionMessage />;
+      }
+
+      const formSchema = message.form?.formSchema;
+      const zodSchemaString = jsonSchemaToZod(
+        formSchema?.schema?.definitions.formSchema,
+      );
+
+      const schemaString = `
+// you can put any helper function or code directly inside the string and use them in your schema
+
+function getZodSchema({z, ctx}) {
+  // use ctx for any dynamic data that your schema depends on
+  return ${zodSchemaString};
+}
+`;
+
+      const zodSchema = Function(
+        "...args",
+        `${schemaString}; return getZodSchema(...args)`,
+      )({ z, ctx: {} });
+
+      return (
+        <AutoForm
+          formSchema={zodSchema}
+          fieldConfig={formSchema?.fieldConfig}
+          onSubmit={() => {}}
+        >
+          <AutoFormSubmit>Submit</AutoFormSubmit>
+        </AutoForm>
+      );
+    } else {
+      return <PreviewMarkdown source={message.content} />;
+    }
+  }, [
+    message.isFormMessage,
+    message.form,
+    message.formSubmission,
+    message.content,
+  ]);
+
   return (
     <div
       className={cn(
@@ -167,7 +218,7 @@ const MessageComponent = memo(({ message }: { message: Message }) => {
             {isPreview ? (
               <TypewriterText text={message.content} />
             ) : (
-              <PreviewMarkdown source={message.content} />
+              messageContent
             )}
           </div>
           <TooltipProvider>
@@ -247,6 +298,26 @@ function TextSeparator({
         {text}
       </span>
       <div className={`flex-grow border-t ${lineColor}`}></div>
+    </div>
+  );
+}
+
+function FormSubmissionMessage() {
+  return (
+    <div className="flex flex-col items-start space-y-3">
+      <motion.div
+        className="flex items-center space-x-2"
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.2, duration: 0.3 }}
+      >
+        <div className="bg-blue-100 rounded-full p-1">
+          <Check className="w-5 h-5 text-blue-500" />
+        </div>
+        <span className="whitespace-normal flex flex-col gap-y-1 text-[14px] leading-[1.4] min-h-[10px] font-medium">
+          Thank you for your submission!
+        </span>
+      </motion.div>
     </div>
   );
 }

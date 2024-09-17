@@ -10,6 +10,8 @@ export const ChatNameSchema = z.object({
   chatName: z
     .string()
     .describe("A short, descriptive name for the chat thread"),
+  sessionId: z.string(),
+  sessionName: z.string(),
   nameChanged: z
     .boolean()
     .describe("Indicates whether the chat name was changed"),
@@ -17,6 +19,8 @@ export const ChatNameSchema = z.object({
 
 export interface GenerateChatNameQueueData {
   chatId: string;
+  sessionId: string;
+  sessionName: string;
 }
 
 export interface GenerateChatNameQueueResult {
@@ -27,6 +31,7 @@ export const generateChatName = Queue<GenerateChatNameQueueData>(
   "generateChatName",
   async (job): Promise<GenerateChatNameQueueResult> => {
     const childrenValues = await job.getChildrenValues();
+    console.log("CHILDREN VALUES: ", childrenValues);
     const chat = Object.values(childrenValues)[0];
 
     invariant(
@@ -43,7 +48,12 @@ export const generateChatName = Queue<GenerateChatNameQueueData>(
 
     const previousName = chat?.name;
 
-    const newName = await generate(formattedMessages, previousName);
+    const newName = await generate(
+      formattedMessages,
+      job.data.sessionId,
+      job.data.sessionName,
+      previousName,
+    );
 
     return { name: newName ? newName.chatName : previousName };
   },
@@ -51,21 +61,33 @@ export const generateChatName = Queue<GenerateChatNameQueueData>(
 
 export async function generate(
   messages: { role: "user" | "assistant"; content: string }[],
+  sessionId: string,
+  sessionName: string,
   previousName?: string,
 ): Promise<z.infer<typeof ChatNameSchema> | null> {
   const lastMessages = messages.slice(-6);
 
   try {
-    const completion = await openai.beta.chat.completions.parse({
-      model: "gpt-4o-mini",
-      messages: [
-        systemPrompt,
-        userPrompt({ messages: lastMessages, previousName }),
-      ],
-      response_format: zodResponseFormat(ChatNameSchema, "chat_name"),
-      temperature: 0.2,
-      max_tokens: 256,
-    });
+    const completion = await openai.beta.chat.completions.parse(
+      {
+        model: "gpt-4o-mini",
+        messages: [
+          systemPrompt,
+          userPrompt({ messages: lastMessages, previousName }),
+        ],
+        response_format: zodResponseFormat(ChatNameSchema, "chat_name"),
+        temperature: 0,
+        max_tokens: 256,
+      },
+      {
+        headers: {
+          "Helicone-Property-Environment": process.env.NODE_ENV,
+          "Helicone-Session-Id": sessionId, // the message id
+          "Helicone-Session-Path": "/message/name", // /message
+          "Helicone-Session-Name": sessionName, // the chat name
+        },
+      },
+    );
 
     const result = completion.choices[0].message;
 

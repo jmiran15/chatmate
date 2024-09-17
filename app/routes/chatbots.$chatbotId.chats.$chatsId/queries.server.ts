@@ -1,12 +1,15 @@
 import { Prisma, TicketStatus } from "@prisma/client";
-import { prisma } from "~/db.server";
 import { serverOnly$ } from "vite-env-only/macros";
+import { prisma } from "~/db.server";
 
 export const getChatInfo = serverOnly$(async (chatId: string) => {
   return prisma.chat.findUnique({
     where: { id: chatId },
     include: {
-      messages: { orderBy: { createdAt: "asc" } },
+      messages: {
+        orderBy: { createdAt: "asc" },
+        include: { form: true, formSubmission: true },
+      },
       chatbot: {
         include: { labels: { select: { id: true, name: true, color: true } } },
       },

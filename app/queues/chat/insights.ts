@@ -7,6 +7,8 @@ import { Queue } from "~/utils/queue.server";
 
 export interface GenerateInsightsQueueData {
   chatId: string;
+  sessionId: string;
+  sessionName: string;
 }
 
 export interface GenerateInsightsQueueResult {
@@ -69,6 +71,8 @@ export const generateAIInsights = Queue<GenerateInsightsQueueData>(
     const aiInsights: z.infer<typeof ChatInsightsSchema> | null =
       await generateInsights({
         messages: formattedMessages,
+        sessionId: job.data.sessionId,
+        sessionName: job.data.sessionName,
       });
 
     return {
@@ -81,22 +85,36 @@ export const generateAIInsights = Queue<GenerateInsightsQueueData>(
 
 async function generateInsights({
   messages,
+  sessionId,
+  sessionName,
 }: {
   messages: {
     role: "user" | "assistant";
     content: string;
   }[];
+  sessionId: string;
+  sessionName: string;
 }): Promise<z.infer<typeof ChatInsightsSchema> | null> {
   const lastMessages = messages.slice(-6);
 
   try {
-    const completion = await openai.beta.chat.completions.parse({
-      model: "gpt-4o-mini",
-      messages: [systemPrompt, userPrompt({ messages: lastMessages })],
-      response_format: zodResponseFormat(ChatInsightsSchema, "chat_insights"),
-      temperature: 0.2,
-      max_tokens: 256,
-    });
+    const completion = await openai.beta.chat.completions.parse(
+      {
+        model: "gpt-4o-mini",
+        messages: [systemPrompt, userPrompt({ messages: lastMessages })],
+        response_format: zodResponseFormat(ChatInsightsSchema, "chat_insights"),
+        temperature: 0,
+        max_tokens: 256,
+      },
+      {
+        headers: {
+          "Helicone-Property-Environment": process.env.NODE_ENV,
+          "Helicone-Session-Id": sessionId, // the message id
+          "Helicone-Session-Path": "/message/insights", // /message
+          "Helicone-Session-Name": sessionName, // the chat name
+        },
+      },
+    );
 
     const result = completion.choices[0].message;
 

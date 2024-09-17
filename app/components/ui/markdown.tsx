@@ -1,6 +1,5 @@
 import React, { RefObject, useRef } from "react";
 import ReactMarkdown from "react-markdown";
-import { Loading } from "~/components/ui/loading";
 import { useToast } from "~/components/ui/use-toast";
 import { copyToClipboard } from "~/utils/clipboard";
 
@@ -60,7 +59,6 @@ export const MarkdownContent = React.memo(_MarkDownContent);
 export default function Markdown(
   props: {
     content: string;
-    loading?: boolean;
     fontSize?: number;
     parentRef?: RefObject<HTMLDivElement>;
     defaultShow?: boolean;
@@ -78,11 +76,7 @@ export default function Markdown(
       onContextMenu={props.onContextMenu}
       onDoubleClickCapture={props.onDoubleClickCapture}
     >
-      {props.loading ? (
-        <Loading />
-      ) : (
-        <MarkdownContent content={props.content} />
-      )}
+      <MarkdownContent content={props.content} />
     </div>
   );
 }

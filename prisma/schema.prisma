@@ -254,7 +254,6 @@ model Message {
   form           Form?           @relation(fields: [formId], references: [id], onDelete: Cascade)
   formSubmission FormSubmission?
 
-
   @@index([chatId, role])
 }
 
@@ -291,6 +290,7 @@ model Flow {
   chatbot    Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   name       String
   flowSchema Json
+  trigger    Trigger  @default(INITIAL_LOAD)
 }
 
 model ToolCall {
@@ -372,4 +372,9 @@ enum ActivityType {
   REQUESTED_LIVE_CHAT
   AGENT_JOINED
   AGENT_LEFT
+}
+
+enum Trigger {
+  INITIAL_LOAD
+  CUSTOM_EVENT
 }
