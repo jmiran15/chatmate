@@ -78,6 +78,11 @@ export async function getAllUsers() {
 }
 
 export async function isProUser(userId: User["id"]) {
+  const manualProUserEmailsProd = [
+    "chatmate.dev@gmail.com",
+    "garon.jinlongyu@gmail.com",
+  ];
+
   const user = await prisma.user.findUnique({
     where: { id: userId },
     include: {
@@ -85,7 +90,12 @@ export async function isProUser(userId: User["id"]) {
     },
   });
 
-  if (user?.subscription?.planId === "pro") {
+  if (
+    user?.subscription?.planId === "pro" ||
+    (user?.email &&
+      manualProUserEmailsProd.includes(user.email) &&
+      process.env.NODE_ENV === "production")
+  ) {
     return true;
   }
 
