@@ -3,7 +3,7 @@ import type { FormElement, InputType } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
-import { loader } from "./route";
+import { FIELD_TYPES, loader } from "./route";
 
 export default function AddType({
   setIsAddingBlock,
@@ -20,9 +20,9 @@ export default function AddType({
       id: createId(),
       type,
       name: `field_${Date.now()}`,
-      label: `New ${type} input`,
+      label: `New ${FIELD_TYPES[type]} input`,
       required: false,
-      placeholder: `Enter ${type}`,
+      placeholder: `Enter ${FIELD_TYPES[type]}`,
       order: elementsLength,
       options: type === clientTypes.SELECT ? ["Option 1", "Option 2"] : [],
       min: null,
@@ -56,7 +56,7 @@ export default function AddType({
           onClick={() => addFormElement(type)}
           className="text-sm py-1 px-2 h-auto"
         >
-          {type}
+          {FIELD_TYPES[type]}
         </Button>
       ))}
     </div>

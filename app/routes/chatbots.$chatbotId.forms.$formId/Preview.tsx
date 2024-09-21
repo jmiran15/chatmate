@@ -25,29 +25,6 @@ export default function FormPreview({
     const schemaObj: Record<string, z.ZodTypeAny> = {};
     const fieldConfigObj: Record<string, any> = {};
 
-    // model FormElement {
-    //     id                 String    @id @default(cuid())
-    //     createdAt          DateTime  @default(now())
-    //     updatedAt          DateTime  @updatedAt
-    //     formId             String
-    //     form               Form      @relation(fields: [formId], references: [id], onDelete: Cascade)
-    //     type               InputType @default(TEXT)
-    //     name               String
-    //     label              String
-    //     required           Boolean   @default(false)
-    //     placeholder        String?
-    //     description        String?
-    //     options            String[]
-    //     min                Int?
-    //     max                Int?
-    //     step               Int?
-    //     order              Int       @default(0)
-    //     required_error     String?   @default("This field is required")
-    //     min_error          String?   @default("Please enter a value greater than the minimum")
-    //     max_error          String?   @default("Please enter a value less than the maximum")
-    //     invalid_type_error String?   @default("Please enter a valid value")
-    //   }
-
     optimisticFormElements.forEach((element: SerializeFrom<FormElement>) => {
       let fieldSchema: z.ZodTypeAny;
 
@@ -115,8 +92,6 @@ export default function FormPreview({
           max: element.max,
           step: element.step,
           required: element.required,
-          //   fieldType: element.type,
-          //   options: element.options,
           label: element.label,
           name: element.name,
           id: element.id,
@@ -172,8 +147,6 @@ export default function FormPreview({
       if (element.type === clientTypes.SLIDER) {
         fieldConfigObj[element.name].fieldType = Slider;
       }
-
-      // if the element is a "slider" make it a slider
     });
 
     return {
@@ -197,13 +170,9 @@ export default function FormPreview({
   };
 
   return (
-    <div
-      className={`flex-grow p-8 overflow-y-auto transition-all duration-300 ${
-        isAddingBlock || editingElement ? "mr-64" : ""
-      }`}
-    >
-      <div className="mx-auto my-6 max-w-lg">
-        <Card>
+    <div className="flex-grow p-8 overflow-y-auto transition-all duration-300">
+      <div className="mx-auto w-full">
+        <Card className="max-w-md">
           <CardContent className="pt-6">
             <AutoForm
               formSchema={formSchema}

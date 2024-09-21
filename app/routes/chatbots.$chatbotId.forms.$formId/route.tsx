@@ -8,12 +8,27 @@ import {
   SerializeFrom,
 } from "@remix-run/node";
 import { useFetchers, useLoaderData } from "@remix-run/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { prisma } from "~/db.server";
 import Header from "./Header";
 import FormPreview from "./Preview";
 import RightBar from "./RightBar";
 import FormStructure from "./Structure";
+
+export const FIELD_TYPES = {
+  TEXT: "text",
+  TEXTAREA: "textarea",
+  DATE: "date",
+  URL: "url",
+  PHONE: "phone",
+  EMAIL: "email",
+  CHECKBOX: "checkbox",
+  SELECT: "select",
+  NUMBER: "number",
+  RATING: "rating",
+  SCALE: "scale",
+  SLIDER: "slider",
+} as Record<InputType, string>;
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { formId } = params;
@@ -136,7 +151,6 @@ export default function FormBuilder() {
   const [editingElement, setEditingElement] =
     useState<SerializeFrom<FormElement> | null>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(0);
   const fetchers = useFetchers();
   const {
     form: { elements: loaderElements },
@@ -187,15 +201,9 @@ export default function FormBuilder() {
     return elements.sort((a, b) => a.order - b.order);
   }, [loaderElements, fetchers]);
 
-  useEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
-  }, []);
-
   return (
     <div className="flex flex-col h-full bg-gray-100">
-      <Header ref={headerRef} />
+      <Header />
       <div className="relative flex flex-1 overflow-hidden">
         {/* Left Column - Structure */}
         <FormStructure
@@ -213,7 +221,6 @@ export default function FormBuilder() {
 
         {/* Right Column - Edit */}
         <RightBar
-          headerHeight={headerHeight}
           isAddingBlock={isAddingBlock}
           editingElement={editingElement}
           setIsAddingBlock={setIsAddingBlock}

@@ -30,14 +30,10 @@ export default function EditPanel({
   const { clientTypes } = useLoaderData<typeof loader>();
   const [isElementDeleteDialogOpen, setIsElementDeleteDialogOpen] =
     useState(false);
-
   const updateFetcher = useFetcher({ key: "update" });
   const deleteFetcher = useFetcher({ key: "delete" });
 
-  // need to update the "editingElement" optimistically based on the update fetcher response
-
   const updateFormElement = (element: SerializeFrom<FormElement>) => {
-    // submit the update fetcher with the new data on change
     updateFetcher.submit(
       { partialElement: JSON.stringify(element), intent: "update" },
       {
@@ -50,7 +46,6 @@ export default function EditPanel({
   const deleteFormElement = () => {
     if (!editingElement) return;
 
-    // TODO - submit the delete fetcher with the element id
     deleteFetcher.submit(
       { elementId: editingElement.id, intent: "delete" },
       {

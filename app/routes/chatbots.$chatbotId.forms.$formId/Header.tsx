@@ -1,6 +1,6 @@
-import { Link, useLoaderData, useParams } from "@remix-run/react";
+import { Link, useFetcher, useLoaderData, useParams } from "@remix-run/react";
 import { ArrowLeft, Trash2 } from "lucide-react";
-import { forwardRef, useState } from "react";
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,24 +16,20 @@ import { Button } from "~/components/ui/button";
 import SubmissionsModal from "./SubmissionsModal";
 import { loader } from "./route";
 
-const Header = forwardRef<HTMLDivElement>((props, ref) => {
+export default function Header() {
   const { chatbotId } = useParams();
   const { form } = useLoaderData<typeof loader>();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isSubmissionsOpen, setIsSubmissionsOpen] = useState(false);
+  const fetcher = useFetcher({ key: "deleteForm" });
 
   function handleDelete() {
-    // submit fetcher to delete form
-
-    //   fetcher.submit({ _action: "delete" }, { method: "post" });
+    fetcher.submit({ intent: "deleteForm" }, { method: "post" });
     setIsDeleteDialogOpen(false);
   }
 
   return (
-    <div
-      ref={ref}
-      className="flex justify-between items-center p-4 bg-white shadow-sm border-b"
-    >
+    <div className="flex justify-between items-center p-4 bg-white shadow-sm border-b">
       <div className="flex items-center space-x-4">
         <Button variant="ghost" size="icon" asChild>
           <Link to={`/chatbots/${chatbotId}/forms`}>
@@ -84,8 +80,4 @@ const Header = forwardRef<HTMLDivElement>((props, ref) => {
       </div>
     </div>
   );
-});
-
-Header.displayName = "Header";
-
-export default Header;
+}
