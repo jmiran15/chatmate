@@ -264,10 +264,35 @@ model Form {
   name          String
   chatbotId     String
   chatbot       Chatbot          @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  formSchema    Json?
-  schemaVersion Int              @default(1)
+  formSchema    Json? // REMOVE THIS? ... maybe good to have, so we don't have to do any transformations on the data at runtime
+  schemaVersion Int              @default(1) // TODO - implement schema versioning (i.e., version control)
   submissions   FormSubmission[]
-  messages      Message[]
+  messages      Message[] // because a message can be associated with a form,
+  // new
+  elements      FormElement[]
+}
+
+model FormElement {
+  id                 String    @id @default(cuid())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  formId             String
+  form               Form      @relation(fields: [formId], references: [id], onDelete: Cascade)
+  type               InputType @default(TEXT)
+  name               String
+  label              String
+  required           Boolean   @default(false)
+  placeholder        String?
+  description        String?
+  options            String[]
+  min                Int?
+  max                Int?
+  step               Int?
+  order              Int       @default(0)
+  required_error     String?   @default("This field is required")
+  min_error          String?   @default("Please enter a value greater than the minimum")
+  max_error          String?   @default("Please enter a value less than the maximum")
+  invalid_type_error String?   @default("Please enter a valid value")
 }
 
 model FormSubmission {
@@ -377,4 +402,19 @@ enum ActivityType {
 enum Trigger {
   INITIAL_LOAD
   CUSTOM_EVENT
+}
+
+enum InputType {
+  TEXT     @map("text")
+  TEXTAREA @map("textarea")
+  DATE     @map("date")
+  URL      @map("url")
+  PHONE    @map("phone")
+  EMAIL    @map("email")
+  CHECKBOX @map("checkbox")
+  SELECT   @map("select")
+  NUMBER   @map("number")
+  RATING   @map("rating")
+  SCALE    @map("scale")
+  SLIDER   @map("slider")
 }
