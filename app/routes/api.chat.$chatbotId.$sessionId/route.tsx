@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { Trigger } from "@prisma/client";
+import { TriggerType } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import ChatNotificationEmail from "emails/ChatNotification";
 import {
@@ -132,20 +132,30 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
       const customFlows = await prisma.flow.findMany({
         where: {
           chatbotId,
-          trigger: Trigger.CUSTOM_EVENT,
+          trigger: {
+            type: TriggerType.CUSTOM_EVENT,
+          },
+        },
+        include: {
+          trigger: true,
+          actions: {
+            orderBy: {
+              order: "asc",
+            },
+          },
         },
       });
 
       let extraTools = customFlows
         .map((flow) => {
-          if (!flow.flowSchema) {
+          if (!flow.trigger || !flow.actions) {
             throw new Error("Flow schema is null");
           }
           return {
             type: "function",
             function: {
               name: flow.id,
-              description: flow.flowSchema.trigger.description,
+              description: flow.trigger.description,
             },
           };
         })

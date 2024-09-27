@@ -1,5 +1,7 @@
+import type { Trigger } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
+import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -8,101 +10,61 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
 import { Textarea } from "~/components/ui/textarea";
-import { FlowSchema } from "./route";
+import { CustomSelect } from "./select";
+import { TriggerSchema } from "./types";
 
 export default function Trigger({
-  toggleCard,
-  openCards,
-  form,
+  trigger,
+  handleFormChange,
 }: {
-  toggleCard: (id: string) => void;
-  openCards: Record<string, boolean>;
-  form: UseFormReturn<FlowSchema>;
+  trigger: SerializeFrom<Trigger>;
+  handleFormChange: () => void;
 }) {
+  const [isOpen, setIsOpen] = useState(true);
+  const [triggerType, setTriggerType] = useState<TriggerSchema["type"]>(
+    trigger.type,
+  );
+
+  function toggleCard() {
+    setIsOpen((prev) => !prev);
+  }
+
+  const triggerOptions = [
+    { id: "INITIAL_LOAD", name: "On initial load" },
+    { id: "CUSTOM_EVENT", name: "Custom trigger" },
+  ];
+
   return (
     <Card className="w-full max-w-4xl">
-      <CardHeader
-        className="cursor-pointer"
-        onClick={() => toggleCard("trigger")}
-      >
+      <CardHeader className="cursor-pointer" onClick={toggleCard}>
         <CardTitle className="flex justify-between items-center">
           Trigger
-          {openCards["trigger"] ? <ChevronUp /> : <ChevronDown />}
+          {isOpen ? <ChevronUp /> : <ChevronDown />}
         </CardTitle>
       </CardHeader>
-      {openCards["trigger"] && (
-        <CardContent>
-          <FormField
-            control={form.control}
-            name="trigger.type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Trigger Type</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={(value) => {
-                      field.onChange(value);
-                      if (value === "INITIAL_LOAD") {
-                        form.setValue("trigger.description", undefined);
-                      }
-                    }}
-                    value={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select trigger type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value={"INITIAL_LOAD"}>
-                        On initial load
-                      </SelectItem>
-                      <SelectItem value={"CUSTOM_EVENT"}>
-                        Custom trigger
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+      {isOpen && (
+        <CardContent className="flex flex-col gap-4">
+          <CustomSelect
+            name="triggerType"
+            options={triggerOptions}
+            value={triggerType}
+            onChange={(value) => setTriggerType(value as TriggerSchema["type"])}
+            placeholder="Select trigger type"
+            handleFormChange={handleFormChange}
           />
-          {form.watch("trigger.type") === "CUSTOM_EVENT" && (
-            <FormField
-              control={form.control}
-              name="trigger.description"
-              render={({ field }) => (
-                <FormItem className="mt-4">
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      placeholder="Enter a detailed description of when the chatbot should trigger this flow."
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+          {triggerType === "CUSTOM_EVENT" && (
+            <Textarea
+              name="triggerDescription"
+              placeholder="Enter a detailed description of when the chatbot should trigger this flow."
+              defaultValue={trigger.description ?? ""}
             />
           )}
         </CardContent>
       )}
-      {openCards["trigger"] && (
+      {isOpen && (
         <CardFooter>
-          <Button variant="ghost" onClick={() => toggleCard("trigger")}>
+          <Button type="button" variant="ghost" onClick={() => toggleCard()}>
             Close
           </Button>
         </CardFooter>

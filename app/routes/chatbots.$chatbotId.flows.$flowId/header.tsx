@@ -1,6 +1,5 @@
-import { Link } from "@remix-run/react";
+import { Link, useNavigation } from "@remix-run/react";
 import { ArrowLeft, Trash2 } from "lucide-react";
-import React from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,25 +15,24 @@ import { Button } from "~/components/ui/button";
 
 interface HeaderProps {
   flowName: string;
-  onSave: () => void;
-  onDelete: () => void;
+  handleDelete: () => void;
   isDeleteDialogOpen: boolean;
   setIsDeleteDialogOpen: (open: boolean) => void;
-  confirmDelete: () => void;
+  canSave: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   flowName,
-  onSave,
-  onDelete,
+  handleDelete,
   isDeleteDialogOpen,
   setIsDeleteDialogOpen,
-  confirmDelete,
-}) => {
+  canSave,
+}: HeaderProps) => {
+  const isSubmitting = useNavigation().state === "submitting";
   return (
     <div className="flex justify-between items-center p-4">
       <div className="flex items-center space-x-4">
-        <Button variant="ghost" size="icon" asChild>
+        <Button type="button" variant="ghost" size="icon" asChild>
           <Link to="../flows">
             <ArrowLeft className="h-4 w-4" />
           </Link>
@@ -47,7 +45,12 @@ const Header: React.FC<HeaderProps> = ({
           onOpenChange={setIsDeleteDialogOpen}
         >
           <AlertDialogTrigger asChild>
-            <Button variant="ghost" size="icon" onClick={onDelete}>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsDeleteDialogOpen(true)}
+            >
               <Trash2 className="h-4 w-4" />
             </Button>
           </AlertDialogTrigger>
@@ -61,13 +64,15 @@ const Header: React.FC<HeaderProps> = ({
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={confirmDelete}>
+              <AlertDialogAction onClick={handleDelete}>
                 Confirm Delete
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        <Button onClick={onSave}>Save</Button>
+        <Button disabled={!canSave} type="submit">
+          {isSubmitting ? "Saving..." : "Save"}
+        </Button>
       </div>
     </div>
   );

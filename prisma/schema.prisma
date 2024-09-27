@@ -133,6 +133,8 @@ model Chat {
   messages   Message[]
   labels     Label[]        @relation("ChatToLabel")
 
+  hasLoadedInitialMessages Boolean? @default(false)
+
   @@index([chatbotId, deleted, createdAt])
 }
 
@@ -254,6 +256,10 @@ model Message {
   form           Form?           @relation(fields: [formId], references: [id], onDelete: Cascade)
   formSubmission FormSubmission?
 
+  // TODO: this is a hacky temp. solution to get flows working. Will be replaced with a cleaner solution soon.
+  flowId String?
+  flow   Flow?   @relation(fields: [flowId], references: [id], onDelete: Cascade)
+
   @@index([chatId, role])
 }
 
@@ -264,12 +270,15 @@ model Form {
   name          String
   chatbotId     String
   chatbot       Chatbot          @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  formSchema    Json? // REMOVE THIS? ... maybe good to have, so we don't have to do any transformations on the data at runtime
   schemaVersion Int              @default(1) // TODO - implement schema versioning (i.e., version control)
   submissions   FormSubmission[]
-  messages      Message[] // because a message can be associated with a form,
-  // new
+  messages      Message[]
   elements      FormElement[]
+  actions       Action[]
+
+  actionsOnForms FormsOnActions[]
+
+  @@index([chatbotId])
 }
 
 model FormElement {
@@ -308,14 +317,52 @@ model FormSubmission {
 }
 
 model Flow {
-  id         String   @id @default(cuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  chatbotId  String
-  chatbot    Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  name       String
-  flowSchema Json
-  trigger    Trigger  @default(INITIAL_LOAD)
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  chatbotId String
+  chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  name      String
+
+  trigger Trigger?
+  actions Action[]
+
+  messages Message[]
+}
+
+model Trigger {
+  id          String      @id @default(cuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  type        TriggerType @default(INITIAL_LOAD)
+  description String?
+  flow        Flow        @relation(fields: [flowId], references: [id])
+  flowId      String      @unique
+}
+
+model Action {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  type      ActionType @default(TEXT)
+  form      Form?      @relation(fields: [formId], references: [id])
+  formId    String?
+  text      String?
+  delay     Int?
+  flow      Flow       @relation(fields: [flowId], references: [id])
+  flowId    String
+  order     Float?     @default(0)
+
+  dependsOn FormsOnActions[]
+}
+
+model FormsOnActions {
+  action   Action @relation(fields: [actionId], references: [id])
+  actionId String
+  form     Form   @relation(fields: [formId], references: [id])
+  formId   String
+
+  @@id([actionId, formId])
 }
 
 model ToolCall {
@@ -399,7 +446,7 @@ enum ActivityType {
   AGENT_LEFT
 }
 
-enum Trigger {
+enum TriggerType {
   INITIAL_LOAD
   CUSTOM_EVENT
 }
@@ -417,4 +464,9 @@ enum InputType {
   RATING   @map("rating")
   SCALE    @map("scale")
   SLIDER   @map("slider")
+}
+
+enum ActionType {
+  TEXT
+  FORM
 }

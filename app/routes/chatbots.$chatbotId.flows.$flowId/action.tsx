@@ -1,7 +1,7 @@
-import { Form } from "@prisma/client";
+import type { Action, Form } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
-import { FieldArrayWithId, UseFormReturn } from "react-hook-form";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -10,137 +10,121 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
-import { Textarea } from "~/components/ui/textarea";
-import { FlowSchema } from "./route";
+import { MentionInput } from "./MentionInput/mention-input";
+import { CustomSelect } from "./select";
+import { ActionSchema } from "./types";
 
 export default function Action({
-  toggleCard,
-  openCards,
-  form,
+  action,
   index,
-  field,
-  remove,
   forms,
+  availableFormElementNames,
+  onDelete,
+  handleFormChange,
+  isNewlyAdded,
 }: {
-  toggleCard: (id: string) => void;
-  openCards: Record<string, boolean>;
-  form: UseFormReturn<FlowSchema>;
+  action: SerializeFrom<Action>;
   index: number;
-  field: FieldArrayWithId<FlowSchema, "actions">;
-  remove: (index: number) => void;
-  forms: SerializeFrom<Pick<Form, "id" | "name">>[];
+  forms: SerializeFrom<Form>[];
+  availableFormElementNames: { id: string; display: string }[];
+  onDelete: (actionId: string) => void;
+  handleFormChange: () => void;
+  isNewlyAdded: boolean;
 }) {
+  const [isOpen, setIsOpen] = useState(true);
+  const [actionType, setActionType] = useState<ActionSchema["type"]>(
+    action.type,
+  );
+  const [formId, setFormId] = useState<string>(action.formId ?? "");
+  const actionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isNewlyAdded && actionRef.current) {
+      actionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [isNewlyAdded]);
+
+  function toggleCard() {
+    setIsOpen((prev) => !prev);
+  }
+
+  const formOptions = forms.map((form) => ({
+    id: form.id,
+    name: form.name,
+  }));
+
+  const handleTextChange = (newValue: string) => {
+    handleFormChange();
+  };
+
   return (
-    <Card key={field.id} className="w-full max-w-4xl">
-      <CardHeader
-        className="cursor-pointer"
-        onClick={() => toggleCard(field.id)}
-      >
+    <Card className="w-full max-w-4xl" ref={actionRef}>
+      <CardHeader className="cursor-pointer" onClick={toggleCard}>
         <CardTitle className="flex justify-between items-center">
-          <span>Action {index + 1}</span>
-          {openCards[field.id] ? <ChevronUp /> : <ChevronDown />}
+          <span>Action {action.order}</span>
+          {isOpen ? <ChevronUp /> : <ChevronDown />}
         </CardTitle>
       </CardHeader>
-      {openCards[field.id] && (
-        <CardContent>
-          <FormField
-            control={form.control}
-            name={`actions.${index}.type`}
-            render={({ field }) => (
-              <FormItem>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select action type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="form">Form</SelectItem>
-                    <SelectItem value="text">Text</SelectItem>
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
+      <input
+        type="hidden"
+        name={`${action.id}-order`}
+        value={action.order ?? ""}
+      />
+      {isOpen && (
+        <CardContent className="flex flex-col gap-4">
+          <CustomSelect
+            name={`${action.id}-type`}
+            options={[
+              { id: "FORM", name: "Form" },
+              { id: "TEXT", name: "Text" },
+            ]}
+            value={actionType}
+            onChange={(value) => setActionType(value as ActionSchema["type"])}
+            placeholder="Select action type"
+            handleFormChange={handleFormChange}
           />
-          {form.watch(`actions.${index}.type`) === "form" && (
-            <FormField
-              control={form.control}
-              name={`actions.${index}.formId`}
-              render={({ field }) => (
-                <FormItem className="mt-4">
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a form" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {forms.map((form) => (
-                        <SelectItem key={form.id} value={form.id}>
-                          {form.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
+          {actionType === "FORM" && (
+            <CustomSelect
+              name={`${action.id}-formId`}
+              options={formOptions}
+              value={formId}
+              onChange={(value) => setFormId(value)}
+              placeholder="Select a form"
+              handleFormChange={handleFormChange}
             />
           )}
-          {form.watch(`actions.${index}.type`) === "text" && (
-            <FormField
-              control={form.control}
-              name={`actions.${index}.text`}
-              render={({ field }) => (
-                <FormItem className="mt-4">
-                  <Textarea {...field} placeholder="Enter text" />
-                  <FormMessage />
-                </FormItem>
-              )}
+          {actionType === "TEXT" && (
+            <MentionInput
+              name={action.id}
+              defaultValue={action.text ?? ""}
+              onChange={handleTextChange}
+              suggestions={availableFormElementNames}
             />
           )}
-          <FormField
-            control={form.control}
-            name={`actions.${index}.delay`}
-            render={({ field }) => (
-              <FormItem className="mt-4">
-                <FormLabel>Delay (optional)</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    {...field}
-                    onChange={(e) => field.onChange(e.target.valueAsNumber)}
-                  />
-                </FormControl>
-              </FormItem>
-            )}
+          <Input
+            type="number"
+            name={`${action.id}-delay`}
+            placeholder="Enter delay"
+            defaultValue={action.delay ?? ""}
           />
         </CardContent>
       )}
-      {openCards[field.id] && (
+      {isOpen && (
         <CardFooter className="flex justify-between">
-          <Button variant="ghost" onClick={() => toggleCard(field.id)}>
+          <Button type="button" variant="ghost" onClick={toggleCard}>
             Close
           </Button>
           {index > 0 && (
-            <Button variant="ghost" size="icon" onClick={() => remove(index)}>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => onDelete(action.id)}
+            >
               <X className="h-4 w-4" />
             </Button>
           )}

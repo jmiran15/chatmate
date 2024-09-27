@@ -8,7 +8,7 @@ import {
   SerializeFrom,
 } from "@remix-run/node";
 import { useFetchers, useLoaderData } from "@remix-run/react";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { prisma } from "~/db.server";
 import Header from "./Header";
 import FormPreview from "./Preview";
@@ -150,7 +150,6 @@ export default function FormBuilder() {
   const [isAddingBlock, setIsAddingBlock] = useState(false);
   const [editingElement, setEditingElement] =
     useState<SerializeFrom<FormElement> | null>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
   const fetchers = useFetchers();
   const {
     form: { elements: loaderElements },
@@ -202,7 +201,7 @@ export default function FormBuilder() {
   }, [loaderElements, fetchers]);
 
   return (
-    <div className="flex flex-col h-full bg-gray-100">
+    <div className="flex flex-col h-full bg-muted">
       <Header />
       <div className="relative flex flex-1 overflow-hidden">
         {/* Left Column - Structure */}
@@ -213,11 +212,7 @@ export default function FormBuilder() {
           editingElement={editingElement}
         />
         {/* Center Column - Preview */}
-        <FormPreview
-          isAddingBlock={isAddingBlock}
-          optimisticFormElements={optimisticFormElements}
-          editingElement={editingElement}
-        />
+        <FormPreview optimisticFormElements={optimisticFormElements} />
 
         {/* Right Column - Edit */}
         <RightBar

@@ -1,4 +1,3 @@
-import { Trigger } from "@prisma/client";
 import {
   ActionFunctionArgs,
   json,
@@ -11,21 +10,6 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { prisma } from "~/db.server";
-
-const starterFlowSchema = (name: string) => ({
-  name,
-  trigger: {
-    type: Trigger.CUSTOM_EVENT,
-    description: "Whenever the user asks about our pricing",
-  },
-  actions: [
-    {
-      type: "text",
-      text: "Heyyy...  our pricing is $100, $200, $300",
-      delay: 2,
-    },
-  ],
-});
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const { chatbotId } = params;
@@ -45,7 +29,22 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           id: chatbotId,
         },
       },
-      flowSchema: starterFlowSchema(name) as any,
+      trigger: {
+        create: {
+          type: "CUSTOM_EVENT",
+          description: "Whenever the user asks about our pricing",
+        },
+      },
+      actions: {
+        create: [
+          {
+            type: "TEXT",
+            text: "Heyyy...  our pricing is $100, $200, $300",
+            delay: 2,
+            order: 0,
+          },
+        ],
+      },
     },
   });
 

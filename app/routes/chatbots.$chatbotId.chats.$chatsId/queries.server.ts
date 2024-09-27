@@ -8,7 +8,14 @@ export const getChatInfo = serverOnly$(async (chatId: string) => {
     include: {
       messages: {
         orderBy: { createdAt: "asc" },
-        include: { form: true, formSubmission: true },
+        include: {
+          form: {
+            include: {
+              elements: true,
+            },
+          },
+          formSubmission: true,
+        },
       },
       chatbot: {
         include: { labels: { select: { id: true, name: true, color: true } } },
