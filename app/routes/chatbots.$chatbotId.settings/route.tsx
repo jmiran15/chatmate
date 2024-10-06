@@ -27,7 +27,6 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
-import { ScrollArea } from "~/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -37,8 +36,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { Separator } from "~/components/ui/separator";
 import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/components/ui/use-toast";
+import Container from "../chatbots.$chatbotId.forms._index/Container";
+import Description from "../chatbots.$chatbotId.forms._index/Description";
+import Title from "../chatbots.$chatbotId.forms._index/Title";
 
 export const PROMPT_TEMPLATES = [
   {
@@ -54,7 +57,6 @@ export const PROMPT_TEMPLATES = [
 ];
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
-  // const userId = await requireUserId(request);
   const formData = await request.formData();
   const action = formData.get("action");
   const { chatbotId } = params;
@@ -106,10 +108,33 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return json({ chatbot });
 };
 
-export default function ModelC() {
-  const data = useLoaderData<typeof loader>();
+function useFormChanged({
+  fetcher,
+}: {
+  fetcher: ReturnType<typeof useFetcher>;
+}) {
   const formRef = useRef<HTMLFormElement>(null);
-  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
+  const [isChanged, setIsChanged] = useState(false);
+
+  useEffect(() => {
+    if (!isSubmitting && formRef.current) {
+      formRef.current.reset();
+      setIsChanged(false);
+    }
+  }, [isSubmitting]);
+
+  const handleFormChange = () => {
+    setIsChanged(true);
+  };
+
+  return { formRef, isChanged, handleFormChange };
+}
+
+export default function ModelSettings() {
+  const data = useLoaderData<typeof loader>();
+  const fetcher = useFetcher({ key: "model-settings" });
+  const { formRef, isChanged, handleFormChange } = useFormChanged({ fetcher });
 
   const [open, setOpen] = useState(false);
 
@@ -135,7 +160,7 @@ export default function ModelC() {
         description: fetcher.data.error,
         variant: "destructive",
       });
-    } else if (fetcher.data?.action === "save") {
+    } else if (fetcher.data?.action === "save" && fetcher.state === "idle") {
       toast({
         title: "Success",
         description: "Model settings saved",
@@ -144,7 +169,7 @@ export default function ModelC() {
   }, [fetcher.data]);
 
   return (
-    <>
+    <Container className="max-w-5xl">
       <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
@@ -224,145 +249,169 @@ export default function ModelC() {
           </div>
         </Dialog>
       </Transition.Root>
-      <ScrollArea className="h-full w-full">
-        <fetcher.Form
-          ref={formRef}
-          method="post"
-          className="flex flex-col gap-6 p-4"
-        >
+      <Header formRef={formRef} fetcher={fetcher} isChanged={isChanged} />
+      <Separator />
+
+      <fetcher.Form
+        ref={formRef}
+        method="post"
+        className="flex flex-col gap-8 items-start justify-start"
+        onChange={handleFormChange}
+      >
+        {/* name */}
+        <div className="grid w-full max-w-2xl items-center gap-2">
+          <Label htmlFor="name">Name</Label>
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            defaultValue={data ? data.chatbot!.name : undefined}
+          />
+        </div>
+        {/* system prompt */}
+        <div className="grid w-full max-w-2xl items-center gap-2">
           <div>
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Settings
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              This is where you can tweak the way your chatbot behaves.
+            <Label htmlFor="system">Prompt</Label>
+            <p className="text-sm text-muted-foreground">
+              Enter a custom prompt for the AI. Test the model after changing it
+              for optimal performance. You can write your own or select one of
+              the templates below.
             </p>
           </div>
+          <Select onValueChange={handleNewValue}>
+            <SelectTrigger className="max-w-xs w-full">
+              <SelectValue placeholder="Select a template" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Templates</SelectLabel>
+                {PROMPT_TEMPLATES.map((template) => {
+                  return (
+                    <SelectItem key={template.key} value={template.content}>
+                      {template.label}
+                    </SelectItem>
+                  );
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Textarea
+            placeholder="Type your prompt here."
+            id="system"
+            name="system"
+            rows={8}
+            value={systemPrompt}
+            onChange={(e) => {
+              setSystemPrompt(e.target.value);
+            }}
+          />
+        </div>
 
-          {/* name */}
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-              defaultValue={data ? data.chatbot!.name : undefined}
-            />
+        {/* response length */}
+        <div className="grid w-full max-w-2xl items-center gap-2">
+          <div>
+            <Label htmlFor="response-length">Ideal response length</Label>
+            <p className="text-sm text-muted-foreground">
+              Select the ideal response length for your chatbot.
+            </p>
           </div>
-          {/* system prompt */}
-          <div className="grid w-full gap-1.5">
-            <div>
-              <Label htmlFor="system">Prompt</Label>
-              <p className="text-sm text-muted-foreground">
-                Enter a custom prompt for the AI. Test the model after changing
-                it for optimal performance. You can write your own or select one
-                of the templates below.
-              </p>
-              <Select onValueChange={handleNewValue}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a template" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Templates</SelectLabel>
-                    {PROMPT_TEMPLATES.map((template) => {
-                      return (
-                        <SelectItem key={template.key} value={template.content}>
-                          {template.label}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+          <RadioGroup
+            defaultValue={data.chatbot!.responseLength}
+            name="response-length"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="short" id="r1" />
+              <Label htmlFor="r1">Short - 25 to 50 words</Label>
             </div>
-            <Textarea
-              placeholder="Type your prompt here."
-              id="system"
-              name="system"
-              rows={8}
-              value={systemPrompt}
-              onChange={(e) => {
-                setSystemPrompt(e.target.value);
-              }}
-            />
-          </div>
-
-          {/* response length */}
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <div>
-              <Label htmlFor="response-length">Ideal response length</Label>
-              <p className="text-sm text-muted-foreground">
-                Select the ideal response length for your chatbot.
-              </p>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="medium" id="r2" />
+              <Label htmlFor="r2">Medium - 50 to 100 words</Label>
             </div>
-            <RadioGroup
-              defaultValue={data.chatbot!.responseLength}
-              name="response-length"
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="short" id="r1" />
-                <Label htmlFor="r1">Short - 25 to 50 words</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="medium" id="r2" />
-                <Label htmlFor="r2">Medium - 50 to 100 words</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="long" id="r3" />
-                <Label htmlFor="r3">Long - 100 or more words</Label>
-              </div>
-            </RadioGroup>
-          </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="long" id="r3" />
+              <Label htmlFor="r3">Long - 100 or more words</Label>
+            </div>
+          </RadioGroup>
+        </div>
+      </fetcher.Form>
+    </Container>
+  );
+}
 
-          <div className="flex flex-row justify-between items-center gap-4">
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button variant="destructive">Delete</Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your chatbot and remove its data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      fetcher.submit(
-                        {
-                          action: "delete",
-                        },
-                        {
-                          method: "POST",
-                        },
-                      );
-                    }}
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            <Button
-              name="action"
-              value="save"
-              onClick={() => {
-                fetcher.submit(new FormData(formRef.current!), {
-                  method: "POST",
-                });
-              }}
-            >
-              Save
+function Header({
+  formRef,
+  fetcher,
+  isChanged,
+}: {
+  formRef: React.RefObject<HTMLFormElement>;
+  fetcher: ReturnType<typeof useFetcher>;
+  isChanged: boolean;
+}) {
+  const isSubmitting = fetcher.state !== "idle";
+
+  console.log("isChanged: ", isChanged);
+
+  return (
+    <div className="flex flex-col sm:flex-row items-start justify-between">
+      <div className="flex flex-col">
+        <Title>Settings</Title>
+        <Description>
+          This is where you can tweak the way your chatbot behaves.
+        </Description>
+      </div>
+      <div className="flex flex-row gap-4">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="outline">
+              <span className="text-md">Delete</span>
             </Button>
-          </div>
-        </fetcher.Form>
-      </ScrollArea>
-    </>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                chatbot and remove its data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  fetcher.submit(
+                    {
+                      action: "delete",
+                    },
+                    {
+                      method: "POST",
+                    },
+                  );
+                }}
+              >
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <Button
+          disabled={!isChanged || isSubmitting}
+          onClick={() => {
+            if (!formRef.current) return;
+
+            const formData = new FormData(formRef.current!);
+            formData.set("action", "save");
+
+            fetcher.submit(formData, {
+              method: "POST",
+            });
+          }}
+        >
+          <span className="text-md">{isSubmitting ? "Saving..." : "Save"}</span>
+        </Button>
+      </div>
+    </div>
   );
 }
 

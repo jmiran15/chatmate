@@ -1,4 +1,4 @@
-import { Processor, QueueEvents, Queue as BullQueue, Worker } from "bullmq";
+import { Queue as BullQueue, Processor, QueueEvents, Worker } from "bullmq";
 import { redis } from "./redis.server";
 
 interface AugmentedQueue<T> extends BullQueue<T> {
@@ -29,8 +29,8 @@ export function Queue<Payload>(
     const worker = new Worker<Payload>(name, handler, {
       connection: redis,
       lockDuration: 1000 * 60 * 15,
-      // concurrency: 8,
-      concurrency: 16,
+      concurrency: 8,
+      // concurrency: 16,
     });
 
     registeredQueues[name] = {

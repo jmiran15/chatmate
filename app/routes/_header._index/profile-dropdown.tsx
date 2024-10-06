@@ -1,4 +1,9 @@
+import { useFetcher, useNavigate } from "@remix-run/react";
 import { Bot, CircleUser, LogOut, Settings } from "lucide-react";
+import { useRef } from "react";
+import { useHoverEffect } from "~/hooks/use-hover-effect";
+import { useOptionalUser } from "~/utils";
+import { useMobileScreen } from "~/utils/mobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,18 +11,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
-import { useFetcher, useNavigate } from "@remix-run/react";
-import { useOptionalUser } from "~/utils";
-import { useRef } from "react";
-import { useHoverEffect } from "~/hooks/use-hover-effect";
-import { useMobileScreen } from "~/utils/mobile";
 
 export default function ProfileDropdown() {
   const user = useOptionalUser();
   const fetcher = useFetcher();
   const navigate = useNavigate();
   const elementRef = useRef(null);
-  const Effect = useHoverEffect(elementRef);
+  const Effect = useHoverEffect(elementRef, false);
   const isMobile = useMobileScreen();
 
   if (!user) return null;
@@ -27,7 +27,7 @@ export default function ProfileDropdown() {
       <DropdownMenuTrigger asChild>
         <button
           ref={elementRef}
-          className="group relative translate-0 rounded-full lg:rounded-lg px-3 py-2"
+          className="group relative translate-0 rounded-full lg:rounded-lg px-3 py-2 z-[70]"
         >
           {!isMobile ? <Effect /> : null}
           <div className="flex items-center gap-2">

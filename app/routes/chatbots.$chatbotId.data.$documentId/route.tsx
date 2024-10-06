@@ -8,23 +8,22 @@ import {
   useParams,
   useSubmit,
 } from "@remix-run/react";
+import { ChevronLeft } from "lucide-react";
+import { useEffect, useRef } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { Badge } from "~/components/ui/badge";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
-import { getDocumentById, updateDocumentById } from "~/models/document.server";
 import { useToast } from "~/components/ui/use-toast";
-import { useEffect, useMemo, useRef } from "react";
-import { ChevronLeft } from "lucide-react";
-import { Badge } from "~/components/ui/badge";
-import { cn } from "~/lib/utils";
-import { requireUserId } from "~/session.server";
 import { prisma } from "~/db.server";
+import { cn } from "~/lib/utils";
+import { getDocumentById, updateDocumentById } from "~/models/document.server";
 import { queue } from "~/queues/ingestion.server";
-import { usePendingDocuments } from "../chatbots.$chatbotId.data._index/hooks/use-pending-documents";
-import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
-import { useEventSource } from "remix-utils/sse/react";
-import { useDocumentProgress } from "../chatbots.$chatbotId.data._index/hooks/use-document-progress";
+import { requireUserId } from "~/session.server";
+import Container from "../chatbots.$chatbotId.forms._index/Container";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
@@ -111,19 +110,19 @@ export default function DocumentPage() {
   const fetcher = useFetcher<typeof action>();
   const { chatbotId, documentId } = useParams();
   const { document } = useLoaderData<typeof loader>();
-  const pendingDocuments = usePendingDocuments();
-  const optimisticDocument = pendingDocuments.find(
-    (document) => document.id === documentId,
-  );
-  const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
-  const progress: ProgressData | undefined = useMemo(() => {
-    return eventSource ? JSON.parse(eventSource) : undefined;
-  }, [eventSource]);
+  // const pendingDocuments = usePendingDocuments();
+  // const optimisticDocument = pendingDocuments.find(
+  //   (document) => document.id === documentId,
+  // );
+  // const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
+  // const progress: ProgressData | undefined = useMemo(() => {
+  //   return eventSource ? JSON.parse(eventSource) : undefined;
+  // }, [eventSource]);
 
-  const { content, status } = useDocumentProgress({
-    item: document || optimisticDocument,
-    progress,
-  });
+  // const { content, status } = useDocumentProgress({
+  //   item: document || optimisticDocument,
+  //   progress,
+  // });
 
   const isSaving =
     fetcher.state === "submitting" &&
@@ -155,18 +154,19 @@ export default function DocumentPage() {
     }
   }, [fetcher]);
 
-  if (!document && !optimisticDocument) {
+  if (!document) {
     throw new Error("Document not found");
   }
 
   const optimisticDocumentName =
     fetcher.formData && String(fetcher.formData.get("intent")) === "save"
       ? String(fetcher.formData.get("name"))
-      : document?.name || optimisticDocument?.name;
+      : document?.name;
 
   if (!documentId) return;
   return (
-    <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
+    // <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
+    <Container className="max-w-5xl">
       <div className="flex items-center justify-between w-full flex-wrap gap-4">
         <div className="flex items-center justify-start gap-4 max-w-full shrink">
           <Link
@@ -183,7 +183,7 @@ export default function DocumentPage() {
             {optimisticDocumentName}
           </h1>
           <Badge variant="secondary" className="ml-auto sm:ml-0">
-            {status}
+            {document.isPending ? "Ingesting" : "Ingested"}
           </Badge>
         </div>
         <div className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export default function DocumentPage() {
               name="name"
               id="name"
               placeholder="Name"
-              defaultValue={document?.name || optimisticDocument?.name}
+              defaultValue={document?.name}
             />
             {fetcher?.data?.errors?.name ? (
               <p
@@ -244,7 +244,7 @@ export default function DocumentPage() {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="content">Content</Label>
-            {typeof content === "string" ? (
+            {document.content ? (
               <>
                 <Textarea
                   ref={contentRef}
@@ -254,7 +254,7 @@ export default function DocumentPage() {
                   id="content"
                   name="content"
                   rows={16}
-                  defaultValue={content}
+                  defaultValue={document.content}
                 />
                 {fetcher?.data?.errors?.content ? (
                   <p
@@ -266,12 +266,13 @@ export default function DocumentPage() {
                 ) : null}
               </>
             ) : (
-              content
+              <Skeleton count={10} />
             )}
           </div>
         </fieldset>
       </Form>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }
 

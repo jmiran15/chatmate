@@ -28,7 +28,7 @@ export function useAutoForm(elements: SerializeFrom<FormElement>[]) {
     const schemaObj: Record<string, z.ZodTypeAny> = {};
     const fieldConfigObj: Record<string, any> = {};
 
-    elements.forEach((element: SerializeFrom<FormElement>) => {
+    elements?.forEach((element: SerializeFrom<FormElement>) => {
       let fieldSchema: z.ZodTypeAny;
 
       const requiredErrorOptions = element.required

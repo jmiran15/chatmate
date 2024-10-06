@@ -1,11 +1,8 @@
-import { Document } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
 import {
   useBeforeUnload,
   useNavigation,
   useSearchParams,
 } from "@remix-run/react";
-import lunr from "lunr";
 import {
   useCallback,
   useEffect,
@@ -14,9 +11,9 @@ import {
   useState,
 } from "react";
 import { useVirtual } from "react-virtual";
-import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import { ItemMeasurer } from "../chatbots.$chatbotId.chats/item-measurer";
 import { DocumentCard } from "./document-card";
+import { OptimisticDocument } from "./route";
 
 // increase both - like @chats-list.tsx
 // should probably share all of these common infinite scroll functions with @chats-list.tsx
@@ -44,15 +41,12 @@ function useIsHydrating(queryString: string) {
 export default function DocumentsList({
   items,
   totalItems,
-  searchTerm,
-  searchResults,
-  progress,
+  searchTerm, // progress,
 }: {
-  items: SerializeFrom<Document>[];
+  items: OptimisticDocument[];
   totalItems: number;
   searchTerm: string;
-  searchResults: SerializeFrom<lunr.Index.Result[] | undefined>[];
-  progress: ProgressData | undefined;
+  // progress: ProgressData | undefined;
 }) {
   const navigation = useNavigation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -70,6 +64,7 @@ export default function DocumentsList({
   });
 
   // saving the user's scroll position
+  // TODO: change the local storage key
   useBeforeUnload(
     useCallback(() => {
       if (!parentRef.current) return;
@@ -160,7 +155,7 @@ export default function DocumentsList({
       key={`list-${totalItems}`}
       ref={parentRef}
       data-hydrating-signal
-      className="List"
+      className="List no-scrollbar"
       style={{
         height: `800px`,
         width: `100%`,
@@ -168,6 +163,7 @@ export default function DocumentsList({
       }}
     >
       <div
+        className="flex flex-col gap-4 flex-1 w-full"
         style={{
           height: `${rowVirtualizer.totalSize}px`,
           width: "100%",
@@ -179,7 +175,6 @@ export default function DocumentsList({
             ? Math.abs(start - virtualRow.index)
             : virtualRow.index;
           const item = items[index];
-          const searchMatches = searchResults?.[index]?.matchData.metadata;
 
           return (
             <ItemMeasurer
@@ -195,16 +190,7 @@ export default function DocumentsList({
               }}
             >
               {item ? (
-                <DocumentCard
-                  key={item.id}
-                  item={item}
-                  progress={
-                    progress?.documentId === item.id ? progress : undefined
-                  }
-                  searchMatches={
-                    searchMatches ? Object.keys(searchMatches) : undefined
-                  }
-                />
+                <DocumentCard key={item.id} item={item} />
               ) : navigation.state === "loading" ? (
                 <span>Loading...</span>
               ) : (

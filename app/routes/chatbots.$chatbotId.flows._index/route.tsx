@@ -2,7 +2,11 @@ import { json, LoaderFunctionArgs } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { Plus } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { Separator } from "~/components/ui/separator";
 import { prisma } from "~/db.server";
+import Container from "../chatbots.$chatbotId.forms._index/Container";
+import Description from "../chatbots.$chatbotId.forms._index/Description";
+import Title from "../chatbots.$chatbotId.forms._index/Title";
 import { FlowCard } from "./flow-card";
 
 interface Flow {
@@ -45,18 +49,9 @@ export default function FlowsPage() {
   const { flows } = useLoaderData<typeof loader>();
 
   return (
-    <div className="container mx-auto px-4 py-8 h-full flex flex-col">
-      <div className="flex flex-col sm:flex-row items-start justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-bold mb-2">My flows</h1>
-          <p className="text-gray-600">Manage your chatbot flows</p>
-        </div>
-        <Button className="mt-4 sm:mt-0" asChild>
-          <Link to="new">
-            <Plus className="mr-2 h-4 w-4" /> Create a new flow
-          </Link>
-        </Button>
-      </div>
+    <Container className="max-w-5xl">
+      <Header />
+      <Separator />
       <div className="space-y-4 overflow-y-auto flex-1 w-full">
         {flows.length === 0 ? (
           <div className="text-center text-gray-500">No flows found</div>
@@ -64,6 +59,23 @@ export default function FlowsPage() {
           flows.map((flow) => <FlowCard key={flow.id} flow={flow} />)
         )}
       </div>
+    </Container>
+  );
+}
+
+function Header() {
+  return (
+    <div className="flex flex-col sm:flex-row items-start justify-between">
+      <div className="flex flex-col">
+        <Title>My flows</Title>
+        <Description>Manage your chatbot flows</Description>
+      </div>
+      <Button asChild>
+        <Link to="new">
+          <Plus className="mr-2 h-4 w-4" />{" "}
+          <span className="text-md">Create a new flow</span>
+        </Link>
+      </Button>
     </div>
   );
 }

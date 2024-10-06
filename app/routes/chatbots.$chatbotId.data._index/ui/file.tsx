@@ -1,15 +1,15 @@
+import { createId } from "@paralleldrive/cuid2";
+import { useParams, useSubmit } from "@remix-run/react";
+import { useRef, useState } from "react";
+import { Button } from "~/components/ui/button";
 import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import { FileUploader } from "./file-uploader";
-import { useRef, useState } from "react";
-import { Button } from "~/components/ui/button";
-import { useParams, useSubmit } from "@remix-run/react";
 import { STEPS } from "~/utils/types";
-import { createId } from "@paralleldrive/cuid2";
+import { FileUploader } from "./file-uploader";
 
 export function FileUpload({
   setStep,

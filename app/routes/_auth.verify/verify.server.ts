@@ -27,9 +27,12 @@ export function getDomainUrl(request: Request) {
 import { createCookieSessionStorage } from "@remix-run/node";
 import {
   createCustomer,
-  createFreeSubscription,
+  createSubscriptionCheckout,
 } from "~/models/subscription.server";
-import { joinPasswordHashSessionKey } from "../_auth.join/route";
+import {
+  joinPasswordHashSessionKey,
+  priceIdSessionKey,
+} from "../_auth.join/route";
 import { handleChangeEmailVerification } from "../chatbots.settings.general.change-email/emails.server";
 
 export const verifySessionStorage = createCookieSessionStorage({
@@ -230,14 +233,30 @@ export async function handleOnboardingVerification({
 
   // TODO - switch to Paddle
   await createCustomer({ userId: user.id });
-  const subscription = await prisma.subscription.findUnique({
-    where: { userId: user.id },
+
+  const priceId = verifySession.get(priceIdSessionKey);
+
+  // Create a checkout session for the basic plan, redirect to that url
+  // TODO - we need this to be the correct price id selected by the user
+
+  const checkoutUrl = await createSubscriptionCheckout({
+    userId: user.id,
+    priceId,
+    successUrl: "/chatbots?success=true",
+    cancelUrl: "/",
   });
-  if (!subscription) await createFreeSubscription({ userId: user.id });
+
+  // clear the priceId from the session
+  verifySession.unset(priceIdSessionKey);
+
+  if (!checkoutUrl) {
+    throw new Error("Unable to create checkout session");
+  }
 
   // TODO - fix the remember me stuff so that it works with the join flow
   return createUserSession({
-    redirectTo: "/chatbots",
+    // redirectTo: "/chatbots",
+    redirectTo: checkoutUrl,
     remember: true,
     request,
     userId: user.id,

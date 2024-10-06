@@ -1,88 +1,9 @@
-import { Price, User } from "@prisma/client";
-import { Form, Link } from "@remix-run/react";
-import { Loader2 } from "lucide-react";
+import { Form } from "@remix-run/react";
 import { Container } from "~/components/landing/container";
-import { useIsPending } from "~/hooks/use-is-pending";
+import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
-import { useOptionalUser } from "~/utils";
 import H2 from "../../components/landing/h2";
 import H3 from "../../components/landing/h3";
-import { Button, buttonVariants } from "../../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
-
-export const PLANS = {
-  FREE: `free`,
-  PRO: `pro`,
-} as const;
-
-export type Plan = (typeof PLANS)[keyof typeof PLANS];
-
-export const INTERVALS = {
-  MONTH: "month",
-  YEAR: "year",
-} as const;
-
-export type Interval = (typeof INTERVALS)[keyof typeof INTERVALS];
-
-type PricingPlan<T extends Plan = Plan> = {
-  [key in T]: {
-    id: string;
-    name: string;
-    description: string;
-    prices: PriceInterval;
-  };
-};
-
-export const CURRENCIES = {
-  DEFAULT: "usd",
-  USD: "usd",
-} as const;
-
-export type Currency = (typeof CURRENCIES)[keyof typeof CURRENCIES];
-
-export const PRICING_PLANS = {
-  [PLANS.FREE]: {
-    id: PLANS.FREE,
-    name: "Free",
-    description: "Start with the basics, upgrade anytime.",
-    prices: {
-      [INTERVALS.MONTH]: {
-        [CURRENCIES.USD]: 0,
-      },
-      [INTERVALS.YEAR]: {
-        [CURRENCIES.USD]: 0,
-      },
-    },
-  },
-  [PLANS.PRO]: {
-    id: PLANS.PRO,
-    name: "Pro",
-    description: "Access to all features and unlimited projects.",
-    prices: {
-      [INTERVALS.MONTH]: {
-        [CURRENCIES.USD]: 500,
-      },
-      [INTERVALS.YEAR]: {
-        [CURRENCIES.USD]: 5000,
-      },
-    },
-  },
-} satisfies PricingPlan;
-
-type PriceInterval<
-  I extends Interval = Interval,
-  C extends Currency = Currency,
-> = {
-  [interval in I]: {
-    [currency in C]: Price["amount"];
-  };
-};
 
 function SwirlyDoodle(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
@@ -128,73 +49,106 @@ function CheckIcon({
   );
 }
 
-function Plan({
-  name,
-  price,
-  price_id,
-  features,
-  canCheckout,
-  button,
-  to,
-}: {
-  name: string;
-  price: string;
-  price_id: string;
-  features: string[];
-  canCheckout: boolean;
-  button: string;
-  to: (user: User | undefined) => string;
-}) {
-  const user = useOptionalUser();
-  const isPending = useIsPending({ intent: "createCheckout" });
+// function Plan({
+//   name,
+//   price,
+//   price_id,
+//   features,
+//   canCheckout,
+//   button,
+//   to,
+// }: {
+//   name: string;
+//   price: string;
+//   price_id: string;
+//   features: string[];
+//   canCheckout: boolean;
+//   button: string;
+//   to: (user: User | undefined) => string;
+// }) {
+//   const user = useOptionalUser();
+//   const isPending = useIsPending({ intent: "createCheckout" });
 
-  return (
-    <Card className="rounded-xl">
-      <CardHeader>
-        <CardTitle>{name}</CardTitle>
-        <CardTitle className="text-4xl">{price}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ul className={cn("order-last flex flex-col gap-y-3 text-primary")}>
-          {features.map((feature) => (
-            <li key={feature} className="flex">
-              <CheckIcon className="text-primary" />
-              <span className="ml-4">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-      <CardFooter>
-        {user && canCheckout ? (
-          <Form
-            method="post"
-            action="/chatbots/settings/billing"
-            className="w-full"
-          >
-            <input type="hidden" name="planId" value={price_id} />
-            <input type="hidden" name="planInterval" value={INTERVALS.MONTH} />
-            <Button
-              type="submit"
-              name="intent"
-              value="createCheckout"
-              className="w-full"
-              disabled={isPending}
-            >
-              {isPending ? <Loader2 className="animate-spin" /> : button}
-            </Button>
-          </Form>
-        ) : (
-          <Link
-            to={to(user)}
-            className={cn(buttonVariants({ variant: "default" }), "w-full")}
-          >
-            {button}
-          </Link>
-        )}
-      </CardFooter>
-    </Card>
-  );
-}
+//   return (
+//     <Card className="rounded-xl">
+//       <CardHeader>
+//         <CardTitle>{name}</CardTitle>
+//         <CardTitle className="text-4xl">{price}</CardTitle>
+//       </CardHeader>
+//       <CardContent>
+//         <ul className={cn("order-last flex flex-col gap-y-3 text-primary")}>
+//           {features.map((feature) => (
+//             <li key={feature} className="flex">
+//               <CheckIcon className="text-primary" />
+//               <span className="ml-4">{feature}</span>
+//             </li>
+//           ))}
+//         </ul>
+//       </CardContent>
+//       <CardFooter>
+//         {user && canCheckout ? (
+// <Form
+//   method="post"
+//   action="/chatbots/settings/billing"
+//   className="w-full"
+// >
+//   <input type="hidden" name="planId" value={price_id} />
+//   <input type="hidden" name="planInterval" value={INTERVALS.MONTH} />
+//   <Button
+//     type="submit"
+//     name="intent"
+//     value="createCheckout"
+//     className="w-full"
+//     disabled={isPending}
+//   >
+//     {isPending ? <Loader2 className="animate-spin" /> : button}
+//   </Button>
+// </Form>
+//         ) : (
+//           <Link
+//             to={to(user)}
+//             className={cn(buttonVariants({ variant: "default" }), "w-full")}
+//           >
+//             {button}
+//           </Link>
+//         )}
+//       </CardFooter>
+//     </Card>
+//   );
+// }
+
+export const plans = [
+  {
+    name: "Hobby",
+    price_id: "price_1Q58gaFSz9CUblnBlDIarRjt",
+    interval: "month",
+  },
+  {
+    name: "Hobby",
+    price_id: "price_1Q58gaFSz9CUblnBslgqB2PG",
+    interval: "year",
+  },
+  {
+    name: "Standard",
+    price_id: "price_1Q58hHFSz9CUblnBdbnkLfn6",
+    interval: "month",
+  },
+  {
+    name: "Standard",
+    price_id: "price_1Q58hHFSz9CUblnBXjudBDis",
+    interval: "year",
+  },
+  {
+    name: "Unlimited",
+    price_id: "price_1Q58hwFSz9CUblnBuCdk4sRy",
+    interval: "month",
+  },
+  {
+    name: "Unlimited",
+    price_id: "price_1Q58hwFSz9CUblnBLNFh0kqn",
+    interval: "year",
+  },
+];
 
 export default function Pricing() {
   return (
@@ -216,6 +170,24 @@ export default function Pricing() {
           </div>
           <div className="grid max-w-7xl w-full grid-cols-1 gap-x-10 gap-y-10 mx-auto lg:grid-cols-3 items-start">
             {plans.map((plan) => (
+              <Form
+                key={plan.name}
+                method="post"
+                action="/chatbots/settings/billing"
+                className="w-full"
+              >
+                <input type="hidden" name="priceId" value={plan.price_id} />
+                <Button
+                  type="submit"
+                  name="intent"
+                  value="createCheckout"
+                  className="w-full"
+                >
+                  Subscripe to {plan.name} {plan.interval}
+                </Button>
+              </Form>
+            ))}
+            {/* {plans.map((plan) => (
               <Plan
                 key={plan.name}
                 name={plan.name}
@@ -226,7 +198,7 @@ export default function Pricing() {
                 button={plan.button}
                 to={plan.to}
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </Container>
@@ -234,56 +206,56 @@ export default function Pricing() {
   );
 }
 
-const plans = [
-  {
-    name: "Everyone starts",
-    price: "Free",
-    price_id: PLANS.FREE,
-    features: [
-      "1 chatbot",
-      "Unlimited chats",
-      "Unlimited document uploads",
-      "Widget customization",
-      "Model customization",
-      "AI chat insights",
-      "AI follow ups",
-    ],
-    canCheckout: false,
-    button: "Start for free",
-    to: (user: User | undefined) => (user ? "/chatbots" : "/join"),
-  },
-  {
-    name: "Pro",
-    price: "$5/mo",
-    price_id: PLANS.PRO,
-    features: [
-      "Unlimited chatbots",
-      "Unlimited chats",
-      "Unlimited document uploads",
-      "Widget customization",
-      "Model customization",
-      "AI chat insights",
-      "AI follow ups",
-      "24/7 customer support",
-      "Analytics",
-    ],
-    button: "Start",
-    canCheckout: true,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    to: (user: User | undefined) => "/join",
-  },
-  {
-    name: "Enterprise",
-    price: "Contact us",
-    price_id: "enterprise",
-    features: [
-      "Everything in the pro plan",
-      "Custom integrations",
-      "Custom features",
-    ],
-    canCheckout: false,
-    button: "Contact us",
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    to: (user: User | undefined) => "mailto:jonathan@chatmate.so",
-  },
-];
+// const plans = [
+//   {
+//     name: "Everyone starts",
+//     price: "Free",
+//     price_id: PLANS.FREE,
+//     features: [
+//       "1 chatbot",
+//       "Unlimited chats",
+//       "Unlimited document uploads",
+//       "Widget customization",
+//       "Model customization",
+//       "AI chat insights",
+//       "AI follow ups",
+//     ],
+//     canCheckout: false,
+//     button: "Start for free",
+//     to: (user: User | undefined) => (user ? "/chatbots" : "/join"),
+//   },
+//   {
+//     name: "Pro",
+//     price: "$5/mo",
+//     price_id: PLANS.PRO,
+//     features: [
+//       "Unlimited chatbots",
+//       "Unlimited chats",
+//       "Unlimited document uploads",
+//       "Widget customization",
+//       "Model customization",
+//       "AI chat insights",
+//       "AI follow ups",
+//       "24/7 customer support",
+//       "Analytics",
+//     ],
+//     button: "Start",
+//     canCheckout: true,
+//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//     to: (user: User | undefined) => "/join",
+//   },
+//   {
+//     name: "Enterprise",
+//     price: "Contact us",
+//     price_id: "enterprise",
+//     features: [
+//       "Everything in the pro plan",
+//       "Custom integrations",
+//       "Custom features",
+//     ],
+//     canCheckout: false,
+//     button: "Contact us",
+//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//     to: (user: User | undefined) => "mailto:jonathan@chatmate.so",
+//   },
+// ];

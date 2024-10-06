@@ -1,10 +1,10 @@
-import { z } from "zod";
-import { urlSchema } from "./table/types";
-import { columns } from "./table/columns";
-import { DataTable } from "./table/table";
 import { RowSelectionState } from "@tanstack/react-table";
 import { useMemo } from "react";
 import Skeleton from "react-loading-skeleton";
+import { z } from "zod";
+import { columns } from "../table/columns";
+import { DataTable } from "../table/table";
+import { urlSchema } from "../table/types";
 
 const MAX_CRAWLED_LINKS = 10;
 

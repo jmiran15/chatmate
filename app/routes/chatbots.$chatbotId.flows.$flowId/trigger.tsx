@@ -36,7 +36,7 @@ export default function Trigger({
   ];
 
   return (
-    <Card className="w-full max-w-4xl">
+    <Card className="w-full">
       <CardHeader className="cursor-pointer" onClick={toggleCard}>
         <CardTitle className="flex justify-between items-center">
           Trigger

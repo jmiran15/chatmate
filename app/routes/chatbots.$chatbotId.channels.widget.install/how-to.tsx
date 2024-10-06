@@ -1,4 +1,7 @@
 import { Link } from "@remix-run/react";
+import { NonLinkCard } from "~/components/LinkCard";
+import { LinkCardBody } from "~/components/LinkCardBody";
+import { LinkCardHeader } from "~/components/LinkCardHeader";
 import { cn } from "~/lib/utils";
 import {
   Accordion,
@@ -7,14 +10,6 @@ import {
   AccordionTrigger,
 } from "../../components/ui/accordion";
 import { buttonVariants } from "../../components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
 
 const PLATFORMS = [
   {
@@ -66,15 +61,18 @@ const PLATFORMS = [
 
 export default function HowTo() {
   return (
-    <Card className="w-full max-w-xl">
-      <CardHeader>
-        <CardTitle>How to install</CardTitle>
-        <CardDescription>
-          Looking for instructions on how to install your chatbot in popular
-          frameworks? See the steps below.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+    <NonLinkCard className="w-full max-w-2xl">
+      <div className="p-4 flex flex-col gap-4 items-start justify-start">
+        <div className="flex flex-col gap-1">
+          <LinkCardHeader title={"How to install"} tag={undefined} />
+          <LinkCardBody>
+            <span>
+              Looking for instructions on how to install your chatbot in popular
+              frameworks? See the steps below.
+            </span>
+          </LinkCardBody>
+        </div>
+
         <Accordion type="single" collapsible className="w-full">
           {PLATFORMS.map(({ platform, steps }) => (
             <AccordionItem key={platform} value={platform}>
@@ -92,15 +90,14 @@ export default function HowTo() {
             </AccordionItem>
           ))}
         </Accordion>
-      </CardContent>
-      <CardFooter>
+
         <Link
           to="mailto:jonathan@chatmate.so"
-          className={cn(buttonVariants({ variant: "link" }), "p-0 h-0")}
+          className={cn(buttonVariants({ variant: "link" }), "px-0")}
         >
           Not sure how to install? Contact us
         </Link>
-      </CardFooter>
-    </Card>
+      </div>
+    </NonLinkCard>
   );
 }

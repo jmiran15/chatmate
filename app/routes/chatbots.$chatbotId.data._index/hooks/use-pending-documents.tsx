@@ -12,6 +12,8 @@ interface PendingDocument extends Omit<Document, "createdAt" | "updatedAt"> {
   updatedAt: string;
 }
 
+// This doesn't really work ... all the fetchers die off when the modal closes so none of them are pending here...
+// we need to set the use_stable ... future flag for this to work
 export function usePendingDocuments(): PendingDocument[] {
   return useFetchers()
     .filter(isPreprocessingFetcher)

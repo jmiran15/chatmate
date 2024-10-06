@@ -1,8 +1,10 @@
 import type { Prisma } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-
-import { Link } from "@remix-run/react";
 import { formatDistanceToNow } from "date-fns";
+
+import { LinkCard } from "~/components/LinkCard";
+import { LinkCardBody } from "~/components/LinkCardBody";
+import { LinkCardHeader } from "~/components/LinkCardHeader";
 
 export default function ChatbotCard({
   chatbot,
@@ -18,16 +20,17 @@ export default function ChatbotCard({
   >;
 }) {
   return (
-    <Link
-      to={`${chatbot.id}/chats`}
-      className="flex w-full items-center justify-between rounded-lg border p-6 text-left transition-all hover:bg-accent"
-    >
-      <div className="font-semibold">{chatbot.name}</div>
-      <div className="text-sm text-muted-foreground">
-        {formatDistanceToNow(new Date(chatbot.createdAt), {
-          addSuffix: true,
-        })}
+    <LinkCard to={`${chatbot.id}/chats`}>
+      <div className="p-4 flex flex-col gap-1">
+        <LinkCardHeader title={chatbot.name} tag={undefined} />
+        <LinkCardBody>
+          <span>
+            {formatDistanceToNow(new Date(chatbot.createdAt), {
+              addSuffix: true,
+            })}
+          </span>
+        </LinkCardBody>
       </div>
-    </Link>
+    </LinkCard>
   );
 }

@@ -1,13 +1,14 @@
 import { Button } from "~/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "~/components/ui/dialog";
 
-import SelectType from "./select-type";
-import Website from "./website";
-import { FileUpload } from "./file";
-import BlankUpload from "./blank";
+import { useSubmit } from "@remix-run/react";
+import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { STEPS } from "~/utils/types";
-import { useSubmit } from "@remix-run/react";
+import BlankUpload from "./blank";
+import { FileUpload } from "./file";
+import SelectType from "./select-type";
+import Website from "./website";
 
 export function DialogDemo({
   submit,
@@ -36,7 +37,10 @@ export function DialogDemo({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => setStep(STEPS.SELECT_TYPE)}>Add data</Button>
+        <Button onClick={() => setStep(STEPS.SELECT_TYPE)}>
+          <Plus className="mr-2 h-4 w-4" />{" "}
+          <span className="text-md">Add data</span>
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-lg max-h-screen overflow-auto">
         {step === STEPS.SELECT_TYPE ? <SelectType setStep={setStep} /> : null}

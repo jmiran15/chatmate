@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
+  previewFeatures = ["postgresqlExtensions", "fullTextSearch"]
 }
 
 datasource db {
@@ -14,11 +14,11 @@ model User {
   email        String        @unique
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  customerId   String?       @unique
   chats        Chat[]
   chatbots     Chatbot[]
   password     Password?
-  subscription Subscription?
+  customerId   String?       @unique // Stripe customer ID
+  subscription Subscription? // Stripe subscription
   name         String?
   picture      String?
   provider     String?
@@ -147,6 +147,8 @@ model Label {
   chatbotId String
   chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chats     Chat[]   @relation("ChatToLabel")
+
+  @@unique([chatbotId, name])
 }
 
 model AnonymousUser {
@@ -336,7 +338,7 @@ model Trigger {
   updatedAt   DateTime    @updatedAt
   type        TriggerType @default(INITIAL_LOAD)
   description String?
-  flow        Flow        @relation(fields: [flowId], references: [id])
+  flow        Flow        @relation(fields: [flowId], references: [id], onDelete: Cascade)
   flowId      String      @unique
 }
 
@@ -345,11 +347,11 @@ model Action {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   type      ActionType @default(TEXT)
-  form      Form?      @relation(fields: [formId], references: [id])
+  form      Form?      @relation(fields: [formId], references: [id], onDelete: Cascade)
   formId    String?
   text      String?
   delay     Int?
-  flow      Flow       @relation(fields: [flowId], references: [id])
+  flow      Flow       @relation(fields: [flowId], references: [id], onDelete: Cascade)
   flowId    String
   order     Float?     @default(0)
 
@@ -357,9 +359,9 @@ model Action {
 }
 
 model FormsOnActions {
-  action   Action @relation(fields: [actionId], references: [id])
+  action   Action @relation(fields: [actionId], references: [id], onDelete: Cascade)
   actionId String
-  form     Form   @relation(fields: [formId], references: [id])
+  form     Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
   formId   String
 
   @@id([actionId, formId])
@@ -385,28 +387,6 @@ model ToolFunction {
   toolCallId String    @unique
 }
 
-model Plan {
-  id            String         @id @unique
-  name          String
-  description   String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  prices        Price[]
-  subscriptions Subscription[]
-}
-
-model Price {
-  id            String         @id @unique
-  planId        String
-  amount        Int
-  currency      String
-  interval      String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  plan          Plan           @relation(fields: [planId], references: [id], onDelete: Cascade)
-  subscriptions Subscription[]
-}
-
 model Subscription {
   id                 String   @id @unique
   userId             String   @unique
@@ -419,8 +399,6 @@ model Subscription {
   cancelAtPeriodEnd  Boolean  @default(false)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
-  plan               Plan     @relation(fields: [planId], references: [id])
-  price              Price    @relation(fields: [priceId], references: [id])
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 

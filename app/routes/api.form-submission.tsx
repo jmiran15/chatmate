@@ -108,6 +108,8 @@ export async function action({ request }: ActionFunctionArgs) {
       ),
     };
 
+    console.log("processedAction", processedAction);
+
     await processAction(processedAction, chatId, io);
   }
 

@@ -17,8 +17,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
+import { Separator } from "~/components/ui/separator";
 import { prisma } from "~/db.server";
 import { requireUserId } from "~/session.server";
+import Container from "../chatbots.$chatbotId.forms._index/Container";
+import Description from "../chatbots.$chatbotId.forms._index/Description";
+import Title from "../chatbots.$chatbotId.forms._index/Title";
 import ChatsChart from "./charts/chats";
 import { TagsChart } from "./charts/tags";
 import VisitorsBarlist from "./charts/visitors";
@@ -45,11 +49,13 @@ const LabelSchema = z.object({
   color: z.string(),
 });
 
-const CountryDataSchema = z.object({
-  country: z.string(),
-  country_code: z.string(),
+const CountrySchema = z.object({
+  country: z.string().nullable().default(""),
+  country_code: z.string().nullable().default(""),
   count: z.number().int(),
 });
+
+const CountryDataSchema = z.array(CountrySchema);
 
 const BrowserDataSchema = z.object({
   browser: z.string(),
@@ -87,7 +93,7 @@ const LoaderDataSchema = z.object({
   period: z.string(),
   previousPeriod: KPIDataSchema,
   percentageChanges: PercentageChangeSchema,
-  countryData: z.array(CountryDataSchema),
+  countryData: CountryDataSchema,
   browserData: z.array(BrowserDataSchema),
   deviceData: z.array(DeviceDataSchema),
   distinctLabels: z.array(LabelSchema),
@@ -156,6 +162,7 @@ export const loader = async ({
   const chatWhereClause = {
     chatbotId,
     deleted: false,
+    userId: null,
     messages: {
       some: {
         role: "user",
@@ -242,6 +249,7 @@ export const loader = async ({
    LEFT JOIN "Label" l ON l.id = cl."B"
    WHERE c."chatbotId" = ${chatbotId}
      AND c.deleted = false
+     AND c."userId" IS NULL
      AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
      AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
      AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
@@ -263,6 +271,7 @@ export const loader = async ({
   FROM "Chat" c
   WHERE c."chatbotId" = ${chatbotId}
     AND c.deleted = false
+    AND c."userId" IS NULL
     AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
     AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
     AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
@@ -292,6 +301,7 @@ export const loader = async ({
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
       AND c.deleted = false
+      AND c."userId" IS NULL
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
       AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
@@ -313,6 +323,7 @@ export const loader = async ({
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
       AND c.deleted = false
+      AND c."userId" IS NULL
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
       AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
@@ -333,6 +344,7 @@ export const loader = async ({
     JOIN "Chat" c ON au."chatId" = c.id
     WHERE c."chatbotId" = ${chatbotId}
       AND c.deleted = false
+      AND c."userId" IS NULL
       AND c."createdAt" >= ${currentStartDate}::timestamp AT TIME ZONE 'UTC'
       AND c."createdAt" <= ${now}::timestamp AT TIME ZONE 'UTC'
       AND EXISTS (SELECT 1 FROM "Message" m WHERE m."chatId" = c.id AND m.role = 'user')
@@ -399,10 +411,39 @@ const generateRandomMessages = (count: number) => {
   return messages;
 };
 
+const PREDEFINED_LABELS = [
+  { name: "refund", color: "#FF6B6B" },
+  { name: "general", color: "#4ECDC4" },
+  { name: "pricing", color: "#45B7D1" },
+  { name: "bugs", color: "#FF9F1C" },
+  { name: "feature req", color: "#7B68EE" },
+  { name: "support", color: "#98D8C8" },
+  { name: "feedback", color: "#F7B801" },
+];
+
 const seedChats = async (chatbotId: string) => {
   const now = DateTime.now().setZone("utc");
   const oneYearAgo = now.minus({ months: 12 });
 
+  // Upsert predefined labels
+  for (const label of PREDEFINED_LABELS) {
+    await prisma.label.upsert({
+      where: {
+        chatbotId_name: {
+          chatbotId,
+          name: label.name,
+        },
+      },
+      update: {},
+      create: {
+        chatbotId,
+        name: label.name,
+        color: label.color,
+      },
+    });
+  }
+
+  // Fetch all labels for the chatbot
   const labels = await prisma.label.findMany({
     where: { chatbotId },
     select: { id: true },
@@ -412,12 +453,13 @@ const seedChats = async (chatbotId: string) => {
     const createdAt = generateRandomDate(oneYearAgo, now);
     const messageCount = Math.floor(Math.random() * 10) + 1;
     const status =
-      Math.random() > 0.5 ? TicketStatus.OPEN : TicketStatus.CLOSED;
-    const elapsedMs = Math.floor(Math.random() * 300000);
+      Math.random() <= 0.8 ? TicketStatus.CLOSED : TicketStatus.OPEN;
+    const elapsedMs = Math.floor(Math.random() * 120000) + 30000; // 30 seconds to 2.5 minutes
 
+    // Randomly select labels (0 to 3)
     const chatLabels = labels
       .sort(() => 0.5 - Math.random())
-      .slice(0, Math.floor(Math.random() * 3));
+      .slice(0, Math.floor(Math.random() * 4));
 
     const chat = await prisma.chat.create({
       data: {
@@ -457,7 +499,7 @@ const seedChats = async (chatbotId: string) => {
           "desktop",
           "mobile",
           "tablet",
-          null, // Add null as a possible value
+          null,
         ]),
         os_name: faker.helpers.arrayElement([
           "Windows",
@@ -531,94 +573,100 @@ export default function Analytics() {
   };
 
   return (
-    <div className="h-full w-full overflow-y-auto ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 sm:mb-0">
-            Analytics
-          </h1>
-          <Select value={period} onValueChange={handlePeriodChange}>
-            <SelectTrigger
-              className="w-full sm:w-[160px]"
-              aria-label="Select time range"
-            >
-              <SelectValue placeholder="Select time range" />
-            </SelectTrigger>
-            <SelectContent className="rounded-xl">
-              {DATE_RANGES.map((range) => (
-                <SelectItem
-                  key={range.value}
-                  value={range.value}
-                  className="rounded-lg"
-                >
-                  {range.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+    <Container className="max-w-5xl">
+      <Header period={period} handlePeriodChange={handlePeriodChange} />
+      <Separator />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
-          <KPIs
-            data={[
-              {
-                name: "Total chats",
-                stat: String(totalChats),
-                change: Math.abs(percentageChanges.totalChats).toFixed(1),
-                changeType:
-                  percentageChanges.totalChats > 0 ? "positive" : "negative",
-                icon: MessageSquare,
-              },
-              {
-                name: "Resolution time",
-                stat: formatDuration(avgResolutionTime),
-                change: Math.abs(percentageChanges.avgResolutionTime).toFixed(
-                  1,
-                ),
-                changeType:
-                  percentageChanges.avgResolutionTime > 0
-                    ? "negative"
-                    : "positive",
-                icon: MessageSquare,
-              },
-              {
-                name: "Resolution rate",
-                stat: Math.round(resolutionRate) + "%",
-                change: Math.abs(percentageChanges.resolutionRate).toFixed(1),
-                changeType:
-                  percentageChanges.resolutionRate > 0
-                    ? "positive"
-                    : "negative",
-                icon: MessageSquare,
-              },
-              {
-                name: "Time saved",
-                stat: formatDuration(totalTimeSaved),
-                change: Math.abs(percentageChanges.totalTimeSaved).toFixed(1),
-                changeType:
-                  percentageChanges.totalTimeSaved > 0
-                    ? "positive"
-                    : "negative",
-                icon: MessageSquare,
-              },
-            ]}
-          />
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-2 items-stretch">
-          <ChatsChart
-            chats={chatCountsByDay}
-            period={period}
-            percentageChanges={percentageChanges}
-          />
-          <TagsChart tags={tagsCount} labels={distinctLabels} />
-          <VisitorsBarlist
-            countryData={countryData}
-            browserData={browserData}
-            deviceData={deviceData}
-          />
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <KPIs
+          data={[
+            {
+              name: "Total chats",
+              stat: String(totalChats),
+              change: Math.abs(percentageChanges.totalChats).toFixed(1),
+              changeType:
+                percentageChanges.totalChats > 0 ? "positive" : "negative",
+              icon: MessageSquare,
+            },
+            {
+              name: "Resolution time",
+              stat: formatDuration(avgResolutionTime),
+              change: Math.abs(percentageChanges.avgResolutionTime).toFixed(1),
+              changeType:
+                percentageChanges.avgResolutionTime > 0
+                  ? "negative"
+                  : "positive",
+              icon: MessageSquare,
+            },
+            {
+              name: "Resolution rate",
+              stat: Math.round(resolutionRate) + "%",
+              change: Math.abs(percentageChanges.resolutionRate).toFixed(1),
+              changeType:
+                percentageChanges.resolutionRate > 0 ? "positive" : "negative",
+              icon: MessageSquare,
+            },
+            {
+              name: "Time saved",
+              stat: formatDuration(totalTimeSaved),
+              change: Math.abs(percentageChanges.totalTimeSaved).toFixed(1),
+              changeType:
+                percentageChanges.totalTimeSaved > 0 ? "positive" : "negative",
+              icon: MessageSquare,
+            },
+          ]}
+        />
       </div>
+
+      <div className="grid gap-6 lg:grid-cols-2 items-stretch">
+        <ChatsChart
+          chats={chatCountsByDay}
+          period={period}
+          percentageChanges={percentageChanges}
+        />
+        <TagsChart tags={tagsCount} labels={distinctLabels} />
+        <VisitorsBarlist
+          countryData={countryData}
+          browserData={browserData}
+          deviceData={deviceData}
+        />
+      </div>
+    </Container>
+  );
+}
+
+function Header({
+  period,
+  handlePeriodChange,
+}: {
+  period: string;
+  handlePeriodChange: (value: string) => void;
+}) {
+  return (
+    <div className="flex flex-col sm:flex-row items-start justify-between">
+      <div className="flex flex-col">
+        <Title>Analytics</Title>
+        <Description>View analytics for your chatbot</Description>
+      </div>
+      <Select value={period} onValueChange={handlePeriodChange}>
+        <SelectTrigger
+          className="w-full sm:w-[160px]"
+          aria-label="Select time range"
+        >
+          <SelectValue placeholder="Select time range" />
+        </SelectTrigger>
+        <SelectContent className="rounded-xl">
+          {DATE_RANGES.map((range) => (
+            <SelectItem
+              key={range.value}
+              value={range.value}
+              className="rounded-lg"
+            >
+              {range.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 }

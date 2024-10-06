@@ -6,7 +6,7 @@ type Bar<T> = T & {
   key?: string;
   href?: string;
   value: number;
-  name: string;
+  name: string | null;
   img?: React.ReactNode;
 };
 
@@ -118,7 +118,7 @@ function BarListInner<T>(
                       rel="noreferrer"
                       onClick={(event) => event.stopPropagation()}
                     >
-                      {item.name}
+                      {item.name ?? ""}
                     </a>
                   ) : (
                     <p

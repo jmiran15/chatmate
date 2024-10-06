@@ -17,11 +17,15 @@ export function formDataToFlowSchema(formData: FormData): Partial<FlowSchema> {
       type:
         (formData.get("triggerType") as TriggerSchema["type"]) ??
         "INITIAL_LOAD",
-      description:
-        (formData.get("triggerDescription") as string | undefined) ?? "",
     },
     actions: [],
   };
+
+  // Only add description if the trigger type is CUSTOM_EVENT
+  if (flowData.trigger && flowData.trigger.type === "CUSTOM_EVENT") {
+    flowData.trigger.description =
+      (formData.get("triggerDescription") as string | undefined) ?? "";
+  }
 
   // Collect all action-related entries
   const actionEntries = Array.from(formData.entries()).filter(
@@ -49,21 +53,36 @@ export function formDataToFlowSchema(formData: FormData): Partial<FlowSchema> {
     {} as Record<string, Partial<ActionSchema>>,
   );
 
+  console.log("groups", groups);
+
   // Convert grouped actions to ActionSchema objects
-  flowData.actions = Object.values(groups).map((group) => ({
-    id: group.id,
-    type: group.type as ActionSchema["type"],
-    ...(group.type === "FORM"
-      ? { formId: group.formId }
-      : { text: group.text }),
-    delay: group.delay ? Number(group.delay) : undefined,
-    order: group.order ? Number(group.order) : undefined,
-    mentions: group.mentions || [],
-  }));
+  flowData.actions = Object.values(groups).map((group) => {
+    const baseAction = {
+      id: group.id,
+      type: group.type as ActionSchema["type"],
+      delay: group.delay ? Number(group.delay) : undefined,
+      order: group.order ? Number(group.order) : undefined,
+    };
+
+    if (group.type === "FORM") {
+      return {
+        ...baseAction,
+        formId: group.formId,
+      };
+    } else {
+      return {
+        ...baseAction,
+        text: group.text,
+        mentions: group.mentions || [],
+      };
+    }
+  });
 
   // Validate the constructed flowData
   const validatedTrigger = triggerSchema.parse(flowData.trigger);
   const validatedActions = z.array(actionSchema).parse(flowData.actions);
+
+  console.log("validatedActions", validatedActions);
 
   return {
     trigger: validatedTrigger,

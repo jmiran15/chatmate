@@ -1,12 +1,9 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { z } from "zod";
-import { stripe } from "~/models/subscription.server";
-import { PLANS } from "~/routes/_header._index/pricing-page";
 import { prisma } from "~/db.server";
-//   sendSubscriptionSuccessEmail,
-//   sendSubscriptionErrorEmail,
+import { stripe } from "~/models/subscription.server";
 
-export const ROUTE_PATH = "/webhooks" as const;
+export const ROUTE_PATH = "/webhook" as const;
 
 /**
  * Gets and constructs a Stripe event signature.
@@ -46,7 +43,7 @@ export async function action({ request }: ActionFunctionArgs) {
       case "checkout.session.completed": {
         const session = event.data.object;
 
-        const { customer: customerId, subscription: subscriptionId } = z
+        const { customer: customerId, subscription: newSubscriptionId } = z
           .object({ customer: z.string(), subscription: z.string() })
           .parse(session);
 
@@ -57,44 +54,57 @@ export async function action({ request }: ActionFunctionArgs) {
         });
         if (!user) throw new Error(`User not found.`);
 
-        const subscription =
-          await stripe.subscriptions.retrieve(subscriptionId);
-        await prisma.subscription.update({
-          where: { userId: user.id },
-          data: {
-            id: subscription.id,
-            userId: user.id,
-            planId: String(subscription.items.data[0].plan.product),
-            priceId: String(subscription.items.data[0].price.id),
-            interval: String(subscription.items.data[0].plan.interval),
-            status: subscription.status,
-            currentPeriodStart: subscription.current_period_start,
-            currentPeriodEnd: subscription.current_period_end,
-            cancelAtPeriodEnd: subscription.cancel_at_period_end,
-          },
+        console.log("customerId", customerId);
+        console.log("newSubscriptionId", newSubscriptionId);
+
+        // Retrieve all subscriptions for the customer
+        const allSubscriptions = await stripe.subscriptions.list({
+          customer: customerId,
         });
 
-        // send this with loops.so
-        // await sendSubscriptionSuccessEmail({
-        //   email: user.email,
-        //   subscriptionId,
-        // });
-
-        // Cancel free subscription. — User upgraded to a paid plan.
-        // Not required, but it's a good practice to keep just a single active plan.
-        const subscriptions = (
-          await stripe.subscriptions.list({ customer: customerId })
-        ).data.map((sub) => sub.items);
-
-        if (subscriptions.length > 1) {
-          const freeSubscription = subscriptions.find((sub) =>
-            sub.data.some((item) => item.price.product === PLANS.FREE),
-          );
-          if (freeSubscription) {
-            await stripe.subscriptions.cancel(
-              freeSubscription?.data[0].subscription,
-            );
+        // Cancel all subscriptions except the newly created one
+        for (const subscription of allSubscriptions.data) {
+          if (subscription.id !== newSubscriptionId) {
+            await stripe.subscriptions.cancel(subscription.id);
+            console.log(`Cancelled subscription: ${subscription.id}`);
           }
+        }
+
+        // Retrieve and process the new subscription
+        const newSubscription =
+          await stripe.subscriptions.retrieve(newSubscriptionId);
+
+        console.log("newSubscription", newSubscription);
+
+        try {
+          const dbSubscription = await prisma.subscription.upsert({
+            where: { userId: user.id },
+            update: {
+              id: newSubscription.id,
+              userId: user.id,
+              planId: String(newSubscription.items.data[0].plan.product),
+              priceId: String(newSubscription.items.data[0].price.id),
+              interval: String(newSubscription.items.data[0].plan.interval),
+              status: newSubscription.status,
+              currentPeriodStart: newSubscription.current_period_start,
+              currentPeriodEnd: newSubscription.current_period_end,
+              cancelAtPeriodEnd: newSubscription.cancel_at_period_end,
+            },
+            create: {
+              id: newSubscription.id,
+              userId: user.id,
+              planId: String(newSubscription.items.data[0].plan.product),
+              priceId: String(newSubscription.items.data[0].price.id),
+              interval: String(newSubscription.items.data[0].plan.interval),
+              status: newSubscription.status,
+              currentPeriodStart: newSubscription.current_period_start,
+              currentPeriodEnd: newSubscription.current_period_end,
+            },
+          });
+
+          console.log("dbSubscription", dbSubscription);
+        } catch (err: unknown) {
+          console.log(err);
         }
 
         return new Response(null);

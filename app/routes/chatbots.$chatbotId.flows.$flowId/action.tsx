@@ -62,7 +62,7 @@ export default function Action({
   };
 
   return (
-    <Card className="w-full max-w-4xl" ref={actionRef}>
+    <Card className="w-full" ref={actionRef}>
       <CardHeader className="cursor-pointer" onClick={toggleCard}>
         <CardTitle className="flex justify-between items-center">
           <span>Action {action.order}</span>
@@ -109,7 +109,7 @@ export default function Action({
             type="number"
             name={`${action.id}-delay`}
             placeholder="Enter delay"
-            defaultValue={action.delay ?? ""}
+            defaultValue={action.delay ?? 0}
           />
         </CardContent>
       )}

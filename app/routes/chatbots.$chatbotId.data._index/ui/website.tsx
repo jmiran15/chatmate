@@ -1,9 +1,4 @@
-import {
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "~/components/ui/dialog";
+import { createId } from "@paralleldrive/cuid2";
 import {
   Form,
   SubmitOptions,
@@ -11,17 +6,22 @@ import {
   useParams,
   useSubmit,
 } from "@remix-run/react";
-import { Label } from "~/components/ui/label";
-import { Input } from "~/components/ui/input";
-import { Button } from "~/components/ui/button";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { STEPS } from "~/utils/types";
-import { Checkbox } from "~/components/ui/checkbox";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useEventSource } from "remix-utils/sse/react";
-import LinksTable from "./links-table";
-import { Progress } from "../api.crawl.$jobId.progress";
-import { createId } from "@paralleldrive/cuid2";
+import { Button } from "~/components/ui/button";
+import { Checkbox } from "~/components/ui/checkbox";
+import {
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "~/components/ui/dialog";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 import { validateUrl } from "~/utils";
+import { STEPS } from "~/utils/types";
+import { Progress } from "../../api.crawl.$jobId.progress";
+import LinksTable from "./links-table";
 
 export default function Website({
   setStep,
@@ -34,7 +34,6 @@ export default function Website({
 }) {
   const { chatbotId } = useParams();
   const fetchers = useFetchers();
-
   const formRef = useRef<HTMLFormElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
   const [links, setLinks] = useState<string[]>([]);
@@ -45,10 +44,29 @@ export default function Website({
   const linksFetcher = fetchers.find(
     (fetcher) => fetcher.key === linksFetcherKey.current,
   );
-  const job = linksFetcher?.data?.job;
-  const eventSource: string | undefined = useEventSource(
-    `/api/crawl/${job?.id}/progress`,
+  const [jobInfo, setJobInfo] = useState<{ id: string } | null>(null);
+
+  // Use a callback to update jobInfo when linksFetcher data changes
+  const updateJobInfo = useCallback((data: any) => {
+    if (data?.job?.id) {
+      setJobInfo({ id: data.job.id });
+    }
+  }, []);
+
+  // Update jobInfo when linksFetcher data changes
+  useEffect(() => {
+    if (linksFetcher?.data) {
+      updateJobInfo(linksFetcher.data);
+    }
+  }, [linksFetcher?.data, updateJobInfo]);
+
+  // Use jobInfo for the event source URL
+  const eventSource: string | null = useEventSource(
+    `/api/crawl/${jobInfo?.id}/progress`,
   );
+
+  console.log("Job: ", jobInfo, eventSource);
+
   const progress: Progress | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
@@ -108,6 +126,7 @@ export default function Website({
         );
       } else if (intent === "links") {
         setIsTableVisible(true);
+        setJobInfo(null); // Reset jobInfo before starting a new job
         submit(
           {
             intent: "getLinks",

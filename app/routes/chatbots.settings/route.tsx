@@ -1,3 +1,4 @@
+import { SEOHandle } from "@nasa-gcn/remix-seo";
 import { NavLink, Outlet } from "@remix-run/react";
 
 export default function Settings() {

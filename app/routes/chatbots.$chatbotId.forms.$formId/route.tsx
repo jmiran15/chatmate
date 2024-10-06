@@ -119,6 +119,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     }
     case "delete": {
       const elementId = formData.get("elementId") as string;
+
+      console.log("elementId", elementId);
       return await prisma.formElement.delete({
         where: { id: elementId },
       });

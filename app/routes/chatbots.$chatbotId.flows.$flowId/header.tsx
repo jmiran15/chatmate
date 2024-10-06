@@ -30,7 +30,7 @@ const Header = ({
 }: HeaderProps) => {
   const isSubmitting = useNavigation().state === "submitting";
   return (
-    <div className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center">
       <div className="flex items-center space-x-4">
         <Button type="button" variant="ghost" size="icon" asChild>
           <Link to="../flows">

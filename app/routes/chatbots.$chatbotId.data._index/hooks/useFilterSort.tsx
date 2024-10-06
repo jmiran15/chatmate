@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getFromLocalStorage,
-  setToLocalStorage,
-} from "./hooks/use-local-storage";
+import { getFromLocalStorage, setToLocalStorage } from "./use-local-storage";
 
 export function useFilterSort(searchParams: URLSearchParams) {
   const [filters, setFilters] = useState(() => {

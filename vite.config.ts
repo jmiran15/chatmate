@@ -44,8 +44,9 @@ export default defineConfig({
     remix({
       ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{ts,tsx}"],
       future: {
+        // TODO: Need to refactor lots of our useFetcher usage to support this!
+        // v3_fetcherPersist possibly causing some bugs
         v3_fetcherPersist: true,
-
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
       },

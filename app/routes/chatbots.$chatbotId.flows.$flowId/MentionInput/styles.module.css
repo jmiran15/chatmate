@@ -2,22 +2,9 @@
   margin: 1em 0;
 }
 
-.mentions--singleLine .mentions__control {
-  display: inline-block;
-  width: 130px;
-}
-.mentions--singleLine .mentions__highlighter {
-  padding: 1px;
-  border: 2px inset transparent;
-}
-.mentions--singleLine .mentions__input {
-  padding: 1px;
-  border: 2px inset;
-}
-
+/* textarea */
 .mentions--multiLine .mentions__control {
-  font-family: monospace;
-  font-size: 14pt;
+  @apply font-sans text-sm;
 }
 .mentions--multiLine .mentions__highlighter {
   border: 1px solid transparent;
@@ -28,8 +15,10 @@
   border: 1px solid silver;
   padding: 9px;
   outline: 0;
+  @apply flex w-full rounded-md border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
 }
 
+/* popover */
 .mentions__suggestions__list {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -45,6 +34,7 @@
   background-color: #cee4e5;
 }
 
+/* mention */
 .mentions__mention {
   position: relative;
   z-index: 1;

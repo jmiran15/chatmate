@@ -5,8 +5,9 @@ import {
   Database,
   Inbox,
   LucideIcon,
-  Megaphone,
+  Paintbrush,
   Settings,
+  Share,
   TestTube,
   Workflow,
 } from "lucide-react";
@@ -75,33 +76,45 @@ export const useLinks = () => {
       navigate: true,
     },
     {
-      title: "Channels",
-      path: `/chatbots/${chatbotId}/channels`,
-      icon: Megaphone,
+      title: "Appearance",
+      path: `/chatbots/${chatbotId}/appearance`,
       navigate: true,
-      children: [
-        {
-          title: "Widget",
-          path: `/chatbots/${chatbotId}/channels/widget/appearance`,
-          navigate: true,
-        },
-        // {
-        //   title: "Email",
-        //   path: `/chatbots/${chatbotId}/channels/email`,
-        //   navigate: true,
-        // },
-        // {
-        //   title: "Phone",
-        //   path: `/chatbots/${chatbotId}/channels/phone`,
-        //   navigate: true,
-        // },
-        // {
-        //   title: "WhatsApp",
-        //   path: `/chatbots/${chatbotId}/channels/whatsapp`,
-        //   navigate: true,
-        // },
-      ],
+      icon: Paintbrush,
     },
+    {
+      title: "Installation",
+      path: `/chatbots/${chatbotId}/install`,
+      navigate: true,
+      icon: Share,
+    },
+    // {
+    //   title: "Channels",
+    //   path: `/chatbots/${chatbotId}/channels`,
+    //   icon: Megaphone,
+    //   navigate: true,
+    //   children: [
+    //     {
+    //       title: "Widget",
+    //       path: `/chatbots/${chatbotId}/channels/widget/appearance`,
+    //       navigate: true,
+    //     },
+    // {
+    //   title: "Email",
+    //   path: `/chatbots/${chatbotId}/channels/email`,
+    //   navigate: true,
+    // },
+    // {
+    //   title: "Phone",
+    //   path: `/chatbots/${chatbotId}/channels/phone`,
+    //   navigate: true,
+    // },
+    // {
+    //   title: "WhatsApp",
+    //   path: `/chatbots/${chatbotId}/channels/whatsapp`,
+    //   navigate: true,
+    // },
+    // ],
+    // },
     {
       title: "Analytics",
       path: `/chatbots/${chatbotId}/analytics`,

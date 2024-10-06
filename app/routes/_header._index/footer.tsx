@@ -16,7 +16,7 @@ export function Footer() {
     "https://app.termly.io/policy-viewer/policy.html?policyUUID=2dd2e155-c4f3-4ec7-a5d2-e33efafb6154";
   const CONTACT_US_URL = "mailto:jonathan@chatmate.so";
   return (
-    <footer className="bg-muted/40 py-12 md:py-16 lg:py-20">
+    <footer className="bg-muted/40 py-12 md:py-16 lg:py-20 border-t">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Left column */}

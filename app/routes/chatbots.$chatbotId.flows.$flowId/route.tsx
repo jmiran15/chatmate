@@ -17,8 +17,10 @@ import {
 import { Plus } from "lucide-react";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "~/components/ui/button";
+import { useToast } from "~/components/ui/use-toast";
 import { prisma } from "~/db.server";
 import { useFormChanged } from "~/hooks/useFormChanged";
+import Container from "../chatbots.$chatbotId.forms._index/Container";
 import Action from "./action";
 import Header from "./header";
 import Trigger from "./trigger";
@@ -81,7 +83,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
       // Update the flow in the database
       await prisma.$transaction(async (tx) => {
-        // Upsert Trigger if defined
+        // Upsert Trigger
         if (trigger) {
           await tx.trigger.upsert({
             where: { flowId: flowId },
@@ -89,13 +91,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
               ...trigger,
               flowId: flowId,
             },
-            update: trigger,
+            update: {
+              type: trigger.type,
+              description:
+                trigger.type === "CUSTOM_EVENT" ? trigger.description : null,
+            },
           });
         }
 
-        // Upsert Actions if defined and not empty
+        // Upsert Actions
+
         if (actions && actions.length > 0) {
           for (const action of actions) {
+            console.log("action delay being saved", action.delay);
             const { mentions, ...actionData } = action;
             const upsertedAction = await tx.action.upsert({
               where: { id: action.id },
@@ -103,46 +111,40 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 ...actionData,
                 flowId: flowId,
               },
-              update: actionData,
+              update: {
+                type: actionData.type,
+                delay: actionData.delay,
+                order: actionData.order,
+                formId: actionData.type === "FORM" ? actionData.formId : null,
+                text: actionData.type === "TEXT" ? actionData.text : null,
+              },
             });
-
-            console.log("upsertedAction", upsertedAction);
 
             // Handle FormsOnActions
             if (action.type === "TEXT" && mentions && mentions.length > 0) {
-              console.log("mentions", mentions);
-              // Delete existing FormsOnActions for this action
-              const existingFormsOnActions = await tx.formsOnActions.deleteMany(
-                {
-                  where: { actionId: upsertedAction.id },
-                },
-              );
+              await tx.formsOnActions.deleteMany({
+                where: { actionId: upsertedAction.id },
+              });
 
-              console.log("existingFormsOnActions", existingFormsOnActions);
-
-              // Create new FormsOnActions
               const uniqueFormElementIds = [
                 ...new Set(mentions.map((m) => m.id)),
               ];
-
-              console.log("uniqueFormElementIds", uniqueFormElementIds);
-
-              // get the form elements from the database
               const formElements = await tx.formElement.findMany({
                 where: { id: { in: uniqueFormElementIds } },
                 select: { id: true, name: true, formId: true },
               });
 
-              console.log("formElements", formElements);
-
-              const createdFormsOnActions = await tx.formsOnActions.createMany({
+              await tx.formsOnActions.createMany({
                 data: formElements.map((formElement) => ({
                   actionId: upsertedAction.id,
                   formId: formElement.formId,
                 })),
               });
-
-              console.log("createdFormsOnActions", createdFormsOnActions);
+            } else {
+              // Clear FormsOnActions for non-TEXT type actions
+              await tx.formsOnActions.deleteMany({
+                where: { actionId: upsertedAction.id },
+              });
             }
           }
         }
@@ -196,6 +198,7 @@ export default function FlowMaker() {
   const { name, trigger, actions, forms } = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
   const { formRef, isChanged, handleFormChange } = useFormChanged();
+  const { toast } = useToast();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const deleteFetcher = useFetcher({ key: "deleteAction" });
   const deleteFlowFetcher = useFetcher({ key: "deleteFlow" });
@@ -211,7 +214,20 @@ export default function FlowMaker() {
 
     // IF error, show errors wherever they are
     // O/W, toast success
-  }, [actionData]);
+    if (actionData?.success) {
+      toast({
+        title: "Success",
+        description: "Flow saved successfully",
+        variant: "default",
+      });
+    } else if (actionData?.error) {
+      toast({
+        title: "Error",
+        description: actionData.error,
+        variant: "destructive",
+      });
+    }
+  }, [actionData, toast]);
 
   function handleDeleteFlow() {
     deleteFlowFetcher.submit(
@@ -309,12 +325,13 @@ export default function FlowMaker() {
   }
 
   return (
-    <div className="mx-auto p-4 h-full overflow-hidden">
+    <Container className="max-w-5xl">
+      {/* <div className="mx-auto p-4 h-full overflow-hidden"> */}
       <Form
         method="post"
         ref={formRef}
         onChange={handleFormChange}
-        className="flex flex-col h-full overflow-y-auto"
+        className="flex flex-col h-full overflow-y-auto no-scrollbar"
       >
         <input type="hidden" name="intent" value="save" />
         <input type="hidden" name="triggerId" value={optimisticTrigger.id} />
@@ -325,7 +342,7 @@ export default function FlowMaker() {
           setIsDeleteDialogOpen={setIsDeleteDialogOpen}
           canSave={isChanged}
         />
-        <div className="gap-6 mt-4 w-full h-full flex flex-col items-center">
+        <div className="gap-6 mt-8 w-full h-full flex flex-col items-center">
           <Trigger
             trigger={optimisticTrigger}
             handleFormChange={handleFormChange}
@@ -369,7 +386,8 @@ export default function FlowMaker() {
           })}
         </div>
       </Form>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }
 
