@@ -12,22 +12,33 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import * as gtag from "~/utils/gtags.client";
 
+import { SEOHandle } from "@nasa-gcn/remix-seo";
+import { prisma } from "~/db.server";
 import { createChatbot, getChatbotsByUserId } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
-import { isProUser } from "~/models/user.server";
-import { SEOHandle } from "@nasa-gcn/remix-seo";
+import { getPricing } from "~/utils/pricing.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   // check if user can create a new chatbot, if not, redirect them back to chatbots page
   const userId = await requireUserId(request);
+  const pricing = getPricing();
   const chatbots = await getChatbotsByUserId({ userId });
-  const isPro = await isProUser(userId);
 
-  if (chatbots.length >= 1 && !isPro) {
+  const subscription = await prisma.subscription.findUnique({
+    where: {
+      userId,
+    },
+  });
+
+  const planId = subscription?.planId;
+  const pricingPlan = pricing.pricing.find((plan) => plan.planId === planId);
+  const chatbotsLimit = pricingPlan?.chatbotsLimit ?? 0;
+
+  if (chatbots.length >= chatbotsLimit) {
     return redirect("/chatbots");
   }
 
-  return json({ chatbots, isPro });
+  return json({ chatbots });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {

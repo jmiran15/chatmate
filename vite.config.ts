@@ -1,15 +1,15 @@
+import mdx from "@mdx-js/rollup";
 import { vitePlugin as remix } from "@remix-run/dev";
 import { installGlobals } from "@remix-run/node";
-import tsconfigPaths from "vite-tsconfig-paths";
+import rehypePrettyCode from "rehype-pretty-code";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { defineConfig } from "vite";
 import { envOnlyMacros } from "vite-env-only";
-import mdx from "@mdx-js/rollup";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkMdxFrontmatter from "remark-mdx-frontmatter";
-import rehypePrettyCode from "rehype-pretty-code";
-import wasm from "vite-plugin-wasm";
 import topLevelAwait from "vite-plugin-top-level-await";
-import remarkGfm from "remark-gfm";
+import wasm from "vite-plugin-wasm";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 installGlobals();
 
@@ -44,6 +44,9 @@ export default defineConfig({
     remix({
       ignoredRouteFiles: ["**/.*", "**/*.css", "**/*.test.{ts,tsx}"],
       future: {
+        // TODO: Need to refactor lots of our useFetcher usage to support this!
+        // v3_fetcherPersist possibly causing some bugs
+        v3_fetcherPersist: true,
         v3_relativeSplatPath: true,
         v3_throwAbortReason: true,
       },

@@ -1,5 +1,8 @@
 import { Document } from "@prisma/client";
+import invariant from "tiny-invariant";
+import { v4 as uuid } from "uuid";
 import { prisma } from "~/db.server";
+import { updateDocument } from "~/models/document.server";
 import {
   embed,
   generatePossibleQuestionsForChunk,
@@ -7,10 +10,6 @@ import {
   splitStringIntoChunks,
 } from "~/utils/openai";
 import { Queue } from "~/utils/queue.server";
-import { v4 as uuid } from "uuid";
-import invariant from "tiny-invariant";
-import { updateDocument } from "~/models/document.server";
-import { invalidateIndex } from "~/routes/chatbots.$chatbotId.data._index/documents.server";
 
 export interface QueueData {
   document: Document;
@@ -118,7 +117,6 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
     });
 
     // Invalidate the index after updating the document
-    invalidateIndex(document.chatbotId);
   } catch (error) {
     console.error("ingestion.server.ts - error during ingestion job:", error);
     throw error; // Re-throw the error to mark the job as failed

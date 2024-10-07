@@ -1,10 +1,15 @@
-import { type MetaFunction } from "@remix-run/node";
-import { Hero } from "~/routes/_header._index/hero";
-import { PrimaryFeatures } from "~/routes/_header._index/primary-features";
-import { SecondaryFeatures } from "~/routes/_header._index/secondary-features";
-import { Faqs } from "~/routes/_header._index/faq";
-import PricingPage from "~/routes/_header._index/pricing-page";
-import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
+import { json, type MetaFunction } from "@remix-run/node";
+import { getPricing } from "~/utils/pricing.server";
+import { generateCanonicalUrl, generateMetaTags } from "~/utils/seo";
+import CtaSection from "./landing_v2/CTA";
+import FAQ from "./landing_v2/FAQ";
+import Hero2 from "./landing_v2/hero";
+import HowItWorks from "./landing_v2/how-it-works";
+import Logos from "./landing_v2/logos";
+import PricingSection from "./landing_v2/pricing";
+import SecondaryFeatures from "./landing_v2/secondary-features";
+import { Stats } from "./landing_v2/stats";
+import Testimonials from "./landing_v2/testimonials";
 
 export const meta: MetaFunction = ({ location }) => {
   const canonicalUrl = generateCanonicalUrl(location.pathname);
@@ -19,14 +24,23 @@ export const meta: MetaFunction = ({ location }) => {
   ];
 };
 
+export const loader = async () => {
+  const pricing = getPricing();
+  return json(pricing);
+};
+
 export default function Index() {
   return (
-    <main>
-      <Hero />
-      <PrimaryFeatures />
+    <main className="font-inter">
+      <Hero2 />
+      <Logos />
+      <HowItWorks />
+      <Stats />
       <SecondaryFeatures />
-      <PricingPage />
-      <Faqs />
+      <Testimonials />
+      <PricingSection />
+      <FAQ />
+      <CtaSection />
     </main>
   );
 }

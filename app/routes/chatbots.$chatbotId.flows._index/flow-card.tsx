@@ -1,6 +1,7 @@
-import { Link } from "@remix-run/react";
-import { formatDistanceToNow } from "date-fns";
-import { Card, CardHeader, CardTitle } from "~/components/ui/card";
+import { DateTime } from "luxon";
+import { LinkCard } from "~/components/LinkCard";
+import { LinkCardBody } from "~/components/LinkCardBody";
+import { LinkCardHeader } from "~/components/LinkCardHeader";
 
 interface FlowCardProps {
   flow: {
@@ -11,18 +12,16 @@ interface FlowCardProps {
 }
 
 export function FlowCard({ flow }: FlowCardProps) {
+  const formattedDate = DateTime.fromISO(flow.lastUpdated).toRelative();
+
   return (
-    <Link to={`${flow.id}`} className="block w-full">
-      <Card>
-        <CardHeader className="p-4">
-          <div className="flex flex-col w-full gap-2">
-            <CardTitle>{flow.name}</CardTitle>
-            <p className="text-sm text-gray-500">
-              Last updated {formatDistanceToNow(new Date(flow.lastUpdated))} ago
-            </p>
-          </div>
-        </CardHeader>
-      </Card>
-    </Link>
+    <LinkCard to={`${flow.id}`}>
+      <div className="p-4 flex flex-col gap-1">
+        <LinkCardHeader title={flow.name} tag={undefined} />
+        <LinkCardBody>
+          <span>Last updated {formattedDate}</span>
+        </LinkCardBody>
+      </div>
+    </LinkCard>
   );
 }

@@ -161,6 +161,11 @@ const PromptInput = React.memo(
                 createdAt: new Date(fetcher.data.message.createdAt),
                 updatedAt: new Date(fetcher.data.message.updatedAt),
                 seenByUserAt: new Date(fetcher.data.message.seenByUserAt),
+
+                // testing
+                // streaming: true,
+                // loading: true,
+                // delay: 2000,
               },
             });
           }
@@ -179,6 +184,11 @@ const PromptInput = React.memo(
                 createdAt: new Date(fetcher.data.message.createdAt),
                 updatedAt: new Date(fetcher.data.message.updatedAt),
                 seenByUserAt: new Date(fetcher.data.message.seenByUserAt),
+
+                // testing
+                // streaming: true,
+                // loading: true,
+                // delay: 5000,
               },
             });
           }

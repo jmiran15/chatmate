@@ -1,6 +1,7 @@
 import { Authenticator } from "remix-auth";
 import { GoogleStrategy } from "remix-auth-google";
 import { prisma } from "~/db.server";
+import { createCustomer } from "~/models/subscription.server";
 import { sessionStorage, USER_SESSION_KEY } from "~/session.server";
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
@@ -25,8 +26,10 @@ let googleStrategy = new GoogleStrategy(
         : "https://chatmate.so"
     }/auth/google/callback`,
   },
-  async ({ accessToken, refreshToken, extraParams, profile }) => {
+  async ({ accessToken, refreshToken, extraParams, profile, context }) => {
     const { email, name, picture } = profile._json;
+
+    const existingUser = await prisma.user.findUnique({ where: { email } });
 
     const user = await prisma.user.upsert({
       where: { email },
@@ -43,6 +46,11 @@ let googleStrategy = new GoogleStrategy(
       },
     });
 
+    if (!existingUser) {
+      await createCustomer({ userId: user.id });
+    }
+
+    console.log("user: ", user);
     return user.id;
   },
 );

@@ -40,8 +40,7 @@ const items = [
       "Customize your chatbot widget to make it look and feel just the way you want it.",
     iconColor: "bg-green-500",
     icon: PaintBrushIcon,
-    path: (chatbotId: string) =>
-      `/chatbots/${chatbotId}/channels/widget/appearance`,
+    path: (chatbotId: string) => `/chatbots/${chatbotId}/appearance`,
   },
   {
     name: "Share your chatbot",
@@ -49,8 +48,7 @@ const items = [
       "Embed your chatbot widget on your website to start engaging with your customers.",
     iconColor: "bg-yellow-500",
     icon: CodeBracketIcon,
-    path: (chatbotId: string) =>
-      `/chatbots/${chatbotId}/channels/widget/install`,
+    path: (chatbotId: string) => `/chatbots/${chatbotId}/install`,
   },
 ];
 

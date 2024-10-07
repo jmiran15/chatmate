@@ -1,3 +1,5 @@
+import { createId } from "@paralleldrive/cuid2";
+import { FormElement, InputType } from "@prisma/client";
 import {
   ActionFunctionArgs,
   MetaFunction,
@@ -10,8 +12,6 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 
-import { z } from "zod";
-import zodToJsonSchema from "zod-to-json-schema";
 import { prisma } from "~/db.server";
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
@@ -23,45 +23,29 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     return json({ errors: { name: "Name is required" } }, { status: 400 });
   }
 
-  // create a basic form Schema
-  const schema = z.object({
-    name: z.string().describe("Name"),
-    email: z
-      .string({
-        required_error: "Email is required",
-      })
-      .describe("Email")
-      .email(),
-  });
-
-  const formElements = [
-    { name: "name", order: 0 },
-    { name: "email", order: 1 },
-  ];
-
-  const orderedElements = [...formElements].sort((a, b) => a.order - b.order);
-  const orderedSchemaObj: Record<string, z.ZodTypeAny> = {};
-  const orderedFieldConfigObj: Record<string, any> = {};
-
-  orderedElements.forEach((element, index) => {
-    orderedSchemaObj[element.name] =
-      schema.shape[element.name as keyof typeof schema.shape];
-    orderedFieldConfigObj[element.name] = {
-      order: index,
-      // Add any additional field config properties here
-    };
-  });
-
-  const orderedSchema = z.object(orderedSchemaObj);
-
-  const jsonSchema = zodToJsonSchema(orderedSchema, "formSchema");
-
-  const formSchema = {
-    schema: jsonSchema,
-    fieldConfig: orderedFieldConfigObj,
+  const nameElement: Partial<FormElement> = {
+    id: createId(),
+    type: InputType.TEXT,
+    name: "name",
+    label: `What is your name?`,
+    required: true,
+    placeholder: `Enter your name`,
+    order: 0,
   };
 
-  // create the form
+  const emailElement: Partial<FormElement> = {
+    id: createId(),
+    type: InputType.EMAIL,
+    name: "email",
+    label: `What is your email?`,
+    required: false,
+    placeholder: `Enter your email`,
+    order: 1,
+  };
+
+  const formElements = [nameElement, emailElement];
+
+  // create the form with formElements
   const form = await prisma.form.create({
     data: {
       name,
@@ -70,7 +54,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           id: chatbotId,
         },
       },
-      formSchema: formSchema as any,
+      elements: {
+        create: formElements,
+      },
     },
   });
 
@@ -124,7 +110,7 @@ export default function NewForm() {
 }
 
 export const handle = {
-  PATH: (chatbotId: string, formId: string) => `/chatbots/${chatbotId}/forms`,
+  PATH: (chatbotId: string) => `/chatbots/${chatbotId}/forms`,
   breadcrumb: "forms",
   getSitemapEntries: () => null,
 };

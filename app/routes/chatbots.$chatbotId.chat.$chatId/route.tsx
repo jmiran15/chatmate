@@ -19,7 +19,11 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       where: { chatId },
       orderBy: { createdAt: "asc" },
       include: {
-        form: true,
+        form: {
+          include: {
+            elements: true,
+          },
+        },
         formSubmission: true,
       },
     }),

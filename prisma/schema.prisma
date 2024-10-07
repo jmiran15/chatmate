@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["postgresqlExtensions"]
+  previewFeatures = ["postgresqlExtensions", "fullTextSearch"]
 }
 
 datasource db {
@@ -14,11 +14,11 @@ model User {
   email        String        @unique
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  customerId   String?       @unique
   chats        Chat[]
   chatbots     Chatbot[]
   password     Password?
-  subscription Subscription?
+  customerId   String?       @unique // Stripe customer ID
+  subscription Subscription? // Stripe subscription
   name         String?
   picture      String?
   provider     String?
@@ -133,6 +133,8 @@ model Chat {
   messages   Message[]
   labels     Label[]        @relation("ChatToLabel")
 
+  hasLoadedInitialMessages Boolean? @default(false)
+
   @@index([chatbotId, deleted, createdAt])
 }
 
@@ -145,6 +147,8 @@ model Label {
   chatbotId String
   chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   chats     Chat[]   @relation("ChatToLabel")
+
+  @@unique([chatbotId, name])
 }
 
 model AnonymousUser {
@@ -254,6 +258,10 @@ model Message {
   form           Form?           @relation(fields: [formId], references: [id], onDelete: Cascade)
   formSubmission FormSubmission?
 
+  // TODO: this is a hacky temp. solution to get flows working. Will be replaced with a cleaner solution soon.
+  flowId String?
+  flow   Flow?   @relation(fields: [flowId], references: [id], onDelete: Cascade)
+
   @@index([chatId, role])
 }
 
@@ -264,10 +272,38 @@ model Form {
   name          String
   chatbotId     String
   chatbot       Chatbot          @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  formSchema    Json?
-  schemaVersion Int              @default(1)
+  schemaVersion Int              @default(1) // TODO - implement schema versioning (i.e., version control)
   submissions   FormSubmission[]
   messages      Message[]
+  elements      FormElement[]
+  actions       Action[]
+
+  actionsOnForms FormsOnActions[]
+
+  @@index([chatbotId])
+}
+
+model FormElement {
+  id                 String    @id @default(cuid())
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  formId             String
+  form               Form      @relation(fields: [formId], references: [id], onDelete: Cascade)
+  type               InputType @default(TEXT)
+  name               String
+  label              String
+  required           Boolean   @default(false)
+  placeholder        String?
+  description        String?
+  options            String[]
+  min                Int?
+  max                Int?
+  step               Int?
+  order              Int       @default(0)
+  required_error     String?   @default("This field is required")
+  min_error          String?   @default("Please enter a value greater than the minimum")
+  max_error          String?   @default("Please enter a value less than the maximum")
+  invalid_type_error String?   @default("Please enter a valid value")
 }
 
 model FormSubmission {
@@ -283,14 +319,52 @@ model FormSubmission {
 }
 
 model Flow {
-  id         String   @id @default(cuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  chatbotId  String
-  chatbot    Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  name       String
-  flowSchema Json
-  trigger    Trigger  @default(INITIAL_LOAD)
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  chatbotId String
+  chatbot   Chatbot  @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  name      String
+
+  trigger Trigger?
+  actions Action[]
+
+  messages Message[]
+}
+
+model Trigger {
+  id          String      @id @default(cuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  type        TriggerType @default(INITIAL_LOAD)
+  description String?
+  flow        Flow        @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  flowId      String      @unique
+}
+
+model Action {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  type      ActionType @default(TEXT)
+  form      Form?      @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formId    String?
+  text      String?
+  delay     Int?
+  flow      Flow       @relation(fields: [flowId], references: [id], onDelete: Cascade)
+  flowId    String
+  order     Float?     @default(0)
+
+  dependsOn FormsOnActions[]
+}
+
+model FormsOnActions {
+  action   Action @relation(fields: [actionId], references: [id], onDelete: Cascade)
+  actionId String
+  form     Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formId   String
+
+  @@id([actionId, formId])
 }
 
 model ToolCall {
@@ -313,28 +387,6 @@ model ToolFunction {
   toolCallId String    @unique
 }
 
-model Plan {
-  id            String         @id @unique
-  name          String
-  description   String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  prices        Price[]
-  subscriptions Subscription[]
-}
-
-model Price {
-  id            String         @id @unique
-  planId        String
-  amount        Int
-  currency      String
-  interval      String
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  plan          Plan           @relation(fields: [planId], references: [id], onDelete: Cascade)
-  subscriptions Subscription[]
-}
-
 model Subscription {
   id                 String   @id @unique
   userId             String   @unique
@@ -347,8 +399,6 @@ model Subscription {
   cancelAtPeriodEnd  Boolean  @default(false)
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
-  plan               Plan     @relation(fields: [planId], references: [id])
-  price              Price    @relation(fields: [priceId], references: [id])
   user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -374,7 +424,27 @@ enum ActivityType {
   AGENT_LEFT
 }
 
-enum Trigger {
+enum TriggerType {
   INITIAL_LOAD
   CUSTOM_EVENT
+}
+
+enum InputType {
+  TEXT     @map("text")
+  TEXTAREA @map("textarea")
+  DATE     @map("date")
+  URL      @map("url")
+  PHONE    @map("phone")
+  EMAIL    @map("email")
+  CHECKBOX @map("checkbox")
+  SELECT   @map("select")
+  NUMBER   @map("number")
+  RATING   @map("rating")
+  SCALE    @map("scale")
+  SLIDER   @map("slider")
+}
+
+enum ActionType {
+  TEXT
+  FORM
 }

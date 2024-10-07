@@ -13,9 +13,8 @@ import {
 import { cn } from "~/lib/utils";
 
 import { useLoaderData } from "@remix-run/react";
-import jsonSchemaToZod from "json-schema-to-zod";
-import { z } from "zod";
 import AutoForm, { AutoFormSubmit } from "~/components/ui/auto-form";
+import { useAutoForm } from "~/routes/chatbots.$chatbotId.forms.$formId/useAutoForm";
 import { loader } from "../loader.server";
 import { Message } from "../useThread";
 import { useMarkMessageSeen } from "./useMarkMessagesSeen";
@@ -141,39 +140,7 @@ const MessageComponent = memo(({ message }: { message: Message }) => {
 
   const messageContent = useMemo(() => {
     if (message.isFormMessage) {
-      // check if we have a formSubmission
-      if (message.formSubmission) {
-        return <FormSubmissionMessage />;
-      }
-
-      const formSchema = message.form?.formSchema;
-      const zodSchemaString = jsonSchemaToZod(
-        formSchema?.schema?.definitions.formSchema,
-      );
-
-      const schemaString = `
-// you can put any helper function or code directly inside the string and use them in your schema
-
-function getZodSchema({z, ctx}) {
-  // use ctx for any dynamic data that your schema depends on
-  return ${zodSchemaString};
-}
-`;
-
-      const zodSchema = Function(
-        "...args",
-        `${schemaString}; return getZodSchema(...args)`,
-      )({ z, ctx: {} });
-
-      return (
-        <AutoForm
-          formSchema={zodSchema}
-          fieldConfig={formSchema?.fieldConfig}
-          onSubmit={() => {}}
-        >
-          <AutoFormSubmit>Submit</AutoFormSubmit>
-        </AutoForm>
-      );
+      return <FormMessage message={message} />;
     } else {
       return <PreviewMarkdown source={message.content} />;
     }
@@ -321,3 +288,21 @@ function FormSubmissionMessage() {
     </div>
   );
 }
+
+const FormMessage = ({ message }: { message: Message }) => {
+  const { formSchema, fieldConfig } = useAutoForm(message.form?.elements);
+
+  if (message.formSubmission) {
+    return <FormSubmissionMessage />;
+  }
+
+  return (
+    <AutoForm
+      formSchema={formSchema}
+      fieldConfig={fieldConfig}
+      onSubmit={() => {}}
+    >
+      <AutoFormSubmit>Submit</AutoFormSubmit>
+    </AutoForm>
+  );
+};

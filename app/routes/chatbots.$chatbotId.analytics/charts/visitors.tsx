@@ -11,8 +11,8 @@ export default function VisitorsBarlist({
   deviceData,
 }: {
   countryData: {
-    country: string;
-    country_code: string;
+    country: string | null;
+    country_code: string | null;
     count: number;
   }[];
   browserData: {

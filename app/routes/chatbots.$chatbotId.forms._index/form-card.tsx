@@ -1,32 +1,31 @@
-import { Link } from "@remix-run/react";
 import { DateTime } from "luxon";
-import { Card, CardHeader, CardTitle } from "~/components/ui/card";
+import { LinkCard } from "~/components/LinkCard";
+import { LinkCardBody } from "~/components/LinkCardBody";
+import { LinkCardHeader } from "~/components/LinkCardHeader";
 
-interface FormCardProps {
+export function FormCard({
+  form,
+}: {
   form: {
     id: string;
     name: string;
     lastUpdated: string;
     submissionCount: number;
   };
-}
-
-export function FormCard({ form }: FormCardProps) {
+}) {
   const formattedDate = DateTime.fromISO(form.lastUpdated).toRelative();
 
   return (
-    <Link to={`${form.id}`} className="block w-full">
-      <Card>
-        <CardHeader className="p-4">
-          <div className="flex flex-col w-full gap-2">
-            <CardTitle>{form.name}</CardTitle>
-            <div className="flex justify-between text-sm text-gray-600">
-              <span>{form.submissionCount} submissions</span>
-              <span>{formattedDate}</span>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-    </Link>
+    <LinkCard to={`${form.id}`}>
+      <div className="p-4 flex flex-col gap-1">
+        <LinkCardHeader
+          title={form.name}
+          tag={<span>{form.submissionCount} submissions</span>}
+        />
+        <LinkCardBody>
+          <span>Last updated {formattedDate}</span>
+        </LinkCardBody>
+      </div>
+    </LinkCard>
   );
 }

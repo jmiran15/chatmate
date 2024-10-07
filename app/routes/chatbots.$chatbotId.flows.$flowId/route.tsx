@@ -1,54 +1,31 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { createId } from "@paralleldrive/cuid2";
+import type { Action as ActionType } from "@prisma/client";
 import {
   ActionFunctionArgs,
-  LoaderFunctionArgs,
   json,
+  LoaderFunctionArgs,
   redirect,
+  SerializeFrom,
 } from "@remix-run/node";
-import { useLoaderData, useSubmit } from "@remix-run/react";
+import {
+  Form,
+  useActionData,
+  useFetcher,
+  useLoaderData,
+  useNavigation,
+} from "@remix-run/react";
 import { Plus } from "lucide-react";
-import { useCallback, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import * as z from "zod";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "~/components/ui/button";
-import { Form } from "~/components/ui/form";
+import { useToast } from "~/components/ui/use-toast";
 import { prisma } from "~/db.server";
+import { useFormChanged } from "~/hooks/useFormChanged";
+import Container from "../chatbots.$chatbotId.forms._index/Container";
 import Action from "./action";
 import Header from "./header";
 import Trigger from "./trigger";
-
-const triggerSchema = z.object({
-  type: z.enum(["INITIAL_LOAD", "CUSTOM_EVENT"]),
-  description: z.string().optional(),
-});
-const actionSchema = z
-  .object({
-    type: z.enum(["form", "text"]),
-    formId: z.string().optional(),
-    text: z.string().optional(),
-    delay: z.number().optional(),
-  })
-  .refine(
-    (data) => {
-      if (data.type === "form") {
-        return !!data.formId;
-      } else {
-        return !!data.text;
-      }
-    },
-    {
-      message: "Form or text is required based on the selected type",
-      path: ["formId"],
-    },
-  );
-
-const flowSchema = z.object({
-  name: z.string(),
-  trigger: triggerSchema,
-  actions: z.array(actionSchema).min(1, "At least one action is required"),
-});
-
-export type FlowSchema = z.infer<typeof flowSchema>;
+import { actionSchema } from "./types";
+import { formDataToFlowSchema, getAvailableFormElementNames } from "./utils";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { chatbotId, flowId } = params;
@@ -59,23 +36,35 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
   const flow = await prisma.flow.findUnique({
     where: { id: flowId },
-    include: { chatbot: true },
+    include: {
+      trigger: true,
+      actions: {
+        orderBy: {
+          order: "asc",
+        },
+      },
+    },
   });
 
   if (!flow) {
-    throw new Response("Flow not found", { status: 404 });
+    throw new Error("Flow not found");
   }
 
   if (flow.chatbotId !== chatbotId) {
-    throw new Response("Flow does not belong to this chatbot", { status: 403 });
+    throw new Error("Flow does not belong to this chatbot");
   }
 
   const forms = await prisma.form.findMany({
     where: { chatbotId },
-    select: { id: true, name: true },
+    include: { elements: true },
   });
 
-  return json({ flow, forms });
+  return json({
+    name: flow.name,
+    trigger: flow.trigger,
+    actions: flow.actions,
+    forms,
+  });
 };
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
@@ -86,124 +75,319 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 
   const formData = await request.formData();
-  const action = formData.get("_action");
+  const action = String(formData.get("intent"));
 
-  if (action === "save") {
-    const flowData = JSON.parse(formData.get("flowData") as string);
+  switch (action) {
+    case "save": {
+      const { trigger, actions } = formDataToFlowSchema(formData);
 
-    try {
-      const validatedData = flowSchema.parse(flowData);
+      // Update the flow in the database
+      await prisma.$transaction(async (tx) => {
+        // Upsert Trigger
+        if (trigger) {
+          await tx.trigger.upsert({
+            where: { flowId: flowId },
+            create: {
+              ...trigger,
+              flowId: flowId,
+            },
+            update: {
+              type: trigger.type,
+              description:
+                trigger.type === "CUSTOM_EVENT" ? trigger.description : null,
+            },
+          });
+        }
 
-      await prisma.flow.update({
-        where: { id: flowId },
-        data: {
-          name: validatedData.name,
-          trigger: validatedData.trigger.type,
-          flowSchema: validatedData,
-        },
+        // Upsert Actions
+
+        if (actions && actions.length > 0) {
+          for (const action of actions) {
+            console.log("action delay being saved", action.delay);
+            const { mentions, ...actionData } = action;
+            const upsertedAction = await tx.action.upsert({
+              where: { id: action.id },
+              create: {
+                ...actionData,
+                flowId: flowId,
+              },
+              update: {
+                type: actionData.type,
+                delay: actionData.delay,
+                order: actionData.order,
+                formId: actionData.type === "FORM" ? actionData.formId : null,
+                text: actionData.type === "TEXT" ? actionData.text : null,
+              },
+            });
+
+            // Handle FormsOnActions
+            if (action.type === "TEXT" && mentions && mentions.length > 0) {
+              await tx.formsOnActions.deleteMany({
+                where: { actionId: upsertedAction.id },
+              });
+
+              const uniqueFormElementIds = [
+                ...new Set(mentions.map((m) => m.id)),
+              ];
+              const formElements = await tx.formElement.findMany({
+                where: { id: { in: uniqueFormElementIds } },
+                select: { id: true, name: true, formId: true },
+              });
+
+              await tx.formsOnActions.createMany({
+                data: formElements.map((formElement) => ({
+                  actionId: upsertedAction.id,
+                  formId: formElement.formId,
+                })),
+              });
+            } else {
+              // Clear FormsOnActions for non-TEXT type actions
+              await tx.formsOnActions.deleteMany({
+                where: { actionId: upsertedAction.id },
+              });
+            }
+          }
+        }
       });
 
       return json({ success: true });
-    } catch (error) {
-      return json({ error: "Invalid flow data" }, { status: 400 });
     }
-  } else if (action === "delete") {
-    try {
+    case "deleteAction": {
+      const actionId = String(formData.get("actionId"));
+      const action = await prisma.action.delete({ where: { id: actionId } });
+      return json({ action });
+    }
+    case "deleteFlow": {
       await prisma.flow.delete({ where: { id: flowId } });
       return redirect(`/chatbots/${chatbotId}/flows`);
-    } catch (error) {
-      console.error("Error deleting flow:", error);
-      return json({ error: "Failed to delete flow" }, { status: 500 });
     }
-  }
+    case "insert": {
+      const pendingAction = formData.get("pendingAction");
 
-  return json({ error: "Invalid action" }, { status: 400 });
+      const parsedAction = pendingAction
+        ? JSON.parse(pendingAction as string)
+        : null;
+
+      const newAction = actionSchema.parse(parsedAction);
+
+      console.log("newAction", newAction);
+
+      if (!newAction) {
+        throw new Error("Invalid action");
+      }
+
+      const action = await prisma.action.create({
+        data: {
+          ...newAction,
+          flowId,
+        },
+      });
+
+      if (!action) {
+        throw new Error("Failed to create action");
+      }
+
+      return json({ action });
+    }
+    default:
+      throw new Error("Invalid action");
+  }
 };
 
 export default function FlowMaker() {
-  const { flow, forms } = useLoaderData<typeof loader>();
-  const submit = useSubmit();
-
-  const form = useForm<FlowSchema>({
-    resolver: zodResolver(flowSchema),
-    defaultValues: flow.flowSchema as FlowSchema,
-  });
-
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: "actions",
-  });
-
-  const [openCards, setOpenCards] = useState<{ [key: string]: boolean }>({
-    trigger: true,
-    ...fields.reduce((acc, field) => ({ ...acc, [field.id]: true }), {}),
-  });
-
-  const toggleCard = (id: string) => {
-    setOpenCards((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
+  const { name, trigger, actions, forms } = useLoaderData<typeof loader>();
+  const actionData = useActionData<typeof action>();
+  const { formRef, isChanged, handleFormChange } = useFormChanged();
+  const { toast } = useToast();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const deleteFetcher = useFetcher({ key: "deleteAction" });
+  const deleteFlowFetcher = useFetcher({ key: "deleteFlow" });
+  const insertFetcher = useFetcher({ key: "insertAction" });
+  const navigation = useNavigation();
+  const [lastAddedActionId, setLastAddedActionId] = useState<string | null>(
+    null,
+  );
 
-  const handleDelete = useCallback(() => {
-    setIsDeleteDialogOpen(true);
-  }, []);
+  useEffect(() => {
+    // TODO - for form validation server side
+    console.log("actionData", actionData);
 
-  const confirmDelete = useCallback(() => {
-    submit({ _action: "delete" }, { method: "post" });
-    setIsDeleteDialogOpen(false);
-  }, [submit]);
+    // IF error, show errors wherever they are
+    // O/W, toast success
+    if (actionData?.success) {
+      toast({
+        title: "Success",
+        description: "Flow saved successfully",
+        variant: "default",
+      });
+    } else if (actionData?.error) {
+      toast({
+        title: "Error",
+        description: actionData.error,
+        variant: "destructive",
+      });
+    }
+  }, [actionData, toast]);
 
-  const onSubmit = (data: FlowSchema) => {
-    submit(
-      { flowData: JSON.stringify(data), _action: "save" },
-      { method: "post" },
+  function handleDeleteFlow() {
+    deleteFlowFetcher.submit(
+      { intent: "deleteFlow" },
+      { method: "post", preventScrollReset: true },
     );
-  };
+    setIsDeleteDialogOpen(false);
+  }
+
+  const handleInsert = useCallback(
+    (prevOrder: number, nextOrder?: number) => {
+      const order = nextOrder
+        ? prevOrder + (nextOrder - prevOrder) / 2
+        : prevOrder + 1;
+
+      const newAction =
+        forms.length > 0
+          ? {
+              id: createId(),
+              type: "FORM" as const,
+              formId: forms[0].id,
+              delay: 1,
+              order,
+            }
+          : {
+              id: createId(),
+              type: "TEXT" as const,
+              text: "",
+              delay: 1,
+              order,
+            };
+
+      setLastAddedActionId(newAction.id);
+
+      insertFetcher.submit(
+        {
+          intent: "insert",
+          pendingAction: JSON.stringify(newAction),
+        },
+        { method: "POST", preventScrollReset: true },
+      );
+    },
+    [forms, insertFetcher],
+  );
+
+  const pendingDelete =
+    deleteFetcher.formData &&
+    deleteFetcher.formData.get("intent") === "deleteAction"
+      ? (deleteFetcher.formData.get("actionId") as string)
+      : null;
+
+  const pendingInsert =
+    insertFetcher.formData && insertFetcher.formData.get("intent") === "insert"
+      ? {
+          action: JSON.parse(
+            insertFetcher.formData.get("pendingAction") as string,
+          ),
+        }
+      : null;
+
+  const pendingSave =
+    navigation.formData && navigation.formData.get("intent") === "save"
+      ? formDataToFlowSchema(navigation.formData)
+      : null;
+
+  const optimisticActions = useMemo(() => {
+    let updatedActions: Partial<SerializeFrom<ActionType>>[] = [...actions];
+
+    if (pendingDelete) {
+      updatedActions = updatedActions.filter(
+        (action) => action.id !== pendingDelete,
+      );
+    }
+
+    if (pendingInsert) {
+      updatedActions.push({ ...pendingInsert.action });
+    }
+
+    if (pendingSave) {
+      updatedActions = pendingSave.actions ?? updatedActions;
+    }
+
+    return updatedActions.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  }, [actions, pendingDelete, pendingInsert, pendingSave]);
+
+  const optimisticTrigger = useMemo(() => {
+    if (pendingSave && pendingSave.trigger) {
+      return pendingSave.trigger;
+    }
+    return trigger;
+  }, [trigger, pendingSave]);
+
+  if (!optimisticTrigger || !actions) {
+    return null;
+  }
 
   return (
-    <div className="mx-auto p-4 h-full  flex flex-col overflow-hidden">
-      <Form {...form}>
+    <Container className="max-w-5xl">
+      {/* <div className="mx-auto p-4 h-full overflow-hidden"> */}
+      <Form
+        method="post"
+        ref={formRef}
+        onChange={handleFormChange}
+        className="flex flex-col h-full overflow-y-auto no-scrollbar"
+      >
+        <input type="hidden" name="intent" value="save" />
+        <input type="hidden" name="triggerId" value={optimisticTrigger.id} />
         <Header
-          flowName={form.watch("name")}
-          onSave={form.handleSubmit(onSubmit)}
-          onDelete={handleDelete}
+          flowName={name}
+          handleDelete={handleDeleteFlow}
           isDeleteDialogOpen={isDeleteDialogOpen}
           setIsDeleteDialogOpen={setIsDeleteDialogOpen}
-          confirmDelete={confirmDelete}
+          canSave={isChanged}
         />
-        <div className="gap-6 mt-4 w-full h-full flex flex-col items-center overflow-y-auto">
-          <Trigger toggleCard={toggleCard} openCards={openCards} form={form} />
-          {fields.map((field, index) => (
-            <Action
-              key={field.id}
-              toggleCard={toggleCard}
-              openCards={openCards}
-              form={form}
-              index={index}
-              field={field}
-              remove={() => remove(index)}
-              forms={forms}
-            />
-          ))}
-          <Button
-            type="button"
-            onClick={() => {
-              const newField: z.infer<typeof actionSchema> = {
-                type: "form" as const,
-              };
-              append(newField);
-              const newId = fields[fields.length].id;
-              setOpenCards((prev) => ({ ...prev, [newId]: true }));
-            }}
-            className="rounded-full p-2"
-            variant="ghost"
-          >
-            <Plus className="h-6 w-6" />
-          </Button>
+        <div className="gap-6 mt-8 w-full h-full flex flex-col items-center">
+          <Trigger
+            trigger={optimisticTrigger}
+            handleFormChange={handleFormChange}
+          />
+          {optimisticActions.map((action, index) => {
+            const availableFormElementNames = getAvailableFormElementNames(
+              optimisticActions.slice(0, index),
+              forms,
+            );
+            return (
+              <Fragment key={action.id}>
+                <Action
+                  action={action}
+                  index={index}
+                  forms={forms}
+                  availableFormElementNames={availableFormElementNames}
+                  onDelete={(actionId) => {
+                    deleteFetcher.submit(
+                      { intent: "deleteAction", actionId },
+                      { method: "POST" },
+                    );
+                  }}
+                  handleFormChange={handleFormChange}
+                  isNewlyAdded={action.id === lastAddedActionId}
+                />
+                <Button
+                  type="button"
+                  onClick={() =>
+                    handleInsert(
+                      action.order ?? 0,
+                      optimisticActions[index + 1]?.order,
+                    )
+                  }
+                  className="rounded-full p-2"
+                  variant="ghost"
+                >
+                  <Plus className="h-6 w-6" />
+                </Button>
+              </Fragment>
+            );
+          })}
         </div>
       </Form>
-    </div>
+      {/* </div> */}
+    </Container>
   );
 }
 

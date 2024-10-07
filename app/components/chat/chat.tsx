@@ -10,7 +10,6 @@ import { createId } from "@paralleldrive/cuid2";
 import { Form, FormSubmission } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import axios from "axios";
-import jsonSchemaToZod from "json-schema-to-zod";
 import { Check, Clipboard } from "lucide-react";
 import { Suspense, lazy, useMemo, useRef } from "react";
 import { z } from "zod";
@@ -23,6 +22,7 @@ import { useScrollToBottom } from "~/hooks/useScroll";
 import { cn } from "~/lib/utils";
 import { useSocket } from "~/providers/socket";
 import { loader } from "~/routes/chatbots.$chatbotId.chat.$chatId/route";
+import { useAutoForm } from "~/routes/chatbots.$chatbotId.forms.$formId/useAutoForm";
 import { copyToClipboard } from "~/utils/clipboard";
 import { useMobileScreen } from "~/utils/mobile";
 import AutoForm, { AutoFormSubmit } from "../ui/auto-form";
@@ -49,7 +49,6 @@ export const CHAT_PAGE_SIZE = 15;
 export default function Chat() {
   const data = useLoaderData<typeof loader>();
   const [loading, setLoading] = useState<boolean>(true);
-
   const [userInput, setUserInput] = useState(() => data?.userMessage ?? "");
   const { scrollRef, setAutoScroll, scrollDomToBottom } = useScrollToBottom();
   const { chatId, chatbotId } = useParams();
@@ -120,7 +119,48 @@ export default function Chat() {
         return prev;
       });
     }
-  }, [chatId]);
+
+    console.log(
+      "showInitalStarterQuestions",
+      data?.chat?.hasLoadedInitialMessages,
+      showInitalStarterQuestions,
+      chatId,
+      chatbotId,
+    );
+    if (
+      !data?.chat?.hasLoadedInitialMessages &&
+      showInitalStarterQuestions &&
+      chatId &&
+      chatbotId
+    ) {
+      axios
+        .post(`${BASE_URL}/api/initialload/${chatId}/${chatbotId}`)
+        .then((res) => {
+          console.log(res.data);
+          const { chat } = res.data;
+        })
+        .catch((error) => {
+          setMessages([]);
+          setLoading(false);
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+    }
+  }, [chatId, chatbotId, BASE_URL, data]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -390,14 +430,20 @@ export default function Chat() {
 
   // add agent typing and new message events to the socket manager
 
+  const { addMessageToQueue } = useMessageProcessor({
+    setMessages,
+    setFollowUps,
+    messages,
+  });
   const handleThread = useCallback(
     (data: { chatId: string; message: any }) => {
       if (chatId === data.chatId) {
-        setMessages((prevThread) => {
-          const newMessage = data.message;
+        addMessageToQueue(data.message);
+        // setMessages((prevThread) => {
+        //   const newMessage = data.message;
 
-          return [...prevThread, newMessage];
-        });
+        //   return [...prevThread, newMessage];
+        // });
       }
     },
     [chatId, setMessages],
@@ -479,97 +525,12 @@ export default function Chat() {
                 return <Loading />;
               }
               if (message.isFormMessage) {
-                // check if we have a formSubmission
-                if (message.formSubmission) {
-                  return <FormSubmissionMessage />;
-                }
-
-                const formSchema = message.form?.formSchema;
-                const zodSchemaString = jsonSchemaToZod(
-                  formSchema?.schema?.definitions.formSchema,
-                );
-
-                const schemaString = `
-          // you can put any helper function or code directly inside the string and use them in your schema
-          
-          function getZodSchema({z, ctx}) {
-            // use ctx for any dynamic data that your schema depends on
-            return ${zodSchemaString};
-          }
-          `;
-
-                const zodSchema = Function(
-                  "...args",
-                  `${schemaString}; return getZodSchema(...args)`,
-                )({ z, ctx: {} });
-
-                const handleSubmit = (
-                  data: z.infer<typeof formSchema.schema>,
-                ) => {
-                  try {
-                    const validatedData = zodSchema.parse(data);
-
-                    // lets call the route /api/form-submission with axios as POSt with the data as json body
-                    axios
-                      .post(`${BASE_URL}/api/form-submission`, {
-                        formId: message.form?.id,
-                        messageId: message.id,
-                        submissionData: validatedData,
-                      })
-                      .then((response) => {
-                        const updatedMessage = response.data?.updatedMessage;
-                        // update the state with the submission
-                        // we need to setMessages after the submission to update it
-                        setMessages((messages) =>
-                          messages.map((msg) =>
-                            msg.id === updatedMessage.id
-                              ? {
-                                  id: updatedMessage.id,
-                                  role: updatedMessage.role,
-                                  content: updatedMessage.content,
-                                  createdAt: updatedMessage.createdAt,
-                                  streaming: updatedMessage.streaming,
-                                  isFormMessage: updatedMessage.isFormMessage,
-                                  form: updatedMessage.form,
-                                  formSubmission: updatedMessage.formSubmission,
-                                }
-                              : msg,
-                          ),
-                        );
-                      })
-                      .catch(function (error) {
-                        if (error.response) {
-                          // The request was made and the server responded with a status code
-                          // that falls out of the range of 2xx
-                          console.log(error.response.data);
-                          console.log(error.response.status);
-                          console.log(error.response.headers);
-                        } else if (error.request) {
-                          // The request was made but no response was received
-                          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                          // http.ClientRequest in node.js
-                          console.log(error.request);
-                        } else {
-                          // Something happened in setting up the request that triggered an Error
-                          console.log("Error", error.message);
-                        }
-                        console.log(error.config);
-                      });
-                  } catch (error) {
-                    if (error instanceof z.ZodError) {
-                      console.log("Form submitted with errors:", error.errors);
-                    }
-                  }
-                };
-
                 return (
-                  <AutoForm
-                    formSchema={zodSchema}
-                    fieldConfig={formSchema?.fieldConfig}
-                    onSubmit={handleSubmit}
-                  >
-                    <AutoFormSubmit>Submit</AutoFormSubmit>
-                  </AutoForm>
+                  <FormMessage
+                    BASE_URL={BASE_URL}
+                    message={message}
+                    setMessages={setMessages}
+                  />
                 );
               } else {
                 return (
@@ -705,4 +666,202 @@ function FormSubmissionMessage() {
       </motion.div>
     </div>
   );
+}
+
+function FormMessage({
+  BASE_URL,
+  message,
+  setMessages,
+}: {
+  BASE_URL: string | undefined;
+  message: any;
+  setMessages: any;
+}) {
+  const { formSchema, fieldConfig } = useAutoForm(message.form?.elements);
+  if (message.formSubmission) {
+    return <FormSubmissionMessage />;
+  }
+
+  const handleSubmit = (data: z.infer<typeof formSchema>) => {
+    try {
+      console.log("message\n", message);
+      const validatedData = formSchema.parse(data);
+
+      // lets call the route /api/form-submission with axios as POSt with the data as json body
+      axios
+        .post(`${BASE_URL}/api/form-submission`, {
+          flowId: message.flowId,
+          formId: message.form?.id,
+          messageId: message.id,
+          submissionData: validatedData,
+          chatId: message.chatId,
+        })
+        .then((response) => {
+          const updatedMessage = response.data?.updatedMessage;
+          // update the state with the submission
+          // we need to setMessages after the submission to update it
+          setMessages((messages: any) =>
+            messages.map((msg: any) =>
+              msg.id === updatedMessage.id
+                ? {
+                    id: updatedMessage.id,
+                    role: updatedMessage.role,
+                    content: updatedMessage.content,
+                    createdAt: updatedMessage.createdAt,
+                    streaming: updatedMessage.streaming,
+                    isFormMessage: updatedMessage.isFormMessage,
+                    form: updatedMessage.form,
+                    formSubmission: updatedMessage.formSubmission,
+                  }
+                : msg,
+            ),
+          );
+        })
+        .catch(function (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.log("Form submitted with errors:", error.errors);
+      }
+    }
+  };
+
+  return (
+    <AutoForm
+      formSchema={formSchema}
+      fieldConfig={fieldConfig}
+      onSubmit={handleSubmit}
+    >
+      <AutoFormSubmit>Submit</AutoFormSubmit>
+    </AutoForm>
+  );
+}
+
+interface UseMessageProcessorProps {
+  setMessages: React.Dispatch<React.SetStateAction<any[]>>;
+  setFollowUps: React.Dispatch<React.SetStateAction<any[]>>;
+  messages: any[];
+}
+
+export function useMessageProcessor({
+  setMessages,
+  setFollowUps,
+  messages,
+}: UseMessageProcessorProps) {
+  const messageQueueRef = useRef<any[]>([]);
+  const isProcessingRef = useRef(false);
+
+  const processQueue = useCallback(() => {
+    isProcessingRef.current = true;
+    const addMessageToState = ({ message }: { message: any }) => {
+      console.log("addMessageToState\n", message);
+      setMessages((prevThread) => {
+        const newMessageTime = new Date(message.createdAt).getTime();
+
+        // Check if the message already exists
+        const existingIndex = prevThread.findIndex((m) => m.id === message.id);
+        if (existingIndex !== -1) {
+          // Update existing message
+          const updatedThread = [...prevThread];
+          updatedThread[existingIndex] = {
+            ...updatedThread[existingIndex],
+            ...message,
+            seenByAgent: updatedThread[existingIndex].seenByAgent,
+            seenByUser: updatedThread[existingIndex].seenByUser,
+            seenByUserAt:
+              updatedThread[existingIndex].seenByUserAt || message.seenByUserAt,
+            createdAt: updatedThread[existingIndex].createdAt,
+            updatedAt: new Date(message.updatedAt),
+          };
+          return updatedThread;
+        }
+
+        // Find the correct insertion position
+        let insertIndex = prevThread.length;
+        for (let i = prevThread.length - 1; i >= 0; i--) {
+          const currentMessageTime = new Date(
+            prevThread[i].createdAt,
+          ).getTime();
+          if (currentMessageTime <= newMessageTime) {
+            insertIndex = i + 1;
+            break;
+          }
+        }
+
+        // Insert the new message at the correct position
+        const updatedThread = [...prevThread];
+        updatedThread.splice(insertIndex, 0, {
+          ...message,
+          createdAt: new Date(message.createdAt),
+          updatedAt: new Date(message.updatedAt),
+        });
+        return updatedThread;
+      });
+    };
+
+    const message = messageQueueRef.current.shift();
+    if (!message) return;
+
+    addMessageToState({
+      message: {
+        ...message,
+        createdAt: new Date(message.createdAt),
+        updatedAt: new Date(message.updatedAt),
+      },
+    });
+
+    if (message.delay) {
+      console.log("Setting timeout");
+      setTimeout(() => {
+        addMessageToState({
+          message: {
+            ...message,
+            delay: undefined,
+            loading: false,
+            streaming: false,
+          },
+        });
+        isProcessingRef.current = false;
+      }, message.delay * 1000);
+    } else {
+      isProcessingRef.current = false;
+    }
+
+    setFollowUps([]);
+  }, [setMessages, setFollowUps]);
+
+  useEffect(() => {
+    if (messageQueueRef.current.length > 0 && !isProcessingRef.current) {
+      processQueue();
+    }
+  }, [messages, processQueue]);
+
+  const addMessageToQueue = (newMessage: any) => {
+    console.log("newMessage", newMessage);
+    messageQueueRef.current.push(newMessage);
+    // processQueue();
+    if (messageQueueRef.current.length > 0 && !isProcessingRef.current) {
+      processQueue();
+    }
+  };
+
+  return {
+    addMessageToQueue,
+  };
 }

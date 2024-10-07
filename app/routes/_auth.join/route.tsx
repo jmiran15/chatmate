@@ -4,7 +4,13 @@ import type {
   MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  useActionData,
+  useFetcher,
+  useLoaderData,
+} from "@remix-run/react";
 
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
@@ -27,14 +33,16 @@ import { useIsPending } from "~/hooks/use-is-pending";
 import { getUserByEmail } from "~/models/user.server";
 import { requireAnonymous } from "~/session.server";
 import { sendEmail } from "~/utils/email.server";
+import { getPricing } from "~/utils/pricing.server";
 import { EmailSchema, PasswordSchema } from "~/utils/types";
 import {
   prepareVerification,
   verifySessionStorage,
 } from "../_auth.verify/verify.server";
+// import { priceIds } from "../_header._index/landing_v2/pricing";
 
 export const joinPasswordHashSessionKey = "joinPasswordHash";
-
+export const priceIdSessionKey = "priceId";
 const SignupSchema = z.object({
   intent: z.string().optional(),
   email: EmailSchema,
@@ -43,11 +51,21 @@ const SignupSchema = z.object({
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   await requireAnonymous(request);
-  return json({});
+  const url = new URL(request.url);
+  const priceId = url.searchParams.get("priceId");
+  const pricing = getPricing();
+  return json({ priceId, ...pricing });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
+
+  // get the search params
+  const url = new URL(request.url);
+  const priceId = url.searchParams.get("priceId");
+
+  console.log("priceId", priceId);
+  const pricing = getPricing();
 
   const submission = await parseWithZod(formData, {
     schema: SignupSchema.superRefine(async (data, ctx) => {
@@ -77,6 +95,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const verifySession = await verifySessionStorage.getSession();
   verifySession.set(joinPasswordHashSessionKey, passwordHash);
+  verifySession.set(
+    priceIdSessionKey,
+    priceId || pricing.isDev
+      ? pricing.devPriceIds.hobby.month
+      : pricing.prodPriceIds.hobby.month,
+  );
 
   // Prepare the verification
   const { verifyUrl, redirectTo, otp } = await prepareVerification({
@@ -115,6 +139,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 export const meta: MetaFunction = () => [{ title: "Sign Up for Chatmate" }];
 
 export default function Join() {
+  const data = useLoaderData<typeof loader>();
   const PRIVACY_POLICY_URL =
     "https://app.termly.io/policy-viewer/policy.html?policyUUID=064c1b30-2950-4e38-9908-700473644f6c";
 
@@ -122,6 +147,22 @@ export default function Join() {
     "https://app.termly.io/policy-viewer/policy.html?policyUUID=6201437d-0e7b-4223-a7b8-72c15211f9ac";
   const actionData = useActionData<typeof action>();
   const isPending = useIsPending({ intent: "signUp" });
+  const googleFetcher = useFetcher();
+
+  const handleGoogleSignUp = () => {
+    // Remove existing priceId from localStorage
+    localStorage.removeItem("priceId");
+    // Set new priceId in localStorage
+    localStorage.setItem(
+      "priceId",
+      data.priceId ??
+        (data.isDev
+          ? data.devPriceIds.hobby.month
+          : data.prodPriceIds.hobby.month),
+    );
+
+    googleFetcher.submit({}, { method: "post", action: "/auth/google" });
+  };
 
   const [form, fields] = useForm({
     id: "signup-form",
@@ -189,16 +230,16 @@ export default function Join() {
               Create an account
             </StatusButton>
 
-            <Form action="/auth/google" method="post" className="w-full">
-              <Button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2"
-                variant="outline"
-              >
-                <GoogleIcon className="w-5 h-5" />
-                <span>Sign up with Google</span>
-              </Button>
-            </Form>
+            <Button
+              type="button"
+              className="w-full flex items-center justify-center gap-2"
+              variant="outline"
+              onClick={handleGoogleSignUp}
+              disabled={googleFetcher.state === "submitting"}
+            >
+              <GoogleIcon className="w-5 h-5" />
+              <span>Sign up with Google</span>
+            </Button>
           </div>
           <div className="text-center text-sm">
             Already have an account?{" "}

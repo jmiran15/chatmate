@@ -1,6 +1,7 @@
 import { Chatbot, WidgetPosition } from "@prisma/client";
 import { useFetcher } from "@remix-run/react";
 import { forwardRef } from "react";
+import { Separator } from "~/components/ui/separator";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import {
@@ -13,6 +14,8 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { Textarea } from "../../components/ui/textarea";
+import Description from "../chatbots.$chatbotId.forms._index/Description";
+import Title from "../chatbots.$chatbotId.forms._index/Title";
 import { ImagePicker } from "./image-picker";
 
 const THEME_COLORS = [
@@ -85,9 +88,11 @@ const Customizer = forwardRef<
   return (
     <div
       ref={ref}
-      className="flex flex-col gap-8 p-4 overflow-y-auto md:col-span-2 w-full "
+      className="flex flex-col gap-8 py-8 px-4 overflow-y-auto md:col-span-2 w-full no-scrollbar"
     >
-      <div className="flex flex-col gap-1.5 w-full">
+      <Header />
+      <Separator />
+      <div className="flex flex-col gap-2 w-full">
         <Label htmlFor="name">Name</Label>
         <Input
           id="name"
@@ -104,7 +109,7 @@ const Customizer = forwardRef<
           }
         />
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label>Logo url</Label>
         <ImagePicker
           originalLogoFilepath={originalLogoFilepath}
@@ -113,7 +118,7 @@ const Customizer = forwardRef<
           fetcher={fetcher}
         />
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label>Theme color</Label>
         <Select
           name="color"
@@ -128,7 +133,7 @@ const Customizer = forwardRef<
             );
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full max-w-xs">
             <SelectValue placeholder="Select a theme color" />
           </SelectTrigger>
           <SelectContent>
@@ -143,7 +148,7 @@ const Customizer = forwardRef<
           </SelectContent>
         </Select>
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label>Open button icon</Label>
         <Select
           name="icon"
@@ -158,7 +163,7 @@ const Customizer = forwardRef<
             );
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full max-w-xs">
             <SelectValue placeholder="Select an icon" />
           </SelectTrigger>
           <SelectContent>
@@ -173,7 +178,7 @@ const Customizer = forwardRef<
           </SelectContent>
         </Select>
       </div>
-      <div className="flex flex-col gap-1.5 w-full">
+      <div className="flex flex-col gap-2 w-full">
         <Label htmlFor="opentext">Open button text</Label>
         <Input
           id="opentext"
@@ -190,7 +195,7 @@ const Customizer = forwardRef<
           }
         />
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label>Container border radius</Label>
         <Select
           name="containerRadius"
@@ -205,7 +210,7 @@ const Customizer = forwardRef<
             );
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full max-w-xs">
             <SelectValue placeholder="Select a border radius" />
           </SelectTrigger>
           <SelectContent>
@@ -220,7 +225,7 @@ const Customizer = forwardRef<
           </SelectContent>
         </Select>
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label>Widget Position</Label>
         <Select
           name="widgetPosition"
@@ -235,7 +240,7 @@ const Customizer = forwardRef<
             );
           }}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-full max-w-xs">
             <SelectValue placeholder="Select widget position" />
           </SelectTrigger>
           <SelectContent>
@@ -250,7 +255,7 @@ const Customizer = forwardRef<
           </SelectContent>
         </Select>
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="intro">Intro messages</Label>
         <Textarea
           id="intro"
@@ -274,7 +279,7 @@ const Customizer = forwardRef<
           These messages will be shown when the chatbot is first opened.
         </p>
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="starter">Starter questions</Label>
         <Textarea
           id="starter"
@@ -298,7 +303,7 @@ const Customizer = forwardRef<
           These questions will be shown when the chatbot is first opened.
         </p>
       </div>
-      <div className="flex flex-col gap-1.5">
+      <div className="flex flex-col gap-2">
         <Label htmlFor="restrict">Restrict paths</Label>
         <Textarea
           id="restrict"
@@ -325,6 +330,19 @@ const Customizer = forwardRef<
     </div>
   );
 });
+
+function Header() {
+  return (
+    <div className="flex flex-col sm:flex-row items-start justify-between">
+      <div className="flex flex-col">
+        <Title>Widget Appearance</Title>
+        <Description>
+          Customize the appearance of the chatbot widget.
+        </Description>
+      </div>
+    </div>
+  );
+}
 
 Customizer.displayName = "Customizer";
 

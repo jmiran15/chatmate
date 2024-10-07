@@ -1,9 +1,8 @@
-import { Chat, Message, Trigger } from "@prisma/client";
+import { Chat, Message } from "@prisma/client";
 import { getClientIPAddress } from "remix-utils/get-client-ip-address";
 import uap from "ua-parser-js";
 import { prisma } from "~/db.server";
 import { Message as ThreadMessage } from "../chatbots.$chatbotId.chats.$chatsId/useThread";
-import { callCustomFlow } from "./customFlows.server";
 
 interface ChatWithMessagesAndCount extends Chat {
   messages: Message[];
@@ -27,7 +26,11 @@ export async function getLatestChatBySessionID({
     include: {
       messages: {
         include: {
-          form: true, // so we can send over the formSchema
+          form: {
+            include: {
+              elements: true,
+            },
+          }, // so we can send over the formSchema
           formSubmission: true, // so we can see if the form was submitted
         },
         orderBy: {
@@ -71,21 +74,6 @@ export async function createAnonymousChat({
     },
   });
 
-  // On creating a new “chat” in the api.chat…. loader, check if there are any flows with the “initial load” trigger, order by updatedAt
-  // If there are… call the callTool function for each of those flows…
-  const flows = await prisma.flow.findMany({
-    where: {
-      trigger: Trigger.INITIAL_LOAD,
-      chatbotId,
-    },
-    orderBy: {
-      updatedAt: "desc",
-    },
-    select: {
-      id: true,
-    },
-  });
-
   const chat = await prisma.chat.create({
     data: {
       chatbot: {
@@ -104,7 +92,11 @@ export async function createAnonymousChat({
     include: {
       messages: {
         include: {
-          form: true, // so we can send over the formSchema
+          form: {
+            include: {
+              elements: true,
+            },
+          }, // so we can send over the formSchema
           formSubmission: true, // so we can see if the form was submitted
         },
         orderBy: {
@@ -125,11 +117,6 @@ export async function createAnonymousChat({
       },
     },
   });
-
-  // call the callCustomFlow function for each of those flows
-  for (const flow of flows) {
-    await callCustomFlow(flow.id, chat.id);
-  }
 
   return chat;
 }

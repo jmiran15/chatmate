@@ -19,13 +19,13 @@ export default function ChatWindow({
   const isMobile = useMobileScreen();
 
   const desktopStyle = `
-    flex flex-col flex-1 bottom-[84px] 
+    z-[999] flex flex-col flex-1 bottom-[84px] 
     min-h-[80px] w-[400px] 
     max-h-[704px] opacity-100 overflow-hidden chat-window-custom
     absolute bottom-[80px]`;
 
   const mobileStyle =
-    "flex flex-col flex-1 fixed bottom-0 right-0 opacity-100 overflow-hidden h-dvh w-dvw";
+    "z-[999] flex flex-col flex-1 fixed bottom-0 right-0 opacity-100 overflow-hidden h-dvh w-dvw";
 
   return (
     <div
