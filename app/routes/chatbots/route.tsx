@@ -11,11 +11,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Gift, Heart, Loader2, Star, X } from "lucide-react"; // Import Loader2 icon from Lucide
 import { useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
-import { useWindowSize } from "react-use";
+
 import { prisma } from "~/db.server";
 import { Header } from "~/routes/_header._index/header";
 import { requireUserId } from "~/session.server";
 import { getPricing } from "~/utils/pricing.server";
+import { useRafState } from "./useRafState";
 // import { pricing } from "../_header._index/landing_v2/pricing";
 
 // should probably add loader for auth check here?
@@ -25,6 +26,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const subscription = await prisma.subscription.findUnique({
     where: { userId },
   });
+
+  console.log("pricing: ", pricing);
+  console.log("subscription: ", subscription);
 
   return json({
     userId,
@@ -72,6 +76,8 @@ function Spinner({ className = "" }: { className?: string }) {
 export default function ChatbotsLayout() {
   const { hasSubscription, priceId, userId, features } =
     useLoaderData<typeof loader>();
+
+  console.log("features: ", features);
   const checkoutFetcher = useFetcher({ key: "checkoutGoogle" });
   const { width, height } = useWindowSize();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -253,3 +259,59 @@ export default function ChatbotsLayout() {
 export const handle: SEOHandle = {
   getSitemapEntries: () => null,
 };
+
+const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
+  const [state, setState] = useRafState<{ width: number; height: number }>({
+    width: isBrowser ? window.innerWidth : initialWidth,
+    height: isBrowser ? window.innerHeight : initialHeight,
+  });
+
+  useEffect((): (() => void) | void => {
+    if (isBrowser) {
+      const handler = () => {
+        setState({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      };
+
+      on(window, "resize", handler);
+
+      return () => {
+        off(window, "resize", handler);
+      };
+    }
+  }, []);
+
+  return state;
+};
+
+export const noop = () => {};
+
+export function on<T extends Window | Document | HTMLElement | EventTarget>(
+  obj: T | null,
+  ...args: Parameters<T["addEventListener"]> | [string, Function | null, ...any]
+): void {
+  if (obj && obj.addEventListener) {
+    obj.addEventListener(
+      ...(args as Parameters<HTMLElement["addEventListener"]>),
+    );
+  }
+}
+
+export function off<T extends Window | Document | HTMLElement | EventTarget>(
+  obj: T | null,
+  ...args:
+    | Parameters<T["removeEventListener"]>
+    | [string, Function | null, ...any]
+): void {
+  if (obj && obj.removeEventListener) {
+    obj.removeEventListener(
+      ...(args as Parameters<HTMLElement["removeEventListener"]>),
+    );
+  }
+}
+
+export const isBrowser = typeof window !== "undefined";
+
+export const isNavigator = typeof navigator !== "undefined";
