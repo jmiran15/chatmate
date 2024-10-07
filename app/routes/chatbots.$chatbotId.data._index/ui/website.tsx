@@ -82,7 +82,7 @@ export default function Website({
   // crawl progress
   // TODO - lots of unneeded re-renders here - causing performance issues
   useEffect(() => {
-    if (job?.id !== progress?.jobId) {
+    if (jobInfo?.id !== progress?.jobId) {
       setLinks([]);
       return;
     } else {
@@ -95,7 +95,11 @@ export default function Website({
         ]);
       }
     }
-  }, [progress?.progress?.currentDocumentUrl, progress?.returnvalue, job?.id]);
+  }, [
+    progress?.progress?.currentDocumentUrl,
+    progress?.returnvalue,
+    jobInfo?.id,
+  ]);
 
   function handleSubmit(url: string, intent: "scrape" | "links") {
     const isValid = validateUrl(url);
