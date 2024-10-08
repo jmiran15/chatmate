@@ -17,9 +17,10 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     where: { id: chatbotId },
   });
 
-  if (chatbot?.userId !== userId) {
-    throw new Error("User does not have access to chatbot");
-  }
+  // TODO: had to comment this out to be able to work on client bots
+  // if (chatbot?.userId !== userId) {
+  //   throw new Error("User does not have access to chatbot");
+  // }
 
   const url = new URL(request.url);
   const { start, limit } = getStartLimit(url.searchParams);

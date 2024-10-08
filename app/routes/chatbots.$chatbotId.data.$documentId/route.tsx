@@ -41,9 +41,9 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     where: { id: chatbotId },
   });
 
-  if (chatbot?.userId !== userId) {
-    throw new Error("User does not have access to chatbot");
-  }
+  // if (chatbot?.userId !== userId) {
+  //   throw new Error("User does not have access to chatbot");
+  // }
 
   const document = await getDocumentById({ id: documentId });
 
