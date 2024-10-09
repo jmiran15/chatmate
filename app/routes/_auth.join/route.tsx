@@ -140,11 +140,9 @@ export const meta: MetaFunction = () => [{ title: "Sign Up for Chatmate" }];
 
 export default function Join() {
   const data = useLoaderData<typeof loader>();
-  const PRIVACY_POLICY_URL =
-    "https://app.termly.io/policy-viewer/policy.html?policyUUID=064c1b30-2950-4e38-9908-700473644f6c";
+  const PRIVACY_POLICY_URL = "https://chatmate.so/policies/terms";
 
-  const TERMS_OF_SERVICE_URL =
-    "https://app.termly.io/policy-viewer/policy.html?policyUUID=6201437d-0e7b-4223-a7b8-72c15211f9ac";
+  const TERMS_OF_SERVICE_URL = "https://chatmate.so/policies/privacy";
   const actionData = useActionData<typeof action>();
   const isPending = useIsPending({ intent: "signUp" });
   const googleFetcher = useFetcher();

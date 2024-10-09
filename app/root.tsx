@@ -79,11 +79,6 @@ export default function App() {
       })(window, document, "clarity", "script", "l2cwgd2upk");`,
           }}
         />
-        <script
-          defer
-          data-domain="chatmate.so"
-          src="https://plausible.io/js/script.js"
-        ></script>
       </head>
 
       <body className="h-full bg-transparent">
@@ -144,14 +139,6 @@ export default function App() {
           src="https://chatmate-widget.vercel.app/chatmate-chat-widget.js"
           async
         ></script>
-
-        {/* <script
-      type="module"
-      data-chatmate-widget-script="true"
-      data-embed-id="2564a644-fdf7-4e26-9e07-0308c77484df"
-      src="dist/chatmate-chat-widget.js"
-      async
-    ></script> */}
       </body>
     </html>
   );

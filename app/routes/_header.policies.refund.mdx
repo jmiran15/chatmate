@@ -1,0 +1,38 @@
+---
+title: "Refund Policy"
+description: "If you’re ever unhappy with any Chatmate Services or products for any reason, contact our support team."
+author: "Jonathan Miranda"
+---
+
+import { generateMetaTags, generateCanonicalUrl } from "~/utils/seo";
+import PolicyWrapper from "~/components/PolicyWrapper";
+
+export const meta = ({ location }) => {
+  const canonicalUrl = generateCanonicalUrl(location.pathname);
+  return [
+    ...generateMetaTags({
+      title: `${frontmatter.title} | Chatmate`,
+      description: frontmatter.description,
+      url: canonicalUrl,
+      publishedTime: frontmatter.published, 
+    }),
+
+];
+};
+
+<PolicyWrapper>
+**RETURN POLICY**
+
+**Last updated August 18, 2024**
+
+**REFUNDS**
+
+All sales are final and no refund will be issued.
+
+**QUESTIONS**
+
+If you have any questions concerning our return policy, please contact us at:
+
+jonathan@chatmate.so
+
+</PolicyWrapper>

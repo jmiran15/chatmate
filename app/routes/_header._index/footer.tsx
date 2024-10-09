@@ -7,13 +7,10 @@ import { useLinks } from "./use-links";
 export function Footer() {
   const { routes } = useLinks();
 
-  const PRIVACY_POLICY_URL =
-    "https://app.termly.io/policy-viewer/policy.html?policyUUID=064c1b30-2950-4e38-9908-700473644f6c";
+  const PRIVACY_POLICY_URL = "https://chatmate.so/policies/terms";
 
-  const TERMS_OF_SERVICE_URL =
-    "https://app.termly.io/policy-viewer/policy.html?policyUUID=6201437d-0e7b-4223-a7b8-72c15211f9ac";
-  const REFUND_POLICY_URL =
-    "https://app.termly.io/policy-viewer/policy.html?policyUUID=2dd2e155-c4f3-4ec7-a5d2-e33efafb6154";
+  const TERMS_OF_SERVICE_URL = "https://chatmate.so/policies/privacy";
+  const REFUND_POLICY_URL = "https://chatmate.so/policies/refund";
   const CONTACT_US_URL = "mailto:jonathan@chatmate.so";
   return (
     <footer className="bg-muted/40 py-12 md:py-16 lg:py-20 border-t">
