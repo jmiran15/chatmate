@@ -15,6 +15,7 @@ import {
   useLoaderData,
   useLocation,
 } from "@remix-run/react";
+import posthog from "posthog-js";
 import { useEffect } from "react";
 import stylesheet from "~/tailwind.css?url";
 import * as gtag from "~/utils/gtags.client";
@@ -60,6 +61,10 @@ export default function App() {
     }
   }, [location, gaTrackingId]);
 
+  useEffect(() => {
+    posthog.capture("$pageview");
+  }, [location]);
+
   return (
     <html lang="en" className="h-full">
       <head>
@@ -98,25 +103,6 @@ export default function App() {
                 gtag('js', new Date());
 
                 gtag('config', '${gaTrackingId}', {
-                  page_path: window.location.pathname,
-                });
-              `,
-              }}
-            />
-            <script
-              async
-              src={`https://www.googletagmanager.com/gtag/js?id=AW-16589884223`}
-            />
-            <script
-              async
-              id="gtag-init"
-              dangerouslySetInnerHTML={{
-                __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'AW-16589884223', {
                   page_path: window.location.pathname,
                 });
               `,
