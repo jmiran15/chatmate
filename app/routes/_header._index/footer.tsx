@@ -7,9 +7,8 @@ import { useLinks } from "./use-links";
 export function Footer() {
   const { routes } = useLinks();
 
-  const PRIVACY_POLICY_URL = "https://chatmate.so/policies/terms";
-
-  const TERMS_OF_SERVICE_URL = "https://chatmate.so/policies/privacy";
+  const PRIVACY_POLICY_URL = "https://chatmate.so/policies/privacy";
+  const TERMS_OF_SERVICE_URL = "https://chatmate.so/policies/terms";
   const REFUND_POLICY_URL = "https://chatmate.so/policies/refund";
   const CONTACT_US_URL = "mailto:jonathan@chatmate.so";
   return (

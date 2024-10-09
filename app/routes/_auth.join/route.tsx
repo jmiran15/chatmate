@@ -140,9 +140,9 @@ export const meta: MetaFunction = () => [{ title: "Sign Up for Chatmate" }];
 
 export default function Join() {
   const data = useLoaderData<typeof loader>();
-  const PRIVACY_POLICY_URL = "https://chatmate.so/policies/terms";
 
-  const TERMS_OF_SERVICE_URL = "https://chatmate.so/policies/privacy";
+  const PRIVACY_POLICY_URL = "https://chatmate.so/policies/privacy";
+  const TERMS_OF_SERVICE_URL = "https://chatmate.so/policies/terms";
   const actionData = useActionData<typeof action>();
   const isPending = useIsPending({ intent: "signUp" });
   const googleFetcher = useFetcher();
