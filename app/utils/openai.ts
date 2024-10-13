@@ -17,7 +17,7 @@ export const OVERLAP = 20;
 export async function embed({ input }: { input: string }) {
   try {
     const embedding = await openai.embeddings.create({
-      model: "text-embedding-ada-002",
+      model: "text-embedding-3-small",
       input: input.replace(/\n/g, " "),
       encoding_format: "float",
     });
