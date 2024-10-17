@@ -1,8 +1,8 @@
 import { Document } from "@prisma/client";
 import { FlowProducer, Queue } from "bullmq";
-import { queue as ingestionQueue } from "~/queues/ingestion.server";
-import { redis } from "~/utils/redis.server";
 import { serverOnly$ } from "vite-env-only/macros";
+import { queue as ingestionQueue } from "~/queues/ingestion/ingestion.server";
+import { redis } from "~/utils/redis.server";
 
 // move this so it is a singleton
 const flow = new FlowProducer({

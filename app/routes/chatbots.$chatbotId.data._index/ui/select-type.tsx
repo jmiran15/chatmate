@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { CgFile, CgFormatText, CgWebsite } from "react-icons/cg";
+import { FaQuestion } from "react-icons/fa";
 import { Button } from "~/components/ui/button";
 import {
   DialogDescription,
@@ -5,10 +8,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import { CgWebsite, CgFile, CgFormatText } from "react-icons/cg";
-import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Label } from "~/components/ui/label";
-import { useState } from "react";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { STEPS } from "~/utils/types";
 // import {
 //   SiZendesk,
@@ -35,6 +36,11 @@ const DataTypes = [
     value: STEPS.BLANK,
     label: "Blank",
     icon: CgFormatText,
+  },
+  {
+    value: STEPS.QA,
+    label: "Q&A",
+    icon: FaQuestion,
   },
   // {
   //   value: "zendesk",

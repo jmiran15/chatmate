@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { STEPS } from "~/utils/types";
 import BlankUpload from "./blank";
 import { FileUpload } from "./file";
+import QA from "./qa";
 import SelectType from "./select-type";
 import Website from "./website";
 
@@ -42,7 +43,7 @@ export function DialogDemo({
           <span className="text-md">Add data</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-lg max-h-screen overflow-auto">
+      <DialogContent className="max-w-xl max-h-screen overflow-auto">
         {step === STEPS.SELECT_TYPE ? <SelectType setStep={setStep} /> : null}
         {step === STEPS.WEBSITE ? (
           <Website setStep={setStep} setOpen={setOpen} submit={submit} />
@@ -52,6 +53,9 @@ export function DialogDemo({
         ) : null}
         {step === STEPS.BLANK ? (
           <BlankUpload setStep={setStep} setOpen={setOpen} submit={submit} />
+        ) : null}
+        {step === STEPS.QA ? (
+          <QA setStep={setStep} setOpen={setOpen} submit={submit} />
         ) : null}
       </DialogContent>
     </Dialog>

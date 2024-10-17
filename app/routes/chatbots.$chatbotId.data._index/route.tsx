@@ -49,7 +49,7 @@ export default function Data() {
     setSelectedSort,
   } = useFilterSort(searchParams);
 
-  console.log("Loader data: ", items);
+  // console.log("Loader data: ", items);
 
   const { documents } = useOptimisticDocuments({
     items,

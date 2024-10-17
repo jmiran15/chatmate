@@ -27,9 +27,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     where: { userId },
   });
 
-  console.log("pricing: ", pricing);
-  console.log("subscription: ", subscription);
-
   return json({
     userId,
     priceId: subscription?.priceId,
@@ -77,7 +74,6 @@ export default function ChatbotsLayout() {
   const { hasSubscription, priceId, userId, features } =
     useLoaderData<typeof loader>();
 
-  console.log("features: ", features);
   const checkoutFetcher = useFetcher({ key: "checkoutGoogle" });
   const { width, height } = useWindowSize();
   const [searchParams, setSearchParams] = useSearchParams();

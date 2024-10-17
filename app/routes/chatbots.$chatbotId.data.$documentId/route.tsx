@@ -21,13 +21,13 @@ import { useToast } from "~/components/ui/use-toast";
 import { prisma } from "~/db.server";
 import { cn } from "~/lib/utils";
 import { getDocumentById, updateDocumentById } from "~/models/document.server";
-import { queue } from "~/queues/ingestion.server";
+import { queue } from "~/queues/ingestion/ingestion.server";
 import { requireUserId } from "~/session.server";
 import Container from "../chatbots.$chatbotId.forms._index/Container";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
-  const userId = await requireUserId(request);
+  await requireUserId(request);
 
   if (!chatbotId) {
     throw new Error("Chatbot id is required");

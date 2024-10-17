@@ -39,7 +39,7 @@ export function useOptimisticDocuments({
   );
 
   const preprocessingQueues = ["scrape", "parseFile"];
-  const ingestionQueues = ["ingestion"];
+  const ingestionQueues = ["ingestion", "qaingestion"];
 
   const prevItemsRef = useRef<SerializeFrom<Document[]> | undefined>();
   const progressQueueRef = useRef<ProgressData[]>([]);

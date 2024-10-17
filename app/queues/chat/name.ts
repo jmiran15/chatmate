@@ -31,7 +31,6 @@ export const generateChatName = Queue<GenerateChatNameQueueData>(
   "generateChatName",
   async (job): Promise<GenerateChatNameQueueResult> => {
     const childrenValues = await job.getChildrenValues();
-    console.log("CHILDREN VALUES: ", childrenValues);
     const chat = Object.values(childrenValues)[0];
 
     invariant(

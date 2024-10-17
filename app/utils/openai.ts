@@ -1,31 +1,128 @@
-import { Chatbot, Document, Embedding } from "@prisma/client";
+// TODO: integrate Helicone sessions and prompts
+import { type Chatbot, type Embedding } from "@prisma/client";
+import { V2RerankResponse } from "cohere-ai/api";
+import uniqBy from "lodash/uniqBy";
 import { ChatCompletionTool } from "openai/resources/index.mjs";
+import pLimit from "p-limit";
 import invariant from "tiny-invariant";
-import { v4 as uuidv4 } from "uuid";
 import { prisma } from "~/db.server";
 import {
   mainChatSystemPrompt_v3,
   mainChatUserPrompt_v3,
   mainTools,
 } from "./prompts";
-import { openai } from "./providers.server";
-import { Chunk } from "./types";
+import { generateSimilarUserQueries } from "./prompts/augmentQuery.server";
+import { generateHyDE } from "./prompts/HyDE";
+import { generateSubQuestions } from "./prompts/subquestions.server";
+import { cohere, openai } from "./providers.server";
 
 export const CHUNK_SIZE = 1024;
 export const OVERLAP = 20;
+export const RERANK_MODEL:
+  | "rerank-english-v3.0"
+  | "rerank-multilingual-v3.0"
+  | "rerank-english-v2.0"
+  | "rerank-multilingual-v2.0" = "rerank-english-v3.0";
 
-export async function embed({ input }: { input: string }) {
+export async function embed({
+  input,
+  sessionId,
+  sessionPath,
+  sessionName,
+}: {
+  input: string | string[];
+  sessionId?: string;
+  sessionPath?: string;
+  sessionName?: string;
+}): Promise<number[] | number[][]> {
   try {
-    const embedding = await openai.embeddings.create({
-      model: "text-embedding-3-small",
-      input: input.replace(/\n/g, " "),
-      encoding_format: "float",
-    });
+    const embedding = await openai.embeddings.create(
+      {
+        model: "text-embedding-3-small",
+        input: Array.isArray(input)
+          ? input.map((i) => i.replace(/\n/g, " "))
+          : input.replace(/\n/g, " "),
+        encoding_format: "float",
+      },
+      {
+        headers: {
+          "Helicone-Property-Environment": process.env.NODE_ENV,
+          ...(sessionId &&
+            sessionPath &&
+            sessionName && {
+              "Helicone-Session-Id": sessionId,
+              "Helicone-Session-Path": sessionPath,
+              "Helicone-Session-Name": sessionName,
+            }),
+        },
+      },
+    );
 
-    return embedding.data[0].embedding as number[];
+    return Array.isArray(input)
+      ? embedding.data.map((e) => e.embedding as number[])
+      : (embedding.data[0].embedding as number[]);
   } catch (e) {
     throw new Error(`Error calling OpenAI embedding API: ${e}`);
   }
+}
+
+const limit = pLimit(100); // Adjust this number based on your server's capacity
+
+async function searchEmbeddings({
+  chatbotId,
+  queries,
+  tagLimit = 10,
+  regularLimit = 5,
+  minSimilarity = 0.7,
+  sessionId,
+  sessionPath,
+  sessionName,
+}: {
+  chatbotId: string;
+  queries: string[];
+  tagLimit?: number;
+  regularLimit?: number;
+  minSimilarity?: number;
+  sessionId: string;
+  sessionPath: string;
+  sessionName: string;
+}): Promise<EmbeddingWithDistance[]> {
+  // Batch embed all queries
+  const embeddings = await batchEmbed(
+    queries,
+    sessionId,
+    sessionPath,
+    sessionName,
+  );
+
+  const searchTasks = embeddings.flatMap((embedding, index) => [
+    limit(() =>
+      fetchRelevantEmbeddingsWithVector({
+        chatbotId,
+        embedding,
+        k: tagLimit,
+        isQA: true,
+        minSimilarity,
+      }),
+    ),
+    limit(() =>
+      fetchRelevantEmbeddingsWithVector({
+        chatbotId,
+        embedding,
+        k: regularLimit,
+        isQA: false,
+        minSimilarity,
+      }),
+    ),
+  ]);
+
+  const results = await Promise.all(searchTasks);
+
+  const allResults = results
+    .flat()
+    .filter((result): result is EmbeddingWithDistance => result !== null);
+
+  return uniqBy(allResults, "id");
 }
 
 export async function chat({
@@ -49,12 +146,100 @@ export async function chat({
 
   const query = messages[messages.length - 1].content;
 
-  // TODO - move RAG into a pure function
-  const references = (await fetchRelevantDocs({
-    chatbotId: chatbot.id,
-    input: query,
-  })) as Embedding[];
+  // TODO: "pre-selection stage" - for improving the speed of messages that don't require much RAG (or none at all).
+  // before all of this ... we should do a pre-selection stage where a super fast llm decides the "RAG path" to be taken. e.g, if the user just says "hi" ... no need to RAG, just use the base prompt.
+  // if the user says something super complicated ... etc... then decide to call more stuff!
+  // all of these can run in parallel - and each is essentially one request to the LLM, so the time is based on the slowest one.
+  // ^^^ we can maybe do this with Groq???
+  // PROBABLY JUST A "SKIP" RAG step would be best here. Skipping anything else would not really save much time.
 
+  // ## Preprocessing stage
+  const [similarQueriesResult, subQuestionsResult, hydeResult] =
+    await Promise.allSettled([
+      generateSimilarUserQueries({
+        originalQuery: query,
+        sessionId,
+        chatName,
+      }),
+      generateSubQuestions({
+        originalQuery: query,
+        sessionId,
+        chatName,
+      }),
+      generateHyDE({
+        originalQuery: query,
+        sessionId,
+        chatName,
+      }),
+      null,
+    ]);
+
+  const similarQueries =
+    similarQueriesResult.status === "fulfilled"
+      ? similarQueriesResult.value
+      : null;
+  const subQuestions =
+    subQuestionsResult.status === "fulfilled" ? subQuestionsResult.value : null;
+  const hyde = hydeResult.status === "fulfilled" ? hydeResult.value : null;
+
+  // Log errors if any
+  if (similarQueriesResult.status === "rejected") {
+    console.error(
+      "Failed to generate similar queries:",
+      similarQueriesResult.reason,
+    );
+  }
+  if (subQuestionsResult.status === "rejected") {
+    console.error(
+      "Failed to generate sub questions:",
+      subQuestionsResult.reason,
+    );
+  }
+  if (hydeResult.status === "rejected") {
+    console.error("Failed to generate HyDE:", hydeResult.reason);
+  }
+
+  // TODO: generate some queries based on the query + history, we need this to embed the chat context into the retrieval.
+  // TODO: include the previous used compressed chunks/context in the new context, before passing to the reranker.
+  // Probably would be a good use of Redis.
+  // i.e. we can keep all the previous questions, hyde, etc... everything we have generated in Redis, retrieve docs, and keep a running list
+  // where we only append new docs... and the reranker should take care of getting rid of irrelevant stuff (i.e. old stuff that is irrelevant to the current query).
+
+  // ## Retrieval stage
+  const allQueries = [
+    query,
+    ...(similarQueries?.expandedQueries ?? []),
+    ...(subQuestions?.subQuestions?.map(
+      (subQuestion) => subQuestion.question,
+    ) ?? []),
+    hyde ?? "",
+  ].filter(Boolean);
+
+  const relevantEmbeddings = await searchEmbeddings({
+    chatbotId: chatbot.id,
+    queries: allQueries,
+    tagLimit: 10,
+    regularLimit: 10,
+    minSimilarity: 0.6,
+    sessionId,
+    sessionPath: "/message/search_embeddings",
+    sessionName: chatName,
+  });
+
+  // TODO: compress the chunks with LLMLingua2
+
+  // Rerank with Cohere Ranker 3
+  const rerankedEmbeddings = await rerank({
+    query,
+    documents: relevantEmbeddings.map((embedding) => ({
+      id: embedding.id,
+      text: embedding.content,
+    })),
+    topN: 10, // Probably increase this number... or perhaps we can make it a percentage of the total documents in a chatbot's embedding space, up-to some max. and would prob. be for it to be expontential to some point, and then drop off exponentially, almost like a sigmoid curve.
+    model: RERANK_MODEL,
+  });
+
+  // create the prompts and call the final LLM
   const systemPrompt = mainChatSystemPrompt_v3({
     chatbotName: chatbot.name,
     systemPrompt: chatbot.systemPrompt
@@ -78,12 +263,12 @@ export async function chat({
   });
 
   const userPrompt = mainChatUserPrompt_v3({
-    retrievedData: references
+    retrievedData: rerankedEmbeddings.results
       .map(
         (reference) =>
-          `VERIFIED_SOURCE_[${reference.documentId}]: ${reference.content}`,
+          `Document relevance: ${reference.relevanceScore}\nDocument content: ${reference.document?.text}`,
       )
-      .join("\n"),
+      .join("\n\n"),
     question: query,
   });
 
@@ -112,124 +297,87 @@ export async function chat({
   return stream;
 }
 
-// TODO - modularize the RAG code out of here
-// DOCUMENT RETRIEVAL (RAG)
-// WE NEED TO BE SUMMARIZING THE PREV CHAT AS WELL AND USING THAT TO GET EMBEDDINGS
-export async function fetchRelevantDocs({
+type EmbeddingWithDistance = Omit<Embedding, "embedding"> & {
+  distance: number;
+};
+
+async function rerank({
+  query,
+  documents,
+  topN,
+  model,
+}: {
+  query: string;
+  documents: { id: string; text: string }[];
+  topN: number;
+  model: typeof RERANK_MODEL;
+}): Promise<V2RerankResponse> {
+  return await cohere.v2.rerank({
+    documents,
+    query,
+    topN,
+    model,
+    returnDocuments: true,
+  });
+}
+
+const MAX_BATCH_SIZE = 100;
+
+export async function batchEmbed(
+  inputs: string[],
+  sessionId: string,
+  sessionPath: string,
+  sessionName: string,
+): Promise<number[][]> {
+  const batches = [];
+  for (let i = 0; i < inputs.length; i += MAX_BATCH_SIZE) {
+    batches.push(inputs.slice(i, i + MAX_BATCH_SIZE));
+  }
+
+  const results = await Promise.all(
+    batches.map((batch) =>
+      embed({ input: batch, sessionId, sessionPath, sessionName }),
+    ),
+  );
+  return results.flat() as number[][];
+}
+
+async function fetchRelevantEmbeddingsWithVector({
   chatbotId,
-  input,
+  embedding,
+  k = 5,
+  isQA = false,
+  minSimilarity = 0.7,
 }: {
   chatbotId: string;
-  input: string;
-}) {
-  const userEmbedding = await embed({ input });
+  embedding: number[];
+  k?: number;
+  isQA?: boolean;
+  minSimilarity?: number;
+}): Promise<EmbeddingWithDistance[] | null> {
+  try {
+    const results = await prisma.$queryRaw<EmbeddingWithDistance[]>`
+      SELECT DISTINCT ON (e.content)
+        e.id,
+        e."createdAt",
+        e."documentId",
+        e."chatbotId",
+        e.content,
+        e."isQA",
+        1 - (e.embedding <=> ${embedding}::vector) AS distance
+      FROM "Embedding" e
+      JOIN "Document" d ON e."documentId" = d.id
+      WHERE e."chatbotId" = ${chatbotId}
+        AND e."isQA" = ${isQA}
+        AND d."isPending" = false
+        AND 1 - (e.embedding <=> ${embedding}::vector) > ${minSimilarity}
+      ORDER BY e.content, distance DESC
+      LIMIT ${k};
+    `;
 
-  const relevantDocs = await prisma.$queryRaw`
-  SELECT id, content, "documentId",
-    (-1 * (embedding <#> ${userEmbedding}::vector)) as similarity
-  FROM "Embedding"
-  WHERE "chatbotId" = ${chatbotId}
-  ORDER BY similarity DESC
-  LIMIT 5;
-`;
-
-  return relevantDocs;
-}
-
-// DOCUMENT PREPROCESSING FLOW
-export function splitStringIntoChunks(
-  document: Document,
-  chunkSize: number,
-  overlap: number,
-): Chunk[] {
-  if (chunkSize <= 0) {
-    throw new Error("Chunk size must be greater than 0.");
+    return results.length > 0 ? results : null;
+  } catch (error) {
+    console.error("Error fetching relevant embeddings:", error);
+    return null;
   }
-
-  if (overlap >= chunkSize) {
-    throw new Error("Overlap must be smaller than the chunk size.");
-  }
-
-  const chunks: Chunk[] = [];
-  let startIndex = 0;
-
-  while (startIndex < document.content.length) {
-    const endIndex = Math.min(startIndex + chunkSize, document.content.length);
-    const chunk = document.content.substring(startIndex, endIndex);
-    const chunkId = uuidv4();
-    chunks.push({
-      content: chunk,
-      id: chunkId,
-      documentId: document.id,
-    });
-    startIndex += chunkSize - overlap;
-
-    // If the overlap is greater than the remaining characters, break to avoid an empty chunk
-    if (startIndex + overlap >= document.content.length) {
-      break;
-    }
-  }
-
-  return chunks;
-}
-
-// TODO - switch to gpt-4o/mini + structured output
-export async function generateSummaryForChunk(chunk: Chunk): Promise<Chunk> {
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Generate a short 2 sentence summary that describes the semantics of the chunk.",
-      },
-      {
-        role: "user",
-        content: `Chunk: ${chunk.content}\n Summary:`,
-      },
-    ],
-    model: "gpt-3.5-turbo-0125",
-  });
-
-  const chunkId = uuidv4();
-  return {
-    content: completion.choices[0].message.content as string,
-    id: chunkId,
-    documentId: chunk.documentId,
-  };
-}
-
-// TODO - switch to gpt-4o/mini + structured output
-export async function generatePossibleQuestionsForChunk(
-  chunk: Chunk,
-): Promise<Chunk[]> {
-  // fetch call to openai with prompt to generate 10 possible questions that a user could ask about this chunk
-  // return the new questions as chunks
-  const completion = await openai.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content:
-          "Generate 10 possible questions that a user could ask about this chunk. Your questions should be seperated by a new line.",
-      },
-      {
-        role: "user",
-        content: `Chunk: ${chunk.content}\n10 questions separated by a new line:`,
-      },
-    ],
-    model: "gpt-3.5-turbo-0125",
-  });
-
-  const questionsContent = (
-    completion.choices[0].message.content as string
-  ).split("\n") as string[];
-
-  return questionsContent.map((question) => {
-    const id = uuidv4();
-
-    return {
-      content: question,
-      id,
-      documentId: chunk.documentId,
-    };
-  });
 }

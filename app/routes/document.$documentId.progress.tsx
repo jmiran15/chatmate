@@ -1,11 +1,11 @@
-import { eventStream } from "remix-utils/sse/server";
-import { LoaderFunctionArgs } from "@remix-run/node";
-import { prisma } from "~/db.server";
 import { Document, DocumentType } from "@prisma/client";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { eventStream } from "remix-utils/sse/server";
+import { prisma } from "~/db.server";
 import {
-  QueueData as IngestionQueueData,
   queue as ingestionQueue,
-} from "~/queues/ingestion.server";
+  QueueData as IngestionQueueData,
+} from "~/queues/ingestion/ingestion.server";
 import { scrapeQueue, ScrapeQueueData } from "~/queues/scrape.server";
 
 import { Job } from "bullmq";

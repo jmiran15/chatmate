@@ -4,6 +4,7 @@ import {
   BookPlus,
   Database,
   Inbox,
+  Lightbulb,
   LucideIcon,
   Paintbrush,
   Settings,
@@ -73,6 +74,12 @@ export const useLinks = () => {
       title: "Data",
       path: `/chatbots/${chatbotId}/data`,
       icon: Database,
+      navigate: true,
+    },
+    {
+      title: "Suggestions",
+      path: `/chatbots/${chatbotId}/suggestions`,
+      icon: Lightbulb,
       navigate: true,
     },
     {

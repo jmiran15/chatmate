@@ -219,9 +219,14 @@ model Document {
   chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   embeddings Embedding[]
 
-  @@index([chatbotId, type, isPending, createdAt, updatedAt])
+  question     String?
+  matchType    MatchType?    @default(BROAD)
+  responseType ResponseType? @default(GENERATIVE)
+
+  @@index([chatbotId, type, isPending, createdAt, updatedAt, question])
 }
 
+// We will search QA embeddings and non QA embeddings separately - QA is given priority
 model Embedding {
   id         String                @id @default(uuid())
   createdAt  DateTime              @default(now())
@@ -232,8 +237,16 @@ model Embedding {
   chatbot    Chatbot               @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   document   Document              @relation(fields: [documentId], references: [id], onDelete: Cascade)
 
-  @@index([chatbotId])
+
+
+ isQA Boolean? @default(false)
+
+
+  @@index([chatbotId, documentId, isQA])
 }
+
+
+
 
 model Message {
   id           String    @id @default(uuid())
@@ -406,6 +419,7 @@ enum DocumentType {
   WEBSITE
   FILE
   RAW
+  QA
 }
 
 enum TicketStatus {
@@ -447,4 +461,14 @@ enum InputType {
 enum ActionType {
   TEXT
   FORM
+}
+
+enum MatchType {
+  BROAD
+  EXACT
+}
+
+enum ResponseType {
+  GENERATIVE
+  STATIC
 }

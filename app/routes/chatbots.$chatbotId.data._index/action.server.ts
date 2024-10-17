@@ -1,11 +1,12 @@
-import { DocumentType } from "@prisma/client";
+import { DocumentType, MatchType, ResponseType } from "@prisma/client";
 import { ActionFunctionArgs, json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { deleteDocumentById } from "~/models/document.server";
 import { crawlQueue } from "~/queues/crawl.server";
-import { queue } from "~/queues/ingestion.server";
+import { queue } from "~/queues/ingestion/ingestion.server";
 import { parseFileQueue } from "~/queues/parsefile.server";
+import { qaqueue } from "~/queues/qaingestion/qaingestion.server";
 import { scrapeQueue } from "~/queues/scrape.server";
 import { validateUrl } from "~/utils";
 import { webFlow } from "./flows.server";
@@ -139,6 +140,31 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
       await queue.add(
         `ingestion-${document.id}`,
+        { document },
+        { jobId: document.id },
+      );
+
+      return json({ intent, documents: [document] });
+    }
+    case "qa": {
+      const question = String(formData.get("question"));
+      const matchType = String(formData.get("matchType"));
+      const answer = String(formData.get("answer"));
+      const responseType = String(formData.get("responseType"));
+
+      const document = await prisma.document.create({
+        data: {
+          name: question,
+          chatbotId,
+          question,
+          content: answer,
+          matchType: matchType as MatchType,
+          responseType: responseType as ResponseType,
+        },
+      });
+
+      await qaqueue.add(
+        `qaingestion-${document.id}`,
         { document },
         { jobId: document.id },
       );
