@@ -35,9 +35,23 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   });
 
   const planId = subscription?.planId;
+  const statusCodesThatRequireBilling = [
+    "paused",
+    "incomplete",
+    "incomplete_expired",
+    "past_due",
+    "canceled",
+    "unpaid",
+  ];
 
   const pricingPlan = pricing.pricing.find((plan) => plan.planId === planId);
-  const chatbotsLimit = pricingPlan?.chatbotsLimit ?? 0;
+
+  // This should handle subscriptions that are not active
+  const chatbotsLimit =
+    subscription?.status &&
+    statusCodesThatRequireBilling.includes(subscription.status)
+      ? 0
+      : pricingPlan?.chatbotsLimit ?? 0;
 
   // next plan in line (i.e. the upgrade if any)
   const idx = pricing.pricing.findIndex((plan) => plan.planId === planId);

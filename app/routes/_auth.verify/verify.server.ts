@@ -25,10 +25,7 @@ export function getDomainUrl(request: Request) {
 }
 
 import { createCookieSessionStorage } from "@remix-run/node";
-import {
-  createCustomer,
-  createSubscriptionCheckout,
-} from "~/models/subscription.server";
+import { createCustomer, stripe } from "~/models/subscription.server";
 import {
   joinPasswordHashSessionKey,
   priceIdSessionKey,
@@ -232,31 +229,62 @@ export async function handleOnboardingVerification({
   });
 
   // TODO - switch to Paddle
-  await createCustomer({ userId: user.id });
+  const updatedUser = await createCustomer({ userId: user.id });
+  if (!updatedUser.customerId) throw new Error(`User not found.`);
 
   const priceId = verifySession.get(priceIdSessionKey);
 
-  // Create a checkout session for the basic plan, redirect to that url
-  // TODO - we need this to be the correct price id selected by the user
+  // const checkoutUrl = await createSubscriptionCheckout({
+  //   userId: user.id,
+  //   priceId,
+  //   successUrl: "/chatbots?success=true",
+  //   cancelUrl: "/",
+  // });
 
-  const checkoutUrl = await createSubscriptionCheckout({
-    userId: user.id,
-    priceId,
-    successUrl: "/chatbots?success=true",
-    cancelUrl: "/",
+  const subscription = await stripe.subscriptions.create({
+    customer: updatedUser.customerId!,
+    items: [
+      {
+        price: priceId,
+      },
+    ],
+    trial_period_days: 7,
+    payment_settings: {
+      save_default_payment_method: "on_subscription",
+    },
+    trial_settings: {
+      end_behavior: {
+        missing_payment_method: "pause",
+      },
+    },
   });
+
+  try {
+    const dbSubscription = await prisma.subscription.create({
+      data: {
+        id: subscription.id,
+        userId: user.id,
+        planId: String(subscription.items.data[0].plan.product),
+        priceId: String(subscription.items.data[0].price.id),
+        interval: String(subscription.items.data[0].plan.interval),
+        status: subscription.status,
+        currentPeriodStart: subscription.current_period_start,
+        currentPeriodEnd: subscription.current_period_end,
+      },
+    });
+
+    console.log("dbSubscription created for new Google user: ", dbSubscription);
+  } catch (err: unknown) {
+    console.log(err);
+    throw new Error("Unable to create free trial subscription");
+  }
 
   // clear the priceId from the session
   verifySession.unset(priceIdSessionKey);
 
-  if (!checkoutUrl) {
-    throw new Error("Unable to create checkout session");
-  }
-
   // TODO - fix the remember me stuff so that it works with the join flow
   return createUserSession({
-    // redirectTo: "/chatbots",
-    redirectTo: checkoutUrl,
+    redirectTo: "/chatbots?trialInitialized=true",
     remember: true,
     request,
     userId: user.id,

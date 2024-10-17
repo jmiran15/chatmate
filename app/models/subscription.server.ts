@@ -26,11 +26,12 @@ export async function createCustomer({ userId }: { userId: string }) {
     .catch((err) => console.error(err));
   if (!customer) throw new Error(`Stripe - Customer not created.`);
 
-  await prisma.user.update({
+  const updatedUser = await prisma.user.update({
     where: { id: user.id },
     data: { customerId: customer.id },
   });
-  return true;
+
+  return updatedUser;
 }
 
 /**

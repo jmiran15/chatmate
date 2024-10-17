@@ -3,6 +3,14 @@ import { z } from "zod";
 import { prisma } from "~/db.server";
 import { stripe } from "~/models/subscription.server";
 
+// TODO - we need to deal with trials with no payment info ... when we create a subscription for the first time (i.e. we create the stripe user) -> put them on the unlimited plan
+// on trial end lets pause their subscription, send the email with the checkout for their plan, update their subscription in the database to paused
+// IMPORTANT - how do we know WHAT plan to send them the checkout for?
+// get the number of chatbots they have, if 1, starter, <5 pro, >=5 enterprise
+// and then re-activate the subscription when they checkout - this is already handled by the checkout completed event.
+// redirect to /chatbots?success=true - this is already built into the "successUrl" when we build the checkout url
+// TODO - send an email with the subscription details, i.e. this checkout url when their trial is over
+
 export const ROUTE_PATH = "/webhook" as const;
 
 /**
@@ -146,18 +154,87 @@ export async function action({ request }: ActionFunctionArgs) {
        */
       case "customer.subscription.deleted": {
         const subscription = event.data.object;
-        const { id } = z.object({ id: z.string() }).parse(subscription);
+        const { id, customer: customerId } = z
+          .object({ id: z.string(), customer: z.string() })
+          .parse(subscription);
 
-        const dbSubscription = await prisma.subscription.findUnique({
-          where: { id },
-        });
-        if (dbSubscription)
-          await prisma.subscription.delete({
-            where: { id: dbSubscription.id },
-          });
+        const user = await prisma.user.findUnique({ where: { customerId } });
+        if (!user) throw new Error(`User not found for customer ${customerId}`);
+
+        await prisma.subscription.delete({ where: { id } });
+
+        // TODO: Implement logic to revoke access to the product
 
         return new Response(null);
       }
+
+      case "customer.subscription.resumed": {
+        const subscription = event.data.object;
+        const {
+          id,
+          customer: customerId,
+          status,
+        } = z
+          .object({ id: z.string(), customer: z.string(), status: z.string() })
+          .parse(subscription);
+
+        const user = await prisma.user.findUnique({ where: { customerId } });
+        if (!user) throw new Error(`User not found for customer ${customerId}`);
+
+        await prisma.subscription.update({
+          where: { id },
+          data: { status },
+        });
+
+        // TODO: Implement logic to grant access to the product
+
+        return new Response(null);
+      }
+
+      case "customer.subscription.paused": {
+        const subscription = event.data.object;
+        const {
+          id,
+          customer: customerId,
+          status,
+        } = z
+          .object({ id: z.string(), customer: z.string(), status: z.string() })
+          .parse(subscription);
+
+        const user = await prisma.user.findUnique({ where: { customerId } });
+        if (!user) throw new Error(`User not found for customer ${customerId}`);
+
+        await prisma.subscription.update({
+          where: { id },
+          data: { status },
+        });
+
+        // TODO: Implement logic to revoke access to the product (probably not necessary)
+        // since we check the subscription status in the chatbots route
+
+        return new Response(null);
+      }
+
+      // case "customer.subscription.trial_will_end": {
+      //   const subscription = event.data.object;
+      //   const { id, customer: customerId, trial_end } = z
+      //     .object({ id: z.string(), customer: z.string(), trial_end: z.number() })
+      //     .parse(subscription);
+
+      //   const user = await prisma.user.findUnique({ where: { customerId } });
+      //   if (!user) throw new Error(`User not found for customer ${customerId}`);
+
+      //   // Stripe automatically sends a reminder email with a Checkout link before a trial ends,
+      //   // so we don't need to implement that here. However, you might want to update your database
+      //   // or perform any other necessary actions.
+
+      //   await prisma.subscription.update({
+      //     where: { id },
+      //     data: { trialEnd: new Date(trial_end * 1000) },
+      //   });
+
+      //   return new Response(null);
+      // }
     }
   } catch (err: unknown) {
     switch (event.type) {

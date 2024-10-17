@@ -155,8 +155,8 @@ export default function Join() {
       "priceId",
       data.priceId ??
         (data.isDev
-          ? data.devPriceIds.hobby.month
-          : data.prodPriceIds.hobby.month),
+          ? data.devPriceIds.unlimited.month
+          : data.prodPriceIds.unlimited.month),
     );
 
     googleFetcher.submit({}, { method: "post", action: "/auth/google" });
