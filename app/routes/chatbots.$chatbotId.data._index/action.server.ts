@@ -154,6 +154,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
       const document = await prisma.document.create({
         data: {
+          type: DocumentType.QA,
           name: question,
           chatbotId,
           question,

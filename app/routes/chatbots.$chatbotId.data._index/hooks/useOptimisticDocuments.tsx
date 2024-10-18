@@ -31,7 +31,7 @@ export function useOptimisticDocuments({
   const progress: ProgressData | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
-  const pendingDocuments = usePendingDocuments();
+  const pendingDocuments = usePendingDocuments(); // TODO: integrate this (optimistic UI)
 
   const localStorageKey = useMemo(
     () => `document_progress_${chatbotId}`,

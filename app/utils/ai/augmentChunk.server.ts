@@ -4,7 +4,7 @@ import { zodResponseFormat } from "openai/helpers/zod.mjs";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { z } from "zod";
 import { openai } from "~/utils/providers.server";
-import { Chunk } from "./ingestion.server";
+import { Chunk } from "../../queues/ingestion/ingestion.server";
 
 const MODEL = "gpt-4o-mini";
 

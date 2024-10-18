@@ -5,7 +5,7 @@ import { Toolbar } from "./Toolbar";
 
 interface MinimalTiptapEditorProps {
   value: Content;
-  onChange: (content: Content) => void;
+  onChange: (content: string) => void;
   className?: string;
   editorContentClassName?: string;
   placeholder?: string;

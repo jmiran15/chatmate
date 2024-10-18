@@ -1,7 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { DocumentType } from "@prisma/client";
 import { Form, useParams, useSubmit } from "@remix-run/react";
-import { Content } from "@tiptap/react";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -138,7 +137,7 @@ export default function QA({
           <div className="relative">
             <MinimalTiptapEditor
               value={answer}
-              onChange={(newContent: Content) => {
+              onChange={(newContent: string) => {
                 setAnswer(newContent);
                 setCharacterCount(
                   JSON.stringify(newContent).replace(/[{}[\],"]/g, "").length,

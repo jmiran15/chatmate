@@ -6,8 +6,8 @@ import { prisma } from "~/db.server";
 import { updateDocument } from "~/models/document.server";
 import { embed } from "~/utils/openai";
 import { Queue } from "~/utils/queue.server";
-import { augmentChunk } from "./augmentChunk.server";
-import { generateChunkBasedQuestions } from "./possibleQuestions.server";
+import { augmentChunk } from "../../utils/ai/augmentChunk.server";
+import { generateChunkBasedQuestions } from "../../utils/ai/possibleChunkQuestions.server";
 
 export interface QueueData {
   document: Document;
@@ -41,10 +41,19 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
   try {
     let progress = 0;
 
-    const [deleteResult, progressUpdateResult] = await Promise.allSettled([
-      prisma.$executeRaw`DELETE FROM "Embedding" WHERE "documentId" = ${document.id}`,
-      job.updateProgress(progress),
-    ]);
+    // update the document to be pending
+
+    const [deleteResult, progressUpdateResult, pendingUpdateResult] =
+      await Promise.allSettled([
+        prisma.$executeRaw`DELETE FROM "Embedding" WHERE "documentId" = ${document.id}`,
+        job.updateProgress(progress),
+        updateDocument({
+          id: document.id,
+          data: {
+            isPending: true,
+          },
+        }),
+      ]);
 
     // Handle results and errors
     if (deleteResult.status === "rejected") {

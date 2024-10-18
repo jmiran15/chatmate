@@ -2,10 +2,11 @@ import { createId } from "@paralleldrive/cuid2";
 import { Prisma, type Document } from "@prisma/client";
 import { Job } from "bullmq";
 import { prisma } from "~/db.server";
+import { updateDocument } from "~/models/document.server";
 import { embed } from "~/utils/openai";
 import { Queue } from "~/utils/queue.server";
-import { augmentDocument } from "./augmentDocument.server";
-import { generateSimilarQuestions } from "./similarQuestions.server";
+import { augmentDocument } from "../../utils/ai/augmentDocument.server";
+import { generateSimilarQuestions } from "../../utils/ai/similarQuestions.server";
 
 export interface QueueData {
   document: Document;
@@ -30,6 +31,7 @@ export const qaqueue = Queue<QueueData>("qaingestion", async (job) => {
       progressUpdateResult,
       relevantQuestionsResult,
       augmentedAnswerResult,
+      pendingUpdateResult,
     ] = await Promise.allSettled([
       prisma.$executeRaw`DELETE FROM "Embedding" WHERE "documentId" = ${document.id}`,
       job.updateProgress(progress),
@@ -42,6 +44,12 @@ export const qaqueue = Queue<QueueData>("qaingestion", async (job) => {
         baseQuestion: question,
         baseAnswer: answer,
         sessionId,
+      }),
+      updateDocument({
+        id: document.id,
+        data: {
+          isPending: true,
+        },
       }),
     ]);
 
@@ -197,7 +205,8 @@ async function insertEmbeddingsBatch(
     embedding: embeddings[index],
     documentId: document.id,
     chatbotId: document.chatbotId,
-    content: document.content,
+    content: document.content, // This is what links the embedding back to the actual content that the user wrote
+    // we should probably change the field name... 'content' should be what was embedded, and then for the actual raw content we want to link back to we should call it something like "retrievalContent" or something
     isQA: true,
   }));
 
