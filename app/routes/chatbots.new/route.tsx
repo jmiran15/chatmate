@@ -13,10 +13,12 @@ import { Label } from "~/components/ui/label";
 import * as gtag from "~/utils/gtags.client";
 
 import { SEOHandle } from "@nasa-gcn/remix-seo";
+import { createId } from "@paralleldrive/cuid2";
 import { prisma } from "~/db.server";
-import { createChatbot, getChatbotsByUserId } from "~/models/chatbot.server";
+import { getChatbotsByUserId } from "~/models/chatbot.server";
 import { requireUserId } from "~/session.server";
 import { getPricing } from "~/utils/pricing.server";
+import { PROMPT_TEMPLATES } from "../chatbots.$chatbotId.settings/route";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   // check if user can create a new chatbot, if not, redirect them back to chatbots page
@@ -50,7 +52,20 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     return json({ errors: { name: "Name is required" } }, { status: 400 });
   }
 
-  const chatbot = await createChatbot({ name, userId });
+  const chatbot = await prisma.chatbot.create({
+    data: {
+      id: createId(),
+      name,
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+      responseLength: "long",
+      systemPrompt: PROMPT_TEMPLATES[0].content,
+    },
+  });
+
   return redirect(`/chatbots/${chatbot.id}/chats`);
 };
 

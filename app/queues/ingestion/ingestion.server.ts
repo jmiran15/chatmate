@@ -123,12 +123,12 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
                 documentId: chunk.documentId,
                 chatbotId: chunk.chatbotId,
               })),
-              ...possibleQuestions.mainTopics.map((t) => ({
-                content: t,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              })),
+              // ...possibleQuestions.mainTopics.map((t) => ({
+              //   content: t,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // })),
             );
           } else if (possibleQuestionsResult.status === "rejected") {
             console.error(
@@ -167,42 +167,42 @@ export const queue = Queue<QueueData>("ingestion", async (job) => {
                 documentId: chunk.documentId,
                 chatbotId: chunk.chatbotId,
               },
-              ...augmentation.keywords.map((keyword) => ({
-                content: keyword,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              })),
-              ...augmentation.semanticVariations.map((variation) => ({
-                content: variation,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              })),
-              ...augmentation.mainTopics.map((topic) => ({
-                content: topic,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              })),
-              ...augmentation.entities.map((entity) => ({
-                content: entity,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              })),
-              {
-                content: augmentation.toneAndStyle,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              },
-              {
-                content: augmentation.contentType,
-                chunkContent: chunk.content,
-                documentId: chunk.documentId,
-                chatbotId: chunk.chatbotId,
-              },
+              // ...augmentation.keywords.map((keyword) => ({
+              //   content: keyword,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // })),
+              // ...augmentation.semanticVariations.map((variation) => ({
+              //   content: variation,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // })),
+              // ...augmentation.mainTopics.map((topic) => ({
+              //   content: topic,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // })),
+              // ...augmentation.entities.map((entity) => ({
+              //   content: entity,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // })),
+              // {
+              //   content: augmentation.toneAndStyle,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // },
+              // {
+              //   content: augmentation.contentType,
+              //   chunkContent: chunk.content,
+              //   documentId: chunk.documentId,
+              //   chatbotId: chunk.chatbotId,
+              // },
             );
           } else if (augmentationResult.status === "rejected") {
             console.error(
@@ -264,16 +264,21 @@ async function batchProcessEmbeddings(
   const EMBEDDING_BATCH_SIZE = 100;
   let progress = 0;
 
+  console.log("batch processing embeddings: ", embeddingsToCreate.length);
+
   for (let i = 0; i < embeddingsToCreate.length; i += EMBEDDING_BATCH_SIZE) {
     const batch = embeddingsToCreate.slice(i, i + EMBEDDING_BATCH_SIZE);
     const batchContents = batch.map((item) => item.content);
 
+    console.log("embedding batch contents: ", batchContents.length);
     const embeddings = await embed({
       input: batchContents,
       sessionId,
       sessionPath,
       sessionName,
     });
+
+    console.log("embedded batch contents: ", embeddings.length);
 
     await insertEmbeddingsBatch(batch, embeddings as number[][], document);
 
@@ -299,6 +304,8 @@ async function insertEmbeddingsBatch(
     chatbotId: item.chatbotId,
     content: item.chunkContent,
   }));
+
+  console.log("inserting embeddings: ", values.length);
 
   const sqlQuery = Prisma.sql`
     INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content")

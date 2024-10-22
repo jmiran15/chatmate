@@ -1,9 +1,9 @@
 import { Chat } from "@prisma/client";
-import { useNavigation, useLocation, Form, Link } from "@remix-run/react";
+import { Form, Link, useLocation, useNavigation } from "@remix-run/react";
+import { Check, Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
 import { buttonVariants } from "../../components/ui/button";
-import { Trash2, Pencil, Check } from "lucide-react";
 
 export default function ChatLink({ chat }: { chat: Chat }) {
   const [active, setActive] = useState(false);
@@ -34,7 +34,7 @@ export default function ChatLink({ chat }: { chat: Chat }) {
           size: "sm",
         }),
         isActive(chat.id) && "justify-start",
-        "flex flex-row justify-between items-center w-full",
+        "flex flex-row justify-between items-center w-full flex-shrink-0",
       )}
     >
       {editing ? (

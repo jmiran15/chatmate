@@ -124,7 +124,7 @@ export function getPricing() {
       yearlyPriceId: isDev
         ? devPriceIds.unlimited.year
         : prodPriceIds.unlimited.year,
-      chatbotsLimit: Infinity,
+      chatbotsLimit: 999,
     },
   ];
 

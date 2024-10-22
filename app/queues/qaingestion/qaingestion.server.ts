@@ -116,15 +116,15 @@ export const qaqueue = Queue<QueueData>("qaingestion", async (job) => {
         { content: augmentedAnswer.context },
         { content: augmentedAnswer.sourceType },
         { content: augmentedAnswer.temporalRelevance },
-        ...augmentedAnswer.keyPoints.map((point) => ({
-          content: point,
-        })),
+        // ...augmentedAnswer.keyPoints.map((point) => ({
+        //   content: point,
+        // })),
         ...augmentedAnswer.bulletPointVersion.map((point) => ({
           content: point,
         })),
-        ...augmentedAnswer.keywords.map((keyword) => ({
-          content: keyword,
-        })),
+        // ...augmentedAnswer.keywords.map((keyword) => ({
+        //   content: keyword,
+        // })),
         ...augmentedAnswer.potentialQuestions.map((q) => ({
           content: q,
         })),
@@ -208,15 +208,16 @@ async function insertEmbeddingsBatch(
     content: document.content, // This is what links the embedding back to the actual content that the user wrote
     // we should probably change the field name... 'content' should be what was embedded, and then for the actual raw content we want to link back to we should call it something like "retrievalContent" or something
     isQA: true,
+    responseType: document.responseType,
   }));
 
   // Construct the SQL query
   const sqlQuery = Prisma.sql`
-    INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content", "isQA")
+    INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content", "isQA", "responseType")
     VALUES ${Prisma.join(
       values.map(
         (v) =>
-          Prisma.sql`(${v.id}, ${v.embedding}::vector, ${v.documentId}, ${v.chatbotId}, ${v.content}, ${v.isQA})`,
+          Prisma.sql`(${v.id}, ${v.embedding}::vector, ${v.documentId}, ${v.chatbotId}, ${v.content}, ${v.isQA}, ${v.responseType}::"ResponseType")`,
       ),
     )}
   `;

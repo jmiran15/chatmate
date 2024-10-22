@@ -3,6 +3,7 @@ import { ActionFunctionArgs, json } from "@remix-run/node";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { deleteDocumentById } from "~/models/document.server";
+import { batchIngestionQueue } from "~/queues/batchIngestion.server";
 import { crawlQueue } from "~/queues/crawl.server";
 import { queue } from "~/queues/ingestion/ingestion.server";
 import { parseFileQueue } from "~/queues/parsefile.server";
@@ -10,6 +11,9 @@ import { qaqueue } from "~/queues/qaingestion/qaingestion.server";
 import { scrapeQueue } from "~/queues/scrape.server";
 import { validateUrl } from "~/utils";
 import { webFlow } from "./flows.server";
+
+export const CACHE_DURATION = 86400;
+const BATCH_THRESHOLD = 50;
 
 export const action = async ({ request, params }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -74,11 +78,19 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
-      const trees = await webFlow!({
-        documents,
-        preprocessingQueue: scrapeQueue,
-      });
-      return json({ errors: null, intent, trees, documents });
+      if (documents.length > BATCH_THRESHOLD) {
+        const batchJob = await batchIngestionQueue.add("batchIngestion", {
+          documents,
+          chatbotId,
+        });
+        return json({ errors: null, intent, batchJob, documents });
+      } else {
+        const trees = await webFlow!({
+          documents,
+          preprocessingQueue: scrapeQueue,
+        });
+        return json({ errors: null, intent, trees, documents });
+      }
     }
     case "parseFiles": {
       try {

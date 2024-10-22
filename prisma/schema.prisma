@@ -70,7 +70,7 @@ model Chatbot {
   publicName           String          @default("Your Chatbot")
   introMessages        String[]        @default(["Hello, how can I help you today?"])
   model                String?         @default("gpt-4o")
-  responseLength       String?         @default("short")
+  responseLength       String?         @default("long")
   systemPrompt         String?
   openIcon             String          @default("plus")
   themeColor           String          @default("zinc")
@@ -230,23 +230,18 @@ model Document {
 model Embedding {
   id         String                @id @default(uuid())
   createdAt  DateTime              @default(now())
-  embedding  Unsupported("vector")
+  embedding  Unsupported("vector(1536)")
   documentId String
   chatbotId  String
   content    String
   chatbot    Chatbot               @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   document   Document              @relation(fields: [documentId], references: [id], onDelete: Cascade)
 
+  isQA         Boolean?      @default(false)
+  responseType ResponseType? @default(GENERATIVE)
 
-
- isQA Boolean? @default(false)
-
-
-  @@index([chatbotId, documentId, isQA])
+  @@index([chatbotId, documentId, isQA, responseType])
 }
-
-
-
 
 model Message {
   id           String    @id @default(uuid())

@@ -1,10 +1,11 @@
 // TODO: integrate Helicone sessions and prompts
 import { createId } from "@paralleldrive/cuid2";
-import { type Chatbot, type Embedding } from "@prisma/client";
+import { ResponseType, type Chatbot, type Embedding } from "@prisma/client";
 import { V2RerankResponse } from "cohere-ai/api";
 import uniqWith from "lodash/uniqWith";
 import { ChatCompletionTool } from "openai/resources/index.mjs";
 import pLimit from "p-limit";
+import { performance } from "perf_hooks";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 import { generateHyDE } from "./ai/inference/HyDE";
@@ -16,6 +17,29 @@ import {
   mainTools,
 } from "./prompts";
 import { cohere, openai } from "./providers.server";
+
+const DEBUG_TIMING = process.env.NODE_ENV === "development";
+
+interface TimingResult {
+  operation: string;
+  duration: number;
+}
+
+async function timeOperation<T>(
+  operation: string,
+  fn: () => Promise<T>,
+): Promise<[T, TimingResult]> {
+  const start = performance.now();
+  try {
+    const result = await fn();
+    const end = performance.now();
+    return [result, { operation, duration: end - start }];
+  } catch (error) {
+    const end = performance.now();
+    console.error(`Error in operation ${operation}:`, error);
+    return [null as T, { operation, duration: end - start }];
+  }
+}
 
 export const CHUNK_SIZE = 1024;
 export const OVERLAP = 20;
@@ -89,47 +113,46 @@ async function searchEmbeddings({
   sessionName: string;
 }): Promise<EmbeddingWithDistance[]> {
   // Batch embed all queries
+  console.time("Batch Embed");
   const embeddings = await batchEmbed(
     queries,
     sessionId,
     sessionPath,
     sessionName,
   );
+  console.timeEnd("Batch Embed");
 
-  const searchTasks = embeddings.flatMap((embedding, index) => [
-    limit(() =>
-      fetchRelevantEmbeddingsWithVector({
-        chatbotId,
-        embedding,
-        k: tagLimit,
-        isQA: true,
-        minSimilarity,
-      }),
-    ),
-    limit(() =>
-      fetchRelevantEmbeddingsWithVector({
-        chatbotId,
-        embedding,
-        k: regularLimit,
-        isQA: false,
-        minSimilarity,
-      }),
-    ),
+  const searchTasks = embeddings.flatMap((embedding) => [
+    fetchRelevantEmbeddingsWithVector({
+      chatbotId,
+      embedding,
+      k: tagLimit,
+      isQA: true,
+      minSimilarity,
+    }),
+    fetchRelevantEmbeddingsWithVector({
+      chatbotId,
+      embedding,
+      k: regularLimit,
+      isQA: false,
+      minSimilarity,
+    }),
   ]);
 
+  console.time("Search");
   const results = await Promise.all(searchTasks);
+  console.timeEnd("Search");
 
   const allResults = results
     .flat()
     .filter((result): result is EmbeddingWithDistance => result !== null);
 
-  console.log("allResults: ", allResults);
-
-  // Replace the existing uniqBy call with uniqWith
-  return uniqWith(
+  const uniqueResults = uniqWith(
     allResults,
     (a, b) => a.documentId === b.documentId && a.content === b.content,
   );
+
+  return uniqueResults;
 }
 
 export async function chat({
@@ -145,6 +168,9 @@ export async function chat({
   sessionId: string;
   chatName: string;
 }) {
+  const timings: TimingResult[] = [];
+  const totalStart = performance.now();
+
   invariant(messages.length > 0, "Messages must not be empty");
   invariant(
     messages[messages.length - 1].role === "user",
@@ -154,48 +180,30 @@ export async function chat({
   const query = messages[messages.length - 1].content;
 
   let rerankedEmbeddings: V2RerankResponse | null = null;
+  let relevantEmbeddings: EmbeddingWithDistance[] = [];
   let skipProcessing = false;
 
   // see if this matches any of the exact type document matchTypes in the DB
-  const hasExactMatch = await prisma.document.findFirst({
-    where: {
-      chatbotId: chatbot.id,
-      question: {
-        search: query.trim().replace(/\s+/g, " & "),
-      },
-      matchType: "EXACT",
-    },
-  });
+  const [hasExactMatch, exactMatchTiming] = await timeOperation(
+    "Exact Match Check",
+    () =>
+      prisma.document.findFirst({
+        where: {
+          chatbotId: chatbot.id,
+          question: {
+            search: query.trim().replace(/\s+/g, " & "),
+          },
+          matchType: "EXACT",
+        },
+      }),
+  );
+  timings.push(exactMatchTiming);
 
   if (hasExactMatch) {
     const staticResponse = hasExactMatch.responseType === "STATIC";
 
     if (staticResponse) {
-      return new ReadableStream({
-        start(controller) {
-          const content = hasExactMatch.content as string;
-
-          const id = createId();
-
-          const chunk = {
-            id,
-            object: "chat.completion.chunk",
-            created: Date.now(),
-            model: "gpt-4o-2024-08-06",
-            choices: [
-              {
-                index: 0,
-                delta: { content, role: "assistant" },
-                logprobs: null,
-                finish_reason: null,
-              },
-            ],
-          };
-          controller.enqueue(chunk);
-
-          controller.close();
-        },
-      });
+      return streamStaticResponse(hasExactMatch.content as string);
     } else {
       rerankedEmbeddings = {
         results: [
@@ -208,6 +216,21 @@ export async function chat({
           },
         ],
       };
+      relevantEmbeddings = [
+        {
+          id: hasExactMatch.id,
+          content: hasExactMatch.content as string,
+          distance: 1,
+          documentName: hasExactMatch.name,
+          documentUrl: hasExactMatch.url ?? "",
+          documentQuestion: hasExactMatch.question ?? "",
+          createdAt: hasExactMatch.createdAt,
+          documentId: hasExactMatch.id,
+          chatbotId: chatbot.id,
+          isQA: null,
+          responseType: hasExactMatch.responseType,
+        },
+      ];
       skipProcessing = true;
     }
   }
@@ -221,52 +244,55 @@ export async function chat({
     // PROBABLY JUST A "SKIP" RAG step would be best here. Skipping anything else would not really save much time.
 
     // TODO: Decide on the RAG path
+    // Preprocessing stage
+    const [preprocessingResults, preprocessingTiming] = await timeOperation(
+      "Preprocessing",
+      async () => {
+        const [similarQueriesResult, subQuestionsResult, hydeResult] =
+          await Promise.allSettled([
+            generateSimilarUserQueries({
+              originalQuery: query,
+              sessionId,
+              chatName,
+            }),
+            generateSubQuestions({
+              originalQuery: query,
+              sessionId,
+              chatName,
+            }),
+            generateHyDE({
+              originalQuery: query,
+              sessionId,
+              chatName,
+            }),
+          ]);
 
-    // ## Preprocessing stage
-    const [similarQueriesResult, subQuestionsResult, hydeResult] =
-      await Promise.allSettled([
-        generateSimilarUserQueries({
-          originalQuery: query,
-          sessionId,
-          chatName,
-        }),
-        generateSubQuestions({
-          originalQuery: query,
-          sessionId,
-          chatName,
-        }),
-        generateHyDE({
-          originalQuery: query,
-          sessionId,
-          chatName,
-        }),
-      ]);
+        return {
+          similarQueries:
+            similarQueriesResult.status === "fulfilled"
+              ? similarQueriesResult.value
+              : null,
+          subQuestions:
+            subQuestionsResult.status === "fulfilled"
+              ? subQuestionsResult.value
+              : null,
+          hyde: hydeResult.status === "fulfilled" ? hydeResult.value : null,
+        };
+      },
+    );
+    timings.push(preprocessingTiming);
 
-    const similarQueries =
-      similarQueriesResult.status === "fulfilled"
-        ? similarQueriesResult.value
-        : null;
-    const subQuestions =
-      subQuestionsResult.status === "fulfilled"
-        ? subQuestionsResult.value
-        : null;
-    const hyde = hydeResult.status === "fulfilled" ? hydeResult.value : null;
+    const { similarQueries, subQuestions, hyde } = preprocessingResults;
 
     // Log errors if any
-    if (similarQueriesResult.status === "rejected") {
-      console.error(
-        "Failed to generate similar queries:",
-        similarQueriesResult.reason,
-      );
+    if (similarQueries === null) {
+      console.error("Failed to generate similar queries");
     }
-    if (subQuestionsResult.status === "rejected") {
-      console.error(
-        "Failed to generate sub questions:",
-        subQuestionsResult.reason,
-      );
+    if (subQuestions === null) {
+      console.error("Failed to generate sub questions");
     }
-    if (hydeResult.status === "rejected") {
-      console.error("Failed to generate HyDE:", hydeResult.reason);
+    if (hyde === null) {
+      console.error("Failed to generate HyDE");
     }
 
     // TODO: generate some queries based on the query + history, we need this to embed the chat context into the retrieval.
@@ -275,7 +301,7 @@ export async function chat({
     // i.e. we can keep all the previous questions, hyde, etc... everything we have generated in Redis, retrieve docs, and keep a running list
     // where we only append new docs... and the reranker should take care of getting rid of irrelevant stuff (i.e. old stuff that is irrelevant to the current query).
 
-    // ## Retrieval stage
+    // Retrieval stage
     const allQueries = [
       query,
       ...(similarQueries?.expandedQueries ?? []),
@@ -285,31 +311,54 @@ export async function chat({
       hyde?.hypotheticalAnswer ?? "",
     ].filter(Boolean);
 
-    const relevantEmbeddings = await searchEmbeddings({
-      chatbotId: chatbot.id,
-      queries: allQueries,
-      tagLimit: 10,
-      regularLimit: 10,
-      minSimilarity: 0.6,
-      sessionId,
-      sessionPath: "/message/search_embeddings",
-      sessionName: chatName,
-    });
+    console.log("allQueries: ", allQueries);
 
-    // TODO: compress the chunks with LLMLingua2
+    const [searchResults, searchTiming] = await timeOperation(
+      "Embedding Search",
+      () =>
+        searchEmbeddings({
+          chatbotId: chatbot.id,
+          queries: allQueries,
+          tagLimit: 10,
+          regularLimit: 10,
+          // minSimilarity: 0.6,
+          minSimilarity: 0,
+          sessionId,
+          sessionPath: "/message/search_embeddings",
+          sessionName: chatName,
+        }),
+    );
+    timings.push(searchTiming);
+    relevantEmbeddings = searchResults;
 
-    // TODO: in here we need to check if any of the highly ranked documents have responseType === "STATIC", if so, we can skip the generation step and just return the static response. (with the stream like above)
     if (relevantEmbeddings.length > 0) {
       // Rerank with Cohere Ranker 3
-      rerankedEmbeddings = await rerank({
-        query,
-        documents: relevantEmbeddings.map((embedding) => ({
-          id: embedding.id,
-          text: embedding.content,
-        })),
-        topN: 10, // Probably increase this number... or perhaps we can make it a percentage of the total documents in a chatbot's embedding space, up-to some max. and would prob. be for it to be expontential to some point, and then drop off exponentially, almost like a sigmoid curve.
-        model: RERANK_MODEL,
-      });
+      const [rerankResults, rerankTiming] = await timeOperation(
+        "Reranking",
+        () =>
+          rerank({
+            query,
+            documents: relevantEmbeddings.map((embedding) => ({
+              id: embedding.id,
+              text: embedding.content,
+            })),
+            topN: 10, // Probably increase this number... or perhaps we can make it a percentage of the total documents in a chatbot's embedding space, up-to some max. and would prob. be for it to be expontential to some point, and then drop off exponentially, almost like a sigmoid curve.
+            model: RERANK_MODEL,
+          }),
+      );
+      timings.push(rerankTiming);
+      rerankedEmbeddings = rerankResults;
+    }
+
+    // TODO: in here we need to check if any of the highly ranked documents have responseType === "STATIC", if so, we can skip the generation step and just return the static response. (with the stream like above)
+    if (rerankedEmbeddings) {
+      const staticResponse = findMostRelevantStaticResponse(
+        rerankedEmbeddings,
+        relevantEmbeddings,
+      );
+      if (staticResponse) {
+        return streamStaticResponse(staticResponse.content);
+      }
     }
   }
 
@@ -336,45 +385,79 @@ export async function chat({
         : "100+",
   });
 
+  let augmentedContext: AugmentedContext[] = [];
+
+  if (rerankedEmbeddings) {
+    augmentedContext = augmentRerankedEmbeddings(
+      rerankedEmbeddings,
+      relevantEmbeddings,
+    );
+  }
+
   const userPrompt = mainChatUserPrompt_v3({
-    retrievedData: rerankedEmbeddings
-      ? rerankedEmbeddings.results
-          .map(
-            (reference) =>
-              `Document relevance: ${reference.relevanceScore}\nDocument content: ${reference.document?.text}`,
-          )
-          .join("\n\n")
-      : "",
+    retrievedData: augmentedContext
+      .map((context) => {
+        let documentInfo = "";
+        if (context.documentName || context.documentQuestion) {
+          documentInfo += `Document name: ${
+            context.documentName || context.documentQuestion
+          }\n`;
+        }
+        if (context.documentUrl) {
+          documentInfo += `Document url: ${context.documentUrl}\n`;
+        }
+        documentInfo += `Document relevance score: ${context.relevanceScore}\n`;
+        documentInfo += `Document content: ${context.text}`;
+        return documentInfo;
+      })
+      .join("\n\n"),
     question: query,
   });
 
   messages[messages.length - 1].content = userPrompt;
 
-  const enviroment = process.env.NODE_ENV;
-
-  const stream = await openai.chat.completions.create(
-    {
-      messages: [{ role: "system", content: systemPrompt }, ...messages],
-      model: "gpt-4o",
-      temperature: 0,
-      stream: true,
-      tools: [...mainTools, ...(extraTools ?? [])],
-    },
-    {
-      headers: {
-        "Helicone-Property-Environment": enviroment,
-        "Helicone-Session-Id": sessionId, // the message id
-        "Helicone-Session-Path": "/message", // /message
-        "Helicone-Session-Name": chatName, // the chat name
-      },
-    },
+  const [stream, streamTiming] = await timeOperation(
+    "LLM Stream Creation",
+    () =>
+      openai.chat.completions.create(
+        {
+          messages: [{ role: "system", content: systemPrompt }, ...messages],
+          model: "gpt-4o",
+          temperature: 0,
+          stream: true,
+          tools: [...mainTools, ...(extraTools ?? [])],
+        },
+        {
+          headers: {
+            "Helicone-Property-Environment": process.env.NODE_ENV,
+            "Helicone-Session-Id": sessionId,
+            "Helicone-Session-Path": "/message",
+            "Helicone-Session-Name": chatName,
+          },
+        },
+      ),
   );
+  timings.push(streamTiming);
+
+  const totalEnd = performance.now();
+  const totalDuration = totalEnd - totalStart;
+
+  if (DEBUG_TIMING) {
+    console.log("Chat Function Timing Results:");
+    timings.forEach(({ operation, duration }) => {
+      console.log(`  ${operation}: ${duration.toFixed(2)}ms`);
+    });
+    console.log(`Total Duration: ${totalDuration.toFixed(2)}ms`);
+  }
 
   return stream;
 }
 
 type EmbeddingWithDistance = Omit<Embedding, "embedding"> & {
   distance: number;
+  documentName: string;
+  documentUrl: string;
+  documentQuestion: string;
 };
 
 async function rerank({
@@ -388,13 +471,15 @@ async function rerank({
   topN: number;
   model: typeof RERANK_MODEL;
 }): Promise<V2RerankResponse> {
-  return await cohere.v2.rerank({
+  const reranked = await cohere.v2.rerank({
     documents,
     query,
     topN,
     model,
     returnDocuments: true,
   });
+
+  return reranked;
 }
 
 const MAX_BATCH_SIZE = 100;
@@ -410,13 +495,82 @@ export async function batchEmbed(
     batches.push(inputs.slice(i, i + MAX_BATCH_SIZE));
   }
 
-  const results = await Promise.all(
-    batches.map((batch) =>
-      embed({ input: batch, sessionId, sessionPath, sessionName }),
-    ),
-  );
-  return results.flat() as number[][];
+  const key = `batchEmbed:${inputs.length}`;
+  console.time(key);
+
+  const results = await embed({
+    input: inputs,
+    sessionId,
+    sessionPath,
+    sessionName,
+  });
+
+  // const results = await Promise.all(
+  //   batches.map((batch) =>
+  //     embed({ input: batch, sessionId, sessionPath, sessionName }),
+  //   ),
+  // );
+
+  console.timeEnd(key);
+
+  return results as number[][];
 }
+
+// async function fetchRelevantEmbeddingsWithVector({
+//   chatbotId,
+//   embedding,
+//   k = 5,
+//   isQA = false,
+//   minSimilarity = 0.7,
+// }: {
+//   chatbotId: string;
+//   embedding: number[];
+//   k?: number;
+//   isQA?: boolean;
+//   minSimilarity?: number;
+// }): Promise<EmbeddingWithDistance[] | null> {
+//   try {
+//     const key = `fetchEmbeddings:${createId()}`;
+//     console.time(key);
+//     const results = await prisma.$queryRaw<EmbeddingWithDistance[]>`
+//     WITH ranked_embeddings AS (
+//       SELECT
+//         e.id,
+//         e."createdAt",
+//         e."documentId",
+//         e."chatbotId",
+//         e.content,
+//         e."isQA",
+//         e."responseType",
+//         1 - (e.embedding <=> ${embedding}::vector) AS distance,
+//         COALESCE(d.name, '') as "documentName",
+//         COALESCE(d.url, '') as "documentUrl",
+//         COALESCE(d.question, '') as "documentQuestion",
+//         ROW_NUMBER() OVER (PARTITION BY e.content ORDER BY 1 - (e.embedding <=> ${embedding}::vector) DESC) as rn
+//       FROM "Embedding" e
+//       JOIN "Document" d ON e."documentId" = d.id
+//       WHERE e."chatbotId" = ${chatbotId}
+//         AND e."isQA" = ${isQA}
+//         AND d."isPending" = false
+//         AND d."matchType" != 'EXACT'
+//         AND 1 - (e.embedding <=> ${embedding}::vector) > ${minSimilarity}
+//     )
+//     SELECT *
+//     FROM ranked_embeddings
+//     WHERE rn = 1
+//     ORDER BY distance DESC
+//     LIMIT ${k};
+//   `;
+
+//     console.timeEnd(key);
+
+//     return results.length > 0 ? results : null;
+//   } catch (error) {
+//     console.log("error: ", error);
+//     console.error("Error fetching relevant embeddings:", error);
+//     return null;
+//   }
+// }
 
 async function fetchRelevantEmbeddingsWithVector({
   chatbotId,
@@ -432,32 +586,116 @@ async function fetchRelevantEmbeddingsWithVector({
   minSimilarity?: number;
 }): Promise<EmbeddingWithDistance[] | null> {
   try {
+    const key = `fetchEmbeddings:${createId()}`;
+    console.time(key);
     const results = await prisma.$queryRaw<EmbeddingWithDistance[]>`
-      SELECT DISTINCT ON (e.content)
-        e.id,
-        e."createdAt",
-        e."documentId",
-        e."chatbotId",
-        e.content,
-        e."isQA",
-        1 - (e.embedding <=> ${embedding}::vector) AS distance
-      FROM "Embedding" e
-      JOIN "Document" d ON e."documentId" = d.id
-      WHERE e."chatbotId" = ${chatbotId}
-        AND e."isQA" = ${isQA}
-        AND d."isPending" = false
-        AND d."matchType" != 'EXACT'
-        AND 1 - (e.embedding <=> ${embedding}::vector) > ${minSimilarity}
-      ORDER BY e.content, distance DESC
-      LIMIT ${k};
+    SELECT
+      e.id,
+      e."createdAt",
+      e."documentId",
+      e."chatbotId",
+      e.content,
+      e."isQA",
+      e."responseType",
+      1 - (e.embedding <=> ${embedding}::vector(1536)) AS distance,
+      COALESCE(d.name, '') as "documentName",
+      COALESCE(d.url, '') as "documentUrl",
+      COALESCE(d.question, '') as "documentQuestion"
+    FROM "Embedding" e
+    JOIN "Document" d ON e."documentId" = d.id
+    WHERE e."chatbotId" = ${chatbotId}
+      AND e."isQA" = ${isQA}
+      AND d."isPending" = false
+      AND d."matchType" != 'EXACT'
+    ORDER BY e.embedding <=> ${embedding}::vector(1536)
+    LIMIT ${k};
     `;
 
-    console.log("results: ", results);
+    console.timeEnd(key);
 
-    return results.length > 0 ? results : null;
+    return results.length > 0
+      ? results.filter((r) => 1 - r.distance > minSimilarity)
+      : null;
   } catch (error) {
     console.log("error: ", error);
     console.error("Error fetching relevant embeddings:", error);
     return null;
   }
+}
+
+function streamStaticResponse(content: string): ReadableStream {
+  return new ReadableStream({
+    start(controller) {
+      const id = createId();
+      const chunk = {
+        id,
+        object: "chat.completion.chunk",
+        created: Date.now(),
+        model: "gpt-4o-2024-08-06",
+        choices: [
+          {
+            index: 0,
+            delta: { content, role: "assistant" },
+            logprobs: null,
+            finish_reason: null,
+          },
+        ],
+      };
+      controller.enqueue(chunk);
+      controller.close();
+    },
+  });
+}
+
+function findMostRelevantStaticResponse(
+  rerankedEmbeddings: V2RerankResponse,
+  relevantEmbeddings: EmbeddingWithDistance[],
+): {
+  content: string;
+} | null {
+  const mostRelevantDocument =
+    rerankedEmbeddings.results.length > 0
+      ? rerankedEmbeddings.results[0]
+      : null;
+
+  if (
+    mostRelevantDocument &&
+    mostRelevantDocument.document &&
+    relevantEmbeddings[mostRelevantDocument.index]?.responseType ===
+      ResponseType.STATIC
+  ) {
+    return {
+      content: mostRelevantDocument.document.text,
+    };
+  }
+
+  return null;
+}
+
+type AugmentedContext = {
+  id: string;
+  relevanceScore: number;
+  index: number;
+  text: string;
+  documentName: string;
+  documentUrl: string;
+  documentQuestion: string;
+};
+
+function augmentRerankedEmbeddings(
+  rerankedEmbeddings: V2RerankResponse,
+  relevantEmbeddings: EmbeddingWithDistance[],
+): AugmentedContext[] {
+  return rerankedEmbeddings.results.map((result) => {
+    const relevantEmbedding = relevantEmbeddings[result.index];
+    return {
+      id: relevantEmbedding.id,
+      relevanceScore: result.relevanceScore,
+      index: result.index,
+      text: result.document?.text ?? "",
+      documentName: relevantEmbedding.documentName,
+      documentUrl: relevantEmbedding.documentUrl,
+      documentQuestion: relevantEmbedding.documentQuestion,
+    };
+  });
 }
