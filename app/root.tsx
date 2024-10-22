@@ -5,6 +5,8 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
+import { HoneypotProvider } from "remix-utils/honeypot/react";
+
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -24,6 +26,7 @@ import { Toaster } from "./components/ui/toaster";
 import { getUser } from "./session.server";
 import highlightStyle from "./styles/lib/highlight.css?url";
 import markdownStyle from "./styles/lib/markdown.css?url";
+import { honeypot } from "./utils/honeypot.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -35,6 +38,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({
     user: await getUser(request),
     gaTrackingId: process.env.GA_TRACKING_ID,
+    honeypotInputProps: honeypot.getInputProps(),
   });
 };
 
@@ -53,7 +57,7 @@ export const meta: MetaFunction = ({ location }) => {
 
 export default function App() {
   const location = useLocation();
-  const { gaTrackingId } = useLoaderData<typeof loader>();
+  const { gaTrackingId, honeypotInputProps } = useLoaderData<typeof loader>();
 
   useEffect(() => {
     if (gaTrackingId?.length) {
@@ -111,11 +115,13 @@ export default function App() {
           </>
         )}
         <Theme>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <Toaster />
-          <div id="modal-container" />
+          <HoneypotProvider {...honeypotInputProps}>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <Toaster />
+            <div id="modal-container" />
+          </HoneypotProvider>
         </Theme>
         {/* widget */}
         <script

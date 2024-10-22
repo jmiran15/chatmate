@@ -17,6 +17,8 @@ import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { SEOHandle } from "@nasa-gcn/remix-seo";
 import bcrypt from "bcryptjs";
 import SignupEmail from "emails/sign-up";
+import { HoneypotInputs } from "remix-utils/honeypot/react";
+import { SpamError } from "remix-utils/honeypot/server";
 import { z } from "zod";
 import { Button } from "~/components/ui/button";
 import {
@@ -33,6 +35,7 @@ import { useIsPending } from "~/hooks/use-is-pending";
 import { getUserByEmail } from "~/models/user.server";
 import { requireAnonymous } from "~/session.server";
 import { sendEmail } from "~/utils/email.server";
+import { honeypot } from "~/utils/honeypot.server";
 import { getPricing } from "~/utils/pricing.server";
 import { EmailSchema, PasswordSchema } from "~/utils/types";
 import {
@@ -59,6 +62,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
+
+  try {
+    honeypot.check(formData);
+  } catch (error) {
+    if (error instanceof SpamError) {
+      throw new Response("Form not submitted properly", { status: 400 });
+    }
+    throw error;
+  }
 
   // get the search params
   const url = new URL(request.url);
@@ -190,6 +202,7 @@ export default function Join() {
           {...getFormProps(form)}
           className="flex flex-col gap-4 sm:gap-6"
         >
+          <HoneypotInputs label="Please leave this field blank" />
           <Field
             labelProps={{
               htmlFor: fields.email.id,
