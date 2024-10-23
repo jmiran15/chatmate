@@ -1,6 +1,6 @@
 import { RemixBrowser } from "@remix-run/react";
 import posthog from "posthog-js";
-import { startTransition, StrictMode, useEffect } from "react";
+import { startTransition, useEffect } from "react";
 import { hydrateRoot } from "react-dom/client";
 
 function PosthogInit() {
@@ -17,9 +17,9 @@ function PosthogInit() {
 startTransition(() => {
   hydrateRoot(
     document,
-    <StrictMode>
+    <>
       <RemixBrowser />
       <PosthogInit />
-    </StrictMode>,
+    </>,
   );
 });

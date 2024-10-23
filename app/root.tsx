@@ -20,6 +20,7 @@ import {
 import posthog from "posthog-js";
 import { useEffect } from "react";
 import stylesheet from "~/tailwind.css?url";
+import * as fbq from "~/utils/fbq.client";
 import * as gtag from "~/utils/gtags.client";
 import { generateCanonicalUrl, generateMetaTags } from "~/utils/seo";
 import { Toaster } from "./components/ui/toaster";
@@ -38,6 +39,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({
     user: await getUser(request),
     gaTrackingId: process.env.GA_TRACKING_ID,
+    fbPixelId: process.env.FB_PIXEL_ID,
     honeypotInputProps: honeypot.getInputProps(),
   });
 };
@@ -57,17 +59,18 @@ export const meta: MetaFunction = ({ location }) => {
 
 export default function App() {
   const location = useLocation();
-  const { gaTrackingId, honeypotInputProps } = useLoaderData<typeof loader>();
+  const { gaTrackingId, fbPixelId, honeypotInputProps } =
+    useLoaderData<typeof loader>();
 
   useEffect(() => {
     if (gaTrackingId?.length) {
       gtag.pageview(location.pathname, gaTrackingId);
     }
-  }, [location, gaTrackingId]);
-
-  useEffect(() => {
+    if (fbPixelId?.length) {
+      fbq.fbPageview();
+    }
     posthog.capture("$pageview");
-  }, [location]);
+  }, [location, gaTrackingId, fbPixelId]);
 
   return (
     <html lang="en" className="h-full">
@@ -100,7 +103,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '951756206781268');
+fbq('init', '${fbPixelId}');
 fbq('track', 'PageView');
             `,
           }}

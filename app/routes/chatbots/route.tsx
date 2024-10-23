@@ -33,6 +33,7 @@ import { prisma } from "~/db.server";
 import { createCustomer, stripe } from "~/models/subscription.server";
 import { Header } from "~/routes/_header._index/header";
 import { requireUser, requireUserId } from "~/session.server";
+import { fbStartTrial } from "~/utils/fbq.client";
 import { getPricing } from "~/utils/pricing.server";
 import { useRafState } from "./useRafState";
 
@@ -282,6 +283,7 @@ export default function ChatbotsLayout() {
       startCelebration();
     } else if (trialInitialized === "true") {
       startTrialCelebration();
+      fbStartTrial(19, 50);
     }
   }, [success, trialInitialized, setSearchParams]);
 
