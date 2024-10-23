@@ -116,7 +116,7 @@ fbq('track', 'PageView');
             height="1"
             width="1"
             style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=951756206781268&ev=PageView&noscript=1"
+            src={`https://www.facebook.com/tr?id=${fbPixelId}&ev=PageView&noscript=1`}
           />
         </noscript>
 
