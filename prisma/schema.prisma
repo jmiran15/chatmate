@@ -228,19 +228,19 @@ model Document {
 
 // We will search QA embeddings and non QA embeddings separately - QA is given priority
 model Embedding {
-  id         String                @id @default(uuid())
-  createdAt  DateTime              @default(now())
-  embedding  Unsupported("vector(1536)")
-  documentId String
-  chatbotId  String
-  content    String
-  chatbot    Chatbot               @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  document   Document              @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  id           String                      @default(cuid())
+  createdAt    DateTime                    @default(now())
+  embedding    Unsupported("vector(1536)")
+  documentId   String
+  chatbotId    String
+  content      String
+  chatbot      Chatbot                     @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  document     Document                    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  isQA         Boolean?                    @default(false)
+  responseType ResponseType?               @default(GENERATIVE)
 
-  isQA         Boolean?      @default(false)
-  responseType ResponseType? @default(GENERATIVE)
-
-  @@index([chatbotId, documentId, isQA, responseType])
+  @@id([id, chatbotId])
+  @@index([documentId, isQA, responseType])
 }
 
 model Message {

@@ -8,8 +8,8 @@ import pLimit from "p-limit";
 import { performance } from "perf_hooks";
 import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
-import { generateHyDE } from "./ai/inference/HyDE";
 import { generateSimilarUserQueries } from "./ai/inference/augmentQuery.server";
+import { generateHyDE } from "./ai/inference/HyDE";
 import { generateSubQuestions } from "./ai/inference/subquestions.server";
 import {
   mainChatSystemPrompt_v3,
@@ -19,6 +19,9 @@ import {
 import { cohere, openai } from "./providers.server";
 
 const DEBUG_TIMING = process.env.NODE_ENV === "development";
+
+//llama-3.2-1b-preview
+export const groqModel = "llama-3.2-90b-text-preview";
 
 interface TimingResult {
   operation: string;
@@ -220,7 +223,7 @@ export async function chat({
         {
           id: hasExactMatch.id,
           content: hasExactMatch.content as string,
-          distance: 1,
+          // distance: 1,
           documentName: hasExactMatch.name,
           documentUrl: hasExactMatch.url ?? "",
           documentQuestion: hasExactMatch.question ?? "",
@@ -319,8 +322,8 @@ export async function chat({
         searchEmbeddings({
           chatbotId: chatbot.id,
           queries: allQueries,
-          tagLimit: 10,
-          regularLimit: 10,
+          tagLimit: 100,
+          regularLimit: 100,
           // minSimilarity: 0.6,
           minSimilarity: 0,
           sessionId,
@@ -454,7 +457,7 @@ export async function chat({
 }
 
 type EmbeddingWithDistance = Omit<Embedding, "embedding"> & {
-  distance: number;
+  // distance: number;
   documentName: string;
   documentUrl: string;
   documentQuestion: string;
@@ -498,6 +501,7 @@ export async function batchEmbed(
   const key = `batchEmbed:${inputs.length}`;
   console.time(key);
 
+  // TODO: batch this so it doesn't crash
   const results = await embed({
     input: inputs,
     sessionId,
@@ -516,62 +520,6 @@ export async function batchEmbed(
   return results as number[][];
 }
 
-// async function fetchRelevantEmbeddingsWithVector({
-//   chatbotId,
-//   embedding,
-//   k = 5,
-//   isQA = false,
-//   minSimilarity = 0.7,
-// }: {
-//   chatbotId: string;
-//   embedding: number[];
-//   k?: number;
-//   isQA?: boolean;
-//   minSimilarity?: number;
-// }): Promise<EmbeddingWithDistance[] | null> {
-//   try {
-//     const key = `fetchEmbeddings:${createId()}`;
-//     console.time(key);
-//     const results = await prisma.$queryRaw<EmbeddingWithDistance[]>`
-//     WITH ranked_embeddings AS (
-//       SELECT
-//         e.id,
-//         e."createdAt",
-//         e."documentId",
-//         e."chatbotId",
-//         e.content,
-//         e."isQA",
-//         e."responseType",
-//         1 - (e.embedding <=> ${embedding}::vector) AS distance,
-//         COALESCE(d.name, '') as "documentName",
-//         COALESCE(d.url, '') as "documentUrl",
-//         COALESCE(d.question, '') as "documentQuestion",
-//         ROW_NUMBER() OVER (PARTITION BY e.content ORDER BY 1 - (e.embedding <=> ${embedding}::vector) DESC) as rn
-//       FROM "Embedding" e
-//       JOIN "Document" d ON e."documentId" = d.id
-//       WHERE e."chatbotId" = ${chatbotId}
-//         AND e."isQA" = ${isQA}
-//         AND d."isPending" = false
-//         AND d."matchType" != 'EXACT'
-//         AND 1 - (e.embedding <=> ${embedding}::vector) > ${minSimilarity}
-//     )
-//     SELECT *
-//     FROM ranked_embeddings
-//     WHERE rn = 1
-//     ORDER BY distance DESC
-//     LIMIT ${k};
-//   `;
-
-//     console.timeEnd(key);
-
-//     return results.length > 0 ? results : null;
-//   } catch (error) {
-//     console.log("error: ", error);
-//     console.error("Error fetching relevant embeddings:", error);
-//     return null;
-//   }
-// }
-
 async function fetchRelevantEmbeddingsWithVector({
   chatbotId,
   embedding,
@@ -589,33 +537,30 @@ async function fetchRelevantEmbeddingsWithVector({
     const key = `fetchEmbeddings:${createId()}`;
     console.time(key);
     const results = await prisma.$queryRaw<EmbeddingWithDistance[]>`
-    SELECT
-      e.id,
-      e."createdAt",
-      e."documentId",
-      e."chatbotId",
-      e.content,
-      e."isQA",
-      e."responseType",
-      1 - (e.embedding <=> ${embedding}::vector(1536)) AS distance,
-      COALESCE(d.name, '') as "documentName",
-      COALESCE(d.url, '') as "documentUrl",
-      COALESCE(d.question, '') as "documentQuestion"
-    FROM "Embedding" e
-    JOIN "Document" d ON e."documentId" = d.id
-    WHERE e."chatbotId" = ${chatbotId}
-      AND e."isQA" = ${isQA}
-      AND d."isPending" = false
-      AND d."matchType" != 'EXACT'
-    ORDER BY e.embedding <=> ${embedding}::vector(1536)
-    LIMIT ${k};
+      SELECT
+        e.id,
+        e."createdAt",
+        e."documentId",
+        e."chatbotId",
+        e.content,
+        e."isQA",
+        e."responseType",
+        COALESCE(d.name, '') as "documentName",
+        COALESCE(d.url, '') as "documentUrl",
+        COALESCE(d.question, '') as "documentQuestion"
+      FROM "Embedding" e
+      JOIN "Document" d ON e."documentId" = d.id
+      WHERE e."chatbotId" = ${chatbotId}
+        AND e."isQA" = ${isQA}
+        AND d."isPending" = false
+        AND d."matchType" != 'EXACT'
+      ORDER BY e.embedding <=> ${embedding}::vector(1536)
+      LIMIT ${k};
     `;
 
     console.timeEnd(key);
 
-    return results.length > 0
-      ? results.filter((r) => 1 - r.distance > minSimilarity)
-      : null;
+    return results.length > 0 ? results : null;
   } catch (error) {
     console.log("error: ", error);
     console.error("Error fetching relevant embeddings:", error);

@@ -3,6 +3,7 @@ import { ChatCompletionMessageParam as GroqChatCompletionMessageParam } from "gr
 import { zodResponseFormat } from "openai/helpers/zod.mjs";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { z } from "zod";
+import { groqModel } from "~/utils/openai";
 import { groq, openai } from "../../providers.server";
 import { checkRateLimits, correctTokenCount } from "../../rateLimiter";
 
@@ -157,6 +158,5 @@ const groqUser = (question: string) =>
     content: `Generate a hypothetical answer for the following question, optimized for use in a Hypothetical Document Embedding (HyDE) system:\n\n"${question}"\n\nProvide your response in the specified JSON format, ensuring all required fields are included.`,
   }) as GroqChatCompletionMessageParam;
 
-const groqModel = "llama-3.2-90b-text-preview";
 const groqTemp = 0;
 const groqTokens = 1024;

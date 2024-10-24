@@ -66,6 +66,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     },
   });
 
+  // Create the partition for the new chatbot
+  await prisma.$executeRaw`SELECT create_embedding_partition(${chatbot.id})`;
+
   return redirect(`/chatbots/${chatbot.id}/chats`);
 };
 

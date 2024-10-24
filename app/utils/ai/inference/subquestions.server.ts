@@ -3,11 +3,11 @@ import { ChatCompletionMessageParam as GroqChatCompletionMessageParam } from "gr
 import { zodResponseFormat } from "openai/helpers/zod.mjs";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { z } from "zod";
+import { groqModel } from "~/utils/openai";
 import { groq, openai } from "../../providers.server";
 import { checkRateLimits, correctTokenCount } from "../../rateLimiter";
 
 const MODEL = "gpt-4o-mini";
-const groqModel = "llama-3.2-90b-text-preview";
 const groqTemp = 0;
 const groqTokens = 1024;
 
