@@ -60,6 +60,7 @@ export async function generateSimilarUserQueries({
 
   try {
     if (await checkRateLimits(estimatedTokens)) {
+      console.time("Groq Augment Query");
       const groqCompletion = await groq.chat.completions.create({
         messages: [groqSystem, groqUser(originalQuery)],
         model: groqModel,
@@ -72,7 +73,7 @@ export async function generateSimilarUserQueries({
         },
         stop: null,
       });
-
+      console.timeEnd("Groq Augment Query");
       // Correct token count
       const actualTokens = groqCompletion.usage?.total_tokens || 0;
       await correctTokenCount(actualTokens, estimatedTokens);

@@ -61,6 +61,7 @@ export async function generateHyDE({
 
   try {
     if (await checkRateLimits(estimatedTokens)) {
+      console.time("Groq HyDE");
       const groqCompletion = await groq.chat.completions.create({
         messages: [groqSystem, groqUser(originalQuery)],
         model: groqModel,
@@ -74,6 +75,8 @@ export async function generateHyDE({
         stop: null,
       });
 
+      console.log("groqCompletion: ", JSON.stringify(groqCompletion, null, 2));
+      console.timeEnd("Groq HyDE");
       // Correct token count
       const actualTokens = groqCompletion.usage?.total_tokens || 0;
       await correctTokenCount(actualTokens, estimatedTokens);

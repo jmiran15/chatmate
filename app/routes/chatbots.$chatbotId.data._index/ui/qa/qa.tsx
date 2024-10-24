@@ -1,5 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { DocumentType } from "@prisma/client";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Form, useParams, useSubmit } from "@remix-run/react";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
@@ -14,6 +15,12 @@ import { Label } from "~/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { MinimalTiptapEditor } from "~/routes/chatbots.$chatbotId.data._index/ui/minimal-tiptap";
 import { STEPS } from "~/utils/types";
+import { CustomTooltip } from "./custom-tooltip";
+import { FieldDescription } from "./field-description";
+import { LabelWithTooltip } from "./label-with-tooltip";
+import { MatchTypeExplanation } from "./match-type-explanation";
+import { ResponseTypeExplanation } from "./response-type-explanation";
+import { TipsAndBestPractices } from "./tips-and-best-practices";
 
 const MAX_CHARACTERS = 10000;
 
@@ -80,13 +87,18 @@ export default function QA({
     <>
       <DialogHeader>
         <DialogTitle>Add Q&A</DialogTitle>
-        <DialogDescription>
-          Create a question and answer pair for your chatbot.
-        </DialogDescription>
+        <div className="flex items-center gap-2">
+          <DialogDescription>
+            Create a question and answer pair for your chatbot.
+          </DialogDescription>
+          <CustomTooltip content={<TipsAndBestPractices />}>
+            <InfoCircledIcon className="h-4 w-4 text-muted-foreground" />
+          </CustomTooltip>
+        </div>
       </DialogHeader>
       <Form
         ref={formRef}
-        className="grid gap-4"
+        className="grid gap-6"
         method="post"
         action={`/chatbots/${chatbotId}/data?index`}
       >
@@ -95,7 +107,7 @@ export default function QA({
         <input type="hidden" name="documentId" value={createId()} />
 
         <div className="grid gap-2">
-          <Label htmlFor="question">Question</Label>
+          <LabelWithTooltip htmlFor="question" label="Question" />
           <Input
             id="question"
             value={question}
@@ -104,27 +116,32 @@ export default function QA({
             aria-invalid={errors.question ? true : undefined}
             aria-describedby="question-error"
           />
-          {errors.question && (
-            <p className="text-sm text-red-500" id="question-error">
-              {errors.question}
-            </p>
-          )}
+          <FieldDescription>
+            Enter a question that users might ask your chatbot. Be specific and
+            concise.
+            <em className="block mt-1">
+              Example: "What are your business hours?"
+            </em>
+          </FieldDescription>
         </div>
 
         <div className="grid gap-2">
-          <Label>Match Type</Label>
+          <LabelWithTooltip
+            label="Match Type"
+            tooltip={<MatchTypeExplanation />}
+          />
           <RadioGroup
             value={matchType}
             onValueChange={setMatchType}
             className="flex space-x-4"
           >
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="exact" id="exact" />
-              <Label htmlFor="exact">Exact</Label>
-            </div>
-            <div className="flex items-center space-x-2">
               <RadioGroupItem value="broad" id="broad" />
               <Label htmlFor="broad">Broad</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="exact" id="exact" />
+              <Label htmlFor="exact">Exact</Label>
             </div>
           </RadioGroup>
           {errors.matchType && (
@@ -133,7 +150,7 @@ export default function QA({
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="answer">Answer</Label>
+          <LabelWithTooltip htmlFor="answer" label="Answer" />
           <div className="relative">
             <MinimalTiptapEditor
               value={answer}
@@ -157,13 +174,24 @@ export default function QA({
               {characterCount}/{MAX_CHARACTERS}
             </div>
           </div>
+          <FieldDescription>
+            Provide a detailed response to the question. Include all relevant
+            information.
+            <em className="block mt-1">
+              Example: "Our business hours are Monday to Friday, 9 AM to 5 PM
+              Eastern Time. We are closed on weekends and major holidays."
+            </em>
+          </FieldDescription>
           {errors.answer && (
             <p className="text-sm text-red-500">{errors.answer}</p>
           )}
         </div>
 
         <div className="grid gap-2">
-          <Label>Response Type</Label>
+          <LabelWithTooltip
+            label="Response Type"
+            tooltip={<ResponseTypeExplanation />}
+          />
           <RadioGroup
             value={responseType}
             onValueChange={setResponseType}

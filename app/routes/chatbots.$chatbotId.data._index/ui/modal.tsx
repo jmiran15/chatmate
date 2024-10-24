@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { STEPS } from "~/utils/types";
 import BlankUpload from "./blank";
 import { FileUpload } from "./file";
-import QA from "./qa";
+import QA from "./qa/qa";
 import SelectType from "./select-type";
 import Website from "./website";
 

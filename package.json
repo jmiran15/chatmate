@@ -38,6 +38,7 @@
     "@epic-web/remember": "^1.1.0",
     "@epic-web/totp": "^1.1.2",
     "@faker-js/faker": "^8.4.1",
+    "@floating-ui/react": "^0.26.25",
     "@headlessui/react": "^1.7.18",
     "@helicone/prompts": "^1.0.10",
     "@heroicons/react": "^2.1.1",

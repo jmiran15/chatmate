@@ -345,7 +345,7 @@ export async function chat({
               id: embedding.id,
               text: embedding.content,
             })),
-            topN: 10, // Probably increase this number... or perhaps we can make it a percentage of the total documents in a chatbot's embedding space, up-to some max. and would prob. be for it to be expontential to some point, and then drop off exponentially, almost like a sigmoid curve.
+            topN: 10, // TODO - Probably increase this number... or perhaps we can make it a percentage of the total documents in a chatbot's embedding space, up-to some max. and would prob. be for it to be expontential to some point, and then drop off exponentially, almost like a sigmoid curve.
             model: RERANK_MODEL,
           }),
       );
