@@ -141,7 +141,7 @@ function HeroCTA() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.0, duration: 0.8 }}
       >
-        Get started with your 7 day free trial now
+        Get started with your 7 day free trial now. No credit card required.
       </motion.p>
     </>
   );

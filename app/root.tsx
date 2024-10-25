@@ -5,6 +5,8 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
+import { HoneypotProvider } from "remix-utils/honeypot/react";
+
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -18,12 +20,14 @@ import {
 import posthog from "posthog-js";
 import { useEffect } from "react";
 import stylesheet from "~/tailwind.css?url";
+import * as fbq from "~/utils/fbq.client";
 import * as gtag from "~/utils/gtags.client";
 import { generateCanonicalUrl, generateMetaTags } from "~/utils/seo";
 import { Toaster } from "./components/ui/toaster";
 import { getUser } from "./session.server";
 import highlightStyle from "./styles/lib/highlight.css?url";
 import markdownStyle from "./styles/lib/markdown.css?url";
+import { honeypot } from "./utils/honeypot.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -35,6 +39,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return json({
     user: await getUser(request),
     gaTrackingId: process.env.GA_TRACKING_ID,
+    fbPixelId: process.env.FB_PIXEL_ID,
+    honeypotInputProps: honeypot.getInputProps(),
   });
 };
 
@@ -53,17 +59,18 @@ export const meta: MetaFunction = ({ location }) => {
 
 export default function App() {
   const location = useLocation();
-  const { gaTrackingId } = useLoaderData<typeof loader>();
+  const { gaTrackingId, fbPixelId, honeypotInputProps } =
+    useLoaderData<typeof loader>();
 
   useEffect(() => {
     if (gaTrackingId?.length) {
       gtag.pageview(location.pathname, gaTrackingId);
     }
-  }, [location, gaTrackingId]);
-
-  useEffect(() => {
+    if (fbPixelId?.length) {
+      fbq.fbPageview();
+    }
     posthog.capture("$pageview");
-  }, [location]);
+  }, [location, gaTrackingId, fbPixelId]);
 
   return (
     <html lang="en" className="h-full">
@@ -84,9 +91,35 @@ export default function App() {
       })(window, document, "clarity", "script", "l2cwgd2upk");`,
           }}
         />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            !function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '${fbPixelId}');
+fbq('track', 'PageView');
+            `,
+          }}
+        />
       </head>
 
       <body className="h-full bg-transparent">
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${fbPixelId}&ev=PageView&noscript=1`}
+          />
+        </noscript>
+
         {process.env.NODE_ENV === "development" || !gaTrackingId ? null : (
           <>
             <script
@@ -111,11 +144,13 @@ export default function App() {
           </>
         )}
         <Theme>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <Toaster />
-          <div id="modal-container" />
+          <HoneypotProvider {...honeypotInputProps}>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <Toaster />
+            <div id="modal-container" />
+          </HoneypotProvider>
         </Theme>
         {/* widget */}
         <script
