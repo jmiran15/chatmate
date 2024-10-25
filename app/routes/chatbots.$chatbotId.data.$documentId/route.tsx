@@ -150,6 +150,11 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           { document: updatedDocument },
           // { jobId: document.id }, If we set the jobId, the job gets ignored since we already have a job with the same id (from initial ingestion)
         );
+        // update document isPending to true
+        await prisma.document.update({
+          where: { id: documentId },
+          data: { isPending: true },
+        });
       }
 
       return json({
@@ -205,6 +210,7 @@ export default function DocumentPage() {
 
   const isSaving =
     fetcher.formData && fetcher.formData?.get("intent") === "save";
+
   const isDeleting =
     fetcher.formData && fetcher.formData?.get("intent") === "delete";
   const formRef = useRef<HTMLFormElement>(null);

@@ -213,11 +213,11 @@ async function insertEmbeddingsBatch(
 
   // Construct the SQL query
   const sqlQuery = Prisma.sql`
-    INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content", "isQA", "responseType")
+    INSERT INTO "Embedding" ("id", "embedding", "documentId", "chatbotId", "content", "isQA")
     VALUES ${Prisma.join(
       values.map(
         (v) =>
-          Prisma.sql`(${v.id}, ${v.embedding}::vector, ${v.documentId}, ${v.chatbotId}, ${v.content}, ${v.isQA}, ${v.responseType}::"ResponseType")`,
+          Prisma.sql`(${v.id}, ${v.embedding}::vector, ${v.documentId}, ${v.chatbotId}, ${v.content}, ${v.isQA})`,
       ),
     )}
   `;

@@ -358,6 +358,7 @@ export async function chat({
       const staticResponse = findMostRelevantStaticResponse(
         rerankedEmbeddings,
         relevantEmbeddings,
+        3,
       );
       if (staticResponse) {
         return streamStaticResponse(staticResponse.content);
@@ -461,6 +462,7 @@ type EmbeddingWithDistance = Omit<Embedding, "embedding"> & {
   documentName: string;
   documentUrl: string;
   documentQuestion: string;
+  responseType: ResponseType;
 };
 
 async function rerank({
@@ -544,10 +546,10 @@ async function fetchRelevantEmbeddingsWithVector({
         e."chatbotId",
         e.content,
         e."isQA",
-        e."responseType",
         COALESCE(d.name, '') as "documentName",
         COALESCE(d.url, '') as "documentUrl",
-        COALESCE(d.question, '') as "documentQuestion"
+        COALESCE(d.question, '') as "documentQuestion",
+        COALESCE(d."responseType", 'GENERATIVE') as "responseType"
       FROM "Embedding" e
       JOIN "Document" d ON e."documentId" = d.id
       WHERE e."chatbotId" = ${chatbotId}
@@ -595,23 +597,25 @@ function streamStaticResponse(content: string): ReadableStream {
 function findMostRelevantStaticResponse(
   rerankedEmbeddings: V2RerankResponse,
   relevantEmbeddings: EmbeddingWithDistance[],
+  topN: number = 1,
 ): {
   content: string;
+  relevanceScore: number;
 } | null {
-  const mostRelevantDocument =
-    rerankedEmbeddings.results.length > 0
-      ? rerankedEmbeddings.results[0]
-      : null;
+  console.log("topN: ", topN);
+  for (let i = 0; i < Math.min(topN, rerankedEmbeddings.results.length); i++) {
+    const result = rerankedEmbeddings.results[i];
+    const relevantEmbedding = relevantEmbeddings[result.index];
 
-  if (
-    mostRelevantDocument &&
-    mostRelevantDocument.document &&
-    relevantEmbeddings[mostRelevantDocument.index]?.responseType ===
-      ResponseType.STATIC
-  ) {
-    return {
-      content: mostRelevantDocument.document.text,
-    };
+    if (
+      result.document &&
+      relevantEmbedding?.responseType === ResponseType.STATIC
+    ) {
+      return {
+        content: result.document.text,
+        relevanceScore: result.relevanceScore,
+      };
+    }
   }
 
   return null;
