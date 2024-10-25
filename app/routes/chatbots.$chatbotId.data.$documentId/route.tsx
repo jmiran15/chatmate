@@ -1,3 +1,4 @@
+import { DocumentType, MatchType, ResponseType } from "@prisma/client";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -8,22 +9,35 @@ import {
   useParams,
   useSubmit,
 } from "@remix-run/react";
+import { motion } from "framer-motion";
 import { ChevronLeft } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useEventSource } from "remix-utils/sse/react";
 import { Badge } from "~/components/ui/badge";
 import { Button, buttonVariants } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group";
 import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/components/ui/use-toast";
 import { prisma } from "~/db.server";
 import { cn } from "~/lib/utils";
-import { getDocumentById, updateDocumentById } from "~/models/document.server";
-import { queue } from "~/queues/ingestion.server";
+import { getDocumentById } from "~/models/document.server";
+import { queue } from "~/queues/ingestion/ingestion.server";
+import { qaqueue } from "~/queues/qaingestion/qaingestion.server";
 import { requireUserId } from "~/session.server";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import Container from "../chatbots.$chatbotId.forms._index/Container";
+
+// TODO: we probably do not need to reingest unless the question or content has changed (i.e. if the match or response type changes, we just update in the db not ingestion)
+
+// TODO: Q&A type documents need to be handled differently
+// we need to add the form fields for the match type, match phrase, response type
+// and we need to handle on save properly
+
+// ALSO ... we need to make sure bullmq cancels any pending ingestion jobs with the same documentId (i.e. if I stack a new ingestion job, it should cancel the previous one)
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatbotId, documentId } = params;
@@ -41,9 +55,9 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     where: { id: chatbotId },
   });
 
-  // if (chatbot?.userId !== userId) {
-  //   throw new Error("User does not have access to chatbot");
-  // }
+  if (chatbot?.userId !== userId) {
+    throw new Error("User does not have access to chatbot");
+  }
 
   const document = await getDocumentById({ id: documentId });
 
@@ -59,18 +73,46 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
     throw new Error("Document id is required");
   }
 
+  // fetch the document
+  const document = await prisma.document.findUnique({
+    where: { id: documentId },
+  });
+
+  if (!document) {
+    throw new Error("Document not found");
+  }
+
   switch (intent) {
     case "save": {
-      // validate - make sure they are not empty
+      const type = String(formData.get("type")) as DocumentType;
+      const isQA = type === DocumentType.QA;
 
-      const name = formData.get("name") as string;
-      const content = formData.get("content") as string;
+      let name, content, question, matchType, responseType;
 
-      if (name.length === 0) {
-        return json(
-          { errors: { name: "Name is required", content: null } },
-          { status: 400 },
-        );
+      if (isQA) {
+        question = String(formData.get("question"));
+        matchType = String(formData.get("matchType")) as MatchType;
+        responseType = String(formData.get("responseType")) as ResponseType;
+        content = String(formData.get("content"));
+
+        if (question.length === 0) {
+          return json(
+            { errors: { question: "Question is required", content: null } },
+            { status: 400 },
+          );
+        }
+
+        name = question; // For QA documents, the name is the question
+      } else {
+        name = formData.get("name") as string;
+        content = formData.get("content") as string;
+
+        if (name.length === 0) {
+          return json(
+            { errors: { name: "Name is required", content: null } },
+            { status: 400 },
+          );
+        }
       }
 
       if (content.length === 0) {
@@ -80,17 +122,40 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         );
       }
 
-      const document = await updateDocumentById({
-        id: documentId,
-        name,
-        content,
+      const updatedDocument = await prisma.document.update({
+        where: { id: documentId },
+        data: {
+          name,
+          content,
+          ...(isQA
+            ? {
+                question,
+                matchType: matchType as MatchType,
+                responseType: responseType as ResponseType,
+              }
+            : {}),
+        },
       });
 
-      await queue.add(
-        `ingestion-${document.id}`,
-        { document },
-        { jobId: document.id },
-      );
+      const queueToUse = isQA ? qaqueue : queue;
+      const jobPrefix = isQA ? "qaingestion" : "ingestion";
+
+      // lets check if the updatedDocument content or question has changed
+      if (
+        updatedDocument.content !== document.content ||
+        updatedDocument.question !== document.question
+      ) {
+        await queueToUse.add(
+          `${jobPrefix}-${updatedDocument.id}`,
+          { document: updatedDocument },
+          // { jobId: document.id }, If we set the jobId, the job gets ignored since we already have a job with the same id (from initial ingestion)
+        );
+        // update document isPending to true
+        await prisma.document.update({
+          where: { id: documentId },
+          data: { isPending: true },
+        });
+      }
 
       return json({
         intent: "save",
@@ -104,32 +169,50 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
   }
 };
 
+// Add this Spinner component at the top level of your file
+const Spinner = () => (
+  <svg
+    className="animate-spin h-4 w-4 text-current"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    ></circle>
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    ></path>
+  </svg>
+);
+
 export default function DocumentPage() {
   const { toast } = useToast();
   const submit = useSubmit();
   const fetcher = useFetcher<typeof action>();
   const { chatbotId, documentId } = useParams();
   const { document } = useLoaderData<typeof loader>();
-  // const pendingDocuments = usePendingDocuments();
-  // const optimisticDocument = pendingDocuments.find(
-  //   (document) => document.id === documentId,
-  // );
-  // const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
-  // const progress: ProgressData | undefined = useMemo(() => {
-  //   return eventSource ? JSON.parse(eventSource) : undefined;
-  // }, [eventSource]);
+  const eventSource = useEventSource(`/api/chatbot/${chatbotId}/data/progress`);
+  const progress: ProgressData | undefined = useMemo(() => {
+    return eventSource ? JSON.parse(eventSource) : undefined;
+  }, [eventSource]);
 
-  // const { content, status } = useDocumentProgress({
-  //   item: document || optimisticDocument,
-  //   progress,
-  // });
+  const [isIngesting, setIsIngesting] = useState<boolean>(() => {
+    return document?.isPending ?? false;
+  });
 
   const isSaving =
-    fetcher.state === "submitting" &&
-    fetcher.formData?.get("intent") === "save";
+    fetcher.formData && fetcher.formData?.get("intent") === "save";
+
   const isDeleting =
-    fetcher.state === "submitting" &&
-    fetcher.formData?.get("intent") === "delete";
+    fetcher.formData && fetcher.formData?.get("intent") === "delete";
   const formRef = useRef<HTMLFormElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -160,12 +243,32 @@ export default function DocumentPage() {
 
   const optimisticDocumentName =
     fetcher.formData && String(fetcher.formData.get("intent")) === "save"
-      ? String(fetcher.formData.get("name"))
+      ? document.type === "QA"
+        ? String(fetcher.formData.get("question"))
+        : String(fetcher.formData.get("name"))
       : document?.name;
 
-  if (!documentId) return;
+  useEffect(() => {
+    if (document.isPending || isSaving) {
+      setIsIngesting(true);
+    } else {
+      setIsIngesting(false);
+    }
+  }, [document.isPending, isSaving]);
+
+  useEffect(() => {
+    if (
+      progress &&
+      progress.documentId === documentId &&
+      ["ingestion", "qaingestion"].includes(progress.queueName) &&
+      progress.completed
+    ) {
+      setIsIngesting(false);
+    }
+  }, [progress, documentId]);
+
+  if (!documentId) return null;
   return (
-    // <div className="flex flex-col p-4 gap-8 w-full h-full overflow-y-auto">
     <Container className="max-w-5xl">
       <div className="flex items-center justify-between w-full flex-wrap gap-4">
         <div className="flex items-center justify-start gap-4 max-w-full shrink">
@@ -182,8 +285,24 @@ export default function DocumentPage() {
           <h1 className="flex-1 text-xl font-semibold tracking-tight overflow-hidden text-ellipsis whitespace-nowrap">
             {optimisticDocumentName}
           </h1>
-          <Badge variant="secondary" className="ml-auto sm:ml-0">
-            {document.isPending ? "Ingesting" : "Ingested"}
+          <Badge
+            className={cn(
+              "ml-auto sm:ml-0 whitespace-nowrap text-xs font-medium px-2.5 py-0.5 rounded flex items-center gap-2",
+              isIngesting
+                ? "bg-yellow-100 text-yellow-800"
+                : "bg-green-100 text-green-800",
+            )}
+          >
+            {isIngesting && (
+              <motion.div
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Spinner />
+              </motion.div>
+            )}
+            <span>{isIngesting ? "Ingesting" : "Ingested"}</span>
           </Badge>
         </div>
         <div className="flex items-center gap-2">
@@ -200,12 +319,14 @@ export default function DocumentPage() {
                 },
               )
             }
+            disabled={isIngesting}
           >
             Discard
           </Button>
           <Button
             size="sm"
             onClick={() => fetcher.submit(formRef.current, { method: "post" })}
+            disabled={isIngesting}
           >
             Save Document
           </Button>
@@ -217,39 +338,75 @@ export default function DocumentPage() {
         ref={formRef}
       >
         <fieldset
-          disabled={isSaving || isDeleting}
+          disabled={isSaving || isDeleting || isIngesting}
           className="flex flex-col gap-6"
         >
           <input type="hidden" name="intent" value="save" />
-          <div className="grid gap-2">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              ref={nameRef}
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus={true}
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Name"
-              defaultValue={document?.name}
-            />
-            {fetcher?.data?.errors?.name ? (
-              <p
-                className="pt-1 text-red-500 text-sm font-medium leading-none"
-                id="url-error"
-              >
-                {fetcher.data.errors.name}
-              </p>
-            ) : null}
-          </div>
+          <input type="hidden" name="type" value={document.type} />
+
+          {document?.type === "QA" ? (
+            <Fragment>
+              <div className="grid gap-2">
+                <Label htmlFor="question">Question</Label>
+                <Input
+                  ref={nameRef}
+                  autoFocus={true}
+                  type="text"
+                  name="question"
+                  id="question"
+                  placeholder="Question"
+                  defaultValue={document.name}
+                />
+                {fetcher?.data?.errors?.question ? (
+                  <p className="pt-1 text-red-500 text-sm font-medium leading-none">
+                    {fetcher.data.errors.question}
+                  </p>
+                ) : null}
+              </div>
+              <div className="grid gap-2">
+                <Label>Match Type</Label>
+                <RadioGroup
+                  defaultValue={document.matchType ?? "EXACT"}
+                  name="matchType"
+                  className="flex space-x-4"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="EXACT" id="exact" />
+                    <Label htmlFor="exact">Exact</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="BROAD" id="broad" />
+                    <Label htmlFor="broad">Broad</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            </Fragment>
+          ) : (
+            <div className="grid gap-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                ref={nameRef}
+                autoFocus={true}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name"
+                defaultValue={document?.name}
+              />
+              {fetcher?.data?.errors?.name ? (
+                <p className="pt-1 text-red-500 text-sm font-medium leading-none">
+                  {fetcher.data.errors.name}
+                </p>
+              ) : null}
+            </div>
+          )}
+
           <div className="grid gap-2">
             <Label htmlFor="content">Content</Label>
             {document.content ? (
               <>
                 <Textarea
                   ref={contentRef}
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus={true}
                   placeholder="Type your message here."
                   id="content"
                   name="content"
@@ -257,10 +414,7 @@ export default function DocumentPage() {
                   defaultValue={document.content}
                 />
                 {fetcher?.data?.errors?.content ? (
-                  <p
-                    className="pt-1 text-red-500 text-sm font-medium leading-none"
-                    id="url-error"
-                  >
+                  <p className="pt-1 text-red-500 text-sm font-medium leading-none">
                     {fetcher.data.errors.content}
                   </p>
                 ) : null}
@@ -269,9 +423,28 @@ export default function DocumentPage() {
               <Skeleton count={10} />
             )}
           </div>
+
+          {document?.type === "QA" && (
+            <div className="grid gap-2">
+              <Label>Response Type</Label>
+              <RadioGroup
+                defaultValue={document.responseType ?? "GENERATIVE"}
+                name="responseType"
+                className="flex space-x-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="STATIC" id="static" />
+                  <Label htmlFor="static">Static</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="GENERATIVE" id="generative" />
+                  <Label htmlFor="generative">Generative</Label>
+                </div>
+              </RadioGroup>
+            </div>
+          )}
         </fieldset>
       </Form>
-      {/* </div> */}
     </Container>
   );
 }

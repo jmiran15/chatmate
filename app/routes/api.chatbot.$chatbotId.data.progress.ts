@@ -4,8 +4,9 @@ import { eventStream } from "remix-utils/sse/server";
 import {
   QueueData as IngestionQueueData,
   queue as ingestionQueue,
-} from "~/queues/ingestion.server";
+} from "~/queues/ingestion/ingestion.server";
 import { parseFileQueue } from "~/queues/parsefile.server";
+import { qaqueue } from "~/queues/qaingestion/qaingestion.server";
 import { ScrapeQueueData, scrapeQueue } from "~/queues/scrape.server";
 import { RegisteredQueue } from "~/utils/queue.server";
 
@@ -23,6 +24,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   if (
     !global.__registeredQueues ||
     !global.__registeredQueues[ingestionQueue.name] ||
+    !global.__registeredQueues[qaqueue.name] ||
     !global.__registeredQueues[scrapeQueue.name] ||
     !global.__registeredQueues[parseFileQueue.name]
   ) {
@@ -37,7 +39,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return eventStream(
       request.signal,
       function setup(send: (event: { event?: string; data: string }) => void) {
-        const queues = [ingestionQueue, scrapeQueue, parseFileQueue];
+        const queues = [ingestionQueue, qaqueue, scrapeQueue, parseFileQueue];
 
         const eventsToListenTo = ["failed", "completed", "progress"];
 
@@ -54,7 +56,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
           );
           return async function listener(args: any) {
             const job = await registeredQueue?.queue.getJob(args.jobId);
-            console.log("Job triggered event: ", JSON.stringify(job, null, 2));
+            // console.log("Job triggered event: ", JSON.stringify(job, null, 2));
 
             if (!job || !isRelatedToChatbot(job, chatbotId!)) return;
 

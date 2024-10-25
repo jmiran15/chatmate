@@ -58,6 +58,7 @@ export const STEPS = {
   WEBSITE: "website",
   FILE: "file",
   BLANK: "blank",
+  QA: "qa",
 };
 
 export type ListOfErrors = Array<string | null | undefined> | null | undefined;

@@ -70,7 +70,7 @@ model Chatbot {
   publicName           String          @default("Your Chatbot")
   introMessages        String[]        @default(["Hello, how can I help you today?"])
   model                String?         @default("gpt-4o")
-  responseLength       String?         @default("short")
+  responseLength       String?         @default("long")
   systemPrompt         String?
   openIcon             String          @default("plus")
   themeColor           String          @default("zinc")
@@ -219,20 +219,26 @@ model Document {
   chatbot    Chatbot      @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
   embeddings Embedding[]
 
-  @@index([chatbotId, type, isPending, createdAt, updatedAt])
+  question     String?
+  matchType    MatchType?    @default(BROAD)
+  responseType ResponseType? @default(GENERATIVE)
+
+  @@index([chatbotId, type, isPending, createdAt, updatedAt, question, matchType])
 }
 
 model Embedding {
-  id         String                @id @default(uuid())
-  createdAt  DateTime              @default(now())
-  embedding  Unsupported("vector")
+  id         String                      @default(cuid())
+  createdAt  DateTime                    @default(now())
+  embedding  Unsupported("vector(1536)")
   documentId String
   chatbotId  String
   content    String
-  chatbot    Chatbot               @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
-  document   Document              @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  chatbot    Chatbot                     @relation(fields: [chatbotId], references: [id], onDelete: Cascade)
+  document   Document                    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  isQA       Boolean?                    @default(false)
 
-  @@index([chatbotId])
+  @@id([id, chatbotId])
+  @@index([documentId, isQA])
 }
 
 model Message {
@@ -406,6 +412,7 @@ enum DocumentType {
   WEBSITE
   FILE
   RAW
+  QA
 }
 
 enum TicketStatus {
@@ -447,4 +454,14 @@ enum InputType {
 enum ActionType {
   TEXT
   FORM
+}
+
+enum MatchType {
+  BROAD
+  EXACT
+}
+
+enum ResponseType {
+  GENERATIVE
+  STATIC
 }

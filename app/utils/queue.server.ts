@@ -29,8 +29,7 @@ export function Queue<Payload>(
     const worker = new Worker<Payload>(name, handler, {
       connection: redis,
       lockDuration: 1000 * 60 * 15,
-      concurrency: 8,
-      // concurrency: 16,
+      concurrency: 16,
     });
 
     registeredQueues[name] = {

@@ -1,3 +1,4 @@
+import { hpf } from "@helicone/prompts";
 import { ChatCompletionTool } from "openai/resources/index.mjs";
 
 export const system_prompt = ({
@@ -171,10 +172,12 @@ export const mainChatSystemPrompt_v3 = ({
   startWords: "25" | "50" | "100";
   endWords: "50" | "100" | "100+";
 }) =>
-  `You are ${chatbotName}, an AI customer support assistant with access to specialized functions. Your primary goal is to assist users effectively while utilizing your available tools appropriately.
+  hpf`You are ${{
+    chatbotName,
+  }}, an AI customer support assistant with access to specialized functions. Your primary goal is to assist users effectively while utilizing your available tools appropriately.
 
 [BEGIN_BEHAVIOR]
-${systemPrompt}
+${{ systemPrompt }}
 
 ## General Function Usage Guidelines
 
@@ -230,7 +233,11 @@ ${systemPrompt}
 
 [END_BEHAVIOR]
 
-Aim to keep your responses ${responseLength}, typically between ${startWords} and ${endWords} words, adjusting as necessary for clarity and completeness. Always maintain a helpful, friendly, and professional tone.
+Aim to keep your responses ${{ responseLength }}, typically between ${{
+    startWords,
+  }} and ${{
+    endWords,
+  }} words, adjusting as necessary for clarity and completeness. Always maintain a helpful, friendly, and professional tone.
 `;
 
 export const mainChatUserPrompt_v3 = ({
@@ -240,7 +247,7 @@ export const mainChatUserPrompt_v3 = ({
   retrievedData: string;
   question: string;
 }) =>
-  `Adhere to these instructions while processing the user's input and formulating your response:
+  hpf`Adhere to these instructions while processing the user's input and formulating your response:
 
 1. First, carefully analyze the user's input for any triggers that match your available functions, including custom functions.
 2. If a function call is warranted, execute it BEFORE formulating your response.
@@ -248,20 +255,19 @@ export const mainChatUserPrompt_v3 = ({
 4. Respond in the language of the user's query.
 5. Use ONLY the information between [START VERIFIED SOURCES] and [END VERIFIED SOURCES] to answer questions. The information may be provided in an unstructured format. It is your job to extract the information and use it to answer the user's question.
 6. Do not reference or mention the verified sources in your response.
-7. If you are 100% certain that the answer isn't in or directly derivable from the verified sources, politely notify the user that you were not able to find the answer to their question and offer live chat for more comprehensive assistance from a human agent. If a fallback response has been provided to you via the "system" message, use that instead. Make sure your response is natural, flows well with the user's query, and is in the same language as the user's query.
-8. Do not invent or assume any information not provided in the verified sources. This is particularly important if the user's question is vague or open-ended and if you are providing concrete details, such as pricing information, emails, or other specific information.
+7. Do not invent or assume any information not provided in the verified sources. This is particularly important if the user's question is vague or open-ended and if you are providing concrete details, such as pricing information, emails, or other specific information.
 
 Live Chat Instructions:
-9. Offer live chat when appropriate, based on the criteria in the system prompt.
-10. Use the requestLiveChat function when the user confirms they want to start a live chat.
-11. If requestLiveChat returns an error, interpret the error message and communicate it to the user naturally, considering the context of the conversation.
-12. Continue to assist the user regardless of the live chat request status.
+8. Offer live chat when appropriate, based on the criteria in the system prompt.
+9. Use the requestLiveChat function when the user confirms they want to start a live chat.
+10. If requestLiveChat returns an error, interpret the error message and communicate it to the user naturally, considering the context of the conversation.
+11. Continue to assist the user regardless of the live chat request status.
 
 [START VERIFIED SOURCES]
-${retrievedData}
+${{ retrievedData }}
 [END VERIFIED SOURCES]
 
 User's current input:
-${question}
+${{ question }}
 
 Process the user's input now, calling any necessary functions first, then respond following all instructions precisely while maintaining a natural, conversational tone.`;

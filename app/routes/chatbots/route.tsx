@@ -168,7 +168,6 @@ export default function ChatbotsLayout() {
     pricing,
   } = useLoaderData<typeof loader>();
 
-  console.log("features: ", features);
   const checkoutFetcher = useFetcher({ key: "checkoutGoogle" });
   const { width, height } = useWindowSize();
   const [searchParams, setSearchParams] = useSearchParams();

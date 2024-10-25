@@ -9,7 +9,6 @@ import {
   ChatCompletionTool,
 } from "openai/resources/index.mjs";
 import { prisma } from "~/db.server";
-import { getChat } from "~/queues/chat/db/getChat";
 import { sendEmail } from "~/utils/email.server";
 import { chat as streamChat } from "~/utils/openai";
 import { mainTools } from "~/utils/prompts";
@@ -484,14 +483,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         },
       });
 
-      // TEST
-      const job = await getChat.add("up", {
-        chatId: chat.id,
-      });
-
-      console.log("JOB: ", job);
-
-      console.log("POST PROCESSING SESSION ID: ", sessionId);
       // TODO - add more AI post processing like markResolved/not, add tags, etc...
       // TODO - test this and make sure it works
       // TODO - add progress streaming to the client

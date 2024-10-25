@@ -31,7 +31,7 @@ export function useOptimisticDocuments({
   const progress: ProgressData | undefined = useMemo(() => {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
-  const pendingDocuments = usePendingDocuments();
+  const pendingDocuments = usePendingDocuments(); // TODO: integrate this (optimistic UI)
 
   const localStorageKey = useMemo(
     () => `document_progress_${chatbotId}`,
@@ -39,7 +39,7 @@ export function useOptimisticDocuments({
   );
 
   const preprocessingQueues = ["scrape", "parseFile"];
-  const ingestionQueues = ["ingestion"];
+  const ingestionQueues = ["ingestion", "qaingestion"];
 
   const prevItemsRef = useRef<SerializeFrom<Document[]> | undefined>();
   const progressQueueRef = useRef<ProgressData[]>([]);
@@ -81,7 +81,29 @@ export function useOptimisticDocuments({
         preprocessingCompleted: item.content ? true : false,
       };
       const progressData = storedProgress[item.id];
-      return progressData ? updateDocumentFromProgress(doc, progressData) : doc;
+
+      if (!progressData) {
+        return doc;
+      }
+
+      if (!item.isPending) {
+        // remove the progress data from localStorage
+        delete storedProgress[item.id];
+        return doc;
+      } else {
+        // lets check which is more up to date
+        if (preprocessingQueues.includes(progressData.queueName)) {
+          // lets check if localstorage says we are still preprocessing, but db says we are not
+          if (doc.content) {
+            // we have content, so we can remove the progress data from localStorage
+            delete storedProgress[item.id];
+            return doc;
+          }
+        }
+
+        // if we get here, then we have an ingestion progfress, and the db says we are still pending, so we are correct
+        return updateDocumentFromProgress(doc, progressData);
+      }
     });
 
     setDocuments(updatedDocuments);
