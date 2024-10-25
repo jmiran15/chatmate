@@ -68,3 +68,6 @@ BEGIN
   EXECUTE format('CREATE INDEX IF NOT EXISTS "embedding_diskann_idx_%s" ON "Embedding_%s" USING diskann (embedding)', chatbot_id, chatbot_id);
 END;
 $$ LANGUAGE plpgsql;
+
+-- Rename the primary key constraint
+ALTER TABLE "Embedding" RENAME CONSTRAINT "PartitionedEmbedding_pkey" TO "Embedding_pkey";

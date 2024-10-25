@@ -226,7 +226,6 @@ model Document {
   @@index([chatbotId, type, isPending, createdAt, updatedAt, question, matchType])
 }
 
-// We will search QA embeddings and non QA embeddings separately - QA is given priority
 model Embedding {
   id         String                      @default(cuid())
   createdAt  DateTime                    @default(now())
