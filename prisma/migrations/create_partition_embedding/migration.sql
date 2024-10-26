@@ -40,16 +40,19 @@ DECLARE
 BEGIN
     FOR chatbot_id IN SELECT id FROM "Chatbot" LOOP
         PERFORM create_embedding_partition(chatbot_id);
+        RAISE NOTICE 'Created partition for chatbot: %', chatbot_id;
     END LOOP;
 END $$;
 
 -- Migrate existing data in batches
 DO $$
 DECLARE
-    batch_size INT := 10000;
+    batch_size INT := 5000;
     total_rows INT;
     processed_rows INT := 0;
     start_time TIMESTAMP;
+    batch_start_time TIMESTAMP;
+    elapsed_time INTERVAL;
 BEGIN
     SELECT COUNT(*) INTO total_rows FROM "Embedding";
     RAISE NOTICE 'Total rows to migrate: %', total_rows;
@@ -57,6 +60,8 @@ BEGIN
     start_time := clock_timestamp();
     
     WHILE processed_rows < total_rows LOOP
+        batch_start_time := clock_timestamp();
+        
         INSERT INTO "PartitionedEmbedding"
         SELECT * FROM "Embedding"
         ORDER BY "id"
@@ -65,16 +70,21 @@ BEGIN
         
         processed_rows := processed_rows + batch_size;
         
-        RAISE NOTICE 'Processed % of % rows. Elapsed time: %', 
-            processed_rows, total_rows, clock_timestamp() - start_time;
+        elapsed_time := clock_timestamp() - start_time;
+        RAISE NOTICE 'Processed % of % rows. Elapsed time: %. Batch time: %', 
+            processed_rows, total_rows, elapsed_time, clock_timestamp() - batch_start_time;
         
         COMMIT;
     END LOOP;
 END $$;
 
+RAISE NOTICE 'Data migration completed.';
+
 -- Drop the old table and rename the new one
 DROP TABLE "Embedding";
 ALTER TABLE "PartitionedEmbedding" RENAME TO "Embedding";
+
+RAISE NOTICE 'Table renamed.';
 
 -- Rename partitions to match the new table name
 DO $$
@@ -83,6 +93,7 @@ DECLARE
 BEGIN
     FOR chatbot_id IN SELECT id FROM "Chatbot" LOOP
         EXECUTE format('ALTER TABLE IF EXISTS "PartitionedEmbedding_%s" RENAME TO "Embedding_%s"', chatbot_id, chatbot_id);
+        RAISE NOTICE 'Renamed partition for chatbot: %', chatbot_id;
     END LOOP;
 END $$;
 
@@ -90,8 +101,12 @@ END $$;
 ALTER TABLE "Embedding" ADD CONSTRAINT "Embedding_chatbotId_fkey" FOREIGN KEY ("chatbotId") REFERENCES "Chatbot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "Embedding" ADD CONSTRAINT "Embedding_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+RAISE NOTICE 'Foreign key constraints added.';
+
 -- Create index
 CREATE INDEX "Embedding_documentId_isQA_idx" ON "Embedding"("documentId", "isQA");
+
+RAISE NOTICE 'Index created.';
 
 -- Create a function to create the HNSW index on a partition
 CREATE OR REPLACE FUNCTION create_hnsw_index_on_partition(chatbot_id TEXT)
@@ -108,6 +123,7 @@ DECLARE
 BEGIN
     FOR chatbot_id IN SELECT id FROM "Chatbot" LOOP
         PERFORM create_hnsw_index_on_partition(chatbot_id);
+        RAISE NOTICE 'Created HNSW index for chatbot: %', chatbot_id;
     END LOOP;
 END $$;
 
@@ -122,3 +138,5 @@ $$ LANGUAGE plpgsql;
 
 -- AlterTable
 ALTER TABLE "Embedding" RENAME CONSTRAINT "PartitionedEmbedding_pkey" TO "Embedding_pkey";
+
+RAISE NOTICE 'Migration completed successfully.';
