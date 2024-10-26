@@ -1,4 +1,4 @@
-import { RateLimiter } from "limiter";
+import { RateLimiter } from "limiter-es6-compat";
 
 // Groq rate limits
 const REQUESTS_PER_MINUTE = 30;
