@@ -12,16 +12,14 @@ CREATE TABLE "PartitionedEmbedding" (
   CONSTRAINT "PartitionedEmbedding_pkey" PRIMARY KEY ("id", "chatbotId")
 ) PARTITION BY LIST ("chatbotId");
 
--- Create a function to automatically create partitions
+-- Create functions for partition management
 CREATE OR REPLACE FUNCTION create_embedding_partition(chatbot_id TEXT)
 RETURNS VOID AS $$
 BEGIN
   EXECUTE format('CREATE TABLE IF NOT EXISTS "PartitionedEmbedding_%s" PARTITION OF "PartitionedEmbedding" FOR VALUES IN (%L)', chatbot_id, chatbot_id);
-  -- We'll create the HNSW index later, after renaming
 END;
 $$ LANGUAGE plpgsql;
 
--- Create a trigger to automatically create partitions when a new chatbot is created
 CREATE OR REPLACE FUNCTION create_embedding_partition_trigger()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -45,8 +43,34 @@ BEGIN
     END LOOP;
 END $$;
 
--- Migrate existing data
-INSERT INTO "PartitionedEmbedding" SELECT * FROM "Embedding";
+-- Migrate existing data in batches
+DO $$
+DECLARE
+    batch_size INT := 10000;
+    total_rows INT;
+    processed_rows INT := 0;
+    start_time TIMESTAMP;
+BEGIN
+    SELECT COUNT(*) INTO total_rows FROM "Embedding";
+    RAISE NOTICE 'Total rows to migrate: %', total_rows;
+    
+    start_time := clock_timestamp();
+    
+    WHILE processed_rows < total_rows LOOP
+        INSERT INTO "PartitionedEmbedding"
+        SELECT * FROM "Embedding"
+        ORDER BY "id"
+        LIMIT batch_size
+        OFFSET processed_rows;
+        
+        processed_rows := processed_rows + batch_size;
+        
+        RAISE NOTICE 'Processed % of % rows. Elapsed time: %', 
+            processed_rows, total_rows, clock_timestamp() - start_time;
+        
+        COMMIT;
+    END LOOP;
+END $$;
 
 -- Drop the old table and rename the new one
 DROP TABLE "Embedding";
@@ -95,3 +119,6 @@ BEGIN
   PERFORM create_hnsw_index_on_partition(chatbot_id);
 END;
 $$ LANGUAGE plpgsql;
+
+-- AlterTable
+ALTER TABLE "Embedding" RENAME CONSTRAINT "PartitionedEmbedding_pkey" TO "Embedding_pkey";

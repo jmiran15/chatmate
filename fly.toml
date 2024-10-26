@@ -17,6 +17,8 @@ release_command = "bash ./scripts/migrate.sh"
 [experimental]
 allowed_public_ports = [ ]
 auto_rollback = true
+cmd = ["npm", "run", "start"]
+entrypoint = ["sh", "-c", "npm run start"]
 
 [[services]]
 internal_port = 8_080
@@ -53,3 +55,8 @@ script_checks = [ ]
   timeout = "2s"
   tls_skip_verify = false
   headers = { }
+
+[[vm]]
+cpu_kind = "shared"
+cpus = 1
+memory_mb = 2048
