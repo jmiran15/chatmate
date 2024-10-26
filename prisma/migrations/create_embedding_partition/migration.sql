@@ -1,5 +1,4 @@
 CREATE EXTENSION IF NOT EXISTS vector;
-CREATE EXTENSION IF NOT EXISTS vectorscale CASCADE;
 
 -- Create the partitioned table
 CREATE TABLE "PartitionedEmbedding" (
@@ -10,7 +9,6 @@ CREATE TABLE "PartitionedEmbedding" (
   "chatbotId" TEXT NOT NULL,
   "content" TEXT NOT NULL,
   "isQA" BOOLEAN DEFAULT false,
-  "responseType" "ResponseType" DEFAULT 'GENERATIVE',
   CONSTRAINT "PartitionedEmbedding_pkey" PRIMARY KEY ("id", "chatbotId")
 ) PARTITION BY LIST ("chatbotId");
 
@@ -19,7 +17,7 @@ CREATE OR REPLACE FUNCTION create_embedding_partition(chatbot_id TEXT)
 RETURNS VOID AS $$
 BEGIN
   EXECUTE format('CREATE TABLE IF NOT EXISTS "Embedding_%s" PARTITION OF "Embedding" FOR VALUES IN (%L)', chatbot_id, chatbot_id);
-  PERFORM create_diskann_index_on_partition(chatbot_id);
+  PERFORM create_hnsw_index_on_partition(chatbot_id);
 END;
 $$ LANGUAGE plpgsql;
 
@@ -59,13 +57,13 @@ ALTER TABLE "Embedding" ADD CONSTRAINT "Embedding_chatbotId_fkey" FOREIGN KEY ("
 ALTER TABLE "Embedding" ADD CONSTRAINT "Embedding_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Create index
-CREATE INDEX "Embedding_documentId_isQA_responseType_idx" ON "Embedding"("documentId", "isQA", "responseType");
+CREATE INDEX "Embedding_documentId_isQA_idx" ON "Embedding"("documentId", "isQA");
 
--- Create a function to create the DiskANN index on a partition
-CREATE OR REPLACE FUNCTION create_diskann_index_on_partition(chatbot_id TEXT)
+-- Create a function to create the HNSW index on a partition
+CREATE OR REPLACE FUNCTION create_hnsw_index_on_partition(chatbot_id TEXT)
 RETURNS VOID AS $$
 BEGIN
-  EXECUTE format('CREATE INDEX IF NOT EXISTS "embedding_diskann_idx_%s" ON "Embedding_%s" USING diskann (embedding)', chatbot_id, chatbot_id);
+  EXECUTE format('CREATE INDEX IF NOT EXISTS "embedding_hnsw_idx_%s" ON "Embedding_%s" USING hnsw (embedding vector_cosine_ops)', chatbot_id, chatbot_id);
 END;
 $$ LANGUAGE plpgsql;
 

@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   postgres:
-    image: timescale/timescaledb-ha:pg16
+    image: ankane/pgvector
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -11,12 +11,8 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      - pgdata:/var/lib/postgresql/data
     command: >
       postgres
       -c shared_buffers=1GB
       -c maintenance_work_mem=256MB
       -c max_parallel_maintenance_workers=4
-
-volumes:
-  pgdata:
