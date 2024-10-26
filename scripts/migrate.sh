@@ -1,38 +1,9 @@
 #!/bin/bash
 
-set -e
-
-echo "Starting migration process..."
-
-fallocate -l 2G /swapfile
+fallocate -l 512M /swapfile
 chmod 0600 /swapfile
 mkswap /swapfile
 echo 10 >/proc/sys/vm/swappiness
 swapon /swapfile
 echo 1 >/proc/sys/vm/overcommit_memory
-
-echo "Swap space set up."
-
-# Increase PostgreSQL's work_mem and maintenance_work_mem
-psql $DATABASE_URL -c "ALTER SYSTEM SET work_mem = '256MB';"
-psql $DATABASE_URL -c "ALTER SYSTEM SET maintenance_work_mem = '1GB';"
-psql $DATABASE_URL -c "SELECT pg_reload_conf();"
-
-echo "PostgreSQL settings updated."
-
-# Run the migration with an increased statement timeout
-psql $DATABASE_URL -c "SET statement_timeout = '3h';"
-
-echo "Running Prisma migration..."
 npx prisma migrate deploy
-
-echo "Prisma migration completed."
-
-# Reset the PostgreSQL settings
-psql $DATABASE_URL -c "ALTER SYSTEM RESET work_mem;"
-psql $DATABASE_URL -c "ALTER SYSTEM RESET maintenance_work_mem;"
-psql $DATABASE_URL -c "SELECT pg_reload_conf();"
-
-echo "PostgreSQL settings reset."
-
-echo "Migration process completed successfully."
