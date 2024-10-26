@@ -35,13 +35,6 @@ AFTER INSERT ON "Chatbot"
 FOR EACH ROW
 EXECUTE FUNCTION create_embedding_partition_trigger();
 
--- Migrate existing data
-INSERT INTO "PartitionedEmbedding" SELECT * FROM "Embedding";
-
--- Drop the old table and rename the new one
-DROP TABLE "Embedding";
-ALTER TABLE "PartitionedEmbedding" RENAME TO "Embedding";
-
 -- Create partitions for existing chatbots
 DO $$
 DECLARE
@@ -51,6 +44,13 @@ BEGIN
         PERFORM create_embedding_partition(chatbot_id);
     END LOOP;
 END $$;
+
+-- Migrate existing data
+INSERT INTO "PartitionedEmbedding" SELECT * FROM "Embedding";
+
+-- Drop the old table and rename the new one
+DROP TABLE "Embedding";
+ALTER TABLE "PartitionedEmbedding" RENAME TO "Embedding";
 
 -- Add foreign key constraints
 ALTER TABLE "Embedding" ADD CONSTRAINT "Embedding_chatbotId_fkey" FOREIGN KEY ("chatbotId") REFERENCES "Chatbot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
