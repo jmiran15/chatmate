@@ -6,6 +6,7 @@ import {
   useParams,
   useSubmit,
 } from "@remix-run/react";
+import confetti from "canvas-confetti";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useEventSource } from "remix-utils/sse/react";
 import { Button } from "~/components/ui/button";
@@ -128,6 +129,11 @@ export default function Website({
             fetcherKey: scrapeFetcherKey.current,
           },
         );
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
       } else if (intent === "links") {
         setIsTableVisible(true);
         setJobInfo(null); // Reset jobInfo before starting a new job

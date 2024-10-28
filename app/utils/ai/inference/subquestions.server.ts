@@ -76,7 +76,6 @@ export async function generateSubQuestions({
 
   try {
     if (await checkRateLimits(estimatedTokens)) {
-      console.time("Groq Sub Questions");
       const groqCompletion = await groq.chat.completions.create({
         messages: [groqSystem, groqUser(originalQuery)],
         model: groqModel,
@@ -89,7 +88,7 @@ export async function generateSubQuestions({
         },
         stop: null,
       });
-      console.timeEnd("Groq Sub Questions");
+
       // Correct token count
       const actualTokens = groqCompletion.usage?.total_tokens || 0;
       await correctTokenCount(actualTokens, estimatedTokens);

@@ -1,5 +1,7 @@
+import { createId } from "@paralleldrive/cuid2";
 import { DocumentType } from "@prisma/client";
 import { Form, useParams, useSubmit } from "@remix-run/react";
+import confetti from "canvas-confetti";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -12,7 +14,6 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { STEPS } from "~/utils/types";
-import { createId } from "@paralleldrive/cuid2";
 
 export default function BlankUpload({
   setStep,
@@ -56,6 +57,12 @@ export default function BlankUpload({
         method: "post",
         navigate: false,
         fetcherKey: `${chatbotId}-${Date.now()}`,
+        action: `/chatbots/${chatbotId}/data?index`,
+      });
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
       });
     }
   }

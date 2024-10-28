@@ -1,4 +1,5 @@
 import { FlowProducer } from "bullmq";
+import { analyzeChat } from "~/queues/chat/answered/queue.server";
 import { getChat } from "~/queues/chat/db/getChat";
 import { updateChatFromChildrenQueue } from "~/queues/chat/db/updateChat";
 import { generateAIInsights } from "~/queues/chat/insights";
@@ -64,6 +65,23 @@ export async function startInsightsFlow({
             data: { chatId },
           },
         ],
+      },
+    ],
+  });
+
+  return flow;
+}
+
+export async function startAnalyzeChatFlow({ chatId }: { chatId: string }) {
+  const flow = await flowProducer.add({
+    name: `analyze-chat-${chatId}`,
+    queueName: analyzeChat.name,
+    data: { chatId },
+    children: [
+      {
+        name: `get-chat-${chatId}`,
+        queueName: getChat.name,
+        data: { chatId },
       },
     ],
   });

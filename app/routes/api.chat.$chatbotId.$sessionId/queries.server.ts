@@ -191,7 +191,9 @@ export async function createMessage(data: ThreadMessage) {
     ...prismaMessageData
   } = data;
 
-  return prisma.message.create({
+  const message = prisma.message.create({
     data: prismaMessageData,
   });
+
+  return message;
 }

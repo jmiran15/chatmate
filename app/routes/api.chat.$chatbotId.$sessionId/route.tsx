@@ -15,7 +15,11 @@ import { mainTools } from "~/utils/prompts";
 import { openai } from "~/utils/providers.server";
 import { requestLiveChat } from "~/utils/requestLiveChat.server";
 import { callCustomFlow } from "./customFlows.server";
-import { startInsightsFlow, startNameGenerationFlow } from "./flows.server";
+import {
+  startAnalyzeChatFlow,
+  startInsightsFlow,
+  startNameGenerationFlow,
+} from "./flows.server";
 import {
   createAnonymousChat,
   createAnonymousUser,
@@ -367,6 +371,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                 }
 
                 messages.push(message);
+                console.log("the message: ", message);
+                console.log("the messages: ", messages);
 
                 // If there are no tool calls, we're done and can exit this loop
                 if (!message.tool_calls && message.content) {
@@ -380,7 +386,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     } as SSEMessage)}\n\n`,
                   );
 
-                  await createMessage({
+                  const createdMessage = await createMessage({
                     id,
                     chatId: chat.id,
                     role: message.role,
@@ -408,6 +414,8 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                         }
                       : undefined,
                   });
+
+                  console.log("createdMessage: ", createdMessage);
 
                   callingTools = false;
 
@@ -478,26 +486,31 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
               }
             }
 
+            console.log("messages: ", messages);
+
+            // TODO - add more AI post processing like markResolved/not, add tags, etc...
+            // TODO - test this and make sure it works
+            // TODO - add progress streaming to the client
+            const [nameFlow, insightsFlow, analyzeChatFlow] = await Promise.all(
+              [
+                startNameGenerationFlow({
+                  chatId: chat.id,
+                  sessionId: sessionId!,
+                  sessionName: `${chat.name ?? `Untitled Chat`}-${sessionId}`,
+                }),
+                startInsightsFlow({
+                  chatId: chat.id,
+                  sessionId: sessionId!,
+                  sessionName: `${chat.name ?? `Untitled Chat`}-${sessionId}`,
+                }),
+                startAnalyzeChatFlow({ chatId: chat.id }),
+              ],
+            );
+
             controller.close();
           })();
         },
       });
-
-      // TODO - add more AI post processing like markResolved/not, add tags, etc...
-      // TODO - test this and make sure it works
-      // TODO - add progress streaming to the client
-      const [nameFlow, insightsFlow] = await Promise.all([
-        startNameGenerationFlow({
-          chatId: chat.id,
-          sessionId: sessionId!,
-          sessionName: `${chat.name ?? `Untitled Chat`}-${sessionId}`,
-        }),
-        startInsightsFlow({
-          chatId: chat.id,
-          sessionId: sessionId!,
-          sessionName: `${chat.name ?? `Untitled Chat`}-${sessionId}`,
-        }),
-      ]);
 
       return new Response(stream, {
         headers,

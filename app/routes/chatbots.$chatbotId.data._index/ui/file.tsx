@@ -1,5 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { useParams, useSubmit } from "@remix-run/react";
+import confetti from "canvas-confetti";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -54,6 +55,12 @@ export function FileUpload({
       encType: "multipart/form-data",
       navigate: false,
       fetcherKey: `${chatbotId}-${Date.now()}`,
+    });
+
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
     });
   };
 
