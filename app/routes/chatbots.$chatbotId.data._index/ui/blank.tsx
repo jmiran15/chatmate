@@ -19,10 +19,12 @@ export default function BlankUpload({
   setStep,
   setOpen,
   submit,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
+  revisionForMessageId?: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const { chatbotId } = useParams();
@@ -81,6 +83,13 @@ export default function BlankUpload({
         method="post"
         action={`/chatbots/${chatbotId}/data?index`}
       >
+        {revisionForMessageId ? (
+          <input
+            type="hidden"
+            name="revisionForMessageId"
+            value={revisionForMessageId}
+          />
+        ) : null}
         <input type="hidden" name="intent" value="blank" />
         <input type="hidden" name="type" value={DocumentType.RAW} />
         <input type="hidden" name="documentId" value={createId()} />

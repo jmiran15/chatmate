@@ -30,11 +30,13 @@ export default function QA({
   setOpen,
   submit,
   prefillQuestion,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
   prefillQuestion?: string;
+  revisionForMessageId?: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const { chatbotId } = useParams();
@@ -77,6 +79,9 @@ export default function QA({
       formData.append("answer", answer);
       formData.append("responseType", responseType.toUpperCase());
       formData.append("intent", "qa");
+      if (revisionForMessageId) {
+        formData.append("revisionForMessageId", revisionForMessageId);
+      }
 
       submit(formData, {
         method: "post",

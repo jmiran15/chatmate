@@ -16,10 +16,12 @@ export function FileUpload({
   setStep,
   setOpen,
   submit,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
+  revisionForMessageId?: string;
 }) {
   const { chatbotId } = useParams();
   const [files, setFiles] = useState<File[]>([]);
@@ -48,6 +50,10 @@ export function FileUpload({
 
     formData.append("intent", "parseFiles");
     formData.append("fileIds", JSON.stringify(fileIds));
+
+    if (revisionForMessageId) {
+      formData.append("revisionForMessageId", revisionForMessageId);
+    }
 
     submit(formData, {
       method: "POST",

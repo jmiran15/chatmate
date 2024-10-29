@@ -109,10 +109,12 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         messages,
         chattingWithAgent,
         chatId,
+        regenerateMessageId,
       }: {
         messages: any[];
         chattingWithAgent: boolean;
         chatId?: boolean;
+        regenerateMessageId?: string;
       } = await request.json();
 
       // TODO - cache the chatbot with lru-cache (and maybe other queries too)
@@ -187,11 +189,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
         );
       }
 
-      const createdUserMessage = await createMessage({
-        chatId: chat.id,
-        ...userMessage,
-      });
-
       const corsHeader =
         process.env.NODE_ENV === "production"
           ? {
@@ -213,38 +210,45 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
       const agentEmail = chatbot.user.email;
 
-      // check if the payload only had one user message - meaning its the first message
-      if (
-        messages.filter(
-          (message: { role: string; content: string }) =>
-            message.role === "user",
-        ).length === 1 &&
-        !chatId
-      ) {
-        const anonymousUser = await getAnonymousUserBySessionId({
-          sessionId: sessionIdOrChatId,
+      if (!regenerateMessageId) {
+        const createdUserMessage = await createMessage({
+          chatId: chat.id,
+          ...userMessage,
         });
 
-        if (agentEmail) {
-          const BASE =
-            process.env.NODE_ENV === "development"
-              ? "http://localhost:3000"
-              : "https://chatmate.so";
+        // check if the payload only had one user message - meaning its the first message
+        if (
+          messages.filter(
+            (message: { role: string; content: string }) =>
+              message.role === "user",
+          ).length === 1 &&
+          !chatId
+        ) {
+          const anonymousUser = await getAnonymousUserBySessionId({
+            sessionId: sessionIdOrChatId,
+          });
 
-          try {
-            await sendEmail({
-              to: agentEmail,
-              subject: "Chatmate - New chat",
-              react: (
-                <ChatNotificationEmail
-                  anonymousUser={anonymousUser}
-                  userMessage={createdUserMessage}
-                  chatUrl={`${BASE}/chatbots/${chatbotId}/chats/${chat.id}`}
-                />
-              ),
-            });
-          } catch (error) {
-            console.error("Failed to send email", error);
+          if (agentEmail) {
+            const BASE =
+              process.env.NODE_ENV === "development"
+                ? "http://localhost:3000"
+                : "https://chatmate.so";
+
+            try {
+              await sendEmail({
+                to: agentEmail,
+                subject: "Chatmate - New chat",
+                react: (
+                  <ChatNotificationEmail
+                    anonymousUser={anonymousUser}
+                    userMessage={createdUserMessage}
+                    chatUrl={`${BASE}/chatbots/${chatbotId}/chats/${chat.id}`}
+                  />
+                ),
+              });
+            } catch (error) {
+              console.error("Failed to send email", error);
+            }
           }
         }
       }
@@ -308,7 +312,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
             let callingTools = true;
             while (callingTools) {
               let fullText = "";
-              const id = createId();
+              const id = regenerateMessageId ? regenerateMessageId : createId();
 
               try {
                 const lastMessageIsUser =
@@ -386,34 +390,46 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
                     } as SSEMessage)}\n\n`,
                   );
 
-                  const createdMessage = await createMessage({
-                    id,
-                    chatId: chat.id,
-                    role: message.role,
-                    content: message.content ?? "",
-                    createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString(),
-                    clusterId: null,
-                    seenByUser: null,
-                    seenByAgent: null,
-                    seenByUserAt: null,
-                    activity: null,
-                    // this is probably not needed, the IF statement above should prevent this from happening
-                    toolCalls: message.tool_calls
-                      ? {
-                          create: message.tool_calls.map((toolCall) => ({
-                            id: toolCall.id,
-                            type: toolCall.type,
-                            function: {
-                              create: {
-                                name: toolCall.function.name,
-                                arguments: toolCall.function.arguments,
+                  // If regenerating, update the existing message instead of creating new
+                  let createdMessage;
+                  if (regenerateMessageId) {
+                    createdMessage = await prisma.message.update({
+                      where: { id: regenerateMessageId },
+                      data: {
+                        content: fullText,
+                        updatedAt: new Date(),
+                      },
+                    });
+                  } else {
+                    createdMessage = await createMessage({
+                      id,
+                      chatId: chat.id,
+                      role: message.role,
+                      content: message.content ?? "",
+                      createdAt: new Date().toISOString(),
+                      updatedAt: new Date().toISOString(),
+                      clusterId: null,
+                      seenByUser: null,
+                      seenByAgent: null,
+                      seenByUserAt: null,
+                      activity: null,
+                      // this is probably not needed, the IF statement above should prevent this from happening
+                      toolCalls: message.tool_calls
+                        ? {
+                            create: message.tool_calls.map((toolCall) => ({
+                              id: toolCall.id,
+                              type: toolCall.type,
+                              function: {
+                                create: {
+                                  name: toolCall.function.name,
+                                  arguments: toolCall.function.arguments,
+                                },
                               },
-                            },
-                          })),
-                        }
-                      : undefined,
-                  });
+                            })),
+                          }
+                        : undefined,
+                    });
+                  }
 
                   console.log("createdMessage: ", createdMessage);
 

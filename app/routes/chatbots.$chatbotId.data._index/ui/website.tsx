@@ -28,10 +28,12 @@ export default function Website({
   setStep,
   setOpen,
   submit,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
+  revisionForMessageId?: string;
 }) {
   const { chatbotId } = useParams();
   const fetchers = useFetchers();
@@ -123,6 +125,7 @@ export default function Website({
             links: JSON.stringify([
               { id: createId(), url: formRef.current?.url.value },
             ]),
+            ...(revisionForMessageId ? { revisionForMessageId } : {}),
           },
           {
             ...options,
@@ -241,6 +244,7 @@ export default function Website({
                       })),
                     ),
                     crawled: true,
+                    ...(revisionForMessageId ? { revisionForMessageId } : {}),
                   },
                   { ...options, fetcherKey: scrapeFetcherKey.current },
                 );

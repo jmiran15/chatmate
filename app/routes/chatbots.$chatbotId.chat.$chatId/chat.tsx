@@ -3,7 +3,12 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { createId } from "@paralleldrive/cuid2";
 import { Prisma } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
-import { useLoaderData, useParams, useSearchParams } from "@remix-run/react";
+import {
+  useFetcher,
+  useLoaderData,
+  useParams,
+  useSearchParams,
+} from "@remix-run/react";
 import axios from "axios";
 import {
   Suspense,
@@ -25,6 +30,7 @@ import { ScrollArea } from "../../components/ui/scroll-area";
 import { Separator } from "../../components/ui/separator";
 import { useToast } from "../../components/ui/use-toast";
 import { AnalyzeProgressData } from "../api.analyze.$chatId.progress";
+import { ProgressData } from "../api.chatbot.$chatbotId.data.progress";
 import ChatInput from "./chat-input";
 import { FormMessage } from "./form-message";
 import { SingleMessageContent } from "./message";
@@ -50,6 +56,16 @@ type MessageWithFormData = SerializeFrom<
         };
       };
       formSubmission: true;
+      revisions: {
+        include: {
+          document: {
+            select: {
+              id: true;
+              isPending: true;
+            };
+          };
+        };
+      };
     };
   }>
 >;
@@ -91,9 +107,21 @@ export interface ChatMessage extends MessageWithFormData {
   error?: string;
 }
 
+export type MessageRevisionStatus =
+  | "waiting"
+  | "processing"
+  | "resolved"
+  | null;
+
+// Revision status of a message
+// if revisions[] is empty - waiting
+// if revisions[] is not empty, but some document is pending - processing
+// if revisions[] is not empty, and all documents are resolved - resolved
+
 export const CHAT_PAGE_SIZE = 15;
 
 export default function Chat() {
+  const fetcher = useFetcher({ key: "deleteMessages" });
   const { chatId, chatbotId } = useParams();
   const socket = useSocket();
   const { toast } = useToast();
@@ -120,7 +148,47 @@ export default function Chat() {
     return eventSource ? JSON.parse(eventSource) : undefined;
   }, [eventSource]);
 
-  console.log("rerender: ", chatbot);
+  const ingestionEvents = useEventSource(
+    `/api/chatbot/${chatbotId}/data/progress`,
+  );
+  const ingestionProgress: ProgressData | undefined = useMemo(() => {
+    return ingestionEvents ? JSON.parse(ingestionEvents) : undefined;
+  }, [ingestionEvents]);
+
+  useEffect(() => {
+    if (!ingestionProgress) return;
+
+    setMessages((prevMessages) => {
+      return prevMessages.map((message) => {
+        // Skip messages without revisions
+        if (!message.revisions?.length) return message;
+
+        // Check if any of the message's revisions contain the document being processed
+        const hasMatchingDocument = message.revisions.some(
+          (revision) => revision.document?.id === ingestionProgress.documentId,
+        );
+
+        if (!hasMatchingDocument) return message;
+
+        // Update the matching revision's document status
+        const updatedRevisions = message.revisions.map((revision) => ({
+          ...revision,
+          document:
+            revision.document?.id === ingestionProgress.documentId
+              ? {
+                  ...revision.document,
+                  isPending: !ingestionProgress.completed,
+                }
+              : revision.document,
+        }));
+
+        return {
+          ...message,
+          revisions: updatedRevisions,
+        };
+      });
+    });
+  }, [ingestionProgress]);
 
   useEffect(() => {
     if (progress && progress.completed && progress.returnvalue) {
@@ -228,6 +296,49 @@ export default function Chat() {
     });
   };
 
+  const handleRegenerate = async ({
+    userInput,
+    message,
+  }: {
+    userInput: string;
+    message: ChatMessage;
+  }) => {
+    setMessages((prevMessages) => {
+      const index = prevMessages.findIndex((msg) => msg.id === message.id);
+      const newMessages = [...prevMessages.slice(0, index)];
+      newMessages.push({
+        ...prevMessages[index],
+        content: "",
+        streaming: true,
+      });
+
+      // TODO - do a fetcher.submit here to delete the messages after this in the db
+      fetcher.submit(
+        {
+          intent: "deleteMessages",
+          messages: JSON.stringify(prevMessages.slice(index + 1)),
+        },
+        {
+          method: "POST",
+        },
+      );
+
+      setLoading(true);
+      setUserInput("");
+      console.log("setting follow ups to empty array- handleSubmit");
+      setFollowUps([]);
+      return newMessages;
+    });
+
+    // then we need to do something here to make sure regenerative messageId gets sent to the server
+
+    // we also need to clear all the messages after the regenerated one... from the db
+    return await streamChat({
+      message: userInput,
+      regenerateMessageId: message.id,
+    });
+  };
+
   function setMsgRenderIndex(newIndex: number) {
     newIndex = Math.min(messages.length - CHAT_PAGE_SIZE, newIndex);
     newIndex = Math.max(0, newIndex);
@@ -269,31 +380,46 @@ export default function Chat() {
 
   const streamChat = async ({
     message,
+    regenerateMessageId,
   }: {
     message: string;
+    regenerateMessageId?: string;
   }): Promise<void> => {
     const userMessage = userMsg({ userInput: message, chatId: chatId! });
-    const _messages: ChatMessage[] = [...messages, userMessage];
     console.log("setting follow ups to empty array- streamChat");
     setFollowUps([]);
+
+    const index = messages.findIndex((msg) => msg.id === regenerateMessageId);
+    const messagesIfRegenerating = [...messages.slice(0, index)];
+    const _messages: ChatMessage[] =
+      regenerateMessageId && messagesIfRegenerating.length > 0
+        ? [
+            ...messagesIfRegenerating,
+            { ...messages[index], content: "", streaming: true },
+          ]
+        : [...messages, userMessage];
 
     const ctrl = new AbortController();
 
     await fetchEventSource(`${BASE_URL}/api/chat/${chatbotId}/${chatId}`, {
       method: "POST",
       body: JSON.stringify({
-        messages: [
-          ...messages.map((message) => ({
-            role: message.role,
-            content: message.content,
-          })),
-          {
-            role: "user",
-            content: message,
-          },
-        ],
+        messages:
+          regenerateMessageId && messagesIfRegenerating.length > 0
+            ? messagesIfRegenerating
+            : [
+                ...messages.map((message) => ({
+                  role: message.role,
+                  content: message.content,
+                })),
+                {
+                  role: "user",
+                  content: message,
+                },
+              ],
         chattingWithAgent: false,
         chatId: true,
+        regenerateMessageId,
       }),
       signal: ctrl.signal,
       openWhenHidden: true,
@@ -409,6 +535,8 @@ export default function Chat() {
 
         if (chatIdx !== -1) {
           const existingMessage = { ..._messages[chatIdx] };
+
+          console.log("existingMessage - stream chunk", existingMessage);
           const updatedMessage = {
             ...existingMessage,
             content: (existingMessage.content ?? "") + (textResponse ?? ""),
@@ -416,6 +544,7 @@ export default function Chat() {
           };
           _messages[chatIdx] = updatedMessage;
         } else {
+          console.log("pushing new message - stream chunk");
           _messages.push({
             id,
             content: textResponse ?? "",
@@ -438,6 +567,8 @@ export default function Chat() {
             reasoning: "",
           });
         }
+
+        console.log("newMessages from handleChat", _messages);
 
         setMessages([..._messages]);
         if (!streaming) {
@@ -631,6 +762,7 @@ export default function Chat() {
                 showActions={showActions}
                 toast={toast}
                 correspondingQuestion={correspondingQuestion}
+                regenerateMessage={handleRegenerate}
               />
             );
           })}

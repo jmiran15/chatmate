@@ -1,9 +1,21 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 import { ShouldRevalidateFunctionArgs } from "@remix-run/react";
 import { prisma } from "~/db.server";
-import Chat from "./chat";
+import Chat, { ChatMessage } from "./chat";
 
-// when the data connector modal renders, we submit a reset, which triggers this to revalidate
+export const action = async ({ request, params }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const intent = String(formData.get("intent"));
+
+  if (intent === "deleteMessages") {
+    const messages = JSON.parse(String(formData.get("messages")));
+    const deletedMessages = await prisma.message.deleteMany({
+      where: { id: { in: messages.map((msg: ChatMessage) => msg.id) } },
+    });
+
+    return json({ deletedMessages });
+  }
+};
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const { chatId, chatbotId } = params;
@@ -29,6 +41,16 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
           },
         },
         formSubmission: true,
+        revisions: {
+          include: {
+            document: {
+              select: {
+                id: true,
+                isPending: true,
+              },
+            },
+          },
+        },
       },
     }),
     fetch(`${BASE_URL}/api/chatbot/${chatbotId}`),
@@ -85,7 +107,8 @@ export function shouldRevalidate({
   formData,
   defaultShouldRevalidate,
 }: ShouldRevalidateFunctionArgs) {
-  if (formData?.get("intent") === "reset") {
+  const intent = String(formData?.get("intent"));
+  if (intent === "reset" || intent === "deleteMessages") {
     return false;
   }
 
