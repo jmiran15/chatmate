@@ -1,5 +1,7 @@
+import { createId } from "@paralleldrive/cuid2";
 import { DocumentType } from "@prisma/client";
 import { Form, useParams, useSubmit } from "@remix-run/react";
+import confetti from "canvas-confetti";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -12,16 +14,17 @@ import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { STEPS } from "~/utils/types";
-import { createId } from "@paralleldrive/cuid2";
 
 export default function BlankUpload({
   setStep,
   setOpen,
   submit,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
+  revisionForMessageId?: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const { chatbotId } = useParams();
@@ -56,6 +59,12 @@ export default function BlankUpload({
         method: "post",
         navigate: false,
         fetcherKey: `${chatbotId}-${Date.now()}`,
+        action: `/chatbots/${chatbotId}/data?index`,
+      });
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
       });
     }
   }
@@ -74,6 +83,13 @@ export default function BlankUpload({
         method="post"
         action={`/chatbots/${chatbotId}/data?index`}
       >
+        {revisionForMessageId ? (
+          <input
+            type="hidden"
+            name="revisionForMessageId"
+            value={revisionForMessageId}
+          />
+        ) : null}
         <input type="hidden" name="intent" value="blank" />
         <input type="hidden" name="type" value={DocumentType.RAW} />
         <input type="hidden" name="documentId" value={createId()} />

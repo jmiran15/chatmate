@@ -78,6 +78,15 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
+      if (formData.get("revisionForMessageId")) {
+        await prisma.messageRevision.createMany({
+          data: documents.map((doc) => ({
+            messageId: String(formData.get("revisionForMessageId")),
+            documentId: doc.id,
+          })),
+        });
+      }
+
       if (documents.length > BATCH_THRESHOLD) {
         const batchJob = await batchIngestionQueue.add("batchIngestion", {
           documents,
@@ -124,6 +133,15 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           })),
         });
 
+        if (formData.get("revisionForMessageId")) {
+          await prisma.messageRevision.createMany({
+            data: documents.map((doc) => ({
+              messageId: String(formData.get("revisionForMessageId")),
+              documentId: doc.id,
+            })),
+          });
+        }
+
         const trees = await webFlow!({
           documents,
           preprocessingQueue: parseFileQueue,
@@ -140,6 +158,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const name = String(formData.get("name"));
       const content = String(formData.get("content"));
       const id = String(formData.get("documentId"));
+      const revisionForMessageId = formData.get("revisionForMessageId");
 
       const document = await prisma.document.create({
         data: {
@@ -149,6 +168,15 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           chatbotId,
         },
       });
+
+      if (revisionForMessageId) {
+        await prisma.messageRevision.create({
+          data: {
+            messageId: String(revisionForMessageId),
+            documentId: document.id,
+          },
+        });
+      }
 
       await queue.add(
         `ingestion-${document.id}`,
@@ -164,6 +192,10 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       const answer = String(formData.get("answer"));
       const responseType = String(formData.get("responseType"));
 
+      const revisionForMessageId = formData.get("revisionForMessageId");
+
+      console.log("revisionForMessageId", revisionForMessageId);
+
       const document = await prisma.document.create({
         data: {
           type: DocumentType.QA,
@@ -175,6 +207,20 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
           responseType: responseType as ResponseType,
         },
       });
+
+      // if we have a revisionForMessageId, we need to create a revision in the message with the document (i.e. connect the document to the message)
+
+      if (revisionForMessageId) {
+        console.log("we have id", revisionForMessageId);
+        const revision = await prisma.messageRevision.create({
+          data: {
+            messageId: String(revisionForMessageId),
+            documentId: document.id,
+          },
+        });
+
+        console.log("revision", revision);
+      }
 
       await qaqueue.add(
         `qaingestion-${document.id}`,

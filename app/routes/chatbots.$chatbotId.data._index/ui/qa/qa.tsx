@@ -2,6 +2,7 @@ import { createId } from "@paralleldrive/cuid2";
 import { DocumentType } from "@prisma/client";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { Form, useParams, useSubmit } from "@remix-run/react";
+import confetti from "canvas-confetti";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -28,14 +29,18 @@ export default function QA({
   setStep,
   setOpen,
   submit,
+  prefillQuestion,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
+  prefillQuestion?: string;
+  revisionForMessageId?: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const { chatbotId } = useParams();
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState(prefillQuestion || "");
   const [matchType, setMatchType] = useState("broad");
   const [answer, setAnswer] = useState<string>("");
   const [responseType, setResponseType] = useState("generative");
@@ -74,11 +79,21 @@ export default function QA({
       formData.append("answer", answer);
       formData.append("responseType", responseType.toUpperCase());
       formData.append("intent", "qa");
+      if (revisionForMessageId) {
+        formData.append("revisionForMessageId", revisionForMessageId);
+      }
 
       submit(formData, {
         method: "post",
         navigate: false,
         fetcherKey: `${chatbotId}-${Date.now()}`,
+        action: `/chatbots/${chatbotId}/data?index`,
+      });
+
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
       });
     }
   }

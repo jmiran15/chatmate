@@ -18,6 +18,7 @@ export const getChat = Queue<GetChat>("getChat", async (job) => {
         select: {
           role: true,
           content: true,
+          id: true,
         },
         take: 10,
       },

@@ -1,5 +1,6 @@
 import { createId } from "@paralleldrive/cuid2";
 import { useParams, useSubmit } from "@remix-run/react";
+import confetti from "canvas-confetti";
 import { useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import {
@@ -15,10 +16,12 @@ export function FileUpload({
   setStep,
   setOpen,
   submit,
+  revisionForMessageId,
 }: {
   setStep: (step: string) => void;
   setOpen: (open: boolean) => void;
   submit: ReturnType<typeof useSubmit>;
+  revisionForMessageId?: string;
 }) {
   const { chatbotId } = useParams();
   const [files, setFiles] = useState<File[]>([]);
@@ -48,12 +51,22 @@ export function FileUpload({
     formData.append("intent", "parseFiles");
     formData.append("fileIds", JSON.stringify(fileIds));
 
+    if (revisionForMessageId) {
+      formData.append("revisionForMessageId", revisionForMessageId);
+    }
+
     submit(formData, {
       method: "POST",
       action: `/chatbots/${chatbotId}/data?index`,
       encType: "multipart/form-data",
       navigate: false,
       fetcherKey: `${chatbotId}-${Date.now()}`,
+    });
+
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
     });
   };
 
