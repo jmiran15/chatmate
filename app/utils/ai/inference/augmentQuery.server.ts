@@ -60,6 +60,7 @@ export async function generateSimilarUserQueries({
 
   try {
     if (await checkRateLimits(estimatedTokens)) {
+      console.log("augmenting query");
       const groqCompletion = await groq.chat.completions.create({
         messages: [groqSystem, groqUser(originalQuery)],
         model: groqModel,
@@ -89,6 +90,8 @@ export async function generateSimilarUserQueries({
   } catch (error) {
     console.error("Error calling Groq API:", error);
   }
+
+  console.log("falling back to openai");
 
   // Fallback to OpenAI
   return openaiGenerateSimilarUserQueries({

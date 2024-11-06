@@ -182,6 +182,8 @@ export async function chat({
 
   const query = messages[messages.length - 1].content;
 
+  console.log("answering query: ", query);
+
   let rerankedEmbeddings: V2RerankResponse | null = null;
   let relevantEmbeddings: EmbeddingWithDistance[] = [];
   let skipProcessing = false;
@@ -201,6 +203,8 @@ export async function chat({
       }),
   );
   timings.push(exactMatchTiming);
+
+  console.log("hasExactMatch: ", hasExactMatch);
 
   if (hasExactMatch) {
     const staticResponse = hasExactMatch.responseType === "STATIC";
@@ -287,6 +291,10 @@ export async function chat({
 
     const { similarQueries, subQuestions, hyde } = preprocessingResults;
 
+    console.log("similarQueries: ", similarQueries);
+    console.log("subQuestions: ", subQuestions);
+    console.log("hyde: ", hyde);
+
     // Log errors if any
     if (similarQueries === null) {
       console.error("Failed to generate similar queries");
@@ -334,6 +342,7 @@ export async function chat({
     timings.push(searchTiming);
     relevantEmbeddings = searchResults;
 
+    console.log("relevantEmbeddings: ", relevantEmbeddings.length);
     if (relevantEmbeddings.length > 0) {
       // Rerank with Cohere Ranker 3
       const [rerankResults, rerankTiming] = await timeOperation(
@@ -352,6 +361,8 @@ export async function chat({
       timings.push(rerankTiming);
       rerankedEmbeddings = rerankResults;
     }
+
+    console.log("rerankedEmbeddings: ", rerankedEmbeddings?.results.length);
 
     // TODO: in here we need to check if any of the highly ranked documents have responseType === "STATIC", if so, we can skip the generation step and just return the static response. (with the stream like above)
     if (rerankedEmbeddings) {

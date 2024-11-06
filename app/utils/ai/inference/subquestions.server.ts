@@ -74,6 +74,7 @@ export async function generateSubQuestions({
 }): Promise<z.infer<typeof QueryDecompositionSchema> | null> {
   const estimatedTokens = originalQuery.split(" ").length * 2; // Rough estimate
 
+  console.log("generating subquestions with groq");
   try {
     if (await checkRateLimits(estimatedTokens)) {
       const groqCompletion = await groq.chat.completions.create({
@@ -105,6 +106,8 @@ export async function generateSubQuestions({
   } catch (error) {
     console.error("Error calling Groq API:", error);
   }
+
+  console.log("falling back to openai");
 
   // Fallback to OpenAI
   return openaiGenerateSubQuestions({ originalQuery, sessionId, chatName });

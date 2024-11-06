@@ -61,6 +61,7 @@ export async function generateHyDE({
 
   try {
     if (await checkRateLimits(estimatedTokens)) {
+      console.log("generating hyde with groq");
       const groqCompletion = await groq.chat.completions.create({
         messages: [groqSystem, groqUser(originalQuery)],
         model: groqModel,
@@ -90,6 +91,8 @@ export async function generateHyDE({
   } catch (error) {
     console.error("Error calling Groq API:", error);
   }
+
+  console.log("falling back to openai");
 
   // Fallback to OpenAI
   return openaiGenerateHyDE({ originalQuery, sessionId, chatName });
