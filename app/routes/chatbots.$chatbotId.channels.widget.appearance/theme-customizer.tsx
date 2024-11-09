@@ -2,6 +2,7 @@ import { Chatbot, WidgetPosition } from "@prisma/client";
 import { useFetcher } from "@remix-run/react";
 import { forwardRef } from "react";
 import { Separator } from "~/components/ui/separator";
+import { Switch } from "~/components/ui/switch";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import {
@@ -69,6 +70,7 @@ const Customizer = forwardRef<
 >(({ fetcher, chatbot }, ref) => {
   const {
     publicName,
+    subheader,
     originalLogoFilepath,
     croppedLogoFilepath,
     lastCrop,
@@ -80,6 +82,7 @@ const Customizer = forwardRef<
     openButtonText,
     widgetRestrictedUrls,
     widgetPosition,
+    showIntroPreview = true,
   } = chatbot;
   const intro = introMessages.join("\n");
   const starter = starterQuestions.join("\n");
@@ -103,6 +106,23 @@ const Customizer = forwardRef<
               {
                 intent: INTENT,
                 update: JSON.stringify({ publicName: e.target.value }),
+              },
+              { method: "post", encType: "multipart/form-data" },
+            )
+          }
+        />
+      </div>
+      <div className="flex flex-col gap-2 w-full">
+        <Label htmlFor="subheader">Subheader</Label>
+        <Input
+          id="subheader"
+          placeholder="Enter your chatbot subheader"
+          defaultValue={subheader ?? ""}
+          onChange={(e) =>
+            fetcher.submit(
+              {
+                intent: INTENT,
+                update: JSON.stringify({ subheader: e.target.value }),
               },
               { method: "post", encType: "multipart/form-data" },
             )
@@ -279,6 +299,30 @@ const Customizer = forwardRef<
           These messages will be shown when the chatbot is first opened.
         </p>
       </div>
+
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <Label>Preview Intro Messages</Label>
+            <p className="text-sm text-muted-foreground">
+              Show intro messages in a preview bubble when the chat is closed
+            </p>
+          </div>
+          <Switch
+            checked={showIntroPreview ?? true}
+            onCheckedChange={(checked) =>
+              fetcher.submit(
+                {
+                  intent: INTENT,
+                  update: JSON.stringify({ showIntroPreview: checked }),
+                },
+                { method: "post", encType: "multipart/form-data" },
+              )
+            }
+          />
+        </div>
+      </div>
+
       <div className="flex flex-col gap-2">
         <Label htmlFor="starter">Starter questions</Label>
         <Textarea

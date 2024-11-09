@@ -68,7 +68,9 @@ model Chatbot {
   name                 String
   userId               String
   publicName           String          @default("Your Chatbot")
+  subheader            String?         @default("Chatting with AI")
   introMessages        String[]        @default(["Hello, how can I help you today?"])
+  showIntroPreview     Boolean?        @default(true)
   model                String?         @default("gpt-4o")
   responseLength       String?         @default("long")
   systemPrompt         String?
@@ -222,7 +224,7 @@ model Document {
   question     String?
   matchType    MatchType?    @default(BROAD)
   responseType ResponseType? @default(GENERATIVE)
-  
+
   messageRevisions MessageRevision[]
 
   @@index([chatbotId, type, isPending, createdAt, updatedAt, question, matchType])
@@ -273,7 +275,7 @@ model Message {
   // WIP - postprocessing of messages for improving chatbot performance
   didNotFulfillQuery Boolean? @default(false)
   reasoning          String?
-  
+
   revisions MessageRevision[]
 
   @@index([chatId, role])
@@ -475,10 +477,10 @@ enum ResponseType {
 }
 
 model MessageRevision {
-  id          String   @id @default(cuid())
-  createdAt   DateTime @default(now())
-  message     Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
-  messageId   String
-  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  documentId  String
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  message    Message  @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  messageId  String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId String
 }

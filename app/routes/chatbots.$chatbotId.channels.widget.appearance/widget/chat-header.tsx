@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
 import { BoltIcon, EnvelopeIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { EllipsisVerticalIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 // import { useMobileScreen } from "@/utils/mobile";
-import { colors } from "./preview";
 import { Chatbot } from "@prisma/client";
 import { useMobileScreen } from "~/utils/mobile";
+import { colors } from "./preview";
 
 export default function ChatWindowHeader({
   chatbot,
@@ -19,7 +19,7 @@ export default function ChatWindowHeader({
   return (
     <nav
       className={`flex flex-col p-[8px] chat-header-bottom-border bg-${
-        colors[chatbot.themeColor]
+        colors[chatbot.themeColor as keyof typeof colors]
       }`}
     >
       <div className="flex flex-row flex-1 items-center justify-between gap-[2px] min-h-[48px] text-[18px]">
@@ -35,7 +35,18 @@ export default function ChatWindowHeader({
             <h1 className="text-[16px] font-[600] text-white">
               {chatbot.publicName}
             </h1>
-            <div className="text-[14px]">AI chat</div>
+            <div
+              className={`
+                text-[14px] text-white/80 overflow-hidden transition-all duration-300 ease-in-out
+                ${
+                  chatbot.subheader
+                    ? "max-h-[20px] opacity-100"
+                    : "max-h-0 opacity-0"
+                }
+              `}
+            >
+              {chatbot.subheader}
+            </div>
           </div>
         </button>
 

@@ -11,8 +11,9 @@ import {
 import { useFetcher, useLoaderData } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { prisma } from "~/db.server";
 import { useIsMediumScreen } from "~/hooks/use-is-medium-screen";
-import { getChatbotById, updateChatbotById } from "~/models/chatbot.server";
+import { updateChatbotById } from "~/models/chatbot.server";
 import { useSidebarWidth } from "~/providers/sidebarWidth";
 import { uploadImage } from "~/utils/cloudinary.server";
 import Customizer from "../chatbots.$chatbotId.channels.widget.appearance/theme-customizer";
@@ -25,7 +26,9 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   }
 
   // can probably defer and cache (localforage this)
-  const chatbot = await getChatbotById({ id: chatbotId });
+  const chatbot = await prisma.chatbot.findUniqueOrThrow({
+    where: { id: chatbotId },
+  });
 
   return json({ chatbot });
 };
