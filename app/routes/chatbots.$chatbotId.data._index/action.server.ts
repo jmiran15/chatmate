@@ -46,6 +46,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
       });
     }
     case "scrapeLinks": {
+      console.log("scrapeLinks - called");
       const urls = JSON.parse(String(formData.get("links")));
       const crawled = formData.get("crawled");
       invariant(Array.isArray(urls), "Links must be an array");
@@ -78,6 +79,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         })),
       });
 
+      console.log("created documents", documents);
       if (formData.get("revisionForMessageId")) {
         await prisma.messageRevision.createMany({
           data: documents.map((doc) => ({
@@ -94,10 +96,13 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
         });
         return json({ errors: null, intent, batchJob, documents });
       } else {
+        console.log("scrapeLinks - webFlow called");
         const trees = await webFlow!({
           documents,
           preprocessingQueue: scrapeQueue,
         });
+        console.log("scrapeLinks - webFlow trees");
+        console.log("env: ", process.env.REDIS_URL_PROD);
         return json({ errors: null, intent, trees, documents });
       }
     }

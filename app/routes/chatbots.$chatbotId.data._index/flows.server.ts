@@ -17,6 +17,7 @@ export const webFlow = serverOnly$(
     documents: Document[];
     preprocessingQueue: Queue;
   }) => {
+    console.log("webFlow - called");
     return await flow.addBulk(
       documents.map((document) => ({
         name: `ingestion-${document.id}`,
