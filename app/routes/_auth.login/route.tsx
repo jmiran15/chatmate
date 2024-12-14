@@ -6,7 +6,6 @@ import type {
 import { json } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 
-import { Button } from "~/components/ui/button";
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, requireAnonymous } from "~/session.server";
 import { safeRedirect } from "~/utils";
@@ -29,7 +28,6 @@ import { Label } from "~/components/ui/label";
 import { StatusButton } from "~/components/ui/status-button";
 import { useIsPending } from "~/hooks/use-is-pending";
 import { EmailSchema, PasswordSchema } from "~/utils/types";
-import { GoogleIcon } from "../_auth.join/route";
 
 const LoginFormSchema = z.object({
   intent: z.string().optional(),
@@ -173,7 +171,7 @@ export default function LoginPage() {
               Login
             </StatusButton>
 
-            <Form action="/auth/google" method="post" className="w-full">
+            {/* <Form action="/auth/google" method="post" className="w-full">
               <Button
                 type="submit"
                 className="w-full flex items-center justify-center gap-2"
@@ -182,7 +180,7 @@ export default function LoginPage() {
                 <GoogleIcon className="w-5 h-5" />
                 <span>Login with Google</span>
               </Button>
-            </Form>
+            </Form> */}
           </div>
           <div className="text-center text-sm">
             Don&apos;t have an account?{" "}

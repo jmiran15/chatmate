@@ -48,7 +48,10 @@ let googleStrategy = new GoogleStrategy(
 
     if (!existingUser) {
       // TODO - remember that we have no credit card requirement now... so things will change!
-      const updatedUser = await createCustomer({ userId: user.id });
+      const updatedUser = await createCustomer({
+        userId: user.id,
+        website: "no website",
+      });
       if (!updatedUser.customerId) throw new Error(`User not found.`);
     }
 

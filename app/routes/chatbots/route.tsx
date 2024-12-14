@@ -96,7 +96,10 @@ clientLoader.hydrate = true;
 export const action = async ({ request }: ActionFunctionArgs) => {
   const user = await requireUser(request);
   if (!user.customerId) {
-    const updatedUser = await createCustomer({ userId: user.id });
+    const updatedUser = await createCustomer({
+      userId: user.id,
+      website: user.website || "no website",
+    });
     if (!updatedUser.customerId) throw new Error(`User not found.`);
   }
   const formData = await request.formData();

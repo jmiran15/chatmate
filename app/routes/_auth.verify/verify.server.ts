@@ -29,6 +29,7 @@ import { createCustomer, stripe } from "~/models/subscription.server";
 import {
   joinPasswordHashSessionKey,
   priceIdSessionKey,
+  websiteSessionKey,
 } from "../_auth.join/route";
 import { handleChangeEmailVerification } from "../chatbots.settings.general.change-email/emails.server";
 
@@ -213,13 +214,19 @@ export async function handleOnboardingVerification({
     request.headers.get("cookie"),
   );
   const joinPasswordHash = verifySession.get(joinPasswordHashSessionKey);
+  const website = verifySession.get(websiteSessionKey);
   if (typeof joinPasswordHash !== "string" || !joinPasswordHash) {
+    throw redirect("/join");
+  }
+
+  if (!website) {
     throw redirect("/join");
   }
 
   const user = await prisma.user.create({
     data: {
       email,
+      website,
       password: {
         create: {
           hash: joinPasswordHash,
@@ -229,7 +236,10 @@ export async function handleOnboardingVerification({
   });
 
   // TODO - switch to Paddle
-  const updatedUser = await createCustomer({ userId: user.id });
+  const updatedUser = await createCustomer({
+    userId: user.id,
+    website: website,
+  });
   if (!updatedUser.customerId) throw new Error(`User not found.`);
 
   const priceId = verifySession.get(priceIdSessionKey);

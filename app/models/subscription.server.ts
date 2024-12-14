@@ -15,14 +15,20 @@ export const HOST_URL =
 /**
  * Creates a Stripe customer for a user.
  */
-export async function createCustomer({ userId }: { userId: string }) {
+export async function createCustomer({
+  userId,
+  website,
+}: {
+  userId: string;
+  website: string;
+}) {
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user || user.customerId)
     throw new Error(`Stripe - Customer not created.`);
 
   const email = user.email ?? undefined;
   const customer = await stripe.customers
-    .create({ email })
+    .create({ email, metadata: { website } })
     .catch((err) => console.error(err));
   if (!customer) throw new Error(`Stripe - Customer not created.`);
 

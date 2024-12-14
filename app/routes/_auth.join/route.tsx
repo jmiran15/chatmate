@@ -20,7 +20,6 @@ import SignupEmail from "emails/sign-up";
 import { HoneypotInputs } from "remix-utils/honeypot/react";
 import { SpamError } from "remix-utils/honeypot/server";
 import { z } from "zod";
-import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -34,6 +33,7 @@ import { StatusButton } from "~/components/ui/status-button";
 import { useIsPending } from "~/hooks/use-is-pending";
 import { getUserByEmail } from "~/models/user.server";
 import { requireAnonymous } from "~/session.server";
+import { WebsiteSchema } from "~/utils";
 import { sendEmail } from "~/utils/email.server";
 import { honeypot } from "~/utils/honeypot.server";
 import { getPricing } from "~/utils/pricing.server";
@@ -46,10 +46,13 @@ import {
 
 export const joinPasswordHashSessionKey = "joinPasswordHash";
 export const priceIdSessionKey = "priceId";
+export const websiteSessionKey = "website";
+
 const SignupSchema = z.object({
   intent: z.string().optional(),
   email: EmailSchema,
   password: PasswordSchema,
+  website: WebsiteSchema,
 });
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -76,7 +79,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const url = new URL(request.url);
   const priceId = url.searchParams.get("priceId");
 
-  console.log("priceId", priceId);
   const pricing = getPricing();
 
   const submission = await parseWithZod(formData, {
@@ -102,7 +104,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   }
 
-  const { email, password } = submission.value;
+  const { email, password, website } = submission.value;
   const passwordHash = await bcrypt.hash(password, 10);
 
   const verifySession = await verifySessionStorage.getSession();
@@ -113,6 +115,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       ? pricing.devPriceIds.hobby.month
       : pricing.prodPriceIds.hobby.month,
   );
+  verifySession.set(websiteSessionKey, website);
 
   // Prepare the verification
   const { verifyUrl, redirectTo, otp } = await prepareVerification({
@@ -191,9 +194,9 @@ export default function Join() {
   return (
     <Card className="w-full max-w-[90%] sm:max-w-sm shadow-lg">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
+        <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
         <CardDescription className="text-sm text-gray-500">
-          Enter your information to create an account
+          Get started with our chat widget for your business website
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -203,6 +206,21 @@ export default function Join() {
           className="flex flex-col gap-4 sm:gap-6"
         >
           <HoneypotInputs label="Please leave this field blank" />
+
+          <Field
+            labelProps={{
+              htmlFor: fields.website.id,
+              children: "Business Website",
+            }}
+            inputProps={{
+              ...getInputProps(fields.website, { type: "url" }),
+              placeholder: "example.com",
+              autoFocus: true,
+            }}
+            errors={fields.website.errors}
+            description="Enter the website where you'll embed our chat widget"
+          />
+
           <Field
             labelProps={{
               htmlFor: fields.email.id,
@@ -210,7 +228,6 @@ export default function Join() {
             }}
             inputProps={{
               ...getInputProps(fields.email, { type: "email" }),
-              autoFocus: true,
               autoComplete: "email",
               className: "lowercase",
             }}
@@ -241,7 +258,7 @@ export default function Join() {
               Create an account
             </StatusButton>
 
-            <Button
+            {/* <Button
               type="button"
               className="w-full flex items-center justify-center gap-2"
               variant="outline"
@@ -250,7 +267,7 @@ export default function Join() {
             >
               <GoogleIcon className="w-5 h-5" />
               <span>Sign up with Google</span>
-            </Button>
+            </Button> */}
           </div>
           <div className="text-center text-sm">
             Already have an account?{" "}
