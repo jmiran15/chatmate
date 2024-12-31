@@ -64,7 +64,9 @@ export default function App() {
 
   useEffect(() => {
     if (gaTrackingId?.length) {
-      gtag.pageview(location.pathname, gaTrackingId);
+      console.log("location.pathname", location.pathname);
+      console.log("location.search", location.search);
+      gtag.pageview(location.pathname + location.search, gaTrackingId);
     }
     if (fbPixelId?.length) {
       fbq.fbPageview();
