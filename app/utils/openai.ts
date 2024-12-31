@@ -44,8 +44,6 @@ async function timeOperation<T>(
   }
 }
 
-export const CHUNK_SIZE = 1024;
-export const OVERLAP = 20;
 export const RERANK_MODEL:
   | "rerank-english-v3.0"
   | "rerank-multilingual-v3.0"
@@ -511,8 +509,6 @@ export async function batchEmbed(
     batches.push(inputs.slice(i, i + MAX_BATCH_SIZE));
   }
 
-  const key = `batchEmbed:${inputs.length}`;
-  console.time(key);
 
   // TODO: batch this so it doesn't crash
   const results = await embed({
@@ -527,9 +523,6 @@ export async function batchEmbed(
   //     embed({ input: batch, sessionId, sessionPath, sessionName }),
   //   ),
   // );
-
-  console.timeEnd(key);
-
   return results as number[][];
 }
 
